@@ -1,0 +1,532 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>报警监控</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("hint");
+        loadControl('webuploader');
+        loadJs("/Common/MAlarmMonitoring/js/MonitorAlarmList.js?v=" + version);
+        loadCss('/Lib/bootstrap/css/opa-icons.css?v=' + version);
+        loadCss('/C3/PC/css/MonitorLocoAlarmList.css?v=' + version);
+        loadCss('/Common/MAlarmMonitoring/css/MonitorAlarmList.css?v=' + version);
+
+        loadControl("elevatezoom");
+        loadControl("cloudzoom");
+        loadControl("progress");
+        loadControl("layer");
+        loadControl("myWebUpload");
+
+        loadCss('/Lib/bootstrap/css/bootstrapSwitch.css?v=' + version);
+        loadJs("/Lib/bootstrap/bootstrapSwitch.js?v=" + version);
+
+        loadJs("/Common/js/6cweb/mydate.js?v=" + version, "utf-8");
+
+        loadJs("/Common/MAlarmMonitoring/js/AlarmEditBox.js?v=" + version);
+        loadJs("/Common/MAlarmMonitoring/js/AlarmSaveList.js?v=" + version);
+    </script>
+
+    <style>
+        .alarmred
+        {
+            background-color: #bd4247;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            font-size: 12px;
+            height: 20px;
+            width: 80px;
+            display: block;
+        }
+        
+        .alarmyellow
+        {
+            background-color: #FFFF02;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            font-size: 12px;
+            height: 20px;
+            width: 80px;
+            display: block;
+        }
+        .chooseMission > li:hover {
+            cursor:pointer;
+            color:red;
+        }
+        .table_select {
+            margin:0;
+            padding:0;
+            height:18px;
+            width:auto;
+        }
+        /*新增查询条件处的样式*/
+        .con-ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        }
+        .con-ul > li {
+            display: inline-block;
+            list-style: none;
+        }
+        .con-ul > .con-li-s {
+            width: 14%;
+        }
+        .con-ul > .con-li-m {
+            width: 86%;
+        }
+        .con-ul > .con-li-ss {
+            width: 10%;
+        }
+        .con-ul > .con-li-mm {
+            width: 90%;
+        }
+        .con-ul > .con-li-wrap {
+            white-space: normal;
+        }
+        .con-ul > .con-li-wrap button {
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        .condi-ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            white-space: normal;
+        }
+        .condi-ul li {
+            display: inline-block;
+            margin-right: 2px;
+            white-space: normal;
+            list-style: none;
+        }
+        .red {
+            color: red;
+        }
+        .white {
+            color: white;
+        }
+        .four_font_title {
+            display: inline-block;
+            width: 55px;
+            font-size: 12px;
+            text-align: justify;
+            text-align-last: justify;
+        }
+        .six_font_title {
+            display: inline-block;
+            width: 80px;
+            font-size: 12px;
+            text-align: justify;
+            text-align-last: justify;
+        }
+        @media screen and (max-width: 1601px) {
+            .con-ul > .con-li-s {
+                width: 20%;
+            }
+            .con-ul > .con-li-m {
+                width: 80%;
+            } 
+        }
+        @media screen and (max-width: 1441px) {
+            .con-ul > .con-li-s {
+                width: 14%;
+            }
+            .con-ul > .con-li-m {
+                width: 86%;
+            }
+        }
+        @media screen and (max-width: 1401px) {
+            .con-ul > .con-li-s {
+                width: 12%;
+            }
+            .con-ul > .con-li-m {
+                width: 88%;
+            }
+        }
+        @media screen and (max-width: 1367px) {
+            .con-ul > .con-li-s {
+                width: 9.5%;
+            }
+            .con-ul > .con-li-m {
+                width: 90.5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="argumentsDiv" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+        
+            <ul class="arguments-ul">
+                <li>
+                    <span>拉出值：</span>
+                    <span id="LC"></span>
+                </li>
+                <li>
+                    <span>导高值：</span>
+                    <span id="high-conductivity"></span>
+                </li>
+                <li>
+                    <span>网压值：</span>
+                    <span id="network-voltage"></span>
+                </li>
+                <li>
+                    <span>硬点值：</span>
+                    <span id="hard-point"></span>
+                </li>
+            </ul>
+        </div>
+    <div id="chooseCansOrMissonDiv" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+        <ul class="arguments-ul chooseMission">
+            <li class="chooseCans">
+                <span>收藏为待取消</span>
+            </li>
+            <li class="chooseCmission">
+                <span>收藏为待转任务</span>
+            </li>
+            
+        </ul>
+    </div>
+        <div id="seleHeadDiv_2C" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+            <div>
+                <img id="img_hd_view_2C" src="" alt="" />
+                <img id="img_ordinary_view_2C" src="" alt="" />
+            </div>
+        </div>
+        <div id="seleHeadDiv_4C" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+            <div>
+                <img id="img_fault_view_4C" src="" alt="" />
+                <img id="img_all_view_4C" src="" alt="" />
+            </div>
+        </div>
+        <div id="seleHeadDiv_DPC" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+            <div>
+                <img id="img_view_DPC_1" src="" alt="" />
+                <img id="img_view_DPC_2" src="" alt="" />
+                <img id="img_view_DPC_3" src="" alt="" />
+            </div>
+        </div>
+        <div class="row-fluid ">
+            <div class="row-fluid sortable">
+                <div class="box span12">
+                    <!--查询条件块-->
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-search"></i>查询条件
+                        </h2>
+                    </div>
+                    <div class="box-content">
+                        <ul class="con-ul">
+                            <li class="con-li-mm">
+                                <input id="choose-repeat" type="hidden" />
+                                <ul id="condition-ul" class="condi-ul">
+                                    <li>
+                                        <label>线路：</label>
+                                        <select id="lineselect" name="lineselect" style="width: 80px;" onchange="lineChange(this.value)">
+                                            <option value="0">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label>区站：</label>
+                                        <input type="text" id="txtqz" style="width: 70px;" />
+                                    </li>
+                                    <li>
+                                        <label>行别：</label>
+                                        <input type="text" id="ddlxb" style="width: 70px;" />
+                                    </li>
+                                    <li>
+                                        <label>支柱号：</label>
+                                        <span class="pole-raido pole-checked j-pole-check" type="pole-single">单个&nbsp;</span>
+                                        <input id="txtpole-single" class="pole-input cur-pole-input" type="text" style="width: 54px;" />
+                                        &nbsp;
+                                        <span class="pole-raido j-pole-check" type="pole-area">范围&nbsp;</span>
+                                        <input id="txtpole-start" type="text" style="width: 50px;" readonly=readonly />&nbsp;-&nbsp;
+                                        <input id="txtpole-end" type="text" style="width: 50px;" readonly=readonly />
+                                    </li>
+                                    <li>
+                                        <label>公里标(m)：</label>
+                                        <input id="txtstartkm" style="width: 130px;" type="text" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                               onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+                                        &nbsp;至&nbsp;
+                                        <input id="txtendkm" style="width: 130px;" type="text" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                               onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+                                    </li>
+                                    <li>
+                                        <label>检测时间：</label>
+                                        <input id="startdate" class="Wdate" readonly type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" style="width: 140px" />
+                                        至
+                                        <input id="enddate" class="Wdate" readonly type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" style="width: 140px" />
+                                    </li>
+                                    <li>
+                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;局：</label>
+                                        <select id="juselect" name="juselect" style="width: 80px;">
+                                            <option value="0">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label> &nbsp;&nbsp;&nbsp;段：</label>
+                                        <select id="duanselect" name="duanselect" style="width: 80px;">
+                                            <option value="0">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label>车间：</label>
+                                        <select id="chejianselect" name="chejianselect" style="width: 80px;">
+                                            <option value="0">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label>工&nbsp;&nbsp;&nbsp;区：</label>
+                                        <select id="gongquselect" name="gongquselect" style="width: 110px;">
+                                            <option value="0">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label><span id="span_ddllx">&nbsp;&nbsp;&nbsp;&nbsp;检测类型：</span></label>
+                                        <span id="span2_ddllx">
+                                            <!--<select name="dll_lx" id="dll_lx" style="margin: 0 auto; width: 108px;">
+                                                <option value="0">全部</option>
+                                                <option value="1C">1C</option>
+                                                <option value="2C">2C</option>
+                                                <option value="3C">3C</option>
+                                                <option value="4C">4C</option>
+                                                <option value="DailyWalk">DailyWalk</option>
+                                            </select>-->
+                                            <input type="text" name="dll_lx" id="dll_lx" code="" style="width: 100px; margin: 0;"/>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <label>报警类型&nbsp;：</label>
+                                        <span>
+                                            <input id="citySel" type="text" value="" style="width: 100px; margin: 0;" />
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <label>&nbsp;&nbsp;缺陷等级：</label>
+                                        <select id="jb" name="example-basic" multiple="multiple" style="width:122px"></select>
+                                    </li>
+                                    <li>
+                                        <label>&nbsp;&nbsp;缺陷状态：</label>
+                                        <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" style="width: 155px"
+                                                size="5">
+                                            <option value="AFSTATUS01" selected="selected">新上报</option>
+                                            <option value="AFSTATUS03">已确认</option>
+                                            <option value="AFSTATUS04">已计划</option>
+                                            <option value="AFSTATUS07">检修中</option>
+                                            <option value="AFSTATUS02">已取消</option>
+                                            <option value="AFSTATUS05">已关闭</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <div style="display: none; " id="DIV_LX_4C">
+                                            类型：
+                                            <select id="LX_4C" style="width: 60px;margin-bottom: 0;">
+                                                <option value="">全部</option>
+                                                <option value="0">大4C</option>
+                                                <option value="1">小4C</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="hide">
+                                        <span style="font-weight:bold;">去重复：</span>
+                                        <div id="chooseRepeatBtn" class="chooseNotOne" first="true" style="cursor:pointer;display:inline-block">
+                                            <span class="chooseSpan"></span> 是
+                                        </div>
+                                        <div id="chooseRepeatBtnNot" class="chooseOne" first="true" style="cursor:pointer;display:inline-block">
+                                            <span class="chooseSpan"></span> 否
+                                        </div>
+                                        <div id="chooseRepeatBox">
+                                            <div id="repeatOnlyNoRe" class="chooseLiMast chooseNotOne"><span class="chooseSpan"></span> 显示非重复数据</div>
+                                            <div id="repeatShowNewOne" class="chooseLiMast chooseNotOne">
+                                                <span class="chooseSpan"></span> 显示最新重复数据
+                                            </div>
+                                            重复数据判断条件：<br />
+                                            <div style="float:left" class="chooseOneDefault"><span class="chooseSpan"></span> 支柱</div>
+                                            <div id="repeatWithAlarm" style="float:left;margin-left:20px" class="chooseNotOne"><span class="chooseSpan"></span> 报警类型</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="con-li-ss con-li-wrap">
+                                <button id="S_so1" class="btn btn-small btn-primary" onclick="doQuery()">
+                                    查询
+                                </button>
+                                <!--<button id="S_export" class="btn btn-small btn-primary" onclick="importToExcel()">
+        导出
+    </button>-->
+                                <div class="dropdown" style="display:inline-block">
+                                    <button class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        导出
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" onclick="importToExcel(0)"><i class="icon-file"></i>报警列表</a></li>
+                                        <li id="import1C"><a href="#" onclick="importToExcel(1)"><i class="icon-file"></i>1C反馈表</a></li>
+                                        <li id="import2C"><a href="#" onclick="importToExcel(2)"><i class="icon-file"></i>2C反馈表</a></li>
+                                        <li id="import3C"><a href="#" onclick="importToExcel(3)"><i class="icon-file"></i>3C反馈表</a></li>
+                                        <li id="import4C"><a href="#" onclick="importToExcel(4)"><i class="icon-file"></i>4C反馈表</a></li>
+
+                                    </ul>
+                                </div>
+                                <button id="btn_close" style="display: none" class="btn btn-small btn-primary">
+                                    关闭
+                                </button>
+                                <!--<a id="E_saveList" title="批量处理" class="btn btn-primary editorBtn">
+        <i class="icon icon-white icon-compose">
+        </i>批量
+    </a>-->
+                                <div id="batch" class="dropdown" style="display:inline-block">
+                                    <button type="button" id="S_btnExlnew" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        批量<span class="caret" style="margin-top: 6px"></span>
+                                    </button>
+                                    <ul class="dropdown-menu chooseType_saveList">
+                                        <li class="Canc">
+                                            <a href="javascript:void(0)">
+                                                取消
+                                            </a>
+                                        </li>
+                                        <li id="taskHandle-btn" class="Mission">
+                                            <a href="javascript:void(0)">
+                                                转任务
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button type="button" id="S_add_fault" class="btn btn-small btn-primary">
+                                    添加步巡缺陷
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--列表块-->
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-eye-open"></i><span id="list_title">报警监控</span>
+                        </h2>
+                    </div>
+                    <div class="box-content">
+                        <table id="flexTable" style="display: none"></table>
+                    </div>
+                </div>
+                <!--/span-->
+            </div>
+        </div>
+        <div id="div1" style="display: none">
+        </div>
+        <div id="div2" style="display: none">
+        </div>
+    <!-- start：添加缺陷弹出框 -->
+    <div id="add-fault" class="box-fault clearfix hide">
+        <div class="cur-box">
+            <h3 class="top-title">添加步巡缺陷</h3>
+            <!--<span class="close-ico j-close"></span>-->
+            <main class="fl-l clearfix">
+                <div class="fl-l clearfix">
+                    <ul class="main-ul">
+                        <li>
+                            <div class="column-5 ">
+                                <label class="four_font_title">报警类型</label>：
+                                <span class="red">*</span>
+                                <input id="alarm-type" type="text" />
+                            </div>
+                            <div class="column-5 right-column">
+                                <label class="four_font_title">缺陷等级</label>：
+                                <span class="red">*</span>
+                                <select id="Useverity">
+                                    <option value="0" selected="">请选择</option>
+                                    <option value="一类">一级</option>
+                                    <option value="二类">二级</option>
+                                    <option value="三类">三级</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <label class="four_font_title">检测时间</label>：
+                                <span class="red">*</span>
+                                <input id="raise-time" type="text" class="Wdate" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="column-5">
+                                <label class="four_font_title">线路区站</label>：
+                                <span class="red">*</span>
+                                <input id="location" type="text" code="" />
+                            </div>
+                            <div class="column-5 right-column">
+                                <label class="four_font_title">行别</label>：
+                                <span class="red">*</span>
+                                <input type="text" id="directselect" style="width:145px;" />
+                            </div>
+                            <div class="column-5 position-re">
+                                <label class="four_font_title">支柱号</label>：
+                                <span class="red">*</span>
+                                <input id="polNumber" type="text" />
+                                <div id="pol_choose" class="pol_choose_div hide"></div>
+                            </div>
+                            <div class="column-5 right-column margin-t">
+                                <label class="four_font_title">公里标</label>：
+                                <span class="red">*</span>
+                                <input type="text" class="validate[custom[integerPositive],maxSize[8]]" id="kmStart"/>
+                                <!--<input type="text" class="validate[custom[integerPositive],maxSize[8]]" id="kmEnd" placeholder="          (m)"=(m)" />-->
+                            </div>
+                        </li>
+                        <li>
+                            <div id="org">组织机构</div>
+                            <div id="GIS" class="margin-t hide">GPS：</div>
+                        </li>
+                        <li>
+                            <div>
+                                <label class="six_font_title">异常描述</label>：
+                                <textarea id="alarm_analysis" class="descrip"></textarea> 
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <label class="six_font_title fl-l">异常图片上传</label><span class="fl-l">：</span>
+                                <div id="upload-resource-file"></div>
+                            </div>
+                            <input type="hidden" id="pictures" />
+                        </li>
+                        <li>
+                            <div class="column-5">
+                                <label class="four_font_title">报告人</label>：
+                                <span class="red">*</span>
+                                <input id="reporter" type="text" readonly/>
+                            </div>
+                            <div class="column-5 right-column">
+                                <label class="four_font_title">报告时间</label>：
+                                <span class="red">*</span>
+                                <input id="report-time" type="text" class="Wdate" readonly />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+        <div id="taskHandle" class="fl-l">
+            <div class="fl-l to-task"><!--<input type="checkbox" id="cb_showTask" class="fl-l" />--><h3 id="showTask" class="fl-l" for="cb_showTask">新建任务</h3></div>
+            <div id="box_task" class="zrw">
+                <input id="alarm_id" type="hidden" />
+                <input id="index_add_fault" type="hidden" />
+                <iframe id="iframe_task" name="iframe_task" style="width: 630px; height: 372px;" seamless=seamless src="" scrolling="no" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="fl-r fault-btn">
+            <input id="btn-add-fault" type="button" value="确认添加" class="btn btn-primary" />
+        </div>
+    </div>
+    <!-- end：添加缺陷弹出框 -->
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>
+
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>

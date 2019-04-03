@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑报警位置</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("form");
+    </script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet'>
+    <script type="text/javascript">
+        var alarmID = GetQueryString("alarmid");
+       
+        $(function () {
+            LoadForm();
+           
+        });
+
+        function LoadForm() {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "RemoteHandlers/AlarmEdit.ashx?active=C1Load&alarmid=" + alarmID,
+                data: "JSON",
+                async: false,
+                success: function (data) {
+                    var responseData = eval('(' + data + ')');
+                    document.getElementById('SPEED').innerHTML = responseData.SPEED;
+                    document.getElementById('F_ALL').innerHTML = responseData.F_ALL;
+                    document.getElementById('F1').innerHTML = responseData.F1;
+                    document.getElementById('F2').innerHTML = responseData.F2;
+                    document.getElementById('F3').innerHTML = responseData.F3;
+                    document.getElementById('F4').innerHTML = responseData.F4;
+                    document.getElementById('H1').innerHTML = responseData.H1;
+                    document.getElementById('H2').innerHTML = responseData.H2;
+                    document.getElementById('STAGGER_T').innerHTML = responseData.STAGGER_T;
+                    document.getElementById('STAGGER_NT').innerHTML = responseData.STAGGER_NT;
+                    document.getElementById('DAOGAO_T').innerHTML = responseData.DAOGAO_T;
+                    document.getElementById('DAOGAO_NT').innerHTML = responseData.DAOGAO_NT;
+                    document.getElementById('PARRALELDISTANCE').innerHTML = responseData.PARRALELDISTANCE;
+                    document.getElementById('PARRALELELEVATION').innerHTML = responseData.PARRALELELEVATION;
+                    document.getElementById('PARRALELTYPE').innerHTML = responseData.PARRALELTYPE;
+                    document.getElementById('LINESLOPE').innerHTML = responseData.LINESLOPE;
+                    document.getElementById('KUAJU').innerHTML = responseData.KUAJU;
+                    document.getElementById('KUANEIGAOCHAO').innerHTML = responseData.KUANEIGAOCHAO;
+                    document.getElementById('OFFLINE_TIME').innerHTML = responseData.OFFLINE_TIME;
+                    document.getElementById('TEMPERATURE').innerHTML = responseData.TEMPERATURE;
+                    document.getElementById('HUMIDITY').innerHTML = responseData.HUMIDITY;
+                    document.getElementById('DINGWEIGUANPODU').innerHTML = responseData.DINGWEIGUANPODU;
+                    document.getElementById('PIANMO').innerHTML = responseData.PIANMO;
+                    document.getElementById('LINETYPE').innerHTML = responseData.LINETYPE;
+                    document.getElementById('BCDAOGAO_T').innerHTML = responseData.BCDAOGAO_T;
+                    document.getElementById('BCDAOGAO_NT').innerHTML = responseData.BCDAOGAO_NT;
+                    document.getElementById('ISXIANJIE').innerHTML = responseData.ISXIANJIE;
+                    document.getElementById('XIANJIE').innerHTML = responseData.XIANJIE;
+                    document.getElementById('BCSTAGGER_T').innerHTML = responseData.BCSTAGGER_T;
+                    document.getElementById('BCSTAGGER_NT').innerHTML = responseData.BCSTAGGER_NT;
+                
+                }
+            });
+        };
+      
+    </script>
+</head>
+<body>
+    <form id="form1" method="POST">
+    <div class="box-content">
+        <table id="tb_info" class="table">
+            <tr>
+                <td style="vertical-align: middle;">
+                    速度(Km/h)：<strong><span id="SPEED"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    网压和：<strong><span id="F_ALL"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    网压1：<strong><span id="F1"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle">
+                    网压2：<strong><span id="F2"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    网压3：<strong><span id="F3"></span> <span id="km_mark"></span></strong>
+                </td>
+                <td style="vertical-align: middle">
+                    网压4：<strong><span id="F4"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle">
+                    硬点1：<strong><span id="H1"></span> </strong>
+                </td>
+                <td style="vertical-align: middle;">
+                    硬点2：<strong><span id="H2"></span> </strong>
+                </td>
+                <td style="vertical-align: middle;">
+                    接触式拉出(mm)：<strong><span id="STAGGER_T"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle">
+                    非接触式拉出(mm)：<strong><span id="STAGGER_NT"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    接触式导高(mm)：<strong><span id="DAOGAO_T"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    非接触式导高(mm)：<strong><span id="DAOGAO_NT"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle">
+                    平行线间距：<strong><span id="PARRALELDISTANCE"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    平行线高差：<strong><span id="PARRALELELEVATION"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    平行线类型：<strong><span id="PARRALELTYPE"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle">
+                    导线坡度：<strong><span id="LINESLOPE"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    跨距：<strong><span id="KUAJU"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    跨内高差：<strong><span id="KUANEIGAOCHAO"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="vertical-align: middle">
+                    离线时间 ： <strong><span id="OFFLINE_TIME"></span></strong>
+                </td>
+                <td style="vertical-align: middle">
+                    温度  ：<strong><span id="TEMPERATURE"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    湿度：<strong><span id="HUMIDITY"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="vertical-align: middle">
+                    定位管坡度 ： <strong><span id="DINGWEIGUANPODU"></span></strong>
+                </td>
+                <td style="vertical-align: middle">
+                    偏磨  ：<strong><span id="PIANMO"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    导线类型：<strong><span id="LINETYPE"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="vertical-align: middle">
+                    补偿接触式导高 ： <strong><span id="BCDAOGAO_T"></span></strong>
+                </td>
+                <td style="vertical-align: middle">
+                    补偿非接触式导高  ：<strong><span id="BCDAOGAO_NT"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    是否限界：<strong><span id="ISXIANJIE"></span> </strong>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="vertical-align: middle">
+                    限界 ： <strong><span id="XIANJIE"></span></strong>
+                </td>
+                <td style="vertical-align: middle">
+                    接触式补偿拉出值  ：<strong><span id="BCSTAGGER_T"></span> </strong>
+                </td>
+                <td style="vertical-align: middle">
+                    非接触式补偿拉出值：<strong><span id="BCSTAGGER_NT"></span> </strong>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="re">
+    </div>
+    </form>
+</body>
+</html>

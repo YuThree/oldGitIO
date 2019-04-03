@@ -1,0 +1,195 @@
+html,body{height: 100%; width: 100%;}
+.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.scrollBox{
+    width: 100%;
+    padding: 0 40px;
+}
+
+.healthTab{
+	height: 80px;
+}
+.box{
+	height: 765px;
+	width: 100%;
+}
+.box .main{
+	width: 100%;
+	height: 100%;
+}
+.patientName{
+	display: inline-block;
+	height: 36px;
+	line-height: 33px;
+	background: #0A3253;
+	border: solid 2px #2CA6F3;
+	border-left: 0;
+	border-right: 0;
+	color: #fff;
+	font-size: 16px;
+	position: relative;
+	margin-top: 15px;
+	margin-left: 40px;
+}
+.patientName::after{
+	position: absolute;
+	right: -19px;
+	top: -2px;
+	content: '';
+	height: 36px;
+	width: 19px;
+	background: url('../img/nameBg.png') no-repeat;
+}
+.patientName::before{
+	position: absolute;
+	left: -19px;
+	top: -2px;
+	content: '';
+	height: 36px;
+	width: 19px;
+	background: url('../img/nameBg.png') no-repeat center;
+	transform: rotate(-180deg);
+}
+
+.main .left{
+	float: left;
+	width: 43%;
+	height: 100%;
+}
+.main .right{
+	float: left;
+	width: 57%;
+	height: 100%;
+}
+.human{
+	margin-left: 55px;
+	margin-top: 30px;
+	position: relative;
+}
+.height,.weight,.vision,.bones,.breathing,.heart,
+.liver,.digestion,.kidney,.endocrine,.nerve{
+	color: #fff;
+	position: absolute;
+	left: 440px;
+	top: 0;
+}
+.weight{ top: 30px; }
+.vision{ top: 60px; }
+.bones{ top: 90px; }
+.breathing{ top: 120px; }
+.heart{ top: 150px; }
+.liver{ top: 180px; }
+.digestion{ top: 210px; }
+.kidney{ top: 240px; }
+.endocrine{ top: 270px; }
+.nerve{ top: 300px; }
+
+.height::before,.height::after,
+.weight::before,.weight::after,
+.vision::before,.vision::after,
+.bones::before,.bones::after,
+.breathing::before,.breathing::after,
+.heart::before,.heart::after,
+.liver::before,.liver::after,
+.digestion::before,.digestion::after,
+.kidney::before,.kidney::after,
+.endocrine::before,.endocrine::after,
+.nerve::before,.nerve::after{
+	content: '';
+	background: #1AA9E8;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.height::before,.vision::before{
+	width: 90px;
+	height: 1px;	
+	left: -110px;
+}
+.weight::before,.bones::before,.breathing::before,
+.heart::before,.liver::before,.digestion::before,
+.kidney::before{
+	width: 240px;
+	height: 1px;	
+	left: -260px;
+}
+.endocrine::before,.nerve::before{
+	width: 120px;
+	height: 1px;	
+	left: -140px;
+}
+
+.height::after,.weight::after,.vision::after,.bones::after,
+.breathing::after,.heart::after,.liver::after,.digestion::after,
+.kidney::after,.endocrine::after,.nerve::after{
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	left: -15px;
+}
+.human .info{
+	padding-left: 15px;
+	color: #1CBAF1;
+}
+.info.unhealthy{
+	color: #FF9752;
+}
+.verticalL{
+	width: 1px;
+	height: 60px;
+	position: absolute;
+	top: 10px;
+	left: 330px;
+	background: #1AA9E8;
+}
+.right .scrollBox{
+	padding: 0;
+	padding-left: 30px;
+	padding-top: 70px;
+}
+.contentBox{
+	width: 89%;
+	border: solid 1px #1AA9E8;
+	padding: 15px 0 0 20px;
+	margin-bottom: 20px;
+}
+.contentBox .cdct_chartsTitle{
+	margin-bottom: 35px;
+}
+.unhealthyInfo{
+	min-width:120px;
+	height:42px;
+	background:rgba(8,83,119,0.5);
+	border:1px solid rgba(28,199,255,1);
+	border-radius: 5px;
+	color: #B5F3FF;
+	line-height: 42px;
+	display: inline-block;
+	padding: 0 15px;
+	font-size: 14px;
+	margin-left: 60px;
+	margin-right: 10px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+.contentBox .detail{
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 30px;
+}
+.contentBox .detail p{
+	display: inline-block;
+	margin-left: 60px;
+}
+.contentBox .detail p span{
+	color: #fff;
+	font-size: 16px;
+}
+.contentBox .info{
+	padding:0 20px 0 60px;
+	color: #fff;
+	margin-bottom: 30px;
+}

@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>设备检测里程统计</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <!--引入css-->
+    <link href="/C3/PC/MMileageCount/css/mileageCount.css" rel="stylesheet" />
+    <!--引入js-->
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+
+    <script>
+        loadControl("ztree");
+        loadControl("mySelectTree");
+        loadControl("myTree");
+        loadControl("trainselect");
+        loadControl("layer");
+        loadControl("Validation");
+        loadControl("paging");
+        loadJs("/Common/js/6cweb/mySelectTree_Level2.js?v=" + version);
+        loadJs("/Common/js/6cweb/myTree.js?v=" + version);
+        loadJs("/Common/js/6cweb/mySelectTree.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+
+</head>
+<body>
+    <div id="content">
+        <!--标题-->
+        <div class="title_bg">
+            <span class="title-g">设备检测里程统计</span>
+        </div>
+        <div class="con_box">
+            <!--条件-->
+            <ul class="ul-condition">
+                <li>
+                    <label>组织机构：</label>
+                    <input id="organization" class="org input-w-s" type="text" code="" />
+                </li>
+                <li>
+                    <label>3C设备：</label>
+                    <input id="device3C" class="device_3C input-w-s" type="text" />
+                </li>
+                <li>
+                    <label>检测时间：</label>
+                    <input id="startTime" class="Wdate start_time input-w-m" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" value="" />
+                    <label>至</label>
+                    <input id="endTime" class="Wdate end_time input-w-m" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" value="" />
+                </li>
+                <li>
+                    <span class="btn-g btn-shadow-green"><span class="btn-g-search j_search">搜索</span></span>
+                </li>
+                <li>
+                    <span class="btn-g btn-shadow-purple"><span class="btn-g-export j_export">导出</span></span>
+                </li>
+                <li>
+                    <span class="btn-g btn-shadow-blue"><span class="btn-g-add-station j_add_device_station">添加途经站</span></span>
+                </li>
+                <li>
+                    <span class="btn-g btn-shadow-orange"><span class="btn-g-special-station j_special_station">特站距离</span></span>
+                </li>
+            </ul>
+
+            <!--分析结果-->
+            <div class="line_one_blue">
+                <div></div>
+                <img src="img/triangle_blue.png" />
+            </div>
+            <div class="result_bg1">
+                <div class="result_bg2">
+                    <span class="result">分析结果</span>
+                </div>
+            </div>
+            <div class="line_two_white">
+                <div></div>
+                <img src="img/triangle_white.png" />
+            </div>
+
+            <!--结果详情列表 start-->
+            <div id="carList" class="detail_box ">
+
+            </div>
+            <!--结果详情列表 end-->
+        </div>
+
+        <!--添加或编辑站点 start-->
+        <div id="add_edit_station_info" class="add_edit_station_box hide">
+            <span class="btn_close j_close"></span>
+            <input type="hidden" class="act" value="" />
+            <input type="hidden" class="rowID" value="" />
+            <div class="row_station">
+                <label>线路区站：</label>
+                <input id="station_line_address" class="station_address" type="text" code="" />
+            </div>
+            <div class="row_station">
+                <label>日期时间：</label>
+                <input id="detection_time" class="Wdate station_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false,  })" value="" />
+            </div>
+            <div class="row_btn">
+                <div class="btn_ok j_station_ok"></div>
+            </div>
+        </div>
+        <!--添加或编辑站点 end-->
+        <!--站点间添加站点 设置站点间距离start-->
+        <div id="site_between_station_info" class="site_between_station_box hide">
+            <span class="btn_close j_close"></span>
+            <div class="title_box">
+                <span class="add_edit_title j-add-edit-title cur-card">添加站点</span>
+                <span class="add_edit_distance j-add-edit-distance">站点距离</span>
+            </div>
+            <div id="station_con" class="station_con">
+                <input type="hidden" class="act" value="" />
+                <input type="hidden" class="rowID" value="" />
+                <div class="row_param">
+                    <label>线路区站：</label>
+                    <input id="position" class="position" type="text" code="" />
+                </div>
+                <div class="row_param">
+                    <label>日期时间：</label>
+                    <input id="site-time" class="Wdate site-time" type="text" onfocus="var min = set_min_time(); var max = set_max_time(); WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, minDate: min, maxDate: max })" value="" />
+                </div>
+                <div class="row_other">
+                    <div class="btn_confirm j_station_confirm">确定</div>
+                </div>
+            </div>
+            <div id="station_distance_con" class="station_distance_con hide">
+                <input type="hidden" class="act" value="" />
+                <input type="hidden" class="rowID" value="" />
+                <div class="row_param margin-one">
+                    <label>线路区站：</label>
+                    <input id="position-first" class="position-first" type="text" code="" readonly="readonly" />
+                </div>
+                <div class="row_param margin-two">
+                    <label>线路区站：</label>
+                    <input id="position-second" class="position-second" type="text" code="" readonly="readonly" />
+                </div>
+                <div class="row_param margin-two">
+                    <label>站点距离：</label>
+                    <input id="site-distance" class="site-distance" type="text" placeholder="" />
+                    <span class="distance-unit">km</span>
+                    <input id="d-type" type="hidden" value="" />
+                </div>
+                <div class="row_other">
+                    <div class="btn_confirm j_distance_confirm">确定</div>
+                </div>
+            </div>
+        </div>
+        <!--站点间添加站点 设置站点间距离end-->
+        <!--添加设备和站点 start-->
+        <div id="add_device_station_info" class="add_device_station_box hide">
+            <span class="btn_close j_close"></span>
+            <input type="hidden" class="act" value="" />
+            <input type="hidden" class="rowID" value="" />
+            <div class="row_station">
+                <label class="letter_space">3C设备：</label>
+                <input id="device" class="device" type="text" code="" />
+            </div>
+            <div class="row_station">
+                <label>线路区站：</label>
+                <input id="station_line_address_device" class="station_address" type="text" code="" />
+            </div>
+            <div class="row_station">
+                <label>日期时间：</label>
+                <input id="device_detection_time" class="Wdate station_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false,  })" value="" />
+            </div>
+            <div class="row_btn">
+                <div class="btn_ok btn_ok_margin j_device_station_ok"></div>
+            </div>
+        </div>
+        <!--添加设备和站点 end-->
+        <!--提示框 start-->
+        <div id="delete_station_info" class="delete_station_box info hide">
+            <div class="row_info">您确定要删除吗？</div>
+            <div class="row_del_btn">
+                <input type="hidden" class="act" value="" />
+                <button type="button" class="btn_margin j_close">取消</button>
+                <button type="button" class="btn_del_ok j_del_ok">确定</button>
+            </div>
+        </div>
+        <!--提示框 end-->
+        <!--特站距离 start-->
+        <div id="special-station" class="special-station hide">
+            <span class="btn_close j_close"></span>
+            <input class="act" type="hidden" value="special-station" />
+            <span class="view-distance">查看特殊站点距离</span>
+            <ul class="ul-station">
+                <li>
+                    <label>站点名</label>
+                    <input id="station-name" class="input-w-middle station-name" type="text" />
+                </li>
+                <li>
+                    <div class="btn-search-station j-search-station">
+                        <img src="img/btn_search_station.png" />
+                    </div>
+                </li>
+            </ul>
+            <div class="list">
+                <table id="table-distance" class="table-distance">
+                    <tr>
+                        <th>开始站点</th>
+                        <th>结果站点</th>
+                        <th>距&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div id="paging"></div>
+            </div>
+        </div>
+        <!--特站距离 end-->
+        <!--置顶-->
+        <div id="updown"><span class="up"></span></div>
+
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+    <!--引入js-->
+    <script>
+        loadJs("./js/mileageCount.js?v=" + version, "utf-8");
+        loadJs("/Common/js/6cweb/mydate.js?v=" + version, "utf-8");
+    </script>
+
+</body>
+</html>

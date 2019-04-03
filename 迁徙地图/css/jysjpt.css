@@ -1,0 +1,125 @@
+
+html,body{
+    height: 100%;
+}
+body{
+    background: url(../img/jyBg.png) center top no-repeat;
+    overflow: hidden;
+}
+.logBG{
+    position: absolute;z-index: 999;
+    top:40px;left: 50%;margin-left: -243px;width: 486px;height: 81px;
+    background: url(../img/jyLogo.png) center center no-repeat;
+}
+.loginBg{
+    width: 871px;height: 686px;margin-left: -435px;left: 50%;top:180px;
+    background: url(../img/jyInputBg.png) center center no-repeat;
+    position: absolute;z-index: 998;
+}
+.loginInput{
+    width: 430px;height: 400px;
+    position: absolute;
+    top: 18px;
+    left: 48%;
+    padding: 49px 43px 0 43px;
+}
+.error{
+    border: 1px solid red;
+}
+.errorS,.errorL{
+    display: none;
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 54px;
+    left: 63px;
+}
+.error+.errorS{
+    display: block;
+}
+.cdct_input{
+    width:283px;
+    height:51px;
+    margin-left: 60px;
+    background:rgba(244,245,247,1);
+    border-radius:2px;
+    padding-left: 18px;
+    color: #999999;
+    font-size: 14px;
+    border: none;
+    -moz-box-shadow: inset 0px 2px 0px #CCC;;
+    -webkit-box-shadow: inset 0px 2px 0px #CCC;;
+    box-shadow: inset 0px 2px 0px #CCC;;
+}
+.error{
+    border: 1px solid red;
+}
+.errorS,.errorL{
+    display: none;
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 54px;
+    left: 63px;
+}
+.error+.errorS{
+    display: block;
+}
+.logBtn{
+    width:342px;    height:51px;
+    background:rgba(69,179,253,1);
+    border-radius:4px;
+    color: white;
+    line-height: 51px;
+    text-align: center;font-size: 18px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+.cdct_infoInput{
+    margin-bottom: 35px;
+}
+.inputTitle{
+    font-size:28px;
+    margin-bottom: 49px;text-align: center;
+    color:rgba(37,130,202,1);
+}
+.icon_bg{
+    background: #f4f5f7;width: 51px;height: 51px;
+    position: absolute;display: inline-block;
+}
+.inputicon{
+    display: inline-block;
+    width: 21px;height: 24px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+.icon_user{
+    background: url(../img/jyUser.png) no-repeat center center
+}
+.icon_password{
+    background: url(../img/jyPw.png) no-repeat center center
+}
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999999;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #999999;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #999999;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #999999;
+}
+input::-ms-clear, input::-ms-reveal{display: none;}
+.footText{
+    color: #2582CA;font-size: 13px;position: absolute;bottom: 8px;
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备全景视频直播（监控第二个屏）</title>
+    <link href="/Common/js/6cweb/video/VideoPlay.css" rel="stylesheet" type="text/css" />
+    <link href="/Lib/bootstrap/css/metro-bootstrap.css" rel='stylesheet' />
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+
+   <script src="/Common/js/hikvision/webVideoCtrl_all.js" type="text/javascript"></script>
+
+    <script src="/C3/PC/MLiveStreaming/js/HikVisionIPCVideoPlayNew.js" type="text/javascript"></script>
+    <style type="text/css">
+        html,body{ background-color: #000}
+        button.s_menu
+        {
+            background: transparent url(/Common/img/i_menu.png) no-repeat left center;
+            padding-left: 26px;
+            width: 100px;
+            color: #CCC;
+        }
+        button.s_menu:hover
+        {
+            color: #FFF;
+        }
+        a.go_home
+        {
+            background: transparent url(/Common/img/i_home.png) no-repeat left center;
+            padding: 4px 12px 4px 26px;
+            width: 100px;
+            color: #CCC;
+            display: inline-block;
+            line-height: 16px;
+        }
+        a.go_home:hover
+        {
+            color: #FFF;
+        }
+        a.btn_link, a.btn_play, a.btn_r, a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            height: 34px;
+            width: 50px;
+            line-height: 34px;
+            color: #333333;
+        }
+        a.btn_link:hover
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            color: #FFF;
+        }
+        a.btn_play
+        {
+            background: transparent url(../../img/i_btn_play.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_r
+        {
+            background: transparent url(../../img/i_btn_r.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_fullscreen.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .playbutton2{background-color:transparent;  opacity:0.8;}
+        .playbutton2 img{ width:30px; height:30px;}
+        .playbutton2:hover img{ -webkit-animation:twinkling 2s infinite ease-in-out;}
+        .playbutton2:link{ background-color:transparent; opacity:0.8;}
+        .playbutton2:visited{background-color:transparent; }
+        
+        .btn_over{ opacity:1 }
+        .btn_out{ opacity:0.8 }
+        
+        .metro p{ margin:0px;}
+    </style>
+
+    <script>
+
+        $(function () {
+
+            _w = $(window).width();
+            _h = $(window).height();
+            $('#locImg,#divPlugin').width(_w).height(_h);
+
+//            var type = GetQueryString("type");
+
+//            if (type != undefined && type == '44dp') {
+//                $('#td_btn,#tr_1').css("padding", "0");
+//            }
+
+//            $('#ImgStopPlay').hide();
+
+        })
+    
+    </script>
+</head>
+<body class="metro" style="overflow: hidden; background-color: #333333; left: -7px;
+    position: relative;">
+    <div class="playdiv">
+        <div>
+            <table style="background-color: #000;">
+                <tr id="tr_1" >
+                    <td style="width: 10px">
+                        <span id="locomotive_no"></span>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="tdb" style="width: 10px">
+                    </td>
+                    <td class="tdb" style="width: 10px">
+                    </td>
+                    <td id="td_btn" style="width: 250px; padding:0px 0px;">
+                        <div class="divButtonIconCtrl">
+                            
+                         <a href="#"  id="ImgStopPlay" class="playbutton2"  title="点击停止直播" onclick="javascript:window.parent.clickRealPlayTwoBack();">
+                                <img src="/Common/img/playico/stop.png" />
+                            </a>
+                            <a href="#" id="ImgRecord" class="playbutton2"  title="点击开始录像" onclick="javascript:record()">
+                                <img src="/Common/img/playico/rec.png" />
+                            </a>
+                           <!-- <a href="#" id="ImgFullScreen" class="playbutton2"  title="点击全屏" onclick="javascript:clickFullScreen()">
+                                 <img src="/Common/img/playico/full.png" />
+                            </a>-->
+
+
+                        </div>
+                    </td>
+                    <td style="width: 450px; text-align: left;">
+                        <div id="divplaylog" class="playlog">
+                        </div>
+                    </td>
+                    <td id="IsP" style="text-align: right; width: 30px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="td_img" colspan="7" style="display: none">
+                        <div id="playImg">
+                            <img id="locImg" src="../../img/test.JPG" style="height: 530px; width: 800px" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <div id="divPlugin" style="height: 330px; width: 680px;" class="plugin">
+                        </div>
+                        <div id="divdownloadplugin">
+                            <a href="/Common/dll/WebComponents.exe">点击下载直播插件</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

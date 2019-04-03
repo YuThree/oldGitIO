@@ -1,0 +1,294 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=2.0&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js" type="text/javascript"></script>
+    <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet" />
+    <!--加载检索信息窗口-->
+    <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js" type="text/javascript"></script>
+    <link href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" rel="stylesheet" />
+    <script src="/Common/MGIS/JS/BMapJS.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapLine.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapUserContainer.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPosition.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapSubstation.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapC3.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPole.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapObjData.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapBridgeTune.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/GIS.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //页面加载是调用
+        $(document).ready(function () {
+            //setInterval(startRequest, 10000);
+            var _h = parseInt($(window).height());
+            $("#repeatMapDiv").height(_h);
+            try {
+                //var Category_Code = GetQueryString("Category_Code");
+                //if (Category_Code == "1C") {
+                //    loadSelectSysCode('afcode', 'AFCODE', '1C'); //加载分析下拉列
+                //}
+                document.getElementById('loading').style.display = 'none';
+                var alarmid = GetQueryString("alarmid"); //缺陷ID
+                var linecode = GetQueryString("linecode"); //线路CODE
+                if (linecode == "" || linecode == "null") {
+                    alert('没有线路信息，无法显示！');
+                    return;
+                }
+                var xb = GetQueryString("xb"); //行别
+                var startdate = GetQueryString("startdate"); //开始时间
+                var enddate = GetQueryString("enddate"); //结束时间
+                var distance = GetQueryString("distance"); //重复距离（M）
+                var count = GetQueryString("count"); //重复个数
+                var org_code = GetQueryString("org_code");
+                var org_name = GetQueryString("org_name");
+                var org_type = GetQueryString("org_type");
+                var locomotive_code = GetQueryString("locomotive_code");
+
+                var txtqz = GetQueryString("txtqz");
+                var skm1 = GetQueryString("skm1");
+                var skm2 = GetQueryString("skm2");
+                var ekm1 = GetQueryString("ekm1");
+                var ekm2 = GetQueryString("ekm2");
+                var gis_x1 = GetQueryString("gis_x1");
+                var gis_y1 = GetQueryString("gis_y1");
+                var gis_x2 = GetQueryString("gis_x2");
+                var gis_y2 = GetQueryString("gis_y2");
+                var zt = GetQueryString("zt");
+                var afcode = GetQueryString("afcode");
+                var type = GetQueryString("type");
+                var start_km = (skm1 == null ? "" : skm1) + (skm2 == null ? "" : skm2);
+                var end_km = (ekm1 == null ? "" : ekm1) + (ekm2 == null ? "" : ekm2);
+                //加载地图
+                RepeatMapbind(alarmid, linecode, escape(xb), startdate, enddate, txtqz, start_km, end_km, gis_x1, gis_y1, gis_x2, gis_y2, zt, afcode, distance, count, type);
+                document.getElementById('UserLogon').style.display = 'none';
+            } catch (e) {
+                // alert("地图加载不成功，请检查网络！");
+
+            }
+        });
+        function btnOnClick(btntype, id) {
+            document.getElementById('alarmid').value = id;
+            document.getElementById('ddd').style.display = 'block';
+            document.getElementById('layout').style.display = 'block';
+            if (btntype == "btnOk") {
+                //                document.getElementById('updatetitle').innerHTML = "报警确认";
+                document.getElementById('updatetype').value = "btnOk";
+                yzAlarmData();
+            }
+            else {
+                //                document.getElementById('updatetitle').innerHTML = "报警取消";
+                document.getElementById('updatetype').value = "btnCan";
+                yzAlarmData();
+            }
+        } //验证数据
+        function yzAlarmData() {
+            var btntype = document.getElementById('updatetype').value;
+            var YZ = 0;
+            if (btntype == "btnOk") {
+                var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+                var severity = document.getElementById('Useverity').value; //等级
+                if (severity != "请选择") { document.getElementById('UseverityYZ').className = ""; }
+                else if (severity == "请选择") { document.getElementById('UseverityYZ').className = "control-group error"; YZ = 1; }
+                if (txtDefect.replace(/[ ]/g, "") != "" && txtDefect != undefined) { document.getElementById('UtxtDefectYZ').className = ""; }
+                else if (txtDefect.replace(/[ ]/g, "") == "" || txtDefect == undefined) { document.getElementById('UtxtDefectYZ').className = "control-group error"; YZ = 1; }
+            }
+            else if (btntype == "btnCan") {
+                var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+                if (txtDefect.replace(/[ ]/g, "") != "" && txtDefect != undefined) { document.getElementById('UtxtDefectYZ').className = ""; }
+                else if (txtDefect.replace(/[ ]/g, "") == "" || txtDefect == undefined) { document.getElementById('UtxtDefectYZ').className = "control-group error"; YZ = 1; }
+            }
+            if (YZ != 0) { return false; } else { return true; }
+        };
+        //确认/取消报警
+        function btnAlarmUpdate() {
+            if (yzAlarmData()) {
+                var json = repeatJson;
+                var alarmid = document.getElementById('alarmid').value; //id
+                var btntype = document.getElementById('updatetype').value;
+                var afcode = document.getElementById('dll_zt').value; //缺陷类型
+                var severity = document.getElementById('Useverity').value; //等级
+                var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+                var txtAdvice = document.getElementById('UtxtAdvice').value; //处理建议
+                var txtNote = document.getElementById('UtxtNote').value; //备注
+                var txtReporter = document.getElementById('UtxtReporter').value; //报告人
+                var reportdate = document.getElementById('Ureportdate').value; //日期
+                //                var linecode = json[0].LINE_CODE; //线路
+                //                var positioncode = json[0].POSITION_CODE; //区站
+                //                var detail = json[0].DETAIL; //描述
+                //                var x = json[0].GIS_X; //x
+                //                var y = json[0].GIS_Y; //y
+
+
+
+
+
+                //调用更新方法
+                var responseData = XmlHttpHelper.transmit(false, "get", "text", "../FastReport/RemoteHandlers/RepeatAlarm.ashx?alarmid=" + alarmid + "&type=manage&btntype=" + btntype + "&txtDefect=" + escape(txtDefect) + "&txtAdvice=" + escape(txtAdvice) + "&txtNote=" + escape(txtNote) + "&txtReporter=" + escape(txtReporter) + "&reportdate=" + reportdate + "&afcode=" + escape(afcode) + "&severity=" + escape(severity) + "&tmpe=" + Math.random(), null, null);
+                if (responseData != null && responseData != "") {
+                    ymPrompt.succeedInfo('保存成功', null, null, '提示信息', null);
+                    document.getElementById('ddd').style.display = 'none';
+                    document.getElementById('layout').style.display = 'none';
+                } else {
+                    ymPrompt.errorInfo('操作失败！请联系管理员', null, null, '提示信息', null);
+                }
+                document.getElementById('btncols').click();
+            }
+            else {
+                return false;
+            }
+        };
+        function OnloadMap() {
+            $('.BMapLib_last').attr('title', "框选计算重复告警区域");
+        }
+    </script>
+    <style>
+        .test {
+            width: 170px;
+            padding: 50px 10px;
+            border: 5px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+
+            .test span {
+                width: 0;
+                height: 0;
+                font-size: 0;
+                overflow: hidden;
+                position: absolute;
+            }
+
+                .test span.bot {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #beceeb transparent transparent;
+                    left: 20px;
+                    bottom: -40px;
+                }
+
+                .test span.top {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #ffffff transparent transparent;
+                    left: 20px;
+                    bottom: -33px;
+                }
+
+        .anchorBL {
+            display: none;
+        }
+    </style>
+</head>
+<body onload="OnloadMap()">
+    <div id="layout" style="background-color: Black; opacity: .4; position: absolute;
+        z-index: 180; width: 100%; height: 100%; display: none;">
+    </div>
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span>
+        </div>
+    </div>
+    <div id="sss" style="z-index: 99; position: absolute; background: white; width: 950px;">
+    </div>
+    <div id="ddd" style="z-index: 200; position: absolute; background: white; left: 500px;
+        top: 100px; display: none;">
+        <table class="table table-condensed">
+            <tr style='margin-top: 10px;'>
+                <td>
+                    <div id="afcodeYZ">
+                        报警类型：<span id="afcode"></span>
+                    </div>
+                </td>
+                <td>
+                    <div id="UseverityYZ">
+                        报警级别：
+                        <select id="Useverity" style="width: 100px" onchange="yzAlarmData()">
+                            <option>请选择</option>
+                            <option>一类</option>
+                            <option>二类</option>
+                            <option>三类</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    报警分析
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div id="UtxtDefectYZ">
+                        <textarea name="txtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 500px;"
+                                  onblur="yzAlarmData()"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    处理建议
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea name="txtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 500px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    备注
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea name="txtNote" id="UtxtNote" rows="2" style="height: 30px; width: 500px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    报告人：<input name="txtReporter" type="text" id="UtxtReporter" style="width: 100px;" />
+                </td>
+                <td>
+                    报告日期：
+                    <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                           style="width: 150px" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="control-group error">
+                        *红框内必填
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"></td>
+                <td style="text-align: right;">
+                    <button id="Button2" class="btn btn-primary" onclick="btnAlarmUpdate()">
+                        确认
+                    </button>
+                    <button id="btncols" class="btn btn-primary" onclick="javascript:document.getElementById('ddd').style.display = 'none';document.getElementById('layout').style.display = 'none';">
+                        关闭
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="main">
+        <div class="mainbox">
+            <div style="width: 100%; border: 0px solid gray; text-align: center; z-index: 1"
+                 id="repeatMapDiv">
+            </div>
+        </div>
+    </div>
+    <input id="updatetype" type="hidden" />
+    <input id="alarmid" type="hidden" />
+</body>
+</html>

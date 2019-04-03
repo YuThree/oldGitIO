@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>艾滋病病毒感染儿童专项</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+
+	<!-- 儿童保健公用样式 -->
+	<link rel="stylesheet" href="../../css/children/childrenCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">艾滋病病毒感染儿童专项</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">姓名</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone" name="info1" required>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">性别</span>
+						</div>
+						<div class="cdct_info">
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="xb1" type="radio" name="xb" value="">
+								<label for="xb1">男</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="xb2" type="radio" name="xb" value="">
+								<label for="xb2">女</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="xb3" type="radio" name="xb" value="">
+								<label for="xb3">未说明</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit cdct_asterisk">出生日期</span>
+					</div>
+					<div class="cdct_info cdct_relative">
+						<input type="text" class="cdct_inputNone datepicker" name="info2" required>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">体重(Kg)</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">身长(CM)</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">随访情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfqk1" type="radio" name="sfqk" value="">
+							<label for="sfqk1">随访中</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfqk2" type="radio" name="sfqk" value="">
+							<label for="sfqk2">已失访</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">存活情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="chqk1" type="radio" name="chqk" value="">
+							<label for="chqk1">存活</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="chqk2" type="radio" name="chqk" value="">
+							<label for="chqk2">死亡</label>
+						</div>
+						<label class="cdct_inputLable">
+							死亡时间
+							<input type="text" class="cdct_inputLine cdct_line150 datepicker">
+						</label>
+						<label class="cdct_inputLable">
+							死亡原因
+							<input type="text" class="cdct_inputLine cdct_line175">
+						</label>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">预防接种情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="yfjzqk1" type="radio" name="yfjzqk" value="">
+							<label for="yfjzqk1">未接种</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="yfjzqk2" type="radio" name="yfjzqk" value="">
+							<label for="yfjzqk2">乙肝疫苗第一针</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="yfjzqk3" type="radio" name="yfjzqk" value="">
+							<label for="yfjzqk3">卡介苗</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="yfjzqk4" type="radio" name="yfjzqk" value="">
+							<label for="yfjzqk4">不详</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">新生婴儿抗艾滋病毒药物应用情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="xsjz1" type="radio" name="xsjz" value="">
+							<label for="xsjz1">用药</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="xsjz2" type="radio" name="xsjz" value="">
+							<label for="xsjz2">未用药</label>
+						</div>
+						<label class="cdct_inputLable">
+							开始用药时间
+							<input type="text" class="cdct_inputLine cdct_line150 datepicker">
+						</label>
+						<label class="cdct_inputLable">
+							停止用药时间
+							<input type="text" class="cdct_inputLine cdct_line150 datepicker">
+						</label>
+						<label class="cdct_inputLable">
+							药品名称
+							<input type="text" class="cdct_inputLine cdct_line175">
+						</label>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">漏服情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="wjfy1" type="radio" name="wjfy" value="">
+							<label for="wjfy1">未漏服</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="wjfy2" type="radio" name="wjfy" value="">
+							<label for="wjfy2">漏服</label>
+							
+						</div>
+						<label class="cdct_inputLable"><input type="text" class="cdct_inputLine cdct_line80">次</label>
+						
+					</div>
+				</div>
+
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">报告机构</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">报告医生</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">医生1</li>
+										<li class="hideUlLi" data-selectoption="2">医生2</li>
+										<li class="hideUlLi" data-selectoption="3">医生3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">联系电话</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">填报时间</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+				info2:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+	</script>
+</body>
+</html>

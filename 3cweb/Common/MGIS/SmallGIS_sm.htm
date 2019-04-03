@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=0.5,Transition=0)" />
+    <meta http-equiv="Page-Exit" content="revealTrans(Duration=5,Transition=22)" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />    
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+
+    <script src="/Common/MGIS/JS/BMapObjData.js" type="text/javascript"></script>
+    <script src="/Common/js/SuperMap/libs/SuperMap.Include.js"></script>
+    <script src="/Common/js/SuperMap/my_superMap.js"></script>
+
+
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <style>
+        .anchorBL
+        {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+        //页面加载是调用
+        $(document).ready(function () {
+
+            addCookie("GisMode", "gis", 1, "/");
+
+            var mapLevel = document.getElementById('mapLevel').value; //获取当前地图显示层次
+
+            var _w = parseInt($(window).width()) + 20;
+            var _h = parseInt($(window).height());
+            $('#mapDiv').width(_w).height(_h);
+
+            var C = getConfig("For6C");
+            if (C == "1C" || C == "2C" || C == "4C") {
+                document.getElementById('one1').style.display = 'none';
+                document.getElementById('con_one_1').style.display = 'none';
+                setTab('one', 2, 2); OnlondbqxMapbind(); MisLinesSelect();
+            }
+            else
+            {
+
+                try {
+
+                    BindMap("mapDiv", "22在线实时监控");
+                    RefreshPosition();
+                    RefreshLoco();
+                    RefreshAlarm();
+
+                    AgainRefsetInterval();
+
+
+                }
+                catch (e)
+                {
+                  //  alert("地图加载不成功，请检查网络！");
+
+                }
+            }
+        });
+   
+    </script>
+</head>
+<body>
+  
+    <div style="left: -20px; position: relative;" id="mapDiv">
+    </div>
+    
+    <div style="display: none">
+        <input id="mapLevel" runat="server" />
+    </div>
+
+    <div id="div1">
+    </div>
+    <div id="div2">
+    </div>CCCCCCCQ
+    <div id="winpop">
+        <div class="title">
+            您有新的消息&nbsp;&nbsp;&nbsp;<span onclick="hid_pop()">关闭</span></div>
+        <div class="con">
+            <span id="AlarmSpan"></span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿<html>
+<head>
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js"></script>
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+        }
+        #main
+        {
+            height: 80%;
+        }
+        #box
+        {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background-color: rgba(15,15,17,0.5);
+            -moz-border-radius: 15px; /* Gecko browsers */
+            -webkit-border-radius: 15px;
+            padding: 5px;
+        }
+        #box_ul
+        {
+            padding-left: 0px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            -moz-border-radius: 15px; /* Gecko browsers */
+            -webkit-border-radius: 15px;
+            margin: 0 0 0px 0px;
+            color: White;
+        }
+        #box_ul li
+        {
+            z-index: 9999;
+            background-color: rgba(100, 100, 144, 0.5);
+            padding: 5px;
+            list-style-type: none;
+            -moz-border-radius: 15px; /* Gecko browsers */
+            -webkit-border-radius: 15px;
+            margin-top: 5px;
+            color: White;
+        }
+        .anchorBL
+        {
+            display: none;
+        }
+        a
+        {
+            cursor: pointer;
+            color: White;
+        }
+    </style>
+    <script>
+        $(function () {
+            LoadOrg();
+        })
+    </script>
+</head>
+<body onload="ssa('','','6','铁路总公司')">
+    <div id="main">
+    </div>
+    <div id="box">
+        <ul id='box_ul'>
+        </ul>
+    </div>
+    <script src="/Lib/Echarts-3.0/echarts.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM" type="text/javascript"></script>
+    <script src="/Common/js/flip/jquery.min.js"></script>
+    <script src="/C3/PC/MRTA/js/example1.js"></script>
+    <script src="/C3/PC/MRTA/js/BMapObjData.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+</body>
+</html>

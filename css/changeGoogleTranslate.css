@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+    width:100%;
+    overflow:hidden;
+}
+* {
+    padding: 0;
+    margin: 0;    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft Yahei";
+    line-height: 1;
+    color: red;
+    background-color: #f0f3f4;
+    font-size: 25px;
+}
+
+ul,
+li {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+.borebox{width: 100%;height: 200px;float: left;border: 1px solid yellow;position: relative;background: wheat}
+.borebox>span{
+    position: absolute;top: 50%;left: 50%;font-size: 30px;
+    color: rgb(212, 15, 238);
+}
+.borebox2{width: 49%;border: 1px solid red;background: url(../img/youdaoPng.png) center center no-repeat; }
+.borebox3{width: 49%;border: 1px solid blue;background: url(../img/baidupng.png) center center no-repeat;}
+.borebox textarea{
+    width: 100%;height: 100%;resize: none;
+    font-size: 16px;
+    background: transparent;
+    line-height: 36px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 15px;
+}
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>儿童档案Tab</title>
+    <!-- 重置样式 -->
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../jsControl/multiNav/nav.css">
+</head>
+
+<body>
+    <ul data-menuSetMove="1" class="subNav">
+        <li><a data-clickChangeIfr="true" href="新生儿疾病筛查.html">疾病筛查管理</a></li>
+        <li><a data-clickChangeIfr="true" href="新生儿听力筛查.html">听力筛查管理</a></li>
+        <li><a data-clickChangeIfr="true" href="新生儿视力筛查.html">视力筛查管理</a></li>
+    </ul>
+    <ul class="subNav" data-menuSetMove="2">
+        <li><a data-clickChangeIfr="true" href="体弱儿童专项.html">体弱儿童专项</a></li>
+        <li><a data-clickChangeIfr="true" href="体弱儿童随访.html">体弱儿童随访</a></li>
+    </ul>
+    <ul class="subNav" data-menuSetMove="3">
+        <li><a data-clickChangeIfr="true" href="新生儿家庭访视记录表.html">新生儿家庭访视</a></li>
+        <li><a data-clickChangeIfr="true" href="满月龄儿童健康检查记录表.html">儿童体检</a></li>
+    </ul>
+    <ul class="subNav" data-menuSetMove="4">
+        <li><a data-clickChangeIfr="true" href="艾滋病病毒感染儿童专项.html">艾滋病感染儿童专项</a></li>
+        <li><a data-clickChangeIfr="true" href="艾滋病病毒感染儿童随访.html">艾滋病感染儿童随访</a></li>
+        <li><a data-clickChangeIfr="true" href="梅毒感染新生儿登记.html">梅毒感染儿童登记</a></li>
+    </ul>
+    <ul class="subNav" data-menuSetMove="5">
+        <li><a data-clickChangeIfr="true" href="预防接种卡.html">预防接种卡</a></li>
+        <li><a data-clickChangeIfr="true" href="预防接种记录.html">预防接种记录</a></li>
+    </ul>
+    <ul class="subNav" data-menuSetMove="6">
+        <li><a data-clickChangeIfr="true" href="小儿贫血防治专项登记.html">小儿贫血防治专项</a></li>
+        <li><a data-clickChangeIfr="true" href="小儿贫血防治随访.html">小儿贫血防治随访</a></li>
+        <li><a data-clickChangeIfr="true" href="小儿佝偻病防治登记.html">佝偻病防治专项</a></li>
+        <li><a data-clickChangeIfr="true" href="小儿佝偻病防治随访.html">佝偻病防治随访</a></li>
+        <li><a data-clickChangeIfr="true" href="小儿腹泻防治记录.html">小儿腹泻防治记录</a></li>
+        <li><a data-clickChangeIfr="true" href="小儿肺炎防治记录.html">小儿肺炎防治记录</a></li>
+    </ul>
+    <form class="cdct_form">
+        <div class="cdct_toolbar cdct_clearfix">
+            <div class="cdct_icon cdct_i1">保存</div>
+            <div class="cdct_icon cdct_i2 ">保存并新建</div>
+            <div class="cdct_icon cdct_i3">新建家庭</div>
+            <div class="cdct_icon cdct_i4">打印</div>
+        </div>
+        <nav id="cdct_nav" class="cdct_nav">
+            <div class="leftA"></div>
+            <div class="rightA"></div>
+            <ul class="cdct_nav_ul">
+                <li><a data-clickChangeIfr="true" href="儿童基本信息登记表.html" title="" class="on">儿童基本信息</a></li>
+                <li class="more" data-menuGetMove="1">
+                    <a data-clickChangeIfr="true" href="新生儿疾病筛查.html" title="">筛查管理</a>
+                </li>
+                <li class="more" data-menuGetMove="2">
+                    <a data-clickChangeIfr="true" href="体弱儿童专项.html" title="">体弱儿童管理</a>
+                </li>
+                <li class="more" data-menuGetMove="3">
+                	<a data-clickChangeIfr="true" href="新生儿家庭访视记录表.html" title="">儿童体检管理</a>
+                </li>
+                <li class="more" data-menuGetMove="4">
+                    <a data-clickChangeIfr="true" href="艾滋病病毒感染儿童专项.html" title="">艾梅乙管理</a>
+                </li>
+                <li class="more" data-menuGetMove="5">
+                	<a data-clickChangeIfr="true" href="预防接种卡.html" title="">预防接种管理</a>
+                </li>
+                <li class="more" data-menuGetMove="6">
+                	<a data-clickChangeIfr="true" href="小儿贫血防治专项登记.html" title="">儿童专病防治管理</a>
+                </li>
+                <li><a data-clickChangeIfr="true" href="阿氏评分登记.html" title="">阿氏评分管理</a></li>
+            </ul>
+            <span class="target"></span>
+        </nav>
+        <div class="cdct_iframe">
+            <iframe src="儿童基本信息登记表.html" id="forIfr" style="width:100%;height:100%;border:none;"></iframe>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../jsControl/MBnavigation/MBnavigation.js"></script>
+    <script type="text/javascript" src="../../jsControl/multiNav/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <meta name=description content="赛贝尔曲线">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>cubic-bezier</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-color:white;
+        }
+
+        #canvasZone {
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        #myCanvas {
+            height:400px;
+            width: 400px;
+            border: 1px solid aqua;
+        }
+        #p1, #p2{
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid purple;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            cursor: pointer;
+        }
+        #p2{
+            top: 390px;
+            left: 390px;
+        }
+        #timeing{
+            width: 800px;
+            background: red;
+            margin: 0 40px;
+            padding: 0px;
+            position: relative;
+            text-align: center;
+            line-height: 400px;
+            float: left;
+        }
+        #timeing b{
+            width: 150px;
+            height: 50px;
+            background: cyan;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            left: 0px;
+        }
+        #run{
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        @keyframes zhixian {
+            to{ left: 650px; }
+        }
+    </style>
+    <script type="text/javascript">
+        var ctx;
+        var t = 0;
+        var tm = 1;
+        var c = .005;
+        var count = tm/c;
+        var x1 = 0;
+        var y1 = 1;
+        var x2 = 1;
+        var y2 = 0;
+        var p1;
+        var p2;
+        var css;
+        var myCanvas;
+        window.onload = function () {
+            startAnimation();
+            var b = document.getElementsByTagName('b');
+            var timeing = ['ease','linear','ease-in','ease-out','ease-in-out','cubic-bezier(0,1,1,0)'];
+            for(var i = 0; i < b.length; i++) {
+                b[i].style.animation = 'zhixian 3s ' + timeing[i] + ' infinite';
+                b[i].style.top = 10+i*60+'px';
+            }
+            var run  = document.getElementById('run');
+            run.onclick = function() {
+                b[b.length-1].style.animation = 'zhixian 3s ' + css.innerHTML + ' infinite';
+            }
+        }
+        function startAnimation() {
+            p1 = document.getElementById('p1');
+            p2 = document.getElementById('p2');
+            myCanvas = document.getElementById('canvasZone');
+            css = document.getElementById('css');
+            var p1W = p1.offsetWidth/2-1;
+            var p2W = p2.offsetWidth/2-1;
+            var myT = myCanvas.offsetTop+p1W;
+            var myL = myCanvas.offsetLeft+p1W;
+            var myW = myCanvas.offsetWidth;
+            var myH = myCanvas.offsetHeight;
+            var _x,_y;
+            p1.addEventListener('mousedown',function (ev) {
+                window.addEventListener('mousemove', move);
+                window.addEventListener('mouseup', function() {
+                    window.removeEventListener('mousemove',move);
+                })
+                function move(e) {
+                    var x_ = e.pageX - myL;
+                    var y_ = e.pageY - myT;
+                    if(x_>=-p1W&&x_<=myW-p1W){
+                        p1.style.left = x_ +'px';
+                        x1 = Math.round((x_+p1W)/400*100)/100;
+                    }
+                    if(y_>=-p1W&&y_<=myH-p1W){
+                        p1.style.top = y_ +'px';
+                        y1 = Math.round((1-(y_+p1W)/400)*100)/100;
+                    }
+                    css.innerHTML = 'cubic-bezier('+x1+','+y1+','+x2+','+y2+')';
+                    drawHeart();
+                }
+            });
+            p2.addEventListener('mousedown',function (ev) {
+                window.addEventListener('mousemove', move);
+                window.addEventListener('mouseup', function() {
+                    window.removeEventListener('mousemove',move);
+                })
+                function move(e) {
+                    var x_ = e.pageX - myL;
+                    var y_ = e.pageY - myT;
+                    if(x_>=-p1W&&x_<=myW-p1W){
+                        p2.style.left = x_ +'px';
+                        x2 = Math.round((x_+p2W)/400*100)/100;
+                    }
+                    if(y_>=-p1W&&y_<=myH-p1W){
+                        p2.style.top = y_ +'px';
+                        y2 = Math.round((1-(y_+p2W)/400)*100)/100;
+                    }
+                    css.innerHTML = 'cubic-bezier('+x1+','+y1+','+x2+','+y2+')';
+                    drawHeart();
+                }
+            });
+            ctx = document.getElementById("myCanvas").getContext("2d");
+            ctx.width = 800;
+            ctx.height = 800;
+            ctx.strokeStyle = 'red';
+            drawHeart();
+        }
+
+
+        function drawHeart() {
+            ctx.beginPath();
+            t = 0;
+            ctx.lineWidth = 1;
+            ctx.moveTo(getX(t), getY(t));//移动到初始点
+            ctx.clearRect(0,0,800,800);
+            for(var j=0; j<count; j++) {
+                printHeart();
+            }
+        }
+        function printHeart() {
+            ctx.lineTo(getX(t), getY(t));
+            t+=c;
+            ctx.stroke();
+        }
+        function getX(t) {//由弧度得到 X 坐标
+            return (300*(3*x1*t*Math.pow(1-t,2)+3*x2*Math.pow(t,2)*(1-t)+Math.pow(t,3)));
+        }
+
+        function getY(t) {//由弧度得到 Y 坐标
+            return 150-(150*(3*y1*t*Math.pow(1-t,2)+3*y2*Math.pow(t,2)*(1-t)+Math.pow(t,3)));
+        }
+
+    </script>
+</head>
+<body>
+    <div id="canvasZone">
+        <canvas id="myCanvas"></canvas>
+        <span id = 'p1'>1</span>
+        <span id = 'p2'>2</span>
+        <p id = 'css'>cubic-bezier(0,1,1,0)</p>
+    </div>
+    <div id='timeing'>
+        各种运动曲线
+        <b>ease</b>
+        <b>linear</b>
+        <b>ease-in</b>
+        <b>ease-out</b>
+        <b>ease-in-out</b>
+        <b>cubic-bezier</b>
+    </div>
+    <button id='run' type="button">跑起来</button>
+</body>
+</html>

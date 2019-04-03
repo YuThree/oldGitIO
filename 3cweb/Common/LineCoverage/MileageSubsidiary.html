@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">   
+    <title>里程明细表</title>
+    <meta charset="utf-8" />
+    <!-- public js-->
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("mySelectTree");
+        loadControl('layer');
+        loadControl("Validation");
+        loadControl("paging");
+        loadControl("trainselect");
+    </script>
+    <link href="/Common/css/6cweb/opa-icons.css" rel='stylesheet' /><!--图标css-->
+
+    <!--引入css js   本页-->
+    
+    <link href="css/publicCss.css" rel="stylesheet" /><!--公用css-->
+    <link href="css/MileageSubsidiary.css" rel="stylesheet" />
+    <script src="js/MileageSubsidiary.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- title-->
+  
+    <!-- title   end-->
+    <!-- search-->
+    <div class="html_content">
+        <div>
+            <span>组织机构：</span>
+            <input type="text" id="org_tree" />
+        </div>
+        <div>
+            <span>设备编号：</span>
+            <input id="car_tree" type="text" />
+        </div>
+        <div>
+            <span>时间：</span>
+            <input id="startTime" class="Wdate start_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', startDate: '%y-%M-%d 00:00:00' })" value="" />
+            <span>&nbsp;至</span>
+            <input id="endTime" class="Wdate end_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', startDate: '%y-%M-%d 23:59:59' })" value="" />
+
+        </div>
+        <div>
+            <div class="buttnColorfor" id="doQuery"><img src="img/MileageSubsidiaryQuery.png"/>&nbsp;查&nbsp;询</div>
+            <div class="buttnColorfor" id="portOut"><img src="img/MileageSubsidiaryPortOut.png" />&nbsp;导&nbsp;出</div>
+            <div class="buttnColorfor" id="recount" style="display:none;"><img src="img/MileageSubsidiaryRefash.png" />明细表重算</div>
+        </div>
+    </div>
+    <!-- search end-->
+    <!-- list-->
+  
+       
+        <div id="dataTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th class="w115">路局</th>
+                        <th class="w115">供电段</th>
+                        <th class="w115">线路</th>
+                        <th class="w50">行别</th>
+                        <th class="w120">设备编号</th>
+                        <th class="w120">开始时间</th>
+                        <th class="w120">结束时间</th>
+                        <th>运行里程(m)</th>
+                        <th>覆盖率</th>
+                        <!--<th>统计</th>-->
+                        <!--<th>标记确认车</th>-->
+                        <!--<th>重算选择</th>-->
+                    </tr>
+                </thead>
+                <tbody class="listbody">
+                    <!--<tr>
+                        <td>啊啊啊啊啊啊啊啊啊</td>
+                        <td>bb</td>
+                        <td>cc</td>
+                        <td>dd</td>
+                        <td>2017-7-26 10:31:55</td>
+                        <td>ff</td>
+                        <td>gg</td>
+                        <td>hh</td>
+                        <td>ii</td>
+                        <td>jj</td>
+                        <td>ll</td>
+                    </tr>
+                    <tr>
+                        <td>aa</td>
+                        <td>bb</td>
+                        <td>a线<span class="lineInfor" data-toggle="tooltip" data-html="true" data-placement="right" title="里程数：448km<br/>管辖区间：456dsadsadsa789"></span></td>
+                        <td>dd</td>
+                        <td>ee</td>
+                        <td>ff</td>
+                        <td>gg</td>
+                        <td>hh</td>
+                        <td>ii</td>
+                        <td class="LineHover"></td>
+                        <td class="LineConfir"></td>
+                    </tr>
+                    <tr>
+                        <td>aa</td>
+                        <td>bb</td>
+                        <td>cc</td>
+                        <td>dd</td>
+                        <td>ee</td>
+                        <td>ff</td>
+                        <td>gg</td>
+                        <td>hh</td>
+                        <td>ii</td>
+                        <td class="LineHover"></td>
+                        <td class="LineConfir choose"></td>
+                    </tr>
+                    <tr>
+                        <td>aa</td>
+                        <td>bb</td>
+                        <td>cc</td>
+                        <td>dd</td>
+                        <td>ee</td>
+                        <td>ff</td>
+                        <td>gg</td>
+                        <td>hh</td>
+                        <td>ii</td>
+                        <td>jj</td>
+                        <td>ll</td>
+                    </tr>
+                    <tr>
+                        <td>aa</td>
+                        <td>bb</td>
+                        <td>cc</td>
+                        <td>dd</td>
+                        <td>ee</td>
+                        <td>ff</td>
+                        <td>gg</td>
+                        <td>hh</td>
+                        <td>ii</td>
+                        <td>jj</td>
+                        <td>ll</td>
+                    </tr>-->
+
+                </tbody>
+            </table>
+            <div id="paging"></div>
+        </div>
+    
+    <!-- list  end-->
+</body>
+</html>

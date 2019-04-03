@@ -1,0 +1,61 @@
+.tableHeadFixed {
+    width: 100%;
+}
+.tableHeadFixed .tableHeadClass1{
+    width:100%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox20{
+    width: 20%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox5{
+    width: 5%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox35{
+    width: 35%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox10{
+    width: 10%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox100{
+    width: 100%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox33{
+    width: 33.333333%;
+}
+.tableHeadFixed .tableHeadClass1 .line82{
+    line-height: 82px;
+    height:82px;
+}
+.tableHeadFixed .tableHeadClass1 .line36{
+    line-height: 36px;
+    height:36px;
+}
+.tableHeadFixed .tableHeadClass1 .line46{
+    line-height: 46px;
+    height:46px;
+}
+.tableHeadFixed .headCom{
+    text-align: center;
+    float: left;
+    
+}
+.br1{
+    border-right: 1px solid #e6eaee;
+}
+.bl1{
+    border-left: 1px solid #e6eaee;
+}
+.bt1{
+    border-top: 1px solid #e6eaee;
+}
+.bb1{
+    border-bottom: 1px solid #e6eaee;
+}
+.tableHeadFixed:after,.tableHeadFixed .tableHeadClass1:after{
+    clear: both;
+    content:" ";
+    display:block;
+}
+.tableHeadFixed .tableHeadClass1{
+    border:1px solid #e6eaee;
+}

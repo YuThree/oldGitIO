@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>支柱详细</title>
+    <link href="/Lib/bootstrap/css/bootstrap-cerulean.css" rel="stylesheet">
+    <link href="/Lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/Lib/bootstrap/css/charisma-app.css" rel="stylesheet">
+    <link href="/Lib/jquery-ui-1.8.21.custom/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+    <link href='/Lib/fullcalendar/fullcalendar.css' rel='stylesheet'>
+    <link href='/Lib/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='/Lib/jquery.chosen/chosen.css' rel='stylesheet'>
+    <link href='/Lib/jquery.uniform/uniform.default.css' rel='stylesheet'>
+    <link href='/Lib/jquery.colorbox/colorbox.css' rel='stylesheet'>
+    <link href='/Lib/jquery.cleditor/jquery.cleditor.css' rel='stylesheet'>
+    <link href='/Lib/jquery.noty/jquery.noty.css' rel='stylesheet'>
+    <link href='/Lib/jquery.noty/noty_theme_default.css' rel='stylesheet'>
+    <link href='/Lib/jquery.elfinder/elfinder.min.css' rel='stylesheet'>
+    <link href='/Lib/jquery.elfinder/elfinder.theme.css' rel='stylesheet'>
+    <link href='/Lib/jquery.iphone.toggle/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='/Lib/bootstrap/css/opa-icons.css' rel='stylesheet'>
+    <link href='/Lib/jquery.uploadify-3.1/uploadify.css' rel='stylesheet'>
+    <link href="/Lib/flexigrid/flexigrid.pack.css" rel="stylesheet" type="text/css" />
+    <link href="/Lib/ymPrompt/skin/qq/ymPrompt.css" rel="stylesheet" type="text/css" />
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!-- external javascript
+	================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery -->
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="/Lib/jquery-ui-1.8.21.custom/jquery-ui-1.8.21.custom.min.js"></script>
+    <!-- 过滤/效果库 -->
+    <script src="/Lib/bootstrap/bootstrap-transition.js"></script>
+    <!-- 弹出框/效果库 -->
+    <script src="/Lib/bootstrap/bootstrap-alert.js"></script>
+    <!-- modal / dialog library -->
+    <script src="/Lib/bootstrap/bootstrap-modal.js"></script>
+    <!-- 下拉列表库 -->
+    <script src="/Lib/bootstrap/bootstrap-dropdown.js"></script>
+    <!-- scrolspy library -->
+    <script src="/Lib/bootstrap/bootstrap-scrollspy.js"></script>
+    <!-- TAB库 -->
+    <script src="/Lib/bootstrap/bootstrap-tab.js"></script>
+    <!-- library for advanced tooltip -->
+    <script src="/Lib/bootstrap/bootstrap-tooltip.js"></script>
+    <!-- popover effect library -->
+    <script src="/Lib/bootstrap/bootstrap-popover.js"></script>
+    <!-- button enhancer library -->
+    <script src="/Lib/bootstrap/bootstrap-button.js"></script>
+    <!-- accordion library (optional, not used in demo) -->
+    <script src="/Lib/bootstrap/bootstrap-collapse.js"></script>
+    <!-- carousel slideshow library (optional, not used in demo) -->
+    <script src="/Lib/bootstrap/bootstrap-carousel.js"></script>
+    <!-- autocomplete library -->
+    <script src="/Lib/bootstrap/bootstrap-typeahead.js"></script>
+    <!-- tour library -->
+    <script src="/Lib/bootstrap/bootstrap-tour.js"></script>
+    <!-- library for cookie management -->
+    <script src="/Lib/jquery.cookie/jquery.cookie.js"></script>
+    <!-- calander plugin -->
+    <script src='/Lib/fullcalendar/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='/Lib/jquery.dataTables/jquery.dataTables.min.js'></script>
+    <!-- chart libraries start -->
+    <script src="/Lib/jquery.jqplot/excanvas.js"></script>
+    <script src="/Lib/jquery.flot/jquery.flot.min.js"></script>
+    <script src="/Lib/jquery.flot/jquery.flot.pie.min.js"></script>
+    <script src="/Lib/jquery.flot/jquery.flot.stack.js"></script>
+    <script src="/Lib/jquery.flot/jquery.flot.resize.min.js"></script>
+    <!-- chart libraries end -->
+    <!-- select or dropdown enhancer -->
+    <script src="/Lib/jquery.chosen/jquery.chosen.min.js"></script>
+    <!-- checkbox, radio, and file input styler -->
+    <script src="/Lib/jquery.uniform/jquery.uniform.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="/Lib/jquery.colorbox/jquery.colorbox.min.js"></script>
+    <!-- rich text editor library -->
+    <script src="/Lib/jquery.cleditor/jquery.cleditor.min.js"></script>
+    <!-- notification plugin -->
+    <script src="/Lib/jquery.noty/jquery.noty.js"></script>
+    <!-- file manager library -->
+    <script src="/Lib/jquery.elfinder/jquery.elfinder.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="/Lib/jquery.raty/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="/Lib/jquery.iphone.toggle/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="/Lib/jquery.autogrow-textarea/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="/Lib/jquery.uploadify-3.1/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="/Lib/jquery.history/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="/Lib/bootstrap/bootstrap/charisma.js"></script>
+    <!-- 日期控件 -->
+    <script src="/Lib/My97DatePicker/WdatePicker.js"" type="text/javascript"></script>
+    <!--处理页面-->
+    <!--引用调后台方法JS-->
+    <script src="/Common/js/6cweb/xmlHttpHelper.js"></script>
+    <!--弹出框-->
+    <script src="/Lib/ymPrompt/ymPrompt.js" type="text/javascript"></script>
+    <!--全局JS-->
+    <script src="/Common/js/6cweb/MasterJs.js"></script>
+    <script src="/Lib/flexigrid/flexigrid.pack.js" type="text/javascript"></script>
+    <link href="/Lib/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/ztree/jquery.ztree.core-3.5.js" type="text/javascript"></script>
+    <script src="/Common/MFoundation/script/PoleFrom.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            document.getElementById("tableImg").style.width = window.screen.width * 0.4 + 30 + "px";
+            document.getElementById("tableJBXX").style.width = window.screen.width * 0.4 + 30 + "px";
+            document.getElementById("Img1").style.height = window.screen.height * 0.5 + "px";
+            document.getElementById("Img1").style.width = window.screen.width * 0.5 + "px";
+            loadPole();
+        })
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div id="modal_detail_body">
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-list-alt"></i>基本信息</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td id="tableImg" align="center" style="margin: 0px; padding: 0px;">
+                                    <img id="Img1" src="../img/admin2013040616042611111.jpg" style="width: 780px; height: 580px;" />
+                                </td>
+                                <td id="tableJBXX">
+                                    <table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin: 0px;
+                                        padding: 0px;">
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" style="width: 25%;" align="right">
+                                                杆号：
+                                            </td>
+                                            <td height="45" style="width: 25%;" align="left">
+                                                <strong><span id="lblPOLE_NO"></span></strong>
+                                            </td>
+                                            <td height="45" style="width: 25%;" align="right">
+                                                行别：
+                                            </td>
+                                            <td height="45" style="width: 25%;" align="left">
+                                                <strong><span id="lblPOLE_DIRECTION"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right">
+                                                线路名称：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblLine"></span></strong>
+                                            </td>
+                                            <td height="45" align="right">
+                                                区、站名称：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblPosition"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right">
+                                                公里标：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblKMSTANDARD"></span></strong>
+                                            </td>
+                                            <td height="45" align="right">
+                                                桥隧名称：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblBridge"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right">
+                                                所属铁路局：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblBureau"></span></strong>
+                                            </td>
+                                            <td height="45" align="right">
+                                                所属供电段：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblPowerSection"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right">
+                                                所属车间：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblWorkShop"></span></strong>
+                                            </td>
+                                            <td height="45" align="right">
+                                                所属工区：
+                                            </td>
+                                            <td height="45" align="left">
+                                                <strong><span id="lblWorkArea"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right" style="width: 12%;">
+                                                导线高度、限界值：
+                                            </td>
+                                            <td height="45" align="left" style="width: 12%;">
+                                                <strong><span id="lblWIRE_LIMIT_HEIGHT"></span></strong>
+                                            </td>
+                                            <td height="45" align="right" style="width: 12%;">
+                                                导线高度、设计值：
+                                            </td>
+                                            <td height="45" align="left" style="width: 12%;">
+                                                <strong><span id="lblWIRE_DESIGN_HEIGHT"></span></strong>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #c0c0c0;">
+                                            <td height="45" align="right" style="width: 9%;">
+                                                拉出值、限界值：
+                                            </td>
+                                            <td height="45" align="left" style="width: 15%;">
+                                                <strong><span id="lblLIMIT_PULLING_VALUE"></span></strong>
+                                            </td>
+                                            <td height="45" align="right" style="width: 12%;">
+                                                拉出值、设计值：
+                                            </td>
+                                            <td height="45" align="left" style="width: 12%;">
+                                                <strong><span id="lblDESIGN_PULLING_VALUE"></span></strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-list-alt"></i>支柱属性</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin: 0px;
+                            padding: 0px;">
+                            <tr>
+                                <td height="25" align="right" style="width: 12%;">
+                                    安装图号：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblINSTALL_IMG_NO"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    安装时间：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblINSTALL_TIME"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" style="width: 12%;">
+                                    支柱用途：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblPOLE_USAGE"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    支柱型号：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblPOLE_TYPE"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                    结构高度：
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                    <strong><span id="lblSTRUCTURE_HEIGHT"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-list-alt"></i>基础状况</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin: 0px;
+                            padding: 0px;">
+                            <tr style="border-bottom: 0px solid #c0c0c0;">
+                                <td height="25" align="right" style="width: 12%;">
+                                    侧面限界CX：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblSIDE_LIMIT_CX"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" style="width: 12%;">
+                                    基础类型：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblPOLE_BASIC_TYPE"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    是否为填方：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblIS_FILLED"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" style="width: 12%;">
+                                    曲线半径：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblCURVE_RADIUS"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    外轨超高：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblRAILFACE_HIGH"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                    曲内（外）：
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                    <strong><span id="lblCURVE_DIRECTION"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" style="width: 12%;">
+                                    跨距：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblSPAN_LENGTH"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    加强线：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblSTRONG_LINE"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 9%;">
+                                    保护线：
+                                </td>
+                                <td height="25" align="left" style="width: 15%;">
+                                    <strong><span id="lblPROTECT_LINE"></span></strong>
+                                </td>
+                                <td height="25" align="right" style="width: 12%;">
+                                    正馈线：
+                                </td>
+                                <td height="25" align="left" style="width: 12%;">
+                                    <strong><span id="lblPOSITIVE_FEEDER"></span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-list-alt"></i>定位参数</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-content" style="display: none;">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin: 0px;
+                            padding: 0px;">
+                            <tr style="border-bottom: 0px solid #c0c0c0;">
+                                <td height="25" align="right">
+                                    承力索补偿比例：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblPOLE_CLS_BCBL"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    定位方式：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblLOCATING_METHOD"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    地理名称：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblGEOGRAPHY_NAME"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    状态：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblPOLE_STATUS"></span></strong>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 0px solid #c0c0c0;">
+                                <td height="25" align="right">
+                                    填方高度：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblFILLING_HEIGHT"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    补偿比例：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblCOMPS_PROPORTION"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    坠陀类型：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblPOLE_ZT_TYPE"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    顺序：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblPOLE_ORDER"></span></strong>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 0px solid #c0c0c0;">
+                                <td height="25" align="right">
+                                    纬度：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblGIS_LON"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    经度：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblGIS_LAT"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                    备注：
+                                </td>
+                                <td height="25" align="left">
+                                    <strong><span id="lblNOTE"></span></strong>
+                                </td>
+                                <td height="25" align="right">
+                                </td>
+                                <td height="25" align="left">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

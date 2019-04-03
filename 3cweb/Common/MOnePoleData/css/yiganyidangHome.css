@@ -1,0 +1,472 @@
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    padding: 0;
+    background:#ffffff;
+}
+*{
+    font-family: 'Microsoft Yahei';
+
+}
+#map{
+    width:100%;
+    height:100%;
+    position: absolute;
+    z-index: 1;
+}
+#panel {
+    position: absolute;
+    top:30px;
+    left:10px;
+    z-index: 999;
+    color: #fff;
+}
+#login{
+    position:absolute;
+    width:300px;
+    height:40px;
+    left:50%;
+    top:50%;
+    margin:-40px 0 0 -150px;
+}
+#login input[type=password]{
+    width:200px;
+    height:30px;
+    padding:3px;
+    line-height:30px;
+    border:1px solid #000;
+}
+#login input[type=submit]{
+    width:80px;
+    height:38px;
+    display:inline-block;
+    line-height:38px;
+}
+.cxListBodyBox {
+    max-height:387px;
+}
+/*@media screen and (max-width: 1366px) {
+    .cxJgList{
+        height: 40%;
+    }
+}
+@media screen and (max-width: 1601px) {
+    .cxListBodyBox{
+		height: 90% !important;
+	}
+}
+
+
+@media screen and (max-width: 1920px) and (min-width: 1600px){
+    .cxJgList{
+        height: 72%;
+    }
+}*/
+.cxBtn{
+    padding-right: 5%;
+}
+
+#xianLuQuJian,#ZuZhiJiGou{
+    width: 110px;
+}
+#direction,#dll_lx{
+    width: 116px;
+    border-radius: 3px;
+    height:23px;vertical-align: 1% ;padding: 0
+}
+#startkm,#endkm{
+    width: 40px;
+}
+#startN,#endN{
+    width: 38px;
+}
+#txtpole{
+    width: 104px;
+}
+#yeMaQu{
+    width: 268px;
+}
+/*}*/
+#boxBiaoZhu{
+    position: absolute;
+    bottom:2%;
+    right: 1%;
+    width: 158px;
+    height: 168px;
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+}
+#boxBiaoZhu .BiaoZhuInside{
+    width: 152px;
+    height: 162px;
+    margin: 2px auto;
+    border: 1px solid white;
+    color: white;
+
+}
+#boxBiaoZhu .BiaoZhuInside p{
+    color: white;
+    padding: 7px 20px 7px 15px;
+    margin: 0;
+    font-size:16px
+}
+#boxBiaoZhu .BiaoZhuInside span:nth-of-type(1){
+    float: left;
+}
+#boxBiaoZhu .BiaoZhuInside span:nth-of-type(2){
+    float: right;
+}
+.BiaoZhuInside div{
+    padding: 3px 10px;
+}
+.BiaoZhuInside div:nth-of-type(1){
+    margin-top: -5px;
+}
+.BiaoZhuInside div span{
+    display: block;width: 20px;height: 20px;
+}
+.anchorBL
+{
+    display: none;
+}
+#zheZhaoCeng{
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: #081734;
+}
+#boxChaXun{
+    z-index: 2;
+    position: absolute;
+    min-height: 250px;
+    background: url(../img/cxbgContent.png) ;
+    background-size: contain;
+    top: 2%;
+    left: 1%;
+    width: 450px;
+    max-height: 90%;
+    /*min-height: 581px;*/
+    overflow: hidden;
+    border-radius: 5px;
+}
+#chaXun{
+    width: 95%;
+    max-height: 96.5%;
+    background: #262626;
+    margin: 0 auto;
+    padding:0 0 80px;
+    /*opacity: .3;*/
+}
+#boxCXtitle{
+    width: 100%;
+    /*height: 34%;*/
+    /*min-height: 282px;*/
+    /*background: red;*/
+}
+#boxCXresult{
+    width: 100%;
+    overflow:hidden;
+    position:relative;
+    /*height: 59%;*/
+    /*min-height: 368px;*/
+    /*background: orchid;*/
+}
+.cxTitle{
+    width: 100%;
+    height: 42px;
+    background: url("../img/cxTitle.png") no-repeat;
+    font-weight: 900;
+}
+.cxResult{
+    width: 100%;
+    height: 52px;
+    background: url("../img/cxAnwser.png") no-repeat;
+    border-radius: 8px 8px 0 0;
+    font-weight: 900;
+}
+.cxTitle div{
+    padding: 0 10px;
+    height: 35px;
+    line-height: 35px;
+    color: #67BCFD;
+}
+.cxResult div{
+    padding: 0 10px;
+    height: 52px;
+    line-height: 45px;
+    color: #67BCFD;
+}
+.cxTitle div img{
+    vertical-align: -10%;
+    /*vertical-align: middle;*/
+}
+.cxResult div img{
+    vertical-align: -10%;
+}
+.cxList{
+    height:80%;
+}
+.cxList,.cxJgList{
+    color: white;
+}
+.yiKuaiSpan{
+    padding: 0 0 0 7px;
+    width: 48%;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    overflow: hidden;
+    font-size: .8rem;
+    /*background: red;*/
+}
+.yiKuaiSpan > span{
+    width:77px;
+    display:inline-block;
+    float:left;
+}
+.ui-multiselect {
+    margin-top: 8px;
+}
+.ui-multiselect > span:nth-of-type(2) {
+    width:80px;white-space:nowrap; text-overflow:ellipsis; overflow: hidden;    display: inline-block;
+}
+.yiKuaiSpan select{
+    margin-top:8px;
+}
+.yiKuaiSpan input{
+    width: 51%;
+    float:left;
+    display:inline-block;
+    vertical-align:middle;
+    line-height:50px;
+    margin-top:8px;
+}
+.cxBtn{
+    float: right;
+    cursor: pointer
+}
+.cxJgList{
+    overflow: auto;
+    /*display: none;*/
+    padding: 30px 0 0;
+}
+#backToMin{
+    height: 25px;
+    width: 95%;
+    background: url("../img/cxreallyButton.png") no-repeat;
+    border-radius:8px 8px 0 0;
+    position: absolute;
+    bottom: 1.5%;
+    right: 10px;
+    background-size: contain;
+}
+#backToMin img{
+    margin-left: 47%;
+    cursor: pointer;
+}
+.cxListXLQJ{
+    width: 100%;
+    position: absolute;
+    top: 16px;
+    left: 90px;
+   /* background: red;*/
+}
+.cxListTitle{
+    text-align: center;
+    border-bottom: solid #6EA0F1 1px;
+    overflow: auto;
+    width: 90%;
+    position: absolute;
+    top: 50px;
+    left: 18px;
+}
+::-webkit-scrollbar
+{
+    width: 10px;
+    /*height: 16px;  */
+    background-color: #ccc;
+    border-radius: 10px;
+
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+.cxListBody{
+    text-align: center;
+    /*border-bottom: dashed #39475C 1px;*/
+    overflow: auto;
+    width: 95%;
+    height: 35px;
+    margin: 0 auto;
+	cursor: pointer;
+}
+.cxListBody span:nth-of-type(1){
+     text-align: left;
+}
+.XULine{
+    border-bottom: dashed #39475C 1px;
+    width: 95%;
+    margin: 0 auto;
+}
+.cxListBody img{
+    vertical-align: top;
+}
+.cxListTitle span{
+    font-size: .8rem;
+    display: block;
+    float: left;
+    padding: .4rem 0;
+}
+.width_34{
+    width: 34%;
+}
+.width_11{
+    width: 11%;
+}
+.width_15{
+    width: 16%;
+}
+.cxListBody span{
+    font-size: .8rem;
+    display: block;
+    float: left;
+    line-height: 35px;
+}
+.cxListBody span:nth-of-type(1){
+    width: 34%;
+}
+.cxListBody span:nth-of-type(2),.cxListBody span:nth-of-type(5),.cxListBody span:nth-of-type(6){
+    width: 11%;
+}
+.cxListBody span:nth-of-type(3),.cxListBody span:nth-of-type(4){
+    width: 16%;
+}
+#cxFenYe{
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    height: 30px;
+    width: 90%;
+    border-radius: 8px;
+    line-height: 30px;
+    background: url("../img/yeweiBG.png");
+    color: #96E4FF;
+}
+.yeJiao{
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    margin: 3px 0 2px 6px;
+    cursor: pointer;
+    text-align: center;
+    background: url("../img/yeweiInsidBG.png");
+}
+.yeJiao:hover{
+    /*line-height: 27px;*/
+    /*background: red;*/
+	color:yellow;
+}
+#yeMaQu{
+    color: white;
+}
+#yeMaQu span{
+    color: #67BCFD;
+}
+.cxListBody:hover{
+    border: 1px #61ADE8 solid;
+    background: #040404;
+    margin: 2px auto;
+    height: 29px;
+    border-radius: 5px;
+}
+.cxListBody:hover span{
+    line-height: 29px;
+}
+.cxListBody:hover img {
+    margin-top: -2px;
+}
+#xianluName,#quName{
+    padding: 3px 10px;
+    background: #61ADE8;
+    margin: 0 4px;
+    font-weight: 600;
+    display: none;
+}
+
+/*È±ÏÝµ¯³öÑùÊ½*/
+.AnimateMarker {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 564px;
+    height: 284px;
+    z-index: 99999999;
+    background: url(/Common/MGIS/img/orbit-img/big-bg.png) no-repeat;
+    color: white;
+}
+
+.AnimateMarker-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    border-bottom: 1px solid #4EBAC4;
+    font-weight: bold;
+}
+
+.AnimateMarker-body {
+    line-height: 33px !important;
+    border-bottom: none !important;
+}
+
+.AnimateMarker-img {
+    float: left;
+    background: url(/Common/MGIS/img/orbit-img/little-bg.png) no-repeat;
+    width: 30px;
+    height: 60px;
+    margin-left: -14px;
+    margin-right: 10px;
+    line-height: 14px;
+}
+
+    .AnimateMarker-img span {
+        width: 10px;
+        display: inline-block;
+        padding: 2px 0 0 5px;
+    }
+
+.AnimateMarker-text {
+    float: left;
+    width: 100% !important;
+}
+
+.AnimateMarker-foot {
+    text-align: right;
+    height: 33px;
+    line-height: 33px;
+}
+
+    .AnimateMarker-foot a {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+.AnimateMarker-color {
+    color: #4EBAC4;
+
+}
+.alarmItem_over{
+	color: #DDB3FD;
+}
+#closeBtn{
+    position:fixed;
+    top:5px;
+    right:5px;
+    cursor:pointer;
+    z-index:99999999999999;
+}

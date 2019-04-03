@@ -1,0 +1,3 @@
+说明：
+1、更新网站时，二维码要重新生成，生成时添加访问app下载的路径为：http://+网站Ip+端口号+/Common/MDownloadApp/downloadApp.html。
+2、在浏览器中下载app的地址为：http://+网站Ip+端口号+/Common/MDownloadApp/apk/CDGT_3C_App_v1.5.3_2017-11-06_15.apk。

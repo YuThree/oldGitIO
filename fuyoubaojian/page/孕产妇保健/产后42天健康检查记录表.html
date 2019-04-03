@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>产后42天健康检查记录表</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+	<!-- 侧边菜单栏 -->
+	<link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+	<!-- 表格 -->
+	<link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+	<!-- 孕产妇模块公用样式 -->
+	<link rel="stylesheet" href="../../css/maternal/maternalCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">产后42天健康检查记录表</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col1 cdct_clearfix">
+					<label class="cdct_inputLable cdct_left">姓名:<input type="text" class="cdct_inputLine cdct_line175"></label>
+					<label class="cdct_inputLable cdct_right">编号:<input type="text" class="cdct_inputLine cdct_line175"></label>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit cdct_asterisk">随访日期</span>
+					</div>
+					<div class="cdct_info cdct_relative">
+						<input type="text" class="cdct_inputNone datepicker" name="info1" required>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">分娩日期</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone datepicker" name="info2" required>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">出院日期</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">一般健康情况</span>
+					</div>
+					<div class="cdct_info">
+						<div style="position: relative;" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtNum=100 data-pmtTextArea="1">
+							<textarea class="cdct_textarea"></textarea >
+							<div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">一般心理状况</span>
+					</div>
+					<div class="cdct_info">
+						<div style="position: relative;" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtNum=100 data-pmtTextArea="1">
+							<textarea class="cdct_textarea"></textarea >
+							<div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">血压（mmHg）</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">乳房</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="rf1" type="radio" name="rf" value="" >
+							<label for="rf1">未见异常</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="rf2" type="radio" name="rf" value="">
+							<label for="rf2">异常</label>
+						</div>
+						<input type="text" class="cdct_inputLine cdct_line150">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">恶露</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="el1" type="radio" name="el" value="" >
+							<label for="el1">未见异常</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="el2" type="radio" name="el" value="">
+							<label for="el2">异常</label>
+						</div>
+						<input type="text" class="cdct_inputLine cdct_line150">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">子宫</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zg1" type="radio" name="zg" value="" >
+							<label for="zg1">未见异常</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="zg2" type="radio" name="zg" value="">
+							<label for="zg2">异常</label>
+						</div>
+						<input type="text" class="cdct_inputLine cdct_line150">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">伤口</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sk1" type="radio" name="sk" value="" >
+							<label for="sk1">未见异常</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="sk2" type="radio" name="sk" value="">
+							<label for="sk2">异常</label>
+						</div>
+						<input type="text" class="cdct_inputLine cdct_line150">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">其他</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">分类</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="fl1" type="radio" name="fl" value="" >
+							<label for="fl1">已恢复</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="fl2" type="radio" name="fl" value="">
+							<label for="fl2">未恢复</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">指导</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zd1" type="radio" name="zd" value="">
+							<label for="zd1">心理保健</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zd2" type="radio" name="zd" value="">
+							<label for="zd2">性保健与避孕</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zd3" type="radio" name="zd" value="">
+							<label for="zd3">婴儿喂养</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zd4" type="radio" name="zd" value="">
+							<label for="zd4">产妇营养</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="zd5" type="radio" name="zd" value="">
+							<label for="zd5">其他</label>
+						</div>
+						<input type="text" class="cdct_inputLine cdct_line150">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">处理</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="cl1" type="radio" name="cl" value="" >
+							<label for="cl1">结案</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="cl2" type="radio" name="cl" value="">
+							<label for="cl2">转诊</label>
+						</div>
+						<label class="cdct_inputLable">原因:<input type="text" class="cdct_inputLine cdct_line175"></label>
+						<label class="cdct_inputLable">机构及科室:<input type="text" class="cdct_inputLine cdct_line175"></label>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit cdct_asterisk">随访医生签名</span>
+					</div>
+					<div class="cdct_info">
+						<div data-selectsimu="1" class="cdct_select" >
+							<div class="selectBox">
+								<span data-selectnew="1" class="checkspan">
+									<span class="optD">
+										<span class="fontMain"></span>
+									</span>
+									<span class="selectDown"></span>
+								</span>
+
+								<ul class="hideUl" data-selectbox="1" style="display: none;">
+									<li class="hideUlLi" data-selectoption="1">李医生</li>
+									<li class="hideUlLi" data-selectoption="2">王医生</li>
+									<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+										<span class="optD">
+											<span class="fontMain">默认当前操作人</span>
+										</span>
+										<span class="selectDown"></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 侧边菜单栏开始 -->
+		<div class="cdct_sideBar">
+			<div class="cdct_toolTip">
+				<span class="toolSpan">产后随访</span>
+			</div>
+			<div class="cdct_sideBarTop">
+				产后随访
+				<span class="close"></span>
+			</div>
+			<div class="cdct_sideBarCon">
+				<div class="cdct_sideBarConTitle" style="line-height: normal;">
+					<div class="cdct_radio cdct_radio_suc">
+						<input id="xx1" type="radio" name="xx" value="">
+						<label for="xx1">全部显示</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc">
+						<input id="xx2" type="radio" name="xx" value="">
+						<label for="xx2">产后随访</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc">
+						<input id="xx3" type="radio" name="xx" value="">
+						<label for="xx3">产后42天健康检查</label>
+					</div>
+				</div>
+				<div class="cdct_tableBox">
+					<div class="tablMainOne" style="height: 100%;">
+						<div class="tableContent tableShowInfo" style="height: 100%;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cdct_sideBarFooter">
+				<button type="button" class="cdct_btn">上一页</button>
+				<input class="cdct_input datepicker1" placeholder="2018">
+				<button type="button" class="cdct_btn">下一页</button>
+			</div>
+		</div>
+		<!-- 侧边菜单栏结束 -->
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 文本域 -->
+	<script type="text/javascript" src="../../jsControl/textArea/textarea.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+	<!-- 侧边菜单栏 -->
+	<script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+	<!-- 表格 -->
+	<script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+				info2:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+		// 侧边栏表格
+		var dataSet = [
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+			[ "01", "产后42天", "2018-03-07", "哈哈哈"],
+		    
+		];
+
+		var tableObj=$(".tableShowInfo").showTable({
+		    data:dataSet,
+		    title:[
+		        "序号",
+		        "类型",
+		        "服务日期",
+		        "备注"
+		    ],
+		    scrollHeight:".tableShowInfo",
+		    scrollHeightPC:45,
+		    edit:false
+		});
+	</script>
+</body>
+</html>

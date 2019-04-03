@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>综合统计</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("form");
+        loadControl("layer");
+        loadControl("Echarts");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadJs("Scripts/comprehensiveAnalysis.js");
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <style>
+        input[type=radio] {
+            vertical-align: -9%;
+            position: relative;
+        }
+
+            input[type=radio]:checked + span {
+                color: #1BCFE6;
+            }
+
+            input[type=radio]::before {
+                content: '';
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                background: url("img/typeChooseNot.png") no-repeat;
+            }
+
+            input[type=radio]:checked::before {
+                background: url("img/typeChoose.png") no-repeat;
+                content: '';
+            }
+
+
+        .dr_line {
+            width: 100%;
+            height: 1px;
+            display: block;
+            margin: 8px 0px 16px 0px;
+            background: #ccc;
+        }
+
+        .bg_linechart {
+            /*background: #414a59;*/
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 25px;
+        }
+
+        #line_chart {
+            border-radius: 5px;
+            padding-bottom: 0;
+            border: 1px solid #fff;
+        }
+
+        #line_chart_left, #line_chart_right {
+            /*border: 1px solid #fff;*/
+            /*border-radius: 4px;*/
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        #line_chart_left {
+            left: 0;
+        }
+
+        #line_chart_right {
+            right: 0;
+        }
+
+        .control_icon {
+            position: absolute;
+            right: 13%;
+            top: 15px;
+            color: #fff;
+        }
+
+        .Type_control {
+            position: absolute;
+            color: #fff;
+            background: #4E5968;
+            border-radius: 10px;
+            border: 1px solid #5D6A7C;
+            padding: 5px 0 5px 15px;
+            color: #fff;
+        }
+
+        .lineCtrl {
+            position: absolute;
+            left: 13%;
+            top: 15px;
+            color: #fff;
+        }
+
+            .control_icon > label, .Type_control > label, .lineCtrl > label {
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+        .line_right_content, .line_left_content {
+            display: inline-block;
+            height: 100%;
+            overflow-y: auto;
+            width: 49.5%;
+        }
+
+        .dow_content {
+            margin: 0 5px;
+            /*background-color: #414a59;*/
+        }
+
+        .chart-wrapper input, .chart-wrapper select {
+            margin-bottom: 0;
+        }
+
+        body {
+            background: #031440;
+        }
+
+        .chart-wrapper table {
+            color: white;
+            height: 60px;
+        }
+
+        .title_black {
+            /*width:100%;*/
+            background: #010029;
+            padding: 0 0 0 20px;
+        }
+
+        .box-content {
+            padding: 0;
+        }
+    </style>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <!--<div class="box-header well" data-original-title=data-original-title>
+                <h2 id="title">综合分析</h2>
+            </div>-->
+            <div class="box-content">
+                <div class="k-content">
+                    <div class="chart-wrapper">
+                        <div class="title_black">
+                            <table>
+                                <tr>
+                                    <td class="Category_Code">
+                                        检测类型：
+                                    </td>
+                                    <td class="Category_Code">
+                                        <div style="display: inline; position: relative;">
+                                            <input type="text" id="category_code" style="width: 60px;" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;缺陷等级：
+                                    </td>
+                                    <td>
+                                        <div style="display: inline; position: relative;">
+                                            <select id="jb" style="margin:0; border-radius:4px;width:60px;">
+                                                <option value="">全部</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;组织机构：
+                                    </td>
+                                    <td>
+                                        <input id="ddlorg" type="text" style="width: 120px;" />
+                                        <input id="hf_ddlorg" style="display: none;" />
+                                        <input id="hf_type_ddlorg" style="display: none;" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;线路：
+                                    </td>
+                                    <td>
+                                        <div style="display: inline; position: relative;">
+                                            <input type="text" id="ddlLine" style="width: 120px;" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;行别：
+                                    </td>
+                                    <td>
+                                        <input id="DIRECTION" type="text" style="width: 120px;" />
+                                        <!--<option value="0">全部</option>
+                                        <option value="上行">上行</option>
+                                        <option value="下行">下行</option>-->
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;日期：
+                                    </td>
+                                    <td>
+                                        <input id="stardate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                                               style="width: 134px;" />
+                                        <label id="label1">
+                                            至
+                                        </label>
+                                        <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                                               style="width: 134px;" />
+                                    </td>
+                                    <td>
+                                        &nbsp;处理状态：
+                                    </td>
+                                    <td>
+                                        <div style="display: inline; position: relative;">
+                                            <select name="statas" id="statas" title="状态" style="width:120px;">
+                                                <option value="">全部</option>
+                                                <option value="SOLVED">已销号</option>
+                                                <option value="UNSOLVED">未销号</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" onclick="doQuery();"
+                                                                 value="统计" />
+                                    </td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-warning hidden" onclick="port_Out();"
+                                                                 value="导出" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--<span class="dr_line"></span>-->
+                        <div id="taskchart" class="bg_linechart" style="width: 100%;">
+                            <div id="severityChart" style="width: 25%; float: left;">
+                            </div>
+                            <div id="summaryChart" style="width: 25%; float: left;">
+                            </div>
+                            <div id="statusChart" style="width: 25%; float: left;">
+                            </div>
+                            <div id="alarmtypeChart" style="width: 25%; float: left;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span id="tabletr"></span>
+            </div>
+            <div class="box-content dow_content">
+                <div id="line_chart" class="bg_linechart">
+                    <div class="line_right_content">
+                        <div id="line_chart_left" style="width: 98%;"></div>
+                    </div>
+
+                    <div class="line_left_content">
+                        <div id="line_chart_right" style="width: 98%;"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="lineCtrl">
+                <span>对比对象：</span>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosin_line" onclick="echart_toggle('LINE')" value="线路" checked="checked" /> <span>线路</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosin_line" onclick="echart_toggle('POSTION')" value="区站" /> <span>区站</span>
+                </label>
+            </div>
+            <div class="control_icon">
+                <span>对比对象：</span>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosinline" onclick="echart_toggle('BUREAU')" value="局" /><span> 局</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosinline" onclick="echart_toggle('POWER_SECTION')" value="段" checked="checked" /> <span>供电段</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosinline" onclick="echart_toggle('WORKSHOP')" value="车间" /> <span>车间</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="optionsRadiosinline" onclick="echart_toggle('ORG')" value="工区" /><span> 工区</span>
+                </label>
+            </div>
+            <div class="Type_control">
+                <span>分布类型：</span>
+                <label class="checkbox-inline">
+                    <input type="radio" name="Type_control_name" onclick="Type_control_toggle('which_C')" value="which_C" checked="checked" /> <span>检测类型</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="Type_control_name" onclick="Type_control_toggle('grade')" value="grade" /> <span>缺陷等级</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="Type_control_name" onclick="Type_control_toggle('status')" value="status" /> <span>状态分布</span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" name="Type_control_name" onclick="Type_control_toggle('alarmtype')" value="alarmtype" /> <span>缺陷类型</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

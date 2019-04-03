@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=F75484f6486f962ed1c28985b9ca68c0" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js" type="text/javascript"></script>
+    <script src="/Common/js/BaiDuMap/BaiDuMapObj.js"></script>
+    <script src="/Common/js/BaiDuMap/BaiduMapStyle.js"></script>
+    <script src="/Common/js/BaiDuMap/my_BaiduMap.js"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <style>
+        @media (max-width: 767px) {
+            body {
+                padding: 0px;
+            }
+        }
+    </style>
+    <script>
+        var showtime = 60000; //刷新时间
+        $(document).ready(function () {
+            var _h = (parseInt($(window).height()));
+            var _w = parseInt($(window).width());
+            $("#mapDiv").width(_w).height(_h);
+            BindMap("mapDiv", "8");
+            map.setMapStyle({ styleJson: myStyleJson1 });
+            GetLoca();
+        });
+
+        function autosize()
+        {
+            var _h = (parseInt($(window).height()));
+            var _w = parseInt($(window).width());
+            $("#mapDiv").width(_w).height(_h);
+        }
+
+        function GetLoca() {
+            map.clearOverlays();
+            GetSms("", "", "", "", GetQueryString("Loca"), "Loca");
+            var Point = new BMap.Point(map.SmsJson[0].GIS_X, map.SmsJson[0].GIS_Y);
+            map.panTo(Point);
+        }
+        function OnLoad() {
+            setshow = setInterval('GetLoca()', showtime);
+        }
+    </script>
+</head>
+<body onload="OnLoad()">
+    <div style="width: 99%; height: 600px; border: 0px solid gray; text-align: center;
+            z-index: 1" id="mapDiv">
+    </div>
+</body>
+</html>

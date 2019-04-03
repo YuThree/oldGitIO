@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>bg7</title>
+ <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+<style>
+html, body { background: #000; margin: 0; padding:0;}
+canvas { width: 100%; height: 100%; position: absolute; }
+</style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+function n(e) {
+    if (null !== u.x)
+        for (var n = 0; n < e; n++) {
+            var t = {
+                x: u.x,
+                y: u.y,
+                r: 1,
+                speed: 1,
+                accel: h,
+                accel2: w,
+                angle: f
+            };
+            f += c;
+            var o = {
+                x: i * Math.cos(t.angle * Math.PI / 180),
+                y: i * Math.sin(t.angle * Math.PI / 180)
+            };
+            t.x += o.x, t.y += o.y, d.push(t)
+        }
+}
+
+function t() {
+    n(s);
+    var e = [];
+    if (r.clearRect(0, 0, l.width, l.height), (p += a) < 360) {
+        u = {
+            x: l.width / 2,
+            y: l.height / 2,
+            angle: p
+        };
+        var t = u.angle * Math.PI / 180;
+        u.x += o * Math.cos(t), u.y += o * Math.sin(t)
+    } else p = 0;
+    for (; d.length;) {
+        var i = d.pop(),
+            c = {
+                x: i.speed * Math.cos(i.angle * Math.PI / 180),
+                y: i.speed * Math.sin(i.angle * Math.PI / 180)
+            };
+        r.beginPath(), r.moveTo(i.x, i.y), r.lineTo(i.x + c.x, i.y + c.y), r.closePath(), r.stroke(), i.x += c.x, i.y += c.y, i.speed *= i.accel, i.accel += i.accel2, i.x < l.width && i.x > 0 && i.y < l.height && i.y > 0 && e.push(i)
+    }
+    d = e.slice(0).reverse()
+}
+var i = 1,//内圆半径
+    o = 120,//内圆旋转大小半径
+    a = 3,//内圆转动速度
+    s = 10,//点频率  越大连接越想一条线
+    c = 100,
+    l = document.getElementsByTagName("canvas")[0],
+    r = l.getContext("2d"),
+    d = [],
+    u = {},
+    p = 0,
+    h = 1.01,
+    w = 2e-4,
+    m = window.devicePixelRatio || 1,
+    f = 0;
+l.width = window.innerWidth * m, l.height = window.innerHeight * m, u.x = null, u.y = null, r.strokeStyle = "#8738f6", r.translate(.5, .5), window.requestAnimFrame = function() {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+            function(e) {
+                window.setTimeout(e, 1e3 / 60)
+            }
+    }(),
+    function e() {
+        requestAnimFrame(e), t()
+    }(), 2 == m && (l.style.width = "100%", l.style.height = "100%")
+</script>
+</body>
+</html>

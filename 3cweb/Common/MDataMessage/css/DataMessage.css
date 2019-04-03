@@ -1,0 +1,139 @@
+﻿*{
+    margin:0;
+    padding:0;
+    font-family:'微软雅黑';
+}
+html,body {
+    height:100%;
+}
+.html_title{
+    height:35px;
+    width:98.9%;
+    padding:0 .5%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    border: 1px solid #DEDEDE;
+}
+    .html_title img {
+        vertical-align: -13%;
+    }
+.html_title h4{
+    display:inline-block;
+    font-family:'微软雅黑';
+    color:#488CB4;
+    letter-spacing:2px;
+    line-height:35px;
+    font-size:15px;
+    margin-left:6px;
+}
+
+.html_content,.html_list{
+    width:96%;
+    margin:0 auto;
+    overflow:auto;
+    color:black;
+}
+.html_content {
+    border-bottom:dashed 1px #ccc;
+    margin-bottom:10px;
+    padding:8px 0;
+}
+    .html_content > div {
+        float: left;
+        padding: 0 12px;
+    }
+.html_content>div>span{
+    letter-spacing:5px;
+}
+.html_content input{
+    margin-top:5px;
+    width:140px;
+}
+
+.search_btn{
+    margin:3px 0 0 20px;
+}
+.list_title{
+    /*padding:5px 10px;*/
+    /*background:#C6E8F5;*/
+    border-bottom:1px solid #3e9fd9;
+    height:30px;
+}
+.list_title>span{
+    cursor:pointer;
+    user-select:none;
+    font-size:14px;
+    letter-spacing:2px;
+    height:29px;
+    display:inline-block;text-align:center;border:1px solid #ccc;border-bottom:none;padding:0px 12px;line-height:29px;
+}
+    .list_title > span.active {
+        border:1px solid #3e9fd9;color:#3e9fd9;border-bottom-color: white;
+    }
+#dataTable{
+    padding:20px;
+    padding-bottom:0;
+    border:1px solid #3e9fd9;
+    border-top:none;
+    /*height:600px;*/
+}
+#dataTable>div {
+        display:none;
+        overflow:auto;
+    }
+    #dataTable div.active {
+        display:block;
+    }
+
+#dataTable table{
+    width:100%;border-right:1px solid #B6B6B6;border-bottom:1px solid #B6B6B6;margin-top:5px;font-size: 14px;
+}
+#dataTable table tbody{
+    font-size: 12px;
+}
+#dataTable table tbody tr:nth-of-type(2n){
+    background:#F7F7F7;
+}
+    #dataTable table tbody tr:hover {
+        background: #DBEBF6;
+    }
+#dataTable table td,#dataTable table th{
+    border-left:1px solid #B6B6B6;border-top:1px solid #B6B6B6;text-align: center;
+}
+#dataTable table tr{
+    line-height:37px;
+}
+#dataTable img,.html_content img{
+     cursor:pointer;
+ }
+.alarmTracklList {
+    display:none;
+}
+#paging,#paging2{
+    text-align:center;
+    padding:10px 0 0 0;
+}
+.jump_img {
+    width:280px;
+}
+.jump_img span {
+    display:inline-block;
+    width: 34px;
+    height:25px;
+    cursor:pointer;
+    margin-bottom: -8px;
+}
+.alarm_list {
+    background:url(/Common/MDataMessage/img/alarm_list.png) no-repeat center center;      
+}
+.onepole_list {
+    background:url(/Common/MDataMessage/img/onepole_list.png) no-repeat center center;
+}
+.equipment_list {
+    background:url(/Common/MDataMessage/img/equipment_list.png) no-repeat center center;
+}
+.trajectory_list {
+    background:url(/Common/MDataMessage/img/trajectory_list.png) no-repeat center center;
+}
+.playOnline_list {
+    background:url(/Common/MDataMessage/img/playOnline.png) no-repeat center center;
+}

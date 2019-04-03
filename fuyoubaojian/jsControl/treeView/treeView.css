@@ -1,0 +1,193 @@
+.treeClass i{
+	transform:rotate(-90deg);
+	width:7px;
+	height:12px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.treeClass .treeViewSd{
+	transform:rotate(0deg);
+	width:20px;
+	height:20px;
+	display: inline-block;
+	vertical-align: text-bottom;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-right: 5px;
+}
+.treeViewSpan{
+	overflow:hidden;
+	white-space: nowrap;
+	display: block;
+	width: 100%;
+	height: 47px;line-height: 47px;
+	font-weight:400;
+	position:relative;
+	padding-left:10px;
+}
+.treeViewSpan.change{
+	background-color: #ecf3f7;
+	cursor: pointer;
+	position: relative;
+	color: #7f8fa4;
+}
+.treeViewSpan.change a{
+	color:#7f8fa4;
+}
+.treeViewSpan a{
+	display: inline-block;width: 100%;
+	height: 100%;
+	text-decoration: none;
+}
+/*.treeViewSpan.change:after{
+	position:absolute;
+	right:0px;
+	height:100%;
+	width:3px;
+	background-color:#1b92ec;
+	color:#1b92ec;
+	top:0px;
+	content:"";
+}*/
+
+.treeViewSpan:hover{
+	background:linear-gradient(rgba(94,218,253,1),rgba(48,179,249,1));
+	background-color: #30b3f9;
+	cursor:pointer;
+	position:relative;
+	color:white;
+}
+
+.treeViewSpan:hover a{
+	color:white;
+}
+/*.treeViewSpan:hover:after{
+	position:absolute;
+	right:0px;
+	height:100%;
+	width:3px;
+	background-color:#1b92ec;
+	color:#1b92ec;
+	top:0px;
+	content:"";
+}*/
+.treeViewDiv {
+	background-color: #ffffff;
+	font-size: 14px;
+	position: relative;
+}
+.treeViewDiv:after{
+	clear: both;
+}
+.treeViewDiv .treeViewUl{
+	margin: 0;
+}
+.treeViewSpan{
+	color:#3C434D;
+}
+.treeViewSpan a{
+	color:#3C434D;
+}
+.treeViewSpan .treeIcon{
+	position:absolute;
+	width:8px;
+	height:13px;
+	top:50%;
+	margin-top:-7px;
+	background-image:url(img/treeIcon.png);
+	background-repeat: no-repeat;
+	background-position:center;
+	transform:rotate(0deg);
+	-o-transform:rotate(0deg);
+	-moz-transform:rotate(0deg);
+	-webkit-transform:rotate(0deg);
+	-ms-transform:rotate(0deg);
+	transition:all 0.25s linear;
+	-webkit-transition:all 0.25s linear;
+	-ms-transition:all 0.25s linear;
+	-moz-transition:all 0.25s linear;
+	-o-transition:all 0.25s linear;
+	background-size: contain;
+}
+.treeViewSpan .treeIcon.change{
+	transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	transition:all 0.25s linear;
+	-webkit-transition:all 0.25s linear;
+	-ms-transition:all 0.25s linear;
+	-moz-transition:all 0.25s linear;
+	-o-transition:all 0.25s linear;
+}
+
+
+.treeViewDiv .more{
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	border:1px solid #c0cad8;
+	margin-right: 13px;
+	border-radius: 100%;
+	line-height: 9px;
+	font-size: 12px;
+	background-color: white;
+	padding: 0;
+	display: none;
+	position: absolute;
+	top: 16px;
+	right: 0px;
+	overflow: visible;
+	z-index: 100;
+	background-color:#33b4fa;
+	cursor: pointer;
+}
+.treeViewDiv .more:focus{
+	background-color: #00AEEF;
+}
+
+.treeViewDiv .more .hiddenDiv{
+	position: absolute;
+	top:50%;
+	width: 100px;
+	background-color: white;
+	border-radius: 8px;
+	right:0;
+	z-index: 10000;
+	box-shadow:0 4px 14px 0 rgba(0,0,0,0.29);
+	display: none;
+}
+.treeViewDiv .more:focus .hiddenDiv{
+	display: block;
+}
+.treeViewDiv .hiddenDiv .addTJ{
+	width: 100%;
+	line-height: 40px;
+	text-align: left;
+	height: 40px;
+	border-bottom: 1px solid #d7d7d7;
+	font-size:14px;
+	color:#4a4a4a;
+	padding-left: 12px;
+}
+.treeViewDiv .hiddenDiv .addTJ .icon_:first-child{
+	background-size: 13px auto;
+}
+.treeViewDiv .hiddenDiv .addTJ .icon_{
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	vertical-align: middle;
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.treeViewDiv .addTJ:last-child{
+	border: none;
+}
+
+.icon_{
+	margin-bottom:2px;
+	
+}

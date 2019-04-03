@@ -1,0 +1,77 @@
+html,body{height: 100%; width: 100%;}
+.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.scrollBox{
+    width: 100%;
+    padding: 0 40px;
+}
+
+.searchBox{
+	height: 90px;
+	padding-top: 27px;
+}
+/* 容器公用 */
+.top{
+	height: 60px;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+
+.main{
+	width: 100%;
+	height: -moz-calc(100% - 60px);
+	height: calc(100% - 60px);
+}
+.box{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.top .more{
+	display: inline-block;
+	color: #6FC9FF;
+	font-size: 18px;
+	float: right;
+	cursor: pointer;
+	padding-right:20px;
+}
+
+
+/* 顶部容器 */
+
+.chartBoxTop,.chartBoxCenter{
+	width: 100%;
+	height: 380px;
+}
+.chartBoxTop .box,.chartBoxCenter .box{ float: left; height: 100%;}
+.chartBoxTop .box:nth-of-type(1),.chartBoxCenter .box:nth-of-type(1){
+	width: 34%;
+}
+.chartBoxTop .box:nth-of-type(2),.chartBoxCenter .box:nth-of-type(2){
+	width: calc(35% - 40px);
+	margin: 0 20px;
+}
+.chartBoxTop .box:nth-of-type(3),.chartBoxCenter .box:nth-of-type(3){
+	width: 31%;
+}
+.operation{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 20px;
+	color: #fff;
+	font-size: 14px;
+}
+
+
+
+/* 样式重置  时间 */
+.time_box .time_slect{ width: 60px;}
+.time_box .time_start, .time_box .time_end{ margin-left: 10px; width: 100px;}
+.operation .cdct_btnOrange{ margin-bottom: 0;  }
+.operation .cdct_time{ margin-right: 10px;margin-bottom: 0; vertical-align: middle; }
+
+

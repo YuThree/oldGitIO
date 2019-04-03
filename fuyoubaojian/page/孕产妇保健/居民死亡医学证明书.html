@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>居民死亡医学证明书</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+
+	<!-- 孕产妇模块公用样式 -->
+	<link rel="stylesheet" href="../../css/maternal/maternalCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">居民死亡医学证明书</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">死者姓名</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">身份证号</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">性别</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">名族</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">主要主页及工种</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">户口所在地</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">生前常住地址</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">婚姻状况</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">文化程度</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">生前工作单位</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">出生日期</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">死亡日期</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">实际年龄</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputLine cdct_line80">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox" style="width: 80px;">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">月</li>
+										<li class="hideUlLi" data-selectoption="2">岁</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">岁</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">死亡地点</span>
+						</div>
+						<div class="cdct_info">
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd1" type="radio" name="swdd" value="" checked="">
+								<label for="swdd1">医院病房</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd2" type="radio" name="swdd" value="">
+								<label for="swdd2">急诊室</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd3" type="radio" name="swdd" value="">
+								<label for="swdd3">家中</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd4" type="radio" name="swdd" value="">
+								<label for="swdd4">赴医院途中</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd5" type="radio" name="swdd" value="">
+								<label for="swdd5">外地及其它</label>
+							</div>
+							<div class="cdct_radio cdct_radio_suc">
+								<input id="swdd6" type="radio" name="swdd" value="">
+								<label for="swdd6">不详</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">死者家属姓名</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">家属联系电话</span>
+						</div>
+						<div class="cdct_info">
+							<input type="number" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">家属联系地址</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row spe_row">
+					致死的主要疾病诊断（请填写具体病名，勿填症状体征，每行填写一个疾病）
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（a）直接导致死亡的疾病或情况</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（a）直接导致死亡疾病ICD编码</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputLine cdct_line150">
+							<button type="button" class="cdct_btn">选择</button>
+							<label class="cdct_inputLable">
+								<input type="text" class="cdct_inputLine cdct_line80">
+								<div data-selectsimu="1" class="cdct_select" >
+									<div class="selectBox" style="width: 80px;">
+										<span data-selectnew="1" class="checkspan">
+											<span class="optD">
+												<span class="fontMain"></span>
+											</span>
+											<span class="selectDown"></span>
+										</span>
+
+										<ul class="hideUl" data-selectbox="1" style="display: none;">
+											<li class="hideUlLi" data-selectoption="1">天</li>
+											<li class="hideUlLi" data-selectoption="2">年</li>
+											<li class="hideUlLi" data-selectoption="3">月</li>
+											<li class="hideUlLi" data-selectoption="3">小时</li>
+											<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+												<span class="optD">
+													<span class="fontMain">天</span>
+												</span>
+												<span class="selectDown"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</label>
+							
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（b）引起（a）的疾病或情况</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（b）引起（a）的疾病ICD编码</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputLine cdct_line150">
+							<button type="button" class="cdct_btn">选择</button>
+							<label class="cdct_inputLable">
+								<input type="text" class="cdct_inputLine cdct_line80">
+								<div data-selectsimu="1" class="cdct_select" >
+									<div class="selectBox" style="width: 80px;">
+										<span data-selectnew="1" class="checkspan">
+											<span class="optD">
+												<span class="fontMain"></span>
+											</span>
+											<span class="selectDown"></span>
+										</span>
+
+										<ul class="hideUl" data-selectbox="1" style="display: none;">
+											<li class="hideUlLi" data-selectoption="1">天</li>
+											<li class="hideUlLi" data-selectoption="2">年</li>
+											<li class="hideUlLi" data-selectoption="3">月</li>
+											<li class="hideUlLi" data-selectoption="3">小时</li>
+											<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+												<span class="optD">
+													<span class="fontMain">天</span>
+												</span>
+												<span class="selectDown"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（c）引起（b）的疾病或情况</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">（c）引起（b）的疾病ICD编码</span>
+						</div>
+						<div class="cdct_info spe_LH">
+							<input type="text" class="cdct_inputLine cdct_line150">
+							<button type="button" class="cdct_btn">选择</button>
+							<label class="cdct_inputLable">
+								<input type="text" class="cdct_inputLine cdct_line80">
+								<div data-selectsimu="1" class="cdct_select" >
+									<div class="selectBox" style="width: 80px;">
+										<span data-selectnew="1" class="checkspan">
+											<span class="optD">
+												<span class="fontMain"></span>
+											</span>
+											<span class="selectDown"></span>
+										</span>
+
+										<ul class="hideUl" data-selectbox="1" style="display: none;">
+											<li class="hideUlLi" data-selectoption="1">天</li>
+											<li class="hideUlLi" data-selectoption="2">年</li>
+											<li class="hideUlLi" data-selectoption="3">月</li>
+											<li class="hideUlLi" data-selectoption="3">小时</li>
+											<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+												<span class="optD">
+													<span class="fontMain">天</span>
+												</span>
+												<span class="selectDown"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</label>
+							
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">其它疾病诊断（促进死亡，但与导致死亡无关的其他重要情况）：</span>
+					</div>
+					<div class="cdct_info spe_LH2">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">生前上述疾病最高诊断单位</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw1" type="radio" name="zddw" value="">
+							<label for="zddw1">省级医院</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw2" type="radio" name="zddw" value="">
+							<label for="zddw2">地市医院</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw3" type="radio" name="zddw" value="">
+							<label for="zddw3">县区医院</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw4" type="radio" name="zddw" value="">
+							<label for="zddw4">卫生院</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw5" type="radio" name="zddw" value="">
+							<label for="zddw5">村卫生室</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zddw6" type="radio" name="zddw" value="">
+							<label for="zddw6">未就诊</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="zddw7" type="radio" name="zddw" value="">
+							<label for="zddw7">其它或不详</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">生前上述疾病最高诊断依据</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj1" type="radio" name="zdyj" value="">
+							<label for="zdyj1">尸检</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj2" type="radio" name="zdyj" value="">
+							<label for="zdyj2">病理</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj3" type="radio" name="zdyj" value="">
+							<label for="zdyj3">手术</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj4" type="radio" name="zdyj" value="">
+							<label for="zdyj4">临床+病理</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj5" type="radio" name="zdyj" value="">
+							<label for="zdyj5">临床</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="zdyj6" type="radio" name="zdyj" value="">
+							<label for="zdyj6">死后推断</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+							<input id="zdyj7" type="radio" name="zdyj" value="">
+							<label for="zdyj7">不详</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">孕产妇死亡原因</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="ycfswyy1" type="radio" name="ycfswyy" value="">
+							<label for="ycfswyy1">产科出血</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="ycfswyy2" type="radio" name="ycfswyy" value="">
+							<label for="ycfswyy2">妊娠高血压疾病</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="ycfswyy3" type="radio" name="ycfswyy" value="">
+							<label for="ycfswyy3">内科合并症</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="ycfswyy4" type="radio" name="ycfswyy" value="">
+							<label for="ycfswyy4">羊水栓塞</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="ycfswyy5" type="radio" name="ycfswyy" value="">
+							<label for="ycfswyy5">不详</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">住院号</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">医师签名</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">医生1</li>
+										<li class="hideUlLi" data-selectoption="2">医生2</li>
+										<li class="hideUlLi" data-selectoption="3">医生3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">默认当前操作人</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">根本死亡原因</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">根本死亡ICD编码</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputLine cdct_line150">
+							<button type="button" class="cdct_btn">选择</button>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">填报日期</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">医疗机构</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">默认当前机构</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+	<script type="text/javascript">
+		// 这部分 放置自己js文件里面
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				firstname:{
+					required:true,
+				},
+				idcard:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+	</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备状态分析统计日志</title>
+    
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("mytree");
+        loadJs("/C3/PC/MDeviceStatus/js/MonitorLocoStateList.js?v=" + version);
+        loadJs("/C3/PC/MDeviceStatus/js/MonitorLocoStateListFX.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <script language="javascript">
+        $(document).ready(function () {
+            buttonControl(); //判断按钮
+            $("#_loctree").height($(window).height() - 64);
+            $("#startdate").val(dateNowStr());
+            $("#enddate").val(dateNowStr());
+            loadOrgSelect("juselect", "duanselect", undefined, undefined, "JWD,CLD,GDD");
+            loadFlexiGridFX(); //加载flexigrid数据
+            var mytree = $('#TreeAll').myTree({
+                type: 'LOCOMOTIVE',//指定类型
+                isDefClick: false,
+                onClick: function (event, treeId, treeNode) {
+                    if (treeNode.treeType == "BUREAU")
+                    {
+                        $("#juselect").val(treeNode.id);
+                        $("#duanselect").val("0");
+                        $("#txtloccode").val("");
+                    }
+                    else if (treeNode.treeType == "ORG")
+                    {
+                        $("#juselect").val(treeNode.pId);
+                        $("#duanselect").mySelect({
+                            tag: "ORGANIZATION",
+                            code: treeNode.pId,
+                            callback: function () {
+                                $("#duanselect").val(treeNode.id);
+                            }
+                        });
+                        $("#txtloccode").val("");
+                    }
+                    else if (treeNode.treeType == "LOCOMOTIVE")
+                    {
+                        var dnode = treeNode.getParentNode();
+                        $("#juselect").val(dnode.pId);
+                        $("#duanselect").mySelect({
+                            tag: "ORGANIZATION",
+                            code: dnode.pId,
+                            callback: function () {
+                                $("#duanselect").val(dnode.id);
+                            }
+                        });
+                        $("#txtloccode").val(treeNode.name);
+                    }
+                    doQuery();
+                }
+            })
+
+            //hideC3infobyID("jltr"); //隐藏动车数据的交路运用区段信息查询信息      
+        })
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid sortable">
+                <div class="box span2">
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-align-left"></i>设备</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div id="_loctree" class="box-content" style="height: 930px; background: url(/Common/img/left_bg.png) no-repeat center bottom;
+                        overflow-y: auto;">
+                        <div id="TreeAll" class="ztree">
+                        </div>
+                    </div>
+                </div>
+                <div class="box span10">
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-search"></i>查询条件</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        局： <span id="ddlju"></span><select id="juselect" style="width:130px"><option></option></select>段：<select id="duanselect" style="width:130px"><option value="0">全部</option></select> 设备编号：<input type="text"
+                            id="txtloccode" class="smallInput" style="width: 100px" />
+
+                        时间：
+                        <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                            style="width: 90px">至
+                        <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                            style="width: 90px">&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" id="S_btnQuery" class="btn btn-small btn-primary" onclick="doQuery()"
+                            value="查询" />
+                        <input type="submit" name="S_btnExl" value="导出Excel" id="S_btnExl" title="导出Excel"
+                            class="btn btn-primary" onclick="importToExcel()" />
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-eye-open"></i>设备状态</h2>
+                        <div class="box-icon">
+                            <button class="btn btn-small btn-primary" onclick="OnclickPJSC()">
+                                查看平均上报时差</button>
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <table id="flexTable" style="display: none">
+                        </table>
+                    </div>
+                    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+        style="display: none"></a>
+    <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-body">
+            <div style="width: 530px; height: 400px; border: 1px solid gray; text-align: center;
+                z-index: 1" id="mapDiv">
+                <div class="modal-body">
+                    <div id="BT">
+                    </div>
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tabs-2">数据列表</a></li>
+                        </ul>
+                        <div id="tabs-2">
+                            <table class="table" style="font-size: 12px; margin: 0px; padding: 0px;" width="100%">
+                                <tr>
+                                    <td height="25" width="30%" align="right">
+                                        平均上报时差 ：
+                                    </td>
+                                    <td height="25" width="70%" align="left">
+                                        <span id='faultsc'></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="Button1" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                    关闭</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

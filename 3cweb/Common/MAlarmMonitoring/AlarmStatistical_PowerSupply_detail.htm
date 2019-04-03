@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>供电管辖报警统计详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("layer");
+        loadControl("Validation");
+
+        loadControl("ztree");
+        loadControl("mySelectTree");
+        loadControl("myTree");
+        loadControl("trainselect");
+
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+        loadCss("/Common/MAlarmMonitoring/css/AlarmStatisticalTrend.css?v=" + version);
+        loadJs("/Common/js/6cweb/mydate.js?v=" + version, "utf-8");
+        loadJs('/Lib/Echarts-3.0/echarts.min.js?v=' + version, 'utf-8');
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="title-bg">
+            <span class="alarm-trend-ico title-ico"></span>
+            <span class="title letter-spacing-small">供电管辖报警统计详情</span>
+            <!--<span class="alarm-trend-ico close-ico j-close"></span>-->
+        </div>
+        <div class="content">
+            <div class="condition">
+                <ul class="ul-condition">
+                    <li>
+                        <label>组织机构：</label>
+                        <input id="org" class="input-w-big margin-bottom-small" type="text" code="" />
+                    </li>
+                    <li>
+                        <label>发生时间：</label>
+                        <input id="s-time" class="Wdate input-w-big margin-bottom-small" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" />
+                        <label>至</label>
+                        <input id="e-time" class="Wdate input-w-big margin-bottom-small" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" />
+                        <span class="alarm-trend-ico time-ico j-time"></span>
+                        <ul class="time-menu" id="hide-time">
+                            <li data="0">今天</li>
+                            <li data="6">7天</li>
+                            <li data="29">30天</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="btn-alarm j-query-alarm">
+                            <span class="alarm-trend-ico search-ico"></span>
+                            <span>查询</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="btn-alarm j-alarm">
+                            <span>局级统计报警数量趋势</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="divide-line"></div>
+            <div id="statistical-charts" class="statistical-charts"></div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        loadJs("js/AlarmStatistical_PowerSupply_detail.js?v=" + version);
+    </script>
+</body>
+</html>

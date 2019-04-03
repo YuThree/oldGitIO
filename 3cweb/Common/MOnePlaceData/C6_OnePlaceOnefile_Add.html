@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>一所一档添加页面</title>
+	<meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("ztree");
+        loadControl("mySelectTree");
+        loadControl("form");
+        loadControl("Validation");
+        loadControl("layer");
+    </script>
+    <script src="/Common/MOnePlaceData/script/C6_OnePlaceOnefile_Add.js" type="text/javascript"></script>
+    <link href="/Common/MOnePlaceData/css/C6_OnePlaceOnefile_Add.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="top_wrapper">
+        <img src="img/dangan.png" width="24" height="21" />
+        <span>一所一档信息添加</span>
+        <span class="close-ico" onclick="window.close();"></span>
+    </div>
+    <div class="main">
+        <form id="form1" method="post">
+            <div class="title_wrapper">
+                <img src="img/information.png" />
+                <h4>基础信息</h4>
+            </div>
+            <div class="content_wrapper">
+                <div class="row-fluid">
+                    <span>
+                        <label>所亭名称</label>：
+                        <input type="text" name="SUBSTATION_NAME" id="SUBSTATION_NAME"  class="validate[required]" />
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>所亭编码</label>：
+                        <input type="text" name="SUBSTATION_CODE" id="SUBSTATION_CODE" class="validate[required]" />
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>线路</label>：
+                        <select name="LINE_CODE" id="LINE_CODE" class="validate[required,custom[notAll]]" >
+                            <option value="">全部</option>
+                        </select>
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>行别</label>：
+                        <input type="text" name="DIRECTION" id="DIRECTION" class="validate[required]" />
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>公里标</label>：
+                        <input type="text" id="KM_MARK" name="KM_MARK" class="validate[required,custom[number]]"  placeholder="仅限数字" />
+                        <i>*</i>
+                    </span>
+                </div>
+                <div class="row-fluid">
+                    <span>
+                        <label>铁路局</label>：
+                        <select name="BUREAU_CODE" id="BUREAU_CODE" class="validate[required,custom[notAll]]">
+                            <option value="0">全部</option>
+                        </select>
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>供电段</label>：
+                        <select name="POWER_SECTION_CODE" id="POWER_SECTION_CODE" class="validate[required,custom[notAll]]">
+                            <option value="0">全部</option>
+                        </select>
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>所属车间</label>：
+                        <select name="WORKSHOP_CODE" id="WORKSHOP_CODE" class="validate[required,custom[notAll]]">
+                            <option value="0">全部</option>
+                        </select>
+                        <i>*</i>
+                    </span>
+                    <span>
+                        <label>所属班组</label>：
+                        <select name="ORG_CODE" id="ORG_CODE" class="validate[required,custom[notAll]]">
+                            <option value="0">全部</option>
+                        </select>
+                        <i>*</i>
+                    </span>
+                </div>
+                <div class="row-fluid">
+                    <span>
+                        <label>供电方式</label>：
+                        <input type="text" name="PWMDL_NAME" id="PWMDL_NAME" class="validate[required]" />
+                        <i>*</i>
+                    </span>
+                    <span class="gdfw">
+                        <label>供电范围</label>：
+                        <input type="text" name="START_PWRNG" id="START_PWRNG" class="input_small validate[custom[number]]" placeholder="仅限数字" />M — <input type="text" id="END_PWRNG" class="input_small validate[custom[number]]" placeholder="仅限数字"/>M
+                        <i class="must">*</i>
+                    </span>
+                    <span>
+                        <label>经度</label>：
+                        <input type="text" name="GIS_LON_O" id="GIS_LON_O" class="validate[custom[number]]" placeholder="仅限数字"/>
+                        <i class="must">*</i>
+                    </span>
+                    <span>
+                        <label>纬度</label>：
+                        <input type="text" name="GIS_LAT_O" id="GIS_LAT_O" class="validate[custom[number]]" placeholder="仅限数字"/>
+                        <i class="must">*</i>
+                    </span>
+                    <span>
+                        <label>性质</label>：
+                        <input type="text" name="NATURE" id="NATURE" />
+                        <i class="must">*</i>
+                    </span>
+                </div>
+                <div class="row-fluid">
+                    <span>
+                        <label>基本概况</label>：
+                        <textarea name="BSDESC" id="BSDESC" maxlength="200" placeholder="请输入不超过100字的内容！"></textarea>
+                    </span>
+                </div>
+            </div>
+            <div class="content_wrapper content-other">
+                <div class="row-fluid" style="margin-top:0;">
+                    <span>
+                        <label>占地总面积</label>：
+                        <input type="text" name="TAREA" id="TAREA" class="validate[custom[number]]" placeholder="仅限数字" />m²
+                    </span>
+                    <span>
+                        <label>房屋建筑总面积</label>：
+                        <input type="text" name="BTEARA" id="BTEARA" class="validate[custom[number]]" placeholder="仅限数字" />m²
+                    </span>
+                    <span>
+                        <label>生产房屋面积</label>：
+                        <input type="text" name="PBEARA" id="PBEARA" class="validate[custom[number]]" placeholder="仅限数字" />m²
+                    </span>
+                    <span>
+                        <label style="width:70px;">房间数量</label>：
+                        <input type="text" name="RMNUM" id="RMNUM" class="validate[custom[number]]" placeholder="仅限数字" />
+                    </span>
+                </div>
+                <div class="row-fluid">
+                    <span>
+                        <label>竣工时间</label>：
+                        <input type="text" name="FSHD" id="FSHD" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: false })" />
+                        <i class="must">m</i>
+                    </span>
+                    <span>
+                        <label>换算接触网条公里</label>：
+                        <input type="text" name="NTKM" id="NTKM" class="validate[custom[number]]" placeholder="仅限数字" />
+                        <i class="must">m</i>
+                    </span>
+                    <span>
+                        <label>所设备数量汇总</label>：
+                        <input type="text" name="DVNUM" id="DVNUM"  class="validate[custom[number]]" placeholder="仅限数字" />
+                    </span>
+                </div>
+                <div class="row-fluid">
+                    <span>
+                        <label>其他</label>：
+                        <input type="text" name="NOTE" id="NOTE" class="Other" />
+                    </span>
+                </div>
+            </div>
+            <div class="title_wrapper">
+                <img src="img/data.png" />
+                <h4>运行数据</h4>
+            </div>
+
+            <div>
+                <ul id="Run-tab" class="tab-ul j-Run-tab">
+                    <li class="cur-tab"><span class="tab">运行数据</span></li>
+                </ul>
+            </div>
+            <div id="Run-container">
+                <div class="table-ul">
+                    <div class="content_wrapper content-data">
+                        <div class="row-fluid">
+                            <span>
+                                <label>运行编号</label>：
+                                <input type="text" name="RNNO" id="RNNO" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>运行名称</label>：
+                                <input type="text" name="RNNM" id="RNNM" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>安装日期</label>：
+                                <input type="text" name="INSDATE" id="INSDATE" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: false })" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>投运日期</label>：
+                                <input type="text" name="OPTDATE" id="OPTDATE" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: false })" />
+                                <i class="must">m</i>
+                            </span>
+                        </div>
+                        <div class="row-fluid">
+                            <span>
+                                <label>运行状态</label>：
+                                <input type="text" name="OPTSTS" id="OPTSTS" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>自用电量</label>：
+                                <input type="text" name="SUEQ" id="SUEQ" class="validate[custom[number]]" placeholder="仅限数字" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>受电量</label>：
+                                <input type="text" name="RECQ" id="RECQ" class="validate[custom[number]]" placeholder="仅限数字" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>供电量</label>：
+                                <input type="text" name="SPEQ" id="SPEQ" class="validate[custom[number]]" placeholder="仅限数字" />
+                            </span>
+                        </div>
+                        <div class="row-fluid">
+                            <span>
+                                <label>牵引供电量</label>：
+                                <input type="text" name="TREQ" id="TREQ" class="validate[custom[number]]" placeholder="仅限数字" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>非牵引供电量</label>：
+                                <input type="text" name="NTREQ" id="NTREQ" class="validate[custom[number]]" placeholder="仅限数字" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>受电电压</label>：
+                                <input type="text" name="RVTG" id="RVTG" class="validate[custom[number]]" placeholder="仅限数字" />Kv
+                            </span>
+                            <span>
+                                <label>电压等级</label>：
+                                <input type="text" name="VTGDGR" id="VTGDGR" />
+                            </span>
+                        </div>
+                        <div class="row-fluid IntoLine">
+                            <label>第一路进线</label>：
+                            <div class="row-fluid">
+                                <span>
+                                    <label>进线电源名称</label>：
+                                    <input type="text" name="INPFNM" id="INPFNM" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>上级变电站名称</label>：
+                                    <input type="text" name="INPFPNM" id="INPFPNM" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>上级变电站编码</label>：
+                                    <input type="text" name="INPFPCD" id="INPFPCD" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>电源引入方式</label>：
+                                    <input type="text" name="INPFMDL_NAME" id="INPFMDL_NAME" code="" />
+                                </span>
+                                <span>
+                                    <label>电源长度</label>：
+                                    <input type="text" name="INPFLEN" id="INPFLEN" class="validate[custom[number]]" placeholder="仅限数字" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row-fluid IntoLine">
+                            <label>第二路进线</label>：
+                            <div class="row-fluid">
+                                <span>
+                                    <label>进线电源名称</label>：
+                                    <input type="text" name="INPSNM" id="INPSNM" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>上级变电站名称</label>：
+                                    <input type="text" name="INPSPNM" id="INPSPNM" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>上级变电站编码</label>：
+                                    <input type="text" name="INPSPCD" id="INPSPCD" />
+                                    <i class="must">m</i>
+                                </span>
+                                <span>
+                                    <label>电源引入方式</label>：
+                                    <input type="text" name="INPSMDL_NAME" id="INPSMDL_NAME" code="" />
+                                </span>
+                                <span>
+                                    <label>电源长度</label>：
+                                    <input type="text" name="INPSLEN" id="INPSLEN" class="validate[custom[number]]" placeholder="仅限数字" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <span>
+                                <label>馈线一名称</label>：
+                                <input type="text" name="FDFNM" id="FDFNM" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>馈线一编号</label>：
+                                <input type="text" name="FDFNO" id="FDFNO" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>馈线二名称</label>：
+                                <input type="text" name="FDSNM" id="FDSNM" />
+                            </span>
+                            <span>
+                                <label>馈线二编号</label>：
+                                <input type="text" name="FDSNO" id="FDSNO" />
+                            </span>
+                        </div>
+                        <div class="row-fluid">
+                            <span>
+                                <label>馈线三名称</label>：
+                                <input type="text" name="FDSDNM" id="FDSDNM" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>馈线三编号</label>：
+                                <input type="text" name="FDSDNO" id="FDSDNO" />
+                                <i class="must">m</i>
+                            </span>
+                            <span>
+                                <label>馈线四名称</label>：
+                                <input type="text" name="FDTHNM" id="FDTHNM" />
+                            </span>
+                            <span>
+                                <label>馈线四编号</label>：
+                                <input type="text" name="FDTHNO" id="FDTHNO" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</form>
+    </div>
+    <div class="footer_wrapper">
+        <button type="button" id="Place_save" class="btn btn-primary">保&nbsp;&nbsp;存</button>
+    </div>
+</body>
+</html>

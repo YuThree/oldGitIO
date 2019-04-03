@@ -1,0 +1,266 @@
+﻿
+/*                      */
+/*任务列表页样式        */
+/*                      */
+
+body{
+    font-family:'微软雅黑';
+}
+ul,li{
+    list-style:none;
+}
+ul,li{
+    padding:0;
+    margin:0;
+}
+
+.title-bg {
+    height: 34px;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.title-ico {
+    display: inline-block;
+    float: left;
+    width: 22px;
+    height: 21px;
+    margin: 6px 7px 6px 12px;
+    background-image: url('../img/task_logo.png');
+}
+.title {
+    float: left;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 34px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #488cb4;
+}
+.close-ico {
+    float: right;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 5px 10px 0 0;
+    cursor: pointer;
+    background-image: url('../img/delete.png');
+}
+.close-ico:hover{
+    background-image: url('../img/deleteOver.png');
+}
+
+.mian{
+    width:100%;
+    display:flex;
+}
+.aside{
+    flex:0 0 200px;
+    width:200px;
+    height:100%;
+    background:#20335d;
+}
+.aside li{
+    padding:15px 0 15px 15px;
+    color:#cddae2;
+}
+.aside li:hover{
+    background:#122347;
+}
+.aside li.active{
+    background:white;
+    color:#555555;
+}
+.aside li img{
+    margin-right:10px;
+}
+.aside li span{
+    font-size: 14px;
+    vertical-align: middle;
+}
+.content{
+    flex:1;
+    height:100%;
+    width: 1000px;
+}
+
+.content_title{
+    width:98%;
+    margin: 0 auto;
+    padding: 20px 0 15px 0;
+    border-bottom:1px solid #ccc;
+}
+.content_title input{
+    width:140px;
+}
+.content_title select{
+    width:150px;
+}
+.content_title li{
+    /*height: 40px;*/
+    line-height: 40px;
+}
+.content_title li>span{
+    display:inline-block;
+    margin-left: 15px;
+}
+.content_title li>span:first-child{
+    margin-left: 0;
+}
+.content_title li>span>label{
+    margin-bottom: 5px;
+    width: 65px;
+    display: inline-block;
+    text-align:justify;
+    text-align-last:justify;
+}
+.content_title li>span:first-child>label{
+    width: 82px;
+}
+.content_title li button{
+    margin-top:-10px;
+}
+
+.my_title,.allTask_title{
+    display:none;
+}
+input.small{
+    width:59px;
+}
+.content_body{
+    width:98%;
+    overflow:auto;
+    margin:20px auto;
+    border: 1px solid #ccc;
+}
+.content_body>div{
+    white-space: nowrap;
+}
+.content_body>div:last-child{
+    border-top:none;
+}
+.content_body>div.table_title{
+    font-weight:bold;
+}
+.content_body>div>span,.table_li>span{
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    padding:8px 0px;
+    text-align:center;
+    display:inline-block;
+    vertical-align:top;
+    height:18px;
+}
+.content_body>div>span:last-child,.table_li>span:last-child{
+    border-right:none;
+}
+.width1{
+    width:35px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.width2{
+    width:55px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.width2_1{
+    width:105px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    text-align:left !important;
+}
+.width3{
+    width:140px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.width4{
+    width:678px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.width4_1{
+    width:300px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.width2_1>img{
+    cursor:pointer;
+    margin-left:5px;
+    margin-right:5px;
+}
+#table_main{
+    min-height: 35px;
+}
+#table_main>div.table_li:hover{
+    background-color:#ccc;
+}
+#table_main>p{
+    text-align:center;
+    line-height: 35px;
+}
+#table_main .width4,#table_main .width4_1{
+    text-align:left;
+}
+#content_page{
+    text-align:center;
+}
+
+#img_C2500Img,#img_C2100Img,
+#img_C3IRV,#img_C3VI,#img_C3OA,
+#img_C4FaultImg,#img_C4AllImg,
+#img_DailyWalkFaultImg {
+    width: 465px;
+    height: 345px;
+}
+
+#ReceiveOrg,#ReceivePerson{
+    display:none;
+}
+
+
+@media screen and (max-width: 1601px) {
+    .content_title input{
+        width:88px;
+    }
+    .content_title select{
+        width:98px;
+    }
+}
+@media screen and (max-width: 1441px) {
+    .content_title input{
+        width:72px;
+    }
+    .content_title select{
+        width:82px;
+    }
+    .content_title li>span{
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 1367px) {
+    .content_title input{
+        width:68px;
+    }
+    .content_title select{
+        width:78px;
+    }
+    .content_title li>span{
+        margin-left: 0;
+    }
+}
+
+.nocolor{
+    color:#555555;
+}
+.redcolor{
+    color:#d41717;
+}
+.greencolor{
+    color:#12b371;
+}
+.bluecolor{
+    color:#2e93e1;
+}

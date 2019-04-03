@@ -1,0 +1,632 @@
+﻿    .main {
+        width: 100%;
+    }
+
+    .speed {
+        color: White;
+    }
+
+        .speed :hover {
+            color: rgb(255, 235, 77) !important;
+        }
+
+    .ym-btn input {
+        padding: 0;
+    }
+
+    #ul_txtqz {
+        width: 200px;
+    }
+
+    .LineCoverage_title{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        font-size: 16px;
+        color: #3dd5f1;
+        background: rgba(5,6,5,.8);
+        /*border: 1px solid #fff;*/
+        box-shadow:0px 0px 15px #fff;
+        border-radius: 4px;
+    }
+
+    #orbitcheck {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+        height: 70px;
+        background: url(/Common/MGIS/img/orbit-img/LineCoverage-bg.png) no-repeat;
+        bottom: 0;
+        left: 0;
+    }
+    #quanbu1{
+        float: left;
+        margin: 10px 20px 0 2%;
+        width: 4.7%;
+    }
+
+    #orbitcheck .orbit-button a {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    #orbitcheck .orbit-button-play {
+        background: url(/Common/MGIS/img/orbit-img/orbit-play-bg.png) no-repeat;
+        margin-top: 15px;
+        float: left;
+        margin-left: 10px;
+        width: 13%;
+    }
+
+        #orbitcheck .orbit-button-play a {
+            margin-left: 3px;
+            /*width:21.5%;*/
+        }
+
+    #orbitcheck .orbit-button-numb {
+        background: url(/Common/MGIS/img/orbit-img/orbit-number.png) no-repeat;
+        background-size: contain;
+        width: 1.8%;
+        margin: 15px 10px 0;
+        text-align: center;
+        float: left;
+    }
+
+        #orbitcheck .orbit-button-numb label {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+    #orbitcheck .orbit-contrl {
+        float: left;
+        margin-top: 15px;
+        width: 65%;
+        margin-left: 10px;
+    }
+
+    #orbitcheck .orbit-close {
+        float: right;
+        margin-top: 10px;
+        margin-right: 20px;
+        width: 5%;
+    }
+
+    #slider {
+        font-size: 12px;
+        margin-top: 5px;
+        height: 0.4em;
+        width: 91%;
+    }
+
+        #slider.ui-widget-content {
+            border: 1px solid #666;
+            background: none;
+        }
+
+        #slider .ui-slider-handle {
+            border-color: transparent;
+            border: none;
+            background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+            background-size: contain;
+            width: 25px;
+            height: 25px;
+            margin-top: -3px;
+            margin-left: -6px;
+            cursor: pointer;
+            border-bottom: none;
+        }
+
+    #Sms_slider {
+        background: url(/Common/MGIS/img/orbit-img/orbit-bar.png) no-repeat;
+        background-size: cover;
+        border: none;
+        height: .6em;
+    }
+
+        #Sms_slider .ui-slider-range {
+            background: #52D9F9;
+        }
+
+        #Sms_slider .ui-slider-handle {
+            border-color: transparent;
+            border: none;
+            background: url(/Common/MGIS/img/orbit-img/orbit-rice.png) no-repeat;
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+        }
+
+    @media screen and (max-width:1680px) {
+        #quanbu1{
+            width: 5%;
+        }
+
+        #orbitcheck .orbit-button-play {
+            width: 15%;
+        }
+
+        #orbitcheck .orbit-button-numb {
+            width: 2.1%;
+        }
+
+        #orbitcheck .orbit-contrl {
+            width: 62%;
+        }
+
+        #orbitcheck .orbit-close {
+            width: 5.5%;
+        }
+    }
+
+    @media screen and (max-width:1440px) {
+        #quanbu1{
+            width: 6%;
+        }
+
+        #orbitcheck .orbit-button-play {
+            width: 17%;
+        }
+
+        #orbitcheck .orbit-button-numb {
+            width: 2.3%;
+        }
+
+        #orbitcheck .orbit-contrl {
+            width: 58%;
+        }
+
+        #orbitcheck .orbit-close {
+            width: 5.5%;
+        }
+    }
+
+    @media screen and (max-width:1366px) {
+        #quanbu1{
+            width: 7%;
+            margin-left: 3px;
+        }
+
+        #orbitcheck .orbit-button-play {
+            width: 18%;
+            margin-left: 6px;
+        }
+
+        #orbitcheck .orbit-button-numb {
+            width: 2.3%;
+            margin-top: 124px;
+        }
+
+        #orbitcheck .orbit-contrl {
+            width: 55%;
+        }
+
+        #orbitcheck .orbit-close {
+            width: 6%;
+        }
+
+        #orbitcheck .orbit-button-numb label {
+            margin-top: 8px;
+        }
+    }
+
+    @media screen and (max-width:1280px) {
+        #quanbu1{
+            width: 6.5%;
+            margin-left: 3px;
+        }
+
+        #orbitcheck .orbit-button-play {
+            width: 19%;
+        }
+
+        #orbitcheck .orbit-button-numb {
+            width: 2.3%;
+            margin-top: 124px;
+        }
+
+        #orbitcheck .orbit-contrl {
+            width: 55%;
+        }
+
+        #orbitcheck .orbit-close {
+            width: 6%;
+        }
+
+        #orbitcheck .orbit-button-numb label {
+            margin-top: 8px;
+        }
+    }
+
+    @media screen and (max-width:1024px) {
+        #quanbu1{
+            width: 6%;
+            margin-left: 1px;
+            margin-top: 123px;
+        }
+
+        #orbitcheck .orbit-button-play {
+            width: 20%;
+            margin-top: 125px;
+            margin-left: 2px;
+        }
+
+            #orbitcheck .orbit-button-play img {
+                width: 45px;
+            }
+
+        #orbitcheck .orbit-button-numb {
+            width: 3%;
+            margin-top: 124px;
+        }
+
+        #orbitcheck .orbit-contrl {
+            width: 34%;
+        }
+
+        #orbitcheck .orbit-close {
+            width: 6%;
+            margin-right: 5px;
+        }
+
+        #orbitcheck .orbit-button-numb label {
+            margin-top: 6.5px;
+        }
+    }
+
+    .playTime {
+        position: absolute;
+        background: url(/Common/MGIS/img/orbit-img/orbit-time.png) no-repeat;
+        width: 192px;
+        height: 44px;
+        top: -48px;
+        left: -96px;
+        line-height: 35px;
+    }
+
+    #_Content1 {
+        color: #52D9F9;
+        padding: 5px 5px 5px 15px;
+    }
+
+    #note {
+        position: absolute;
+        width: 180px;
+        padding: 10px;
+        background: #000000;
+        border: 1px solid #ccc;
+        right: 1%;
+        z-index: 9999;
+        display: none;
+        filter: alpha(Opacity=60);
+        -moz-opacity: 0.6;
+        opacity: 1.0;
+    }
+
+    #slider {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+
+
+/*弹出窗样式*/
+.animateMarker {
+    position: absolute;
+    z-index: 99999999;
+    width: 909px;
+    height: 371px;
+    background: url(/Common/LineCoverage/img/linecoverage_alertbg.png) no-repeat;
+    color: #fff;
+    border-radius: 5px;
+    font-family: '微软雅黑';
+    font-weight: bold;
+}
+
+.animateMarker:after {
+    content: "";
+    width: 0;
+    height: 0;
+      
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    bottom: -10px;
+}
+
+.AnimateMarker-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    border-bottom: 1px solid #4EBAC4;
+    font-weight: bold;
+}
+
+.AnimateMarker-body {
+    line-height: 34px;
+    border-bottom: 1px solid #4E4B4B;
+}
+.AnimateMarker-body-title{
+    font-size: 16px;
+    color: #4EBAC4;
+}
+.AnimateMarker-text {
+    float: left;
+    width: 100%;
+}
+.AnimateMarker-text>.row-fluid{
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 8px;
+}
+.AnimateMarker-text>.row-fluid:first-child{
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+.AnimateMarker-text input{
+    width: 190px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+.AnimateMarker-text select{
+    width: 200px;
+    line-height: 18px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+
+.AnimateMarker-foot {
+    text-align: right;
+    height: 33px;
+    line-height: 33px;
+    margin-top: 15px;
+}
+
+    .AnimateMarker-foot a {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+.AnimateMarker-color {
+    color: #4EBAC4;
+}
+
+.btn-submit {
+    width: 70px;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    color: #ffffff;
+}
+    .btn-submit div{
+        display: inline-block;
+        height: 30px;
+    }
+    .btn-submit .btn-left {
+        background: url(/C3/PC/MLiveStreaming/img/Satyr.png);
+        background-position: -165px -0px;
+        width: 8px;
+    }
+    .btn-submit .btn-middle{
+        background: url(/C3/PC/MLiveStreaming/img/btn-bg.png);
+        width: 54px;
+    }
+    .btn-submit .btn-right{
+        background: url(/C3/PC/MLiveStreaming/img/Satyr.png);
+        background-position: -135px -0px;
+        width: 8px;
+    }
+    .btn-submit .btn-font{
+        position: absolute;
+        left: 18px;
+        top: 0;
+        line-height: 30px;
+    }
+    /*移入按钮背景*/
+    .btn-submit:hover .btn-left{
+	    background-position: -5px -5px;
+    }
+    .btn-submit:hover .btn-middle{
+	    background:url(/C3/PC/MLiveStreaming/img/btn-bgl.png);
+    }
+    .btn-submit:hover .btn-right{
+	    background-position: -20px -0px;
+    }
+    .btn-submit:hover .btn-font{
+	    color:#3dd5f1;
+    }
+
+#ul_LineC_position{
+    width: 210px;
+}
+#ul_LineC_position{
+    margin-left: 45px;
+    height: 110px;
+}
+/*------------------------左上角盒子------------------------*/
+#boxChaXun{
+    z-index: 2;
+    position: absolute;
+    width: 25%;
+    height: 55%;
+    background: url(/Common/MOnePoleData/img/cxbgContent.png) ;
+    background-size: contain;
+    top: 2%;
+    left: 1%;
+    max-width: 450px;
+    max-height: 807px;
+    min-width: 450px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+#chaXun{
+    width: 95%;
+    height: 96.5%;
+    background: #262626;
+    margin: 0 auto;
+}
+#boxCXresult{
+    width: 100%;
+    height: 100%;
+    min-height: 368px;
+}
+.cxResult{
+    width: 100%;
+    height: 52px;
+    background: url("/Common/MOnePoleData/img/cxAnwser.png") no-repeat;
+    border-radius: 8px 8px 0 0;
+    font-weight: 900;
+}
+.cxResult div{
+    padding: 0 10px;
+    height: 52px;
+    line-height: 45px;
+    color: #67BCFD;
+}
+.cxResult div img{
+    vertical-align: -10%;
+}
+.cxJgList{
+    overflow: auto;
+    margin: 60px 0 75px;
+}
+.cxList,.cxJgList{
+    color: white;
+}
+.cxListTitle{
+    text-align: center;
+    border-bottom: solid #6EA0F1 1px;
+    overflow: auto;
+    width: 90%;
+    position: absolute;
+    top: 70px;
+    left: 18px;
+}
+.cxListTitle span{
+    font-size: .8rem;
+    display: block;
+    float: left;
+    padding: .4rem 0;
+}
+.width_2{
+    display: inline-block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;
+    width: 14%;
+}
+.width_1{
+    display: inline-block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;
+    width: 30%;
+}
+.cxListBody{
+    text-align: center;
+    overflow: auto;
+    width: 95%;
+    height: 35px;
+    margin: 0 auto;
+	cursor: pointer;
+}
+.cxListBody:hover{
+    border: 1px #61ADE8 solid;
+    background: #040404;
+    margin: 2px auto;
+    height: 29px;
+    border-radius: 5px;
+}
+.cxListBody span{
+    font-size: .8rem;
+    display: block;
+    float: left;
+    line-height: 35px;
+}
+.cxListBody:hover span{
+    line-height: 29px;
+}
+.cxListBody:hover img {
+    margin-top: -2px;
+}
+#cxFenYe{
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    height: 30px;
+    width: 90%;
+    border-radius: 8px;
+    text-align:center;
+    line-height: 30px;
+    /*background: url("/Common/MOnePoleData/img/yeweiBG.png");*/
+    color: #96E4FF;
+}
+.yeJiao{
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    margin: 3px 0 2px 6px;
+    cursor: pointer;
+    text-align: center;
+    background: url("/Common/MOnePoleData/img/yeweiInsidBG.png");
+}
+.yeJiao:hover{
+	color:yellow;
+}
+#yeMaQu{
+    color: white;
+}
+#yeMaQu span{
+    color: #67BCFD;
+}
+#backToMin{
+    height: 25px;
+    width: 95%;
+    background: url("/Common/MOnePoleData/img/cxreallyButton.png") no-repeat;
+    border-radius:8px 8px 0 0;
+    position: absolute;
+    bottom: 1.5%;
+    right: 10px;
+    background-size: contain;
+}
+#backToMin img{
+    margin-left: 47%;
+    cursor: pointer;
+}
+.yiKuaiSpan select{
+    margin-top:8px;
+}
+#yeMaQu{
+    width: 268px;
+}
+.chooseList {
+    color:#DDB3FD;
+}
+.changeList {
+     color:red;   
+}
+.changeListNotone {
+    color:#EB5D00;
+}
+@media screen and (max-width: 1366px) {
+    .cxJgList{
+        height: 62%;
+    }
+}
+
+@media screen and (max-width: 1440px) and (min-width: 1367px){
+     .cxJgList{
+        height: 55%;
+    }
+    
+}
+@media screen and (max-width: 1600px) and (min-width: 1441px){
+     .cxJgList{
+        height: 55%;
+    }
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1601px){
+     .cxJgList{
+        height: 64%;
+    }
+}
+

@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>系统自动取消缺陷类型统计</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <style>
+        #table {
+            border-collapse: separate;
+            border-spacing: 20px 0px;
+        }
+    </style>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("mySelectTree");
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            if (FunEnable('Fun_isCRH') == "False" && getConfig('debug') == "1") { $('#carTypeSelect').css('display', 'inline-block') }//车型选择
+            $("#startDate").val(AddDays(new Date(), -10).format("yyyy-MM-dd") + ' 00:00:00');
+            $("#endDate").val(now.format("yyyy-MM-dd") + ' 23:59:59');
+            $("#url").width(document.body.clientWidth - 5);
+            $("#url").height($(window).height() - 143);
+            $("#startDate,#endDate").mouseover(function () { $(this).css("cursor", "pointer"); }).mouseout(function () { $(this).css("cursor", "default"); });
+            $("#juselect").mySelect({
+                tag: "Organization", code: "TOPBOSS", type: "J"
+            });
+            $('#lineSelect').mySelectTree({//线路区间
+                tag: 'LINE',
+                 height: 250,
+                 enableFilter: true,
+                 // isDefClick:true,
+                 //  onClick: function (event, treeId, treeNode) {
+                 //      alert(treeNode.name);
+                 //  }
+             });
+
+            //$('#orgSelect').mySelectTree({//组织机构
+            //    tag: 'ORGANIZATION',
+            //    //  type: jsonUser.orgcode,
+            //    enableFilter: true
+            //    //          onClick: function (event, treeId, treeNode) {
+            //    //                $("#hf_ddlorg").val(treeNode.id);
+            //    //                $("#ddlorg").val(treeNode.name);
+            //    //                $("#hf_type_ddlorg").val(treeNode.treeType);
+            //    //          }
+            //});
+        });
+
+
+        
+        function btnQuery(condition) {
+            var startdate = document.getElementById('startDate').value;            
+            var enddate = document.getElementById('endDate').value;
+            var jc_type = $('#carType').val();
+            if (jc_type == undefined || jc_type == '0' || jc_type == '') {
+                jc_type = '';
+            }
+            if (startdate != null && startdate != "" && enddate != null && enddate != "") {
+                if (enddate < startdate) {
+                    ymPrompt.errorInfo('结束时间必须比开始时间大~！！', null, null, '提示信息', null);
+                    return;
+                }
+            } else {
+                ymPrompt.errorInfo('时间不能为空~！！', null, null, '提示信息', null);
+                return;
+            }
+
+            var obj = document.getElementById('ddlzt');
+            var url = "SysCancel.aspx?condition=" + condition
+            + "&startDate=" + $("#startDate").val()
+            + "&endDate=" + $("#endDate").val()
+            + "&_w=" + $("#url").width()
+            + "&_h=" + $("#url").height()
+            + "&ju=" + $("#juselect").val()
+            + "&juname=" + $("#juselect option:selected").text()
+            + "&line=" + ($("#lineSelect").attr('code') == undefined ? '' : $("#lineSelect").attr('code'))
+            //+ "&linename=" + $("#lineSelect").val()
+            + "&v=" + version
+            + "&car_type=" + jc_type;
+            $("#url").attr("src", url).css("display", "block");
+              
+        };
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid">
+            <div class="box span12">
+                <!--查询条件块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-search"></i>统计条件</h2>
+                </div>
+                <div class="box-content">
+                    局：
+                    <select id="juselect" name="juselect" style="width: 130px;">
+                        <option value="0">全部</option>
+                    </select>
+                    <!--组织机构：
+        <input id="orgSelect" type="text" name="name" value="" />-->
+                    线路：
+                    <input id="lineSelect" type="text" name="name" value="" />
+                    <div id="carTypeSelect" style="display:none">
+                        车型选择：
+                        <select id="carType" name="carType" style="width: 150px; border-radius: 3px;">
+                            <option value="0">不限</option>
+                            <option value="ZY">自研机车</option>
+                            <option value="PJ">破解机车</option>
+                        </select>
+                    </div>
+
+                            起始时间：
+                            <input id="startDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                                   runat="server" style="width: 140px" readonly="readonly" />
+                            终止时间：
+                            <input id="endDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                                   runat="server" style="width: 140px" readonly="readonly" />
+
+                            <button id="btnQuery" onclick="btnQuery('org')" class="btn btn-primary" style="margin-top: -7px;">
+                                供电视图
+                            </button>
+                            <button id="btnQuery2" onclick="btnQuery('porg')" class="btn btn-primary" style="margin-top: -7px;">
+                                车辆视图
+                            </button>
+                        </select>
+                    </select>
+                </div>
+                <!--列表块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-eye-open"></i>报警取消统计报表</h2>
+                </div>
+                <div>
+                    <iframe id="url" style="display: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

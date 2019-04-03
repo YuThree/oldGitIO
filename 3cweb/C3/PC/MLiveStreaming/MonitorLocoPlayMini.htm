@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备全景视频直播（地图弹出和监控第一个视频）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=0.5,Transition=0)" />
+    <meta http-equiv="Page-Exit" content="revealTrans(Duration=5,Transition=22)" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link href="/Common/js/6cweb/video/VideoPlay.css" rel="stylesheet" type="text/css" />
+    <link href="/Lib/bootstrap/css/metro-bootstrap.css" rel='stylesheet' />
+    <style type="text/css">
+        
+         #TreeAll{ background:#fff;}
+        
+        button.s_menu
+        {
+            background: transparent url(/Common/img/i_menu.png) no-repeat left center;
+            padding-left: 26px;
+            width: 100px;
+            color: #CCC;
+        }
+        button.s_menu:hover
+        {
+            color: #FFF;
+        }
+        a.go_home
+        {
+            background: transparent url(/Common/img/i_home.png) no-repeat left center;
+            padding: 4px 12px 4px 26px;
+            width: 100px;
+            color: #CCC;
+            display: inline-block;
+            line-height: 16px;
+        }
+        a.go_home:hover
+        {
+            color: #FFF;
+        }
+        a.btn_link, a.btn_play, a.btn_r, a.btn_fullscreen, a.btn_tuichu
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            height: 34px;
+            width: 50px;
+            line-height: 34px;
+            color: #333333;
+        }
+        a.btn_link:hover
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            color: #FFF;
+        }
+        a.btn_play
+        {
+            background: transparent url(../../img/i_btn_play.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_r
+        {
+            background: transparent url(../../img/i_btn_r.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_fullscreen.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_tuichu
+        {
+            background: transparent url(/Common/Index/images/退出.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        #dropdown-menu{ height:150px; overflow:auto;}
+        
+        .playbutton2{background-color:transparent;  opacity:0.8;}
+        .playbutton2 img{ width:30px; height:30px;}
+        .playbutton2:hover img{ -webkit-animation:twinkling 2s infinite ease-in-out;}
+        .playbutton2:link{ background-color:transparent; opacity:0.8;}
+        .playbutton2:visited{background-color:transparent; }
+        
+        .btn_over{ opacity:1 }
+        .btn_out{ opacity:0.8 }
+        
+        .metro p{ margin:0px;}
+        p{ margin:0px;}
+
+        #locomotive_no{ font-size:15px;}
+        
+        
+ @-webkit-keyframes twinkling{  
+    0%{
+       opacity:0.5; /*透明度为0*/
+     }
+     
+     50%{
+       opacity:1; /*透明度为0*/
+     }
+    100%{
+       opacity:0.5; /*透明度为1*/
+    }
+  }
+        
+        
+        
+       
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 16px;  
+    height: 16px;  
+    background-color:transparent;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);  
+   border-radius: 10px;  
+    background-color: #000;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+   border-radius: 10px;  
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.6);  
+    background-color: #555;  
+  
+}  
+
+        
+    </style>
+    <!-- jQuery 必须-->
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js"></script>
+    <!-- jQuery UI必须 -->
+    <script src="/Lib/jquery-ui-1.8.21.custom/jquery-ui-1.8.21.custom.min.js"></script>
+    <!-- TAB库 依赖-->
+    <script src="/Lib/bootstrap/bootstrap-tab.js"></script>
+    <!-- library for advanced tooltip 依赖-->
+    <script src="/Lib/bootstrap/bootstrap-tooltip.js"></script>
+    <!-- popover effect library 依赖-->
+    <script src="/Lib/bootstrap/bootstrap-popover.js"></script>
+    <!-- button enhancer library 依赖-->
+    <script src="/Lib/bootstrap/bootstrap-button.js"></script>
+    <!-- accordion library 依赖-->
+    <script src="/Lib/bootstrap/bootstrap-collapse.js"></script>
+    <!-- library for cookie management依赖 -->
+    <script src="/Lib/jquery.cookie/jquery.cookie.js"></script>
+    <!-- calander plugin 依赖-->
+    <script src="/Lib/fullcalendar/fullcalendar.min.js"></script>
+    <!-- data table plugin 依赖-->
+    <script src="/Lib/jquery.dataTables/jquery.dataTables.min.js"></script>
+    <!-- select or dropdown enhancer 依赖-->
+    <script src="/Lib/jquery.chosen/jquery.chosen.min.js"></script>
+    <!-- checkbox, radio, and file input styler 依赖-->
+    <script src="/Lib/jquery.uniform/jquery.uniform.min.js" charset="gbk"></script>
+    <!-- plugin for gallery image view 依赖-->
+    <script src="/Lib/jquery.colorbox/jquery.colorbox.min.js"></script>
+    <!-- rich text editor library 依赖-->
+    <script src="/Lib/jquery.cleditor/jquery.cleditor.min.js"></script>
+    <!-- file manager library 依赖-->
+    <script src="/Lib/jquery.cleditor/jquery.cleditor.min.js"></script>
+    <!-- star rating plugin 依赖-->
+    <script src="/Lib/jquery.raty/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch 依赖-->
+    <script src="/Lib/jquery.iphone.toggle/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin 依赖-->
+    <script src="/Lib/jquery.autogrow-textarea/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin 依赖-->
+    <script src="/Lib/jquery.uploadify-3.1/jquery.uploadify-3.1.min.js" charset="gbk"></script>
+    <!-- history.js for cross-browser state change on ajax 依赖-->
+    <script src="/Lib/jquery.history/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+    <script src="/Lib/metro/metro.min.js" type="text/javascript"></script>
+    <script src="/Lib/metro/metro-dropdown.js" type="text/javascript"></script>
+    <link href="/Lib/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/zTree/jquery.ztree.core-3.5.min.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mySelectTree.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/myTree.js" type="text/javascript"></script>
+    <script src="/Common/js/hikvision/webVideoCtrl_all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var _w, _h;
+
+
+
+
+
+        $(function () {
+
+
+
+            $('#dropdown-menu').css("overflow", "auto");
+
+
+            _w = $(window).width();
+            _h = $(window).height() - $('#tr_menu').outerHeight();
+
+            $('#locImg,#divPlugin,#box_load1').width(_w).height(_h);
+
+            if (page != undefined && page == 'meta_big_loca' || page == 'meta_big') {
+                //4*4大屏不显示下拉框。
+
+
+                //   alert($('#box_load1').width());
+
+
+                $('#tuiChu').hide();
+
+                $('.btn_play').css("margin-right", "0px");
+                $('.btn_tuichu').css("margin-right", "0px");
+                $('.btn_r').css("margin-right", "0px");
+
+            }
+
+            if (page != undefined && page == 'meta_22') {
+                //2*2大屏不显示下拉框。
+
+                $('#tuiChu').show().click(function () {
+                    window.parent.close();
+                });
+
+            }
+            var loca = GetQueryString("locomotiveCode");
+            if (loca != "") {
+                $('#locomotive_no').html(loca);
+            }
+            var _treeType = "VideoDevice";
+            //            var IsPowerOrg = GetIsPowerOrg();
+            //            if (IsPowerOrg == "1") {
+            //                _treeType = "line-station";
+            //            }
+
+
+            $('#TreeAll').myTree({
+                type: _treeType
+            })
+
+        });
+
+
+
+        function PlayRecord() {
+
+            $('#divPlugin,#divdownloadplugin,#playImg').hide();
+            //  $("body", parent.document).find("#t_play").hide();
+
+
+            _w = $(window).width();
+            _h = $(window).height() - $('#tr_menu').outerHeight();
+            var _w2 = _w;
+            var _h2 = _h + 20;
+
+            //  alert(_w);
+
+            var loca = GetQueryString("locomotiveCode");
+            var playName = '';
+            if (loca != undefined) {
+                playName = loca + '.mp4';
+            }
+
+            $('#box_video').html('<video id="video1" width="' + _w2 + '" height="' + _h2 + '" autoplay="autoplay">\
+                                <source src="/Resource/mp4/' + playName + '" type="video/mp4">\
+                                您的浏览器不支持此种视频格式。\
+                            </video>').show();
+
+
+            //             var html=' <object id="video" width="400" height="200" border="0" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA">\
+            //<param name="ShowDisplay" value="0">\
+            //<param name="ShowControls" value="1">\
+            //<param name="AutoStart" value="1">\
+            //<param name="AutoRewind" value="0">\
+            //<param name="PlayCount" value="0">\
+            //<param name="Appearance value="0 value=""">\
+            //<param name="BorderStyle value="0 value=""">\
+            //<param name="MovieWindowHeight" value="240">\
+            //<param name="MovieWindowWidth" value="320">\
+            //<param name="FileName" value="/C3/img/5.avi">\
+            //<embed width="400" height="200" border="0" showdisplay="0" showcontrols="1" autostart="1" autorewind="0" playcount="0" moviewindowheight="240" moviewindowwidth="320" filename="/C3/img/5.avi" src="sample.avi">\
+            //</embed>\
+            //</object>  ';
+
+
+            //             $('#box_video').html(html);
+
+
+        }
+    </script>
+    <script src="/C3/PC/MLiveStreaming/js/HikVisionIPCVideoPlay.js" type="text/javascript"></script>
+</head>
+<body style="background-color: #000;">
+    <div style="margin: 0 auto; text-align: center;">
+        <div>
+            <table>
+                <tr id="tr_menu">
+                    <td id="td1" style="width: 120px">
+                        <div class="button-dropdown">
+                            <button class="dropdown-toggle s_menu " onclick=" $('#dropdown-menu').css('overflow', 'auto');$('#TreeAll').fadeIn()">
+                                选择设备</button>
+                            <div id="TreeAll" class="ztree" style="position: absolute; top: 45px; left: 0; height: 280px;
+                                width: 200px; border-radius: 10px; -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+                                overflow: auto; background-color: rgba(255,254,241,0.8); color: White; display: none">
+                                aaa
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width: 100px; color: white">
+                        <label id="locomotive_no">
+                        </label>
+                    </td>
+                    <td align="left" style="padding: 0px 0px;">
+                        <a id="playbutton1" href="javascript:showPlugin();clickRealPlay1();" class="playbutton2"
+                            title="点击直播I端视频">
+                            <img src="/Common/img/playico/1.png" />
+                        </a><a id="playbutton2" href="javascript:showPlugin();clickRealPlay2();" class="playbutton2"
+                            title="点击直播II端视频">
+                            <img src="/Common/img/playico/2.png" />
+                        </a><a id="isShuang" href="javascript:window.parent.clickRealPlayTwo();showPlugin();clickRealPlay1();"
+                            class="playbutton2 isShuang" title="点击直播双视频">
+                            <img src="/Common/img/playico/double.png" />
+                        </a><a href="javascript:hidePlugin();window.parent.clickRealPlayTwoAll();stopRealPlay();"
+                            id="ImgStopPlay" class="playbutton2" title="点击停止直播">
+                            <img src="/Common/img/playico/stop.png" />
+                        </a><a href="javascript:record()" id="ImgRecord" class="playbutton2" title="点击开始录像">
+                            <img src="/Common/img/playico/rec.png" />
+                        </a>
+                        <!--
+                            <a href="javascript:PlayRecord()" id="A1" class="playbutton2"  title="播放最近录像" >
+                                <img src="/Common/img/playico/play.png" />
+                            </a>-->
+                        <!--<a href="#" id="ImgFullScreen" class="playbutton2"  title="点击全屏" onclick="javascript:clickFullScreen()">
+                                 <img src="/Common/img/playico/full.png" />
+                            </a>-->
+                        <a href="#" id="tuiChu" style="display: none" class="playbutton2" title="退出" onclick="javascript:window.parent.closeplay();">
+                            <img src="/Common/img/playico/close.png" />
+                        </a>
+                    </td>
+                    <td>
+                        <div id="divplaylog" style="z-index: 100000; text-align: left; left: 0px; position: relative;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div id="playImg">
+                            <img id="locImg" src="../../img/test.JPG" width="100%" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div id="divdownloadplugin" style="display: none">
+                            <a href="/Common/dll/WebComponents.exe">点击下载直播插件</a>
+                        </div>
+                        <div id="box_load1" style="display: none">
+                            加载中....
+                        </div>
+                        <div id="divPlugin" class="plugin">
+                        </div>
+                        <div id="box_video" style="display: none">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+.pointBox3 {
+    width: 16.66%;
+    float: left;
+}
+
+.cdct_row .pointBox3 .marLe {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.marLe .cdct_inputNone {
+    height: 47px;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    background: #F2F4F6;
+}
+
+body{
+    height: 100%;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+html{
+    height: 100%;
+}
+
+.scrollJS {
+    height: calc(100% - 110px);
+}
+
+.z-Box{
+    width: 100%;
+    min-height: 100%;
+}
+
+.cdct_row .cdct_info .ztextArea .zareaHei48 {
+    height: 48px;
+    padding-top: 14px;
+}
+
+.QXE .cdct_rows_col3 .cdct_colLeft .cdct_asterisk {
+    padding-left: 10px;
+     padding-top: 0; 
+}
+
+.QXE .pointBox3 {
+    width: 33.33%;
+    float: left;
+}
+
+.QXE .cdct_row .pointBox3 .marLe {
+    width: 100%;
+    margin-left: 100px;
+    padding-left: 0;
+}
+
+
+.rightBox {
+    float: left;
+    width: 33.33%;
+    border-right: solid 1px #e9eaef;
+}
+
+.rightTitle {
+    background: #F2F4F6;
+}

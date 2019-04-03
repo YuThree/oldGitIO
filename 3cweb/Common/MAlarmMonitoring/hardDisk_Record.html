@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>硬盘取盘记录</title>
+	<meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("ztree");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("myTree");
+        loadControl("layer");
+        loadControl("trainselect");
+        loadControl("Validation");
+        loadControl("paging");
+        loadJs("/Common/js/6cweb/mydate.js?v=" + version, "utf-8");
+        loadJs("/Common/MAlarmMonitoring/js/hardDisk_Record.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+        loadCss("/Common/MAlarmMonitoring/css/hardDisk_Record.css?v=" + version);
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <!--<div class="title-bg">
+            <span class="record-ico title-ico"></span>
+            <span class="title letter-spacing-small">硬盘取盘记录</span>
+            <span class="record-delay-ico close-ico j-close"></span>
+        </div>-->
+        <div class="content">
+            <div class="record_add_div">
+                <div class="btn-alarm record_add_button" id="record_add_button">
+                    <span>添&nbsp;加</span>
+                </div>
+            </div>
+            <div class="divide-line"></div>
+            <div class="condition">
+                <ul class="ul-condition">
+                    <li>
+                        <label>设备编号：</label>
+                        <input id="record_loco" class="input-w-big margin-bottom-small" type="text" />
+                    </li>
+                    <li>
+                        <label>检测日期：</label>
+                        <input id="record_star_time" class="Wdate input-w-big margin-bottom-small" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: false, readOnly: true })" />
+                        <label>&nbsp;&nbsp;至&nbsp;&nbsp;</label>
+                        <input id="record_end_time" class="Wdate input-w-big margin-bottom-small" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: false, readOnly: true })" />
+                    </li>
+                    <li>
+                        <label>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：</label>
+                        <input id="effect" name="effect" class="input-w-big margin-bottom-small" type="text" style="width: 200px;" maxlength="20" placeholder="请输入关键词(最多20字)"/>
+                    </li>
+                    <li>
+                        <div class="btn-alarm" id="record_query">
+                            <span>查&nbsp;询</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="divide-line"></div>
+            <div class="list">
+                <div id="inner_cont">
+                    <div class="inner-head">
+                        <span class="mid-Span">设备编号</span>
+                        <span class="mid-Span">检测开始时间</span>
+                        <span class="mid-Span">检测结束时间</span>
+                        <span class="big-Span">描述</span>
+                        <span class="mid-Span">优先级</span>
+                        <span class="mid-Span">创建人</span>
+                        <span class="mid-Span">创建时间</span>
+                        <span class="sm-Span">操作</span>
+                        <div class="Clear"></div>
+                    </div>
+                    <div class="Clear"></div>
+                    <div class="inner-body">
+                        <div class="inner-body-list" id="inner_body"></div>
+                    </div>
+                </div>
+                <div id="paging"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 弹出框 -->
+    <div class="record_Add" id="record_Add">
+        <div class="closeimg layui-layer-close"></div>
+        <h4><span class="new-img"></span><span>添加硬盘数据</span></h4>
+        <div class="hr-div"></div>
+        <div class="record_Add_cont">
+            <div class="row-fluid">
+                <div class="span2" style="padding-top:5px;">
+                    设备编号：
+                </div>
+                <div class="span5">
+                    <input id="record_add_loco" class="input-w-big margin-bottom-small" type="text" />
+                </div>
+            </div>
+            <div class="row-fluid" style="line-height:50px;">
+                <div class="span2" style="padding-top:5px;">
+                    起止时间：
+                </div>
+                <div class="span10"  style="margin-top: 8px;">
+                    <input type="text" class="Wdate" id="record_add_strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })"/>&nbsp;至&nbsp;<input type="text" class="Wdate" id="record_add_endTime" onclick="    WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2" style="padding-top:5px;">
+                    描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：
+                </div>
+                <div class="span10">
+                    <textarea id="instruction" class="instruction" maxlength="100" placeholder="请输入关键词(最多100字)"></textarea>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2" style="padding-top:5px;">
+                    优&nbsp;先&nbsp;级：
+                </div>
+                <div class="span10">
+                    <select id="priority" name="priority">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option selected value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid record_add_sure">
+                <div class="btn-alarm" id="record_add_sure">
+                    <span>添&nbsp;加</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

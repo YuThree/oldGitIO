@@ -1,0 +1,145 @@
+.resultContainer
+{
+    border: 1px solid blue;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.listContainer
+{
+    border: 1px solid #4DC3F0;
+    padding: 5px;
+    margin-top: -7px;
+    margin-left: 0px;
+    background-color: #D7F4FF;
+    position: absolute;
+    height: 160px;
+    width:300px;
+    overflow: auto;
+    display: none;
+    color: #6d6d6d;
+    font-size:12px;
+    z-index:999;
+    text-shadow: none;
+}
+.listContainerWhite {
+     border: 1px solid #4DC3F0;
+     /*border-bottom: 0px solid #4DC3F0;*/
+    padding: 5px;
+    margin-top: 31px;
+    margin-left: 0px;
+    background-color: white;
+    position: absolute;
+    height: 160px;
+    width:660px;
+    overflow: auto;
+    display: none;
+    color: #6d6d6d;
+    font-size:12px;
+    z-index:999;
+    text-shadow: none;
+}
+    .listContainerWhite li {
+        width:200px;
+        float:left;
+        position:relative;
+    }
+.hilight
+{
+    /*color: #fff;*/
+    background-color: #fff;
+    box-shadow: 3px 3px 3px #ccc;
+    border-radius: 5px;
+}
+
+    .colorFor .start,.colorFor  .end{
+        display:inline-block;
+    }
+.start,.end {
+    display:none;
+    color:white;
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    border-radius:8px;
+    font-size:10px;
+    font-weight:bold;
+    text-align:center;
+    background-color:#3e9fd9;
+    position:absolute;
+    right:50px;
+    z-index:999;
+}
+.end {
+    right:30px;
+    background-color:#ef5d00;
+}
+.colorFor {
+    background-color:#D3EDFF;
+}
+.chooseColor {
+    color:#5392B8;
+}
+.sureBtn,.FindInput {
+    position:absolute;
+    top:0px;
+    background:white;
+    z-index:1000;
+     border: 1px solid #4DC3F0;
+     border-top: 0 solid #4DC3F0;
+     padding:5px;
+}
+.FindInput {
+     border-top: 1px solid #4DC3F0;
+
+     border-bottom: 0 solid #4DC3F0;
+     height:27px;
+}
+.hilight #SelectName{
+    color:#2c2c2c;
+}
+.hilight #SelectDuan{
+    color:#6e6e6e;
+}
+li.listItem
+{
+    list-style: none;
+    padding: 5px;
+    margin: 0px;
+}
+#SelectName{
+    display:inline-block;
+    width:150px;
+    color:#6d6d6d;
+}
+#SelectDuan{
+    display:inline-block;
+    color:#c5c5c5;
+    margin-left:10px;
+    width:100px;
+}
+.select_icon{
+    margin-left:-25px;
+    top:-2px;
+    color:#8b8b8b;
+    font-size: 14px;
+}
+
+/*滚动条样式修改*/
+#ul_txtloccode::-webkit-scrollbar{
+    background-color:white;
+    width:15px;
+}
+#ul_txtloccode::-webkit-scrollbar-thumb{
+    background-color:#D7F4FF;
+    border-radius:5px;
+    height:60px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.6);
+}
+#ul_txtloccode::-webkit-scrollbar-button:start{
+    background: url(images/up.png) no-repeat;   
+    background-size:cover;
+}
+#ul_txtloccode::-webkit-scrollbar-button:end{
+    background: url(images/down.png) no-repeat;   
+    background-size:cover;
+}

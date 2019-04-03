@@ -1,0 +1,59 @@
+﻿/*滚动条样式修改*/
+::-webkit-scrollbar{
+	width: 12px;  
+    height: 12px; 
+    background-color:white;
+}
+::-webkit-scrollbar-track:horizontal  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgy.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-track:vertical  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgx.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-button:start:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-left.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-right.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:start:vertical{
+    background: url(/Lib/scrollBar/images/scroll-top.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:vertical{
+    background: url(/Lib/scrollBar/images/scroll-down.png) no-repeat;
+	width: 12px;  
+    height: 12px;
+}  
+::-webkit-scrollbar-thumb  
+{    
+   -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.6);  
+   background-color: #ABDFF3;
+}
+
+.dialog_iframe_box {
+    padding: 12px 16px 0 16px !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+}
+.dialog_box {
+    border-radius: 3px !important;
+}
+.layui-layer {
+    -webkit-background-clip: padding-box !important;
+}
+.layui-layer-iframe .layui-layer-content,
+.layui-layer-page .layui-layer-content {
+    border-radius: 3px !important;
+}

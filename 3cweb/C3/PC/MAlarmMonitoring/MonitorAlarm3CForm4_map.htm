@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>卫星数</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta charset="utf-8" />
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+
+        loadControl("layer");
+        loadCss("/C3/PC/css/3CForm4.css?v=" + version);
+    </script>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=2.0&services=true" type="text/javascript"></script>
+    <script src="js/MonitorAlarm3CForm4_map.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="box_gis" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 900px" class="modal-dialog ">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>-->
+                <h4 class="modal-title">
+                    地理位置
+                </h4>
+            </div>
+            <div style="padding: 8px;">
+                地理位置：<strong><span id="_WZ"></span></strong> &nbsp;<span id="GPSshow" style="display:none">
+    经纬度
+        (<span id="gisX"></span>,<span id="gisY"></span>)
+    
+</span><span style="display:none;margin-left:5px;cursor:pointer;" id="GPSrefresh" class="icon icon-orange icon-refresh" title="转换经纬度位置" data-html="true" data-rel="tooltip"></span>&nbsp;&nbsp;&nbsp; <span id="xj2" class="xj">
+                </span>
+            </div>
+            <div class="modal-content">
+                <div id="mapDiv" style="width: 100%; height: 450px">
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" id="btn_closeEditBox" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>-->
+        </div>
+    </div>
+
+</body>
+</html>

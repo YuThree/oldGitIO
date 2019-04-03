@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("SuperMap");
+    </script>
+   
+</head>
+<body>
+    <div style=" width:50%;float:left;">
+        <div id="mapDiv"></div>
+
+    </div>
+
+    <div id="option2" style="float:left;">
+        <input type="button" value="查询路由对象" onclick="CreateRouteObj()" />
+        <input type="button" value="指定查询点" onclick="RouteCalculateMeasure()" />
+        <input type="button" value="清除" onclick="Remove()" />
+
+        <div id="lab_re" style=" width: 100%; height: 600px; overflow: auto; white-space: nowrap"></div>
+    </div>
+</body>
+</html>
+<script>
+    var host = "http://192.168.1.130:8091";
+  //  var url2 = host + "/iserver/services/spatialanalyst-changchun/restjsr/spatialanalyst";
+    var url2 = host + "/iserver/services/spatialAnalysis-China400/restjsr/spatialanalyst";
+    var m_index = 0;
+    var geoVertices;
+    var routeObj;
+    var diff = 0;//指定值与计算值的差距。
+    var json;
+
+    $(function () {
+
+        var _w = $(window).width();
+
+        $("#mapDiv,#option2").width(_w/2).height($(window).height());
+
+        BindMap("mapDiv", "km测试页");
+
+
+        map.events.on({
+            "click": function () {
+
+               
+            }
+        });
+
+        setTimeout(Init, 2000);
+
+       
+
+    })
+
+    function Init()
+    {
+    //map.setCenter(new SuperMap.LonLat(115.5, 28.5), 6);
+        map.setCenter(new SuperMap.LonLat(106.9886040, 29.8656173), 6);
+        
+        var _url = "Temp_GIS.ashx?action=getAll";
+        $.ajax({
+            type: "GET",
+            url: _url,
+            async: false,
+            cache: true,
+            success: function (result) {
+                json = eval('(' + result + ')');
+
+                for (var i = 0; i < json.length; i++)
+                {
+
+                    var html = "序号："+i+"<br/>公里标：" + json[i].km + "<br/>lon：" + json[i].x + "<br/>lat：" + json[i].y;
+
+                    addMarkerData(json[i].x, json[i].y, markerlayer, "marker.png", html, '');
+                }
+
+            }
+        });
+
+        addMarkerData(115.5, 28.5, markerlayer, "marker.png", "我是中心点", '');
+
+    }
+
+    function SetKM(x,y,km)
+    {
+        var _url = "Temp_GIS.ashx?action=updateKM_SM&x="+x+"&y="+y+"&km="+km;
+        $.ajax({
+            type: "GET",
+            url: _url,
+            async: false,
+            cache: true,
+            success: function (result) {
+                document.getElementById("lab_re").innerHTML += "<br/>更新计算公里标成功";
+            }
+        });
+        
+    }
+
+
+    //通过SQL查询路由对象  Routes_JJX@123
+    function CreateRouteObj() {
+        var queryParam, queryBySQLParams, queryBySQLService;
+        queryParam = new SuperMap.REST.FilterParameter({
+            name: "Routes_3@123"
+            // ,attributeFilter:"RouteID=1690"
+        });
+        queryBySQLParams = new SuperMap.REST.QueryBySQLParameters({
+            queryParams: [queryParam]
+        });
+        queryBySQLService = new SuperMap.REST.QueryBySQLService(url, {
+            eventListeners: {
+                "processCompleted": processCompleted,
+                "processFailed": processFailed
+            }
+        });
+        queryBySQLService.processAsync(queryBySQLParams);
+    }
+
+    //路由对象查询成功，初始化routeObj的值，同时将查询结果绘制在地图上
+    function processCompleted(queryEventArgs) {
+
+        routeObj = geo = queryEventArgs.result.recordsets[0].features[0].geometry;
+        geoVertices = geo.getVertices();
+
+        GetM();
+
+
+        var feature = new SuperMap.Feature.Vector();
+        feature.geometry = geo;
+        feature.style = lineStyle;
+        vectorLayer.addFeatures(feature);
+        //  alert("查询成功");
+
+
+        m_index = 0;
+        diff = 0;
+        document.getElementById("lab_re").innerHTML = "查询成功<br/>";
+    }
+
+    //路由对象查询失败，显示提示信息
+    function processFailed() {
+        alert("查询失败");
+    }
+
+    //激活画点控件，判断routeObj是否为空，如果为空则禁止下一步操作
+    function RouteCalculateMeasure() {
+        if (!routeObj) {
+            alert("请通过查询获取路由对象！");
+            return;
+        }
+        drawPoint.activate();
+    }
+    //绘制点完成触发事件，先将点绘制在地图上，然后以点的geometry和查询结果
+    // routeObj为参数初始化"点定里程"的参数类。
+    function drawPointCompleted(drawGeometryArgs) {
+        var feature = new SuperMap.Feature.Vector();
+        var geometry = drawGeometryArgs.feature.geometry
+        feature.geometry = geometry;
+        feature.style = pointStyle;
+        pointLayer.addFeatures(feature);
+
+        //创建“点定里程”参数类。
+        var parameters = new SuperMap.REST.RouteCalculateMeasureParameters({
+            "sourceRoute": routeObj,
+            "tolerance": 10,
+            "point": geometry,
+            "isIgnoreGap": false
+        });
+
+        //创建“点定里程”服务类。
+        var routeCalculateMeasureService = new SuperMap.REST.RouteCalculateMeasureService(url2, {
+            eventListeners: {
+                "processCompleted": routeCalculateMeasureCompleted,
+                'processFailed': routeCalculateMeasureFailed
+            }
+        }
+        );
+        //执行相关操作
+        routeCalculateMeasureService.processAsync(parameters);
+    }
+
+    //“点定里程”查询完成，提示返回信息
+    function routeCalculateMeasureCompleted(e) {
+        alert("查询获取的M值为：" + e.result.measure);
+    }
+
+    //“点定里程”查询失败，提示服务端返回的信息
+    function routeCalculateMeasureFailed(e) {
+        alert(e.error.errorMsg);
+    }
+
+    //移除图面要素，并使画点控件失效，同时将路由对象置空，去掉提示信息
+    function Remove() {
+        vectorLayer.removeAllFeatures();
+        pointLayer.removeAllFeatures();
+        drawPoint.deactivate();
+        routeObj = null;
+    }
+
+
+    var _geometryPoint;
+    function GetM() {
+        // if (m_index >= geoVertices.length || m_index >= 10) {
+        if (m_index >= geoVertices.length ) {
+            return;
+        }
+
+       _geometryPoint = geoVertices[m_index];
+
+    //    var _geometryPoint = new SuperMap.Geometry.Point(json[m_index].x, json[m_index].y);
+
+      
+
+
+        document.getElementById("lab_re").innerHTML += "<br/><br/>(" + _geometryPoint.x + "," + _geometryPoint.y + ")";
+
+        //创建“点定里程”参数类。
+        var parameters = new SuperMap.REST.RouteCalculateMeasureParameters({
+            "sourceRoute": routeObj,
+            "tolerance": 10,
+            "point": _geometryPoint,
+            "isIgnoreGap": false
+        });
+
+        //var parameters = new SuperMap.REST.RouteCalculateMeasureParameters({
+        //    "sourceRoute": routeObj,
+        //    "tolerance": 10,
+        //    "point": _geometryPoint,
+        //    "isIgnoreGap": false
+        //});
+
+
+
+        //创建“点定里程”服务类。
+        var routeCalculateMeasureService = new SuperMap.REST.RouteCalculateMeasureService(url2, {
+            eventListeners: {
+                "processCompleted": function (e) {
+                    var obj = document.getElementById("lab_re");
+
+
+
+                    var jl_float = 0;
+
+                    if (e.result.measure != null)
+                        jl_float = parseFloat(e.result.measure);
+
+                    if (m_index == 0)//模拟公里标校正
+                    {
+
+                        document.getElementById("lab_re").innerHTML += "<br/><span style='color:red;'>模拟公里标校正</span><br/>";
+
+
+                        var zdjl = 1600284;//指定公里标。米
+                        diff = zdjl - jl_float;//指定值与计算值的差距。
+
+                        document.getElementById("lab_re").innerHTML += "<br/>指定值：" + zdjl  + "<br/>";
+
+
+                    }
+
+                //    jl_float = 0 - jl_float;//公里标倒序
+
+                    obj.innerHTML += "<br/>计算值：" + jl_float+",";
+
+                    jl_float += diff;
+
+                    obj.innerHTML += "偏移量:" + diff + ",";
+
+
+                    var jl = jl_float.toFixed(0);
+                    var glb = jl / 1000;
+
+                    obj.innerHTML += "距离原点:" + jl_float + "米,<br/>取整：" + jl + "米,公里标:K" + glb.toString().replace(".", "+");
+
+                    SetKM(_geometryPoint.x, _geometryPoint.y, jl);
+                    //updateKM_SM
+
+                    m_index++;
+                    GetM();
+
+                },
+                'processFailed': function (e) {
+                    alert(e.error.errorMsg);
+                }
+            }
+        }
+        );
+        //执行相关操作
+        routeCalculateMeasureService.processAsync(parameters);
+    }
+
+</script>

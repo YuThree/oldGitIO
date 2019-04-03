@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/Lib/bootstrap/css/bootstrap-cerulean.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Lib/Echarts-2.0/2.0/esl.js" type="text/javascript"></script>
+    <script src="/Lib/bootstrap/bootstrap-tab.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/xmlHttpHelper.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            loadLineTag();
+            document.getElementById("main").style.height = window.screen.height / 5 + "px";
+            document.getElementById("main2").style.height = window.screen.height / 4 - 10 + "px";
+        });  
+    </script>
+</head>
+<body>
+    <div class="container-fluid" style="background-color: #333333;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="row-fluid">
+                    <div id="main" class="span12">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div id="main2" class="span12">
+                    </div>
+                </div>
+                <div class="row-fluid" style="display: none">
+                    <div id="main3" class="span12">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <span id="img"></span>
+            <br />
+            <span id="linetag"></span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var timeTicket;
+        var isplay = 1;
+        //加载线路
+        function loadLineTag() {
+            responseData = XmlHttpHelper.transmit(false, "get", "text", "RemoteHandlers/GetAllLineTag.ashx?linecode=" + GetQueryString("linecode"), null, null);
+
+            if (GetQueryString("type") != undefined && GetQueryString("type") != "") {
+            } else {
+                document.getElementById("linetag").innerHTML = responseData;
+            }
+        };
+        function loadLine() {
+            window.location.href = "C3Echart.htm?linecode=ZXX" + '&v=' + version;
+        }
+        function getLineinfo(line) {
+            window.location.href = "C3Echart.htm?linecode=" + line + '&v=' + version;
+        }
+        //获取C3趋势图JSON串
+        function getNodes(type) {
+            var url = "RemoteHandlers/GetC3barnewJson.ashx?type=" + type + "&linecode=" + GetQueryString("linecode");
+            var json;
+            $.ajax({
+                type: "POST",
+                url: url,
+                async: false,
+                cache: true,
+                success: function (result) {
+                    json = eval('(' + result + ')');
+                }
+            });
+            return json;
+        };
+
+        // 路径配置
+        require.config({
+            paths: {
+                'echarts': '/Lib/Echarts-2.0/2.0/echarts',
+                'echarts/chart/line': '/Lib/Echarts-2.0/2.0/echarts'
+            }
+        });
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+                var myChart2 = ec.init(document.getElementById('main2'));
+                var myChart3 = ec.init(document.getElementById('main3'));
+                var axisData = getNodes("Name"); //申明横坐标
+                var option = {
+                    title: {
+                        text: '线路巡检数据'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        showDelay: 1,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        formatter: function (params) {
+                            var res = params[0][1];
+                            res += '<br/>' + params[0][0] + ':' + params[0][2] + 'mm';
+                            return res;
+
+                        }
+                    },
+                    legend: {
+                        data: ['导高值', '拉出值'],
+                        textStyle: { color: "#fff" }
+                    },
+                    dataZoom: {
+                        y: 350,
+                        show: true,
+                        realtime: true,
+                        start: 85,
+                        end: 100
+                    },
+                    grid: {
+                        x: 80,
+                        y: 30,
+                        x2: 20,
+                        y2: 15
+                    },
+                    xAxis: [
+                                {
+
+                                    type: 'category',
+                                    axisLabel: { show: false },
+                                    boundaryGap: true,
+                                    axisTick: { onGap: false },
+                                    splitLine: { show: false },
+                                    data: axisData
+                                }
+                            ],
+                    yAxis: [
+
+                                {
+                                    show: true,
+                                    type: 'value',
+                                    scale: true,
+                                    precision: 2,
+                                    boundaryGap: [0.05, 0.05],
+                                    axisLabel: {
+                                        textStyle: { color: '#fff' },
+                                        formatter: function (v) {
+                                            return v + 'mm'
+                                        }
+                                    }
+                                }
+                            ],
+                    series: [
+                                {
+                                    name: '导高值',
+                                    type: 'line',
+                                    showAllSymbol: true,
+                                    symbolSize: 0.1,
+                                    //symbol: 'none',
+                                    data: getNodes("LH")
+                                },
+                                {
+                                    name: '拉出值',
+                                    type: 'line',
+                                    data: []
+                                }
+
+                            ]
+                };
+                var option2 = {
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    tooltip: {
+                        trigger: 'axis',
+                        showDelay: 1,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        formatter: function (params) {
+                            var res = params[0][1];
+                            res += '<br/>' + params[0][0] + ':' + params[0][2] + 'mm';
+                            return res;
+                        }
+                    },
+                    legend: {
+                        y: -30,
+                        data: ['导高值', '拉出值', '接触点温度', '环境温度']
+                    },
+                    dataZoom: {
+                        show: true,
+                        realtime: true,
+                        start: 85,
+                        end: 100
+                    },
+                    grid: {
+                        x: 80,
+                        y: 5,
+                        x2: 20,
+                        y2: 60
+                    },
+                    xAxis: [
+                                {
+                                    type: 'category',
+                                    position: 'bottom',
+                                    boundaryGap: true,
+                                    axisTick: { onGap: false },
+                                    splitLine: { show: false },
+                                    axisLabel: {
+                                        textStyle: { color: '#fff' }
+                                    },
+                                    data: axisData
+                                }
+                            ],
+                    yAxis: [
+                                {
+                                    type: 'value',
+                                    scale: true,
+                                    splitNumber: 6,
+                                    max: 400,
+                                    min: -400,
+                                    boundaryGap: [0.05, 0.05],
+                                    splitArea: { show: true },
+                                    axisLabel: {
+                                        textStyle: { color: '#fff' },
+                                        formatter: function (v) {
+                                            return v + 'mm'
+                                        }
+                                    }
+
+                                }
+                            ],
+                    series: [
+                                {
+                                    name: '拉出值',
+                                    type: 'line',
+                                    showAllSymbol: true,
+                                    symbolSize: 0.1,
+                                    smooth: true,
+                                    //symbol: 'none',
+                                    data: getNodes("PV")
+
+                                }
+                            ]
+                };
+                var option3 = {
+
+                    tooltip: {
+                        trigger: 'axis',
+                        showDelay: 1,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        formatter: function (params) {
+                            var res = '<table>'
+                            //res += "<tr>";
+                            res += '<td valign=top>' + params[0][1];
+                            res += '<br/>' + params[0][0] + ':' + params[0][2] + '℃';
+                            res += '<br/>' + params[1][0] + ':' + params[1][2] + '℃';
+                            res += '<br/>公里标： ';
+                            res += '</td>';
+                            //res += '<td><img width=200px height=150px src=../../Monitor/ImgTmp/C3HW.png ></td>';
+                            return res;
+                        }
+                    },
+                    legend: {
+                        y: -30,
+                        data: ['导高值', '拉出值', '接触点温度', '环境温度']
+                    },
+                    dataZoom: {
+                        show: true,
+                        realtime: true,
+                        start: 85,
+                        end: 100
+                    },
+                    grid: {
+                        x: 80,
+                        y: 5,
+                        x2: 20,
+                        y2: 60
+                    },
+                    xAxis: [
+                                {
+                                    type: 'category',
+                                    position: 'bottom',
+                                    boundaryGap: true,
+                                    axisTick: { onGap: false },
+                                    splitLine: { show: false },
+                                    axisLabel: {
+                                        textStyle: { color: '#fff' }
+                                    },
+                                    data: axisData
+                                }
+                            ],
+                    yAxis: [
+                                {
+                                    type: 'value',
+                                    scale: true,
+                                    splitNumber: 4,
+                                    boundaryGap: [0.05, 0.05],
+                                    axisLabel: {
+                                        textStyle: { color: '#fff' },
+                                        formatter: function (v) {
+                                            return v + '℃';
+                                        }
+                                    },
+                                    splitArea: { show: true }
+                                }
+                            ],
+                    series: [
+                                {
+                                    name: '接触点温度',
+                                    type: 'line',
+                                    smooth: true,
+                                    showAllSymbol: true,
+                                    symbolSize: 0.1,
+                                    //symbol: 'none',
+                                    data: getNodes("IR")
+                                },
+                                {
+                                    name: '环境温度',
+                                    type: 'line',
+                                    symbol: 'none',
+                                    data: getNodes("ENV"),
+                                    markLine: {
+                                        symbol: 'none',
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#1e90ff',
+                                                label: {
+                                                    show: false
+                                                }
+                                            }
+                                        },
+                                        data: [
+                                            { type: 'average', name: '平均环境温度' }
+                                        ]
+                                    }
+                                }
+                            ]
+                };
+                // 为echarts对象加载数据 
+                myChart.setOption(option);
+                myChart2.setOption(option2);
+                //myChart3.setOption(option3);
+                // 多表关联
+                myChart.connect([myChart2]);
+                myChart2.connect([myChart]);
+                //myChart3.connect([myChart, myChart2]);
+                //点击事件
+                var ecConfig = require('echarts/config');
+                //点击事件执行的方法
+                function eConsole(param) {
+                    if (typeof param.seriesIndex != 'undefined') {
+                        window.parent.SetImg(param.data.IR_FRAME);
+                    }
+                }
+                //绑定点击事件
+                myChart.on(ecConfig.EVENT.CLICK, eConsole);
+                myChart2.on(ecConfig.EVENT.CLICK, eConsole);
+                //myChart3.on(ecConfig.EVENT.CLICK, eConsole);
+                function rd(n, m) {
+                    var c = m - n + 1;
+                    return Math.floor(Math.random() * c + n);
+                }
+                //点击播放 点击暂停
+                function ckplay() {
+                    if (isplay == 1) {
+                        isplay = 0;
+                        clearInterval(timeTicket);
+                    }
+                    else {
+                        isplay = 1;
+                        //timeTicket = setInterval(function () { dataadd(); }, 500);
+                    }
+                }
+                //timeTicket = setInterval(function () { dataadd(); }, 500);
+                function dataadd() {
+                    myChart.addData([
+                                        [
+                                            0,        // 系列索引
+                                            {value: rd(6650, 6600), lb: '01' }, // 新增数据
+                                            false,     // 新增数据是否从队列头部插入
+                                            false,     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                                            '2014-6-1 11:21:00'
+                                        ]
+                                    ]);
+
+                    myChart2.addData([
+                                        [
+                                            0,        // 系列索引
+                                            rd(-135, 135), // 新增数据
+                                            false,     // 新增数据是否从队列头部插入
+                                            false,     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                                            '2014-6-1 11:21:00'
+                                        ]
+                                    ]);
+
+                    myChart3.addData([
+                                        [
+                                            0,        // 系列索引
+                                            rd(15, 30), // 新增数据
+                                            false,     // 新增数据是否从队列头部插入
+                                            false,     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                                            '2014-6-1 11:21:00'
+                                        ],
+                                        [
+                                            1,        // 系列索引
+                                            13.33, // 新增数据
+                                            false,     // 新增数据是否从队列头部插入
+                                            false,     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                                            '2014-6-1 11:21:00'
+                                        ]
+                                    ]);
+                }
+            }
+        );
+        // 过渡---------------------
+
+    </script>
+</body>
+</html>

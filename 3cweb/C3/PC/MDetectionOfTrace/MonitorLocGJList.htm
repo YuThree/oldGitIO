@@ -1,0 +1,413 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>检测轨迹监控</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("ztree");
+        loadControl("Validation");
+        loadControl("trainselect");
+        loadJs("/C3/PC/MDetectionOfTrace/js/MonitorLocGJList_New.js?r=" + Math.random() + "&v=" + version);
+        loadJs("/Common/js/6cweb/HistoricalTime.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <link href="/Lib/jquery.easyui/easyui.css" rel="stylesheet" />
+    <script src="/Lib/jquery.easyui/jquery.easyui.min.js"></script>
+    <script src="/Lib/jquery.easyui/easyui-lang-zh_CN.js"></script>
+    <script src="/Lib/jquery.easyui/datagrid-detailview.js"></script>
+    <script src="/Common/js/6cweb/myTree.js" type="text/javascript"></script>
+    <script src="/Lib/layer/layer.js" type="text/javascript"></script>
+    <style>
+        .span12 {
+            position: relative;
+        }
+
+        .span2 {
+            position: relative;
+        }
+
+        .button_img_show {
+            position: absolute;
+            width: 35px;
+            height: 50px;
+            background: url("/Common/img/100.png") center no-repeat;
+            background-size: contain;
+            right: -35px;
+            top: 50%;
+            cursor: pointer;
+        }
+         #S_btnMark{
+            background:#ff6a00;
+            display:none;
+        }
+
+        .button_img_hide {
+            position: absolute;
+            width: 35px;
+            height: 50px;
+            background: url("/Common/img/101.png") center no-repeat;
+            background-size: contain;
+            left: 0;
+            top: 50%;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media screen and (max-width:1025px) {
+            #startdate, #enddate {
+                width: 90px !important;
+            }
+
+            .select_icon {
+                /*left: -345px !important;*/
+            }
+
+            #ul_txtloccode, #droup_txtloccode {
+                margin-left: 240px !important;
+            }
+        }
+    </style>
+    <script language="javascript">
+        $(document).ready(function () {
+            if (getConfig('debug')== '1') {
+                $('#S_btnMark').show()
+            }
+            $("#queryList").validationEngine({
+                validationEventTriggers: "blur",  //触发的事件  "keyup blur",
+                inlineValidation: true, //是否即时验证，false为提交表单时验证,默认true
+                success: false, //为true时即使有不符合的也提交表单,false表示只有全部通过验证了才能提交表单,默认false
+                promptPosition: "topLeft" //提示位置，topLeft, topRight, bottomLeft,  centerRight, bottomRight
+                //        validateNonVisibleFields: true
+            });
+            $("#modal-container-update").height($(window).height() * 0.95);
+            $("#alarmInfo").height($("#modal-container-update").height() - 90);
+
+            if ($(window).width() * 0.9 > 1100) {
+                $("#alarmInfo").width(1100);
+                $("#modal-container-update").width(1120);
+                $("#modal-container-update").css("left", ($(window).width() - $("#modal-container-update").width()) / 2 + 280);
+            } else {
+
+            }
+            if ($(window).height() > 900) {
+                $("#alarmInfo").height(800);
+                $("#modal-container-update").height(900);
+                $("#modal-container-update").css("top", ($(window).height() - $("#modal-container-update").height()) / 2 + 250);
+            } else {
+                $("#modal-container-update").height($(window).height() * 0.95);
+                $("#alarmInfo").height(($("#modal-container-update").height() - 60) * 0.94);
+                $("#modal-container-update").css("top", ($(window).height() - $("#modal-container-update").height()) / 2 + 250);
+            }
+            LoadingHistoricalTime("startdate", "enddate"); ///  Common\js\6cweb\HistoricalTime.js
+            buttonControl(); //判断按钮
+
+            document.getElementById("_loctree").style.height = $(window).height() - 65 + "px";
+
+            document.getElementById('startdate').value = dateNowStr() + '00:00:00'; //获取当前日期
+            document.getElementById('enddate').value = dateNowStr() + '23:59:59'; //获取当前日期
+            var sTime = GetQueryString('sTime')//开始时间
+            var eTime = GetQueryString('eTime')//结束时间
+            var loca = GetQueryString('loca')//
+            if (loca != '' && loca != undefined) {
+                $('#txtloccode').val(loca)
+            }
+            if (sTime != '' && sTime != undefined) {
+                $('#startdate').val(sTime)
+            }
+            if (eTime != '' && eTime != undefined) {
+                $('#enddate').val(eTime)
+            }
+            loadFlexiGrid();
+
+            //loadOrgSelect('TOPBOSS', 'ju', null, 'ddlju', null); //加载局下拉
+            //loadOrgSelect(null, 'duan', null, 'ddlduan', null); //加载段下拉
+
+            var null_option = '<option value="0">全部</option>';
+            $("#juselect").mySelect({
+                tag: "Organization", code: "TOPBOSS", type: "J"
+            }).change(function () {
+                var jcode = $(this).val();
+                if (jcode == "0") {
+                    $("#duanselect").html(null_option);
+                }
+                else {
+                    $("#duanselect").mySelect({
+                        tag: "Organization",
+                        code: jcode
+                        //  ,type: "JWD" || "CLD"
+                    })
+                }
+            })
+
+
+
+            //  loadTree(); //加载树
+            $('#TreeAll').myTree({
+                type: 'Organization-ju',//指定类型
+                enableFilter: true
+            })
+
+            hideC3infobyID("jltr"); //隐藏动车数据的交路运用区段信息查询信息
+        })
+        window.onload = function () {
+
+            //className();
+        };
+
+
+        function className() {
+
+        }
+        //选择ju事件
+        function juChange(pcode) {
+            loadOrgSelect(pcode, 'duan', '局', 'ddlduan', null);
+        };
+        var data = ""; //统计json
+        var data1 = ""; //交路统计json
+        var data2 = ""; //线路统计json
+        function update() {
+            var spanArray = $("span");
+            for (var i = 0; i < spanArray.length; i++) {//循环整个input数组
+                var span = spanArray[i]; //取到每一个input
+                if (span.innerHTML.indexOf("一类告警数量") != "-1") {
+                    span.innerHTML = GetSeverityName2('一类', json) + '告警数量';
+                } else if (span.innerHTML.indexOf("二类告警数量") != "-1") {
+                    span.innerHTML = GetSeverityName2('二类', json) + '告警数量';
+                } else if (span.innerHTML.indexOf("三类告警数量") != "-1") {
+                    var val = GetSeverityName2('三类', json);
+                    if (!val) {
+                        $("#Xdg").datagrid('hideColumn', 'SLnum');
+                        $("#dg").datagrid('hideColumn', 'SLnum');
+                    }
+                    else {
+                        span.innerHTML = GetSeverityName2('三类', json) + '告警数量';
+                    }
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        // 右边设备栏的隐藏和显示
+        $(document).ready(function () {
+            $(".button_img_show").click(function () {
+                var Width = $(".span2").outerWidth(true);
+                $(".span2").animate({ left: -Width + 'px' }).css("position", "absolute");
+                $(this).hide();
+                $(".span10").animate({ width: "96.5%" });
+                $(".button_img_hide").show();
+            });
+            $(".button_img_hide").click(function () {
+                $(".span2").animate({ left: 0 }).css("position", "relative");
+                $(".button_img_show").show();
+                $(this).hide();
+                $(".span10").animate({ width: "82.8%" });
+            });
+            $('#S_btnMark').click(function () {
+                var _h=$(window).height();
+                var _w=$(window).width();
+                showDialogIframe('/C3/PC/MDetectionOfTrace/MarkDevice.htm', _w * 0.47, _h * 0.5);
+            })
+            //下拉选择控件
+            $('#txtloccode').LocoSelect({
+                position: 'MonitorLocGJList',
+            });
+
+            //设备编号控件
+            $('#txtloccode').inputSelect({
+                type: 'loca',
+                contant: 2,
+                position: 'MonitorLocGJList',
+            });
+            
+            
+            //$('#btn_Mark').click(function () {
+            //    var device_code = $('#DeviceNum').val();
+            //    //HtmlMarkedDevice(device_code);
+            //    DeviceMark(device_code);
+            //})
+            //下拉选择框样式插件
+            //$("select:not(:last-child)").addClass("select select-primary").attr("data-toggle", "select");
+        });
+    </script>
+</head>
+<body onload="update()">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="button_img_hide">
+            </div>
+            <div class="row-fluid sortable">
+                <div class="box span2">
+                    <div class="button_img_show">
+                    </div>
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-align-left"></i>设备
+                        </h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div id="_loctree" class="box-content" style="height: 970px; background: url(/Common/img/left_bg.png) no-repeat bottom;
+                        overflow-y: auto; background-size: cover;">
+                        <div id="TreeAll" class="ztree">
+                        </div>
+                    </div>
+                </div>
+                <div class="box span10">
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-search"></i>查询条件
+                        </h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <form id="queryList">
+                        <div class="box-content">
+                            局：
+                            <select id="juselect" name="juselect" style="width: 90px;">
+                                <option value="0">全部</option>
+                            </select>
+                            段：<select id="duanselect" name="duanselect" style="width: 90px;">
+                                <option value="0">全部</option>
+                            </select>
+                            设备编号：<input type="text" id="txtloccode" class="smallInput" style="width: 100px" />
+                            <span id="jltr">
+                                交路号：<input type="text" id="jlh" class="smallInput" style="width: 100px" />
+                            </span>时间：
+                            <input id="startdate" class="Wdate validate[required]" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})"
+                                   style="width: 135px" />至
+                            <input id="enddate" class="Wdate validate[required]" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})"
+                                   style="width: 135px" />
+                            <div id="HistoricalTime" style="display: inline-block; width: 30px; vertical-align: top;
+                            margin-top: 3px;">
+                            </div>
+                            <input type="button" id="S_btnQuery" class="btn btn-small btn-primary" onclick="doQueryHistoricalTime(); loadFlexiGrid(); update(); " value="查询" style="margin-bottom: 9px;" />
+                            <input type="button" id="S_btnMark" class="btn btn-primary" value="异常设备标记" style="margin-bottom: 9px;margin-left:5px;" />
+                        </div>
+                    </form>
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-eye-open"></i>检测轨迹监控
+                        </h2>
+                        <div class="box-icon">
+                        </div>
+                    </div>
+                    <div class="easyui-tabs" style="width: 98%">
+                        <div title="线路统计" style="padding: 10px">
+
+                            <div class="box-content">
+                                <table id="Xdg" style="width: 95%" url="" toolbar="#toolbar" pagination="true" fitcolumns="true"
+                                       singleselect="true">
+                                    <thead>
+                                        <tr>
+                                            <th data-options="field:'LOCOMOTIVE_CODE'" width="40">
+                                                设备编号
+                                            </th>
+                                            <th data-options="field:'RUNNING_DATE'" width="30">
+                                                日期
+                                            </th>
+                                            <th data-options="field:'BEGIN'" width="40">
+                                                开始时间
+                                            </th>
+                                            <th data-options="field:'END'" width="40">
+                                                结束时间
+                                            </th>
+                                            <th id="Y" data-options="field:'YLnum'" width="30">
+                                                一类告警数量
+                                            </th>
+                                            <th id="E" data-options="field:'ELnum'" width="30">
+                                                二类告警数量
+                                            </th>
+                                            <th id="S" data-options="field:'SLnum'" width="30">
+                                                三类告警数量
+                                            </th>
+                                            <th data-options="field:'GJMXurl'" width="30">
+                                                检测轨迹明细
+                                            </th>
+                                            <th data-options="field:'CZ'" width="30">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div title="交路统计" id="div_X" style="padding: 10px">
+                            <div class="box-content">
+                                <table id="dg" style="width: 100%;" url="" toolbar="#toolbar" pagination="true" fitcolumns="true"
+                                       singleselect="true">
+                                    <thead>
+                                        <tr>
+                                            <th data-options="field:'LOCOMOTIVE_CODE'" width="40">
+                                                设备编号
+                                            </th>
+                                            <th data-options="field:'RUNNING_DATE'" width="30">
+                                                日期
+                                            </th>
+                                            <th data-options="field:'BEGIN'" width="40">
+                                                开始时间
+                                            </th>
+                                            <th data-options="field:'END'" width="40">
+                                                结束时间
+                                            </th>
+                                            <th id="_Y" data-options="field:'YLnum'" width="30">
+                                                一类告警数量
+                                            </th>
+                                            <th id="_E" data-options="field:'ELnum'" width="30">
+                                                二类告警数量
+                                            </th>
+                                            <th id="_S" data-options="field:'SLnum'" width="30">
+                                                三类告警数量
+                                            </th>
+                                            <th data-options="field:'GJMXurl'" width="30">
+                                                检测轨迹明细
+                                            </th>
+                                            <th data-options="field:'CZ'" width="30">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+                </div>
+            </div>
+        </div>
+        <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+        </a>
+        <!--弹出模态-->
+        <div aria-hidden="true" id="modal-container-update" class="modal hide fade" role="dialog"
+             aria-labelledby="myModalLabel" style="width: 90%; left: 350px; top: 280px; height: 580px;">
+            <div class="modal-body">
+                <div>
+                    <iframe id="alarmInfo" height="490px" width="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btncols" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+        <!-- 异常设备标记弹出框 -->
+        <!--<div id="DeviceMark" class="hide">
+            <div class="closeimg layui-layer-close"></div>
+            <h4><span class="new-img"></span><span>异常设备标记</span></h4>
+            <div class="hr-div"></div>
+            <div>
+                <label>设备编号：</label>
+                <input id="DeviceNum" type="text" />-->
+                <!--<select id="DeviceNum" type="text"></select>-->
+                <!--<input type="button" id="btn_Mark" class="btn btn-small btn-primary" value="标 记" />
+            </div>
+            <div class="p_div">
+                <span class="abnormal_pic"></span><label>异常设备</label><span id="TotalNum"></span>
+            </div>
+            <div class="DeviceContent"></div>
+        </div>-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!--
+	跨页面传值已经提取
+	跳转页面已经提取
+	模态框已经提取
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--浏览器选项卡图标-->
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="favicon.ico" />
+<link rel="stylesheet" href="common/css/COMMONT.css" />
+<link rel="stylesheet" href= "index/css/H-ui.admin.css" />
+<link rel="stylesheet" href= "index/css/skin.css"/>
+	<link rel="stylesheet" href= "index/css/CTXD.css" />
+	<link rel="stylesheet" href="index/css/animate.css" />
+	<link rel="stylesheet" href="index/css/style.css" />
+<!--树形二级菜单-->
+<link rel="stylesheet" type="text/css" href="jsControl/treeView/treeView.css"/>
+<!--滚动条-->
+<link rel="stylesheet" type="text/css" href="jsControl/zUI/zUI.css"/>
+<!--模态框-->
+<link rel="stylesheet" type="text/css" href="jsControl/modelShow/modelShow.css"/>
+<link rel="stylesheet" type="text/css" href="jsControl/modelShow/modelShowY.css"/>
+<link rel="stylesheet" type="text/css" href="jsControl/modelShow/modelShowH.css"/>
+<!--首页页面css-->
+<link rel="stylesheet" type="text/css" href="index/css/index.css"/>
+
+
+<title>主体框架</title>
+</head>
+<body>
+<!--头部容器-->
+<header class="navbar-wrapper">
+	<div style="background-image: url(common/img/bgTop.png)" class="navbar navbar-fixed-top">
+		<div class="container-fluid cl">
+			<input id="YSBH" value="1" type="hidden"> <input type="hidden" name="sysbh" value="12"> <span class="logo navbar-slogan f-l mr-10 hidden-xs"><a href="###"><img style=" width:244px;height:64px" src="image/icon/login.png"></a> </span>
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl navbar-top-links">
+					<li>你好,<span id="loginUser_one">超级管理员[成都中心医院]</span>，欢迎使用远程会诊系统！
+					</li>
+					<li class="msgLeft"></li>
+					<!--<li class="message">
+						<span class="msgIcon" style="background-image: url(image/icon/infoLeft.png)"></span>
+						<div class="msgNum">99</div>
+						
+					</li>-->
+					
+					<li class="message">
+						<a class="dropdown-toggle waves-effect waves-light mess" data-toggle="dropdown" href="#" aria-expanded="false"> <i  class="message_icon"></i>
+							<div class="notify">
+								<span class="msgIcon" style="background-image: url(common/img/infoLeft.png)"></span>
+							    <div class="msgNum">99</div>
+							</div>
+				       </a>
+						<div class="dropdown-menu  animated bounceInDown" style="color: black;">
+							<div class="drop-title">
+								<span class="drodownFont"><img src="index/img/new1.png" /> 我的消息列表</span>
+								<span class="newempycolor">清空</span>
+							</div>
+							<div class="newDiv">
+								<ul>
+									<li>我的消息</li>
+								    <li>系统消息</li>
+								    <li>公告消息</li>
+								    <li>广告消息</li> 
+								</ul>
+							</div>
+						</div> 
+					</li>
+
+					<li class="msgRight"></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle profile-pic userNameA" data-toggle="dropdown" href="#" aria-expanded="false">
+							<span class="userLeft">
+								<img src="image/icon/userNameLeft.png">
+							</span>
+							<span class="userName">Henry</span>
+							<span alt="user-img"><img id="back_img" style="width:100%;height:100%;display: inline-block;border-radius: 100%;vertical-align: top" src="common/img/defaultUserHead.png"></span> <!-- <b class="hidden-xs">Steave</b> --> <span  class="caret"></span>
+					   </a>
+						<ul class="dropdown-menu dropdown-user animated flipInY">
+							<li>
+								<div class="dw-user-box">
+									<div class="u-img">
+										<img class="newyx" id="header_tx" src="common/img/defaultUserHead.png" alt="头像">
+
+									</div>
+									<div class="u-text center-block">
+										<h4 id="ihUername">超级管理员</h4>
+										<p class="text-muted" id="ihJGMC" style="text-align: center;">成都中心医院</p>
+										<a class="btn btn-rounded btn-primary btn-sm Xgdata center-block">修改资料</a>
+									</div>
+								</div>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li class="modifyThePassword"><a href="javascript:;"><i class="ti-settings modifyPassword"></i>修改密码</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="javascript:;"><i class="fa fa-power-off"></i> 退出登录</a></li>
+						</ul>
+					
+					</li>
+
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+
+<!--左侧一级图标菜单容器-->
+<div class="CTXD-left-menu">
+	<ul id="oneLevalMenu" class="CTXD-left-ul"></ul>
+</div>
+
+<!--左侧二级菜单容器-->
+<aside class="Hui-aside">
+	<div id="menuLevalOneBox" class="menu_dropdown bk_2"></div>
+</aside>
+<div class="controlHideMenu">
+
+</div>
+
+
+<!--收缩按钮容器-->
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+
+<!--主内容容器-->
+<section class="Hui-article-box">
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+			</ul>
+		</div>
+		<div class="Hui-tabNav-more btn-group">
+			<a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;">
+				<i class="iconInfo"></i>
+			</a>
+			<a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;">
+				<i class="iconInfo"></i>
+			</a>
+		</div>
+	</div>
+	<div id="iframe_box" class="Hui-article">
+		
+	</div>
+</section>
+
+
+<!--右键点击选项卡面包屑 出现的选项-->
+<div class="contextMenu" id="Huiadminmenu">
+	<ul>
+			<li id="flushNow">刷新当前</li>
+		<li id="closeother">关闭其他</li>
+		<li id="closethis">关闭当前 </li>
+		<li id="closeall">关闭全部 </li>
+</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+
+
+
+
+<!--jq-->
+<script type="text/javascript" src="common/js/jquery.min.js"></script>
+
+
+<!--HuiJs-->
+<script type="text/javascript" src="index/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--树形插件-->
+<script type="text/javascript" src="jsControl/treeView/treeViewTwoAddFunction.min.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<!--右键菜单JS-->
+<script type="text/javascript" src="index/js/jquery.contextmenu.r2.js"></script>
+<!--引入跨页面传值JS-->
+<script type="text/javascript" src="index/js/iframeGlobal.js"></script>
+
+<!--引入模态框相关JS-->
+<script type="text/javascript" src="jsControl/modelShow/modelShow.min.js"></script>
+<!--ZUI-->
+<script type="text/javascript" src="jsControl/zUI/zUI.min.js"></script>
+<!--避免冲突树形数据     后台不用时请自动删除-->
+<script type="text/javascript" src="index/js/huyuewen.js"></script>
+<script type="text/javascript" src="index/js/yinhui.js"></script>
+<!--首页主要js-->
+<script type="text/javascript" src="index/js/index_style.js"></script>
+
+<script type="text/javascript">
+	 $(".newDiv").panel({
+			iWheelStep:32
+		})   ;
+</script>
+<!--兼容ie6的js 貌似只有首页有用-->
+<!--[if IE 6]>
+<script type="text/javascript" src="index/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+
+
+<!--兼容小于ie9的js 貌似只有首页有用-->
+<!--[if lt IE 9]><script type="text/javascript" src="index/js/html5shiv.js"></script>
+<script type="text/javascript" src="index/js/respond.min.js"></script><![endif]-->
+</body>
+</html>

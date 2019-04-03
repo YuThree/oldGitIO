@@ -1,0 +1,280 @@
+﻿/*----------------------*/
+/*一所一档添加页面样式*/
+/*2017/9/5*/
+/*----------------------*/
+.top_wrapper{
+    margin-top:0 !important;
+    text-align: left !important;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.top_wrapper>span{
+    line-height:inherit;
+    text-align: left;
+    font-size:14px;
+    font-weight: bolder;
+    color: #488cb4;
+    vertical-align: middle;
+}
+.top_wrapper>img{
+    margin-left:20px;
+}
+.top_wrapper > .close-ico {
+    float: right;
+    display: inline-block;
+    width: 24px;
+    height: 34px;
+    background: url(/Common/MFoundation/css/img/close_page.png) 0 5px no-repeat;
+    cursor: pointer;
+}
+.top_wrapper > .close-ico:hover{
+    background: url(/Common/MFoundation/css/img/close_page_hover.png) 0 5px no-repeat;
+}
+.main{
+    margin: 20px auto;
+    width: 96%;
+}
+
+.title_wrapper{
+    background-color:#40a0d9;
+    padding:4px 20px;
+}
+.title_wrapper>img{
+    
+}
+.title_wrapper>h4{
+    display:inline-block;
+    vertical-align:middle;
+    color:white;
+    letter-spacing:2px;
+}
+.content_wrapper .row-fluid{
+    margin: 0 auto 9px;
+    width: 96%;
+}
+.content_wrapper .row-fluid:first-child{
+    margin-top:20px;
+}
+/*.content_wrapper .row-fluid:last-child{
+    margin-bottom:18px;
+}*/
+.content_wrapper>.row-fluid>span{
+    display:inline-block;
+    margin-right:40px;
+}
+.content_wrapper>.row-fluid>span.gdfw{
+    margin-right: 38px;
+}
+/*.content-data>.row-fluid>span{
+    margin-right:12px;
+}*/
+.content_wrapper label{
+    width:70px;
+    display:inline-block;
+    text-align:justify;
+    text-align-last:justify;
+}
+.content-other>.row-fluid>span>label{
+    width:115px;
+}
+.content-other>.row-fluid>span:first-child>label{
+    width:70px;
+}
+.content-data>.row-fluid>span>label{
+    width:85px;
+}
+.content_wrapper .row-fluid input{
+    width:170px;
+}
+.content_wrapper .row-fluid select{
+    width:180px;
+}
+.content_wrapper .row-fluid .input_small{
+    width:60px;
+}
+.content_wrapper i{
+    color:red;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.content_wrapper .must{
+    opacity:0;
+}
+.content_wrapper textarea{
+    resize:none;
+    width: 910px;
+    height: 80px;
+}
+.content_wrapper input.Other{
+    width:910px
+}
+.IntoLine label{
+    width:95px;
+}
+.IntoLine>.row-fluid{
+    display: inline-block;
+    width: 90%;
+    border:1px solid #ccc;
+    padding: 8px;
+    border-radius:4px;
+}
+.IntoLine>.row-fluid>span{
+    display:inline-block;
+    margin-right:50px;
+}
+.footer_wrapper,.top_wrapper{
+    width:100%;
+    margin:30px auto;
+    line-height:30px;
+    text-align:center;
+    height: 34px;
+}
+
+
+
+
+
+
+
+
+
+/*--------------------   一所一档修改页面样式   ----------------------*/
+
+.Place_Run_wrapper label,.Place_Quality_wrapper label,.Place_Note_wrapper label{
+    width: 110px;
+    vertical-align: top;
+    margin-top: 9px;
+}
+.Place_Run_wrapper #Place_Run_Content,.Place_Quality_wrapper #Place_Quality_Content,.Place_Note_wrapper #Place_Note_Content{
+    display:inline-block;
+    min-height: 80px;
+    width: 900px;
+    vertical-align: top;
+    padding-left: 15px;
+}
+.Place_Run_wrapper .div_ul,.Place_Run_wrapper .div_ul .div_li,.Place_Quality_wrapper .div_ul,.Place_Quality_wrapper .div_ul .div_li,.Place_Note_wrapper .div_ul,.Place_Note_wrapper .div_ul .div_li{
+    position: relative;
+    list-style-type:none;
+    margin:0;
+}
+#Place_Run_Content>.div_ul>.div_li,#Place_Quality_Content>.div_ul>.div_li,#Place_Note_Content>.div_ul>.div_li{
+    padding:5px;
+}
+#Place_Run_Content>.div_ul>.div_li:hover,#Place_Quality_Content>.div_ul>.div_li:hover,#Place_Note_Content>.div_ul>.div_li:hover{
+    background:#ccc;
+}
+#Place_Run_Content>.div_ul>.div_li>span,#Place_Quality_Content>.div_ul>.div_li>span,#Place_Note_Content>.div_ul>.div_li>span{
+    display: inline-block;
+    width:200px;
+    height:25px;
+    line-height:25px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+#Place_Run_Content>.div_ul>.div_li>img,#Place_Quality_Content>.div_ul>.div_li>img,#Place_Note_Content>.div_ul>.div_li>img{
+    position:absolute;
+    cursor:pointer;
+}
+.Place_Run_Edit,.Place_Quality_Edit,.Place_Note_Edit{
+    right:40px;
+    top: 10px;
+}
+.Place_Run_Del,.Place_Quality_Del,.Place_Note_Del{
+    right:5px;
+    top: 10px;
+}
+#Place_Run_Paging,#Place_Quality_Paging,#Place_Note_Paging{
+    width: 900px;
+    margin:15px 0 20px 110px;
+    padding-bottom:5px;
+    border-bottom:1px solid #ccc;
+}
+.Place_Run_Add,.Place_Quality_Add,.Place_Note_Add{
+    margin-left:110px;
+    height: 25px;
+    line-height: 25px;
+}
+.Place_Run_Add img,.Place_Quality_Add img,.Place_Note_Add img{
+    cursor:pointer;
+}
+.Place_Run_Add span,.Place_Quality_Add span,.Place_Note_Add span{
+    vertical-align:middle;
+    margin-left:5px;
+}
+
+#Place_Quality_Content>.div_ul>.div_li>span:nth-of-type(3),#Place_Note_Content>.div_ul>.div_li>span:nth-of-type(3){
+    width:400px;
+}
+
+.Place_Run_container,.Place_Quality_container,.Place_Note_container{
+    width:550px;
+    border:1px solid #ccc;
+    padding:10px 15px;
+    margin:15px 15px 15px 110px;
+}
+.Place_Run_container .row-fluid:first-child,.Place_Quality_container .row-fluid:first-child,.Place_Note_container .row-fluid:first-child{
+    margin-top:2px;
+}
+.Place_Run_container .row-fluid:last-child,.Place_Quality_container .row-fluid:last-child,.Place_Note_container .row-fluid:last-child{
+    text-align:center;
+}
+.Place_Run_container .row-fluid span:nth-child(2n),.Place_Quality_container .row-fluid span:nth-child(2n),.Place_Note_container .row-fluid span:nth-child(2n){
+    float:right;
+}
+.Place_Run_container .row-fluid label,.Place_Quality_container .row-fluid label,.Place_Note_container .row-fluid label{
+    width:60px;
+}
+.Place_Run_container .row-fluid button,.Place_Quality_container .row-fluid button,.Place_Note_container .row-fluid button{
+    margin-right:25px;
+    margin-left:25px;
+}
+.Place_Quality_container textarea,.Place_Note_container textarea{
+    width:356px;
+    height:50px;
+}
+
+
+
+/*选项卡样式*/
+.tab-ul {
+    display: inline-block;
+    margin: 20px 0 0 0;
+}
+.tab-ul > li {
+    position: relative;
+    display: inline-block;
+    width: 110px;
+    height: 35px;
+    margin-bottom: -1px;
+    margin-right: 12px;
+    background-color: #ffffff;
+    border: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 12px;
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+.tab-ul > .cur-tab {
+    border-bottom: 1px solid #ffffff;
+}
+.tab {
+    padding: 8px 5px;
+}
+.table-ul {
+    width: 97.9%;
+    padding: 19px 1.01%;
+    margin-bottom: 19px;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+}
+
+.table-ul>.content_wrapper{
+    border: 1px solid #cdcdcd;
+}

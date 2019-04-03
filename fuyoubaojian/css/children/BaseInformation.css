@@ -1,0 +1,129 @@
+.scrollJS {
+    height: calc(100% - 60px);
+}
+
+button {
+    cursor: pointer;
+}
+
+.z-Box{
+    width: 100%;
+    height: calc(100% - 110px);
+    height: -webkit-calc(100% - 110px);
+    height: -moz-calc(100% - 110px);
+    height: -ms-calc(100% - 110px);
+    height: -o-calc(100% - 110px);
+}
+.zBoxs {
+    width: 100%;
+}
+body{
+    height: 100%;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+html{
+    height: 100%;
+}
+
+.linkMsg .cdct_tit {
+    top: 30%;
+}
+
+.linkMsg .cdct_btn {
+    position: relative;
+    top: 40%
+}
+
+.cdct_row .cdct_info .ztextArea .zareaHei48 {
+    height: 48px;
+    padding-top: 14px;
+}
+
+.inLine {
+    width: calc(100% - 110px);
+    width: -webkit-calc(100% - 110px);
+    width: -moz-calc(100% - 110px);
+    width: -ms-calc(100% - 110px);
+    width: -o-calc(100% - 110px);
+}
+
+.inLine2 {
+    width: calc(50% - 110px);
+    width: -webkit-calc(50% - 110px);
+    width: -moz-calc(50% - 110px);
+    width: -ms-calc(50% - 110px);
+    width: -o-calc(50% - 110px);
+}
+
+.w40 {
+    width: 40%;
+}
+.w80{
+    width: 80%;
+}
+
+.glInput {
+    position: absolute;
+    z-index: 1;
+    right: 30px;
+    top: 0;
+}
+
+.glInput2 {
+    position: absolute;
+    z-index: 1;
+    right: calc(50% + 30px);
+    right: -webkit-calc(50% + 30px);
+    right: -moz-calc(50% + 30px);
+    right: -ms-calc(50% + 30px);
+    right: -o-calc(50% + 30px);
+    top: 0;
+}
+
+.lineI {
+    width: 100%;
+}
+
+.line100 {
+    width: calc(50% - 110px);
+    width: -webkit-calc(50% - 110px);
+    width: -moz-calc(50% - 110px);
+    width: -ms-calc(50% - 110px);
+    width: -o-calc(50% - 110px);
+}
+
+.scrollJS2 {
+    height: calc(100% - 110px);
+    height: -webkit-calc(100% - 110px);
+    height: -moz-calc(100% - 110px);
+    height: -ms-calc(100% - 110px);
+    height: -o-calc(100% - 110px);
+}
+
+.reChild .cdct_btn {
+    min-width: 80px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.reChild .cdct_left {
+    width: 20%;
+    margin-right: 0;
+    text-align: center;
+}
+
+.reChild {
+    height: calc(100% - 60px);
+    height: -webkit-calc(100% - 60px);
+    height: -moz-calc(100% - 60px);
+    height: -ms-calc(100% - 60px);
+    height: -o-calc(100% - 60px); 
+}
+
+.cdct_toolbar {
+    margin-bottom: 10px;
+}

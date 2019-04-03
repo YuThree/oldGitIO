@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>echarts</title>
+	<link rel="stylesheet" href="css/common/reset.css">
+	<link rel="stylesheet" href="css/common/cdctCom.css">
+	<link rel="stylesheet" href="css/main/main.css">
+	<link rel="stylesheet" href="jsControl/zUI/zUI.css">
+	<style type="text/css">
+	body {
+	    padding: 10px;
+	    height: 100%;
+	    overflow: hidden;
+	}
+	.content{
+		width: 100%;
+	}
+
+	.main {
+	    height: 350px;
+	}
+
+	.top {
+	    height: 60px;
+	    padding-top: 15px;
+	    padding-left: 20px;
+	}
+
+	.box {
+	    margin-bottom: 20px;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="content">
+			<div class="box cdct_angleBorder">
+					<div class="cdct_angleBorderBottom"></div>
+					<div class="top">
+						<div class="cdct_chartsTitle">地图</div>
+					</div>
+					<div class="main" id="echarts35" style="height: 800px;"></div>
+				</div>
+	</div>
+	<script type="text/javascript" src="js/common/jquery.min.js"></script>
+	<script type="text/javascript" src="jsControl/zUI/zUI.js"></script>
+	<script type="text/javascript" src="jsControl/echarts/echarts.js"></script>
+	<script type="text/javascript" src="js/qxCharts.js"></script>
+	<script type="text/javascript">
+		$("body").panel({
+			iWheelStep:64,
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3C缺陷详情</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("flexigrid");
+        loadControl("elevatezoom");
+        loadControl("cloudzoom");
+        loadControl("jqueryUI_2");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("kendo");
+        loadJs("/C3/PC/MRTA/js/C3AlarmImg_big.js?v=" + version);
+        loadJs("/C3/PC/Device/script/DeviceForm.js?v=" + version);
+    </script>
+    <script src="/Common/MAlarmMonitoring/js/AlarmEditBox.js" type="text/javascript"></script>
+    <script src="/Common/MAlarmMonitoring/js/AlarmSaveList.js"></script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <link href="/C3/PC/css/3CForm4.css" rel="stylesheet" />
+    <style>
+        .tooltip-inner
+        {
+            max-width: inherit;
+            max-height: inherit;
+            text-align: left;
+            line-height: 22px;
+        }
+        
+        .sptime
+        {
+            display: inline-block;
+            width: 118px;
+        }
+        
+        #btn_raised_time
+        {
+            cursor: pointer;
+        }
+        
+        #btns_all a
+        {
+            margin: 0 1px;
+        }
+    </style>
+</head>
+<body style="overflow-x: hidden; overflow-y: auto; display: none">
+    <a id="A1" href="#" class="lightbox"></a>
+    <div id="note" style="display: none;">
+        <a href="#" style="color: White" onclick="ShowAllImg()"><span id="qjbtn" title="全景"
+            class="icon32 icon-white icon-image"></span></a><a href="#" style="color: White"
+                onclick="upImg()"><span title="上一张" class="icon32 icon-white icon-arrowthick-w">
+                </span></a><a href="#" style="color: White" onclick="lastImg()"><span title="下一张"
+                    class="icon32 icon-white icon-arrowthick-e"></span></a><a href="#" style="color: White"
+                        id="A2" onclick='GoToAlarmFrame()'><span title="跳转到缺陷帧" class="icon32 icon-white icon-info">
+                        </span></a><a href="#" style="color: White" onclick="out()"><span title="关闭" class="icon32 icon-white icon-cross">
+                        </span></a>
+        <div id="slider">
+        </div>
+    </div>
+    <div>
+        <div class="carousel-inner" id="BigDiv" style="display: none; z-index: 100001; position: absolute;">
+            <div class="item">
+                <img id="BigImg" onclick="BigdbImgShuffling()" ondblclick="CloseALLimg()" style="height: 100%;
+                    width: 100%;" src="/Common/img/ImgTmp/C31.JPG" data-zoom-image="/Common/img/ImgTmp/C31.JPG" />
+            </div>
+        </div>
+        <div class="RowLR">
+            <div class="L">
+                <img id="hw" height="150" src="/Common/img/暂无图片.png" ondblclick="ALLimg(this,'HW')"
+                    onclick="dbImgShuffling()" />
+                <div class="tab-pane active carousel-caption" id="panel-6652" style="text-align: left;
+                    height: 30px;">
+                    <img id="btn_locInfoControl" class="imgshareing" src="/Common/img/locoPlay/left.png" align="absmiddle" />
+                    <p id="locInfo" style="display: inline-block; line-height: 25px; vertical-align: middle;
+                        margin: 0px;">
+                    </p>
+                </div>
+            </div>
+            <div class="R">
+                <img id="kjg" height="150" src="/Common/img/暂无图片.png" data-zoom-image="/Common/img/ImgTmp/C31.JPG" />
+            </div>
+            <div class="cls">
+            </div>
+        </div>
+        <div class="RowLR" id="RowLR">
+            <div class="L">
+                <div class="box-header well" data-original-title="data-original-title">
+                    <h2>
+                        <span id="Span1">基本信息</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <div id="tablejbxx">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td rowspan="15" style="width: 50%;">
+                                    <img src="/Common/img/暂无图片.png" id='ImgPole' />
+                                </td>
+                                <td style="width: 25%; vertical-align: middle">
+                                    线路：<strong><span id="line_name"></span> </strong>
+                                </td>
+                                <td style="width: 50%; vertical-align: middle">
+                                    区站：<strong><span id="QZ"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    桥隧：<strong><span id="brige"></span> </strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    支柱：<strong><span id="pole_number"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    行别： <strong><span id="DIRECTION"></span></strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    公里标：<strong><span id="km_mark"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="vertical-align: middle">
+                                    巡检时间：<strong><span id="samplled_time"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    导高：<strong><span id="BCDAOGAO_T"></span> </strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    拉出值：<strong><span id="STAGGER_T"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    报警温度：<strong><span id="wendu"></span> </strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    环境温度：<strong><span id="hjwendu"></span> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    局：<strong><span id="bureau"></span> </strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    段：<strong><span id="GDD"></span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    车间：<strong><span id="CJ"></span> </strong>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    工区：<strong><span id="GQ"></span> </strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="R">
+                <div class="box-header well" data-original-title="data-original-title">
+                    <h2>
+                        <span id="C3title">当前设备状态</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <div class="box-content">
+                        <table id="flexTableAlarm">
+                        </table>
+                    </div>
+                </div>
+                <div class="box-header well" data-original-title="data-original-title">
+                    <h2>
+                        <span id="Span12">历史信息</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <div class="box-content">
+                        <table id="flexTableFault">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="cls">
+            </div>
+        </div>
+        <div style="position: absolute; left: 305px; top: 200px; width: 200px;">
+        </div>
+    </div>
+    <a id="modal-td" href="#modal-container-td" data-toggle="modal" style="display: none">
+    </a>
+    <!--弹出模态-->
+    <div aria-hidden="true" id="modal-container-td" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel" style="width: 850px; left: 550px; top: 350px">
+        <div class="modal-header">
+            <h3>
+                详细信息
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center">
+                <iframe id="alarmInfo" height="550px" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <a id="modal-repeat" href="#modal-container-repeat" data-toggle="modal" style="display: none">
+    </a>
+    <!--弹出模态-->
+    <div aria-hidden="true" id="modal-container-repeat" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel" style="width: 1400px; height: 1050px; left: 370px;
+        top: 290px">
+        <div class="modal-header">
+            <h3>
+                详细信息
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center">
+                <iframe id="repeatInfo" height="910px" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="Button3" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <div id="box_gis" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 900px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    地理位置
+                </h4>
+            </div>
+            <div style="padding: 8px;">
+                地理位置：<strong><span id="_WZ"></span></strong> &nbsp;<strong>东经<span id="gisX"></span>
+                    &nbsp;北纬 <span id="gisY"></span></strong>&nbsp;&nbsp;&nbsp; <span id="xj2" class="xj">
+                    </span>
+            </div>
+            <div class="modal-content">
+                <div id="mapDiv" style="width: 100%; height: 450px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box_delay" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 500px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    延时
+                </h4>
+            </div>
+            <div class="modal-content">
+                <div id="box_delay_content">
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+                        <button type="button" id="btn_closeEditBox" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                    </div>-->
+        </div>
+    </div>
+    <a id="modal-condition" href="#modal-condition-td" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-condition-td" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" style="float: left;">
+                同点对比&nbsp;&nbsp;&nbsp;<span id="td_title"></span>
+            </h4>
+            <span id="td-Title" style="float: left;"></span>
+        </div>
+        <div class="modal-content">
+            <table class="table table-striped" style="width: 560px;">
+                <tr>
+                    <td style="padding: 12px;">
+                        起始时间
+                    </td>
+                    <td>
+                        <input id="startTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                            style="width: 130px" readonly="readonly" />
+                    </td>
+                    <td style="padding: 12px;">
+                        终止时间
+                    </td>
+                    <td>
+                        <input id="endTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                            style="width: 130px" readonly="readonly" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        间距
+                    </td>
+                    <td>
+                        <input id="range" type="text" style="width: 130px;" value="100" />
+                    </td>
+                    <td style="padding: 12px;">
+                        重复次数
+                    </td>
+                    <td>
+                        <input id="repeatCount" type="text" style="width: 130px;" value="2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        缺陷类型
+                    </td>
+                    <td class="tdLx">
+                        <input id="citySel" type="text" value="非干扰" code="FGR" style="width: 130px; margin: 0;" />
+                    </td>
+                    <td class="tdXb" style="padding: 12px;">
+                        行别
+                    </td>
+                    <td class="tdXb">
+                        <select id="direction" style="width: 140px; border-radius: 3px;">
+                            <option value="0">全部</option>
+                            <option value="上行">上行</option>
+                            <option value="下行">下行</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        状态
+                    </td>
+                    <td colspan="3">
+                        <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                            style="width: 275px" size="3">
+                            <option value="AFSTATUS01" selected="selected">新上报</option>
+                            <option value="AFSTATUS04" selected="selected">已计划</option>
+                            <option value="AFSTATUS03" selected="selected">已确认</option>
+                            <option value="AFSTATUS02">已取消</option>
+                            <option value="AFSTATUS05">已关闭</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btn_fx" class="btn btn-primary" data-dismiss="modal">
+                分析
+            </button>
+        </div>
+    </div>
+</body>
+</html>

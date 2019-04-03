@@ -1,0 +1,117 @@
+﻿*{
+    margin:0;
+    padding:0;
+    font-family:'微软雅黑';
+}
+.html_title{
+    height:38px;
+    width:98.9%;
+    padding:0 .5%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    border: 1px solid #DEDEDE;
+}
+.html_title .html_title_img{
+	width:23px;height:23px;background: url(/Common/Index/images/index_Satyr.png) no-repeat;background-position: -54px -0px; display: inline-block;vertical-align: sub;
+}
+.list_title .list_title_img{
+	width:16px;height:16px;background: url(/Common/Index/images/index_Satyr.png) no-repeat;background-position: -77px -0px; display: inline-block;vertical-align: sub;
+}
+.html_title h4{
+    display:inline-block;
+    font-family:'微软雅黑';
+    color:#488CB4;
+    letter-spacing:4px;
+    line-height:40px;
+    font-size:16px;
+    margin-left:3px;
+}
+.html_content,.html_list{
+    width:96%;
+    margin:0 auto;
+    padding-top:20px;
+    overflow:auto;
+    color:black;
+}
+.html_content{width:92%;}
+.html_content>div:nth-of-type(1),.html_content>div:nth-of-type(2),.html_content>div:nth-of-type(3){
+    float:left;margin-right: 25px;
+}
+.html_content>div>span{letter-spacing: 2px;font-size:12px;}
+.html_content input{
+    margin-top:5px;
+    width:145px;
+}
+.search_btn{
+    margin:4px 0 0 0;
+}
+.list_title{
+    padding:5px 10px;
+    background:#C6E8F5;
+}
+.list_title>img{
+    vertical-align:text-bottom;
+}
+.list_title>span{
+    font-size:12px;
+    color:#5B5D5D;
+    letter-spacing:2px;
+}
+#dataTable{
+    padding:20px;
+    border:1px solid #B6B6B6;
+    border-top:none;
+    height:600px;
+}
+
+#dataTable table{
+    width:100%;border-right:1px solid #B6B6B6;border-bottom:1px solid #B6B6B6;margin-top:5px;font-size: 14px;
+}
+#dataTable table tbody{
+    font-size: 12px;
+}
+#dataTable table td,#dataTable table th{
+    border-left:1px solid #B6B6B6;border-top:1px solid #B6B6B6;text-align: center;
+}
+#dataTable table tr{
+    line-height:40px;
+}
+#dataTable img,.html_content img{
+     cursor:pointer;
+ }
+#paging{
+    text-align:center;
+    padding:10px 0 0 0;
+}
+.AbnormalInfo{color:#45a3da !important;margin-left: 12px;}
+.Abnormalselect{
+    background-image: url('/Common/img/sele.png');
+    background-repeat: no-repeat;
+    background-position: 5px;
+    width: 180px;
+    height: 25px;
+    padding-left:27px;
+}
+@media screen and (min-width:1441px) and (max-width:1600px) {
+    #dataTable{
+        height:500px;
+    }
+    #startTime,#endTime{
+        width:150px;
+    }
+}
+@media screen and (min-width:1367px) and (max-width:1440px) {
+    #dataTable{
+        height:450px;
+    }
+     #startTime,#endTime{
+        width:150px;
+    }
+}
+@media screen and (max-width:1366px) {
+    #dataTable{
+        height:450px;
+    }
+     #startTime,#endTime{
+        width:150px;
+    }
+}

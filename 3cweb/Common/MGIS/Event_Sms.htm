@@ -1,0 +1,554 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+
+
+    <script src="/Common/MGIS/JS/NewMap.js"></script>
+    <script src="/Common/MGIS/JS/C1EventTrack.js"></script>
+    <script src="/Common/MGIS/JS/ObtainData.js"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/GIS.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/convertor.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <style>
+        /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+            border-radius: 10px;
+            background-color: #000;
+        }
+
+        /*定义滑块 内阴影+圆角*/
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.6);
+            background-color: #555;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+
+        loadControl("elevatezoom");
+
+
+        loadControl("kendo");
+
+    </script>
+    <script type="text/javascript">
+        //页面加载是调用
+        $(document).ready(function () {
+            try {
+                var _h = parseInt($(window).height());
+                var _w = parseInt($(window).width());
+                $("#orBmapDiv").height(_h).width(_w);
+
+                if (getConfig('debug') == "1") {
+                    $("#_YSButton").show();
+                }
+
+
+                addCookie("Small", "", 1, ""); //加入Cookie判断是否是实时监控的GIS还是直接GIS
+                addCookie("GISSmall", "", 1, "");
+                document.getElementById('loading').style.display = 'none'; //隐藏加载信息
+                var id = GetQueryString("id"); //巡检ID
+                OrbMapbind(id); //加载巡检轨迹
+
+                document.getElementById('UserLogon').style.display = 'none';
+            } catch (e) {
+                // alert("地图加载不成功，请检查网络！");
+
+            }
+            var _h = (parseInt($(window).height()) - 10) / 4;
+            var _w = (parseInt($(window).width()) - 20) / 4;
+            $("#kjg").elevateZoom({ zoomWindowPosition: 05, zoomWindowWidth: _w - 8, zoomWindowHeight: _h - 8 });
+
+            $("#C3Alarm_1").width(_w).height(_h);
+            $("#C3Alarm_2").width(_w).height(_h);
+            $("#C3Alarm_3").width(_w).height(_h);
+            $("#C3Alarm_4").width(_w).height(_h);
+            $("#linechart").width(_w).height(_h);
+
+            $("#hw").width(_w).height(_h);
+            $("#kjg").width(_w).height(_h);
+
+            $("#ImgTypeBox").css("bottom", "10px");
+            $('#iframe_task').attr('src', '/Common/MTask/TaskForm.htm?id=' + GetQueryString("alarmid") + '&type=openFaultTask&openType=&ShowSimple=1&v=' + version)
+
+
+
+            $('#cb_type1').click(function () {
+                var v = this.checked;
+                showType("一类", v);
+            })
+            $('#cb_type2').click(function () {
+                var v = this.checked;
+                showType("二类", v);
+
+            })
+            $('#cb_type3').click(function () {
+                var v = this.checked;
+                showType("三类", v);
+            })
+            $('#cb_new').click(function () {
+                var v = this.checked;
+                showStatus("AFSTATUS01", v);
+            })
+            $('#cb_sure').click(function () {
+                var v = this.checked;
+                showStatus("AFSTATUS03", v);
+            })
+            $('#cb_plan').click(function () {
+                var v = this.checked;
+                showStatus("AFSTATUS04", v);
+            })
+            $('#cb_check').click(function () {
+                var v = this.checked;
+                showStatus("AFSTATUS07", v);
+            })
+            $('#cb_close').click(function () {
+                var v = this.checked;
+                showStatus("AFSTATUS05", v);
+            })
+
+            $('#Button4').click(function () {
+                //确认并转任务按钮。
+                btnAlarmUpdate();
+
+                $('#iframe_task').contents().find("#btnTaskAndBute").click();
+
+
+
+                // $("#iframe_task").contents()[0].defaultView.SendTaskAndDispatch();
+                //btnOnClick('btnTask')
+            })
+        });
+        function ss() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 120;
+            $('#allp').width(_w).height(_h);
+            $('#play1').show();
+            $('#play1').animate({ top: 10, left: 20, opacity: 1, width: _w, height: _h }, 500);
+        }
+        function ColseDIV() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 120;
+            $('#allp').width(_w).height(_h);
+
+            $('#play1').animate({ top: 10, left: 0, opacity: 0, width: _w, height: _h }, 500);
+            $('#play1').hide();
+        }
+    </script>
+    <style>
+        .test {
+            width: 170px;
+            padding: 50px 10px;
+            border: 5px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+
+            .test span {
+                width: 0;
+                height: 0;
+                font-size: 0;
+                overflow: hidden;
+                position: absolute;
+            }
+
+                .test span.bot {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #beceeb transparent transparent;
+                    left: 20px;
+                    bottom: -40px;
+                }
+
+                .test span.top {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #ffffff transparent transparent;
+                    left: 20px;
+                    bottom: -33px;
+                }
+
+        .anchorBL {
+            display: none;
+        }
+
+        .fg_blue {
+            -webkit-animation: neon_blue 1.5s ease-in-out infinite alternate;
+            -moz-animation: neon_blue 1.5s ease-in-out infinite alternate;
+            animation: neon_blue 1.5s ease-in-out infinite alternate;
+        }
+
+            .fg_blue span {
+                color: #F0E68C;
+            }
+
+        #ImgTypeBox {
+            position: absolute;
+            left: 0px;
+            z-index: 999;
+            background-color: rgba(15,15,17,0.5);
+            padding: 5px;
+            display: block;
+            bottom: 0px;
+        }
+
+            #ImgTypeBox img {
+                padding: 5px 0px;
+            }
+    </style>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .menuHolder {
+            width: 100px;
+            height: 100px;
+            margin: 0px 0 0px 0px;
+            position: absolute;
+            z-index: 100;
+            display: block;
+        }
+
+            .menuHolder ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+            }
+
+                .menuHolder ul li {
+                    border-radius: 0 0 300px 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                    .menuHolder ul li a {
+                        color: #000;
+                        text-decoration: none;
+                        font: bold 13px/30px arial, sans-serif;
+                        text-align: center;
+                        box-shadow: -5px 5px 5px rgba(0,0,0,0.4);
+                        -webkit-transform-origin: 0 0;
+                        -moz-transform-origin: 0 0;
+                        -ms-transform-origin: 0 0;
+                        -o-transform-origin: 0 0;
+                        transform-origin: 0 0;
+                    }
+
+            .menuHolder li.s1 > a {
+                position: absolute;
+                display: block;
+                width: 50px;
+                height: 50px;
+                background: #c8c8c8;
+                border-radius: 0 0 100px 0;
+            }
+
+            .menuHolder ul li:hover > a {
+                background: #f00;
+                color: #fff;
+            }
+    </style>
+    <style type="text/css">
+        #show {
+            margin: 10px;
+        }
+
+        .list {
+            position: relative;
+            background: #eee;
+            border: 1px #ccc solid;
+            margin: 10px;
+            height: 30px;
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .listShow {
+            position: relative;
+            background: #eff;
+            border: 1px #ddd solid;
+            margin: 10px;
+            height: 30px;
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .comment {
+            position: absolute;
+            left: 0;
+            display: none;
+            position: absolute;
+            border: 1px #ccc solid;
+            background: #fee;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="_Button" style="display: block; left: 60px; top: 5px; position: absolute;
+        z-index: 1000;">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' class='btn btn-primary' id="A1" onclick='JSSms()' style='background: #4A6F9C; color: White;'>加速显示</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='#' class='btn btn-primary' onclick='window.close()' style='background: #4A6F9C;
+            color: White;'>关闭本页</a>
+    </div>
+
+    </div>
+    <div id="ImgTypeBox">
+        <div>
+            <input id="cb_type1" type="checkbox" checked=checked checked=checked checked=checked checked=checked style="vertical-align: middle;" /><span style="vertical-align: middle; color: White;"><label for="cb_type1">一类　&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/ico1_new.png' /></label></span>&nbsp;(<span id='one_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_type2" type="checkbox"  style="vertical-align: middle;" /><span style='color: White;'><label for="cb_type2">二类　&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/ico2_new.png' /></label></span>&nbsp;(<span id='two_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_type3" type="checkbox"  style="vertical-align: middle;" /><span style='color: White;'><label for="cb_type3">三类　&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/ico3_new.png' /></label></span>&nbsp;(<span id='three_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_new" type="checkbox" checked=checked checked=checked checked=checked checked=checked style="vertical-align: middle;" /><span style='color: White;'>
+                <label for="cb_new">
+                    新上报&nbsp;<img style='width: 20px; height: 20px;'
+                                  align="absmiddle" src='/Common/MGIS/img/new0.png' />
+                </label>
+            </span>&nbsp;(<span id='new_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_sure" type="checkbox" checked=checked checked=checked checked=checked checked=checked style="vertical-align: middle;" /><span style='color: White;'>
+                <label for="cb_sure">已确认&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/sure0.png' /></label>
+            </span>&nbsp;(<span id='sure_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_plan" type="checkbox" style="vertical-align: middle;" /><span style='color: White;'>
+                <label for="cb_plan">已计划&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/plan0.png' /></label>
+            </span>&nbsp;(<span id='plan_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_check" type="checkbox" style="vertical-align: middle;" /><span style='color: White;'>
+                <label for="cb_check">检修中&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/check0.png' /></label>
+            </span>&nbsp;(<span id='check_number'>0</span>)
+        </div>
+        <div>
+            <input id="cb_close" type="checkbox" style="vertical-align: middle;" /><span style='color: White;'>
+                <label for="cb_close">已关闭&nbsp;<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/close0.png' /></label>
+            </span>&nbsp;(<span id='close_number'>0</span>)
+        </div>
+        <!--   <div>
+            <input id="cb_type4" type="checkbox" style="vertical-align: middle;" /><span style='color: White;'><label
+                for="cb_type4">处理<img style='width: 20px; height: 20px;' align="absmiddle" src='/Common/MGIS/img/ico4.png'></label></span>(<span
+                    id='wc_number'></span>)
+        </div>-->
+    </div>
+    <div id="C3Alarm" style="display: none; position: absolute; top: 0px; right: 5px;
+        z-index: 9990; background-color: #333333;">
+        <div style="position: absolute; left: -25px; top: 10px;">
+            <a href="#" onclick="ColseC3AlarmInfo()" style="font-size: 30px; color: White;">X</a>
+        </div>
+        <div id='C3Alarm_1' style="overflow-y: auto; overflow-x: hidden;">
+            <div class="box-content">
+                <div id="tablejbxx">
+                    <table class="table1" id="tableinfo" style="color: White;">
+                        <tr>
+                            <td colspan="2">
+                                设备编号：<strong><span id="trainNo"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                时间：<strong><span id="raised_time"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                地点：<strong><span id="WZ"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                报警温度：<strong><span id="wendu"></span><span>℃</span></strong>
+                            </td>
+                            <td style="">
+                                环境温度：<strong><span id="hjwendu"></span><span>℃</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                导高值：<strong><span id="dgz"></span><span>mm</span></strong>
+                            </td>
+                            <td>
+                                拉出值：<strong><span id="lcz"></span><span>mm</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%;">
+                                速度：<strong><span id="sudu"></span><span>km/h </span></strong>
+                            </td>
+                            <td style="width: 50%;">
+                                弓位置：<strong><span id="BOW_TYPE"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                报警级别：<strong> <span id="severity"></span></strong>
+                            </td>
+                            <td>
+                                报警状态：<strong><span id="status"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" colspan="2">
+                                报警类型：<strong> <span id="SUMMARYDIC"></span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <input type="submit" name="E_btnOk2" value="报警确认" id="E_btnOk2" title="确认疑似缺陷属实"
+                                       class="btn btn-primary " />
+                                <input type="submit" name="E_btnCan2" value="报警取消" id="E_btnCan2" title="疑似缺陷属于误报，取消该缺陷显示"
+                                       class="btn btn-primary" />
+
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                报警分析： <strong><span id="txtDefect"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                处理建议： <strong><span id="txtAdvice"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                备注： <strong><span id="txtNote"></span></strong><a href="#" onclick="Map()">
+                                    <img src='/Common/img/roll.gif' />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 300px">
+                                报告人：<strong><span id="txtReporter"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                报告日期： <strong><span id="reportdate"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                设备厂商：<strong><span id="vendor"></span> </strong>线路：<strong>
+                                    <span id="wwdw"></span>
+                                </strong>
+                            </td>
+                            <td>
+                                区站：<strong><span id="QZ"></span> </strong>
+                            </td>
+                            <td>
+                                桥隧：<strong><span id="brige"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                杆号：<strong><span id="pole_number"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="display: none">
+                                供电段： <strong><span id="GDD"></span></strong>
+                            </td>
+                            <td style="display: none">
+                                供电车间：<strong><span id="CJ"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                供电班组：<strong><span id="BZ"></span> </strong>
+                            </td>
+                            <td style="width: 200px; display: none">
+                                公里标：<strong><span id="km_mark"></span></strong> 状态变化时间：<strong>
+                                    <span id="status_time"></span>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr id="jltr" style="display: none;">
+                            <td style="width: 100px">
+                                交路号：<strong><span id="jlh"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                运用区段：<strong><span id="crossing_no"></span></strong> 线路：<strong>
+                                    <span id="line_code"></span>
+                                </strong>车站：<strong><span id="STATION_NO"></span> </strong>
+                                <input id="taskid" type="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="text-align: center; z-index: 9999; display: none">
+                <div id="irvAA">
+                </div>
+            </div>
+        </div>
+        <div id='C3Alarm_2'>
+            <img src='' id="hw" />
+        </div>
+        <div id='C3Alarm_3'>
+            <img src='' id="kjg" />
+        </div>
+        <div id='C3Alarm_4'>
+            <div id="linechart" style="background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+        </div>
+    </div>
+    <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+    </a>
+
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span>
+        </div>
+    </div>
+    <div class="main">
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 930px; text-align: center; z-index: 1" id="orBmapDiv">
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+<script>
+    $(function () {
+        LoadSureBox('3C', GetQueryString("alarmid"))
+    })
+
+</script>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="03/17/2014 16:11:01" ReportInfo.Modified="01/14/2015 10:13:20" ReportInfo.CreatorVersion="2013.3.9.0">
+  <Dictionary>
+    <OdbcDataConnection Name="Connection" ConnectionString="rijcmlqfx2VUYw2/JorAcejEds9Avo3uG6CFY+G0PRwT/SwNGg=">
+      <TableDataSource Name="Table" Alias="Severity" DataType="System.Int32" Enabled="true" SelectCommand="select SEVERITY,count(ID) from ALARM where to_char(RAISED_TIME,'yyyy-MM-dd') ='2013-12-11' group by SEVERITY ">
+        <Column Name="SEVERITY" DataType="System.String"/>
+        <Column Name="COUNT(ID)" DataType="System.Double"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="Status" DataType="System.Int32" Enabled="true" SelectCommand="select (select CODE_NAME from SYS_DIC where DIC_CODE=t1.STATUS) as STATUS,count(ID) from ALARM t1 &#13;&#10;where to_char(RAISED_TIME,'yyyy-MM-dd') ='2013-12-11' group by STATUS">
+        <Column Name="STATUS" DataType="System.String"/>
+        <Column Name="COUNT(ID)" DataType="System.Double"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" Alias="Summary" DataType="System.Int32" Enabled="true" SelectCommand="select case when SUMMARY is null then '新上报' else SUMMARY end as SUMMARY,count(ID) from ALARM t1 &#13;&#10;where to_char(RAISED_TIME,'yyyy-MM-dd') ='2013-12-11' group by t1.SUMMARY">
+        <Column Name="SUMMARY" DataType="System.String"/>
+        <Column Name="COUNT(ID)" DataType="System.Double"/>
+      </TableDataSource>
+      <TableDataSource Name="Table3" Alias="DetailDataSet" DataType="System.Int32" Enabled="true" SelectCommand="select ID,&#13;&#10;       (select LINE_NAME from MIS_LINE where LINE_CODE = t.LINE_CODE) as LINE_NAME,&#13;&#10;       (select POSITION_NAME&#13;&#10;          from MIS_POSITION&#13;&#10;         where POSITION_CODE = t.POSITION_CODE) as POSITION_NAME,&#13;&#10;       (select substation_name&#13;&#10;          from mis_substation&#13;&#10;         where substation_code = t.substation_code) as SUBSTATION_NAME,&#13;&#10;         t.direction,&#13;&#10;       t.power_device_code,case when ('K' || FLOOR(t.KM_MARK / 1000) || '+' || MOD(t.KM_MARK, 1000))='K+' then '' else ('K' || FLOOR(t.KM_MARK / 1000) || '+' || MOD(t.KM_MARK, 1000)) end as KM_MARK,&#13;&#10;       POLE_NUMBER,&#13;&#10;       RAISED_TIME,&#13;&#10;       t.repair_date,&#13;&#10;       t.report_person,&#13;&#10;       SEVERITY,&#13;&#10;       (select CODE_NAME from SYS_DIC where DIC_CODE = t.CODE) as SUMMARY,&#13;&#10;       (select CODE_NAME from SYS_DIC where DIC_CODE = t.STATUS) as STATUS,&#13;&#10;       DETECT_DEVICE_CODE,&#13;&#10;       CROSSING_NO,&#13;&#10;       (select AREA_SECTION from ROUTING where ROUTING_NO = t.CROSSING_NO) as AREA_SECTION,&#13;&#10;       BRIDGE_TUNNEL_NO,&#13;&#10;       (select brg_tun_name from mis_brg_tun where brg_tun_code=t.BRIDGE_TUNNEL_NO) as brg_tun_name,&#13;&#10;       GIS_X,&#13;&#10;       GIS_Y,&#13;&#10;       NVALUE1,&#13;&#10;       NVALUE2,&#13;&#10;       NVALUE5,&#13;&#10;       NVALUE3,&#13;&#10;       NVALUE4,DETAIL,'' as ZY,'' as WZ,&#13;&#10;       (select ORG_NAME from TSYS_ORG where ORG_CODE = t.BUREAU_CODE) as BUREAU,&#13;&#10;       (select ORG_NAME from TSYS_ORG where ORG_CODE = t.power_section_code) as GDDUAN,&#13;&#10;       (select ORG_NAME from TSYS_ORG where ORG_CODE = t.p_org_code) as DUAN,&#13;&#10;       (select ORG_NAME from TSYS_ORG where ORG_CODE = t.workshop_code) as CJ,&#13;&#10;       (select ORG_NAME from TSYS_ORG where ORG_CODE = t.ORG_CODE) as BZ&#13;&#10;  from ALARM t&#13;&#10; where category_code = '1C'&#13;&#10; order by RAISED_TIME desc&#13;&#10;">
+        <Column Name="LINE_NAME" DataType="System.String"/>
+        <Column Name="POSITION_NAME" DataType="System.String"/>
+        <Column Name="KM_MARK" DataType="System.String"/>
+        <Column Name="POLE_NUMBER" DataType="System.String"/>
+        <Column Name="RAISED_TIME" DataType="System.DateTime"/>
+        <Column Name="SEVERITY" DataType="System.String"/>
+        <Column Name="SUMMARY" DataType="System.String"/>
+        <Column Name="STATUS" DataType="System.String"/>
+        <Column Name="DETECT_DEVICE_CODE" DataType="System.String"/>
+        <Column Name="CROSSING_NO" DataType="System.String"/>
+        <Column Name="AREA_SECTION" DataType="System.String"/>
+        <Column Name="BRIDGE_TUNNEL_NO" DataType="System.String"/>
+        <Column Name="GIS_X" DataType="System.Decimal"/>
+        <Column Name="GIS_Y" DataType="System.Decimal"/>
+        <Column Name="NVALUE1" DataType="System.Decimal"/>
+        <Column Name="NVALUE5" DataType="System.Decimal"/>
+        <Column Name="NVALUE3" DataType="System.Decimal"/>
+        <Column Name="NVALUE4" DataType="System.Decimal"/>
+        <Column Name="BUREAU" DataType="System.String"/>
+        <Column Name="DUAN" DataType="System.String"/>
+        <Column Name="CJ" DataType="System.String"/>
+        <Column Name="BZ" DataType="System.String"/>
+        <Column Name="GDDUAN" DataType="System.String"/>
+        <Column Name="NVALUE2" DataType="System.Decimal"/>
+        <Column Name="ID" DataType="System.String"/>
+        <Column Name="SUBSTATION_NAME" DataType="System.String"/>
+        <Column Name="DIRECTION" DataType="System.String"/>
+        <Column Name="POWER_DEVICE_CODE" DataType="System.String"/>
+        <Column Name="REPAIR_DATE" DataType="System.DateTime"/>
+        <Column Name="REPORT_PERSON" DataType="System.String"/>
+        <Column Name="BRG_TUN_NAME" DataType="System.String"/>
+        <Column Name="DETAIL" DataType="System.String"/>
+        <Column Name="ZY" DataType="System.String"/>
+        <Column Name="WZ" DataType="System.String"/>
+      </TableDataSource>
+    </OdbcDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="340" PaperHeight="250" FirstPageSource="15" OtherPagesSource="15">
+    <ReportTitleBand Name="ReportTitle1" Width="1209.6" Height="189">
+      <MSChartObject Name="MSChart1" Left="9.45" Width="378" Height="189" DataSource="Table" ChartData="PENoYXJ0IEJvcmRlcmxpbmVDb2xvcj0iRGFya0dyYXkiIEJvcmRlcmxpbmVXaWR0aD0iMiIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0iU2VyaWVzMSIgTGVnZW5kPSJEZWZhdWx0IiBYVmFsdWVUeXBlPSJTdHJpbmciIFlWYWx1ZVR5cGU9IkRvdWJsZSIgQ2hhcnRUeXBlPSJQaWUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgTGFiZWw9IiNWQUxYOiAjVkFMWSIgQ3VzdG9tUHJvcGVydGllcz0iUGllTGFiZWxTdHlsZT1EaXNhYmxlZCI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIzIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMiIgQXhpc0xhYmVsPSJDIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjQiIEF4aXNMYWJlbD0iRCIgLz4NCiAgICAgIDwvUG9pbnRzPg0KICAgIDwvU2VyaWVzPg0KICA8L1Nlcmllcz4NCiAgPExlZ2VuZHM+DQogICAgPExlZ2VuZCBOYW1lPSJEZWZhdWx0IiBJc0RvY2tlZEluc2lkZUNoYXJ0QXJlYT0iRmFsc2UiPg0KICAgIDwvTGVnZW5kPg0KICA8L0xlZ2VuZHM+DQogIDxUaXRsZXM+DQogICAgPFRpdGxlIE5hbWU9IlRpdGxlMSIgSXNEb2NrZWRJbnNpZGVDaGFydEFyZWE9IkZhbHNlIiBUZXh0PSLnvLrpmbfnuqfliKsiIEZvbnQ9Ik1pY3Jvc29mdCBTYW5zIFNlcmlmLCAxNS43NXB0LCBzdHlsZT1Cb2xkLCBHZGlDaGFyU2V0PTAiPg0KICAgIDwvVGl0bGU+DQogIDwvVGl0bGVzPg0KICA8Q2hhcnRBcmVhcz4NCiAgICA8Q2hhcnRBcmVhIE5hbWU9IkRlZmF1bHQiPg0KICAgICAgPEF4aXNZPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICA8L0F4aXNZPg0KICAgICAgPEF4aXNYPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICA8L0F4aXNYPg0KICAgICAgPEF4aXNYMj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY0LCA2NCwgNjQsIDY0IiAvPg0KICAgICAgPC9BeGlzWDI+DQogICAgICA8QXhpc1kyPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICA8L0F4aXNZMj4NCiAgICA8L0NoYXJ0QXJlYT4NCiAgPC9DaGFydEFyZWFzPg0KICA8Qm9yZGVyU2tpbiBTa2luU3R5bGU9IkVtYm9zcyIgLz4NCjwvQ2hhcnQ+">
+        <MSChartSeries Name="Series2" XValue="[Severity.SEVERITY]" YValue1="[Severity.COUNT(ID)]"/>
+      </MSChartObject>
+      <MSChartObject Name="MSChart2" Left="404.35" Width="378" Height="189" DataSource="Table2" ChartData="PENoYXJ0IEJvcmRlcmxpbmVDb2xvcj0iRGFya0dyYXkiIEJvcmRlcmxpbmVXaWR0aD0iMiIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0iU2VyaWVzMSIgTGVnZW5kPSJEZWZhdWx0IiBYVmFsdWVUeXBlPSJTdHJpbmciIFlWYWx1ZVR5cGU9IkRvdWJsZSIgQ2hhcnRUeXBlPSJQaWUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgTGFiZWw9IiNWQUxYOiAjVkFMWSIgQ3VzdG9tUHJvcGVydGllcz0iUGllTGFiZWxTdHlsZT1EaXNhYmxlZCI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIzIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMiIgQXhpc0xhYmVsPSJDIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjQiIEF4aXNMYWJlbD0iRCIgLz4NCiAgICAgIDwvUG9pbnRzPg0KICAgIDwvU2VyaWVzPg0KICA8L1Nlcmllcz4NCiAgPExlZ2VuZHM+DQogICAgPExlZ2VuZCBOYW1lPSJEZWZhdWx0Ij4NCiAgICA8L0xlZ2VuZD4NCiAgPC9MZWdlbmRzPg0KICA8VGl0bGVzPg0KICAgIDxUaXRsZSBOYW1lPSJUaXRsZTEiIFRleHQ9Iue8uumZt+exu+WeiyIgRm9udD0iTWljcm9zb2Z0IFNhbnMgU2VyaWYsIDE1Ljc1cHQsIHN0eWxlPUJvbGQsIEdkaUNoYXJTZXQ9MCI+DQogICAgPC9UaXRsZT4NCiAgPC9UaXRsZXM+DQogIDxDaGFydEFyZWFzPg0KICAgIDxDaGFydEFyZWEgTmFtZT0iRGVmYXVsdCI+DQogICAgICA8QXhpc1k+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1k+DQogICAgICA8QXhpc1g+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1g+DQogICAgICA8QXhpc1gyPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICA8L0F4aXNYMj4NCiAgICAgIDxBeGlzWTI+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1kyPg0KICAgIDwvQ2hhcnRBcmVhPg0KICA8L0NoYXJ0QXJlYXM+DQogIDxCb3JkZXJTa2luIFNraW5TdHlsZT0iRW1ib3NzIiAvPg0KPC9DaGFydD4=">
+        <MSChartSeries Name="Series3" XValue="[Summary.SUMMARY]" YValue1="[Summary.COUNT(ID)]"/>
+      </MSChartObject>
+      <MSChartObject Name="MSChart3" Left="796.25" Width="378" Height="189" DataSource="Table1" ChartData="PENoYXJ0IEJvcmRlcmxpbmVDb2xvcj0iRGFya0dyYXkiIEJvcmRlcmxpbmVXaWR0aD0iMiIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0iU2VyaWVzMSIgTGVnZW5kPSJEZWZhdWx0IiBYVmFsdWVUeXBlPSJTdHJpbmciIFlWYWx1ZVR5cGU9IkRvdWJsZSIgQ2hhcnRUeXBlPSJQaWUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgTGFiZWw9IiNWQUxYOiAjVkFMWSIgQ3VzdG9tUHJvcGVydGllcz0iUGllTGFiZWxTdHlsZT1EaXNhYmxlZCI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIzIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMiIgQXhpc0xhYmVsPSJDIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjQiIEF4aXNMYWJlbD0iRCIgLz4NCiAgICAgIDwvUG9pbnRzPg0KICAgIDwvU2VyaWVzPg0KICA8L1Nlcmllcz4NCiAgPExlZ2VuZHM+DQogICAgPExlZ2VuZCBOYW1lPSJEZWZhdWx0Ij4NCiAgICA8L0xlZ2VuZD4NCiAgPC9MZWdlbmRzPg0KICA8VGl0bGVzPg0KICAgIDxUaXRsZSBOYW1lPSJUaXRsZTEiIFRleHQ9Iue8uumZt+eKtuaAgSIgRm9udD0iTWljcm9zb2Z0IFNhbnMgU2VyaWYsIDE1Ljc1cHQsIHN0eWxlPUJvbGQsIEdkaUNoYXJTZXQ9MCI+DQogICAgPC9UaXRsZT4NCiAgPC9UaXRsZXM+DQogIDxDaGFydEFyZWFzPg0KICAgIDxDaGFydEFyZWEgTmFtZT0iRGVmYXVsdCI+DQogICAgICA8QXhpc1k+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1k+DQogICAgICA8QXhpc1g+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1g+DQogICAgICA8QXhpc1gyPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjQsIDY0LCA2NCwgNjQiIC8+DQogICAgICA8L0F4aXNYMj4NCiAgICAgIDxBeGlzWTI+DQogICAgICAgIDxNYWpvckdyaWQgTGluZUNvbG9yPSI2NCwgNjQsIDY0LCA2NCIgLz4NCiAgICAgIDwvQXhpc1kyPg0KICAgIDwvQ2hhcnRBcmVhPg0KICA8L0NoYXJ0QXJlYXM+DQogIDxCb3JkZXJTa2luIFNraW5TdHlsZT0iRW1ib3NzIiAvPg0KPC9DaGFydD4=">
+        <MSChartSeries Name="Series4" XValue="[Status.STATUS]" YValue1="[Status.COUNT(ID)]"/>
+      </MSChartObject>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="193" Width="1209.6" Height="18.9">
+      <TextObject Name="Text1" Left="198.45" Width="103.95" Height="18.9" Border.Lines="All" Text="发生时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="66.15" Width="132.3" Height="18.9" Border.Lines="All" Text="位置信息" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="992.25" Width="85.05" Height="18.9" Border.Lines="All" Text="段" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="1077.3" Width="94.5" Height="18.9" Border.Lines="All" Text="局" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Width="66.15" Height="18.9" Border.Lines="All" Text="线路" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="302.4" Width="255.15" Height="18.9" Border.Lines="All" Text="摘要" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="557.55" Width="75.6" Height="18.9" Border.Lines="All" Text="缺陷类型" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="699.3" Width="56.7" Height="18.9" Border.Lines="All" Text="状态" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text16" Left="756" Width="122.85" Height="18.9" Border.Lines="All" Text="工区" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="878.85" Width="113.4" Height="18.9" Border.Lines="All" Text="车间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text45" Left="633.15" Width="66.15" Height="18.9" Border.Lines="All" Text="缺陷级别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="215.9" Width="1209.6" Height="28.35" DataSource="Table3">
+      <TextObject Name="Text23" Left="198.45" Width="103.95" Height="28.35" Border.Lines="All" Text="[DetailDataSet.RAISED_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text27" Left="66.15" Width="132.3" Height="28.35" Border.Lines="All" Text="[DetailDataSet.WZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text28" Left="992.25" Width="85.05" Height="28.35" Border.Lines="All" Text="[DetailDataSet.GDDUAN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text29" Left="1077.3" Width="94.5" Height="28.35" Border.Lines="All" Text="[DetailDataSet.BUREAU]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text31" Width="66.15" Height="28.35" Border.Lines="All" Text="[DetailDataSet.LINE_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text35" Left="302.4" Width="255.15" Height="28.35" Border.Lines="All" Text="[DetailDataSet.ZY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text36" Left="557.55" Width="75.6" Height="28.35" Border.Lines="All" Text="[DetailDataSet.SUMMARY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text37" Left="699.3" Width="56.7" Height="28.35" Border.Lines="All" Text="[DetailDataSet.STATUS]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text38" Left="756" Width="122.85" Height="28.35" Border.Lines="All" Text="[DetailDataSet.BZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text39" Left="878.85" Width="113.4" Height="28.35" Border.Lines="All" Text="[DetailDataSet.CJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text46" Left="633.15" Width="66.15" Height="28.35" Border.Lines="All" Text="[DetailDataSet.SEVERITY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

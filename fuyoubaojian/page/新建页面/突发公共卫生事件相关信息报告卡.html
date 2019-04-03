@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>突发公共卫生事件相关信息报告卡</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/maternal/tfggwssjxgxxbgk.css">
+    <!-- 独自样式 -->
+
+
+</head>
+
+<body>
+    <div class="mainBox">
+        <form id="signupForm">
+            <div class="cdct_tableTitle">突发公共卫生事件相关信息报告卡</div>
+            <div class="cdct_row cdct_row1_col1 cdct_clearfix">
+                <div class="">
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="FMFS1" type="radio" name="FMFS" value="">
+                        <label for="FMFS1">初步报告</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="FMFS2" type="radio" name="FMFS" value="">
+                        <label for="FMFS2">进程报告</label>
+                        <input class="cdct_input input86" id="" type="text" name="" value="">
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="FMFS3" type="radio" name="FMFS" value="">
+                        <label for="FMFS3">结案报告</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scrollJS">
+                <div class="z-Box">
+                    <!-- 报告单位 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">报告单位</span>
+                            </div>
+                            <div class="cdct_info noPl longW">
+                                <div data-selectsimu="1" class="cdct_select">
+                                    <div class="selectBox">
+                                        <span data-selectnew="1" class="checkspan">
+                                            <span class="optD">
+                                                <span class="fontMain"></span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </span>
+                                        <div class="ulParent">
+                                            <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                    <span class="optD">
+                                                        <span class="fontMain"></span>
+                                                    </span>
+                                                    <span class="selectDown"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">填报时间</span>
+                            </div>
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择填报时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 性别 -->
+
+                    <!-- 报告人 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">报告人</span>
+                            </div>
+                            <div class="cdct_info cdct_relative">
+                                <input name="firstname3" class="cdct_inputNone " placeholder="报告人" required>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">联系电话</span>
+                            </div>
+                            <div class="cdct_info cdct_relative">
+                                <input name="firstname3" class="cdct_inputNone" placeholder="联系电话" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 联系电话 -->
+
+                    <!-- 事件名称 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">事件名称</span>
+                            </div>
+                            <div class="cdct_info cdct_relative">
+                                <input name="firstname3" class="cdct_inputNone" placeholder="事件名称" required>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">信息类别</span>
+                            </div>
+                            <div class="cdct_info noPl longW">
+                                <div data-selectsimu="1" class="cdct_select">
+                                    <div class="selectBox">
+                                        <span data-selectnew="1" class="checkspan">
+                                            <span class="optD">
+                                                <span class="fontMain"></span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </span>
+                                        <div class="ulParent">
+                                            <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                    <span class="optD">
+                                                        <span class="fontMain"></span>
+                                                    </span>
+                                                    <span class="selectDown"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 信息类别 -->
+
+                    <!-- 突发事件等级 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">突发事件等级</span>
+                        </div>
+                        <div class="cdct_info noPl longW">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain"></span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain"></span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 突发事件等级 -->
+
+                    <!-- 初步诊断 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">初步诊断</span>
+                            </div>
+                            <div class="cdct_info noPl longW">
+                                <div data-selectsimu="1" class="cdct_select">
+                                    <div class="selectBox">
+                                        <span data-selectnew="1" class="checkspan">
+                                            <span class="optD">
+                                                <span class="fontMain"></span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </span>
+                                        <div class="ulParent">
+                                            <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                    <span class="optD">
+                                                        <span class="fontMain"></span>
+                                                    </span>
+                                                    <span class="selectDown"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">初步诊断时间</span>
+                            </div>
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择初步诊断时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 初步诊断 -->
+
+                    <!-- 订正诊断 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">订正诊断</span>
+                            </div>
+                            <div class="cdct_info noPl longW">
+                                <div data-selectsimu="1" class="cdct_select">
+                                    <div class="selectBox">
+                                        <span data-selectnew="1" class="checkspan">
+                                            <span class="optD">
+                                                <span class="fontMain"></span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </span>
+                                        <div class="ulParent">
+                                            <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                    <span class="optD">
+                                                        <span class="fontMain"></span>
+                                                    </span>
+                                                    <span class="selectDown"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">订正诊断时间</span>
+                            </div>
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择订正诊断时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 订正诊断 -->
+
+                    <!-- 确定分级时间 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">确定分级时间</span>
+                            </div>
+
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择确定分级时间">
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">订正分级时间</span>
+                            </div>
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择订正分级时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 订正分级时间 -->
+
+
+                    <!-- 报告地址 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">报告地址</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">省</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">省</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">市</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">市</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">区/县</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">区/县</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">镇</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">镇</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 报告地址 -->
+
+
+                    <!-- 发生地区 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">发生地区</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">省</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">省</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">市</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">市</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">区/县</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">区/县</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">镇</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">镇</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 发生地区 -->
+                    <!-- 详细地点 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit">详细地点</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"
+                                data-pmtnum="50" data-pmttextarea="1">
+                                <textarea class="cdct_textarea zareaHei48" placeholder="请输入您的意见" aria-invalid="false"></textarea>
+                                <div data-pmttextshow="1" style="position: absolute;bottom: 0;right: 20px;">
+                                    <div style="float:right">
+                                        <span style="color:#2da1f8;">0字</span>/
+                                        <span style="color:#7f8fa4;padding-left:0px;">50字</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 详细地点 -->
+
+                    <!-- 事件发生场所 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">事件发生场所</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_sjf1" type="checkbox">
+                                <label for="chk_sjf1">学校【类别:</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_sjf2" type="checkbox">
+                                <label for="chk_sjf2">托幼机构</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_sjf3" type="checkbox">
+                                <label for="chk_sjf3">小学</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_sjf4" type="checkbox">
+                                <label for="chk_sjf4">中学</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_sjf5" type="checkbox">
+                                <label for="chk_sjf5">大/中专院校</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf6" type="checkbox">
+                                    <label for="chk_sjf6">综合类学校</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf7" type="checkbox">
+                                    <label for="chk_sjf7">其他】</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf8" type="checkbox">
+                                    <label for="chk_sjf8">医疗卫生机构【（1）类别：</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf9" type="checkbox">
+                                    <label for="chk_sjf9">公共医疗机构</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf10" type="checkbox">
+                                    <label for="chk_sjf10">疾病预防控制机构</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf11" type="checkbox">
+                                    <label for="chk_sjf11">采供血机构</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf12" type="checkbox">
+                                    <label for="chk_sjf12">检验检疫机构</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf13" type="checkbox">
+                                    <label for="chk_sjf13">其它及私立机构   </label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <span>（2）感染部门：</span>
+                                    <input id="chk_sjf14" type="checkbox">
+                                    <label for="chk_sjf14">病房</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf15" type="checkbox">
+                                    <label for="chk_sjf15">手术室</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf16" type="checkbox">
+                                    <label for="chk_sjf16">门诊</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf17" type="checkbox">
+                                    <label for="chk_sjf17">化验室</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf18" type="checkbox">
+                                    <label for="chk_sjf18">药房</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf19" type="checkbox">
+                                    <label for="chk_sjf19">办公室</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf20" type="checkbox">
+                                    <label for="chk_sjf20">治疗室</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf21" type="checkbox">
+                                    <label for="chk_sjf21">特殊检查室</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf22" type="checkbox">
+                                    <label for="chk_sjf22">其它场所】</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf23" type="checkbox">
+                                    <label for="chk_sjf23">家庭</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf24" type="checkbox">
+                                    <label for="chk_sjf24">宾馆饭店写字楼</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf25" type="checkbox">
+                                    <label for="chk_sjf25">餐饮服务单位</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf26" type="checkbox">
+                                    <label for="chk_sjf26">交通运输工具</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf27" type="checkbox">
+                                    <label for="chk_sjf27">菜场、商场或超市</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf28" type="checkbox">
+                                    <label for="chk_sjf28">车站/码头或机场</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf29" type="checkbox">
+                                    <label for="chk_sjf29">党政机关办公场所</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf30" type="checkbox">
+                                    <label for="chk_sjf30">企事业单位办公场所</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf31" type="checkbox">
+                                    <label for="chk_sjf31">大型厂矿企业生产场所</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf32" type="checkbox">
+                                    <label for="chk_sjf32">中小型厂矿企业生产场所</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf33" type="checkbox">
+                                    <label for="chk_sjf33">城市住宅小区</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf34" type="checkbox">
+                                    <label for="chk_sjf34">城市其它公共场所</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf35" type="checkbox">
+                                    <label for="chk_sjf35">农村村庄</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf36" type="checkbox">
+                                    <label for="chk_sjf36">农村农田野外</label>
+                                </div>
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_sjf37" type="checkbox">
+                                    <label for="chk_sjf37">其它重要公共场所</label>
+                                </div>
+                                
+                        </div>
+                    </div>
+                    <!-- 事件发生场所 -->
+
+ <!-- 事件信息来源 -->
+ <div class="cdct_row cdct_row1_col2">
+        <div class="cdct_txt">
+            <span class="cdct_tit ">事件信息来源</span>
+        </div>
+        <div class="cdct_info">
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly1" type="checkbox">
+                <label for="chk_sjxxly1">属地医疗机构</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly2" type="checkbox">
+                <label for="chk_sjxxly2">外地医疗机构</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly3" type="checkbox">
+                <label for="chk_sjxxly3">报纸</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly4" type="checkbox">
+                <label for="chk_sjxxly4">电视</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly5" type="checkbox">
+                <label for="chk_sjxxly5">特服务号电话95120</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly6" type="checkbox">
+                <label for="chk_sjxxly6">互联网</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly7" type="checkbox">
+                <label for="chk_sjxxly7">市民电话报告</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly8" type="checkbox">
+                <label for="chk_sjxxly8">上门直接报告</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly9" type="checkbox">
+                <label for="chk_sjxxly9">本系统自动预警产生</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly10" type="checkbox">
+                <label for="chk_sjxxly10">广播</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly11" type="checkbox">
+                <label for="chk_sjxxly11">填报单位人员目睹</label>
+            </div>
+            <div class="cdct_chk cdct_chk_suc">
+                <input id="chk_sjxxly12" type="checkbox">
+                <label for="chk_sjxxly12">其它</label>
+            </div>
+        </div>
+    </div>
+    <!-- 事件信息来源 -->
+
+                    <!-- 事件信息来源详细 -->
+                    <div class="cdct_row cdct_row1_col2 h99">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit">事件信息来源详细</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"
+                                data-pmtnum="300" data-pmttextarea="1">
+                                <textarea class="cdct_textarea" placeholder="事件信息来源详细"></textarea>
+                                <div data-pmttextshow="1" class="cdct_textareaInfo">
+                                    <div style="float:right">
+                                        <span style="color:#2da1f8;">0字</span>/
+                                        <span style="color:#7f8fa4;padding-left:0px;">300字</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 事件信息来源详细 -->
+
+                    <!-- 事件波及的地域范围 -->
+                    <div class="cdct_row cdct_row1_col2 h99">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit">事件波及的地域范围</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"
+                                data-pmtnum="300" data-pmttextarea="1">
+                                <textarea class="cdct_textarea" placeholder="事件波及的地域范围"></textarea>
+                                <div data-pmttextshow="1" class="cdct_textareaInfo">
+                                    <div style="float:right">
+                                        <span style="color:#2da1f8;">0字</span>/
+                                        <span style="color:#7f8fa4;padding-left:0px;">300字</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 事件波及的地域范围 -->
+
+
+
+                    <!-- 新报告病例子数 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">新报告病例子数</span>
+                            </div>
+                            <div class="cdct_info">
+                                <label class="cdct_inputLable">
+                                    <input type="text" class="cdct_inputLine cdct_line126">人</label>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">新报告死亡数</span>
+                            </div>
+                            <div class="cdct_info">
+                                <label class="cdct_inputLable">
+                                    <input type="text" class="cdct_inputLine cdct_line126">人</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 新报告病例子数 -->
+
+                    <!-- 排除病例数 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">排除病例数</span>
+                            </div>
+                            <div class="cdct_info">
+                                <label class="cdct_inputLable">
+                                    <input type="text" class="cdct_inputLine cdct_line126">人</label>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">累计告病例数</span>
+                            </div>
+                            <div class="cdct_info">
+                                <label class="cdct_inputLable">
+                                    <input type="text" class="cdct_inputLine cdct_line126">例</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 累计告病例数 -->
+
+                    <!-- 累计报告死亡数 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">累计报告死亡数</span>
+                            </div>
+                            <div class="cdct_info">
+                                <label class="cdct_inputLable">
+                                    <input type="text" class="cdct_inputLine cdct_line126">人</label>
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">事件发生时间</span>
+                            </div>
+
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 累计告病例数 -->
+
+                    <!-- 接到报告时间 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">接到报告时间</span>
+                            </div>
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择时间">
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">首例病人发病时间</span>
+                            </div>
+
+                            <div class="cdct_info " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择时间">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 首例病人发病时间 -->
+
+                    <!-- 末例病人发病时间 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit">末例病人发病时间</span>
+                        </div>
+                        <div class="cdct_info " data-tableSelect="1">
+                            <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择时间">
+                        </div>
+
+                    </div>
+                    <!-- 末例病人发病时间 -->
+
+
+
+                    <!-- 主要症状 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">主要症状</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc1" type="checkbox">
+                                <label for="chk_suc1">呼吸道症状</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc2" type="checkbox">
+                                <label for="chk_suc2">胃肠道症状</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc3" type="checkbox">
+                                <label for="chk_suc3">神经系统症状</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc4" type="checkbox">
+                                <label for="chk_suc4">皮肤黏膜症状</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc5" type="checkbox">
+                                <label for="chk_suc5">精神症状</label>
+                            </div>
+                            <div class="cdct_chk cdct_chk_suc">
+                                <input id="chk_suc6" type="checkbox">
+                                <label for="chk_suc6">其他</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 主要症状 -->
+
+
+
+
+                    <!-- 主要体征 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit ">主要体征</span>
+                            </div>
+                            <div class="cdct_info">
+                                <input type="text" class="cdct_inputNone " placeholder="主要体征">
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit ">主要措施与效果</span>
+                            </div>
+                            <div class="cdct_info">
+                                <input type="text" class="cdct_inputNone " placeholder="主要措施与效果">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 主要措施与效果 -->
+
+
+                    <!-- 检查人姓名 -->
+                    <div class="cdct_row cdct_row1_col2">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">检查人姓名</span>
+                        </div>
+                        <div class="cdct_info">
+                            <input type="text" class="cdct_inputNone " placeholder="检查人姓名">
+                        </div>
+                    </div>
+                    <!-- 检查人姓名 -->
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 文本域js -->
+    <script src="../../jsControl/textArea/textarea.min.js" type="text/javascript"></script>
+    <!-- 文本域js -->
+
+    <!-- 独自js -->
+    <script src="../../js/baseInfo.js" type="text/javascript"></script>
+</body>
+
+</html>

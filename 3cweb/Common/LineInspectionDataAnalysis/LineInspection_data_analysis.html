@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>硬盘数据播放</title>
+    <meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <!-- 放大镜 -->
+    <script src='/Lib/jquery.elevatezoom-2.5.5/jquery.elevatezoom.js' type="text/javascript" charset="utf-8"></script>
+    <script src="/Lib/Echarts-3.0/echarts.min.js" type="text/javascript"></script>
+    <script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+    <script src="/Lib/jcanvas/jcanvas.min.js"></script>
+
+    <script>
+        loadControl("jqueryUI_2");
+        loadControl("mySelectTree");
+        loadControl("layer");
+        loadControl("Validation");
+
+        //本页js css
+        loadJs("/Common/LineInspectionDataAnalysis/js/LineInspection_data_analysis.js?v=" + version, 'utf-8');
+        loadCss("/Common/LineInspectionDataAnalysis/css/LineInspection_data_analysis.css?v=" + version);
+    </script>
+</head>
+<body >
+    <!-- top title controler-->
+    <div class="controller">
+        <div class="controller_contentLeft"></div>
+        <div class="controller_contentRight"></div>
+        <div class="controller_content">
+            <div class="title_of_title">
+                <b class="title_font"></b>
+                <b class="title_font forLine"></b>
+                <span class="backToalarm" title="点击跳转">&nbsp;&lt;&lt;快速回到报警反生开始点</span>
+                <a href="#" onclick="window.close()" title="关闭">
+                    <img src="img/LineInspection_play_closseAll.png" alt="关闭" />
+                </a>
+            </div>
+            <div class="really_Ctrl_btn">
+              
+                <!--<a href="#" id="shotCut_btn"><img src="img/LineInspection_play_changeCut.png" alt="正反镜头" title="正反镜头" /></a>-->
+                <div class="LineInspection_button_play">
+                    <a id="btn_less"><img src="img/LineInspection_play_left.png" alt="前一帧" title="前一帧" /></a>
+                    <a id="btn_play" title="暂停"><img src="img/LineInspection_play_play.png" alt="暂停" /></a>
+                    <a id="btn_pause" title="播放"><img src="img/LineInspection_play_stop.png" alt="播放" /></a>
+                    <a id="btn_next"><img src="img/LineInspection_play_right.png" alt="后一帧" title="后一帧" /></a>
+                    <a id="btn_repeat"><img src="img/LineInspection_play_replay.png" alt="重播" title="重播" /></a>
+                    <a class="LineInspection_choose" title="清晰度">超清</a>
+                    <a class="LineInspection_choose_car carchoose" title="弓位置">3车</a>
+                </div>
+                
+                <div class="LineInspection_choose_UL">
+                    <div code="10">标清</div>
+                    <div code="50">高清</div>
+                    <div code="70">超清</div>
+                </div>
+                <div class="LineInspection_choose_carUL">
+                    <!--<div>6车</div>
+        <div>3车</div>
+        <div>12车</div>
+        <div>15车</div>-->
+                </div>
+                <a href="#" id='query_btn'>
+                    <img src="img/LineInspection_play_search.png" alt="查询" />
+                    <span>定&ensp;位</span>
+                </a>
+                <div class="LineInspection_contrl" style="position:relative;">
+                    <div id="Sms_slider"></div>
+                    <strong id="_Content">当前位置：<label id="_Content_Sta_Lab"></label></strong>
+                    <!--<strong id="_Content_End">&ensp;数据采集时间：<label id="_Content_end_Lab"></label></strong>-->
+                    <strong id="_Content_Pecent">当前进度：&ensp;<label id="_Content_Pecent_Lab"></label></strong>
+
+
+                </div>
+                
+                <a href="#" id="compara_btn">
+                    <img src="img/LineInspection_play_compara.png" alt="对比分析" />
+                    <span>对比分析</span>
+                </a>
+                <!--<a class="LineInspection_Subline" href="#">
+                    <img src="img/LineInspection_play_scaleplate.png" alt="是否开启标尺" title="" />
+                    <span>标尺</span>
+                </a>-->
+                <a class="LineInspection_exposure" href="#" style="display:none">
+                    <img src="img/LineInspection_play_baoguang.png" alt="是否曝光" title="" />
+                    <span>自动曝光</span>
+                </a>
+                <a class="LineInspection_Temp" href="#">
+                    <img src="img/LineInspection_play_Temp.png" alt="红外温度测量" title="" />
+                    <span>红外测温</span>
+                </a>
+                <a class="LineInspection_Magnifier" href="#">
+                    <img src="img/LineInspection_play_Magnifier.png" alt="启用/关闭放大" title="" />
+                    <span>放大镜</span>
+                </a>
+                <a class="LineInspection_details" href="#">
+                    <img src="img/LineInspection_play_DetailsClick.png" alt="详细信息" title="" />
+                    <span>详细信息</span>
+                </a>
+                <div class="LineInspection_choose_DetailsUL">
+                    <div class="Details_list_play list_ChooseOne">播放详情</div>
+                    <!--<div class="Details_list_alarm">报警列表</div>-->
+                    <div class="Details_list_linePolling ">检测列表</div>
+                </div>
+                <a class="LineInspection_Confirm" href="#" style="display:none">
+                    <img src="img/LineInspection_play_Confirm.png" alt="确认报警" />
+                    <span>确认报警</span>
+                </a>
+                <a id="E_btnOk2" style="display:none"></a>
+            </div>
+        </div>
+    </div>
+    <!--query-->
+    <div class="QueryBuilder">
+        <div id="QueryInside">
+            <div class="QueryTitle">
+                <div id="Q_by_time" class="Qtitle title_choosenot_one">按时间定位</div>
+                <div></div>
+                <div id="Q_by_loc" class="Qtitle title_choose_one">按位置定位</div>
+                <div></div>
+            </div>
+            <form id="linspForm">
+                <table>
+                    <tbody>
+                        <!--<tr class="qTime" style="display:none">
+                            <td width="100">
+                                开始时间：
+                            </td>
+                            <td>
+                                <input name="Ureportdate" type="text" id="startTime" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, isShowClear:false})">
+                            </td>
+                            <td width="110">
+                               
+                            </td>
+                            <td width="160">
+                               
+                            </td>
+                        </tr>-->
+                        <tr class="qLoc">
+                            <td>线&ensp;&ensp;&nbsp;&nbsp;&nbsp;路：</td>
+                            <td><input type="text" id="line_tree" value="" /></td>
+                            
+                            <td>
+                                行&ensp;&ensp;&nbsp;&nbsp;&nbsp;别：
+                            </td>
+                            <td>
+                                <input type="text" id="direction" />
+
+                                <!--<select id="direction" name="direction">
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="上行" >上行</option>
+                                    <option value="下行">下行</option>
+                                </select>-->
+                            </td>
+                        </tr>
+                        <tr class="qLoc">
+                            <td>
+                                区&ensp;&ensp;&nbsp;&nbsp;&nbsp;间：
+                            </td>
+                            <td>
+                                <input type="text" id="LineTreeselect" value="" />
+                                <!--<select id="LineTreeselect" name="direction"></select>-->
+                            </td>
+                            <td>桥&ensp;&ensp;&nbsp;&nbsp;&nbsp;隧：</td>
+                            <td><input type="text" id="BRIDGETUNE" value="" /></td>
+
+                            <td>
+                        </tr>
+                        <tr class="qLoc">
+                            <td>
+                                公&nbsp;里&ensp;标：
+                            </td>
+                            <td  id="KmChoose">
+                                <!--<input type="text" class="validate[custom[integerPositive],maxSize[7]]" id="kmStart" />至<input type="text" class="validate[custom[integerPositive],maxSize[7]]" id="kmEnd" />-->
+                                <input type="text" class="validate[custom[integerPositive],maxSize[8]]" id="kmStart" placeholder="          (m)" /> —
+                                <input type="text" class="validate[custom[integerPositive],maxSize[8]]" id="kmEnd"  placeholder="          (m)" />
+                            </td>
+                            <td>支&ensp;&ensp;&nbsp;&nbsp;&nbsp;柱：</td>
+                            <td><input type="text" class="validate[maxSize[7]]" id="polNumber" autocomplete="off"/></td>
+
+                        </tr>
+                        <tr>
+                            <td class="qTime" style="width:68px;">开始时间：</td>
+                            <td class="qTime" style="width:172px;">
+                                <input name="Ureportdate" type="text" id="startTime" class="Wdate" >
+                            </td>
+                            <td></td>
+                            <td>
+                                <a href="#" id="btn_hideSoBox"><div>隐藏</div></a>
+                                <a href="#" name="btnOk" id="Submit1"><div>定位</div> </a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+            
+        </div>
+        <div class="pol_choose_div"></div>
+    </div>
+
+    <!--details-->
+    <div class="LineInspection_details_inside detailes">
+        <div class="insideLeft"></div>
+        <div class="insideRight"></div>
+        <div class="insideContent">
+            <div class="btn_hide"><img src="img/LineInspection_play_Detailsshow.png" alt="隐藏" title="隐藏"/></div>
+            <div class="tble">
+                <table>
+                    <tr>
+                        <td class="firstTRTd">位&ensp;&ensp;&ensp;&ensp;置：</td>
+                        <td id="location"></td>
+                    </tr>
+                    <tr>
+                        <td>时&ensp;&ensp;&ensp;&ensp;间：</td>
+                        <td id="timer"></td>
+                    </tr>
+                    <tr>
+                        <td>设备编号：</td>
+                        <td id="deviceID"></td>
+                    </tr>
+                    <tr>
+                        <td>弓&ensp;位&ensp;置：</td>
+                        <td id="bowLocation"></td>
+                    </tr>
+                    <tr>
+                        <td>红外温度：</td>
+                        <td id="tempe"></td>
+                    </tr>
+                    <tr>
+                        <td>拉&ensp;出&ensp;值：</td>
+                        <td id="outValue"></td>
+                    </tr>
+                    <tr>
+                        <td>导&ensp;高&ensp;值：</td>
+                        <td id="topValue"></td>
+                    </tr>
+                   
+
+                    <tr>
+                        <td>速&ensp;&ensp;&ensp;&ensp;度：</td>
+                        <td id="carSpeed"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--details alarm-->
+    <div class="LineInspection_details_inside_alarm detailes">
+        <div class="insideLeft_alarm"></div>
+        <div class="insideRight_alarm"></div>
+        <div class="insideContent_alarm">
+            <div class="btn_hide inside_alarm"><img src="img/LineInspection_play_Detailsshow.png" alt="隐藏" title="隐藏" /></div>
+            <div class="list_title_alarm">报警列表</div>
+            <div class="alarm_bg">
+                <table class="alarm_Table_title">
+                    <thead>
+                        <tr>
+                            <th>发生时间</th>
+                            <th>缺陷类型</th>
+                            <th>报警级别</th>
+                            <th>弓位置</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="alarm_Table_body">
+                    <table class="list_scall">
+                        <tbody id="alarm_Table_content">
+                            <!--<tr tmcode="1489455001386">
+                                <td>2017.02.11 13:08:54</td>
+                                <td>疑似电连接线线夹燃弧</td>
+                                <td>一类</td>
+                                <td>6车</td>
+                            </tr>
+                            <tr tmcode="1489455001586">
+                                <td>2017.02.11 13:08:54</td>
+                                <td>疑似电连接线线夹燃弧</td>
+                                <td>一类</td>
+                                <td>6车</td>
+                            </tr>
+                            <tr tmcode="1489455001829">
+                                <td>2017.02.11 13:08:54</td>
+                                <td>疑似电连接线线夹燃弧</td>
+                                <td>一类</td>
+                                <td>6车</td>
+                            </tr>-->
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--details linePolling-->
+    <div class="LineInspection_details_inside_linePolling detailes">
+        <div class="insideLeft_linePolling"></div>
+        <div class="insideRight_linePolling"></div>
+        <div class="insideContent_linePolling">
+            <div class="btn_hide inside_linePolling"><img src="img/LineInspection_play_Detailsshow.png" alt="隐藏" title="隐藏" /></div>
+            <div class="list_title_linePolling"><span class="bigdate"></span>内所有检测数据</div>
+            <div class="linePolling_bg">
+                <div class="insideTop_left_linePolling"></div>
+                <div class="insideTop_right_linePolling"></div>
+                <div class="linePolling">
+                    <table class="linePolling_Table_title">
+                        <thead>
+                            <tr>
+                                <th>设备编号</th>
+                                <th>时间</th>
+                                <th>优先级</th>
+                                <th>弓位置</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="linePolling_Table_body">
+                        <table class="list_scall">
+                            <tbody id="linePolling_Table_content">
+                                <!--<tr class="thisweb_One">
+                                    <td>2017.02.11 </td>
+                                    <td>13:08:54</td>
+                                    <td>一类</td>
+                                    <td>6车</td>
+                                    <td>
+                                        <img class="playImg" src="img/changePlay.png" title="播放" />
+                                        <span class="line_start">开始</span>
+                                        <span class="line_end">结束</span>
+                                    </td>
+                                </tr>-->
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+                
+            </div>
+            
+            <div class="secend_list_title_linePolling"><img src="img/LineInspection_play_afterDo.png"/>&ensp;操作结果</div>
+            <div class="afterDo_blackDiv">
+                <div class="afterDo_left_linePolling"></div>
+                <div class="afterDo_right_linePolling"></div>
+                <div class="afterDo">
+                    <div class="text">
+                        <div class="greenOne" title="定位至此">开始: <span class="start_title"></span><span class="start_title_time"></span><span class="start_title_bown"></span><span class="start_title_Level"></span></div>
+                        <div class="yellowOne" title="定位至此">结束: <span class="end_title"></span><span class="end_title_time"></span><span class="end_title_bown"></span><span class="end_title_Level"></span></div>
+
+                    </div>
+                     <hr />
+                    <div class="setLevel">优先级 ： <input  type="number" step=""  min="0" id="firstLevel"/> &ensp;&ensp; &ensp;&ensp; 
+                         <span class="bgBtn">设 置</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+        
+
+        <!--alarmConfirm-->
+        <!--<div class="LineInspection_alarmConfirm_inside">
+            <div class="alarmConfirm_insideLeft"></div>
+            <div class="alarmConfirm_insideRight"></div>
+            <div class="alarmConfirm_insideContent">
+                <table id="tb_sure" class="table form-horizontal" cellpadding="1" cellspacing="1" style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td style="width: 47%;">
+                                <label class="control-label">
+                                    报警类型：
+                                </label>
+                                <div id="afcodeYZ" class="controls">
+                                    <input id="citySel" type="text" value="" style="width: 150px; margin: 0;">
+                                </div>
+                            </td>
+                            <td>
+                                <label class="control-label">
+                                    报警级别：
+                                </label>
+                                <div id="UseverityYZ" class="controls">
+                                    <select id="Useverity" style="width: 200px;" onchange="yzAlarmData()"><option value="0" selected="">请选择</option><option value="一类">一级</option><option value="二类">二级</option><option value="三类">三级</option></select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="DefectMark_td">
+                                <label class="control-label">
+                                    缺陷标志：
+                                </label>
+                                <div class="controls">
+                                    <div style="position: relative; display: inline-table; width: 150px;"><input id="DefectMark" type="text" value="" style="width: 150px; cursor: pointer;" readonly="readonly"><a name="ztree" href="javascript:void(0);" style="position: absolute;width:13px;height:13px;right: 0px;top:0px;display:inline-block;padding:8px 3px;"><img src="/Common/img/tree_clear.png"></a></div>
+                                </div>
+                            </td>
+                            <td>
+                                <label class="control-label">
+                                    标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签：
+                                </label>
+                                <div class="controls">
+                                    <input id="alarmcode" type="text" value="CRH2A-2222_170314093000" style="width: 190px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label class="control-label">
+                                    报警分析：
+                                </label>
+                                <div class="controls">
+                                    <div id="UtxtDefectYZ">
+                                        <textarea name="UtxtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 97.3%;" onblur="yzAlarmData()"></textarea>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label class="control-label">
+                                    处理建议：
+                                </label>
+                                <div class="controls">
+                                    <textarea name="UtxtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 91.7%"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label class="control-label">
+                                    备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：
+                                </label>
+                                <div class="controls">
+                                    <textarea name="UtxtNote" id="UtxtNote" rows="2" style="height: 30px; width: 91.7%;"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">
+                                    报&nbsp;&nbsp;告&nbsp;&nbsp;人：
+                                </label>
+                                <div id="Div2" class="controls">
+                                    <input name="UtxtReporter" type="text" id="UtxtReporter" style="width: 150px;" readonly="readonly">
+                                </div>
+                            </td>
+                            <td>
+                                <label class="control-label">
+                                    报告日期：
+                                </label>
+                                <div id="Div1" class="controls">
+                                    <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" style="width: 190px">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding: 0;"><hr style="border:1px dashed;"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="width:30%;display:inline-block">局部偏移<input type="number" step="" min="1" max="100" style="width:50px" /></div>
+                                <div style="width:30%;display:inline-block">全景偏移<input type="number" step="" min="1" max="100" style="width:50px" /></div>
+                                <div style="width:30%;display:inline-block">红外前后帧数：<input type="number" step="" min="1" max="100" style="width:50px" /></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>-->
+        <!-- right echars  and  jpg -->
+        <div class="echarsAndJpg">
+            <div class="rightSixDiv littleimg chooseOne" id="DLV_IMG_DIR">
+                <div class="show_loading">加载中...</div>
+                <div class="show_font">红外图像</div>
+                <div id="RED_ctorl" class="img_ctorl">
+                    <div class="circle_white"></div>
+                    <span class="circle_font">打开</span>
+                </div>
+                <div id="assist_ctorl" class="assist_ctorl">
+                    <div class="circle_white"></div>
+                    <span class="circle_font">辅助</span>
+                </div>
+                <img id="RED" src="/C3/PC/LineInspection/img/bg.jpg"/>
+            </div><!--红外图片-->
+            <div class="rightSixDiv littleimg" id="HD_IMG_DIR">
+                <div class="show_loading">加载中...</div>
+                <div class="show_font">局部图像</div>
+                <div id="HD_ctorl" class="img_ctorl">
+                    <div class="circle_white"></div>
+                    <span class="circle_font">打开</span>
+                </div>
+                <div id="HD_left" class="left_arrows arrows" title="上一张"></div>
+                <div id="HD_right" class="right_arrows arrows" title="下一张"></div>
+                <img id="HD" src="/C3/PC/LineInspection/img/bg.jpg"/>
+            </div><!--高清局部图片-->
+            <div class="rightSixDiv littleimg" id="OVER_IMG_DIR">
+                <div class="show_loading">加载中...</div>
+                <div class="show_font">全景图像</div>
+                <div id="OVER_ctorl" class="img_ctorl">
+                    <div class="circle_white"></div>
+                    <span class="circle_font">打开</span>
+                </div>
+                <div id="OV_left" class="left_arrows arrows" title="上一张"></div>
+                <div id="OV_right" class="right_arrows arrows" title="下一张"></div>
+                <img id="OVER" src="/C3/PC/LineInspection/img/bg.jpg"/>
+            </div><!--全景图片-->
+            <div class="rightSixDiv littleimg fz_div" id="FZ_IMG_DIR">
+                <div class="show_loading">加载中...</div>
+                <div class="show_font">辅助图像</div>
+                <div id="FZ_ctorl" class="img_ctorl">
+                    <div class="circle_white"></div>
+                    <span class="circle_font">关闭</span>
+                </div>
+                <img id="FZ" src="/C3/PC/LineInspection/img/bg.jpg" />
+            </div><!--辅助图片-->
+            <div id="main1" class="rightSixDiv">
+                <!--<div class="echar_title">温度</div>-->
+            </div>
+            <div id="main2" class="rightSixDiv">
+                <!--<div class="echar_title">拉出</div>-->
+            </div>
+            <div id="main3" class="rightSixDiv">
+                <!--<div class="echar_title">导高</div>-->
+            </div>
+        </div>
+        <div class="IR_alert">
+            <a href="#" class="closse_A"><img src="img/LineInspection_play_closse.png" alt="Alternate Text" /></a>
+            <div class="IR_title">红外测温</div>
+            <div class="IR_content" code="single_point">
+                <img class="choose_serial" src="img/LineInspection_pole_chooseNot.png" alt="" />
+                单点测温
+
+
+            </div>
+            <div class="IR_content" code="continuou">
+                <img class="choose_serial" src="img/LineInspection_pole_choose.png" alt="" />
+                单点连续测温
+
+            </div>
+            <div class="IR_content" code="rectangle">
+                <img class="choose_serial" src="img/LineInspection_pole_chooseNot.png" alt="" />
+
+                区域测温
+                <img class="choose_clear" style="margin-left:25px;" src="img/LineInspection_pole_clear.png" alt="" />
+
+            </div>
+        </div>
+        <!-- content jpg -->
+        <div id="bigIMG_OVER" class="content_jpg">
+            <div class="show_loading">加载中...</div>
+
+
+            <img id="F" src="img/bg.jpg" data-zoom-image="" />
+        </div><!--全景图片-->
+        <canvas id="tempCavars"></canvas>
+
+        <canvas id="cavars"></canvas>
+        <!--<div id="bigIMG_HD" class="content_jpg"><img id="H" data-zoom-image=""/></div><!--高清局部图片-->
+        <!--<div id="bigIMG_DLV" class="content_jpg"><img id="R" data-zoom-image=""/></div>-->
+
+    <!-- 新建任务下载弹出框 start-->
+    <div id="chooseTimeLaye" style="display:none;">
+        <!--<div class="closeimg layui-layer-close"></div>-->
+        <h4><span class="new-img"></span><span>播放原始数据</span></h4>
+        <div class="hr-div"></div>
+
+        <div>
+            <div class="row-fluid" style="padding:10px 0;">
+                <div class="span3" style="padding-top:5px;">
+                    播放时间范围：
+                </div>
+            </div>
+            <div class="row-fluid">
+                <span class="li_one" code="1day">当天全部</span>
+                <span class="li_one times_cheack" code="1min">报警发生前后1分钟</span>
+                <span class="li_one" code="5secend">报警发生前后5秒钟</span>
+            </div>
+            <div class="row-fluid" style="text-align: right;padding-top:20px;">
+                <input id="set_time_btn" type="button" class="btn btn-primary" value="确 认"/>
+            </div>
+        </div>
+    </div>
+    <!-- 新建任务下载弹出框 end -->
+</body>
+</html>

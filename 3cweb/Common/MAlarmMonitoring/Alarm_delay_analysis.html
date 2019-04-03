@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>报警延时分析统计</title>
+    <meta charset="utf-8" />
+    <!-- public js-->
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("mySelectTree");
+        loadControl('layer');
+        loadControl("Validation");
+        loadControl("trainselect");
+
+        loadJs('/Lib/Echarts-3.0/echarts.min.js?v=' + version, 'utf-8')
+        //<!--引入css js   本页-->
+        loadCss('/Common/MAlarmMonitoring/css/Alarm_delay_analysis.css?v=' + version)
+        loadJs('/Common/MAlarmMonitoring/js/Alarm_delay_analysis.js?v=' + version)
+    </script>
+
+
+</head>
+<body>
+    <!-- title-->
+    <div class="html_title">
+        <span class="pic pic_10"></span>
+        <h4>报警延时分析统计</h4>
+        <span class="pic pic_2" title="关闭本页" onclick="window.close()"></span>
+    </div>
+    <!-- title   end-->
+    <!-- search-->
+    <div class="html_content">
+
+        <div>
+            <span>设备编号：</span>
+            <input id="car_tree" type="text" placeholder="请输入关键字" />
+        </div>
+        <div>
+            <span>组织机构：</span>
+            <input id="org_tree" type="text" />
+        </div>
+        <div>
+            <span>线路区间：</span>
+            <input type="text" id="line_tree" />
+        </div>
+        <div>
+            <span>发生时间：</span>
+            <input id="startTime" class="Wdate start_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})" value="" />
+            <span>&nbsp;至</span>
+            <input id="endTime" class="Wdate end_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})" value="" />
+            <span class="pic pic_9" data-toggle="dropdown"></span>
+            <ul class="dropdown-menu" id="hideUL">
+                <li onclick="chooseTime(0)">今天</li>
+                <li onclick="chooseTime(6)">七天</li>
+                <li onclick="chooseTime(29)">30天</li>
+            </ul>
+
+        </div>
+
+        <div style="display:none">
+            <span>最长耗时≥</span>
+            <input id="allovertime" type="text" /><span>&nbsp;分</span>
+        </div>
+        <div>
+            <div class="btn btn-small btn-primary" id="searchBtn"><span class="pic pic_1"></span>&ensp;查&ensp;询</div>
+            <div class="btn btn-small btn-primary" id="portoutBtn">导&ensp;出</div>
+
+        </div>
+    </div>
+    <!-- search end-->
+    <!-- echarts-->
+    <div class="echartsContent">
+        <div class="echartsContent_one" id="main"></div>
+        <div class="echartsContent_two" id="main2"></div>
+    </div>
+    <!-- echarts  end-->
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>
+

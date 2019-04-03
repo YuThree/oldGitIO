@@ -1,0 +1,84 @@
+
+/*不带逗号开始*/
+/*最大盒子的容器样式*/
+    .mainBox{
+        height: calc(100% - 20px);
+        width: calc(100% - 80px);
+        height: -webkit-calc(100% - 20px);
+        width: -webkit-calc(100% - 80px);
+        height: -moz-calc(100% - 20px);
+        width: -moz-calc(100% - 80px);
+        height: -ms-calc(100% - 20px);
+        width: -ms-calc(100% - 80px);
+        height: -o-calc(100% - 20px);
+        width: -o-calc(100% - 80px);
+        margin-top: 20px;
+        margin-left: 40px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+/*表格样式*/
+.tablMainOne {
+    height: calc(100% - 156px);
+    height: -moz-calc(100% - 156px);
+    height: -o-calc(100% - 156px);
+    height: -ms-calc(100% - 156px);
+    height: -webkit-calc(100% - 156px);
+    width: 100%;
+}
+
+.timeControl .cdct_subLabel {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    padding-right: 8px;
+    max-width: 102px;
+}
+
+.timesControl .cdct_subLabel {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    padding-right: 8px;
+    max-width: 102px;
+}
+
+.timeControl::before {
+    left: 110px;
+}
+
+.timesControl::before {
+    left: 77px;
+}
+
+
+.cdct_infoInput label.cdct_subLabel {
+    max-width: 80px;
+} 
+
+
+.daoru {
+    background: #008BCC;
+}
+
+.eyes {
+    line-height: 0px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.tablMainOne {
+    border-bottom: 1px solid #1AA9E8;
+}
+
+.showTableTr:last-child .showTableTd {
+    border-bottom: none;
+}

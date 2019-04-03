@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Lib/Echarts-3.0/echarts.min.js"></script>
+    <script>
+
+        loadControl("elevatezoom");
+        loadControl("jqueryUI_2");
+
+        loadCss("css/mrta_big.css?v=" + version);
+
+        loadJs("js/C3AlarmImg_big.js?v=" + version);
+    </script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet'>
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css" rel="stylesheet" type="text/css" />
+    <style>
+        #note
+        {
+            position: absolute;
+            width: 173px;
+            padding: 10px;
+            background: url(/C3/PC/MAlarmMonitoring/ImgTmp/cfbjbg.png) no-repeat;
+            right: 1%;
+            z-index: 9999;
+            display: none;
+            filter: alpha(Opacity=60);
+            -moz-opacity: 0.6;
+            opacity: 1.0;
+            text-align: center;
+        }
+        
+        #slider
+        {
+            font-size: 12px;
+            margin-top: 5px;
+            height: 0.4em;
+            width: 91%;
+        }
+        #slider.ui-widget-content
+        {
+            border: 1px solid #666;
+            background: none;
+        }
+        #slider .ui-slider-handle
+        {
+            border-color: transparent;
+            border: none;
+            background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+            background-size: contain;
+            width: 25px;
+            height: 25px;
+            margin-top: -3px;
+            margin-left: -6px;
+            cursor: pointer;
+            border-bottom: none;
+        }
+    </style>
+    <script>
+
+        var ECharts;
+
+
+        var alarmid = '';
+
+        $(function () {
+
+            AutoSize();
+
+            var _h = parseInt($(window).height()) / 4;
+            var _w = parseInt($(window).width());
+
+            $("#kjg").elevateZoom({ zoomWindowPosition: 05, zoomWindowWidth: _w - 8, zoomWindowHeight: _h - 8 });
+
+
+            //     getAlarminfo("127f376e22724e74a70c56f902fc8939");
+            //GetList();
+            // setInterval(GetList, 5 * 1000);
+
+            $(window).resize(function () {
+                AutoSize();
+
+            });
+
+            //图标变色
+            $("#qjbtn").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic.png");
+            });
+            $("#note-left").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left.png");
+            });
+            $("#note-right").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right.png");
+            });
+            $("#note-jump").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump.png");
+            });
+            $("#note-close").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close1.png");
+            });
+            $("#wd").click(function () {
+                if ($(".wdqx div[id='linechart']>div").length == 0) {
+                    setTimeout("createLineChart()", 300);
+                }
+                $("#linechart").show();
+                $("#lc_chart").hide();
+                $("#dg_chart").hide();
+                $("#chartTitle").text("温度曲线");
+                $("#curve").html("温<br />度<br />曲<br />线").attr("qx", "wd");
+            });
+            $("#lc").click(function () {
+                if ($(".wdqx div[id='lc_chart']>div").length == 0) {
+                    setTimeout("createLC_LineChart()", 300);
+                }
+                $("#linechart").hide();
+                $("#lc_chart").show();
+                $("#dg_chart").hide();
+                $("#chartTitle").text("拉出值曲线");
+                $("#curve").html("拉<br />出<br />值<br />曲<br />线").attr("qx", "lc");
+            });
+            $("#dg").click(function () {
+                if ($(".wdqx div[id='dg_chart']>div").length == 0) {
+                    setTimeout("createDG_LineChart()", 300);
+                }
+                $("#linechart").hide();
+                $("#lc_chart").hide();
+                $("#dg_chart").show();
+                $("#chartTitle").text("导高值曲线");
+                $("#curve").html("导<br />高<br />值<br />曲<br />线").attr("qx", "dg");
+            });
+        })
+
+
+        function SetItemBox(_id, obj) {
+            //mouseover
+
+            // obj.ClassName=
+
+            var _d = $('#' + _id).find(".m_locaNo").html();
+            var _d2 = $('#' + _id).find(".m_mapInfo").attr('title');
+            var _d3 = $('#' + _id).find(".m_type").attr('title');
+            var _d4 = $('#' + _id).find(".m_level").attr('title');
+            var _d5 = $('#' + _id).find(".m_memo").attr('title');
+            _d5 = _d5.replace('报警温度℃', '').replace('环境温度℃', '').replace('导高值mm', '').replace('拉出值mm', '').replace('速度km/h', '');
+
+            _d5 = _d5.replace('报警温度', '报警温度&nbsp;&nbsp;').replace('环境温度', '<br/>环境温度&nbsp;&nbsp;').replace('导高值', '<br/>导高值&nbsp;&nbsp;').replace('拉出值', '<br/>拉出值&nbsp;&nbsp;').replace('速度', '<br/>速度&nbsp;&nbsp;');
+
+
+            var _d6 = $('#' + _id).find(".m_task").attr('title');
+            window.parent.SetItemBox(_d, _d2, _d3, _d4, _d5, _d6);
+
+        }
+
+        function clearAll() {
+            alarmid = '';
+            $('#hw').attr('src', '');
+            $('#kjg').attr('src', '');
+            $('#allimg').attr('src', '');
+            $('#linechart').html('');
+            clearInterval(set);
+            Imgjson = [];
+        }
+
+        function AutoSize() {
+            var _h = parseInt($(window).height()) / 4;
+            var _w = parseInt($(window).width());
+
+            var fz = $(window).height() * 0.016104;
+
+            $('.box1_1').width(_w).height(_h);
+            $('.boxTitle').width(_w / 15).height(_h).css("font-size", fz + "px"); ;
+
+            $('.title_bg').css("font-size", fz + "px"); ;
+
+
+
+            $('.wdqx').css("padding-left", _w / 15);
+            $('.box1_875').width(_w / 15 * 14).height(_h);
+
+            $('#linechart').height(_h);
+
+            $('#alarms').height(_h - $('.title_bg').outerHeight() - 9);
+
+
+
+
+        }
+
+        //设置选中报警项。
+        function SetAlarm(_alarmID) {
+
+
+            $('#alarms>div').removeClass('alarmItem_over');
+            $('#' + _alarmID).addClass('alarmItem_over');
+
+
+            getAlarminfo(_alarmID);
+            // SetTop(_alarmID);
+
+
+            $("#slider").slider({
+                value: 0,
+                min: 0,
+                max: JsonAlarm.PLAY_IDX.length - 1,
+                step: 1,
+                slide: function (event, ui) {
+                    //  $("#FrameN").html("$" + ui.value);
+                    GoToFrame(parseInt(ui.value));
+                }
+            });
+
+            //  window.parent.SetIsShowCurrentInfo(1);  //显示信息窗口
+
+        }
+
+        //设置gis图中的位置。
+        function SetGis(_alarmid, Type) {
+
+            if ($.browser.msie) {
+                //IE
+                window.parent.frames["iframe_map"].SetAlarmGIS(_alarmid, Type);
+            }
+            else {
+                //FF
+                $("body", parent.document).find("#iframe_map").contents()[0].defaultView.SetAlarmGIS(_alarmid, Type);
+                //  $("#Iframe2").contents()[0].defaultView.clickLoco(locaCode);
+            }
+        }
+
+        function ReLoad() {
+
+
+
+            //  GetList();
+        }
+
+
+
+        function GetList() {
+
+
+            var alarmsJSON = $("body", parent.document).find("#iframe_map").contents()[0].defaultView.GetAlarmJson();
+
+
+            var result = '';
+
+            for (var i = 0; i < alarmsJSON.length; i++) {
+
+
+
+                var m = alarmsJSON[i];
+
+                if (m.GIS_X == 0) continue;
+
+
+                var displayStr = "";
+                //    var IScheckWC = $("body", parent.document).find("#cb_type4").is(':checked');
+                var IscheckType1 = $("body", parent.document).find("#cb_type1").is(':checked');
+                var IscheckType2 = $("body", parent.document).find("#cb_type2").is(':checked');
+                var IscheckType3 = $("body", parent.document).find("#cb_type3").is(':checked');
+
+                var Ischeck_new = $("body", parent.document).find("#cb_new").is(':checked');
+                var Ischeck_sure = $("body", parent.document).find("#cb_sure").is(':checked');
+                var Ischeck_plan = $("body", parent.document).find("#cb_plan").is(':checked');
+                var Ischeck_check = $("body", parent.document).find("#cb_check").is(':checked');
+                var Ischeck_close = $("body", parent.document).find("#cb_close").is(':checked');
+
+
+
+
+                if (!IscheckType1 && m.SEVERITY_Code == "一类") {
+                    displayStr = "hide";
+                }
+
+                if (!IscheckType2 && m.SEVERITY_Code == "二类") {
+                    displayStr = "hide";
+                }
+
+                if (!IscheckType3 && m.SEVERITY_Code == "三类") {
+                    displayStr = "hide";
+                }
+
+                if (!Ischeck_new && m.STATUS == "AFSTATUS01") {
+                    displayStr = "hide";
+                }
+
+                if (!Ischeck_sure && m.STATUS == "AFSTATUS03") {
+                    displayStr = "hide";
+                }
+
+                if (!Ischeck_plan && m.STATUS == "AFSTATUS04") {
+                    displayStr = "hide";
+                }
+
+                if (!Ischeck_check && m.STATUS == "AFSTATUS07") {
+                    displayStr = "hide";
+                }
+
+                if (!Ischeck_close && m.STATUS == "AFSTATUS05") {
+                    displayStr = "hide";
+                }
+
+                if (displayStr == 'hide') {
+                    displayStr = "style='display:none;'"
+                }
+
+                var _timeS = m.RAISED_TIME.split(' ');
+
+                result += "<div class='alarmItem' id='" + m.ALARM_ID + "' status='" + m.CODE_NAME + "' " + displayStr + " >\
+    <div class='m_locaNo d'  title='" + m.DETECT_DEVICE_CODE + "'>" + m.DETECT_DEVICE_CODE + "</div>\
+    <div class='m_mapInfo  d'  title='" + m.RAISED_TIME + "'>" + _timeS[0].substring(5) + " " + _timeS[1] + "</div>\
+    <div class='m_type d' title='" + m.wz.split("<a")[0].replace(/&nbsp;/g, " ") + "'>" + m.wz + "</div>\
+    <div class='m_level d' title='" + m.SEVERITY + "'>" + m.SEVERITY + "</div>\
+    <div class='m_memo d' style='display:none' data-toggle='tooltip' title='" + m.Summary + "'>" + m.Summary + "</div>\
+    <div class='cls'></div>\
+    <div style='display:none' class='m_task d' title='" + m.taskName + "'>" + m.taskName + "</div>\
+</div>";
+            }
+
+            $('#alarms').html(result);
+
+            if (alarmsJSON.length == 0) {
+
+                var imgurl = '/Common/MRTA/img/test.jpg';
+
+                $('#kjg,#hw').attr('src', imgurl);
+
+                var ez = $('#kjg').data('elevateZoom');
+                ez.swaptheimage(imgurl, imgurl); //C2500
+
+                JsonAlarm = [];
+                alarmid = '';
+                $('#linechart').html('');
+
+            }
+
+            bind();
+
+
+        }
+
+
+        function bind() {
+
+
+            if ($(window).width() < 1600) {
+                // var f1 = $(window).height() * 0.031104;  //20px;
+                //  var f2 = $(window).height() * 0.021104;
+                // $('.m_type,.m_type_t').hide();
+            }
+
+            $('.alarmItem').bind({
+                mouseenter: function () {
+                    var _id = $(this).attr('id');
+                    SetItemBox(_id);
+                },
+                mouseleave: function () {
+
+                    if (window.parent.GetIsShowCurrentInfo() == '1') {
+
+                        SetItemBox(alarmid);
+                    }
+                    else {
+                        $('body', window.parent.document).find('#ItemBox').hide();
+                    }
+                }
+            })
+
+            $('.alarmItem').click(function () {
+                var _id = $(this).attr('id');
+                ClickAlarm(_id);
+            });
+
+            $('.alarmItem').dblclick(function () {
+
+                var _alarmid = $(this).attr('id');
+
+                toAlarmDetails('3C', _alarmid);
+            });
+
+            if (alarmid == '') {
+                if ($('.alarmItem:visible:first').length > 0) {
+                    alarmid = $('.alarmItem:visible:first').attr('id');
+                    $('#' + alarmid).click();
+                    createLineChart();
+                }
+            }
+            else {
+                $('#alarms>div').removeClass('alarmItem_over');
+                $('#' + alarmid).addClass('alarmItem_over');
+            }
+        }
+
+        function showIDs(_ids) {
+            $('.alarmItem').hide();
+            $(_ids).show();
+        }
+
+        function showItem(_id, _disp) {
+            if (_disp) {
+                $('#' + _id).show();
+            }
+            else {
+                $('#' + _id).hide();
+            }
+        }
+
+
+        function SetTop(_alarmID) {
+            $("#alarms").animate({ scrollTop: $("#" + _alarmID)[0].offsetTop - 35 }, 500);
+        }
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid" style="background-color: #333333;">
+        <div class="carousel-inner" style="display: none">
+            <div class="item">
+                <div class="tab-pane active carousel-caption" id="panel-6652">
+                    <p id="locold" style="display: none">
+                        <span id="locinfo"></span>
+                    </p>
+                    <p id="locnew" style="display: none">
+                        最高温度:<span id="zgwd"></span>℃&nbsp;环境温度:<span id="hjwd"></span>℃&nbsp;导高值:<span id="dgz"></span>mm&nbsp;拉出值:<span
+                            id="lcz"></span>mm&nbsp;速度:<span id="sd"></span>km/h
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+        </div>
+        <div class="row-fluid">
+            <span id="locnametag" runat="server"></span>
+        </div>
+    </div>
+    <span id="test" style="display: "></span><span id="test1" style="display: "></span>
+    <div class="box1_1">
+        <div class="title_bg">
+            <div class="m_locaNo d fg_blue">
+                设备编号</div>
+            <div class="m_mapInfo  d fg_blue">
+                发生时间</div>
+            <div class="m_type_t d fg_blue">
+                位置信息</div>
+            <div class="m_level d fg_blue">
+                等级</div>
+            <div style="display: none" class='m_memo d fg_blue'>
+                摘要</div>
+            <div class="cls">
+            </div>
+            <div style="display: none">
+            </div>
+        </div>
+        <div id="alarms">
+            <img src="/Common/img/loading1.gif" align="absmiddle" />
+            <!--<div class="alarmItem">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">发生日期</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">一级</div>
+                <div class="m_memo d">缺陷描述</div>
+                <div class="cls"></div>
+            </div>
+
+
+            <div class="alarmItem alarmItem_over">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">位置信息</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">二级</div>
+                <div class="m_memo d">缺陷描述</div>
+                <div class="cls"></div>
+            </div>
+
+
+            <div  class="alarmItem">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">位置信息</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">三级</div>
+                <div class="m_memo d">缺陷描述</div>
+                 <div class="cls"></div>
+            </div>
+
+             <div  class="alarmItem">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">位置信息</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">一级</div>
+                <div class="m_memo d">缺陷描述</div>
+                 <div class="cls"></div>
+            </div>
+
+             <div  class="alarmItem">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">位置信息</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">一级</div>
+                <div class="m_memo d">缺陷描述</div>
+                 <div class="cls"></div>
+            </div>
+
+            <div  class="alarmItem">
+                <div class="m_locaNo d">车号</div>
+                <div class="m_mapInfo  d">位置信息</div>
+                <div class="m_type d">缺陷类型</div>
+                <div class="m_level d">一级</div>
+                <div class="m_memo d">缺陷描述</div>
+                 <div class="cls"></div>
+            </div>-->
+        </div>
+    </div>
+    <div class="box1_1 posistionR">
+        <!-- <div id="note" style="display: none">
+              <a id="btn_openAllimg" href="#" style="color: White" onclick="ShowAllImg()"><span title="全景" class="icon32 icon-white icon-image">
+              </span></a><a href="#" style="color: White" onclick="upImg()"><span title="上一张" class="icon32 icon-white icon-arrowthick-w">
+              </span></a><a href="#" style="color: White" onclick="lastImg()"><span title="下一张"
+                  class="icon32 icon-white icon-arrowthick-e"></span></a><a href="#" style="color: White"
+                      onclick="ShowC3Form()"><span title="处理" class="icon32 icon-white icon-compose"></span>
+                  </a><a href="#" style="color: White" onclick="out()"><span title="关闭" class="icon32 icon-white icon-cross">
+                  </span></a>
+          </div>-->
+        <div id="note" style="display: none">
+            <a href="#" style="color: White; display: inline-block;" onclick="ShowAllImg()">
+                <!--<span id="qjbtn" title="全景" class="icon32 icon-white icon-image"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/pic.png" id="qjbtn" alt="全景" />
+            </a><a href="#" style="color: White; display: inline-block;" onclick="upImg()">
+                <!--<span title="上一张" class="icon32 icon-white icon-arrowthick-w"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/left.png" id="note-left" alt="上一张" />
+            </a><a href="#" style="color: White; display: inline-block;" onclick="lastImg()">
+                <!--<span title="下一张" class="icon32 icon-white icon-arrowthick-e"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/right.png" id="note-right" alt="下一张" />
+            </a><a href="#" style="color: White; display: inline-block;" id="A2" onclick='GoToAlarmFrame()'>
+                <!--<span title="跳转到缺陷帧" class="icon32 icon-white icon-info"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/jump.png" id="note-jump" alt="跳转到缺陷帧" />
+            </a>
+            <!-- <a href="#" style="color: White" id="btn_alarmFrame" onclick="$('.btn_setFrame').toggle()">
+             <span title="设置缺陷帧显示与隐藏" class="icon32 icon-white icon-gear"></span></a>-->
+            <a href="#" style="color: White; display: inline-block;" onclick="out()">
+                <!--<span title="关闭" class="icon32 icon-white icon-cross"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/close1.png" id="note-close" alt="关闭" />
+            </a>
+            <div id="slider">
+            </div>
+        </div>
+        <!--  <img src="css/img/temp1.jpg" class="box1_1" />-->
+        <img class="img-polaroid box1_1" style="margin: 0px;" id="hw" onclick="dbImgShuffling()" src="" />
+        <div class="boxTitle">
+            <div class="boxTitle_1 fg_white">
+                <img src="/Common/MRTA/img/ico_top.png" /><br />
+                红<br />
+                外<br />
+                热<br />
+                图<br />
+                像
+            </div>
+        </div>
+    </div>
+    <div class="box1_1 posistionR">
+        <img class="img-polaroid box1_1" style="margin: 0px;" id="kjg" src="" data-zoom-image=""
+            onclick="dbImgShuffling()" />
+        <div class="boxTitle">
+            <div class="boxTitle_1 fg_white">
+                <img src="/Common/MRTA/img/ico_top.png" /><br />
+                高<br />
+                清<br />
+                可<br />
+                见<br />
+                光
+            </div>
+        </div>
+    </div>
+    <div class="box1_1 posistionR">
+        <div id="wdqx" class="wdqx">
+            <div id="divDropButton" class="btn-group" role="group" style="position: absolute;
+                right: 0; top: 0; z-index: 1; display: none;">
+                <button id="dropButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="width: 110px; background-color: #1B1B1B;
+                    color: White; background-image: none; text-shadow: none; border-color: #FFF;
+                    border-width: 3px; border-radius: 7px; padding: 2px 0;">
+                    <span id="chartTitle">温度曲线</span> <span class="glyphicon glyphicon-chevron-down"
+                        style="color: White;"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width: 105px; width: 105px; background-color: #1B1B1B;
+                    border-color: #FFF; border-width: 3px;">
+                    <li style="background-color: #1B1B1B; color: White; background-image: none; text-shadow: none;
+                        border-color: #FFF; border-width: 5px; border-radius: 7px;"><a id="wd" href="javascript:void(0);"
+                            style="color: White;">温度曲线</a></li>
+                    <li><a id="lc" href="javascript:void(0);" style="color: White;">拉出值曲线</a></li>
+                    <li><a id="dg" href="javascript:void(0);" style="color: White;">导高值曲线</a></li>
+                </ul>
+            </div>
+            <div id="linechart" class="box1_875" style="background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+            <div id="lc_chart" class="box1_875" style="display: none; background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+            <div id="dg_chart" class="box1_875" style="display: none; background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+            <div class="boxTitle">
+                <div class="boxTitle_1 fg_white">
+                    <img src="/Common/MRTA/img/ico_top.png" /><br />
+                    <span id="curve" qx="wd">温<br />
+                        度<br />
+                        曲<br />
+                        线</span>
+                </div>
+            </div>
+        </div>
+        <div id="allimg_box" style="display: none">
+            <img id="allimg" src="#" class="box1_1" onclick="allimgck()" />
+            <div class="boxTitle">
+                <div class="boxTitle_1 fg_white">
+                    <img src="/Common/MRTA/img/ico_top.png" /><br />
+                    全<br />
+                    景<br />
+                    图
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

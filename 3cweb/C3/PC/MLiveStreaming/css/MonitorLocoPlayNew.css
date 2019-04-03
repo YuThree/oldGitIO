@@ -1,0 +1,223 @@
+﻿body {
+        padding: 0px;
+    }
+
+    #playTime {
+        position: absolute;
+        top: 65px;
+        left: 10px;
+        color: white;
+        padding: 1px;
+        display: none;
+        background-color: rgba(0,0,0,0.7);
+    }
+
+    .imgshareing {
+        -webkit-animation: twinkling 2s infinite ease-in-out;
+        width: 32px;
+        height: 25px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    #playbtn_prev_next {
+        display: none;
+    }
+
+    #btn_prev {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+    }
+
+    #btn_next {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+    }
+
+    #loca_info {
+        color: white;
+        padding: 5px;
+    }
+
+    #Iframe_gis {
+        position: absolute;
+    }
+
+    .div-menu {
+        float: left;
+        width: 133px;
+        height: 25px;
+        border: 1px solid #ffffff;
+        margin: 8px 8px 0 0;
+        border-radius: 4px;
+        position: relative;
+        margin-left: 5px;
+    }
+
+    #locomotive_no {
+        display: block;
+        line-height: 25px;
+        padding-left: 4px;
+        cursor: pointer;
+    }
+
+    .div-menu img {
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        width: 12px;
+        height: 10px;
+    }
+
+    #TreeAll {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        height: 280px;
+        width: 200px;
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+        overflow: auto;
+        background-color: rgba(255,254,241,0.9);
+        color: White;
+        display: none;
+        padding-top:35px;
+    }
+    .div-menu:hover {
+        background-color: #004994;
+        border: 1px solid #97d7ff;
+    }
+    .ztreeInput{
+        width:180px !important;
+        display:none;
+    }
+
+
+
+	.layui-layer{
+		/*background-color: transparent;*/
+		font-family:微软雅黑;
+	}
+	.layui-layer{
+		box-shadow:0 0 8px 1px rgba(61,213,241,3);
+	}
+	#OriginalFile{
+		background:#020202;
+		padding:15px;
+		color:#ffffff;
+		font-size:13px;
+		border-radius: 8px;
+		display:none;
+	}
+	#OriginalFile>h4>span{
+		color:#41D0F4;
+		letter-spacing: 5px;
+		margin-left: 10px;
+	}
+	.new-img{
+		background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+		background-position: -90px -0px; 
+		width: 15px;
+		height: 16px;
+		display:inline-block;
+		margin-left: 0px !important;
+	}
+	#OriginalFile .hr-div{
+		width:100%;
+		height:1px;
+		background:#206c7a;
+		margin:5px 0 15px;
+	}
+	#new-strTime,#new-endTime,#new-loco{
+		width:180px;
+	}
+	.div-menus{
+		float: left;
+		width: 183px;
+		height: 25px;
+		border: 1px solid #ffffff;
+		border-radius: 4px;
+		position: relative;
+		margin-bottom: 9px;
+	}
+	#locomotive_NB {
+		display: block;
+		line-height: 25px;
+		padding-left: 4px;
+		cursor: pointer;
+	}
+	.div-menus img {
+		position: absolute;
+		right: 5px;
+		top: 8px;
+		width: 12px;
+		height: 10px;
+	}
+	#OriginalFile_TreeAll {
+		position: absolute;
+		top: 25px;
+		left: 0;
+		height: 120px;
+		width: 200px;
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+		overflow: auto;
+		background-color: rgba(255,254,241,1);
+		color: White;
+		display: none;
+		padding-top:35px;
+		z-index:1;
+	}
+	.row-fluid>div{
+		display:inline-block;
+	}
+	.btn-submit{
+		width:70px;
+		position:relative;
+		cursor: pointer;
+		display: inline-block;
+	}
+	.btn-submit div{
+		display:inline-block;
+		height: 30px;
+	}
+	/*移入按钮背景*/
+	.btn-submit:hover .btn-left{
+		background-position: -5px -5px;
+	}
+	.btn-submit:hover .btn-middle{
+		background:url(/C3/PC/MLiveStreaming/img/btn-bgl.png);
+	}
+	.btn-submit:hover .btn-right{
+		background-position: -20px -0px;
+	}
+	.btn-submit:hover .btn-font{
+		color:#3dd5f1;
+	}
+	.btn-submit div{
+		display:inline-block;
+		height: 30px;
+	}
+	/*正常按钮背景*/
+	.btn-submit .btn-left{
+		 background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+		 background-position: -165px -0px;
+		 width: 8px;
+	}
+	.btn-submit .btn-middle{
+		 background:url(/C3/PC/MLiveStreaming/img/btn-bg.png);
+		 width:54px;
+	}
+	.btn-submit .btn-right{
+		 background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+		 background-position: -135px -0px;
+		 width: 8px;
+	}
+	.btn-submit .btn-font{
+		position: absolute;
+		left: 18px;
+		top: 0;
+		line-height: 30px;
+	}

@@ -1,0 +1,628 @@
+/*综合样式*/
+body{
+    font-size: 0;
+    overflow: hidden;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.ovh{
+    overflow: hidden;
+}
+.maxBox{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 16px;
+    background-image: url(img/bg.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.maxBox .head{
+    width: 100%;
+    height: 70px;
+    z-index: 300;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #050616;
+    border-bottom: 1px solid rgba(27,24,48,1);
+}
+.maxBox .foot{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(50,05,33,0.37);
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color:rgba(255,255,255,1);
+    font-size: 16px;
+
+}
+.maxBox .content{
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    bottom: 60px;
+
+}
+
+
+
+/*头部样式*/
+.maxBox .head .left{
+    height:20px;
+    font-size:20px;
+    line-height: 20px;
+    color:rgba(255,255,255,1);
+    margin-left: 30px;
+    margin-top: 24px;
+
+}
+.maxBox .head .right{
+    white-space: nowrap;
+    margin-right: 30px;
+}
+.maxBox .head  .time,
+.maxBox .head  .headImg{
+    display: inline-block;
+    vertical-align:middle;
+}
+.maxBox .head  .time{
+    font-size:20px;
+    line-height: 20px;
+    color: white;
+    margin-right: 30px;
+}
+.maxBox .head  .headImg{
+    vertical-align: middle;
+}
+.maxBox .head  .headImg .img,
+.maxBox .head  .headImg .list{
+    display: inline-block;vertical-align: middle;
+    white-space: inherit;
+    cursor: pointer;
+
+}
+.maxBox .head  .headImg .img{
+    font-size: 0;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.maxBox .head  .headImg .list{
+    height: 70px;
+
+}
+.maxBox .head  .headImg .item,.maxBox .head  .headImg .item a{
+    font-size: 16px;
+    color: white;
+}
+.maxBox .head  .headImg .topMax{
+    border-radius: 5px 5px 0 0;
+}
+.maxBox .head  .headImg .bottomMax{
+    border-radius: 0 0 5px 5px;
+}
+.maxBox .head  .headImg .item{
+    display: none;
+    background-color: #151442;
+    text-align: center;
+    width: 116px;
+    height: 38px;
+    line-height: 38px;
+}
+.maxBox .head  .headImg .item:hover{
+    background-color: #22246D;
+}
+.maxBox .head  .headImg .item.first{
+    display: block;
+    background-color: transparent;
+    position: relative;
+    width: 116px;
+    line-height: 70px;
+    height: 70px;
+}
+.maxBox .head  .headImg .item.first a{
+    font-size: 20px;
+}
+.maxBox .head  .headImg .item.first:after{
+    position: absolute;
+    width: 7px;
+    height: 4px;
+    background-image: url(img/xl.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    content: " ";
+    right: 0;
+    top: 50%;
+    margin-top: -2px;
+}
+
+
+/*content 样式*/
+.maxBox .content .logo{
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%,0);
+    -webit-transform: translate(-50%,0);
+    -moz-transform: translate(-50%,0);
+    -o-transform: translate(-50%,0);
+    -ms-transform: translate(-50%,0);
+}
+.maxBox .content .contentBox{
+    width: 1130px;
+    position: absolute;
+    left: 50%;
+    margin-left: -565px;
+    bottom: 8%;
+}
+.maxBox .content .contentBox .left{
+    width: 260px;
+    overflow: hidden;
+}
+.maxBox .content .contentBox .right{
+    width: 860px;
+}
+.maxBox .content .contentBox .left .item,
+.maxBox .content .contentBox .right .item{
+    position: relative;
+}
+.maxBox .content .contentBox .left .item .txt,
+.maxBox .content .contentBox .right .item .txt{
+    position: absolute;
+    left: 10px;
+    color: white;
+    height:22px;
+    bottom: 15px;
+    line-height: 22px;
+    font-size:22px;
+}
+.maxBox .content .contentBox .right .row{
+    margin-bottom: 5px;
+    white-space: nowrap;
+    font-size: 0;
+}
+.maxBox .content .contentBox .right .row:last-child{
+    margin-bottom: 0;
+}
+.maxBox .content .contentBox .right .row .item{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 0;
+}
+.maxBox .content .contentBox .right .row .item:first-child{
+    margin-left: 0;
+}
+
+/* @media screen and (max-height:900px) {
+    .maxBox .content .logo img{
+        width: 440px;
+
+    }
+    .maxBox .content .logo{
+        top: 7%;
+    }
+    .maxBox .content .contentBox .left{
+        width: 208px;
+    }
+    .maxBox .content .contentBox .right{
+        width: 692px;
+    }
+    .maxBox .content .contentBox{
+        width: 908px;
+        margin-left: -454px;
+    }
+    .maxBox .content .contentBox .right .row .item{
+        margin-left: 8px;
+    }
+    .maxBox .content .contentBox .right .row{
+        margin-bottom: 3px;
+    }
+    .maxBox .head .left{
+        font-size: 16px;
+    }
+    .maxBox .head .time{
+        font-size: 16px;
+    }
+    .maxBox .head .headImg .item, .maxBox .head .headImg .item a{
+        font-size: 16px;
+    }
+    .maxBox .foot{
+        font-size: 12px;
+    }
+} */
+
+
+
+/*toolTip css*/
+
+.toolTipBox{
+    width: 360px;
+    position: absolute;
+    height: auto;
+    background-color: rgba(02,11,22,0.67);
+    right: 18px;
+    bottom: 70px;
+    padding: 0 15px;
+}
+.toolTipBox .toolTipHead{
+    padding-top: 20px;
+}
+
+.toolTipBox .toolTipHead .txt,
+.toolTipBox .toolTipHead .close{
+    display: inline-block;
+    vertical-align: middle;
+}
+.toolTipBox .toolTipHead .txt{
+    font-size: 24px;
+    color: white;
+    line-height: 24px;
+}
+.toolTipBox .toolTipHead .close{
+    vertical-align: top;
+    font-size: 30px;
+    float: right;
+    color: white;
+    line-height: 17px;
+    height: 20px;
+    cursor: pointer;
+}
+.toolTipBox .toolTipContent
+{
+    position: relative;
+    margin-top: 35px;
+}
+.toolTipBox .toolTipContent .scroll{
+    font-size:18px;
+    color:white;
+    width: 100%;
+    line-height: 24px;
+}
+.toolTipBox .tooltipFoot .btn2{
+    margin-left: 64px;
+}
+.toolTipBox .tooltipFoot .btn1,
+.toolTipBox .tooltipFoot .btn2{
+    width: 90px;
+    height: 36px;
+    line-height: 34px;
+    border-radius: 2px;
+    border:1px solid #44A0FF;
+    color: #44A0FF;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+}
+.toolTipBox .tooltipFoot{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+/* 修改资料 */
+.modifyBox{
+    position: absolute;
+    right: 27px;
+    top: 70px;
+    display: none;
+}
+.modifyBox li{
+    height: 38px;
+    padding: 0 25px;
+    line-height: 38px;
+    background: #11134A;
+    color: #B9BADC;
+    cursor: pointer;
+}
+.modifyBox li:hover,.modifyBox li.on{
+    background: #22246D;
+    color: #fff;
+}
+
+.animated{animation-duration:1s;animation-fill-mode:both}
+@keyframes slideInDown{0%{transform:translate3d(0,-100%,0);visibility:visible}to{transform:translateZ(0)}}
+.slideInDown{animation-name:slideInDown}
+@keyframes flipInY {
+    0% {
+        transform: perspective(400px) rotateY(90deg);
+        animation-timing-function: ease-in;
+        opacity: 0
+    }
+    40% {
+        transform: perspective(400px) rotateY(-20deg);
+        animation-timing-function: ease-in
+    }
+    60% {
+        transform: perspective(400px) rotateY(10deg);
+        opacity: 1
+    }
+    80% {
+        transform: perspective(400px) rotateY(-5deg)
+    }
+    to {
+        transform: perspective(400px)
+    }
+}
+
+.flipInY {
+    -webkit-backface-visibility: visible!important;
+    backface-visibility: visible!important;
+    animation-name: flipInY
+}
+
+.mask{
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 9;
+    display: none;
+}
+
+.modifyInfo,.modifyPwd{
+    width: 730px;
+    height: 410px;
+    background: #0D1C3D;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border: solid 1px #44A0FF;
+    box-shadow: #44A0FF 0px 0px 50px -3px inset;
+    position: relative;
+    padding-top: 25px;
+    padding-left: 30px;
+    display: none;
+}
+.modifyPwd{
+    width: 458px;
+    height: 357px;
+    padding-left: 68px;
+}
+.angle1,.angle2,.angle3,.angle4{
+    position: absolute;
+}
+.angle1{
+    top: 0;
+    left: 0;
+}
+.angle2{
+    top: 0;
+    right: 0;
+}
+.angle3{
+    left: 0;
+    bottom: 0;
+}
+.angle4{
+    right: 0;
+    bottom: 0;
+}
+.angle1::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    border-top: 20px solid #1ABBF1;
+    border-right: 20px solid transparent;
+    z-index: 0;
+}
+.angle1::before{
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -1px;
+    width: 0;
+    border-top: 21px solid #04040c;
+    border-right: 21px solid transparent;
+    z-index: 1;
+}
+.angle2::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    border-top: 20px solid #1ABBF1;
+    border-left: 20px solid transparent;
+    z-index: 0;
+}
+.angle2::before{
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    width: 0;
+    border-top: 21px solid #04040c;
+    border-left: 21px solid transparent;
+    z-index: 1;
+}
+.angle3::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-bottom: 20px solid #1ABBF1;
+    border-right: 20px solid transparent;
+    z-index: 0;
+}
+.angle3::before{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: -1px;
+    width: 0;
+    border-bottom: 21px solid #04040c;
+    border-right: 21px solid transparent;
+    z-index: 1;
+}
+.angle4::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    border-bottom: 20px solid #1ABBF1;
+    border-left: 20px solid transparent;
+    z-index: 0;
+}
+.angle4::before{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    right: -1px;
+    width: 0;
+    border-bottom: 21px solid #04040c;
+    border-left: 21px solid transparent;
+    z-index: 1;
+}
+.modifyInfo .title,.modifyPwd .title{
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+.modifyPwd .title{
+    margin-bottom: 35px;
+}
+.modifyInfo .close,.modifyPwd .close{
+    width: 22px;
+    height: 21px;
+    background: url('img/close.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 23px;
+    top: 5px;
+    cursor: pointer;
+}
+.modifyInfo .content{
+    width: calc(100% - 30px);
+    height: calc(100% - 98px);
+    overflow: hidden;
+    padding-top: 30px;
+}
+.modifyInfo .avaterBox{
+    float: left;
+    margin-right: 30px;
+}
+.modifyInfo .avaterBox .avater{
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    background: url('img/avater.png') no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+.modifyInfo .avaterBox .avater img{
+    width: 100px;
+}
+.modifyInfo .avaterBox .upload{
+    color: #44A0FF;
+    border: dashed 1px #44A0FF;
+    background: #1E2C4B;
+    border-radius:4px;
+    width: 96px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+}
+.file{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+}
+.modifyInfo .content .rightBox{
+    float: left;
+    width: calc(100% - 150px);
+}
+.rightBox .inputBox,.modifyPwd .inputBox{
+    display: inline-block;
+    font-size: 0;
+    margin-bottom: 20px;
+}
+.rightBox .inputBox span.tit,.modifyPwd .inputBox span.tit{
+    color: #A2D0FF;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.rightBox .inputBox input,.modifyPwd .inputBox input{
+    width: 180px;
+    height: 36px;
+    border: solid 1px #44A0FF;
+    border-radius:4px;
+    background: #0D1C3D;
+    padding: 0 10px;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+}
+.modifyPwd .inputBox input{
+    width: 200px;
+}
+[data-selectSimu="1"] .selectBox{
+    width: 180px;
+    border: solid 1px #44A0FF;
+    border-radius:4px;
+    background: #0D1C3D;
+    color: #fff;
+    margin-top: -10px;
+}
+.cdct_select{
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+.rightBox .inputBox:nth-child(odd){
+    margin-right: 55px;
+}
+.modifyInfo .btnBox,.modifyPwd .btnBox{
+    overflow: hidden;
+    width: 100%;
+    padding-right: 30px;
+}
+.modifyInfo .btnBox .cancle,.modifyInfo .btnBox .sure,.modifyPwd .btnBox .cancle,.modifyPwd .btnBox .sure{
+    width:96px;
+    height:34px;
+    border-radius:4px;
+    line-height: 34px;
+    text-align: center;
+    float: right;
+    margin-top: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+.modifyPwd .btnBox .cancle,.modifyPwd .btnBox .sure{
+    margin-top: 32px;
+}
+.modifyInfo .btnBox .cancle,.modifyPwd .btnBox .cancle{
+    background: #0D1C3D;
+    color: #44A0FF;
+    border: solid 1px #44A0FF;
+}
+.modifyInfo .btnBox .sure,.modifyPwd .btnBox .sure{
+    background:rgba(68,160,255,1);
+    color: #fff;
+}

@@ -1,0 +1,805 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+   
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+
+    <script src="/Common/js/SuperMap/libs/SuperMap.Include.js"></script>
+    <script src="/Common/js/SuperMap/my_superMap.js"></script>
+    
+    <script src="/Common/MGIS/JS/BMapObjData.js" type="text/javascript"></script>
+            
+    <script src="/Common/MGIS/JS/GIS_dpc_sm.js"  type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/mySelectTree.js" type="text/javascript"></script>
+    <script src="/C3/PC/MRTA/js/C3AlarmImg_big.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        loadControl("ztree");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("hint");
+        loadControl("elevatezoom");
+        loadControl("kendo"); 
+
+    </script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <!-- modal / dialog library -->
+    <script type="text/javascript">
+        //页面加载是调用
+        //页面加载是调用
+        $(document).ready(function () {
+
+
+            $('#btn_ss').click(function () {
+                // setTab('one', 1, 2);
+
+                Color('ss');                
+                $('#sm_so_box').hide();
+                pageName = "实时GIS";
+                RefreshAlarm();
+
+            })
+
+            Color('ss');
+
+
+            $('#btn_qx').click(function () {
+
+                Color('qx');               
+                $('#sm_so_box').show();
+                pageName = "缺陷GIS";
+                RefreshAlarm();
+               
+              //  setTab('one', 2, 2);
+              //  OnlondbqxMapbind();
+              //  ColseC3AlarmInfo()
+            })
+
+
+            $('#btn_so').click(function () {
+
+                pageName = "缺陷GIS";
+                RefreshAlarm();
+
+               
+
+
+            })
+
+
+            var _h = (parseInt($(window).height())) / 4;
+            var _w = parseInt($(window).width()) / 4;
+
+            $("#kjg").elevateZoom({ zoomWindowPosition: 05, zoomWindowWidth: _w - 8, zoomWindowHeight: _h - 8 });
+            var _Divh = (parseInt($(window).height()) - 32);
+            var _Divw = parseInt($(window).width()) + 12;
+
+            $("#mapDiv").width($(window).width()).height($(window).height());
+
+            $("#qxDiv").width(_Divw + 7).height(_Divh - 72);
+
+            $("#C3Alarm").width(_Divw / 4).height(_Divh);
+
+            $("#C3Alarm_1").width(_w).height(_h - 30);
+            $("#C3Alarm_2").width(_w).height(_h);
+            $("#C3Alarm_3").width(_w).height(_h);
+            $("#C3Alarm_4").width(_w).height(_h);
+            $("#linechart").width(_w).height(_h);
+
+            $("#ImgTypeBox").css("bottom", "10px");
+            $('#iframe_task').attr('src', '/Common/MTask/TaskForm.htm?id=' + GetQueryString("alarmid") + '&type=openFaultTask&openType=&ShowSimple=1&v=' + version)
+
+            $("#hw").width(_w).height(_h);
+            $("#kjg").width(_w).height(_h);
+
+
+            addCookie("GISSmall", "gis", 1, ""); //加入Cookie判断是否是实时监控的GIS还是直接GIS
+            document.getElementById('loading').style.display = 'none'; // 加载时候如果网速慢提示正在加载请稍后。。。。
+            var mapLevel = document.getElementById('mapLevel').value; //获取当前地图显示层次
+
+            //初始时间值
+            document.getElementById('startdate').value = ServerTime("Days", getConfig("FaultTimePeriod"));
+            document.getElementById('enddate').value = ServerTime("0", "0");
+
+            var V_CateGory = "0"; //0为取全部数据
+            // loadControl("ztree");
+
+            loadOrgSelect('TOPBOSS', 'ju', null, 'ddlju', null); //加载局下拉
+            loadOrgSelect(null, 'duan', null, 'ddlduan', null);
+            loadOrgSelect(null, "chejian", null, "ddlchejian", null);
+            loadOrgSelect(null, "gongqu", null, "ddlgongqu", null);
+            loadOrgSelect(null, "line", null, 'ddlline', '1'); //加载线路下拉
+
+            V_CateGory = GetQueryString("Category_Code").toUpperCase();
+            if (GetQueryString("Category_Code") != undefined && GetQueryString("Category_Code") != "") {
+                V_CateGory = GetQueryString("Category_Code").toUpperCase();
+                if (V_CateGory == "DPC") {
+                    V_CateGory = "0";
+                }
+
+
+                if (V_CateGory != "0") {
+                    $('#dll_lx').val(V_CateGory).attr('disabled', "true");
+                }
+            }
+            var codeTypes = V_CateGory;
+            if (codeTypes == "0")
+                codeTypes = "";
+
+            $('#citySel').mySelectTree({
+                CateGory: 'AFCODE',
+                CodeType: codeTypes
+            })
+            $('#citySel1').mySelectTree({
+                CateGory: 'AFCODE',
+                CodeType: codeTypes
+            })
+
+            if (GetQueryString("dllzt") != undefined && GetQueryString("dllzt") != "") {
+
+                var ids = GetQueryString("dllzt");
+                // parameter += '&dllzt=' + ids;
+
+                //设置ddlzt的状态。。。。暂略
+
+                $("#ddlzt").attr("value", ""); //清空选中项。 
+                // var ids = '1,3,6'; //设置选中框ID。 
+                var id_Ojbect = (ids).split(","); //分割为Ojbect数组。 
+                var count = $("#ddlzt option").length; //获取下拉框的长度。 
+                for (var c = 0; c < id_Ojbect.length; c++) {
+                    for (var c_i = 0; c_i < count; c_i++) {
+                        if ($("#ddlzt").get(0).options[c_i].value == id_Ojbect[c]) {
+                            $("#ddlzt").get(0).options[c_i].selected = true; //设置为选中。 
+                        }
+                    }
+                }
+
+            }
+
+            //设置选中状态
+            $('#ddlzt').val('AFSTATUS03');
+            $("#ddlzt>option[value='AFSTATUS04']").attr('selected', true);
+
+
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 5
+            });
+
+
+
+
+            if (GetQueryString("id") != undefined && GetQueryString("id") != "") {
+                //设置ID，以便查询使用....暂略
+            }
+
+
+            if (GetQueryString("AlarmTime") != "" && GetQueryString("AlarmTime") != undefined) {
+                var startDate = GetQueryString("AlarmTime")
+                $('#startdate').val(startDate);
+            }
+
+            if (GetQueryString("startdate") != "" && GetQueryString("startdate") != undefined) {
+                var startDate = GetQueryString("startdate")
+                $('#startdate').val(startDate);
+            }
+
+            if (GetQueryString("enddate") != "" && GetQueryString("enddate") != undefined) {
+                var startDate = GetQueryString("enddate")
+                $('#enddate').val(startDate);
+            }
+
+            if (GetQueryString("line") != "" && GetQueryString("line") != undefined) {
+                var lineCode = GetQueryString("line")
+                $('#ddlLine').val(lineCode);
+            }
+            if (V_CateGory == "1C" || V_CateGory == "2C" || V_CateGory == "4C") {
+
+                document.getElementById("qxDiv").style.height = window.screen.height * 0.91 + 28 + "px"; //缺陷GIS初始高度
+                document.getElementById("qxDiv").style.width = window.screen.width + 20 + "px"; //缺陷GIS初始高度
+
+
+                document.getElementById('one1').style.display = 'none';
+                document.getElementById('Ul_One').style.display = 'none';
+                document.getElementById('con_one_1').style.display = 'none';
+                setTab('one', 2, 2);
+
+              //  OnlondbqxMapbind();
+
+                // MisLinesSelect();
+            } else {
+                try {
+
+                    ///GIS加载
+                    //   bMapbind(mapLevel);
+
+                    BindMap("mapDiv", "实时GIS");
+
+                    RefreshPosition();
+                    RefreshLoco();
+                    RefreshAlarm();
+
+                    RefsetInterval();
+                  
+                    document.getElementById('UserLogon').style.display = 'none';
+
+                } catch (e) {
+                    //alert("地图加载不成功，请检查网络！");
+
+                }
+            }
+
+
+         
+            $('#Button4').click(function () {
+                //确认并转任务按钮。
+                btnAlarmUpdate();
+
+                $('#iframe_task').contents().find("#btnTaskAndBute").click();
+
+
+
+                // $("#iframe_task").contents()[0].defaultView.SendTaskAndDispatch();
+                //btnOnClick('btnTask')
+            })
+
+        });
+        ////单击缺陷GIS加载信息
+        //function OnlondbqxMapbind() {
+        //    var mapLevel = document.getElementById('mapLevel').value; //获取加载图层  （现在没有用 先保留）
+        //    //缺陷GIS加载 mapLevel=地图初始图层；开始时间；结束时间（结束时间拼接后续查询条件）
+        //    bqxMapbind(mapLevel, document.getElementById('startdate').value, document.getElementById('enddate').value + ";,,,,,,,,");
+        //}
+        ///用于判断当前选中table
+        function Color(type) {
+            if (type == "ss") {
+                document.getElementById('btn_ss').style.color = "#F9F4B2";
+                document.getElementById('btn_qx').style.color = "";
+            } else {
+
+                document.getElementById('btn_ss').style.color = "";
+                document.getElementById('btn_qx').style.color = "#F9F4B2";
+            }
+        }
+        function ShowMTwin(str, w, h) {
+            $("#tanchu").attr("href", str + "&lightbox[iframe]=true&lightbox[width]=" + w + "p&lightbox[height]=" + h + "p");
+            $("#tanchu").click();
+        }
+
+
+        //选择ju事件
+        function juChange(pcode) {
+            loadOrgSelect(pcode, 'duan', '局', 'ddlduan', null);
+        };
+
+        //选择段事件
+        function duanChange(pcode) {
+            loadOrgSelect(pcode, "chejian", "段", "ddlchejian", null);
+        };
+        //选择车间事件
+        function chejianChange(pcode) {
+            loadOrgSelect(pcode, "gongqu", "车间", "ddlgongqu", null);
+        };
+        //选择车间事件
+        function gongquChange(pcode) {
+
+        };
+       
+
+    </script>
+    <style>
+        .test
+        {
+            width: 170px;
+            padding: 50px 10px;
+            border: 5px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+        .test span
+        {
+            width: 0;
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+            position: absolute;
+        }
+        .test span.bot
+        {
+            border-width: 20px;
+            border-style: solid dashed dashed;
+            border-color: #beceeb transparent transparent;
+            left: 20px;
+            bottom: -40px;
+        }
+        .test span.top
+        {
+            border-width: 20px;
+            border-style: solid dashed dashed;
+            border-color: #ffffff transparent transparent;
+            left: 20px;
+            bottom: -33px;
+        }
+        
+        
+        .anchorBL
+        {
+            display: none;
+        }
+        .fg_blue
+        {
+            -webkit-animation: neon_blue2 1s ease-in-out infinite alternate;
+            -moz-animation: neon_blue2 1s ease-in-out infinite alternate;
+            animation: neon_blue2 1s ease-in-out infinite alternate;
+        }
+        .fg_blue span
+        {
+            color: #F0E68C;
+        }
+       
+    </style>
+</head>
+<body onload="RefsetInterval()">
+   
+    <div id="C3Alarm" style="display: none; position: absolute; top: 30px; right: 0px;
+        z-index: 9990; background-color: #333333;">
+        <div style="position: absolute; left: -25px; top: 10px;">
+            <a href="#" onclick="ColseC3AlarmInfo()" style="font-size: 30px; color: White;">X</a>
+        </div>
+        <div id='C3Alarm_1' style="overflow-y: auto; overflow-x: hidden;">
+            <div class="box-content">
+                <div id="tablejbxx">
+                    <table class="table1 fg_blue" id="tableinfo" style="color: White;">
+                        <tr>
+                            <td colspan="2">
+                                设备编号：<strong><span id="trainNo"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                时间：<strong><span id="raised_time"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                地点：<strong><span id="WZ"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                报警温度：<strong><span id="wendu"></span><span>℃</span></strong>
+                            </td>
+                            <td style="">
+                                环境温度：<strong><span id="hjwendu"></span><span>℃</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                导高值：<strong><span id="dgz"></span><span>mm</span></strong>
+                            </td>
+                            <td>
+                                拉出值：<strong><span id="lcz"></span><span>mm</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%;">
+                                速度：<strong><span id="sudu"></span><span>km/h </span></strong>
+                            </td>
+                            <td style="width: 50%;">
+                                弓位置：<strong><span id="BOW_TYPE"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                报警级别：<strong> <span id="severity"></span></strong>
+                            </td>
+                            <td>
+                                报警状态：<strong><span id="status"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" colspan="2">
+                                报警类型：<strong> <span id="SUMMARYDIC"></span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <input type="submit" name="E_btnOk2" value="报警确认" id="E_btnOk2" title="确认疑似缺陷属实"
+                                    class="btn btn-primary " />
+                                <input type="submit" name="E_btnCan2" value="报警取消" id="E_btnCan2" title="疑似缺陷属于误报，取消该缺陷显示"
+                                    class="btn btn-primary" />
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                报警分析： <strong><span id="txtDefect"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                处理建议： <strong><span id="txtAdvice"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                备注： <strong><span id="txtNote"></span></strong><a href="#" onclick="Map()">
+                                    <img src='/Common/img/roll.gif'></a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 300px">
+                                报告人：<strong><span id="txtReporter"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                报告日期： <strong><span id="reportdate"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                设备厂商：<strong><span id="vendor"></span> </strong>线路：<strong><span id="wwdw"></span>
+                                </strong>
+                            </td>
+                            <td>
+                                区站：<strong><span id="QZ"></span> </strong>
+                            </td>
+                            <td>
+                                桥隧：<strong><span id="brige"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                杆号：<strong><span id="pole_number"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="display: none">
+                                供电段： <strong><span id="GDD"></span></strong>
+                            </td>
+                            <td style="display: none">
+                                供电车间：<strong><span id="CJ"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                供电班组：<strong><span id="BZ"></span> </strong>
+                            </td>
+                            <td style="width: 200px; display: none">
+                                公里标：<strong><span id="km_mark"></span></strong> 状态变化时间：<strong><span id="status_time"></span>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr id="jltr" style="display: none;">
+                            <td style="width: 100px">
+                                交路号：<strong><span id="jlh"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                运用区段：<strong><span id="crossing_no"></span></strong> 线路：<strong><span id="line_code"></span>
+                                </strong>车站：<strong><span id="STATION_NO"></span> </strong>
+                                <input id="taskid" type="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="text-align: center; z-index: 9999; display: none">
+                <div id="irvAA">
+                </div>
+            </div>
+        </div>
+        <div id='C3Alarm_2'>
+            <img src='' id="hw"></div>
+        <div id='C3Alarm_3'>
+            <img src='' id="kjg"></div>
+        <div id='C3Alarm_4'>
+            <div id="linechart" style="background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+        </div>
+    </div>
+    <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-container-update" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel" style="top: 50%; width: 1400px; left: 30%; z-index: 9999;">
+        <div class="modal-header">
+            <h3>
+                <span id="updatetitle"></span>
+            </h3>
+            <input id="updatetype" type="hidden" />
+        </div>
+        <div class="modal-body form-horizontal">
+            <table id="tb_sure" class="table" cellpadding="1" cellspacing="1" style="width: 93%">
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报警类型：</label>
+                        <div id="afcodeYZ" class="controls">
+                            <input id="Text1" type="text" value="" style="width: 160px; margin: 0;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报警级别：</label>
+                        <div id="UseverityYZ" class="controls">
+                            <select id="Useverity" style="width: 100px" onchange="yzAlarmData()">
+                                <option>请选择</option>
+                                <option>一类</option>
+                                <option>二类</option>
+                                <option>三类</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            报警分析：</label>
+                        <div class="controls">
+                            <div id="UtxtDefectYZ">
+                                <textarea name="txtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 900px;"
+                                    onblur="yzAlarmData()"></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            处理建议：</label>
+                        <div class="controls">
+                            <textarea name="txtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            备注：</label>
+                        <div class="controls">
+                            <textarea name="txtNote" id="UtxtNote" rows="2" style="height: 30px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报告人：</label>
+                        <div id="Div3" class="controls">
+                            <input name="txtReporter" type="text" id="UtxtReporter" style="width: 100px;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报告日期：</label>
+                        <div id="Div4" class="controls">
+                            <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                style="width: 150px" />
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td colspan="2">
+                        <div class="control-group error">
+                            *红框内必填
+                        </div>
+                    </td>
+                </tr>-->
+            </table>
+            <input type="checkbox" id="cb_showTask" class="zrw" /><label for="cb_showTask" style="display: inline;"
+                class="zrw"><h3 style="display: inline;">
+                    转任务</h3>
+            </label>
+            <div id="box_task" class="zrw" style="height: 200px; display: none">
+                <iframe id="iframe_task" name="iframe_task" style="width: 100%; height: 210px;" seamless
+                    src="" scrolling="no" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="Button4" class="btn btn-primary zrw" style="display: none">
+                确认并转任务
+            </button>
+            <button id="Button2" class="btn btn-primary" onclick="btnAlarmUpdate()">
+                确认
+            </button>
+            <button id="btncols" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span></div>
+    </div>
+    <a id="tanchu" href="#" class="lightbox"></a>
+    <div class="main">
+        <!--<ul id='Ul_One'>
+            <li id="one1" ><a id="GISA" onclick="Color('GIS')" style="color: Red;" href="#">实时GIS</a></li>
+            <li id="one2" ><a id="qxGIS" href="#" onclick="Color('QXGIS')">缺陷GIS</a></li>
+            <li style="float: right;"><a id="FullScreen" href="#" style="display: none;" onclick="javascript:window.parent.toFullScreen('1');toADisplay('1');">
+                全屏</a><input type="button" value="关闭本页" id="Button1" onclick="window.close();" class="btn btn-primary" /></li>
+        </ul>-->
+        <div class="mainbox">
+            <div id="con_one_1">
+               
+                <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                    style="display: none"></a>
+                <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                    aria-labelledby="myModalLabel" style="width: 635px; height: 395px; z-index: 99999;
+                    left: 650px; top: 300px;">
+                    <div id="modal-body" style="height: 380px; width: 630px; z-index: 99999; text-align: center">
+                        <iframe id="url" scrolling="no" style="height: 360px; width: 620px;"></iframe>
+                        <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                            关闭</button>
+                    </div>
+                    <!-- <div class="modal-footer" style="z-index: 99999; text-align: center">
+                        
+                    </div>-->
+                </div>
+                <!--设备弹出模态窗口获取红外视频文件-->
+            </div>
+        </div>
+        <div id="con_one_2" style="display: none;">
+          
+            <div id="qxDiv" style="border: 0px solid gray; text-align: center; z-index: 1; position: inherit; left: -20px">
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        <input id="mapLevel" runat="server" />
+    </div>
+    <div id="chartOne" style="margin-top: 5px; text-align: center; width: 500px; height: 200px;
+        display: none;">
+    </div>
+    <div id="chartTwo" style="margin-top: 5px; text-align: center; width: 200px; height: 100px;
+        display: none;">
+    </div>
+    <div id="div1">
+    </div>
+    <div id="div2">
+    </div>
+    <div id="winpop">
+        <div class="title">
+            您有新的消息&nbsp;&nbsp;&nbsp;<span onclick="hid_pop()">关闭</span></div>
+        <div class="con">
+            <span id="AlarmSpan"></span>
+        </div>
+    </div>
+
+
+    <div style="text-align: center; z-index: 1" id="mapDiv">
+    </div>
+
+    <div id ='sm_so_box' class="box-content" style="display:none">
+        <table>
+            <tr>
+                <td>
+                    线路：
+                </td>
+                <td>
+                    <span id="ddlline"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;区站：
+                </td>
+                <td>
+                    <input type="text" id="txtqz" style="width: 70px;" />
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;行别：
+                </td>
+                <td>
+                    <select name="ddlxb" id="ddlxb" style="width: 80px;">
+                        <option value="0">全部</option>
+                        <option value="上行">上行</option>
+                        <option value="下行">下行</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;杆号：
+                </td>
+                <td>
+                    <input type="text" id="txtpole" style="width: 70px;" />
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;公里标(m)：
+                </td>
+                <td>
+                    <input type="text" id="txtstartkm" style="width: 45px;" />至<input type="text" id="txtendkm"
+                                                                                      style="width: 45px;" />
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;发生时间：
+                </td>
+                <td>
+                    <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})"
+                           style="width: 128px" />
+                    至
+                    <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})"
+                           style="width: 128px" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    局：
+                </td>
+                <td>
+                    <span id="ddlju"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;段：
+                </td>
+                <td>
+                    <span id="ddlduan"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;车间：
+                </td>
+                <td>
+                    <span id="ddlchejian"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;工区：
+                </td>
+                <td>
+                    <span id="ddlgongqu"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;缺陷类型：
+                </td>
+                <td>
+                    <!--<span id="dll_zt" style="display: none"></span>-->
+                    <input id="citySel" type="text" value="" style="width: 112px; margin: 0;" />
+                 
+                        <select name="dll_lx" id="dll_lx" style="margin: 0 auto; width: 60px; display:none">
+                            <option value="0">全部</option>
+                            <option value="1C">1C</option>
+                            <option value="2C">2C</option>
+                            <option value="3C">3C</option>
+                            <option value="4C">4C</option>
+                            <option value="5C">5C</option>
+                            <option value="6C">6C</option>
+                        </select>
+                    </span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;状态：
+                </td>
+                <td>
+                    <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                            style="width: 290px" size="5">
+                        <option value="AFSTATUS01" selected=selected>新上报</option>
+                        <option value="AFSTATUS04">已计划</option>
+                        <option value="AFSTATUS03">已确认</option>
+                        <option value="AFSTATUS02">已取消</option>
+                        <option value="AFSTATUS05">已关闭</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;
+                    <button id="btn_so" class="btn btn-small btn-primary">
+                        查询
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="map_btn">
+        <a id="btn_ss" href='#'>实时GIS</a>     
+        &nbsp;&nbsp;
+        <a id="btn_qx" href='#'>缺陷GIS</a>     
+    </div>
+
+
+
+</body>
+</html>
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+<script>
+    $(function () {
+        LoadSureBox('3C', GetQueryString("alarmid"))
+    })
+
+</script>

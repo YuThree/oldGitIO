@@ -1,0 +1,1512 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>轨迹</title>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapJS.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapLine.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapUserContainer.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPosition.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapSubstation.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapC3.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPole.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapObjData.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapBridgeTune.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/GIS.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/convertor.js" type="text/javascript"></script>
+    <script src="/Common/js/BaiDuMap/my_BaiduMap.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+
+    <script src="/Common/MGIS/JS/C3Sms.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <link href="/Common/css/gis/C3Sms.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css" rel="stylesheet" />
+    <script src="/Lib/Echarts-3.0/echarts.min.js"></script>
+    <script type="text/javascript">
+
+
+        loadControl("jqueryUI_2");
+
+        loadControl("mytree");
+        loadControl("mySelectTree");
+        loadControl("elevatezoom");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+
+
+
+
+        loadControl("layer");
+
+
+        loadJs("/C3/PC/MRTA/js/C3AlarmImg_big.js?v=" + version);
+        loadControl("hint");
+
+        loadJs("/Common/js/6cweb/mySelectTree_Level2.js?v=" + version);
+
+        loadJs("/Common/MGIS/JS/traffic.js?v=" + version);
+        loadJs("/Common/MGIS/JS/GetHtml.js?v=" + version);
+        loadCss("/Common/css/gis/gisT1css.css?v=" + version);
+
+    </script>
+    <script type="text/javascript">
+        var speed = 400; //初始播放速度
+        var checkDom; //选中对象
+        //页面加载是调用
+        $(document).ready(function () {
+            //报警状态多选框
+            $("#ddlzt").multiselect({
+                noneSelectedText: "全部",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 6,
+                height: 204
+            });
+            $('#direction').mySelectTree({
+                tag: 'Get_Drection',
+                height: 70,
+                width: 128,
+                IsShowMoreOption_name: '无行别',
+                IsShowMoreOption_code: '无行别',
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $('#direction').val(treeNode.name).attr({ "code": treeNode.id });
+                }
+            });
+            $('#xb').mySelectTree({
+                tag: 'Get_Drection',
+                height: 70,
+                width: 128,
+                IsShowMoreOption_name: '无行别',
+                IsShowMoreOption_code: '无行别',
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $('#xb').val(treeNode.name).attr({ "code": treeNode.id });
+                }
+            });
+            //多选框样式
+            $('.ui-multiselect span:last').css({ 'display': 'inline-block', 'height': '18px', 'width': '135px', 'overflow': 'inherit', 'white-space': 'nowrap', 'text-overflow': 'ellipsis' })
+            $('.ui-multiselect').css({ 'height': '23px', 'overflow': 'hidden', 'margin-bottom': '9px' })
+            $('.ui-multiselect-header').css('padding', ''); $('.ui-multiselect-checkboxes label input').css('height', '15px')
+
+            checkDom = document.getElementById("1X"); //选中对象
+            $("#1X").css("color", "#369bd7");
+            $('#citySel').mySelectTree_Level2({
+                //isSelectChildren: true,
+                height: '250px'
+            });
+            $("#ImgTypeBox").html(GetSeverityLegend(15, 15, false, "123"));
+            try {
+                var _h = parseInt($(window).height());
+                var _w = parseInt($(window).width());
+                $("#orBmapDiv").height(_h).width(_w);
+
+                if (FunEnable('Fun_OriginalLocus') == "True" && GetQueryString("deviceid") != "") {
+                    $("#_YSButton").show();
+                }
+
+                $('#txtqz').jHint({
+                    type: 'StationSection',
+                    line: '',
+                    noreadonly:true,
+                });
+                $('#lineselect').mySelect({
+                    tag: 'LINE'
+                });
+                addCookie("Small", "", 1, ""); //加入Cookie判断是否是实时监控的GIS还是直接GIS
+                addCookie("GISSmall", "", 1, "");
+                document.getElementById('loading').style.display = 'none'; //隐藏加载信息
+                var deviceid = GetQueryString("deviceid"); //车号
+                var LINE_CODE = GetQueryString("LINE_CODE"); //
+                if (LINE_CODE == undefined || LINE_CODE == "undefined") {
+                    LINE_CODE = "";
+                }
+                var startdate = GetQueryString("startdate").replace(/\//g, '-'); //开始时间
+                var enddate = GetQueryString("enddate").replace(/\//g, '-'); //结束时间
+                $('#Text2').val(startdate);
+                $('#Text3').val(enddate);
+                $('#lineselect').val(LINE_CODE);
+                OrbMapbind(deviceid, startdate, enddate); //加载机车轨迹 js/C3Sms.js
+
+                document.getElementById('UserLogon').style.display = 'none';
+            } catch (e) {
+                // alert("地图加载不成功，请检查网络！");
+
+            }
+            var _w = (parseInt($(window).width()) - 20) / 4;
+            var _h = '';
+            if ($(window).height() < 800) {
+                _h = (parseInt($(window).height()) - 95) / 4;
+                $("#C3Alarm_1").width(_w).height(_h - 85);
+                $("#C3Alarm_4").width(_w).height(_h);
+                $("#linechart").width(_w).height(_h);
+            } else {
+                _h = (parseInt($(window).height()) - 10) / 4;
+                $("#C3Alarm_1").width(_w).height(_h - 85);
+                $("#C3Alarm_4").width(_w).height(_h - 85);
+                $("#linechart").width(_w).height(_h - 85);
+            }
+            $("#kjg").elevateZoom({ zoomWindowPosition: 05, zoomWindowWidth: _w - 8, zoomWindowHeight: _h - 8 });
+
+            $("#C3Alarm_2").width(_w).height(_h);
+            $("#C3Alarm_3").width(_w).height(_h);
+            $("#C3Alarm_5").width(_w).height(_h); //全景
+
+            $("#hw").width(_w).height(_h);
+            $("#kjg").width(_w).height(_h);
+            $('#allimg').width(_w).height(_h);
+
+            $("#ImgTypeBox").css("bottom", "10px");
+            $('#iframe_task').attr('src', '/Common/MTask/TaskForm.htm?id=' + GetQueryString("alarmid") + '&type=openFaultTask&openType=&ShowSimple=1&v=' + version)
+
+
+            $('#cb_type1').click(function () {
+
+                var v = this.checked;
+                showType("一类", v);
+
+            })
+            $('#cb_type2').click(function () {
+
+                var v = this.checked;
+                showType("二类", v);
+
+            })
+            $('#cb_type3').click(function () {
+
+                var v = this.checked;
+                showType("三类", v);
+
+            })
+            $('#Button4').click(function () {
+                //确认并转任务按钮。
+                btnAlarmUpdate();
+
+                $('#iframe_task').contents().find("#btnTaskAndBute").click();
+
+
+
+                // $("#iframe_task").contents()[0].defaultView.SendTaskAndDispatch();
+                //btnOnClick('btnTask')
+            })
+            $('#btnSet').click(function () {
+                document.getElementById('modal-direction').click();
+            })
+
+
+
+
+            $('#btn_play').click(function () {
+                //播放
+                Is_doing = false;
+                //var _showtime = 400; //刷新时间
+                //setSmsshow = setInterval('SetC3Sms()', _showtime);
+
+                chageSpeed(checkDom, speed)
+                $(this).hide();
+                $('#btn_pause').show();
+                // $('#btn_slow,#btn_fast').show();
+            });
+
+            $('#btn_pause').click(function () {
+                //暂停
+                Is_doing = true;
+                clearInterval(setSmsshow); //关闭定时器
+                $(this).hide();
+                $('#btn_play').show();
+
+                // $('#btn_slow,#btn_fast').hide();
+
+            });
+            $('#btn_last').click(function () {
+                $('#btn_play').hide();
+                $('#btn_pause').show();
+                JSSms(speed);
+            });
+
+            //回播
+            $('#_Content_Sta').click(function () {
+                //$('#btn_play').show();
+                //$('#btn_pause').hide();
+
+                ColseC3Alarm();
+
+                map.clearOverlays();
+                smsNumber = silderNumber; //当前帧数
+                clearB_SmsNumberArray();
+                getMisC3AlaemPointAsync(map, _GJC3AlarmJson, "", "", "", 2, ""); //重新加载一次告警(不用查询)
+                $("#_Content_Sta_Lab").html("" + _josn[0][2].Dtime[smsNumber].Dtime);
+                $("#Sms_slider").slider("option", "values", [smsNumber, EndNumber]);
+                clearInterval(setSmsshow); //关闭定时器
+
+                //speed = 400;
+                //   $("#speendMemo").html("正常");
+
+
+                $('#btn_play').hide();
+                $('#btn_pause').show();
+
+                chageSpeed(checkDom, speed);
+                //                var _showtime = 200; //刷新时间
+                //                clearInterval(setSmsshow); //关闭定时器
+                //                setSmsshow = setInterval('SetC3Sms()', _showtime);
+            });
+
+            //改变按钮颜色
+            $("#list1").children("img").hover(function () {
+                if ($("#play1").css("display") == "none") {
+                    $(this).attr("src", "img/orbit-img/orbit-filter-light.png")
+                }
+            }, function () {
+                if ($("#play1").css("display") == "none") {
+                    $(this).attr("src", "img/orbit-img/orbit-filter.png")
+                }
+            });
+            $("#_YSButton").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-old-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-old.png")
+            });
+            $("#quanbu1").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-all-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-all.png")
+            });
+            $("#btnSet").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-line-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-line.png")
+            });
+            $("#btn_slow").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-left-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-left.png")
+            });
+            $("#btn_play").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-play-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-play.png")
+            });
+            $("#btn_pause").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-pause-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-pause.png")
+            });
+            $("#btn_fast").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-right-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-right.png")
+            });
+            $("#_Content_Sta").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-repeat-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-repeat.png")
+            });
+            $(".orbit-close").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-close-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-close.png")
+            });
+            $("#Submit1").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-check-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-check.png")
+            });
+            $("#btn_hideSoBox").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-hide-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-hide.png")
+            });
+            $(".footSure").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/sure-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/sure.png")
+            });
+            $(".footCancel").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/calcel-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/cancel.png")
+            });
+            $('.AnimateMarker>a').children("img").hover(function () {
+                $(this).attr("src", "img/gis-img/guanbi-light.png")
+            }, function () {
+                $(this).attr("src", "img/gis-img/guanbi.png")
+            });
+            $("#qjbtn").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic.png");
+            });
+            $("#note-left").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left.png");
+            });
+            $("#note-right").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right.png");
+            });
+            $("#note-jump").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump.png");
+            });
+            $("#note-close").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close1.png");
+            });
+            //播放时间内容
+            $(".playTime").html('<strong id="_Content1" style="font-size: 12px;"></strong>');
+        });
+        function chageSpeed(e, delay) {
+            checkDom = e;
+            speed = delay;
+            $("#1X,#2X,#4X,#8X").css("color", "White");
+            $(e).css("color", "rgb(255, 235, 77)");
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+            JSSms(delay);
+        }
+
+        function reload() {
+            window.location.reload();
+        }
+
+        function chageSpeed_fast() {
+            //speed 400  加速
+            var _speed = speed / 2;
+            var _sp = 400 / _speed;
+
+            if (_sp > 32) {
+                _sp = 32;
+                _speed = 400 / 32;
+            }
+
+            speed = _speed;
+
+            if (_sp == "1")
+            { _sp = "正常"; }
+            else {
+                _sp = _sp + "倍";
+            }
+
+            $('#speendMemo').html(_sp);
+
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+
+            JSSms(speed);
+
+
+
+        }
+
+        function chageSpeed_slow() {
+            //speed 400  减速
+            var _speed = speed * 2;
+
+            var _sp = 400 / _speed;
+
+            if (_sp < 1) {
+                _sp = 1;
+                _speed = 400;
+            }
+
+            speed = _speed;
+
+            if (_sp == "1")
+            { _sp = "正常"; }
+            else {
+                _sp = _sp + "倍";
+            }
+
+            $('#speendMemo').html(_sp);
+
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+
+            JSSms(speed);
+        }
+
+        function ss() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 290;
+            $('#allp').width(_w).height(_h);
+            $('#play1').show();
+            $('#play1').animate({ bottom: 10, right: 20, opacity: 1, width: 258, height: 342 }, 500);
+            $("#list1").children("img").attr("src", "img/orbit-img/orbit-filter-surce.png");
+        }
+        function ColseDIV() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 120;
+            $('#allp').width(_w).height(_h);
+
+            $('#play1').animate({ bottom: 10, right: 0, opacity: 0, width: _w, height: _h }, 500);
+            $('#play1').hide();
+            $("#list1").children("img").attr("src", "img/orbit-img/orbit-filter.png");
+        }
+
+        //线路改变
+        function lineChange(pcode) {
+            $('body').find('#ul_txtqz').parent().remove();
+            $('body').find('#txtqz').val('').attr('code','')
+            $('#txtqz').jHint({
+                type: 'StationSection',
+                line: $('#lineselect').val() == 0 ? '' : $('#lineselect').val(),
+                noreadonly:true,
+
+            });
+        };
+        var silderNumber = 0; //记录最后一次拖动的帧号
+        var EndNumber = 0;
+        function Setslider(count) {
+
+
+            $("#Sms_slider").slider({
+                range: true,
+                min: 0,
+                max: count,
+                values: [0, count],
+                slide: function (event, ui) {
+                    //  $("#FrameN").html("$" + ui.value);
+                    if (event.keyCode == undefined)  //按钮不执行。
+                    {
+                        $("#Sms_slider").slider("option", "values", [ui.values[0], ui.values[1]]);
+                        map.clearOverlays();
+                        EndNumber = ui.values[1];
+                        getMisC3AlaemPointAsync(map, _GJC3AlarmJson, "", "", "", 2, ""); //重新加载一次告警(不用查询)
+                        smsNumber = ui.values[0]; //当前帧数
+                        if (ui.value == ui.values[0]) {
+                            silderNumber = ui.values[0]; //回放时用
+                        }
+                        clearB_SmsNumberArray();
+                        clearInterval(setSmsshow); //关闭定时器
+                        $('#btn_play').show();
+                        $('#btn_pause').hide();
+                        $("#_Content_Sta_Lab").html("" + _josn[0][2].Dtime[silderNumber].Dtime);
+                        $("#_Content_End").html("结束时间:" + _josn[0][2].Dtime[EndNumber].Dtime);
+                        var startdate = _josn[0][2].Dtime[silderNumber].Dtime.replace(/\//g, '-'); //开始时间
+                        var enddate = _josn[0][2].Dtime[EndNumber].Dtime.replace(/\//g, '-'); //结束时间
+                        $('#Text2').val(startdate);
+                        $('#Text3').val(enddate);
+                        SetC3Sms();
+
+                        //设置当前时间div位置
+
+                        var p = parseInt($("#Sms_slider .ui-slider-handle").css("left"));
+                        $(".playTime").css("left", -96 + p + 'px');
+                    }
+
+                },
+                change: function (event, ui) {
+                    var p = parseInt($("#Sms_slider .ui-slider-handle").css("left"));
+                    $(".playTime").css("left", -96 + p + 'px');
+                }
+            });
+        }
+
+        function hexFromRGB(b) {
+            var hex = [
+              b.toString(16)
+            ];
+            $.each(hex, function (nr, val) {
+                if (val.length === 1) {
+                    hex[nr] = "0" + val;
+                }
+            });
+            return hex.join("").toUpperCase();
+        }
+        function refreshSwatch() {
+            var blue = $("#Sms_slider").slider("value"),
+              hex = hexFromRGB(blue);
+            //  $("#swatch").css("background-color", "#" + hex);
+        }
+    </script>
+    <style type="text/css">
+        .main {
+            width: 100%;
+        }
+
+        .speed {
+            color: White;
+        }
+
+            .speed :hover {
+                color: rgb(255, 235, 77) !important;
+            }
+
+        .ym-btn input {
+            padding: 0;
+        }
+
+        #ul_txtqz {
+            width: 200px;
+        }
+
+        #orbitcheck {
+            display: block;
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 180px;
+            background: url(img/orbit-img/orbit-bg.png) no-repeat;
+            bottom: 0;
+            left: 0;
+        }
+
+            #orbitcheck .orbit-lei {
+                width: 5%;
+                height: 100%;
+                float: left;
+                position: relative;
+            }
+
+        #ImgTypeBox {
+            background-color: transparent;
+            left: 10px;
+        }
+
+        #list1, #_YSButton, #quanbu1, #btnSet {
+            float: left;
+            margin-top: 115px;
+            margin-left: 10px;
+            width: 4.7%;
+        }
+
+        #orbitcheck .orbit-button a {
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        #orbitcheck .orbit-button-play {
+            background: url(img/orbit-img/orbit-play-bg.png) no-repeat;
+            margin-top: 122px;
+            float: left;
+            margin-left: 10px;
+            width: 13%;
+        }
+
+            #orbitcheck .orbit-button-play a {
+                margin-left: 3px;
+                /*width:21.5%;*/
+            }
+
+        #orbitcheck .orbit-button-numb {
+            background: url(img/orbit-img/orbit-number.png) no-repeat;
+            background-size: contain;
+            width: 1.8%;
+            /*height: 38px;*/
+            margin-left: 2px;
+            margin-top: 122px;
+            text-align: center;
+            float: left;
+        }
+
+            #orbitcheck .orbit-button-numb label {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+        #orbitcheck .orbit-contrl {
+            float: left;
+            margin-top: 122px;
+            width: 50%;
+            margin-left: 10px;
+        }
+
+        #orbitcheck .orbit-close {
+            float: right;
+            margin-top: 115px;
+            margin-right: 20px;
+            width: 5%;
+        }
+
+        #play1 {
+            display: none;
+            position: absolute;
+            background: url(img/orbit-img/orbit-filter-bg.png) no-repeat;
+            background-size: 100% 100%;
+            width: 50px;
+            color: White;
+            text-align: center;
+            padding: 5px;
+        }
+
+            #play1 table {
+                margin: 10px auto;
+            }
+
+        #Submit1 {
+            display: inline-block;
+        }
+
+            #Submit1 img, #btn_hideSoBox img {
+                border-radius: 4px;
+            }
+
+        #btn_hideSoBox {
+            display: inline-block;
+        }
+
+        #slider {
+            font-size: 12px;
+            margin-top: 5px;
+            height: 0.4em;
+            width: 91%;
+        }
+
+            #slider.ui-widget-content {
+                border: 1px solid #666;
+                background: none;
+            }
+
+            #slider .ui-slider-handle {
+                border-color: transparent;
+                border: none;
+                background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+                background-size: contain;
+                width: 25px;
+                height: 25px;
+                margin-top: -3px;
+                margin-left: -6px;
+                cursor: pointer;
+                border-bottom: none;
+            }
+
+        #Sms_slider {
+            background: url(img/orbit-img/orbit-bar.png) no-repeat;
+            border: none;
+            height: .6em;
+        }
+
+            #Sms_slider .ui-slider-range {
+                background: #52D9F9;
+            }
+
+            #Sms_slider .ui-slider-handle {
+                border-color: transparent;
+                border: none;
+                background: url(img/orbit-img/orbit-rice.png) no-repeat;
+                background-size: contain;
+                width: 20px;
+                height: 20px;
+            }
+
+        @media screen and (max-width:1680px) {
+            #orbitcheck .orbit-lei {
+                width: 6%;
+            }
+
+            #list1, #_YSButton, #quanbu1, #btnSet {
+                width: 5%;
+            }
+
+            #orbitcheck .orbit-button-play {
+                width: 15%;
+            }
+
+            #orbitcheck .orbit-button-numb {
+                width: 2.1%;
+            }
+
+            #orbitcheck .orbit-contrl {
+                width: 45%;
+            }
+
+            #orbitcheck .orbit-close {
+                width: 5.5%;
+            }
+        }
+
+        @media screen and (max-width:1440px) {
+            #orbitcheck .orbit-lei {
+                width: 7%;
+            }
+
+            #list1, #_YSButton, #quanbu1, #btnSet {
+                width: 6%;
+            }
+
+            #orbitcheck .orbit-button-play {
+                width: 17%;
+            }
+
+            #orbitcheck .orbit-button-numb {
+                width: 2.3%;
+            }
+
+            #orbitcheck .orbit-contrl {
+                width: 37%;
+            }
+
+            #orbitcheck .orbit-close {
+                width: 5.5%;
+            }
+        }
+
+        @media screen and (max-width:1366px) {
+            #orbitcheck .orbit-lei {
+                width: 8%;
+            }
+
+            #list1, #_YSButton, #quanbu1, #btnSet {
+                width: 7%;
+                margin-left: 3px;
+            }
+
+            #orbitcheck .orbit-button-play {
+                width: 18%;
+                margin-left: 6px;
+            }
+
+            #orbitcheck .orbit-button-numb {
+                width: 2.3%;
+                margin-top: 124px;
+            }
+
+            #orbitcheck .orbit-contrl {
+                width: 32%;
+            }
+
+            #orbitcheck .orbit-close {
+                width: 6%;
+            }
+
+            #orbitcheck .orbit-button-numb label {
+                margin-top: 8px;
+            }
+        }
+
+        @media screen and (max-width:1280px) {
+            #orbitcheck .orbit-lei {
+                width: 9%;
+            }
+
+            #list1, #_YSButton, #quanbu1, #btnSet {
+                width: 6.5%;
+                margin-left: 3px;
+            }
+
+            #orbitcheck .orbit-button-play {
+                width: 19%;
+            }
+
+            #orbitcheck .orbit-button-numb {
+                width: 2.3%;
+                margin-top: 124px;
+            }
+
+            #orbitcheck .orbit-contrl {
+                width: 32%;
+            }
+
+            #orbitcheck .orbit-close {
+                width: 6%;
+            }
+
+            #orbitcheck .orbit-button-numb label {
+                margin-top: 8px;
+            }
+        }
+
+        @media screen and (max-width:1024px) {
+            #orbitcheck .orbit-lei {
+                width: 9%;
+            }
+
+            #list1, #_YSButton, #quanbu1, #btnSet {
+                width: 6%;
+                margin-left: 1px;
+                margin-top: 123px;
+            }
+
+            #orbitcheck .orbit-button-play {
+                width: 20%;
+                margin-top: 125px;
+                margin-left: 2px;
+            }
+
+                #orbitcheck .orbit-button-play img {
+                    width: 45px;
+                }
+
+            #orbitcheck .orbit-button-numb {
+                width: 3%;
+                margin-top: 124px;
+            }
+
+            #orbitcheck .orbit-contrl {
+                width: 34%;
+            }
+
+            #orbitcheck .orbit-close {
+                width: 6%;
+                margin-right: 5px;
+            }
+
+            #orbitcheck .orbit-button-numb label {
+                margin-top: 6.5px;
+            }
+        }
+
+        .playTime {
+            position: absolute;
+            background: url(img/orbit-img/orbit-time.png) no-repeat;
+            width: 192px;
+            height: 44px;
+            top: -48px;
+            left: -96px;
+            line-height: 35px;
+        }
+
+        #_Content1 {
+            color: #52D9F9;
+            padding: 5px 5px 5px 15px;
+        }
+
+        #note {
+            position: absolute;
+            width: 180px;
+            padding: 10px;
+            background: #000000;
+            border: 1px solid #ccc;
+            right: 1%;
+            z-index: 9999;
+            display: none;
+            filter: alpha(Opacity=60);
+            -moz-opacity: 0.6;
+            opacity: 1.0;
+        }
+
+        #slider {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <!--<div class="menuHolder">
+        <div class="menuWindow">
+            <ul class="p1">
+                <li class="s1"><a href="#url" id='list1' onclick="ss()">筛选</a> </li>
+            </ul>
+        </div>
+    </div>-->
+    <div id="allp" style="display: block; left: 150px; bottom: 60px; position: absolute;
+        z-index: 1009;">
+        <div id="play1">
+            <table>
+                <tr>
+                    <td>
+                        缺陷状态：
+                    </td>
+                    <td>
+                        <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" style="width: 156px;" size="3">
+                            <option value="AFSTATUS01">新上报</option>
+                            <option value="AFSTATUS03">已确认</option>
+                            <option value="AFSTATUS04">已计划</option>
+                            <option value="AFSTATUS07">检修中</option>
+                            <option value="AFSTATUS02">已取消</option>
+                            <option value="AFSTATUS05">已关闭</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        报警类型：
+                    </td>
+                    <td>
+                        <input id="citySel" type="text" value="" code="" class="smallInput" style="width: 150px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        开始时间：
+                    </td>
+                    <td>
+                        <input name="Ureportdate" type="text" id="Text2" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                               style="width: 150px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        结束时间：
+                    </td>
+                    <td>
+                        <input name="Ureportdate" type="text" id="Text3" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                               style="width: 150px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        线&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路：
+                    </td>
+                    <td>
+                        <select id="lineselect" name="lineselect" style="width: 160px;" onchange="lineChange(this.value)">
+                            <option value="0">全部</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;站：
+                    </td>
+                    <td>
+                        <input type="text" id="txtqz" class="smallInput" style="width: 150px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+                    </td>
+                    <td>
+                        <div><input type="text" id="direction" name="direction" style="width: 150px;" /></div>
+                        <!--<select id="direction" name="direction" style="width: 160px;">
+                            <option value=""></option>
+                            <option value="无行别">无行别</option>
+                            <option value="上行">上行</option>
+                            <option value="下行">下行</option>
+                        </select>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        速&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：
+                    </td>
+                    <td>
+                        <input type="text" id="startSpeed" class="smallInput" style="width: 65px;" />
+                        -
+                        <input type="text" id="endSpeed" class="smallInput" style="width: 65px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align:right;">
+                        <a href="#" name="btnOk" id="Submit1" onclick="OnClickSmsInfo(); closeTime(); ColseC3Alarm();"><img src="img/orbit-img/orbit-check.png" alt="查询" /></a>
+                        <a href="#" id="btn_hideSoBox" onclick="ColseDIV();"><img src="img/orbit-img/orbit-hide.png" alt="隐藏" /></a>
+                        <!--<input type="submit" name="btnOk" value="查询" id="Submit1" onclick="OnClickSmsInfo();closeTime();"
+                            title="查询" class="btn btn-primary " />
+                        <input type="button" value="隐藏" id="btn_hideSoBox" class="btn btn-primary" onclick="ColseDIV();" />-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!--<div id="_Button" style="display: block; left: 60px; top: 5px; position: absolute;
+        z-index: 1000;">
+        <a href='#' class='btn btn-primary' onclick='OrbitJtopo()' style='background: #4A6F9C;
+            color: White; display: none;'>拓扑模式</a>&nbsp;&nbsp;&nbsp <a href='#' class='btn btn-primary'
+                id="_YSButton" onclick='QB()' style='background: #4A6F9C; color: White; display: none'>
+                原始轨迹 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='#' class='btn btn-primary' id="quanbu1"
+                    onclick='QBSms()' style='background: #4A6F9C; color: White;'>全部轨迹</a>
+        <a href='#' class='btn btn-primary' id="A1" onclick='JSSms(0)' style='background: #4A6F9C;
+            color: White; display: none;'>加速显示</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='#'
+                class='btn btn-primary' style='background: #4A6F9C; color: White;' id="btnSet">设置行别
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href='#' class='btn btn-primary' onclick='window.close()'
+                style='background: #4A6F9C; color: White;'>关闭本页</a>
+        <br />
+    </div>-->
+    <!--</div>-->
+    <!--<div id="ImgTypeBox">
+        <div>
+            <input id="cb_type1" type="checkbox" checked="checked" style="vertical-align: middle;
+                display: inline;" /><span style="vertical-align: middle; color: White; display: inline;">
+                    <label style='display: inline;' for="cb_type1">
+                        <span id="sp_type1"></span>
+                        <img style='width: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico1.png' />
+                    </label>
+                </span>
+        </div>
+        <div>
+            <input id="cb_type2" type="checkbox" checked="checked" style="vertical-align: middle;" /><span
+                style='color: White;'>
+                <label for="cb_type2" style='display: inline;'>
+                    <span id="sp_type2"></span>
+                    <img style='width: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico2.png' />
+                </label>
+            </span>
+        </div>
+        <div>
+            <input id="cb_type3" type="checkbox" checked="checked" style="vertical-align: middle;" /><span
+                style='color: White;'>
+                <label for="cb_type3" style='display: inline;'>
+                    <span id="sp_type3"></span>
+                    <img style='width: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico3.png' />
+                </label>
+            </span>
+        </div>
+    </div>-->
+    <div id="C3Alarm" style="display: none; position: absolute; top: 0px; right: 0;
+        z-index: 9990; background-color: #333333;">
+        <div style="position: absolute; left: -25px; top: 10px;">
+            <a href="#" onclick="ColseC3Alarm()" style="font-size: 30px; color: White;">X</a>
+        </div>
+
+        <div id="note" style="display: none">
+            <a href="#" style="color: White" onclick="ShowAllImg()">
+                <!--<span id="qjbtn" title="全景" class="icon32 icon-white icon-image"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/pic.png" id="qjbtn" alt="全景" />
+            </a>
+
+            <a href="#" style="color: White" onclick="upImg()">
+                <!--<span title="上一张" class="icon32 icon-white icon-arrowthick-w"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/left.png" id="note-left" alt="上一张" />
+            </a>
+
+            <a href="#" style="color: White" onclick="lastImg()">
+                <!--<span title="下一张" class="icon32 icon-white icon-arrowthick-e"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/right.png" id="note-right" alt="下一张" />
+            </a>
+
+            <a href="#" style="color: White" id="A2" onclick='GoToAlarmFrame()'>
+                <!--<span title="跳转到缺陷帧" class="icon32 icon-white icon-info"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/jump.png" id="note-jump" alt="跳转到缺陷帧" />
+            </a>
+
+            <!-- <a href="#" style="color: White" id="btn_alarmFrame" onclick="$('.btn_setFrame').toggle()">
+            <span title="设置缺陷帧显示与隐藏" class="icon32 icon-white icon-gear"></span></a>-->
+
+            <a href="#" style="color: White" onclick="out()">
+                <!--<span title="关闭" class="icon32 icon-white icon-cross"></span>-->
+                <img src="/C3/PC/MAlarmMonitoring/ImgTmp/close1.png" id="note-close" alt="关闭" />
+            </a>
+
+            <div id="slider"></div>
+
+        </div>
+
+        <div id='C3Alarm_2'>
+            <img src='' id="hw" class="ssjk_hw" />
+        </div>
+        <div id='C3Alarm_3'>
+            <img src='' id="kjg" />
+        </div>
+        <div id='C3Alarm_5'>
+            <img src='' id="allimg" />
+        </div>
+        <div id='C3Alarm_4'>
+            <div id="linechart" style="background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+        </div>
+        <div id='C3Alarm_1' style="overflow-y: auto; overflow-x: hidden; display:none">
+            <div class="box-content">
+                <div id="tablejbxx">
+                    <table class="table1" id="tableinfo" style="color: White;">
+                        <tr>
+                            <td colspan="2">
+                                设备编号：<strong><span id="trainNo"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                时间：<strong><span id="raised_time"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                地点：<strong><span id="WZ"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                报警温度：<strong><span id="wendu"></span><span>℃</span></strong>
+                            </td>
+                            <td style="">
+                                环境温度：<strong><span id="hjwendu"></span><span>℃</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                导高值：<strong><span id="dgz"></span><span>mm</span></strong>
+                            </td>
+                            <td>
+                                拉出值：<strong><span id="lcz"></span><span>mm</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%;">
+                                速度：<strong><span id="sudu"></span><span>km/h </span></strong>
+                            </td>
+                            <td style="width: 50%;">
+                                弓位置：<strong><span id="BOW_TYPE"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                报警级别：<strong> <span id="severity"></span></strong>
+                            </td>
+                            <td>
+                                报警状态：<strong><span id="status"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" colspan="2">
+                                报警类型：<strong> <span id="SUMMARYDIC"></span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <input type="submit" name="E_btnOk2" value="报警确认" id="E_btnOk2" title="确认疑似缺陷属实"
+                                       class="btn btn-primary " />
+                                <input type="submit" name="E_btnCan2" value="报警取消" id="E_btnCan2" title="疑似缺陷属于误报，取消该缺陷显示"
+                                       class="btn btn-primary" />
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                报警分析： <strong><span id="txtDefect"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                处理建议： <strong><span id="txtAdvice"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                备注： <strong><span id="txtNote"></span></strong><a href="#" onclick="Map()">
+                                    <img src='/Common/img/roll.gif' />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 300px">
+                                报告人：<strong><span id="txtReporter"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                报告日期： <strong><span id="reportdate"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                设备厂商：<strong><span id="vendor"></span> </strong>线路：<strong>
+                                    <span id="wwdw"></span>
+                                </strong>
+                            </td>
+                            <td>
+                                区站：<strong><span id="QZ"></span> </strong>
+                            </td>
+                            <td>
+                                桥隧：<strong><span id="brige"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                杆号：<strong><span id="pole_number"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="display: none">
+                                供电段： <strong><span id="GDD"></span></strong>
+                            </td>
+                            <td style="display: none">
+                                供电车间：<strong><span id="CJ"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                供电班组：<strong><span id="BZ"></span> </strong>
+                            </td>
+                            <td style="width: 200px; display: none">
+                                公里标：<strong><span id="km_mark"></span></strong> 状态变化时间：<strong>
+                                    <span id="status_time">
+                                    </span>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr id="jltr" style="display: none;">
+                            <td style="width: 100px">
+                                交路号：<strong><span id="jlh"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                运用区段：<strong><span id="crossing_no"></span></strong> 线路：<strong>
+                                    <span id="line_code">
+                                    </span>
+                                </strong>车站：<strong><span id="STATION_NO"></span> </strong>
+                                <input id="taskid" type="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="text-align: center; z-index: 9999; display: none">
+                <div id="irvAA">
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-container-update" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="top: 50%; width: 1400px; left: 30%; z-index: 9999;">
+        <div class="modal-header">
+            <h3>
+                <span id="updatetitle"></span>
+            </h3>
+            <input id="updatetype" type="hidden" />
+        </div>
+        <div class="modal-body form-horizontal">
+            <table id="tb_sure" class="table" cellpadding="1" cellspacing="1" style="width: 93%">
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报警类型：
+                        </label>
+                        <div id="afcodeYZ" class="controls">
+                            <input id="Text1" type="text" value="" style="width: 160px; margin: 0;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报警级别：
+                        </label>
+                        <div id="UseverityYZ" class="controls">
+                            <select id="Useverity" style="width: 100px" onchange="yzAlarmData()">
+                                <option>请选择</option>
+                                <option>一类</option>
+                                <option>二类</option>
+                                <option>三类</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            报警分析：
+                        </label>
+                        <div class="controls">
+                            <div id="UtxtDefectYZ">
+                                <textarea name="txtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 900px;"
+                                          onblur="yzAlarmData()"></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            处理建议：
+                        </label>
+                        <div class="controls">
+                            <textarea name="txtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            备注：
+                        </label>
+                        <div class="controls">
+                            <textarea name="txtNote" id="UtxtNote" rows="2" style="height: 30px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报告人：
+                        </label>
+                        <div id="Div3" class="controls">
+                            <input name="txtReporter" type="text" id="UtxtReporter" style="width: 100px;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报告日期：
+                        </label>
+                        <div id="Div4" class="controls">
+                            <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                   style="width: 150px" />
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td colspan="2">
+                        <div class="control-group error">
+                            *红框内必填
+                        </div>
+                    </td>
+                </tr>-->
+            </table>
+            <input type="checkbox" id="cb_showTask" class="zrw" /><label for="cb_showTask" style="display: inline;"
+                                                                         class="zrw">
+                <h3 style="display: inline;">
+                    转任务
+                </h3>
+            </label>
+            <div id="box_task" class="zrw" style="height: 200px; display: none">
+                <iframe id="iframe_task" name="iframe_task" style="width: 100%; height: 210px;" seamless="seamless"
+                        src="" scrolling="no" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="Button4" class="btn btn-primary zrw" style="display: none">
+                确认并转任务
+            </button>
+            <button id="Button2" class="btn btn-primary" onclick="btnAlarmUpdate()">
+                确认
+            </button>
+            <button id="btncols" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <a id="modal-direction" href="#modal-container-direction" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-container-direction" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="top: 50%; width: 350px; left: 50%; z-index: 9999;">
+        <div class="modal-header">
+            <button id="btnModal" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×
+            </button>
+            <h3>
+                设置行别
+            </h3>
+        </div>
+        <div class="modal-body form-horizontal">
+            行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+            <input type="text" id="xb" name="direction" style="width: 150px;" />
+
+            <!--<select id="xb" name="direction"
+                                                                       style="width: 160px;">
+                <option value="无行别">无行别</option>
+                <option value="上行">上行</option>
+                <option value="下行">下行</option>
+            </select>-->
+            <input type="button" value="确定" id="btnDirection" class="btn btn-danger" onclick="setDirection();" />
+        </div>
+    </div>
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span>
+        </div>
+    </div>
+    <div class="main">
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 930px; text-align: center; z-index: 1" id="orBmapDiv">
+                </div>
+                <!--<div style="display: block; left: 100px; bottom: 250px; position: absolute; z-index: 1000;
+                    width: 80%; height: 50px; background-color: rgba(15,15,17,0.5); color: White;
+                    text-align: center; padding: 5px;">
+                    <div id="Sms_slider">
+                    </div>
+                    <div id="btns" class="fl sboxt" style="height: 50px; line-height: 50px;">
+                        <a id="btn_slow" href="javascript:chageSpeed_slow()"><span class="glyphicon glyphicon-backward"></span></a>
+                        <a id="btn_play" href="#" title="播放" style="display: none;"><span title="播放" class="glyphicon glyphicon-play"></span></a>
+                        <a id="btn_pause" href="#" title="暂停"><span title="暂停" class="glyphicon glyphicon-pause"></span></a>
+                        <a id="btn_fast" href="javascript:chageSpeed_fast()"><span class="glyphicon glyphicon-forward"></span></a>
+                        <label id="speendMemo" style="font-size: 15px; width: 50px; display: inline-block;">
+                            正常
+                        </label>
+                        <a id="btn_last" href="#" title="加速" style="display: none;"><span title="加速" class="iconstar_fast">
+                        </span></a><strong id="_Content" style="font-size: 12px;">开始时间：<label id="_Content_Sta_Lab"></label>&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="_Content_Sta">重播</a></strong>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <strong id="_Content_End" style="font-size: 12px;">
+                        </strong>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <strong id="_Content1" style="font-size: 12px;">
+                        </strong>
+                    </div>
+                </div>-->
+                <!-- 新的控制界面 -->
+                <div id="orbitcheck">
+                    <div class="orbit-lei">
+                        <div id="ImgTypeBox">
+                            <div>
+                                <input id="cb_type1" type="checkbox" checked="checked" style="vertical-align: middle;
+                                        display: inline;" /><span style="vertical-align: middle; color: White; display: inline;">
+                                    <label style='display: inline;' for="cb_type1">
+                                        <span id="sp_type1"></span>
+                                        <img style='width: 15px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico1.png' />
+                                    </label>
+                                </span>
+                            </div>
+                            <div>
+                                <input id="cb_type2" type="checkbox" checked="checked" style="vertical-align: middle;" /><span style='color: White;'>
+                                    <label for="cb_type2" style='display: inline;'>
+                                        <span id="sp_type2"></span>
+                                        <img style='width: 15px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico2.png' />
+                                    </label>
+                                </span>
+                            </div>
+                            <div>
+                                <input id="cb_type3" type="checkbox" checked="checked" style="vertical-align: middle;" /><span style='color: White;'>
+                                    <label for="cb_type3" style='display: inline;'>
+                                        <span id="sp_type3"></span>
+                                        <img style='width: 15px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico3.png' />
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="orbit-button">-->
+                    <a href="#" id='list1' onclick="ss()"><img src="img/orbit-img/orbit-filter.png" alt="筛选" /></a>
+                    <a href="#" id="_YSButton" onclick='QB()' style="display:none;"><img src="img/orbit-img/orbit-old.png" alt="原始轨迹" /></a>
+                    <a href="#" id="quanbu1" onclick='QBSms()'><img src="img/orbit-img/orbit-all.png" alt="全部轨迹" /></a>
+                    <a href="#" id="btnSet"><img src="img/orbit-img/orbit-line.png" alt="设置行别" /></a>
+                    <div class="orbit-button-play">
+                        <a id="btn_slow" href="javascript:chageSpeed_slow()"><img src="img/orbit-img/orbit-left.png" alt="减速" /></a>
+                        <a id="btn_play" href="#" title="播放" style="display: none;"><img src="img/orbit-img/orbit-play.png" alt="播放" /></a>
+                        <a id="btn_pause" href="#" title="暂停"><img src="img/orbit-img/orbit-pause.png" alt="暂停" /></a>
+                        <a id="btn_fast" href="javascript:chageSpeed_fast()"><img src="img/orbit-img/orbit-right.png" alt="加速" /></a>
+                        <a href="javascript:void(0);" id="_Content_Sta"><img src="img/orbit-img/orbit-repeat.png" alt="重播" /></a>
+                    </div>
+                    <a href="#" class="orbit-button-numb"><label id="speendMemo">正常</label></a>
+                    <!--</div>-->
+                    <div class="orbit-contrl" style="position:relative;">
+                        <div class="playTime"></div>
+                        <div id="Sms_slider" style="margin-bottom:6px;"></div>
+                        <strong id="_Content" style="font-size: 12px; color: #ffffff">开始时间：<label id="_Content_Sta_Lab"></label></strong>
+                        <strong id="_Content_End" style="font-size: 12px;float:right;color:#ffffff"></strong>
+                    </div>
+                    <a class="orbit-close" href="#" onclick='window.close()'>
+                        <img src="img/orbit-img/orbit-close.png" alt="关闭本页" />
+                    </a>
+                </div>
+
+                <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                   style="display: none"></a>
+                <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-body">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                            <tr>
+                                <td colspan="2">
+                                    获取红外时间
+                                    <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                           runat="server" style="width: 150px" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="getHuoQueSmsSP()" id="sub">
+                            获取
+                        </button>
+                        <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                            关闭
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+<script>
+    $(function () {
+        LoadSureBox('3C', GetQueryString("alarmid"))
+    })
+
+</script>

@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备检测缺陷监控</title>
+    <link href="/Common/MTopo/css/jquery.snippet.min.css" rel="stylesheet">
+    <script src="/Common/MTopo/js/jquery.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/site.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/demo.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/device.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/snippet/jquery.snippet.min.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/excanvas.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/jtopo-min.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/xmlHttpHelper.js" type="text/javascript"></script>
+    <!--操作-->
+    <script src="/Common/MTopo/js/MisAlarm.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisLine.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisObjData.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisPosition.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisSms.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisSubstation.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisUserContainer.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+   
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <!--结束-->
+    <script language="javascript">
+        function disabledMouseWheel() {
+            if (document.addEventListener) {
+                document.addEventListener('DOMMouseScroll', scrollFunc, false);
+            } //W3C
+            window.onmousewheel = document.onmousewheel = scrollFunc; //IE/Opera/Chrome
+        }
+        function scrollFunc(evt) {
+            return false;
+        }
+        $(document).ready(function () {
+            //loadTree(); //加载树 
+            load6CFlexiGrid();
+            $("#sss").css({
+                top: 0,
+                left: 0
+            }).show();
+            disabledMouseWheel();
+
+            var centerLon = decodeURIComponent(GetQueryString("centerLon"), null, null);
+            var centerLat = decodeURIComponent(GetQueryString("centerLat"), null, null);
+            var xunit = decodeURIComponent(GetQueryString("xunit"), null, null);
+            var yunit = decodeURIComponent(GetQueryString("yunit"), null, null);
+            var type = decodeURIComponent(GetQueryString("type"), null, null);
+            var json = GetQueryString("json");
+            var TopoStyle = GetQueryString("TopoStyle");
+            var AlarmTopo = "6CAlarmTopo";
+            if (TopoStyle != "GIS") {
+                TopoStyle = "";
+                document.getElementById('option2').checked = "checked";
+            } else {
+                document.getElementById('option1').checked = "checked";
+            }
+
+            var scene;
+            if (centerLon == 'null') {
+                scene = GetOneMisLine("", "", "", "", TopoStyle, AlarmTopo);
+            } else {
+                scene = GetOneMisLine(centerLat, centerLon, xunit, yunit, TopoStyle, AlarmTopo);
+                switch (type) {
+                    case "1":
+                        getYJC3ClickSmsInfo(json, 1);
+                        break;
+                    case "3":
+                        break;
+                    case "5":
+                        YJonclickAlarm(json, 1);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        })
+    </script>
+</head>
+<body onload="RefsetInterval();">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid sortable">
+                <div class="box span12" id="topo">
+                    <div class="box-content" style="z-index: 99999; position: relative;">
+                        <div id="rightmenu" class="menuJtopo" style="display: none;">
+                        </div>
+                        <div id="clickmenu" class="outsideJtopo" style="display: none;">
+                            <div class="menuJtopo" id="insideJtopo">
+                            </div>
+                            <sjtopo><iJtopo></iJtopo></sjtopo>
+                        </div>
+                        <div id="sss" style="filter: alpha(opacity=50);">
+                            <div data-toggle="buttons" style="border: 0px solid #aaa; border-bottom: 0; position: absolute;
+                                list-style: none; margin: 0; padding: 0; display: block; padding: 10px; border-bottom: 0px solid #aaa;">
+                                <label class="btn btn-primary" style="background: #4A6F9C">
+                                    <input type="radio" onclick="oneAlarmurl6C()" name="options" id="option2">
+                                    拓扑模式
+                                </label>
+                                <label class="btn btn-primary" style="background: #4A6F9C">
+                                    <input type="radio" onclick="oneAlarmurl6C('GIS')" name="options" id="option1">
+                                    地图模式
+                                </label>
+                            </div>
+                        </div>
+                        <div id="content" style="z-index: 99999;">
+                        </div>
+                        <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                            style="display: none"></a>
+                        <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                            aria-labelledby="myModalLabel" style="width: 1000px; height: 640px; z-index: 99999;
+                            left: 450px; top: 300px;">
+                            <div id="modal-body" style="height: 580px; width: 950px; z-index: 99999;">
+                                <iframe id="url" style="height: 580px; width: 940px;"></iframe>
+                            </div>
+                            <div class="modal-footer" style="z-index: 99999;">
+                                <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                                    关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            最近报警</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content" style="z-index: -9999;">
+                        <table id="flexTable" style="display: none; z-index: -9999;">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

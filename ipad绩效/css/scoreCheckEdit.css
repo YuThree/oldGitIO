@@ -1,0 +1,76 @@
+.y_logPng{
+    width: 11px;
+    background: no-repeat center 11px url(../img/back.png)
+}
+.y_longInput input{
+    width: 290px;
+}
+nav{
+    height:44px;
+}
+nav>div{
+    height:44px;
+    line-height:44px;
+}
+.y_logText{
+    font-size:16px;margin-left: 50%;
+}
+.y_loctionTitle{
+    font-size: 14px;color: #4D545E;margin-top: 21px;padding-left: 15px;
+}
+.y_textAre{
+    width: calc(100% - 30px);box-sizing: border-box;
+    background: #FFFFFF;
+    height: calc(100% - 110px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0 15px 0 15px;
+    padding: 4px 23px 23px 24px;
+    position: absolute;
+    top:95px;
+    left: 0;
+}
+.y_label{
+    color: #464F5C;font-size: 14px;
+}
+.y_formBox{
+    margin-top: 20px;
+}
+.y_formBox input,.y_formBox select{
+    width: 200px;
+}
+.y_formBox textarea{
+    height: 150px;
+    width: 100%;
+}
+.y_ccColor{
+    color: #999999;
+}
+.y_inputBox{
+    display: inline-block;
+    width: calc(100% - 66px);
+}
+.y_queryButton{
+    line-height: 36px;margin-left: 66px;
+}
+
+/* 双高度 */
+@media screen and (min-width: 535px) and (max-width: 768px) {
+    .y_listBox{
+        height:calc(100% - 146px);
+    }
+}
+@media screen and (max-width: 534px) {
+    .y_checkButton{
+        margin-top: -82px;
+    }
+    .y_listBox{
+        height:calc(100% - 146px);
+    }
+}
+/* 三高度 */
+@media screen and (max-width: 431px) {
+    .y_listBox{
+        height:calc(100% - 192px);
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <style>
+        .tsetDiv{
+            width:40px;
+            height: 40px;
+            border-radius: 100%;
+            font-size: 0;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        #boxF{
+            <!-- width:600px; -->
+            font-size: 0;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="boxF"></div>
+<script type="text/javascript">
+var boxf=document.getElementById("boxF");
+var r=100;
+var g=61;
+var b=20;
+    for(let i=0;i<20;i++){
+        for(let j=0;j<38;j++){
+            let divC=document.createElement("div");
+            divC.style.backgroundColor="rgb("+r+","+g+","+b+")";
+         
+            divC.setAttribute("class","tsetDiv");
+            boxf.appendChild(divC);
+        }
+        //修改r g b加的不同值可以得到不同的效果 rgb最大值为255 所以不用担心超过不显示
+            r+=10;
+            g+=20;
+            b+=30;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新生儿疾病筛查</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/children/newChildEil.css">
+    <!-- 独自样式 -->
+ 
+    
+</head>
+<body>
+    <form id="signupForm">
+        <div class="cdct_tableTitle">新生儿疾病筛查</div>
+        <div class="scrollJS">
+            <div class="z-Box">
+                <!-- 姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">新生儿姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入新生儿姓名" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">性别</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入性别" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 姓名 -->
+
+                <!-- 出生日期 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">出生日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone" placeholder="请选择出生日期" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">母亲姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly  name="firstname3" class="cdct_inputNone " placeholder="请输入母亲姓名" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 出生日期 -->
+
+                <!-- 与户主关系 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">身份证</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入身份证" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">出生日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请选择出生日期" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 与户主关系 -->
+
+                <!-- 现住地址 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">现住地址</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input readonly type="text" class="cdct_inputNone" placeholder="请输入现住地址">
+                    </div>
+                </div>
+                <!-- 现住地址 -->
+
+                <!-- 邮编 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">邮编</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone" placeholder="请输入邮编" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">联系电话</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入联系电话" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 邮编 -->
+
+                <!-- 采血情况 -->
+                <div class="cdct_row cdct_rows_col5">
+                    <div class="cdct_rowLeft">
+                        <span class="cdct_tit">采血情况</span>
+                    </div>
+                    <div class="cdct_rowRight">
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3 title">
+                                <span>标本编号</span>
+                            </div>
+                            <div class="cdct_col pointBox3 title">
+                                <span>采血时间</span>
+                            </div>
+                            <div class="cdct_col pointBox3 title">
+                                <span>采血方式</span>
+                            </div>
+                            <div class="cdct_col pointBox3 title">
+                                <span>采血部位</span>
+                            </div>
+                            <div class="cdct_col pointBox3 title">
+                                <span>采血单位</span>
+                            </div>
+                            <div class="cdct_col pointBox3 title">
+                                <span>采血者</span>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone datepicker">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone datepicker">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone datepicker">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone datepicker">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_info marLe">
+                                    <input type="text" class="cdct_inputNone">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 采血情况 -->
+
+                <!-- 筛查编号 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">筛查编号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入筛查编号" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">筛查日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择筛查日期" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查编号 -->
+
+                <!-- 筛查项目 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">筛查项目</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入筛查项目" required>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">筛查方法</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入筛查方法" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查项目 -->
+
+                <!-- 筛查结果 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit">筛查结果</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="100" data-pmttextarea="1">
+                            <textarea class="cdct_textarea zareaHei48" placeholder="请输入您的意见"></textarea>
+                            <div data-pmttextshow="1" style="position: absolute;bottom: 0;right: 20px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">100字</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查结果 -->
+
+                <!-- 筛查单位 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">筛查单位</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">筛查单位</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">筛查单位</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">检查医生</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">检查医生</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">检查医生</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查单位 -->
+            </div>
+        </div>
+    </form>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 控件调用js -->
+    <script src="../../js/baseInfo.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //验证  
+
+        var obj =  $("#signupForm").validate({
+            rules: {
+              firstname: {
+                required: true,
+                minlength: 3
+              },
+              firstname1: {
+                required: true,
+                minlength: 3
+              },
+              firstname3: {
+                required: true,
+                minlength: 3
+              }
+            },
+            errorClass:"errorClass_"
+        });
+        obj.form();
+    </script>      
+</body>
+</html>

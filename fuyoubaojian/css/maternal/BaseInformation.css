@@ -1,0 +1,33 @@
+.scrollJS {
+    height: calc(100% - 60px);
+}
+
+button {
+    cursor: pointer;
+}
+
+.z-Box{
+    width: 100%;
+    min-height: 100%;
+}
+body{
+    height: 100%;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+html{
+    height: 100%;
+}
+
+.linkMsg .cdct_tit {
+    top: 30%;
+}
+
+.linkMsg .cdct_btn {
+    position: relative;
+    top: 40%
+}
+

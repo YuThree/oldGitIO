@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多级tab</title>
+	<!-- 重置样式 -->
+	<link rel="stylesheet" href="../../common/css/reset.css">
+	<link rel="stylesheet" href="../../jsControl/multiNav/nav.css">
+	
+</head>
+<body>
+		<ul data-menuSetMove="1" class="subNav">
+				<li><a data-clickChangeIfr="true" href="高危筛查登记表.html">高危筛查</a></li>
+				<li><a data-clickChangeIfr="true" href="高危妊娠评分表.html">高危妊娠</a></li>
+		</ul>
+		<ul class="subNav" data-menuSetMove="2">
+				<li><a data-clickChangeIfr="true" href="产前随访.html">产前随访</a></li>
+				<li><a data-clickChangeIfr="true" href="产前检查复诊服务记录表.html">产前诊查复诊</a></li>
+		</ul>
+		<ul class="subNav" data-menuSetMove="3">
+				<li><a data-clickChangeIfr="true" href="艾滋病感染孕妇登记.html">艾滋病感染孕妇</a></li>
+				<li><a data-clickChangeIfr="true" href="艾滋病感染孕产妇妊娠登记.html">艾滋病感染孕妇妊娠</a></li>
+				<li><a data-clickChangeIfr="true" href="梅毒感染孕妇登记.html">梅毒感染登记</a></li>
+				<li><a data-clickChangeIfr="true" href="梅毒感染孕妇随访登记.html">梅毒随访</a></li>
+			</ul>
+	<form class="cdct_form">
+		<div class="cdct_toolbar cdct_clearfix">
+			<div class="cdct_icon cdct_i1">保存</div>
+			<div class="cdct_icon cdct_i2 ">保存并新建</div>
+			<div class="cdct_icon cdct_i3">新建家庭</div>
+			<div class="cdct_icon cdct_i4">打印</div>
+		</div>
+		<nav id="cdct_nav" class="cdct_nav">
+			<div class="leftA"></div>
+			<div class="rightA"></div>
+			<ul class="cdct_nav_ul">
+				<li><a data-clickChangeIfr="true" href="孕产妇基本信息登记表.html" title="" class="on">孕产妇基本信息</a></li>
+				<li class="more" data-menuGetMove="1">
+					<a data-clickChangeIfr="true" href="高危筛查登记表.html" title="">高危管理</a>
+				</li>
+				<li class="more" data-menuGetMove="2">
+					<a data-clickChangeIfr="true" href="产前随访.html" title="">产前管理</a>
+				</li>
+				<li><a data-clickChangeIfr="true" href="产后访视记录表.html" title="">产后随访</a></li>
+				<li class="more"  data-menuGetMove="3">
+					<a data-clickChangeIfr="true" href="艾滋病感染孕妇登记.html" title="">艾梅乙管理</a>
+				</li>
+				<li><a data-clickChangeIfr="true" href="叶酸增补.html" title="">叶酸增补</a></li>
+				<li><a data-clickChangeIfr="true" href="javascript:void(0)" title="">妊娠图</a></li>
+				<li><a data-clickChangeIfr="true" href="叶酸增补.html" title="">叶酸增补</a></li>
+				<li><a data-clickChangeIfr="true" href="javascript:void(0)" title="">妊娠图</a></li>
+				<li><a data-clickChangeIfr="true" href="叶酸增补.html" title="">叶酸增补</a></li>
+				<li><a data-clickChangeIfr="true" href="javascript:void(0)" title="">妊娠图</a></li>
+				<li><a data-clickChangeIfr="true" href="叶酸增补.html" title="">叶酸增补</a></li>
+				<li><a data-clickChangeIfr="true" href="javascript:void(0)" title="">妊娠图</a></li>
+			</ul>
+			<span class="target"></span>
+		</nav>
+		<div class="cdct_iframe">
+			<iframe src="孕产妇基本信息登记表.html" id="forIfr" style="width:100%;height:100%;border:none;"></iframe>
+		</div>
+	    
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../jsControl/MBnavigation/MBnavigation.js"></script>
+	
+	<script type="text/javascript" src="../../jsControl/multiNav/nav.js"></script>
+</body>
+</html>

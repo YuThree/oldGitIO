@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>国铁电气</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <link href="/Lib/bootstrap/css/bootstrap-cerulean.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/charisma-app.css" rel="stylesheet" />
+    <link href="/Common/MDownloadApp/css/downloadApp.css" rel="stylesheet" />
+    <link href="/Lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" rel="stylesheet" />
+
+    <script src="/Lib/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+    <script src="/Lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#download-app').on("tap", function () {
+                if (is_weixin()) {
+                    $('.guide-bg').show();
+                    $('.img-box').show();
+                    $(document).attr('title', '点击下载应用');
+                } else {
+                    var _protocol = window.location.protocol;
+                    var _host = window.location.host;
+                    var _url = _protocol + '//' + _host + '/Common/MDownloadApp/apk/CDGT_3C_App_v1.5.3_2017-11-06_15.apk';
+                    window.location.href = _url;
+                }
+            });
+        });
+
+        //判断客户端类型
+        function is_weixin() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- start:引导层 -->
+    <div class="guide-bg hide"></div>
+    <div class="img-box hide"><img class="guide" src="/Common/MDownloadApp/img/guide.png" /></div>
+    <!-- end:引导层 -->
+
+    <!-- start:下载 -->
+    <div class="content-bg"><img class="" src="/Common/MDownloadApp/img/download_background.png" /></div>
+    <a id="download-app" href="javascript:void(0)"><img src="/Common/MDownloadApp/img/download_app.png" /></a>
+    <!-- end:下载 -->
+</body>
+</html>

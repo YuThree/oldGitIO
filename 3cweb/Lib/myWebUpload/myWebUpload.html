@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>上传控件</title>
+	<meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl('webuploader');
+        loadControl('layer');
+        loadControl('myWebUpload');
+    </script>
+    <style type="text/css">
+        .sss {
+            background: url(/Lib/myUploadImg/images/pic_splicing.png) no-repeat;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //上传控件
+            $('#myUpload').myWebUpload({
+                uploadBtnId: '#ctlBtn',
+                addBtnBgClass: '',
+                uploadCategories: 'filesAndImages', //filesAndImages、files、images
+                server: '/Common/MAlarmMonitoring/RemoteHandlers/UploadFiles.ashx',
+                uploadParams: {
+                    action: 'UpLoad',
+                    alarmid: guid()
+                },
+                onFinished: function (addCount, files, fileStr) {
+                    if (addCount === files.length) {
+                        console.log('添加的文件数：' + addCount);
+                        console.log(files);
+                        console.log(fileStr);
+                    }
+                },
+                callback: function () {
+                    console.log('测试');
+                }
+            });
+
+            //点击上传
+            $('#upload-btn').click(function () {
+                $('#ctlBtn').trigger('click');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="myUpload"></div>
+    <input id="upload-btn" type="button" class="btn btn-primary" value="开始上传"/>
+</body>
+</html>

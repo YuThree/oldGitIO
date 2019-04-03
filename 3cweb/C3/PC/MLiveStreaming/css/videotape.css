@@ -1,0 +1,551 @@
+﻿
+html {
+    height:100%;
+	font-family:微软雅黑;
+}
+body{
+	width:100%;
+	height:100%;
+}
+/*左边容器样式*/
+.videotape-left{
+	width:75%;
+	height:100%;
+	float: left;
+	font-size:16px;
+	position:relative;
+	font-family:微软雅黑;
+}
+
+.videotape-left-nav{
+	padding:25px 0;
+    width:100%;
+    height:50px;
+    background:url(/C3/PC/LineInspection/img/LineInspection_play_Content.png);
+}
+.controller_contentLeft{
+    position:absolute;
+    left:0;
+	top:0;
+    width:5px;
+    height:100px;
+    background:url(/C3/PC/LineInspection/img/LineInspection_play_titleLeft.png);
+}
+.controller_contentRight{
+    position:absolute;
+    right:0;
+	top:0;
+    width:5px;
+    height:100px;
+    background:url(/C3/PC/LineInspection/img/LineInspection_play_titleRight.png);
+}
+
+.videotape-logo{
+	height:100%;
+	width:85px;
+	border-right:1px solid #3dd5f1;
+	float: left;
+	padding: 0 10px 0 15px;
+}
+.videotape-logo>div{
+	 background:url(/C3/PC/MLiveStreaming/img/Satyr.png) repeat;
+	 background-position:  -125px -55px;
+	 width: 32px;
+	 height: 20px;
+	 margin: 0 auto;
+}
+.videotape-logo>p{
+	font-size:16px;
+	color:#3dd5f1;
+	letter-spacing: 3px;
+    margin: 10px 0 0 0;
+}
+.logo-rightimg{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png) repeat;
+	background-position:  -95px -30px;
+	width: 10px;
+	height: 14px;
+	display:inline-block;
+}
+
+#NewBuild,#BtnSearch,#Gwz{
+	width:82px;
+	position:relative;
+	cursor: pointer;
+	display: inline-block;
+	margin-left: 15px;
+}
+#NewBuild div,#BtnSearch div,#Gwz div{
+	display:inline-block;
+	height: 48px;
+}
+#NewBuild .NewBuild-left,#BtnSearch .NewBuild-left,#Gwz .NewBuild-left{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -40px -0px;
+	width: 11px;
+}
+#NewBuild .NewBuild-middle,#BtnSearch .NewBuild-middle,#Gwz .NewBuild-middle{
+	background:url(/C3/PC/MLiveStreaming/img/dbtn-bg.png);
+	width: 60px;
+}
+#NewBuild .NewBuild-right,#BtnSearch .NewBuild-right,#Gwz .NewBuild-right{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -60px -0px;
+	width: 11px;
+}
+#NewBuild .NewBuild-font,#BtnSearch .NewBuild-font,#Gwz .NewBuild-font{
+	position: absolute;
+    left: 22px;
+    top: 0;
+    line-height: 48px;
+	color:white;
+}
+#Gwz .NewBuild-font{
+	left: 16px;
+}
+#NewBuild:hover .NewBuild-left,#BtnSearch:hover .NewBuild-left,#Gwz:hover .NewBuild-left{
+	background-position: -0px -60px;
+}
+#NewBuild:hover .NewBuild-middle,#BtnSearch:hover .NewBuild-middle,#Gwz:hover .NewBuild-middle{
+	background:url(/C3/PC/MLiveStreaming/img/dbtn-bgl.png);
+}
+#NewBuild:hover .NewBuild-right,#BtnSearch:hover .NewBuild-right,#Gwz:hover .NewBuild-right{
+	background-position: -25px -60px;
+}
+#NewBuild:hover .NewBuild-font,#BtnSearch:hover .NewBuild-font,#Gwz:hover .NewBuild-font{
+	color:#3dd5f1;
+}
+#Gwz:hover .Gwz-droup{
+	display:block;
+}
+
+.Gwz-droup{
+	display:none;
+	position: absolute;
+	top:50px;
+	left:0;
+	width: 115px;
+	margin-left: 0;
+}
+.Gwz-droup span{
+	display:inline-block;
+}
+.Gwz-droup a{
+	display:block;
+	margin:0 0 9px 0;
+	text-align:center;
+	font-size:16px;
+	color:white;
+	letter-spacing: 6px;
+}
+.Gwz-droup a:hover{
+	color:#3dd5f1;
+}
+.Gwz-droup>.Gwz-droup-bg{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -295px -15px;
+	width: 115px;
+	height: 20px;
+}
+.Gwz-droup>.Gwz-droup-content{
+	background:url(/C3/PC/MLiveStreaming/img/gwz-bg.png);
+	height:85px;
+	width: 115px;
+	box-shadow:0px 15px 10px -12px rgba(61,213,241,3);
+	padding: 10px 0;
+}
+
+
+.LineInspection_button_play{
+    display:inline-block;
+    height:38px;
+    background:#111111;
+    border-radius:5px;
+    padding:6px 3px;
+	vertical-align: top;
+	margin-left: 20px;
+}
+.LineInspection_button_play>a{
+    cursor:pointer;
+}
+
+.btnGroup,.btn-group{
+	display:inline-block;
+	vertical-align: middle;
+}
+.btnGroup .btn{
+	margin-left:30px;
+}
+.btn-group{
+	margin-left:50px;
+}
+.LineInspection_contrl{
+    display:inline-block;
+    width:44%;
+    height:50px;
+    margin-left:40px;
+    margin-top:-5px;
+	vertical-align: middle;
+	font-size:12px;
+	color:#3dd5f1;
+}
+#Sms_slider{
+    background: url(/C3/PC/LineInspection/img/LineInspection_play_bar.png) ;
+    border: none;
+    border-radius:9px;
+    height: 18px;
+    margin:10px 0 5px 0;
+ }
+ #Sms_slider .ui-slider-handle {
+    border-color: transparent;
+    border: none;
+    background: url(/C3/PC/LineInspection/img/LineInspection_play_circl.png) no-repeat;
+    width: 25px;
+    height: 25px;
+}
+ #Sms_slider .ui-widget-header{
+     background: url(/C3/PC/LineInspection/img/LineInspection_play_bar_bg.png) ;
+     left:5px;
+     top:20%;
+     height:10px;
+    border-radius:5px;
+ }
+
+ .videotape-left-play img{
+	width:100%;
+	height:100%;
+ }
+
+
+/*右边容器样式*/
+.videotape-right{
+	width:25%;
+	height:100%;
+	float: left;
+	font-family:微软雅黑;
+}
+.videotape-right-IR,.videotape-right-VI,.videotape-right-OAB,.videotape-right-FZ{
+	height:24.9%;
+	width:100%;
+	position:relative;
+	cursor:pointer;
+}
+.videotape-right-border{
+	outline: 1px solid #3dd5f1;
+	z-index: 1;
+}
+.Img-Title{
+	position:absolute;
+	top: 0;
+    left: 0;
+    height: 100%;
+	font-size:16px;
+	font-weight: bold;
+	color:#3dd5f1;
+	background-color: rgba(2,2,2,0.7);
+}
+.Img-Title span{
+	width: 18px;
+    display: inline-block;
+    padding: 0 10px;
+	padding-top:80px;
+}
+.Img-Active{
+	color:black;
+	background-color:rgba(61,213,241,0.6);
+}
+
+.videotape-right img{
+	width: 100%;
+    height: 100%;
+}
+
+/*新建弹出层样式*/
+.layui-layer{
+	background-color: transparent;
+	font-family:微软雅黑;
+}
+
+#newbuild,#Search-Box{
+	background:#020202;
+	padding:15px;
+	color:#ffffff;
+	font-size:12px;
+	border-radius: 8px;
+	display:none;
+}
+#newbuild>h4>span,#Search-Box>h4>span{
+	color:#41D0F4;
+	letter-spacing: 20px;
+	margin-left: 10px;
+}
+#newbuild .hr-div,#Search-Box .hr-div{
+	width:100%;
+	height:1px;
+	background:#206c7a;
+	margin:5px 0 15px;
+}
+#new-title{
+	width:320px;
+}
+#new-strTime,#new-endTime,#new-loco{
+	width:147px;
+}
+.div-menu {
+    float: left;
+    width: 133px;
+    height: 25px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 9px;
+}
+
+#locomotive_no {
+    display: block;
+    line-height: 25px;
+    padding-left: 4px;
+    cursor: pointer;
+}
+
+.div-menu img {
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    width: 12px;
+    height: 10px;
+}
+
+#TreeAll {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    height: 160px;
+    width: 200px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+    overflow: auto;
+    background-color: rgba(255,254,241,1);
+    color: White;
+    display: none;
+    padding-top:35px;
+	z-index:1;
+}
+.div-menu:hover {
+    background-color: #004994;
+    border: 1px solid #97d7ff;
+}
+.ztreeInput{
+    width:180px !important;
+    display:none;
+}
+#new-line{
+	width:145px;
+}
+#new-DIRECTION{
+	width: 105px;
+	border-radius: 3px;
+}
+.layui-layer{
+	box-shadow:0 0 8px 1px rgba(61,213,241,3);
+}
+.new-img{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -90px -0px; 
+	width: 15px;
+	height: 16px;
+	display:inline-block;
+	margin-left: 0px !important;
+}
+.btn-submit,.Btn-Search{
+	width:70px;
+	position:relative;
+	cursor: pointer;
+	display: inline-block;
+}
+
+/*移入按钮背景*/
+.btn-submit:hover .btn-left,.Btn-Search:hover .btn-left{
+	background-position: -5px -5px;
+}
+.btn-submit:hover .btn-middle,.Btn-Search:hover .btn-middle{
+	background:url(/C3/PC/MLiveStreaming/img/btn-bgl.png);
+}
+.btn-submit:hover .btn-right,.Btn-Search:hover .btn-right{
+	background-position: -20px -0px;
+}
+.btn-submit:hover .btn-font,.Btn-Search:hover .btn-font{
+	color:#3dd5f1;
+}
+.btn-submit div,.Btn-Search div{
+	display:inline-block;
+	height: 30px;
+}
+
+/*正常按钮背景*/
+.btn-submit .btn-left,.Btn-Search .btn-left{
+	 background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	 background-position: -165px -0px;
+	 width: 8px;
+}
+.btn-submit .btn-middle,.Btn-Search .btn-middle{
+	 background:url(/C3/PC/MLiveStreaming/img/btn-bg.png);
+	 width:54px;
+}
+.btn-submit .btn-right,.Btn-Search .btn-right{
+	 background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	 background-position: -135px -0px;
+	 width: 8px;
+}
+.btn-submit .btn-font,.Btn-Search .btn-font{
+	position: absolute;
+    left: 18px;
+    top: 0;
+    line-height: 30px;
+}
+
+/*查询弹出层样式*/
+#Search-Box{
+	padding-bottom: 2px;
+}
+.Search-img{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -180px -55px; 
+	width: 18px;
+	height: 18px;
+	display:inline-block;
+	margin-left: 0px !important;
+}
+.row-fluid>div{
+	display:inline-block;
+}
+.Search-title>div{
+	margin: 0 15px 0 2px;
+}
+.Search-Input{
+	width:115px;
+	border-radius: 3px;
+}
+#Search-Title{
+	width:180px;
+}
+.Btn-Search{
+	vertical-align: middle;
+    margin-top: -5px;
+}
+#Search-table{
+	height:500px;
+	border: 1px solid #ffffff;
+	text-align: center;
+}
+#Search-table .SearchTime,#Search-table .SearchTT,#Search-table .SearchXB{
+	display:block;
+	float:left;
+	border-bottom: 1px solid #4e4b4b;
+    border-right: 1px solid #4e4b4b;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height:100%;
+}
+#Search-table .SearchTime{
+	width:138px;
+}
+#Search-table .SearchTT{
+	width:320px;
+	text-align:left;
+	text-indent: 1em;
+}
+#Search-table .SearchXB{
+	width:64px;
+}
+#Search-table>div.row-fluid{
+	height:45px;
+	line-height:45px;
+}
+.SearchBF{
+	background:url(/C3/PC/MLiveStreaming/img/Satyr.png);
+	background-position: -220px -55px;
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.progressbar{
+	width:80%;
+	margin: 0 auto;
+    height: 8px;
+    margin-top: 18px;
+}
+.ui-widget-content{
+	border: 1px solid #ffffff;
+	 background: #ffffff;
+}
+.ui-widget-header{
+	 border: 1px solid #41D0F4;
+	 background: #41D0F4;
+}
+/*分页样式*/
+.page{
+    text-align:right;
+    right:10px;
+}
+.page a{
+    display:inline-block;
+    margin:0;
+    padding:0;
+    vertical-align: top;
+}
+.page .page-bg{
+    background:url(/Common/MGIS/img/gis-img/pagebg.png) no-repeat;
+    background-size:cover;
+    border-radius:8px;
+    height:24px;
+    line-height:24px;
+}
+.page-numb{
+    background:url(/Common/MGIS/img/gis-img/page.png) no-repeat;
+    display:inline-block;
+    width:60px;
+    text-align:center;
+    /*vertical-align: middle;*/
+    line-height:20px;
+}
+.page .pagecolor{
+    color:#8ac6fe;
+}
+
+#Search-Page{
+	text-align: center;
+	margin: 10px 0 5px 0
+}
+
+/*关闭按钮背景*/
+.layui-layer-setwin .layui-layer-close2{
+	 background:url(/C3/PC/MLiveStreaming/img/Satyr.png) repeat;
+	 background-position:  -200px -10px;
+	 width: 36px;
+	 height: 36px;
+}
+.layui-layer-setwin .layui-layer-close2:hover{
+	background-position:  -250px -10px;
+}
+.fourPicDetail {
+    text-align:right;
+    position:absolute;
+    top:0;
+    right:0;
+    background:rgba(0,0,0,.5);
+    color:white;
+}
+
+@media screen and (max-width:1600px){
+	.LineInspection_contrl{margin-left: 0px;width: 38%;}
+	.LineInspection_button_play{margin-left: 1px;}
+}
+@media screen and (max-width:1366px){
+	.LineInspection_contrl{margin-left: 0px;width: 32%;}
+	.LineInspection_button_play{margin-left: 1px;}
+	#NewBuild, #BtnSearch, #Gwz{margin-left: 0px;}
+}

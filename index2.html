@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>变幻幻变变幻幻变变幻幻变变幻幻变</title>
+<script type="text/javascript" src="js/jquery-1.12.2.js"></script>  
+
+<style>
+	html{height: 100%;}
+	body { margin: 0; padding: 0;background: black; overflow: hidden;height: 100%;display: table;width:100%;
+}
+</style>
+
+
+
+
+</head>
+
+<body onload="newtext()">
+<div style="margin:0 auto;text-align:center;font-size:50px;color:red;height:100%;width:100%;vertical-align: middle;display: table-cell;">welcome to YuThree`s home!</div>
+
+<script>
+var text=document.title;
+        var timerID;
+        function newtext() {
+            clearTimeout(timerID);
+            document.title=text.substring(1,text.length)+text.substring(0,1);
+            text=document.title.substring(0,text.length);
+            timerID = setTimeout("newtext()", 100);
+        }
+        console.log(escape('%'))
+        
+$(function(){
+
+
+	// $.ajax({
+	// 	url: 'http://weixiao.qq.com/home/bonus/check_bonus?token=c01c3f0783983e4bbfc7bd6d74734e8d',
+	// 	type: "POST",
+	// 	data: {
+	// 		bonus_id: 271
+	// 	},
+	// 	success: function(re) {
+	// 		console.log(re)
+	// 	},
+	// 	error: function(re) {
+	// 		console.log(re)
+	// 	}
+	// })
+
+  var b = function(n, o) {
+            e.ajax({
+                url: t.global.context + "/home/bonus/check_bonus",
+                type: "post",
+                dataType: "json",
+                data: {
+                    bonus_id: n,
+                    push_pos: o
+                },
+                success: function(i) {
+                    if (a.wxModal("close"), 7 != i.code && e("#queue-modal").wxModal("close"), 0 == i.code) location.href = t.global.context + "/home/bonus/view/" + n;
+                    else if (1 == i.code) showMessage("该任务的赏金已被领完，请参与其他任务！", "warn");
+                    else if (2 == i.code) showMessage("该任务已结束，请参与其他任务！", "warn");
+                    else if (3 == i.code) showMessage("未按时完成任务，已取消本次任务参与资格", "warn");
+                    else if (4 == i.code) showMessage("人太多没抢上，请重试", "warn");
+                    else if (5 == i.code) showMessage(i.message, "warn");
+                    else if (6 == i.code) showMessage(i.message, "warn");
+                    else if (7 == i.code) e("#queue-seconds").text("点击重试(20s)"),
+                    e("#queue-seconds").attr("push_pos", o),
+                    e("#queue-modal").wxModal("open"),
+                    f(n, o);
+                    else if (8 == i.code) showMessage(i.message, "warn");
+                    else if (304 == i.code) {
+                        e("#verify-modal").wxModal("open");
+                        var s = {
+                            callback: r,
+                            type: "embed"
+                        };
+                        t.capInit(document.getElementById("verify-modal-body"), s),
+                        showMessage(i.message, "warn")
+                    } else showMessage("该任务不存在！！", "warn")
+                },
+                error: function() {
+                    showMessage("请求失败", "warn")
+                }
+            })
+        };
+})
+</script>
+</body>
+</html>

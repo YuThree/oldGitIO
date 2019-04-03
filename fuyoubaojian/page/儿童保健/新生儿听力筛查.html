@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新生儿听力筛查</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/children/newChildListen.css">
+    <!-- 独自样式 -->
+ 
+    
+</head>
+<body>
+    <form id="signupForm">
+        <div class="cdct_tableTitle">新生儿听力筛查</div>
+        <div class="scrollJS">
+            <div class="z-Box">
+                <!-- 姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">新生儿姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入新生儿姓名">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">性别</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入性别">
+                        </div>
+                    </div>
+                </div>
+                <!-- 姓名 -->
+
+                <!-- 出生日期 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">出生日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请选择出生日期">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">母亲姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入母亲姓名">
+                        </div>
+                    </div>
+                </div>
+                <!-- 出生日期 -->
+
+                <!-- 与户主关系 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">身份证</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请输入母亲身份证">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit cdct_asterisk">出生日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input readonly name="firstname3" class="cdct_inputNone " placeholder="请选择母亲出生日期">
+                        </div>
+                    </div>
+                </div>
+                <!-- 与户主关系 -->
+
+                <!-- 现住地址 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">现住地址</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input readonly type="text" class="cdct_inputNone" placeholder="请输入现住地址">
+                    </div>
+                </div>
+                <!-- 现住地址 -->
+
+                <!-- 联系电话 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">联系电话</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input type="text" class="cdct_inputNone" placeholder="请输入联系电话" readonly="">
+                    </div>
+                </div>
+                <!-- 联系电话 -->
+
+                <!-- 筛查 -->
+
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">住院号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入住院号">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">门诊号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入门诊号">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">床号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入床号">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">分娩方式</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="FMFS1" type="radio" name="FMFS" value="">
+                                <label for="FMFS1">自然产</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="FMFS2" type="radio" name="FMFS" value="">
+                                <label for="FMFS2">阴道手术产</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="FMFS3" type="radio" name="FMFS" value="">
+                                <label for="FMFS3">剖宫产</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="FMFS4" type="radio" name="FMFS" value="">
+                                <label for="FMFS4">其他</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 新生儿情况 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit">新生儿情况</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="50" data-pmttextarea="1">
+                            <textarea class="cdct_textarea zareaHei48" placeholder="请输入您的意见"></textarea>
+                            <div data-pmttextshow="1" style="position: absolute;bottom: 0;right: 20px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">50字</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 新生儿情况 -->
+
+                <!-- 筛查方法 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit">筛查方法</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="50" data-pmttextarea="1">
+                            <textarea class="cdct_textarea zareaHei48" placeholder="请输入您的意见"></textarea>
+                            <div data-pmttextshow="1" style="position: absolute;bottom: 0;right: 20px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">50字</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查方法 -->
+
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">左耳筛查</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="ZESC1" type="radio" name="ZESC" value="">
+                                <label for="ZESC1">通过</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="ZESC2" type="radio" name="ZESC" value="">
+                                <label for="ZESC2">未通过</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit">右耳筛查</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="YESC1" type="radio" name="YESC" value="">
+                                <label for="YESC1">通过</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="YESC2" type="radio" name="YESC" value="">
+                                <label for="YESC2">未通过</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">筛查意见</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="SCYJ1" type="radio" name="SCYJ" value="">
+                            <label for="SCYJ1">1.通过</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="SCYJ2" type="radio" name="SCYJ" value="">
+                            <label for="SCYJ2">2.未通过,请于婴儿出生后42天到本院或当地妇幼保健机构复查。</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="SCYJ3" type="radio" name="SCYJ" value="">
+                            <label for="SCYJ3">3.复查未通过,请于婴儿出生后3个月到妇幼保健机构复查。</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 筛查 -->
+    
+                <!-- 筛查日期 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">筛查日期</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input type="text" class="cdct_inputNone datepicker" placeholder="请选择日期">
+                    </div>
+                </div>
+                <!-- 筛查日期 -->
+
+                <!-- 筛查单位 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">筛查单位</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">筛查单位</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">筛查单位</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">检查医生</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">检查医生</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">检查医生</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查单位 -->
+            </div>
+        </div>
+    </form>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 独自js -->
+    <script src="../../js/baseInfo.js" type="text/javascript"></script>    
+
+    <script type="text/javascript">
+        //验证  
+
+        var obj =  $("#signupForm").validate({
+            rules: {
+              firstname: {
+                required: true,
+                minlength: 3
+              },
+              firstname1: {
+                required: true,
+                minlength: 3
+              },
+              firstname3: {
+                required: true,
+                minlength: 3
+              }
+            },
+            errorClass:"errorClass_"
+        });
+        obj.form();
+    </script>        
+</body>
+</html>

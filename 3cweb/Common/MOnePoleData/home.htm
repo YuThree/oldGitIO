@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>一杆一档</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <link href="css/yiganyidangHome.css" rel="stylesheet" />
+
+
+
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=6G188kAN6mGApve3nM1lrLm3VSCuCEDa" type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script>
+        loadControl("jqueryUI");
+
+        loadControl("mySelectTree");
+        loadControl("multiSelect");
+        loadControl("layer");
+        loadControl("Validation");
+        loadJs("/Common/MGIS/JS/traffic.js?v=" + version);
+        loadCss("/Common/css/gis/gisT1css.css?v=" + version);
+    </script>
+
+</head>
+<body style="overflow-y: hidden">
+    <div id="closeBtn"><img src="img/closeBtn.png" title="关闭本页" onclick="window.close()" /></div>
+    <!--<div id="zheZhaoCeng" style=""></div>&lt;!&ndash;掩饰延时层&ndash;&gt;-->
+    <div id="boxChaXun">
+        <!--左上角盒子-->
+        <div id="cxTop" style="background:url('img/cxbgTop.png');width: 100%;height: 12px;max-height: 12px"></div>
+        <div id="cxButton" style="background:url('img/cxbgButton.png') no-repeat;width: 100%;height: 14px;max-height: 14px;position: absolute;bottom:0;"></div>
+        <div id="chaXun">
+            <div id="boxCXtitle">
+                <div class="cxTitle">
+                    <div><img src="img/放大镜.png" alt="" />&nbsp;查询条件</div>
+                </div>
+                <div class="cxList">
+                    <form id="yiganyidangForm">
+                        <div class="yiKuaiSpan">
+                            <span style="letter-spacing:1px">线路区间 ：</span>
+                            <input type="text" id="xianLuQuJian" style="height:13px;vertical-align: 1%;" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>行&ensp;&ensp;&ensp;&ensp;&ensp;别&ensp;：</span>
+                            <input type="text" id="direction" name="direction" style="height:23px;vertical-align: 1% ;padding: 0;width:112px" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>公里标(m)：</span>
+                            <input id="startkm" class="validate[custom[integerPositive],maxSize[7]]" type="text" style="height:13px;vertical-align: 1%" /><span style="width:19px;text-align:center;">至</span>
+                            <input id="endkm" class="validate[custom[integerPositive],maxSize[7]]" type="text" style="height:13px;vertical-align: 1%" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>杆&ensp;&ensp;&ensp;&ensp;&ensp;号&ensp;：</span>
+                            <input id="txtpole" class="validate[maxSize[7]]" type="text" style="height:13px;vertical-align: 1%" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span style="letter-spacing:1px">组织机构 ：</span>
+                            <input type="text" id="ZuZhiJiGou" style="height:13px;vertical-align: 1%" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>缺陷数(个) ：</span>
+                            <input type="text" id="startN" class="validate[custom[onlyNumberSp]]" style="height:13px;vertical-align:1%" /><span style="width:19px;text-align:center;">至</span>
+                            <input type="text" id="endN" class="validate[custom[onlyNumberSp]]" style="height:13px;vertical-align: 1%" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>开始时间 ：</span>
+                            <input id="start_time" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="height:13px;vertical-align: 1%;width:110px;" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>结束时间 ：</span>
+                            <input id="end_time" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="height:13px;vertical-align: 1%" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>报警状态 ：</span>
+                            <select name="ddlzt" id="ddlzt" title="状态" style="width:126px" multiple="multiple">
+                                <option value="AFSTATUS01" >新上报</option>
+                                <option value="AFSTATUS03" >已确认</option>
+                                <option value="AFSTATUS04" >已计划</option>
+                                <option value="AFSTATUS07" >检修中</option>
+                                <option value="AFSTATUS02" >已取消</option>
+                                <option value="AFSTATUS05" >已关闭</option>
+                            </select>
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>报警等级 ：</span>
+                            <select id="jb" style="width: 120px; border-radius: 3px;" multiple="multiple">
+                               
+                            </select>
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>检测类型 ：</span>
+                            <input id="dll_lx" type="text" style="height:23px;vertical-align: 1% ;padding: 0;width:117px" />
+                        </div>
+                        <div class="cxBtn">
+                            <img src="img/查询按钮.png" alt="" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="boxCXresult">
+                <div class="cxResult">
+                    <div><img src="img/搜索结果icon.png" alt="" />&nbsp;查询结果</div>
+                </div>
+                <div class="cxJgList">
+                    <div class="cxListXLQJ">
+                        <span class="label label-info " id="xianluName">线路：<span id="xianlu"></span></span>
+                        <span class="label label-warning " id="quName">区间：<span id="qujian"></span></span>
+                    </div>
+                    <div class="cxListTitle">
+                        <span class="width_34">线路区间</span>
+                        <span class="width_11">行别</span>
+                        <span class="width_15">公里标</span>
+                        <span class="width_15">杆号</span>
+                        <span class="width_11">缺陷数</span>
+                        <span class="width_11">报警数</span>
+                    </div>
+                    <div class="cxListBodyBox" style="max-height:387px;overflow-y: auto;">
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div></div>
+            <div id="cxFenYe">
+                <!--<span>&lt;&lt;</span><span>&lt;</span><span>&gt;</span><span>&gt;&gt;</span><span></span>-->
+
+                <div class="yeJiao dbleft" onclick="yemianTiaozhuan('first')" title="回到首页">&lt;&lt;</div>
+                <div class="yeJiao sgleft" onclick="yemianTiaozhuan('less')" title="上一页">&lt;</div>
+                <div class="yeJiao sgright" onclick="yemianTiaozhuan('next')" title="下一页">&gt;</div>
+                <div class="yeJiao dbright" onclick="yemianTiaozhuan('end')" title="回到尾页">&gt;&gt;</div>
+                <div class="yeJiao" id="yeMaQu">
+                    <p style="font-size: 12px"><span id="nowPage">0/0</span>页&nbsp;共<span id="sumPage">0</span>条，现<span id="pageRange">0~0</span>条</p>
+                </div>
+            </div>
+            <div id="backToMin"><img src="img/prepage.png" alt="" /></div>
+        </div><!--内部框-->
+    </div><!--左上角盒子-->
+    <div id="map"></div><!--百度地图区-->
+    <div id="boxBiaoZhu">
+        <div class="BiaoZhuInside">
+            <p><span>图例</span><span><img src="img/图例按钮.png" alt="" /></span><br /></p>
+            <hr align="left" style="height:2px;border:none;border-top:1px solid white; width: 80%;margin-left: 7%;margin-top: 0;" />
+            <hr align="left" style="height:2px;border:none;border-top:1px solid white; width: 80%;margin-left: 12%;margin-top: -12px;" />
+            <div style="font-size: .9em ;margin-top: -10px;"><span style="background:#6CF075;"></span>&nbsp;无缺陷</div>
+            <div style="font-size: .9em"><span style="background:#EAFF00;"></span>&nbsp;1~5个缺陷</div>
+            <div style="font-size: .9em"><span style="background:#EA8E50;"></span>&nbsp;6~10个缺陷</div>
+            <div style="font-size: .9em"><span style="background:#FF0600;"></span>&nbsp;10个以上缺陷</div>
+        </div>
+    </div><!--//图例区-->
+    <script>
+        loadJs("/Common/MOnePoleData/script/yiganyidangHome.js?v=" + version, "utf-8");
+        loadJs("/Common/MOnePoleData/script/SetHmtl.js?v=" + version);
+    </script>
+</body>
+</html>

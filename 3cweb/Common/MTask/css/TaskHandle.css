@@ -1,0 +1,310 @@
+﻿@charset 'utf-8';
+
+.box {
+    margin-top: 0;
+    border: none;
+    -webkit-box-shadow: none;
+}
+
+/* -------------------------------- 主标题 -------------------------------- */
+.main-title > .close-ico {
+    display: inline-block;
+    position: absolute;
+    right: 6px;
+    top: 0;
+    width: 24px;
+    height: 34px;
+    background: url(/Common/MTask/img/close_page.png) 0 5px no-repeat;
+    cursor: pointer;
+}
+.main-title > .close-ico:hover {
+    background: url(/Common/MTask/img/close_page_hover.png) 0 5px no-repeat;
+}
+.close-pic-ico {
+    display: inline-block;
+    position: absolute;
+    right: 6px;
+    top: 0;
+    width: 24px;
+    height: 34px;
+    background: url(/Common/MTask/img/close_page.png) 0 5px no-repeat;
+    cursor: pointer;
+    z-index: 12;
+}
+.row-fluid input,.row-fluid label,.row-fluid textarea {
+    margin-bottom: 0;
+}
+.row-fluid input[type="text"] {
+    width: 140px;
+}
+.box-content {
+    padding: 0;
+}
+.font-w { /* + */
+    /*font-weight: bold;*/
+}
+.hide {
+    display: none;
+}
+/* -------------------------------- 框架表格 -------------------------------- */
+.table {
+    width: calc(100% - 2px);
+    margin-bottom: 0;
+}
+.table tbody tr:hover td,
+.table tbody tr:hover th {
+    background-color: #ffffff;
+}
+.table th,
+.table td {
+    line-height: 14px;
+}
+#task-detail > tbody > tr:first-child > td {
+    border-top: none;
+}
+#task-detail > tbody > tr:last-child {
+    border-bottom: 1px solid #dddddd;
+}
+.showTable .lititle_titleTD {
+    width: 90px;
+    padding-top: 10px;
+    padding-right: 0px;
+    text-align: right;
+}
+.lititle_titleTD img {
+    vertical-align: top;
+    cursor: pointer;
+}
+.lititle_title { /*可折叠的小标题*/
+    padding: 3px 8px;
+    background: #018AA6;
+    border-radius: 5px;
+    font-size: 12px;
+    color: white;
+}
+
+/* -------------------------------- 任务详情中右侧信息table -------------------------------- */
+.insideTable { 
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.insideTable td {
+    padding: 10px 6px;
+    border-top: 0px;
+}
+.insideTable [id*="list_show"] img {
+    cursor: pointer;
+}
+.four_font_title {
+    display: inline-block;
+    width: 55px;
+    font-size: 12px;
+    text-align: justify;
+    text-align-last: justify;
+}
+.six_font_title {
+    display: inline-block;
+    width: 85px;
+    font-size: 12px;
+    text-align: justify;
+    text-align-last: justify;
+}
+.titleshow_height_no {
+    overflow-y: auto;
+}
+.view {
+    display: inline-block;
+    background: url(/Common/MTask/img/glass.png) no-repeat;
+    color: #018AA6;
+    text-indent: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* -------------------------------- slider 轮播 + -------------------------------- */
+.img_switch {
+    position: absolute;
+    top: 0;
+    /*z-index: 999;*/
+}
+.img_switch,.img_switch > li {
+	width: 100%;
+	height: 100%;
+}
+.img_switch > li+li {
+	display: none;
+}
+ul.img_switch {
+    height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+.img_control {
+	position: absolute;
+	left: 50%;
+	bottom: 8px;
+	/*width: 95px;*/
+    width: auto;
+	height: 30px;
+	margin-left: -47px;
+    /*z-index: 1000;*/
+}
+.img_control > ul {
+	margin: 0;
+}
+.img_control > ul > li {
+	float: left;
+	display: inline-block;
+	margin-left: 5px;
+	padding: 8px;
+    background-color: #7d6330;
+	border-radius: 50%;
+	font-size: 12px;
+	color: #fff;
+	list-style: none;
+	cursor: pointer;
+}
+.img_control > ul > li.active {
+    background-color: #e5cc99;
+}
+.img_control > ul > li:hover {
+    background-color: #e5cc99;
+}
+.img_control > ul:after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	content: "";
+}
+.layui-layer {
+    border-radius: 10px;
+}
+.layui-layer-content {
+    border-radius: 10px;
+}
+
+/* -------------------------------- 选项卡 -------------------------------- */
+.box-content .nav-tabs {
+    margin-left: 10px;
+}
+.nav-tabs {
+    height: 37px;
+    border-bottom: 2px solid #488cb4;
+}
+.nav-tabs > li {
+    width: 113px;
+    margin-bottom: -1px;
+    margin-left: 10px;
+    padding: 6px 0;
+    text-align: center;
+}
+.nav-tabs > li:nth-of-type(1) {
+    margin-left: 0;
+}
+.nav-tabs > li > a {
+    border: 1px solid #ccc;
+}
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover {
+    padding: 6px 0;
+    border-bottom: 2px solid #488cb4;
+}
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+    padding: 6px 0;
+    border: 2px solid #488cb4;
+    border-bottom-color: transparent;
+}
+.task-ul {
+    float: left;
+    width: 99%;
+    margin: 10px;
+    padding: 0;
+}
+.task-ul > li {
+    min-height: 494px;
+    border: 1px solid #cccccc;
+    white-space: nowrap;
+}
+.task-ul > li:last-child {
+    white-space: normal;
+}
+.task-opera, .task-process {
+    display: inline-block;
+    width: 49.2%;
+}
+.task-opera {
+    float: left;
+}
+.task-process {
+    float: right;
+}
+#task-form-table > tbody > tr > td {
+    border-top: none;
+}
+#task-form-table > tbody > tr > td {
+    padding: 0;
+}
+.pt-defined {
+    padding-top: 20px;
+}
+.btn-box {
+    padding: 6px 10px 20px 10px;
+    margin-bottom: 0;
+    text-align: center;
+}
+.btn {
+    padding-right: 3px;
+    letter-spacing: 8px;
+}
+.textarea-auto {
+    width: 80%;
+    height: 38px;
+    resize: none;
+}
+.red {
+    color: red;
+}
+.white {
+    color: white;
+}
+.td-middle {
+    width: 50%;
+}
+.td-big {
+    width: 92%;
+    max-width: 92%;
+}
+.text-top {
+    vertical-align: top;
+}
+.upload-auto {
+    display: inline-block;
+    width: 88%;
+}
+.upload-defined {
+    display: inline-block;
+    width: 90%;
+}
+#dept_checkbox {
+    margin: 0;
+}
+
+.hide {
+    display: none;
+}
+/* -------------------------------- 根据分辨率修改样式 -------------------------------- */
+@media screen and (max-width: 1601px) {
+    .textarea-auto {
+        width: 72%;
+    }
+}
+@media screen and (max-width: 1401px) {
+    .row-fluid input[type="text"] {
+        width: 110px;
+    }
+}

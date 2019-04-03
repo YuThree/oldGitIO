@@ -1,0 +1,90 @@
+
+/* nav区 ------------------------------------start*/
+
+.y_logPng{
+    width: 49px;
+    background: no-repeat center 11px url(../img/logo_001@3x.png)
+}
+
+.y_logUserPng{
+    width: 29px;margin-right: 8px;
+    background: no-repeat center center url(../img/Group7.png)
+}
+.y_logOut{
+    width: 19px;margin-right: 8px;
+    background: no-repeat center center url(../img/Group6.png)
+}
+.y_logUserText{
+    font-size:13px;font-weight: bold;margin-right: 18px;
+}
+/* 颜色展示卡 -------------------------------start*/
+.y_tips{
+    padding: 20px 10px 0 10px;
+    display: -webkit-flex;
+    display: flex;
+}
+.y_tips>div{
+    height:100px;
+    box-shadow:0px 2px 13px 0px rgba(217,217,217,0.5);
+    position: relative;
+    border-radius:2px;
+    box-sizing: border-box; 
+    margin: 0 5px;
+    color: white;
+}
+.y_tips>div:nth-of-type(1){
+    background:linear-gradient(180deg,rgba(39,177,250,1),rgba(55,205,240,1));
+}
+.y_tips>div:nth-of-type(2){
+    background:linear-gradient(180deg,rgba(158,90,255,1),rgba(209,98,255,1));
+}
+.y_tips>div:nth-of-type(3){
+    background:linear-gradient(180deg,rgba(242,130,193,1),rgba(249,147,175,1));
+}
+.y_tips>div:nth-of-type(4){
+    background:linear-gradient(180deg,rgba(78,202,251,1),rgba(17,154,252,1));
+}
+.y_tips .y_tipsPng{
+    width: 29px;height: 35px;position: absolute;right: 26px;top: 20px;
+    background: no-repeat center center url(../img/JSP.png)
+}
+.y_tips .y_tipsText{
+    position: absolute;
+    left: 26px;top: 21px;
+}
+.y_tips .y_tipTextNamer{
+    font-size: 14px;
+}
+.y_tips .y_tipTextNumber{
+    font-size: 26px;line-height: 40px;
+}
+
+
+/* list ---------------------------start */
+.y_listBox{
+    padding: 10px;box-sizing: border-box;
+    color: #464F5C;
+    position: absolute;
+	left: 0;
+	top: 230px;
+	height: calc(100% - 230px);
+	width: 100%;
+}
+.y_listBody{
+    height: calc(100% - 50px);
+}
+
+.y_listSpan .score{
+    margin-right: 16px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .y_tips .y_tipsPng {
+        right: 10px;
+        top: 44px;
+    }
+    .y_listBox{
+        top: 270px;
+        height: calc(100% - 270px);;
+    }
+}

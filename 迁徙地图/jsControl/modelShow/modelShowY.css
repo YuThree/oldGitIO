@@ -1,0 +1,406 @@
+/* [data-styleType="1"] .m-top{
+    background-image:linear-gradient(90deg, #30b3f9 6%, #6dc9fb 95%);
+    background-image:-moz-linear-gradient(90deg, #30b3f9 6%, #6dc9fb 95%);
+    background-image:-webkit-linear-gradient(90deg, #30b3f9 6%, #6dc9fb 95%);
+    background-image:-ms-linear-gradient(90deg, #30b3f9 6%, #6dc9fb 95%);
+    background-image:-o-linear-gradient(90deg, #30b3f9 6%, #6dc9fb 95%);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#30b3f9',endColorStr='#6dc9fb',gradientType=1);
+    border:1px solid #26a3e7;
+
+} */
+[data-styleType="1"] .m-modal-title{
+    font-size:18px;
+    color:#fbfdff;
+}
+[data-styleType="1"] .m-modal-dialog{
+    border-radius:4px 4px 4px 4px;
+    color: #fff;
+}
+[data-styleType="1"] .m-modal-close{
+    width: 50px;
+    height: 50px;
+    font-size: 0;
+    background-image: url('img/close.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 60px);
+}
+[data-styleType="1"] .m-modal-close:hover{
+    background-image: url('img/closehove.png');
+}
+[data-styleType="1"] .m-bottom .m-btn-cancel{
+    background: #0B3757;
+    border:1px solid #1ABBF1;
+    border-radius:4px;
+    width:95px;
+    color: #1ABBF1;
+    height:34px;
+}
+
+
+[data-styleType="1"] .m-bottom  .m-btn-sure{
+    background: #008BCC;
+    border:1px solid #1ABBF1;
+    border-radius:4px;
+    width:96px;
+    height:34px;
+}
+
+[data-styleType="1"] .m-bottom{
+    padding-left: 27px;
+    padding-bottom: 17px;
+    padding-right: 27px;
+}
+[data-styleType="1"] .tableBoxModelOne{
+    width: 100%;
+    padding-left: 11px;
+    padding-right: 11px;
+    height: 270px;
+    margin-top: 11px;
+}
+[data-styleType="1"] .tableBoxModelOne .left{
+    width: 516px;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+[data-styleType="1"] .tableBoxModelOne .left  th, [data-styleType="1"] .tableBoxModelOne .left td{
+    text-align: center;
+}
+[data-styleType="1"] .tableBoxModelOne .right{
+    width: 338px;
+    height: 100%;
+    float: right;
+}
+[data-styleType="1"] .tableBoxModelOne .right .headerModelTable{
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #e6eaee;
+    font-size:14px;
+    color:#9fa9ba;
+    padding-left: 11px;
+    background-color: #f7f8f8;;
+}
+[data-styleType="1"] .tableBoxModelOne .right .contentModelTable{
+    border: 1px solid #e6eaee;
+    border-top:none;
+    height: 235px;
+    background-color: #f7f8f8;;
+}
+[data-styleType="1"]  .dataTableUserDefined table.dataTable thead th,[data-styleType="1"]  .dataTableUserDefined table.dataTable thead td{
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+[data-styleType="1"] .tableBoxModelOne .right .item{
+    width: 43.48%;
+    display: inline-block;
+    height: 48px;
+    background-color:#ffffff;
+    box-shadow:0 0 6px 0 rgba(0,0,0,0.19);
+    border-radius:4px;
+    margin-left:11px;
+    margin-right: 10px;
+    margin-top: 16px;
+    margin-bottom: 5px;
+    line-height: 48px;
+    text-align: center;
+    font-size:14px;
+    position: relative;
+    color:#7f8fa4;
+    overflow: hidden;
+
+}
+[data-styleType="1"] .tableBoxModelOne .right .item .delete{
+    background-image: url(../delete.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color:rgba(73,200,251,0.8);
+    border-radius:4px;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+[data-styleType="1"] .tableBoxModelOne .right .item:hover .delete{
+    top: 0%;
+    transition: all 0.1s linear;
+}
+/*data-inputModel="1"类型的样式*/
+[data-inputModel='1'] {
+    width: 100%;
+
+}
+[data-inputModel='1']:after{
+    content: " ";
+    font-size: 16px;
+    clear: both;
+    display: block;
+}
+[data-inputModel='1'] .input,[data-inputModel='1'] .select{
+    width: 50%;
+    float: left;
+}
+[data-inputModel='1'] .select.w25{
+    width: 25%;
+}
+[data-inputModel='1'] .input .txt,[data-inputModel='1'] .select .txt{
+    font-size:14px;
+    color:#9fa9ba;
+    vertical-align: middle;
+    margin-right: 9px;
+}
+[data-inputModel='1'] .input .inputTxt,[data-inputModel='1'] .select .checkspan{
+    background:#ffffff;
+    border:1px solid #cccfd4;
+    border-radius:4px;
+    width:118px;
+    height:35px;
+    line-height: 35px;
+    font-size:14px;
+    color:#7f8fa4;
+    padding-left: 15px;
+}
+[data-inputModel='1'] .input .inputTxt.w200{
+    width: 200px;
+}
+[data-inputModel='1'] .input .inputTxt.w158{
+    width: 158px;
+}
+[data-inputModel='1'] .input.w50{
+    width: 50%;
+}
+[data-inputModel='1'] .input.w25{
+    width: 25%;
+}
+[data-inputModel='1'] .input.w50{
+    width: 50%;
+}
+[data-inputModel='1'] .input .inputTxt.wPX349{
+    width: 349px;
+}
+[data-inputModel='1'] .input.w100{
+    width: 100%;
+}
+[data-inputModel='1'] .input .inputTxt.w546{
+    width: 546px;
+}
+[data-inputModel='1'] .input .checkbox1{
+    width: 0;
+    display: inline-block;
+}
+[data-inputModel='1'] .input .addFile{
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    background-color: #000000;
+    vertical-align: top;
+    margin-left: 8px;
+}
+[data-inputModel='1'] .input .addFile .fileType{
+    display: none;
+}
+
+[data-inputModel='1'] .select .checkspan{
+    padding: 0;
+    width: 96px;
+}
+[data-inputModel='1'] .select .selectTxt{
+    width:118px;
+    display: inline-block;
+    vertical-align: middle;
+}
+[data-inputModel='1'] .select .selectBox{
+    width:118px;
+}
+[data-inputModel='1'] .select.wauto{
+    display: inline-block;
+    width: auto;
+    float: none;
+}
+[data-inputModel='1'] .select.w168{
+    width: 168px;
+}
+[data-inputModel='1'] .select.w168 .selectTxt,[data-inputModel='1'] .select.w168 .selectBox{
+    width: 168px;
+}
+[data-inputModel='1'] .select.w168 .checkspan{
+    width: 145px;
+}
+[data-inputModel='1'] .select {
+    width: 50%;
+    float: left;
+}
+[data-inputModel='1'] .textArea .txt{
+    font-size:14px;
+    color:#9fa9ba;
+    vertical-align: top;
+}
+[data-inputModel='1'] .textArea .areaTxt{
+    background:#ffffff;
+    border:1px solid #cccfd4;
+    border-radius:4px;
+    width:346px;
+    height:70px;
+    font-size:14px;
+    color:#9fa9ba;
+    padding: 5px;
+    margin-left: 10px;
+    resize: none;
+    outline: none;
+}
+[data-inputModel='1'] .lineBoundary{
+    width: 100%;
+    height: 1px;
+    background-color: #e6eaee;
+    position: relative;
+    float: left;
+    margin-top: 37px;
+}
+[data-inputModel='1'] .lineBoundary .txt{
+    position: absolute;
+    padding: 8px 16px;
+    background-color: #31c123;
+    top: 50%;
+    margin-top: -18px;
+    font-size:14px;
+    color:#ffffff;
+    left: 26px;
+    border-radius: 4px;
+}
+
+[data-inputModel='1'] .searchInput{
+
+    width:483px;
+    height:34px;
+    position: relative;
+}
+[data-inputModel='1'] .searchInput .topDiv{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    transition: all 0.1s linear;
+    white-space: nowrap;
+}
+[data-inputModel='1'] .searchInput .input{
+    width: 100%;
+    height: 34px;
+    padding-left: 10px;
+    background:#e6eaee;
+    border:1px solid #dfe5eb;
+    border-radius:17px;
+    padding-right: 32px;
+
+}
+[data-inputModel='1'] .searchInput .topDiv .i{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../search.png);
+    vertical-align: middle;
+    margin-right: 10px;
+}
+[data-inputModel='1'] .searchInput.getFocus .topDiv{
+    width: 14px;
+    transition: all 0.1s linear;
+    overflow: hidden;
+    left: auto;
+    right: 18px;
+}
+[data-inputModel='1'] .searchInput .topDiv .txt{
+    vertical-align: middle;
+    font-size:14px;
+    color:rgba(127,143,164,0.5);
+}
+[data-styleType="1"].currSearchTool .bar{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #e6eaee;
+}
+[data-styleType="1"].currSearchTool .item:first-child{
+    border-right: 1px solid #e6eaee;
+}
+[data-styleType="1"].currSearchTool .bottom{
+    height: 452px;
+    margin-top: 10px;
+    box-shadow: none!important;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+[data-styleType="1"].currSearchTool .item{
+    float: left;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #7f8fa4;
+}
+[data-styleType="1"].currSearchTool .item.change{
+    font-size: 16px;
+    color: #23aef9;
+    position: relative;
+}
+[data-styleType="1"].currSearchTool .item.change:after{
+    display: block;
+    content: " ";
+    font-size: 0;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #23aef9;
+    bottom:-9px;
+}
+[data-styleType="1"].currSearchTool .treeViewSpan .treeIcon{
+    background-image:url(../treeView.png);
+}
+[data-styleType="1"].currSearchTool  .dataTableUserDefined{
+    width: 100%;
+}
+[data-styleType="1"].currSearchTool .treeViewMaxBox{
+    width: 100%;
+}
+[data-styleType="1"].currSearchTool  .dataTableUserDefined table.dataTable.no-footer{
+    min-width: 100%;
+    text-align: center;
+}
+[data-styleType="1"]  .dataTableUserDefined table.dataTable thead th, [data-styleType="1"]  .dataTableUserDefined table.dataTable thead td{
+    text-align: center;
+}
+/*一些模态框输入框类型1的补充样式*/
+[data-inputModel='1'].plr26{
+    padding-left: 26px;
+    padding-right: 26px;
+}
+[data-inputModel='1'].plr34{
+    padding-left: 34px;
+    padding-right: 34px;
+}
+[data-inputModel='1'].mt26{
+    margin-top: 26px;
+}
+[data-inputModel='1'] .TR{
+    text-align: right;
+}
+[data-inputModel='1'] .FL{
+    float: left;
+}
+[data-inputModel='1'] .FR{
+    float: right;
+}
+[data-inputModel='1'] .TL{
+    text-align: left;
+}

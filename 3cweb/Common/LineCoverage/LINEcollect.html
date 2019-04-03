@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>供电段汇总</title>
+    <meta charset="utf-8" />
+    <!-- public js-->
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("mySelectTree");
+        loadControl('layer');
+        loadControl("Validation");
+        loadControl("paging");
+        loadControl("trainselect");
+    </script>
+
+
+
+    <!--引入css js   本页-->
+    <link href="css/publicCss.css" rel="stylesheet" /><!--公用css-->
+    <style>
+        #tableAsp {
+            border: none;
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- title-->
+    <!-- title   end-->
+    <!-- search-->
+    <div class="html_content">
+        <div>
+            <span>组织机构：</span>
+            <input type="text" id="org_tree" />
+        </div>
+        <!--<div>
+            <span>设备编号：</span>
+            <input id="car_tree" type="text" />
+        </div>-->
+        <div>
+            <span>时间：</span>
+            <input id="startTime" class="Wdate start_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', startDate: '%y-%M-%d 00:00:00' })" value="" />
+            <span>&nbsp;至</span>
+            <input id="endTime" class="Wdate end_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', startDate: '%y-%M-%d 23:59:59' })" value="" />
+
+        </div>
+        <div>
+            <div class="buttnColorfor" id="query"><img src="img/MileageSubsidiaryQuery.png" />&nbsp;查&nbsp;询</div>
+            <!--<div class="buttnColorfor"><img src="img/MileageSubsidiaryPortOut.png" />&nbsp;导&nbsp;出</div>
+            <div class="buttnColorfor"><img src="img/MileageSubsidiaryRefash.png" />供电段汇总</div>-->
+        </div>
+    </div>
+    <!-- search end-->
+    <!-- list-->
+
+
+    <div id="dataTable">
+        <iframe id="tableAsp" src=""></iframe>
+
+    </div>
+
+    <!-- list  end-->
+    <script>
+        $(function () {
+
+
+
+            //设备编号控件
+            //$('#car_tree').LocoSelect({
+            //    position: 'MonitorLocoAlarmList'
+            //});
+            //$('#car_tree').inputSelect({
+            //    type: 'loca',
+            //    contant: 2,
+            //});
+            $('.select_icon').css('top', '1px')
+            //组织机构
+            $('#org_tree').mySelectTree({
+                tag: 'ORGANIZATION',
+                enableFilter: true,
+                height: 240,
+                //onClick: function (event, treeId, treeNode) {
+                //    console.log(treeNode)
+                //}
+            });
+            if (getLocalStorage('LineCoverage_startTime') != '' && getLocalStorage('LineCoverage_startTime') != undefined) {
+                $('#startTime').val(getLocalStorage('LineCoverage_startTime'));
+                $('#endTime').val(getLocalStorage('LineCoverage_endTime'));
+                $('#org_tree').val(getLocalStorage('LineCoverage_org')).attr({ 'code': getLocalStorage('LineCoverage_org_tree_code'), 'treetype': getLocalStorage('LineCoverage_org_treetype') });
+            } else {
+                $('#startTime').val((dateNowStr() + "00:00:00"));
+                $('#endTime').val((dateNowStr() + "23:59:59"));
+            }
+
+
+            $("#tableAsp").css('height', $(window).height() - $('.html_content').outerHeight() - 50 - 20);
+
+            //查询
+            $('#query').click(doquery);
+
+
+
+        })
+
+        //查询按钮
+        function doquery() {
+            if (dojudge()) {
+                var org_code = $('#org_tree').attr('code') == undefined ? '' : $('#org_tree').attr('code');//组织机构
+                var org_type = $('#org_tree').attr('treetype');//org-type
+                var ju_code = '';
+                var duan_code = '';
+                switch (org_type) {
+                    case 'TOPBOSS':
+                        ju_code = '';
+                        duan_code = '';
+                        break;
+                    case 'YSJ':
+                        ju_code = '';
+                        duan_code = '';
+                        break;
+                    case 'J':
+                        ju_code = org_code;
+                        duan_code = '';
+                        break;
+                    default:
+                        ju_code = '';
+                        duan_code = org_code;
+                        break;
+                }
+                //var LocomotiveCode = $('#car_tree').val();//设备号
+                var sTime = $('#startTime').val(); //开始时间
+                var eTime = $('#endTime').val();  //结束时间
+                var _url = '/Common/LineCoverage/LineDimesionSection.aspx?'
+                    + 'BUREAU_CODE=' + ju_code
+                    + '&Power_Section_CODE=' + duan_code
+                    //+ '&LocoCode=' + LocomotiveCode
+                    + '&StartTime=' + sTime
+                    + '&EndTime=' + eTime;
+                $("#tableAsp").attr('src', _url)
+            }
+        }
+        //时间判断
+        function dojudge() {
+            //layer.msg('kaishi ');
+            if ($('#startTime').val() != '' && $('#endTime').val() != '') {
+                if ($('#startTime').val() >= $('#endTime').val()) {
+                    layer.msg('时间输入有误！')
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+    </script>
+</body>
+</html>

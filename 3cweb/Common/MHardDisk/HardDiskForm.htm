@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadJs("/Common/MHardDisk/script/HardDiskForm.js?v=" + version);
+    </script>
+    <script type="text/javascript">
+        //初始化加载
+        $(document).ready(function () {
+            var id = GetQueryString("id");
+            //  var categoryCode = GetQueryString("categoryCode");
+            if (id != undefined && id != "") {
+                // document.getElementById('btnSave').style.display = "none";
+                loadHardDisk(id);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-edit"></i>巡检数据信息
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <form id="HardDiskForm" method="post" runat="server" class="form-horizontal">
+                        <table class="table" cellpadding="1" cellspacing="1">
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="DEPT_NAME">
+                                        归属单位：
+                                    </label>
+                                    <div id="DIVDEPT_NAME" class="controls">
+                                        <input name="DEPT_NAME" id="DEPT_NAME" type="text" />
+                                        <button id="Button2" type="button" onclick="showOrgDialog('DEPT_NAME');">
+                                            选择
+                                        </button>
+                                        <input name="DEPT_CODE" id="DEPT_CODE" type="hidden" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="control-label" for="LINE_NAME">
+                                        线路名称：
+                                    </label>
+                                    <div class="controls">
+                                        <select id="LINE_NAME" name="LINE_NAME" onchange="onChangeLine(this.options[this.options.selectedIndex].text,this.options[this.options.selectedIndex].value)"></select>
+                                    </div>
+                                    <input name="LINE_CODE" id="LINE_CODE" type="hidden" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="START_STATION">
+                                        起始站点：
+                                    </label>
+                                    <div class="controls">
+                                        <select id="START_STATION" name="START_STATION"></select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="control-label" for="END_STATION">
+                                        终止站点：
+                                    </label>
+                                    <div class="controls">
+                                        <select id="END_STATION" name="END_STATION"></select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label class="control-label" for="DIRECTION">
+                                        行别：
+                                    </label>
+                                    <div class="controls">
+                                        <select id="DIRECTION" name="DIRECTION">
+                                            <option value="">--请选择--</option>
+                                            <option value="上行">上行</option>
+                                            <option value="下行">下行</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="START_TIME">
+                                        开始时间：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="START_TIME" id="START_TIME" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="control-label" for="END_TIME">
+                                        结束时间：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="END_TIME" id="END_TIME" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- <td>
+                                    <label class="control-label" for="ORIGINAL_FILE_PATH">
+                                        原始数据打包文件：</label>
+                                    <div class="controls">
+                                        <input name="ORIGINAL_FILE_PATH" id="ORIGINAL_FILE_PATH" type="file" size="50" onkeyup="checkImgType(this);" />
+                                        <a id="UPLOADORIGINAL_FILE_PATH" style="display: none">下载</a>
+                                    </div>
+                                </td>-->
+                                <td colspan="2">
+                                    <label class="control-label" for="VIDEO_PATH">
+                                        检测JCC文件：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="VIDEO_PATH" id="VIDEO_PATH" type="text" readonly="readonly" />
+                                        <a id="UPLOADVIDEO_PATH" style="display: none">下载</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--     <tr>
+                                <td colspan="2">
+                                    <label class="control-label" for="DATA_CAPACITY">
+                                        数据容量：</label>
+                                    <div class="controls">
+                                        <input name="DATA_CAPACITY" id="DATA_CAPACITY" type="text" readonly="readonly" />
+                                    </div>
+                                </td>
+                            </tr>-->
+                            <tr>
+                                <td>
+                                    <label class="control-label" for="FILE_PATH">
+                                        统计EXECL文件：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="FILE_PATH" id="FILE_PATH" type="text" readonly="readonly" />
+                                        <a id="UPLOADFILE_PATH" style="display: none">下载</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="control-label" for="FAULT_FILE_PATH">
+                                        缺陷分析结果文件：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="FAULT_FILE_PATH" id="FAULT_FILE_PATH" type="text" readonly="readonly" />
+                                        <a id="UPLOADFAULT_FILE_PATH" style="display: none">下载</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label class="control-label" for="CONTEXT">
+                                        缺陷描述：
+                                    </label>
+                                    <div class="controls">
+                                        <input name="CONTEXT" id="CONTEXT" type="text" style="width: 890px" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-container-selectOrg" class="modal" style="width: 30%; left: 600px;
+        top: 300px; display: none">
+        <div class="modal-header">
+            <button type="button" id="close" class="close" onclick="closeSelectOrg()">
+                ×
+            </button>
+            <h3>
+                选择组织机构
+            </h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul id="tree" class="ztree" runat="server"></ul>
+        </div>
+    </div>
+</body>
+</html>

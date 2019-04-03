@@ -1,0 +1,104 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <script type="text/javascript" src="JS/BMapJS.js"></script>
+    <script type="text/javascript" src="JS/BMapLine.js"></script>
+    <script type="text/javascript" src="JS/BMapUserContainer.js"></script>
+    <script type="text/javascript" src="JS/BMapPosition.js"></script>
+    <script type="text/javascript" src="JS/BMapSubstation.js"></script>
+    <script type="text/javascript" src="JS/BMapPole.js"></script>
+    <script type="text/javascript" src="JS/BMapBridgeTune.js"></script>
+    <script type="text/javascript" src="JS/xfk.js"></script>
+    <script type="text/javascript" src="JS/GIS.js"></script>
+    <script src="JS/convertor.js" type="text/javascript"></script>
+    <script src="../js/BaiDuMap/my_BaiduMap.js"></script>
+    <script src="../js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="../js/6cweb/mydate.js" type="text/javascript"></script>
+    <link href="../css/gis/GIS.css" rel="stylesheet" />
+    <!--<link href="../css/gis/C3Sms.css" rel="stylesheet" />-->
+    <script type="text/javascript">
+        loadControl("jqueryUI_2");
+        loadControl("mytree");
+        loadControl("mySelectTree");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("layer");
+        loadControl("hint");
+        loadJs("/Common/js/6cweb/mySelectTree_Level2.js?v=" + version);
+        loadJs("JS/traffic.js?v=" + version);
+        //loadJs("JS/GetHtml.js?v=" + version);
+        loadJs("/Common/MGIS/JS/GetHtml.js");
+        loadCss("../css/gis/LineCoverage.css");
+    </script>
+    <script src="JS/LineCoverage.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="main">
+        <div id="boxChaXun">
+            <!--左上角盒子-->
+            <div id="cxTop" style="background:url('/Common/MOnePoleData/img/cxbgTop.png');width: 100%;height: 12px;max-height: 12px"></div>
+            <div id="cxButton" style="background:url('/Common/MOnePoleData/img/cxbgButton.png') no-repeat;width: 100%;height: 14px;max-height: 14px;position: absolute;bottom:0;"></div>
+            <div id="chaXun">
+                <div id="boxCXresult">
+                    <div class="cxResult">
+                        <div>
+                            <img src="/Common/MOnePoleData/img/搜索结果icon.png" alt="" />&nbsp;轨迹点信息:<span id="boxTitle"></span>
+                            <input type="button" class="btn btn-warning" value="还原修改" onclick="resetList()" style="margin:10px;float:right;"/>
+                        </div>
+                    </div>
+                    <div class="cxJgList">
+                        <div class="cxListTitle">
+                            <span class="width_1">时间</span>
+                            <span class="width_2">铁路局</span>
+                            <span class="width_2">供电段</span>
+                            <span class="width_2">线路</span>
+                            <span class="width_2">行别</span>
+                            <span class="width_2">区站</span>
+                        </div>
+                        <div class="cxListBodyBox" style="height:100%;overflow-y: auto;"></div>
+                    </div>
+                    <div id="cxFenYe">
+                        <input type="button" class="btn btn-primary" value="修改站点" onclick="savelist('add')" />
+                        <input type="button" class="btn btn-primary" value="新增站点" onclick="savelist()"/>
+                    </div>
+                    <div id="backToMin"><img src="/Common/MOnePoleData/img/prepage.png" alt="" /></div>
+                </div>
+                <div></div>
+            </div>
+        </div><!--左上角盒子-->
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 930px; text-align: center; z-index: 1" id="orBmapDiv">
+                </div>
+                <div class="LineCoverage_title"><span>线路覆盖轨迹</span></div>
+                <!-- 新的控制界面 -->
+                <div id="orbitcheck">
+                    <a href="#" id="quanbu1" onclick='QBSms()'><img src="img/orbit-img/orbit-all.png" alt="全部轨迹" /></a>
+                    <div class="orbit-button-play">
+                        <a id="btn_slow" href="javascript:chageSpeed_slow()"><img src="img/orbit-img/orbit-left.png" alt="减速" /></a>
+                        <a id="btn_play" href="#" title="播放" style="display: none;"><img src="img/orbit-img/orbit-play.png" alt="播放" /></a>
+                        <a id="btn_pause" href="#" title="暂停"><img src="img/orbit-img/orbit-pause.png" alt="暂停" /></a>
+                        <a id="btn_fast" href="javascript:chageSpeed_fast()"><img src="img/orbit-img/orbit-right.png" alt="加速" /></a>
+                        <a href="javascript:void(0);" id="_Content_Sta"><img src="img/orbit-img/orbit-repeat.png" alt="重播" /></a>
+                    </div>
+                    <a href="#" class="orbit-button-numb"><label id="speendMemo">正常</label></a>
+                    <!--</div>-->
+                    <div class="orbit-contrl" style="position:relative;">
+                        <div class="playTime"><strong id="_Content1" style="font-size: 12px;"></strong></div>
+                        <div id="Sms_slider" style="margin-bottom:6px;"></div>
+                        <strong id="_Content" style="font-size: 12px; color: #ffffff">开始时间：<label id="_Content_Sta_Lab"></label></strong>
+                        <strong id="_Content_End" style="font-size: 12px;float:right;color:#ffffff"></strong>
+                    </div>
+                    <a class="orbit-close" href="#" onclick='window.close()'>
+                        <img src="img/orbit-img/orbit-close.png" alt="关闭本页" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

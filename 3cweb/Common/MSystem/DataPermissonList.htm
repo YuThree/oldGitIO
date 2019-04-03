@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>数据权限</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("hint");
+        loadJs("/Common/MSystem/DataPermisson.js?v=" + version);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadFlexiGrid(); //加载flexigrid数据
+            $('#tree').myTree({
+                tag: 'USER',
+                isDefClick: false,
+                onClick: function (event, treeId, treeNode) {
+                    $("#TYPE").val(treeNode.treeType);
+                    $("#MASTERID").val(treeNode.id);
+                    $("#MASTER_NAME").val(treeNode.name);
+                }
+            });
+           // setTreeOrg();
+        })
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="row-fluid sortable">
+                <!--<div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-list"></i>查询条件
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>-->
+                <!--<div class="box-content">
+                  
+                    <input type="text" id="txt_linename" class="input-small" style="display: none" />
+                    <button class="btn btn-primary" type="button" onclick="doQuery()" style="display: none">
+                        查 询
+                    </button>
+                   
+                </div>-->
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-resize-small"></i>数据权限
+                    </h2>
+                    <div class="box-icon">
+                        <button class="btn btn-primary" type="button" onclick="addPermissonModal()">
+                            添 加
+                        </button>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table id="flexTable" style="display: none"></table>
+                    <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                       style="display: none"></a>
+                    <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                         aria-labelledby="myModalLabel" style="width: 800px;">
+                        <div class="modal-body">
+                            <div style="float: left; width: 250px; height: 400px;">
+                                <ul id="tree" class="ztree" runat="server" style="height: 400px; width: 250px; overflow-y: auto;"></ul>
+                            </div>
+                            <div style="float: left; width: 500px; height: 400px;">
+                                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                                    <tr>
+                                        <td height="25" width="30%" align="right">
+                                            授权对象：
+                                        </td>
+                                        <td height="25" width="*" align="left">
+                                            <input type="text" id="MASTER_NAME" style="width: 120px;" readonly="readonly" />
+                                            <input type="text" id="MASTERID" style="width: 120px; display: none;" readonly="readonly" />
+                                            <input type="text" id="PERMISSIONTYPE" style="width: 120px; display: none;" />
+                                            <input type="text" id="PERMISSIONVALUE" style="width: 120px; display: none;" />
+                                            <input type="text" id="TYPE" style="width: 120px; display: none;" />
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td height="25" width="30%" align="right">
+                                            过滤字段比对值：
+                                        </td>
+                                        <td height="25" width="*" align="left">
+                                            <input type="text" id="PERMISSIONVALUE" style="width: 120px;" />
+                                        </td>
+                                    </tr>-->
+                                    <tr>
+                                        <td height="25" width="30%" align="right">
+                                            授权组织：
+                                        </td>
+                                        <td height="25" width="*" align="left">
+                                            <textarea name="SENDDEPTNAMES" id="SENDDEPTNAMES" style="width: 220px; height: 70px"
+                                                      onblur="removeClass(this);"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25" width="30%" align="right" style="margin-top: 0px;">
+                                            选择授权组织：
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <ul id="DIVSENDDEPT" class="ztree" runat="server" style="height: 400px; width: 250px;
+                                                overflow-y: auto;"></ul>
+                                            <input name="SENDDEPT" id="SENDDEPT" type="hidden" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" onclick="addOrUpdate()" id="sub">
+                                保存
+                            </button>
+                            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                                关闭
+                            </button>
+                            <input type="text" id="text" style="display: none;" />
+                            <input type="text" id="CODE" style="display: none;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

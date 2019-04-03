@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>变电所</title>
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("trainselect");
+        loadControl("mySelectTree");
+        loadControl("layer");
+    </script>
+    <link href="/C3/PC/MRTA/css/mrta_big.css" rel="stylesheet" type="text/css" />
+    <script>
+        var boxshow = true;//展示框消失与否
+        $(function () {
+            AutoSize();
+            $(window).resize(function () {
+                AutoSize();
+
+            });
+            //线路
+            $('#line_name').mySelectTree({
+                tag: 'LINE',
+                enableFilter: true,
+                height: 180,
+                callback: function () {
+                    $('#line_name').siblings('a').css('top',-4)//a标签高度调整
+                }
+            })
+            //$('#pavilion_name').mySelect({
+            //    tag: "SUBSTATION",
+            //});
+            $('#clear_postionName').click(function () {
+                $('#pavilion_name').val('')
+            })
+            $('#btn_portCtrl').click(function () {
+                if ($('#portCtrl_box').is(':hidden')) {
+                    $('#portCtrl_box').show();
+                    var that = $(this);
+                    $('#portCtrl_box').css({ top: that.offset().top + that.outerHeight()+5, left: that.offset().left - 200 });
+
+                } else {
+                    $('#portCtrl_box').hide();
+                }
+                
+            })
+            //导入按钮
+            $('#btn_portIn').click(function () {
+                var file = document.getElementById("fileInput").files;
+                if (file.length == 0) {
+                    //layer.msg('请先选择导入文件！');
+                    layer.tips('请先选择导入文件！', '#fileInput', {
+                        tips: [1, '#78BA32']
+                    });
+                   
+                    return;
+                }
+                console.log(file);
+                var formData = new FormData($("#uploadForm")[0]);
+                formData.append('file', $('#fileInput')[0].files[0]);
+                console.log(formData)
+                $.ajax({
+                    url: '/Common/MSubstation/RemoteHandlers/SubstationAbnormal.ashx?action=upLoad',
+                    type: 'POST',
+                    data: formData,
+                    beforeSend: function () {
+                        parent.showLayerLoad();
+                    },
+                    async: true,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (re) {
+                        if (re.sign == 'True') {
+                            $('#portCtrl_box').hide();
+                            parent.closeLayerLoad()
+                            layer.tips('成功！', '#btn_portCtrl', {
+                                tips: [1, 'green']
+                            });
+                            queryList();//刷新列表
+                            $("body", parent.document).find("#iframe_map").contents()[0].defaultView.getSubstationPoint();//刷新地图
+                        } else {
+                            parent.closeLayerLoad();
+                            $('#portCtrl_box').hide();
+                            layer.tips('上传文件失败！', '#btn_portCtrl', {
+                                tips: [1, 'red']
+                            });
+                        }
+                       
+                    },
+                    error: function (returndata) {
+                        parent.closeLayerLoad()
+                        layer.tips('导入文件失败！', '#btn_portIn', {
+                            tips: [1, 'red']
+                        });
+
+                    }
+                });
+
+            })
+            
+            //查询按钮
+            $('#btn_queryS').click(function () {
+                queryList();
+            })
+            queryList();
+
+        })
+        function AutoSize() {
+            var _h = parseInt($(window).height());
+            var _w = parseInt($(window).width()) / 3;
+
+            $('.box1_1').width(_w * 3).height(_h);
+
+            var fz = $(window).height() * 0.016104 * 2.5;
+
+            // $('.boxTitle_loca').width(_w).height(_h / 6);
+            $('.boxTitle_loca2').width(_w).height(_h / 8).css("font-size", fz + "px");;
+
+            $('.title_bg').css("font-size", fz + "px");;
+
+
+
+
+
+            $('.box5-6').width(_w).height(_h / 8 * 7);
+
+            $('.box5-6_1').width(_w).height(_h / 8 * 7 / 2); //竖排
+            $('.box5-6_1').width(_w / 2).height(_h / 8 * 7).css('float', 'left'); //横排
+
+            $('.box5-6_2').width(_w * 3).height(_h / 8 * 7 / 2); //竖排
+            //$('.box5-6_2').width(_w / 2).height(_h / 8 * 7).css('float', 'left'); //横排
+
+            $('#locas').height(_h - $('.title_bg').height() - $('.title_query').outerHeight() );
+
+
+        }
+       
+
+        function GetlocaList(json) {
+
+
+            var result = '';
+
+            for (var i = 0; i < json.length; i++) {
+
+                var m = json[i];
+
+                result += "<div class='locaItem' sid='" + m.SUBSTATION_CODE + "' >\
+    <div class='m_loca0 d'  title='" + m.SUBSTATION_NAME + "'>" + m.SUBSTATION_NAME + "</div>\
+    <div class='m_loca_p d'  title='" + m.TRBL_TIME + "'>" + m.TRBL_TIME + "</div>\
+    <div class='m_loca_p d'  title='" + m.DEV_NAME + "'>" + m.DEV_NAME + "</div>\
+    <div class='m_loca_ju d'  title='" + m.TRBL_SN + "'>" + m.TRBL_SN + "</div>\
+    <div class='m_loca2 d' title='" + m.WZ + "'>" + m.WZ + "</div>\
+    <div class='m_loca1 d dettleList' content='" + m.TRBL_CNT_CONTEXT + "' title='" + m.TRBL_CNT_TITLE + "'>" + m.TRBL_CNT_TITLE + "</div>\
+    <div class='cls'></div>\
+</div>";
+
+
+
+
+            }
+
+            $('#locas').html(result);
+            //故障内容展示框移动
+            $('.dettleList').hover(function (e) {
+                $('#locas .dettleList').removeClass('locaItem_hover')
+                $(this).addClass('locaItem_hover');
+                boxshow = true;
+                $('#showdisAlarmBox').show();
+                var that = $(this);
+                
+                var html = '';
+                var content = that.attr('content');
+                if (content != '' && content != undefined) {
+                    content = content.split(',');
+                    for (var i = 0; i < content.length; i++) {
+                        html += '<span class="d Lii" title="' + content[i] + '">' + content[i] + '</span>';
+                    }
+                    switch (content.length % 3) {
+                        case 1:
+                            html += '<span class="d Lii">&nbsp;</span><span class="d Lii">&nbsp;</span>';
+                            break;
+                        case 2:
+                            html += '<span class="d Lii">&nbsp;</span>';
+                            break;
+                        case 0:
+                            break;
+                    }
+                    $('#showdisAlarmBox').css('height',parseInt( content.length / 3)*30+70)
+                }
+                
+
+
+                $('#showdisAlarmBox .box_content').html(html)//内置html
+                setTimeout(function () {
+                    if (e.pageY > 190) {
+                        $('#showdisAlarmBox').css({ 'top': e.pageY - $('#showdisAlarmBox').outerHeight()-10, 'left': that.offset().left - $('#showdisAlarmBox').width() })
+                    } else {
+                        $('#showdisAlarmBox').css({ 'top': e.pageY+15, 'left': that.offset().left - $('#showdisAlarmBox').width() })
+                    }
+                }, 100)
+                
+
+            }, function () {
+                boxshow = false;
+                setTimeout(function () { if (!boxshow) { $('#showdisAlarmBox').hide(); } }, 200)
+
+            })
+            //故障内容展示框鼠标移入不消失
+            $('#showdisAlarmBox').hover(function () {
+                boxshow = true;
+            }, function () {
+                boxshow = false;
+                setTimeout(function () { if (!boxshow) { $('#showdisAlarmBox').hide(); } }, 200)
+
+            })
+            $('#locas .locaItem').click(function () {
+                $('#locas .locaItem').removeClass('locaItem_over');
+                $(this).addClass('locaItem_over');
+                $("body", parent.document).find("#iframe_map").contents()[0].defaultView.setSubstation_center($(this).attr('sid'))//中心点
+                
+            })
+            //$('#numberSubstation', parent.document).html($('#locas').children().length);//括号后缀数字
+
+
+        }
+
+        //变电所跳闸列表    点击默认查询列表带入  所亭名称
+        function getSubstationList(SubstationName) {
+            $('#pavilion_name').val(SubstationName);
+            queryList();
+        }
+
+        function queryList() {
+            var linecode = $('#line_name').attr('code');
+            if (linecode == undefined) {
+                linecode = '';
+            }
+            var SubstationName = $('#pavilion_name').val();
+            if (SubstationName == '0' || SubstationName==null) {
+                SubstationName = '';
+            }
+            var _url = '/Common/MSubstation/RemoteHandlers/SubstationAbnormal.ashx?action=queryErrorList&PAGESIZE=500000&CURRENTPAGE=1'
+                +'&LINE_CODE='+linecode
+                + '&SUBSTATION_NAME=' + SubstationName;
+            $.ajax({
+                type: "POST",
+                url: _url,
+                async: true,
+                beforeSend: function () {
+                    parent.showLayerLoadList();
+                },
+                cache: false,
+                success: function (re) {
+                    parent.closeLayerLoad()
+                    if (re != '' && re != undefined) {
+                        var _json = re.data;
+                        var _html = '';
+                        if (_json.length > 0) {
+                            GetlocaList(_json)
+                        } else {
+                            $('#locas').html('<span style="color:white;font-size:20px;font-weight:bold;float: left;margin:' + $(window).height() / 2 + 'px 0 0 ' + (($(window).width() / 2) == 0 ? '620' : ($(window).width() / 2)) + 'px;">暂无数据！</span>');
+                        }
+                    } else {
+                        $('#locas').html('<span style="color:white;font-size:20px;font-weight:bold;float: left;margin:' + $(window).height() / 2 + 'px 0 0 ' + (($(window).width() / 2) == 0 ? '620' : ($(window).width() / 2)) + 'px;">暂无数据！</span>');
+                    }
+                }, error: function () {
+                    parent.closeLayerLoad();
+                    $('#locas').html('<span style="color:white;font-size:20px;font-weight:bold;float: left;margin:' + $(window).height() / 2 + 'px 0 0 ' + (($(window).width() / 2) == 0 ? '620' : ($(window).width() / 2)) + 'px;">查询失败！</span>');
+                }
+            })
+            //$("body", parent.document).find("#iframe_map").contents()[0].defaultView.getSubstationPoint()
+        }
+
+    </script>
+    <style>
+        #showdisAlarmBox .oneLine {
+            padding:5px;
+            border-bottom:1px solid #ccc;
+        }
+        #showdisAlarmBox .oneLine span{
+            display:inline-block;
+            width:33%;
+            text-align:left;
+        }
+        #showdisAlarmBox .box_content {
+            max-height:calc(100% - 40px);
+            overflow-y:auto;
+            
+        }
+        #showdisAlarmBox .box_title {
+            padding:5px;
+            border-bottom:1px solid #45CCE6;
+            font-size:16px;
+            color:#45CCE6;
+        }
+        #showdisAlarmBox {
+            width:600px;
+            max-height:220px;
+        }
+        .locaItem_hover {
+            color:#DDB3FD;
+        }
+        /*a  upload */
+/*.a-upload {
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+        background-color: #5C89FA;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    padding: 5px;
+    background-color: #5C89FA;
+    color: White;
+    border-width: 0px;
+    vertical-align: middle;
+}
+
+.a-upload  input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+    width:100px;
+}
+
+.a-upload:hover {
+    color: white;
+    background-color: Blue;
+    border-color: #ccc;
+    text-decoration: none
+}*/
+
+        .layui-layer-msg .layui-layer-padding {
+            color:black;
+        }
+        .box_content .Lii {
+            padding:5px 0;
+            border-bottom:1px solid #ccc;
+            float:left;
+            width:33%
+        }
+        #portCtrl_box {
+            /*width:400px;*/
+            /*height:100px;*/
+            background:white;
+            border-radius:5px;
+            position:absolute;top:10px;left:10px;padding:10px;z-index:999;display:none;
+        }
+    </style>
+</head>
+<body bgColor="transparent" style="background-color:rgba(0,0,0,0.7);width:100%">
+    
+    <div id="portCtrl_box">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="border:1px #43a1da solid; border-radius:5px; width:305px;padding-top: 4px;padding-left: 4px;color:black " id="fileInput" />
+            <input id="btn_portIn" type="button" value="上传">
+        </form>
+    </div>
+    <div id="showdisAlarmBox">
+        <div style="padding:5px;height: 100%;">
+            <div class="box_title">故障內容</div>
+            
+
+            <div class="box_content">
+                
+
+            </div>
+        </div>
+        
+    </div>
+    <div class="box1_1 floatL" style="width:100%">
+        <div class="title_query" style="padding:5px 0 5px 10px">
+            <span>线&ensp;&ensp;路：</span><input id="line_name" type="text" style="width:150px;margin-bottom:0;" />
+            <span>所亭名称：</span><input id="pavilion_name" type="text" style="width:150px;margin-bottom:0;"/>
+            <img src="/Common/img/tree_clear.png" style="position: relative; left: -20px;  cursor: pointer;" id="clear_postionName">
+            <input id="btn_queryS" type="button" value="查询" >
+            <!--<a href="javascript:;" class="a-upload" id="btn_portIn_A">
+                <form id="uploadForm">
+                    <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="fileInput">
+                </form>点击选择导入文件
+            </a>
+            <input id="btn_portIn" type="button" value="导入">-->
+            <input id="btn_portCtrl" type="button" value="导入">
+        </div>
+        <div class="title_bg">
+            <div class="m_loca0 d fg_blue">所亭名称</div>
+            <div class="m_loca_p d fg_blue">故障时间</div>
+            <div class="m_loca_p d fg_blue">设备名称</div>
+            <div class="m_loca_ju d fg_blue">故障序号</div>
+            <div class="m_loca2 d fg_blue">位置</div>
+            <div class="m_loca1  d fg_blue">故障内容</div>
+
+
+            <div class="cls"></div>
+
+        </div>
+
+
+
+        <div id="locas">
+            <img src="/Common/img/loading1.gif" align="middle" />
+            
+            <div class="locaItem locaItem_over">
+                <div class="m_loca0  d">车号</div>
+                <div class="m_loca_p   d">位置信息</div>
+                <div class="m_loca_p d">缺陷类型</div>
+                <div class="m_loca_ju d">一级</div>
+               <div class="m_loca1  d disAlarm">缺陷描述</div>
+                <div class="m_loca2 d ">位置位置位置位置</div>
+                <div class="cls"></div>
+            </div>
+
+
+             
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="cls"></div>
+
+
+
+</body>
+</html>

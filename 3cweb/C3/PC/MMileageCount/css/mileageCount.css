@@ -1,0 +1,1320 @@
+﻿@CHARSET "UTF-8";
+/* reset -------------------------------- */
+*{
+    padding: 0;
+    margin: 0;
+}
+body,html{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+}
+img{
+    border: 0;
+}
+body, ul{
+    margin: 0;
+}
+ul, ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+.none{
+    display: none;
+}
+/* content title ------------------------------ */
+#content{
+    width: 100%;
+    height: 100%;
+}
+.title_bg1{
+    height: 60px;
+    background-image: url(../img/bg_title.png);
+    background-repeat: repeat-x;
+}
+.title_bg2{
+    display: inline-block;
+    height: 48px;
+    margin: 6px 0 0 6px;
+    background: url(../img/bg_ruler.png) left center no-repeat;
+    background-size: 48px 48px;
+}
+.title{
+    display: inline-block;
+    margin: 11px 0 0 60px;
+    line-height: 28px;
+    font-family: Microsoft Yahei;
+    font-size: 24px;
+    font-weight: bolder;
+    color: #fff;
+    letter-spacing: 4px;
+}
+/* title ------------------------------ */
+.title_bg {
+    height: 6.0%;
+    border-bottom: 1px solid #5cb1f6;
+    background: linear-gradient(to bottom, #91cbf9 0%, #5cb1f6 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.title-g {
+    display: inline-block;
+    padding: 0.9% 0 0.7% 3.5%;
+    background: url(../img/bg_ruler.png) 8% 54% no-repeat;
+    background-size: 12%;
+    font-family: Microsoft Yahei;
+    font-size: 24px;
+    font-weight: bolder;
+    line-height: 24px;
+    color: #fff;
+    letter-spacing: 4px;
+}
+/* condition ------------------------------*/
+.ul-condition {
+    width: 100%;
+    margin: 0;
+}
+.ul-condition li {
+    display: inline-block;
+    margin: 0 0.5% 0 0;
+    font-family: 'Microsoft YaHei';
+}
+.ul-condition li label {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.ul-condition li input {
+    height: 20px;
+    /*margin-bottom: 3px;*/
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
+.input-w-s {
+    width: 200px;
+}
+.input-w-m {
+    width: 200px;
+}
+.btn-g {
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 18px;
+    font-family: 'Microsoft YaHei';
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-shadow-green {
+    background: linear-gradient(to bottom, #caf19f 0%,#8ee434 100%);
+}
+.btn-shadow-purple {
+    background: linear-gradient(to bottom, #bfb5f9 0%,#7b64f2 100%);
+}
+.btn-shadow-blue {
+    background: linear-gradient(to bottom, #91cbf9 0%,#5cb1f6 100%);
+}
+.btn-shadow-orange {
+    background: linear-gradient(to bottom, #faccae 0%,#ef5e02 100%);
+}
+.btn-g-search {
+    display: inline-block;
+    background: url(../img/ico-g-glass.png) 16px no-repeat;
+    background-size: 21%;
+    padding: 10px 0px 10px 55px;
+    letter-spacing: 22px;
+}
+.btn-g-export {
+    display: inline-block;
+    background: url(../img/ico-export.png) 16px no-repeat;
+    background-size: 20%;
+    padding: 10px 0px 10px 55px;
+    letter-spacing: 22px;
+}
+.btn-g-add-station {
+    display: inline-block;
+    background: url(../img/ico-g-add.png) 3px no-repeat;
+    background-size: 20%;
+    padding: 10px 3px 10px 32px;
+    letter-spacing: 2px;
+}
+.btn-g-special-station {
+    display: inline-block;
+    background: url(../img/ico-camera.png) 14px no-repeat;
+    background-size: 16%;
+    padding: 10px 15px 10px 40px;
+    letter-spacing: 2px;
+}
+/* condition field ------------------------------ */
+.con_box{
+    margin: 27px 66px 0 66px;
+}
+.organization,.equipment,.detection_time{
+    display: inline-block;
+    margin-right: 16px;
+}
+.organization label,.equipment label,.detection_time label{
+    height: 28px;
+    line-height: 28px;
+    font-family: Microsoft Yahei;
+    font-size: 16px;
+}
+.detection_time label.pdlr12{
+    padding: 0 12px 0 12px;
+}
+.organization input.org{
+    width: 130px;
+    height: 20px;
+    line-height: 14px;
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+}
+.equipment input.device_3C{
+    width: 150px;
+    height: 20px;
+    line-height: 14px;
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+}
+.detection_time input{
+    width: auto;
+}
+.detection_time input.start_time{
+    height: 20px;
+    line-height: 14px;
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+}
+.detection_time input.end_time{
+    height: 20px;
+    line-height: 14px;
+    font-size: 14px;
+    font-family: Microsoft Yahei;
+}
+/* condition  btn ------------------------------ */
+.btn_condition{
+    display: inline-block;
+    width: 8%;
+    height: 8%;
+    margin-right: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.btn_condition img {
+    width: 95%;
+    height: 95%;
+    margin-top: -9px;
+}
+.btn_search{
+    width: 144px;
+    height: 40px;
+    background: url(../img/btn_search.png) center no-repeat;
+    background-size: 144px 40px;
+}
+.btn_export{
+    width: 144px;
+    height: 40px;
+    background: url(../img/btn_export.png) center no-repeat;
+    background-size: 144px 40px;
+}
+.btn_add_station{
+    width: 148px;
+    height: 40px;
+    background: url(../img/btn_add_station.png) center no-repeat;
+    background-size: 148px 40px;
+}
+/* separated  style ------------------------------ */
+.line_one_blue{
+    margin-top: 16px;
+}
+.line_one_blue div{
+    border: 2px solid #91CBF9;
+    background-color: #91CBF9;
+}
+.line_one_blue img{
+    width: 22px;
+    height: 10px;
+    margin-left: 49%;
+    margin-top: -9px;
+}
+.result_bg1{
+    height: 32px;
+    text-align: center;
+}
+.result_bg2{
+    display: inline-block;
+    width: auto;
+    height: 32px;
+    padding-left: 33px;
+    background: url(../img/bg_result.png) left no-repeat;
+    background-size: 30px 32px;
+}
+.result{
+    line-height: 32px;
+    font-family: Microsoft Yahei;
+    font-size: 24px;
+}
+.line_two_white{
+    margin-top: 16px;
+}
+.line_two_white div{
+    border: 5px solid #8EE434;
+    background-color: #8EE434;
+}
+.line_two_white img{
+    width: 23px;
+    height: 10px;
+    margin-left: 49%;
+    margin-top: -29px;
+}
+/* no condition ------------------------------ */
+.no_data_box{
+    width: 100%;
+    height: 100%;
+    margin-top: 150px;
+    text-align: center;
+}
+.no_data_bg{
+    width: auto;
+    height: auto;
+    background: url(../img/bg_logo.png) center no-repeat;
+    background-size: 312px 211px;
+}
+.no_data_bg div{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 100px;
+    line-height: 40px;
+    font-family: Microsoft Yahei;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 10px;
+    color: #268DDF;
+}
+/* detail result ------------------------------ */
+.detail_box{
+    margin-bottom: 44px;
+}
+.device_box{
+    padding: 48px 0 48px 0;
+}
+.line_dotted{/*虚线*/
+    border-top: 4px dashed #E3F2FD;
+}
+/* device table ------------------------------ */
+.device_table{
+    table-layout: fixed;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    word-break: break-all;
+    letter-spacing: 3px;
+}
+.device_table tr{
+    padding-left: 2px;
+    padding-right: 2px;
+    border: 2px solid #91CBF9;
+}
+.device_table td{
+    border-right: 2px solid #91CBF9;
+    font-family: Microsoft Yahei;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+    white-space: pre-wrap;
+    color: #000;
+}
+.device_table .col2 {
+    width: 2px;
+    border: 1px solid #fff;
+    border-right: 2px solid #91CBF9;
+}
+.device_table .col15 {
+    width: 15.04%;
+}
+.device_table .col21 {
+    width: 21.70%;
+}
+.device_table tr td.color_purple{
+    color: #7B64F2;
+}
+.orbit-gis {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    background-image: url(/Common/css/img/opa-icons-orange16.png);
+    background-position: -224px 0;
+    cursor: pointer;
+}
+.orbit-gis-in {
+    position: absolute;
+    display: inline-block;
+    left: 83px;
+    top: 54px;
+    width: 16px;
+    height: 16px;
+    background-image: url(/Common/css/img/opa-icons-orange16.png);
+    background-position: -224px 0;
+    cursor: pointer;
+}
+/* station list ------------------------------ */
+.device_detail_box{
+    margin: 0 20px 0 20px;
+}
+.sta_box{
+    display: inline-block;
+    position: relative;
+    /*border: 1px solid #808080;*/
+}
+.station_box{
+    display: inline-block;
+    width: 133px;
+    margin-top: 48px;
+}
+/* default station ------------------------------ */
+.station{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: 3px solid #91CBF9;
+    border-radius: 3px;
+}
+.flag-icon {
+    float: left;
+    display: inline-block;
+    width: 18px;
+    height: 22px;
+    margin-right: 1px;
+    padding-left: 3px;
+    font-size: 16px;
+    line-height: 22px;
+}
+.change-line {
+    float: right;
+    background-color: #00EC00;
+    -webkit-transform: rotate(90deg);  
+}
+.km-count {
+    float: right;
+    background-color: #ff7575;
+}
+.custom-distance {
+    float: right;
+    background-color: #00EC00;
+}
+.line-name {
+    position: absolute;
+    bottom: -32px;
+    height: 29px;
+    width: 100%;
+    background-color: #fff;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 4px;
+    color: #7B64F2;
+}
+.address{
+    min-height: 29px;
+    background-color: #91CBF9;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 4px;
+    color: #fff;
+}
+.time{
+    display: inline-block;
+    width: 100%;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+    line-height: 45px;
+    text-align: center;
+}
+.btn_add_left{
+    width: 22px;
+    height: 21px;
+    margin-right: 4px;
+    background: url(../img/btn_add_left.png) center no-repeat;
+    background-size: 22px 21px;
+    cursor: pointer;
+}
+.btn_add_right{
+    width: 22px;
+    height: 21px;
+    margin-left: 4px;
+    background: url(../img/btn_add_right.png) center no-repeat;
+    background-size: 22px 21px;
+    cursor: pointer;
+}
+/*.btn_add_local_station {
+    display: inline-block;
+    width: 200px;
+    height: 42px;
+    margin-top: 2px;
+    background: url(../img/btn_add_station_local.png) center no-repeat;
+    background-size: 200px 42px;
+    cursor: pointer;
+}*/
+.btn_add_local_station {
+    display: inline-block;
+    width: 80%;
+    height: 30%;
+    cursor: pointer;
+}
+.btn_add_local_station img {
+    width: 80%;
+    height: 80%;
+    margin-top: -6px;
+}
+.margin-right20 {
+    margin-right: 20px;
+}
+.margin-left24 {
+    margin-left: 24px;
+}
+.btn-add-station-big {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    padding-bottom: 40px;
+    background-image: url(../img/btn_add.png);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.btn-add-station-start,.btn-add-station-end {
+    background-position: -60px -0px;
+}
+.btn-add-station-start-hover,.btn-add-station-end-hover {
+    background-position: -0px -0px;
+}
+.btn-add-station-small {
+    position: absolute;
+    top: 52px;
+    left: 52px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/btn_add.png);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.btn-add-station-between {
+    background-position: -120px -0px; 
+}
+.btn-add-station-between-hover {
+    background-position: -165px -0px;
+}
+/* new station ------------------------------ */
+.edit_station{
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+    text-align: right;
+}
+.edit_bg{
+    display: inline-block;
+    width: auto;
+    padding: 5px;
+    margin-right: -6px;
+    background-color: #7B64F2;
+}
+.btn_edit{
+    width: 18px;
+    height: 18px;
+    background: url(../img/btn_edit.png) center no-repeat;
+    background-size: 11px 18px;
+    cursor: pointer;
+}
+.btn_delete{
+    width: 18px;
+    height: 18px;
+    background: url(../img/btn_delete.png) center no-repeat;
+    background-size: 18px 18px;
+    cursor: pointer;
+}
+.edit_station div{
+    display: inline-block;
+    margin-bottom: -5px;
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+    line-height: 14px;
+}
+.station_auto{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: 3px solid #7B64F2;
+    border-radius: 3px;
+}
+.address_auto{
+    min-height: 29px;
+    background-color: #7B64F2;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #fff;
+}
+.add_station{
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+.add_station div{
+    display: inline-block;
+    margin-bottom: -5px;
+    font-size: 14px;
+    font-family: Microsoft Yahei;
+    line-height: 14px;
+    text-align: center;
+}
+.add_station_blank {
+    display: inline-block;
+    width: 100%;
+    height: 21px;
+}
+/* straight arrow ------------------------------ */
+.arrow_box{
+    display: inline-block;
+    position: relative;
+    width: 155px;
+    margin-top: 48px;
+    text-align: center;
+}
+.distance{
+    display: inline-block;
+}
+.distance div{
+    display: inline-block;
+    width: 136px;
+    font-family: Microsoft Yahei;
+    font-size: 12px; 
+    line-height: 12px;
+}
+.arrow_right{
+    display: inline-block;
+    width: 118px;
+    height: 19px;
+    background: url(../img/arrow_right.png) center no-repeat;
+    background-size: 118px 19px;
+}
+.arrow_left{
+    display: inline-block;
+    width: 118px;
+    height: 19px;
+    background: url(../img/arrow_left.png) center no-repeat;
+    background-size: 118px 19px;
+}
+.arrow_bottom_blank{
+    display: inline-block;
+    width: 136px;
+    height: 36px;
+}
+/* bending the arrow ------------------------------ */
+.arrow_top_blank{
+    display: inline-block;
+    width: 136px;
+    margin-top: 48px;
+}
+.arrow_bend_left_box{
+    display: inline;
+    position: absolute;
+    width: 48px;
+    height: 177px;
+    left: 315px;
+    top: 115px;
+}
+.arrow_bend_left{
+    display: inline-block;
+    width: 48px;
+    height: 177px;
+    background: url(../img/arrow_bend_left.png) center no-repeat;
+    background-size: 48px 177px;
+}
+.distance_bend{
+    display: inline-block;
+    position: relative;
+}
+.bend_left_lineName{
+    display: inline-block;
+    position: absolute;
+    width: 14px;
+    height: 85px;
+    font-family: Microsoft Yahei;
+    font-size: 12px; 
+    line-height: 12px;
+    top: 15px;
+    right: -62px;
+}
+.bend_left_distance{
+    display: inline-block;
+    position: absolute;
+    width: 85px;
+    height: 16px;
+    font-family: Microsoft Yahei;
+    font-size: 12px; 
+    line-height: 12px;
+    top: 106px;
+    right: -95px;
+    -webkit-transform: rotate(90deg);  
+}
+.bend_right_lineName{
+    display: inline-block;
+    position: absolute;
+    width: 14px;
+    height: 85px;
+    font-family: Microsoft Yahei;
+    font-size: 12px; 
+    line-height: 12px;
+    top: 15px;
+    right: 0;
+}
+.bend_right_distance{
+    display: inline-block;
+    position: absolute;
+    width: 70px;
+    height: 16px;
+    font-family: Microsoft Yahei;
+    font-size: 12px; 
+    line-height: 12px;
+    top: 96px;
+    right: -25px;
+     -webkit-transform: rotate(90deg);  
+}
+.arrow_bend_right_box{
+    display: inline;
+    position: absolute;
+    width: 48px;
+    height: 177px;
+    left: -60px;
+    top: 125px;
+}
+.arrow_bend_right{
+    display: inline-block;
+    width: 48px;
+    height: 177px;
+    background: url(../img/arrow_bend_right.png) center no-repeat;
+    background-size: 48px 177px;
+}
+/* floating layer box ------------------------------ */
+.dialog_box {
+    border-radius: 10px !important;
+}
+.delete_station_box{
+    position: relative;
+    float: left;
+    width: 268px;
+    height: 160px; 
+    padding: 20px;
+    border: none; 
+    background-color: #fafdff; 
+    font-family: Microsoft Yahei;
+    border-radius: 15px;
+}
+.add_edit_station_box{
+    position: relative;
+    float: left;
+    width: 381px;
+    height: 275px; 
+    padding: 26px 62px 17px 62px;
+    border: none; 
+    background-color: #fafdff; 
+    font-family: Microsoft Yahei;
+    border-radius: 15px;
+}
+.add_device_station_box{
+    position: relative;
+    float: left;
+    width: 390px;
+    height: 372px; 
+    padding: 26px 62px 17px 62px;
+    border: none; 
+    background-color: #fafdff; 
+    font-family: Microsoft Yahei;
+    border-radius: 15px;
+}
+.row_station{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding-top: 40px;
+    text-align: left;
+    line-height: 14px;
+}
+.row_station label{
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: 4px;
+    text-align: center;
+}
+.row_station label.letter_space {
+    padding-left: 3px;
+    letter-spacing: 6px;
+}
+.row_station .listContainer {
+    right: 27px;
+}
+.row_info{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+}
+.info{
+    height: 120px;
+}
+.btn_ok_margin {
+    margin-right: 10px;
+}
+.row_btn{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding-top: 40px;
+    text-align: right;
+    line-height: 30px;
+}
+.row_del_btn {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding-top: 40px;
+    text-align: center;
+    line-height: 30px;
+}
+.row_del_btn button{
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    background-color: #f5f5f5;
+    font-family: Microsoft Yahei;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+}
+input.device{
+    width: 257px !important;
+    height: 38px !important;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 18px;
+}
+input.station_address{
+    width: 257px !important;
+    height: 38px !important;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 18px;
+}
+input.station_time{
+    width: 257px !important;
+    height: 38px !important;
+    font-family: Microsoft Yahei;
+    font-size: 18px;
+    line-height: 18px;
+}
+.btn_margin{
+    margin-right: 15px;
+}
+.row_btn .btn_ok{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    background: url(../img/btn_ok.png) center no-repeat;
+    background-size: 100px 40px;
+    cursor: pointer;
+}
+.row_del_btn .btn_del_ok {
+    background-color: #de3e3e;
+    color: #fff;
+}
+.btn_close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../img/btn_close.png) center no-repeat;
+    background-size: 24px 24px;
+    cursor: pointer;
+}
+/* 新增弹出框 ------------------------------ */
+.site_between_station_box{
+    position: relative;
+    float: left;
+    padding-top: 20px;
+    border: none; 
+    background-color: #fafdff; 
+    font-family: Microsoft Yahei;
+    border-radius: 4px;
+}
+.station_con,.station_distance_con {
+    display: inline-block;
+    text-align: center;
+}
+.title_box {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #252626;
+}
+.add_edit_title, .add_edit_distance {
+    padding-bottom: 4px;
+    border-bottom: 1px solid #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+.add_edit_distance {
+    margin-left: 74px;
+}
+.add_edit_title:hover, .add_edit_distance:hover {
+    border-bottom: 1px solid #64b5f7;
+}
+.cur-card {
+    border-bottom: 1px solid #64b5f7;
+}
+input.position, input.position-second, input.position-first, input.site-time {
+    width: 170px;
+    font-family: Microsoft Yahei;
+}
+input.site-distance {
+    width: 80px;
+    font-family: Microsoft Yahei;
+}
+.distance-unit {
+    display: inline-block;
+    width: 86px;
+}
+.row_param{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding-top: 29px;
+    text-align: left;
+    line-height: 14px;
+}
+.station_distance_con .margin-one {
+    padding-top: 29px;
+}
+.station_distance_con .margin-two {
+    padding-top: 10px;
+}
+.row_param label{
+    color: #252626;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 4px;
+    text-align: center;
+}
+.row_other{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    padding-top: 27px;
+    text-align: right;
+}
+.station_distance_con .row_other {
+    padding-top: 13px;
+}
+.row_other .btn_confirm{
+    display: inline-block;
+    padding: 5px 10px 5px 18px;
+    margin-right: 50px;
+    background: url(../img/btn_bg_blue.png) repeat;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+/* 特站距离 */
+.special-station {
+    position: relative;
+    width: 620px;
+    padding: 8px 40px 14px 40px;
+    border-radius: 4px;
+    /*background-color: #ccc;*/
+}
+.view-distance {
+    display: block;
+    height: 20px;
+    padding: 0 0 8px 23px;
+    margin-bottom: 20px;
+    background: url(../img/search-title.png) no-repeat;
+    border-bottom: 1px solid #d6d6d6;
+    font-family: 'Microsoft YaHei';
+    color: #7ec0f8;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+ul.ul-station {
+    display: inline-block;
+    margin: 0 0 19px 0;
+    font-size: 14px;
+    font-family: 'Microsoft YaHei';
+}
+ul.ul-station li {
+    display: inline-block;
+    margin: 0 0 0 0;
+}
+#station-name {
+    margin-left: 5px;
+    margin-bottom: 0;
+    font-family: 'Microsoft YaHei';
+}
+.btn-search-station {
+    margin-left: 20px;
+    cursor: pointer;
+}
+.input-w-middle {
+    width: 148px;
+}
+.list {
+    text-align: center;
+}
+.table-distance {
+    width: 100%;
+    margin-bottom: 14px;
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.table-distance th,.table-distance td {
+    line-height: 32px;
+    width: 198px;
+    text-align: center;
+    border: 1px solid #d6d6d6;
+    color: #555;
+    font-size: 12px;
+    font-family: 'Microsoft YaHei';
+}
+
+/* top ------------------------------ */
+#updown{
+		display: none;	
+		position: fixed;
+		top: 500px;
+		right: 10px;
+}
+#updown span{
+	display: block;
+	width: 48px;
+	height: 50px;
+	cursor: pointer;
+}
+#updown .up{
+	background: url(../img/updown.png) no-repeat;
+}
+#updown .up:hover{
+	background: url(../img/updown.png) top right no-repeat;
+}
+
+/* adaptive ------------------------------ */
+@media screen and (max-width: 1600px){
+    .title-g {
+        font-size: 22px;
+        line-height: 22px;
+        padding: 0.9% 0 0.7% 4%;
+        background-size: 11%;
+    }
+    .ul-condition li label {
+        font-size: 14px;
+    }
+    .ul-condition li input {
+        height: 16px;
+        font-size: 13px;
+    }
+    .input-w-s {
+        width: 125px;
+    }
+    .input-w-m {
+        width: 130px;
+    }
+    .btn-g {
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 5px 8px no-repeat;
+        background-size: 27%;
+        padding: 8px 4px 5px 25px;
+        letter-spacing: 4px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px 9px no-repeat;
+        background-size: 26%;
+        padding: 8px 1px 5px 24px;
+        letter-spacing: 4px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 16%;
+        padding: 7px 3px 5px 24px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 6px no-repeat;
+        background-size: 16%;
+        padding: 7px 4px 5px 26px;
+        letter-spacing: 2px;
+    }
+    /*.input-w-s {
+        width: 150px;
+    }
+    .input-w-m {
+        width: 150px;
+    }
+    .btn-g {
+        font-size: 16px;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 16px no-repeat;
+        background-size: 22%;
+        padding: 10px 0px 10px 50px;
+        letter-spacing: 16px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 16px no-repeat;
+        background-size: 22%;
+        padding: 10px 0px 10px 50px;
+        letter-spacing: 16px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 20%;
+        padding: 10px 3px 10px 32px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 14px no-repeat;
+        background-size: 16%;
+        padding: 10px 15px 10px 40px;
+        letter-spacing: 2px;
+    }*/
+}
+@media screen and (max-width: 1440px){
+    .title-g {
+        font-size: 22px;
+        line-height: 22px;
+        padding: 1% 0 0.7% 4%;
+        background-size: 11%;
+    }
+    .ul-condition li label {
+        font-size: 14px;
+    }
+    .ul-condition li input {
+        height: 16px;
+        font-size: 13px;
+    }
+    .input-w-s {
+        width: 125px;
+    }
+    .input-w-m {
+        width: 130px;
+    }
+    .btn-g {
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 5px 8px no-repeat;
+        background-size: 27%;
+        padding: 8px 4px 5px 25px;
+        letter-spacing: 4px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px 9px no-repeat;
+        background-size: 26%;
+        padding: 8px 1px 5px 24px;
+        letter-spacing: 4px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 16%;
+        padding: 7px 3px 5px 24px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 6px no-repeat;
+        background-size: 16%;
+        padding: 7px 4px 5px 26px;
+        letter-spacing: 2px;
+    }
+    /*.input-w-s {
+        width: 130px;
+    }
+    .input-w-m {
+        width: 140px;
+    }
+    .btn-g {
+        font-size: 16px;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 4px no-repeat;
+        background-size: 25%;
+        padding: 10px 0px 10px 25px;
+        letter-spacing: 8px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px no-repeat;
+        background-size: 22%;
+        padding: 10px 0px 10px 26px;
+        letter-spacing: 10px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 20%;
+        padding: 10px 3px 10px 32px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 8px no-repeat;
+        background-size: 16%;
+        padding: 10px 8px 10px 30px;
+        letter-spacing: 2px;
+    }*/
+}
+@media screen and (max-width: 1366px){
+   .title-g {
+        font-size: 22px;
+        line-height: 22px;
+        padding: 1% 0 0.7% 4%;
+        background-size: 11%;
+    }
+    .ul-condition li label {
+        font-size: 14px;
+    }
+    .ul-condition li input {
+        height: 16px;
+        font-size: 13px;
+    }
+    .input-w-s {
+        width: 125px;
+    }
+    .input-w-m {
+        width: 130px;
+    }
+    .btn-g {
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 5px 8px no-repeat;
+        background-size: 27%;
+        padding: 8px 4px 5px 25px;
+        letter-spacing: 4px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px 9px no-repeat;
+        background-size: 26%;
+        padding: 8px 1px 5px 24px;
+        letter-spacing: 4px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 16%;
+        padding: 7px 3px 5px 24px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 6px no-repeat;
+        background-size: 16%;
+        padding: 7px 4px 5px 26px;
+        letter-spacing: 2px;
+    }
+}
+@media screen and (max-width: 1280px){
+   .title-g {
+        font-size: 22px;
+        line-height: 22px;
+        padding: 1.1% 0 1.1% 4.5%;
+        background-size: 11%;
+    }
+    .ul-condition li {
+        margin: 0 0.1% 0 0;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 4px 8px no-repeat;
+        background-size: 27%;
+        padding: 8px 4px 5px 23px;
+        letter-spacing: 4px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px 9px no-repeat;
+        background-size: 26%;
+        padding: 8px 1px 5px 24px;
+        letter-spacing: 4px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 16%;
+        padding: 7px 3px 5px 24px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 6px no-repeat;
+        background-size: 16%;
+        padding: 7px 4px 5px 26px;
+        letter-spacing: 2px;
+    }
+}
+@media screen and (max-width: 1024px){
+    .title-g {
+        font-size: 18px;
+        line-height: 18px;
+        padding: 1.5% 0 1.1% 4.5%;
+        background-size: 11%;
+    }
+    .input-w-s {
+        width: 130px;
+    }
+    .input-w-m {
+        width: 135px;
+    }
+    .btn-g-search {
+        background: url(../img/ico-g-glass.png) 8px 8px no-repeat;
+        background-size: 24%;
+        padding: 8px 7px 5px 30px;
+        letter-spacing: 6px;
+    }
+    .btn-g-export {
+        background: url(../img/ico-export.png) 5px 9px no-repeat;
+        background-size: 26%;
+        padding: 8px 1px 5px 24px;
+        letter-spacing: 4px;
+    }
+    .btn-g-add-station {
+        background: url(../img/ico-g-add.png) 3px no-repeat;
+        background-size: 16%;
+        padding: 7px 3px 5px 24px;
+        letter-spacing: 2px;
+    }
+    .btn-g-special-station {
+        background: url(../img/ico-camera.png) 6px no-repeat;
+        background-size: 16%;
+        padding: 7px 4px 5px 26px;
+        letter-spacing: 2px;
+    }
+}

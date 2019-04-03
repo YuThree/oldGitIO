@@ -1,0 +1,125 @@
+﻿body {
+}
+/*插件 播放窗口*/
+.plugin
+{
+	width:100%;
+	height:600px;
+}
+fieldset
+{
+	display:block;
+}
+.playbutton
+{
+    text-decoration: none;
+    background: gray repeat 0px 0px; 
+    width: 80px; 
+    height: 25px; 
+    display: block;
+    text-align:center;
+    vertical-align:middle; 
+    color: White; 
+    border-color: Yellow;
+    border:2px;      
+}
+.playbutton::selection
+{
+   color:Blue;  
+}
+.playbutton span { display: none; }
+
+.playbutton:hover { background: blue repeat 0px -44px; }
+
+.tdb
+{
+ font-size:medium;
+ text-align:center;
+ vertical-align:middle; 
+
+}
+.playdiv
+{
+    margin-left:1%;
+}
+.buttonCtrl
+{
+    width:80px;
+    height:25px;
+}
+.buttonIconCtrl
+{
+    width:35px;
+    height:35px;
+}
+.divButtonIconCtrl
+{
+    margin-left:10px;
+}
+
+
+
+  html,body{ background-color: #333}
+        button.s_menu
+        {
+            background: transparent url(img/i_menu.png) no-repeat left center;
+            padding-left: 26px;
+            width: 100px;
+            color: #CCC;
+        }
+        button.s_menu:hover
+        {
+            color: #FFF;
+        }
+        a.go_home
+        {
+            background: transparent url(/Common/img/i_home.png) no-repeat left center;
+            padding: 4px 12px 4px 26px;
+            width: 100px;
+            color: #CCC;
+            display: inline-block;
+            line-height: 16px;
+        }
+        a.go_home:hover
+        {
+            color: #FFF;
+        }
+        a.btn_link, a.btn_play, a.btn_r, a.btn_fullscreen
+        {
+            background: transparent url(img/i_btn_bg.png) no-repeat center;
+            height: 34px;
+            width: 50px;
+            line-height: 34px;
+            color: #333333;
+        }
+        a.btn_link:hover
+        {
+            background: transparent url(img/i_btn_bg.png) no-repeat center;
+            color: #FFF;
+        }
+        a.btn_play
+        {
+            background: transparent url(img/i_btn_play.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_r
+        {
+            background: transparent url(img/i_btn_r.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_fullscreen
+        {
+            background: transparent url(img/i_btn_fullscreen.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+       #playImg
+       {
+           background:url(img/img/test.jpg) no-repeat;
+           
+           }
+           
+#dropdown-menu{ z-index:9999;}

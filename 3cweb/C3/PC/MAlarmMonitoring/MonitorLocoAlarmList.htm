@@ -1,0 +1,704 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备缺陷监控</title>
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/HistoricalTime.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("mySelectSample");
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+
+        loadJs("/C3/PC/MAlarmMonitoring/js/MonitorLocoAlarmList.js?v=" + version);
+
+        loadCss("/C3/PC/css/MonitorLocoAlarmList.css?v=" + version);
+        loadJs("/Common/MAlarmMonitoring/js/AlarmSaveList.js?v=" + version);
+    </script>
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <link href="/Lib/bootstrap/css/bootstrapSwitch.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/bootstrap/bootstrapSwitch.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        // 右边设备栏的隐藏和显示
+        $(document).ready(function () {
+
+            if (GetQueryString("data_type") == "FAULT") {
+                $('.L_title').text('缺陷库');
+            } else if (GetQueryString("data_type") == "SUPERVISE") {
+                $('.L_title').text('报警监控')
+            }
+
+            if (FunEnable('Fun_6CDataExport') == "True") { $("#S_btnTemp").css("display", "list-item"); };
+            if (FunEnable('Fun_CollectionButton') == "True") { $(".savedWord").css("display", "list-item"); };
+            if (FunEnable('Fun_StatisticalPageReport') == "True") { $("#S_btnExcl").css("display", "list-item"); };
+            if (FunEnable('Fun_portOutExcelWith_Pic') == "True") { $("#portoutExcel_pic").css("display", ""); };
+            $(".button_img_show").click(function () {
+                var Width = $(".span2").outerWidth(true);
+                $(".span2").animate({ left: -Width + 'px' }).css("position", "absolute");
+                $(this).hide();
+                $(".span10").animate({ width: "96.5%" });
+                $(".button_img_hide").show();
+            });
+            $(".button_img_hide").click(function () {
+                $(".span2").animate({ left: 0 }).css("position", "relative");
+                $(".button_img_show").show();
+                $(this).hide();
+                $(".span10").animate({ width: "82.8%" });
+            });
+            $("#ddlorg").mouseover(function () { $(this).css("cursor", "pointer"); }).mouseout(function () { $(this).css("cursor", "default"); });
+            //            $("#rv_org").css("color", "gray").click(function () { $("#ddlorg,#hf_ddlorg,#hf_type_ddlorg").val(""); });
+        })
+    </script>
+</head>
+<body>
+    <div id="seleHeadDiv" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+        <div>
+            <img id="img_hw" src="" alt="" /><img id="img_kjg" src="" alt="" /><img id="img_qj" src="" alt="" />
+        </div>
+        <!-- <center id="div_E_save">
+            <a id="E_save" title="加入待处理列表" class="btn btn-info">
+                <i id="i_save" class="icon icon-star-on icon-white"></i>收藏
+            </a>
+            <div id="temp_alarmID"></div>
+        </center>-->
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="button_img_hide">
+            </div>
+            <div class="row-fluid sortable">
+                <div class="box span2">
+                    <div class="button_img_show">
+                    </div>
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="icon-align-left"></i><span class="L_title">检测数据</span>
+                        </h2>
+                        <!-- <div class="box-icon">
+                                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                            </div>-->
+                    </div>
+                    <div id="_loctree" class="box-content" style="height: 970px; background: url(/Common/img/left_bg.png) no-repeat bottom;
+                        overflow-y: auto; background-size: cover;">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#tab_org">组织机构</a></li>
+                            <li class="clx_box"><a href="#tab_type">型号</a></li>
+                            <li class="org_box" style="display: none;"><a href="#tab_gdorg">组织机构</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane active" id="tab_org">
+                                <div id="TreeAll" class="ztree">
+                                </div>
+                                <!--组织机构权-->
+                            </div>
+                            <div class="tab-pane debug" id="tab_type">
+                                <div id="TreeAll_locoType" class="ztree">
+                                </div>
+                                <!--列车类型-->
+                            </div>
+                            <div class="tab-pane debug" id="tab_gdorg" style="display: none;">
+                                <div id="TreeOrg" class="ztree">
+                                </div>
+                                <!--组织机构-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box span10">
+                    <div class="box-header well" data-original-title="data-original-title">
+                        <h2>
+                            <i class="list_title"></i>设备检测<span class="L_title">数据</span>列表
+                        </h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <form id="Form1" style="position: relative;">
+                            <div class="GradeDiv">
+                                <div class="red-block">
+                                    <div class="grade-img"><img src="/Common/img/MAlarmMonitoring/red-block.png" alt="" /><span>严重缺陷</span></div>
+                                    <div class="grade" id="grade-one"></div>
+                                    <img class="red-check" src="/Common/img/MAlarmMonitoring/red-check.png" alt="" />
+                                </div><div class="orange-block">
+                                    <div class="grade-img"><img src="/Common/img/MAlarmMonitoring/orange-block.png" alt="" /><span>隐患缺陷</span></div>
+                                    <div class="grade" id="grade-two"></div>
+                                    <img class="orange-check" src="/Common/img/MAlarmMonitoring/orange-check.png" alt="" />
+                                </div><div class="yellow-block">
+                                    <div class="grade-img"><img src="/Common/img/MAlarmMonitoring/gray-block.png" alt="" /><span>异常状态</span></div>
+                                    <div class="grade" id="grade-three"></div>
+                                    <img class="yellow-check" src="/Common/img/MAlarmMonitoring/yellow-check.png" alt="" />
+                                </div>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>
+                                        设备编号：
+                                    </th>
+                                    <td>
+                                        <input type="text" id="txtloccode" class="smallInput" style="width: 145px" />
+                                    </td>
+                                    <th>
+                                        &nbsp;时间：
+                                    </th>
+                                    <td>
+                                        <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })"
+                                               style="width: 140px" />
+                                        至
+                                        <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })"
+                                               style="width: 140px" />
+                                    </td>
+                                    <th>
+                                    </th>
+                                    <td>
+                                        <div id="HistoricalTime">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="justDIV" style="display:none;margin-left: 8px;font-size: 12px;">
+                                            级别:<select id="jb" name="example-basic" multiple="multiple" style="width: 122px;"></select>
+                                        </div>
+                                    </td>
+                                    <td style="display:none;">
+
+                                        &nbsp;<span style="font-weight:bold;">去重复：</span>
+                                        <div id="chooseRepeatBtn" class="chooseNotOne" first="true" style="cursor:pointer;display:inline-block">
+                                            <span class="chooseSpan"></span> 是
+                                        </div>
+                                        <div id="chooseRepeatBtnNot" class="chooseOne" first="true" style="cursor:pointer;display:inline-block">
+                                            <span class="chooseSpan"></span> 否
+                                        </div>
+                                        <div id="chooseRepeatBox">
+                                            <div id="repeatOnlyNoRe" class="chooseLiMast chooseNotOne"><span class="chooseSpan"></span> 显示非重复数据</div>
+                                            <div id="repeatShowNewOne" class="chooseLiMast chooseNotOne">
+                                                <span class="chooseSpan"></span> 显示最新重复数据
+                                            </div>
+                                            重复数据判断条件：<br />
+                                            <div style="float:left" class="chooseOneDefault"><span class="chooseSpan"></span> 支柱</div>
+                                            <div id="repeatWithAlarm" style="float:left;margin-left:20px" class="chooseNotOne"><span class="chooseSpan"></span> 报警类型</div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!--<th>
+                                        级别：
+                                    </th>
+                                    <td style="font-size: 12px;">
+                                        <select id="jb" name="example-basic" multiple="multiple" style="width: 160px">
+                                        </select>
+                                    </td>-->
+                                    <th>
+                                        报警类型：
+                                    </th>
+                                    <td style="font-size: 12px;">
+                                        <input id="citySel" type="text" value="" code="" style="width: 145px; margin: 0;" />
+                                    </td>
+                                    <th>
+                                        &nbsp;状态：
+                                    </th>
+                                    <td colspan="3" style="font-size: 12px;">
+                                        <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                                                style="width: 352px;" size="3">
+                                            <option value="AFSTATUS01">新上报</option>
+                                            <option value="AFSTATUS03">已确认</option>
+                                            <option value="AFSTATUS04">已计划</option>
+                                            <option value="AFSTATUS07">检修中</option>
+                                            <option value="AFSTATUS02">已取消</option>
+                                            <option value="AFSTATUS05">已关闭</option>
+                                        </select>
+                                    </td>
+                                    <td colspan="3" id="td-btn">
+                                        <!--<span id="ddlzt"></span>-->
+                                        &nbsp;
+                                        <input type="button" id="S_btnQuery" class="btn btn-small btn-primary" value="查&nbsp;&nbsp;&nbsp;&nbsp;询" style="float: left;" />
+                                        <!-- <input id="btn_openSearch" type="button" class="btn btn-small btn-success" value="更多条件" />-->
+                                        <input id="btn_openSearch" type="button" class="btn btn-small btn-success" value="更多条件" style="float: left;margin-left: 3px;" />
+                                        <div class="btn-group justLT" style="float: left; position: relative; left: 3px; margin-bottom: 9px;">
+                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false" style="width: 68px;">
+                                                导&nbsp;&nbsp;&nbsp;出<span class="caret" style="margin-top: 0"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li id="S_btnExcl">
+                                                    <a href="javascript:void(0)" onclick="importToWord(true)">
+                                                        <i class="icon-file">
+                                                        </i>统计页
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnMore" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToWord(false)">
+                                                        <i class="icon-file">
+                                                        </i>报告(多文件)
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnTemp">
+                                                    <a href="javascript:void(0)" onclick="importToTemp()">
+                                                        <i class="icon-file">
+                                                        </i>6C模板
+                                                    </a>
+                                                </li>
+                                                <li><a href="javascript:void(0)" onclick="importToExcel()"><i class="icon-file"></i>Excel列表 </a></li>
+                                                <li id="portoutExcel_pic" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToExcel('true')">
+                                                        <i class="icon-file"></i>Excel列表(带图像)
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnCombine" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToWord(false, 1)">
+                                                        <i class="icon-file">
+                                                        </i>报告(合并版)
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnWeekend" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToWord(false, 2,'gdd')">
+                                                        <i class="icon-file">
+                                                        </i>周报(供电管辖)
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnWeekend_cld" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToWord(false, 2,'cld')">
+                                                        <i class="icon-file">
+                                                        </i>周报(车辆管辖)
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnsumRepeat" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="importToWord(false, 3)">
+                                                        <i class="icon-file">
+                                                        </i>周报(自动计算重复)
+                                                    </a>
+                                                </li>
+                                                <li id="import3C" style="display:none;">
+                                                    <a href="#" onclick="importToRecord()">
+                                                        <i class="icon-file"></i>反馈表
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnNot_oneMFC3" style="display:block;">
+                                                    <a href="javascript:void(0)" onclick="mfc3_portout_notOnlyOne()">
+                                                        <i class="icon-file">
+                                                        </i>MFC3批量
+                                                    </a>
+                                                </li>
+                                                <li id="S_btnNot_oneOriginal" style="display:none;">
+                                                    <a href="javascript:void(0)" onclick="original_file_export()">
+                                                        <i class="icon-file">
+                                                        </i>原始文件批量
+                                                    </a>
+                                                </li>
+                                                <li id="importHistory" class="hide">
+                                                    <a href="javascript:void(0)" onclick="mfc3_portout_AlarmHistory()">
+                                                        <i class="icon-file"></i>MFC3批量(含报警历史)
+                                                    </a>
+                                                </li>
+                                                <!-- <li class="savedWord">
+                                                    <a href="javascript:void(0)" onclick="importSavedToWord(true)">
+                                                        <i class="icon-file"></i>
+                                                        导出收藏报告[带统计页]
+                                                    </a>
+                                                </li>
+                                                <li class="savedWord">
+                                                    <a href="javascript:void(0)" onclick="importSavedToWord(false)">
+                                                        <i class="icon-file"></i>
+                                                        导出收藏报告
+                                                    </a>
+                                                </li>-->
+                                            </ul>
+                                            <input type="hidden" id="saved_ids" name="saved_ids" />
+                                        </div>
+                                        <div class="dropdown btn-group" style="float: left;margin-left: 6px;">
+                                            <button type="button" id="S_btnExlnew" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 65px;display:none;">
+                                                批&nbsp;&nbsp;&nbsp;量<span class="caret" style="margin-top: 0px"></span>
+                                            </button>
+                                            <ul class="dropdown-menu chooseType_saveList">
+                                                <li class="Canc">
+                                                    <a href="javascript:void(0)">
+                                                        取消
+                                                    </a>
+                                                </li>
+                                                <li class="Mission">
+                                                    <a href="javascript:void(0)">
+                                                        转任务
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div id="myDiv" style="display: none; background-color: White; left: 342px; width: 900px;
+                            z-index: 99; position: absolute; border: 1px solid #A6C385; border-radius: 5px;
+                            /*background-image: url(/Common/img/向下箭头.png); background-repeat: no-repeat; background-position: right 20px top -5px;*/">
+                                <div id="search_bg">
+                                    <div class="row-fluid row_Search" style="height: 28px;">
+                                        <div class="span3">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 60px; margin-left: 0px;">
+                                                仅收藏：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="alarm_switch" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -50px;">
+                                                已确认重复报警：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="repeat_switch" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span2" id="TypicalDefects" style="display:none">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -110px;">
+                                                典型缺陷：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="bug_switch" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span2">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -110px;">
+                                                空位置：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="position_null" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span2" id="portOut_sign_choose" style="display:none">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -100px;">
+                                                周报标志：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="portOut_sign" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span2" id="alarm_order" style="display:none">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -69px;">
+                                                报警类型排序：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="alarm_order_sign" type="checkbox" />
+                                            </div>
+                                        </div>
+                                        <div class="span2" id="S_btn_notIncludedRepeatHistory" style="width:193px;display:none;">
+                                            <span class="so_LT_normal" style="position: relative; top: -8px; width: 110px; margin-left: -51px;">
+                                                不包含历史重复：
+                                            </span>
+                                            <div class="switch switch-small" data-on-label="是" data-off-label="否">
+                                                <input id="notIncludedRepeatHistory" type="checkbox" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr style="background-image: url(/Common/img/虚线.png); width: 100%; height: 1px; margin: 0;" />
+                                    <div class="row-fluid row_Search" style="height: 28px;">
+                                        <div class="span4" style="display: none;">
+                                            <span class="so_LT" style="width: 60px;">局&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+                                            <select id="juselect" name="juselect" style="width: 160px; border-radius: 3px;">
+                                                <option value="0">全部</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4" style="display: none;">
+                                            <span class="so_LT" style="width: 60px;">段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+                                            <select id="duanselect" name="duanselect" style="width: 150px; border-radius: 3px;">
+                                                <option value="0">全部</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4" style="margin-left: 0;">
+                                            <span class="so_LT" style="width: 73px; margin-top: 5px;">组织机构：</span>
+                                            <div style="display: inline; position: absolute;">
+                                                <input id="ddlorg" type="text" readonly=readonly style="width: 140px; border-radius: 3px;" />
+                                            </div>
+                                            <!-- <a id="rv_org" href="javascript:void(0);"><i class="glyphicon glyphicon-remove"></i>
+                                            </a>-->
+                                            <input id="hf_ddlorg" style="display: none;" />
+                                            <input id="hf_type_ddlorg" style="display: none;" />
+                                        </div>
+                                        <div class="span4" id="carTypeSelect" style="margin-left: 0px;display: none;">
+                                            <span class="so_LT" style="width: 60px;">车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+                                            <select id="carType" name="carType" style="width: 150px; border-radius: 3px;">
+                                                <option value="0">不限</option>
+                                                <option value="ZY">自研机车</option>
+                                                <option value="PJ">破解机车</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4" id="IsAbnormitySelect" style="margin-left: 0px;display:none;">
+                                            <span class="so_LT" style="width: 73px;">处理范围：</span>
+                                            <select id="IsAbnormity" name="IsAbnormity" style="width: 150px; border-radius: 3px;">
+                                                <option value="">全部</option>
+                                                <option value="0">正常数据</option>
+                                                <option value="1">异常数据</option>
+                                            </select>
+                                        </div>
+                                        <div class="span3" style="display: none">
+                                            <span class="so_LT">交路号：</span>
+                                            <input type="text" id="jlh" class="smallInput validate[custom[integer]] " style="width: 50px" />
+                                        </div>
+                                    </div>
+                                    <hr style="background-image: url(/Common/img/虚线.png); width: 100%; height: 1px; margin: 0;" />
+                                    <div class="row-fluid row_Search" style="height: 28px;">
+                                        <div class="span4" style="display: none;">
+                                            <span class="so_LT" style="width: 60px;">线路&nbsp;：</span>
+                                            <input type="text" id="lineselect" style="width: 140px;" />
+                                        </div>
+                                        <div class="span4" style="margin-left: 0px;">
+                                            <span class="so_LT" style="width: 74px; margin-top: 5px;">线路区站：</span>
+                                            <div style="display: inline; position: absolute;">
+                                                <input type="text" id="location" style="width: 140px;" />
+                                            </div>
+                                        </div>
+                                        <div class="span4" style="margin-left: 0px;">
+                                            <span class="so_LT" style="width: 74px;margin-top: 5px;">行别：</span>
+                                            <input type="text" id="direction" name="direction" style="width: 140px; border-radius: 3px;" />
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid row_Search" style="height: 28px;">
+                                        <div class="span8">
+                                            <span class="so_LT" style="width: 73px;">公里标：</span>
+                                            <input type="text" id="startkm" class="smallInput validate[custom[integerPositive],maxSize[8]]"
+                                                   style="width: 140px" /><span style="padding: 0 12px;">(m)至</span><input type="text"
+                                                                                                                           id="endkm" class="smallInput validate[custom[integerPositive],maxSize[8]]" style="width: 140px" /><span style="padding: 0 12px;">(m)</span>
+                                        </div>
+                                        <div class="span4" style="margin-left: 0;">
+                                            <span class="so_LT" style="width: 74px;">杆号：</span>
+                                            <div style="display: inline">
+                                                <input type="text" id="txtpole" name="txtpole" style="width: 140px;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr style="background-image: url(/Common/img/虚线.png); width: 100%; height: 1px; margin: 0;" />
+                                    <div class="row-fluid  row_Search" style="height: 28px;">
+                                        <!--<div class="span4">
+                                            <span class="so_LT" style="width: 73px;">报警类型：</span>
+                                            <input id="citySel" type="text" value="" code="" style="width: 136px; margin: 0;" />
+                                        </div>-->
+                                        <div class="span4 align_span">
+                                            <span class="so_LT" style="width: 73px;">报警分析：</span>
+                                            <input id="txt_fx" name="txt_fx" type="text" value="" code="" style="width: 140px;margin: 0;" />
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;">
+                                            <span class="so_LT" style="width: 74px;">标签：</span>
+                                            <input id="bjbm" type="text" value="" code="" style="width: 140px; margin: 0;" />
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none;">
+                                            <span class="so_LT" style="width: 74px; margin-top: 5px;">缺陷标志：</span>
+                                            <div style="display: inline; position: absolute;">
+                                                <input type="text" id="QX_mark" style="width: 140px;" />
+                                            </div>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none;">
+                                            <span class="so_LT" style="width: 73px;">原始类型：</span>
+                                            <input type="text" id="INITIAL_CODE" style="width: 140px;margin: 0;" />
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none;">
+                                            <span class="so_LT" style="width: 74px;text-align: left;">报告人：</span>
+                                            <div style="display: inline">
+                                                <input type="text" id="ReportPerson" style="width: 140px;margin: 0;" />
+                                            </div>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none;">
+                                            <span class="so_LT" style="width: 74px;">解析文件：</span>
+                                            <select id="JXWJ" name="JXWJ" style="width: 150px; border-radius: 3px;margin-left: -4px;margin-bottom:0">
+                                                <option value="0">不限</option>
+                                                <option value="VI_ANALYSIS">局部已解析</option>
+                                                <option value="OX_ANALYSIS">全景已解析</option>
+                                                <option value="all">局部全景已解析</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none">
+                                            <span class="so_LT" style="width: 74px;">锁定状态：</span>
+                                            <select id="IsLock" name="IsLock" style="width: 150px; border-radius: 3px;margin-bottom:0;">
+                                                <option value="0">不限</option>
+                                                <option value="1">锁定</option>
+                                                <option value="-1">未锁定</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none">
+                                            <span class="so_LT" style="width: 74px;">转发状态：</span>
+                                            <select id="IsTransmit" name="IsTransmit" multiple="multiple" style="width: 150px; border-radius: 3px;margin-bottom:0">
+                                                <option value="1">紧急转发</option>
+                                                <option value="2">普通转发</option>
+                                                <option value="-1">不转发</option>
+                                                <option value="0">未处理</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none">
+                                            <span class="so_LT" style="width: 74px;margin-top: 5px;">解析取消：</span>
+                                            <div style="display: inline; position: absolute;">
+                                                <input type="text" id="Parsing_cancel" style="width: 140px;margin: 0;" />
+                                            </div>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0;display:none">
+                                            <span class="so_LT" style="width: 74px;">样本类型：</span>
+                                            <input type="text" id="Sample_type" style="width: 140px;margin: 0;" />
+                                            <span id="sample_img"></span>
+                                        </div>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0; width:578px;display:none">
+                                            <span class="so_LT" style="width: 74px;">场景样本：</span>
+                                            <div style="position:relative;display: inline-block;">
+                                                <input id="ScenceSample" class="" code="" type="text" onclick="" style="width: 402px;margin-bottom:0" />
+                                            </div>
+                                        </div>
+                                        <span class="span4 align_span" style="margin: 0 0 5px 0; width:400px;display:none;">
+                                            <span class="so_LT" style="width: 74px;">处理时间：</span> <input id="deal_startdate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" style="width: 140px;margin-bottom:0" />
+                                            至
+                                            <input id="deal_enddate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })"
+                                                   style="width: 140px;margin-bottom:0" />
+                                        </span>
+                                        <div class="span4 align_span" style="margin: 0 0 5px 0; width:445px;display:none;">
+                                            <span class="so_LT" style="width: 74px;">燃弧大小：</span> <input id="ArcingSize_star" type="text" style="width: 110px;margin-bottom:0" /><i class="firsti">(%)</i>
+                                            至
+                                            <input id="ArcingSize_end" type="text" style="width: 110px;margin-bottom:0" /><i class="secondi">(%)</i>
+                                        </div>
+                                        <div class="span4" style="margin: 0 0 5px 0; width:278px;display:none;">
+                                            <span class="so_LT" style="width: 74px;">燃弧像素：</span> <input id="START_NUM_PIXELS" name="START_NUM_PIXELS" class="validate[custom[integer],min[0]]" type="text" style="width: 42px;margin-bottom:0" /><i class="firsti">(个)</i>
+                                            至
+                                            <input id="END_NUM_PIXELS" name="END_NUM_PIXELS" class="validate[custom[integer],min[0]]" type="text" style="width: 42px;margin-bottom:0" /><i class="secondi">(个)</i>
+                                        </div>
+                                        <div class="span4" style="margin: 0px 0px 5px 20px; width:250px;display:none;">
+                                            <span class="so_LT" style="width: 74px;">判断依据：</span> 
+                                            <input id="criterion" type="text" readonly="readonly" style="width: 140px; border-radius: 3px; cursor: default;" />
+                                        </div>
+                                    </div>
+                                    <hr style="background-image: url(/Common/img/虚线.png); width: 100%; height: 1px; margin: 0;" />
+                                    <div class="row-fluid row_Search">
+                                        <div class="span4" style="position: relative;">
+                                            <span class="so_LT" style="width: 73px;">最高温度：</span>
+                                            <input id="txt_temp_hw1" name="txt_temp_hw1" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 42px; margin: 0;" /><i class="firsti">(℃)</i> 至
+                                            <input id="txt_temp_hw2" name="txt_temp_hw2" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 42px; margin: 0;" /><i class="secondi">(℃)</i>
+                                        </div>
+                                        <div class="span4" style="position: relative;">
+                                            <span class="so_LT" style="width: 73px;">环境温度：</span>
+                                            <input id="txt_temp_hj1" name="txt_temp_hj1" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 38px; margin: 0;" /><i class="firsti firsti-1">(℃)</i>
+                                            至
+                                            <input id="txt_temp_hj2" name="txt_temp_hj2" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 38px; margin: 0;" /><i class="secondi secondi-1">(℃)</i>
+                                        </div>
+                                        <div class="span4" style="margin-left: 0px;">
+                                            <span class="so_LT" style="width: 60px; margin-left: 0px;">弓位置：</span>
+                                            <select id="txt_bow" name="txt_bow" style="width: 149px; margin: 0; border-radius: 3px;">
+                                                <option value="0">全部</option>
+                                                <option value="A弓">A弓</option>
+                                                <option value="B弓">B弓</option>
+                                                <option value="2车">2车</option>
+                                                <option value="3车">3车</option>
+                                                <option value="4车">4车</option>
+                                                <option value="6车">6车</option>
+                                                <option value="7车">7车</option>
+                                                <option value="10车">10车</option>
+                                                <option value="15车">15车</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid row_Search">
+                                        <div class="span4" style="position: relative;">
+                                            <span class="so_LT" style="width: 73px;">导高值&nbsp;&nbsp;&nbsp;：</span>
+                                            <input id="txt_dg1" name="txt_dg1" type="text" class="validate[custom[integer]]"
+                                                   value="" style="width: 42px; margin: 0;" /><i class="firsti">(mm)</i> 至
+                                            <input id="txt_dg2" name="txt_dg2" type="text" class="validate[custom[integer]]"
+                                                   value="" style="width: 42px; margin: 0;" /><i class="secondi">(mm)</i>
+                                        </div>
+                                        <div class="span4" style="position: relative;">
+                                            <span class="so_LT" style="width: 73px;">拉出值&nbsp;&nbsp;&nbsp;：</span>
+                                            <input id="txt_lc1" name="txt_lc1" type="text" class="validate[custom[integer]]"
+                                                   value="" style="width: 38px; margin: 0;" /><i class="firsti firsti-1">(mm)</i>
+                                            至
+                                            <input id="txt_lc2" name="txt_lc2" type="text" class="validate[custom[integer]]"
+                                                   value="" style="width: 38px; margin: 0;" /><i class="secondi secondi-1">(mm)</i>
+                                        </div>
+                                        <div class="span4" style="margin-left: 0px; position: relative;">
+                                            <span class="so_LT" style="width: 60px; margin-left: 0px;">速&nbsp;&nbsp;&nbsp;度：</span>
+                                            <input id="txt_speed1" name="txt_speed1" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 40px; margin: 0;" /><i class="firsti firsti-2">(km/h)</i>
+                                            至
+                                            <input id="txt_speed2" name="txt_speed2" class="validate[custom[integer]]" type="text"
+                                                   value="" style="width: 40px; margin: 0;" /><i class="secondi secondi-2">(km/h)</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid row_Search" style="text-align: right; background-color: #DDDDDD;
+                                width: 100%; position: absolute; bottom: 0px;">
+                                    <button type="button" class="btn btn-primary" id="btn_search" style="width: 74px;">
+                                        查 询
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-warning" id="btn_reset" style="margin-right: 10px;">
+                                        清空条件
+                                    </button>
+                                    &nbsp;&nbsp;
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="box_whereMemo">
+                        <div id="txt_whereTitle">
+                            更多条件：
+                        </div>
+                        <!--<span class="label  label-info whereBlock">
+                                  <span class="icon-remove icon-white"></span>测试
+                               </span>-->
+                        <div id="txt_whereMemo">
+                        </div>
+                        <div class="cls">
+                        </div>
+                    </div>
+                    <div class="cls">
+                    </div>
+                    <div class="box-content">
+                        <table id="flexTable" style="display: none"></table>
+                    </div>
+                    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+                </div>
+            </div>
+        </div>
+        <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+           style="display: none"></a>
+        <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div class="modal-body">
+                <div style="width: 530px; height: 400px; border: 1px solid gray; text-align: center;
+                    z-index: 1" id="mapDiv">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="Button1" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    LoadingHistoricalTime("startdate", "enddate"); ///  Common\js\6cweb\HistoricalTime.js
+
+    init_doquery();
+
+    loadJs("/Common/js/6cweb/mySelectTree_Level2.js?v=" + version);
+    loadControl("trainselect");
+    loadControl("layer");
+    loadControl("Validation");
+    loadControl("progress");
+    $("#ddlzt").multiselect({
+        noneSelectedText: "==请选择==",
+        checkAllText: "全选",
+        uncheckAllText: '全不选',
+        selectedList: 6,
+        height: 200
+    });
+    $('#IsTransmit').multiselect({
+        noneSelectedText: "==请选择==",
+        checkAllText: "全选",
+        uncheckAllText: '全不选',
+        selectedList: 4,
+        height: 133
+    });
+    setTimeout(OneTreeLoad, 600); //查询绑定完列表数据，第一次加载树控件
+</script>
+
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>

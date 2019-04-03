@@ -1,0 +1,213 @@
+html{
+    height: 100%;
+}
+body {
+    background: url('./main/img/bg.png');
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.mainBox {
+    width: 100%;
+    height: calc(100% - 92px);
+}
+
+.title {
+    display: block;
+    font-size: 36px;
+    color: rgba(38, 211, 255, 1);
+    font-family: '微软雅黑';
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(187, 244, 255, 1)), to(rgba(38, 211, 255, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   text-align: center;
+   margin-left: 30px;
+   margin-right: 54px;
+   border-bottom: 1px RGBA(25, 182, 235, 1) solid;
+   padding-top: 23px;
+   padding-bottom: 21px;
+}
+
+
+.littleTitle {
+    display: block;
+    font-size: 20px;
+    color: #FFFFFF;
+    border-left: 4px #E17940 solid;
+    border-radius: 2px;
+    margin-left: 21px;
+    padding-left: 7px;
+    padding-top: 4px;
+    margin-top: 23px;
+}
+
+
+.baseInfo {
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px #19B6EB dashed;
+}
+
+.stuInfo {
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-right: 60px;
+}
+
+.borderNather {
+    border-color: #2CF2B6;
+    display: inline-block;
+
+}
+
+.change {
+    display: inline-block;
+    width: 65px;
+    height: 36px;
+    background: #E18140;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 4px;
+    font-size: 16px;
+    float: right;
+    margin-top: 27px;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+.table {
+    font-size: 16px; 
+    color: #fff;
+    min-height: 50px;
+    height: auto;
+    position: relative;
+    display: inline-block;
+}
+
+.itemBox {
+    margin-left: 30px;
+    margin-right: 27px;
+    margin-top: 15px;
+    font-size: 0;
+    padding-bottom: 20px;
+}
+
+.itemBox::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.item {
+    float: left;
+    width: 360px;
+    font-size: 0;
+    border-radius: 4px;
+    margin-right: 9px;
+    box-sizing: border-box;
+    font-size: 0;
+    border-bottom: 1px solid #528DEB;
+}
+
+.item:last-child {
+    /* border-bottom: 1px solid #528DEB; */
+}
+
+
+
+
+.table .tableLeft {
+    min-height: 50px;
+    width: 90px;
+    background: #267BB6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid 1px #528DEB;
+    border-right: none;
+    border-bottom: none;
+    line-height: normal;
+    padding-left: 15px;
+    float: left;
+    height:100%;
+}
+
+.table .tableLeft .tableHead {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.table .tableRight {
+    min-height: 48px;
+    width: 270px;
+    margin-left: 90px;
+    min-height: 48px;
+}
+
+.table .tableRight .tableRow {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    line-height: 48px;
+    background: #0A4063;
+    border: 1px solid #528DEB;
+    border-bottom: none;
+    font-size: 14px;
+    color: #fff;
+    
+}
+
+.table .tableRight .tableRow::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.table .tableRight .tableRow .tableTxt {
+    color: #fff;
+     width: 120px;
+     background: #0A4063;
+     border-right: solid 1px #528DEB;
+     float: left;
+     line-height: 50px;
+     text-align: center;
+}
+
+
+.table .tableRight .tableRow .tableInfo {
+    color: #fff;
+    width: 148px;
+    background: #0A4063;
+    float: left;
+    text-align: center;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+
+.table .tableRight .tableRow .longInfo {
+    line-height: 25px;
+}
+
+.innerInput {
+    border: none;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.innerInput:focus {
+    outline: none;
+}

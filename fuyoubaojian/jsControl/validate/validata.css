@@ -1,0 +1,14 @@
+.errorClass_ {
+    position: absolute;
+    top: 102%;
+    line-height: 17px;
+    z-index: 100000;
+    left: 0px;
+    font-size:12px;
+     color:#e86453;
+    white-space: nowrap;
+}
+.errorClass_ span{
+	background-image: url(error.png);
+	
+}

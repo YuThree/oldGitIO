@@ -1,0 +1,165 @@
+﻿@charset "utf-8";
+/*File Name:*.css*/
+/*Project Name:网站*/
+/*Version:1.0(2014-5)*/
+/*Author:ybc*/
+
+* {
+    margin:0;padding:0;
+}
+body {
+    font-family:'Microsoft YaHei';
+}
+.box_title {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #488cb4;
+    line-height: 34px;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    padding:0 15px;
+}
+/*上部分*/
+#boxCXtitle {
+    padding:15px 0px 0 15px;
+    overflow:hidden;
+}
+    #boxCXtitle .yiKuaiSpan {
+        width:250px;
+        display:inline-block;float:left;margin:0 15px;
+    }
+        #boxCXtitle .yiKuaiSpan span {
+            display: inline-block;
+            text-align: justify;
+            text-align-last: justify;
+            width: 79px;
+        }
+        #boxCXtitle .yiKuaiSpan input {
+            width: 120px;
+        }
+/*列表*/
+#box_bottom {
+    padding: 0 30px;
+    overflow:hidden;
+    color:black;
+}
+    #box_bottom .cxResult {
+        line-height:24px;
+    
+    }
+    #box_bottom .cxResult div {
+        display:inline-block;
+        float:right;
+        margin-right:15px;
+    }
+     #box_bottom .cxResult > span {
+         margin-left: -6px;
+    }
+        #box_bottom .cxResult > div {
+            cursor:pointer;
+        }
+      #box_bottom .cxResult > div> span {
+          display:inline-block;
+          width:24px;height:24px;float: left;
+          background:url(../img/add_inf.png) no-repeat center center;
+    }
+    #box_bottom .line_table {
+        overflow:auto;
+    }
+    #box_bottom .line_table_title {
+        overflow:auto;
+    }
+    #box_bottom .line_table >div {
+        line-height: 27px;
+        text-align: center;
+    }
+    #box_bottom .line_table > div > span ,#box_bottom .line_table > div >div> span {
+        display: inline-block;
+        float: left;
+        width: 14.1%;
+    }
+        #box_bottom .line_table > div > span:nth-of-type(1),  #box_bottom .line_table > div >div> span:nth-of-type(1){
+            border-left:1px solid #E3E3E3;
+        }
+        #box_bottom .line_table_title > span {
+            border-bottom:1px solid #E3E3E3;
+            border-right:1px solid #E3E3E3;
+            border-top:1px solid #E3E3E3;
+            background:linear-gradient(#F9F9F9,#EDEEF0);
+        }
+    #box_bottom .line_table_row {
+        line-height:38px;
+    }
+         #box_bottom .line_table_row > span {
+            border-bottom:1px dashed #E3E3E3;
+            border-right:1px dashed #E3E3E3;
+            height:38px;
+        }
+         
+         #box_bottom .line_table_row:nth-last-child(1) > span {
+            border-bottom:1px solid #E3E3E3;
+            border-right:1px dashed #E3E3E3;
+        }
+          #box_bottom .line_table_row > span:nth-last-child(1) {
+            border-right:1px solid #E3E3E3;
+        }
+    #box_bottom .list_row_box {
+        clear:both;
+        max-height: 117px;
+        overflow:auto;
+    }
+.box_end {
+    text-align:center;
+    padding:15px;
+    background:#F5F5F5;
+    margin-top:25px;
+}
+    .box_end .box_end_btn {
+        color:white;
+        display:inline-block;
+        width:80px;
+        height :26px;
+        line-height:26px;
+        background:#43A2DA;
+        border-radius:5px;
+        cursor:pointer;
+    }
+        .box_end .box_end_btn:nth-of-type(1) {
+            margin-right: 30px;
+        }
+.list_row_box .line_table_row .ctrl_btn {
+    display: inline-block;
+    width: 15px;
+    height: 35px;
+    vertical-align: middle;
+    cursor:pointer;
+}
+.list_row_box .line_table_row .edi_btn {
+    background: url(../img/edit_mouseout.png) no-repeat center center;
+    margin-right:6px;
+}
+
+    .list_row_box .line_table_row .edi_btn:hover {
+        background: url(../img/edit.png) no-repeat center center;
+    }
+
+.list_row_box .line_table_row .dele_btn {
+    background: url(../img/delete_mouseout.png) no-repeat center center;
+}
+
+    .list_row_box .line_table_row .dele_btn:hover {
+        background: url(../img/delete.png) no-repeat center center;
+    }
+
+
+/*行内input样式*/
+.line_table_row span input{
+    width: calc(100% - 25px);
+    margin: 5px 0;
+    height: 18px;
+}
+.showNot {
+    display:none;
+}

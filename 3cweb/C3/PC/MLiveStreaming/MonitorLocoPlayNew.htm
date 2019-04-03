@@ -1,0 +1,745 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>车顶监测</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Common/js/6cweb/video/VideoPlay.css" rel="stylesheet" type="text/css" />
+    <link href="/C3/PC/MLiveStreaming/css/selectmain.css" rel="stylesheet" />
+    <script src="/Common/js/6cweb/mydate.js"></script>
+    <script src="/Common/js/BaiDuMap/BaiDuMapObj.js"></script>
+    <script>
+        loadControl("jqueryUI_2");
+        loadControl("mytree");
+        loadControl("layer");
+        loadJs("/C3/PC/MLiveStreaming/js/GTplayer.js?v=" + version);
+        loadJs("/C3/PC/MLiveStreaming/js/MonitorLocoPlayNew.js?v=" + version);
+        if (GetIsPowerOrg() == 1) {
+            loadCss("/C3/PC/MLiveStreaming/css/powerSection.css?v=" + version);
+        } 
+        loadCss("/C3/PC/MLiveStreaming/css/MonitorLocoPlayNew.css?v=" + version);
+    </script>
+    <script src="/C3/PC/MLiveStreaming/js/PowerSection.js"></script>
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css" rel="stylesheet" />
+    <script type="text/javascript">
+        var TT_locaInfo;
+        var t_locaInfo = 30000; //机车位置信息刷新时间
+        function autosize() {
+
+            var _imgH = $(window).height() - 68;
+
+
+            $('#locImg').height(_imgH);
+            $('#locImg,#playImg').width($(window).width());
+
+            var _playH = _imgH;
+            var _playW = $(window).width() - 2;
+
+            $('#playbox_mode1_1').height($(window).height() - 68);
+            $('#playbox_mode1_1').width(_playW);
+            $('#playbox_mode2_1,#playbox_mode2_2').height(_playH);
+            $('#playbox_mode2_1,#playbox_mode2_2').width(_playW / 2);
+            if ($("#play3", window.parent.document).css("display") == "none" && $("#out-full").css("display") == "none") {
+                $('#playbox_mode3_1,#playbox_mode3_2').height(($(window).height() - 68) / 2);
+            } else {
+                $('#playbox_mode3_1').height($(window).height() / 2 - 68);
+                $('#playbox_mode3_2').height($(window).height() / 2);
+            };
+            $('#playbox_mode3_3').height(_playH);
+            $('#playbox_mode3_1,#playbox_mode3_2,#playbox_mode3_3').width(_playW / 2);
+            $('#playbox_mode3_L').width(_playW / 2);
+            $('#playbox_mode3_R').width(_playW / 2);
+
+
+            var _w = $(window).width();
+            var _h = $(window).height();
+
+            $('#Iframe_gis').css({ top: 68, right: 0, width: _w / 4, height: _h / 4 });
+            $('#Iframe_gis').attr('src', '/C3/PC/MRTA/GIS_Loca.html?Loca=' + $('#locomotive_no').text() + '&v=' + version);
+
+        }
+
+        $(document).ready(function () {
+
+            // 关闭页面
+            $('#tuiChu').click(function () {
+                if (self.frameElement === null) { // 新页面
+                    window.close();
+                } else { // 弹出框
+                    window.parent.closeplay(); 
+                }
+            });
+
+            // layer.alert('xxx');
+            var Definition = getConfig("Definition");
+            if (Definition != undefined && Definition != "") {
+                $('#txt_definition').text(Definition);
+            }
+            
+            autosize();
+
+            //   alert( $('#locImg').width());
+
+            var _treeType = "VideoDevice";
+
+            $('#div_ckLink').hide();
+
+            if (GetIsPowerOrg() == 1) {
+                $("#TreeAll").powersection();
+            }else{
+            $('#TreeAll').myTree({
+                type: _treeType,
+                tag: 'LOCOMOTIVE',
+                isVideo: '1',
+                enableFilter: true,
+                isDefClick: false,
+                onClick: function (event, treeId, treeNode) {
+
+
+
+               
+
+
+                    $('#Iframe_gis').hide();//关闭地图控件
+
+                    ReSetImg(); //切换时，图片还原默认。
+
+
+                    $('#locomotive_no').css('color', '#fff');
+                   // $('#div_ckLink').show(); //隐藏直连非直连
+                    //控制车顶实时监测页面关闭按钮
+                    if ($(".closeX", window.parent.document).css("display") == "block") {
+                        $("#suoxiao").show();
+                        $("#tuiChu").show();
+                        //$(".closeX", window.parent.document).hide();
+                    };
+                    if ($(".closeX", window.parent.document).css("display") == "block" && $("#play4", window.parent.document).css("display") == "block") {
+                        $("#suoxiao").hide();
+                        $("#tuiChu").hide();
+                    }
+
+                    if ($(".MyLayerBox", window.parent.document).length) {
+                        $("#suoxiao").hide();
+                    }
+
+                    //加载车厢号列表。
+                    Getrelations(treeNode.relations);
+
+                    var span_click = $("span:contains('" + treeNode.name + "')")
+                    var onlinePort = span_click.attr('onlineport');
+
+                    // alert(onlineport);
+
+                    if (onlinePort != undefined && onlinePort != '') {
+                        //显示在线的一端。
+                        var carNo = GetCarNo(onlinePort, treeNode.relations);
+                        $('#txt_AB').text(carNo);
+                    }
+
+
+
+                    if (treeNode.treeType != "LOCOMOTIVE") return;
+
+                    $('#locomotive_no').html(treeNode.name);
+                    $('#TreeAll').fadeOut();
+                    $('.div-menu .ztreeInput').fadeOut(50);
+
+                    GetLocaPlayMemo_GT({
+                        locomotiveCode: treeNode.name,
+                        LoadCallback: function (json) {
+                            changeBtns(json);
+                            loadLocaInfo();
+
+                            var page = GetQueryString("page");
+                            if (page != undefined && page == 'meta_big') {
+
+                                window.parent.SetPlayGisUrl(treeNode.name);
+
+                            }
+
+                            clearInterval(TT_locaInfo)
+                            TT_locaInfo = setInterval('loadLocaInfo()', t_locaInfo);
+
+                            Stop_GT();
+                            setTimeout(Play_GT, 2000);
+                        }
+                    });
+                }
+                , callback: function (event, treeId, treeNode, msg) {
+                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                    treeObj.expandAll(true);
+
+                    GetOnline();
+
+                }
+
+            })
+            };
+
+            if (GetIsPowerOrg() == 1) {
+                $("#OriginalFile_TreeAll").powersection();
+            } else {
+                $('#OriginalFile_TreeAll').myTree({
+                    type: _treeType,
+                    tag: 'LOCOMOTIVE',
+                    isVideo: '1',
+                    enableFilter: true,
+                    isDefClick: false,
+                    onClick: function (event, treeId, treeNode) {
+                        if (treeNode.treeType != "LOCOMOTIVE") return;
+                        $('#locomotive_NB').html(treeNode.name);
+                        $('#OriginalFile_TreeAll').fadeOut();
+                        $('.div-menus .ztreeInput').fadeOut(50);
+
+                        //加载车厢号列表。
+                        GetreLations(treeNode.relations);
+                    },
+                    callback: function (event, treeId, treeNode, msg) {
+                        var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                        treeObj.expandAll(true);
+
+                        GetOnline(); //车在线否
+                    }
+                })
+            };
+
+            bind();
+
+            if (GetQueryString("btnCloseHide") == "1") {
+                $('#tuiChu').hide();
+            }
+
+            var page = GetQueryString("page");
+            if (page != undefined && page == 'meta_big') {
+                if ($(".MyLayerBox", window.parent.document).length) {
+                    $("#suoxiao").hide();
+                    $('#btn_map').show();
+                    $("#btn_map_bottom").hide();
+                } else {
+                    $('#suoxiao').hide();
+                    $('#btn_map').hide();
+                    $("#btn_map_bottom").show();
+                }
+                $('#tuiChu').show();   
+            }
+            var loca = GetQueryString("loca");
+            if (loca != null && loca != '') {
+                $('#locomotive_no').text(loca);
+                Getrelations(GetLocomotive(loca).RELATIONS);
+                GetLocaPlayMemo_GT({
+                    locomotiveCode: loca,
+                    LoadCallback: function (json) {
+
+                        changeBtns(json);
+
+                        SetRec_DC();//设置回放图片质量。
+
+
+                        Play_GT();
+                        //var AutoPlay = GetQueryString("AutoPlay");
+                        //if (AutoPlay != null && AutoPlay == '1') {
+
+                        //}
+
+                        loadLocaInfo();
+                        clearInterval(TT_locaInfo)
+                        TT_locaInfo = setInterval('loadLocaInfo()', t_locaInfo);
+
+                    }
+                })
+            }
+
+
+            $(".div-menu").hover(
+	            function () {
+	                $('#TreeAll').fadeIn(50);
+	                $('.div-menu .ztreeInput').fadeIn(50);
+	                $(this).find("img").attr("src", "/Common/img/playico/xia-blue.png");
+	                if (GetIsPowerOrg() == 1) {
+	                    //   Fresh();
+	                    $("#TreeAll").empty();
+	                    $("#TreeAll").powersection();
+	                    $('.div-menu .ztreeInput').hide();
+	                }    
+	            },
+	            function () {
+	                $('#TreeAll').fadeOut(50);
+	                $('.div-menu .ztreeInput').fadeOut(50);
+	                $(this).find("img").attr("src", "/Common/img/playico/xia.png")
+	            }
+            );
+            $(".div-menus").hover(
+	            function () {
+	                $('#OriginalFile_TreeAll').fadeIn(50);
+	                $('.div-menus .ztreeInput').fadeIn(50);
+	                $(this).find("img").attr("src", "/Common/img/playico/xia-blue.png");
+	                if (GetIsPowerOrg() == 1) {
+	                    $("#OriginalFile_TreeAll").empty();
+	                    $("#OriginalFile_TreeAll").powersection();
+	                    $('.div-menus .ztreeInput').hide();
+	                }
+	            },
+	            function () {
+	                $('#OriginalFile_TreeAll').fadeOut(50);
+	                $('.div-menus .ztreeInput').fadeOut(50);
+	                $(this).find("img").attr("src", "/Common/img/playico/xia.png")
+	            }
+            );
+            $("#btn_map_bottom").click(function () {
+                //$("#Iframe_bigPlay1_gis", window.parent.document).toggle();
+                MapToggle();
+            });
+            if (FunEnable("Fun_VideoDown") == "True") {
+                $("#btn_video").css("display", "inline-block");
+            }
+            //if (FunEnable("Fun_FileDown") == "True") {
+            //    $("#btn_download").css("display", "inline-block");
+            //}
+            if (FunEnable('Fun_isCRH') === 'False' && FunEnable('Fun_OpenVideoDowndLoad') === 'True') { //机车下载视频
+                $('#btn_download_video').css("display", "inline-block");
+            }
+            $("#btn_video").click(function () {
+                if ($("#locomotive_no").text() != "请选择") {
+                    window.open("/C3/PC/MLiveStreaming/videotape.html?locomotive=" + $("#locomotive_no").text());
+                }else{
+                    window.open("/C3/PC/MLiveStreaming/videotape.html");
+                }
+            });
+            $("#btn_download").click(function () {
+                //layer.open({
+                //    title: false,
+                //    area: '450px',
+                //    type: 1,
+                //    shade: 0.5,
+                //    content: $("#OriginalFile")
+                //})
+                window.open("/C3/PC/MLiveStreaming/OriginalFile.html");
+
+            });
+        });
+
+
+        function GetCarNo(loco, relations) {
+            var groupJson = GetJSON_relations(relations)
+
+            if (loco.indexOf('#') > -1) {
+                //长编组
+                if (loco.indexOf('#1_A') > -1) return groupJson[0].A;
+                if (loco.indexOf('#1_B') > -1) return groupJson[0].B;
+                if (loco.indexOf('#2_A') > -1) return groupJson[1].A;
+                if (loco.indexOf('#2_B') > -1) return groupJson[1].B;
+
+
+            }
+            else {
+                if (loco.indexOf('_A') > -1) return groupJson[0].A;
+                if (loco.indexOf('_B') > -1) return groupJson[0].B;
+            }
+        };
+
+        function GetJSON_relations(relations) {
+            var html = "";
+            if (relations != "") {
+                html = "[";
+                var Array_relations = relations.split('#');
+                for (var i = 0; i < Array_relations.length; i++) {
+
+                    var carNoA = Array_relations[i].split(':')[1].split(',')[0];
+                    var carNoB = Array_relations[i].split(':')[1].split(',')[1];
+                    if (i == 0) {
+                        html += "{'A':'" + carNoA + "车','B':'" + carNoB + "车'}";
+                    }
+                    else {
+                        html += ",{'A':'" + carNoA + "车','B':'" + carNoB + "车'}";
+                    }
+
+
+                }
+                html += "]";
+
+            } else {
+                html = "[{'A':'4车','B':'6车'}]";
+            }
+
+            var _json = eval('(' + html + ')');
+            return _json;
+        };
+
+        function Getrelations(relations) {
+            var html = "";
+            if (relations != "") {
+                var Array_relations = relations.split('#');
+                for (var i = 0; i < Array_relations.length; i++) {
+                    for (var j = 0; j < Array_relations[i].split(':')[1].split(',').length; j++) {
+                        if (i == 0 && j == 0) {
+                            if ($(".MyLayerBox", window.parent.document).length) {
+                                html = "<a id='txt_AB' href='#s1' code='ip1_A' >" + wz + "</a>\
+                                        <ul id='ul_select_AB' class='submenu'>";
+                            } else {
+                                html = "<a id='txt_AB' href='#s1' code='ip1_A' >" + Array_relations[i].split(':')[1].split(',')[j] + "车</a>\
+                                        <ul id='ul_select_AB' class='submenu'>";
+                            }
+                        }
+                        var code = "ip" + (i + 1);
+                        if (j == 0) {
+                            code = code + "_A";
+                        } else {
+                            code = code + "_B";
+                        }
+                        html += "<li><a href='#' style='width: 50px' code='" + code + "'>" + Array_relations[i].split(':')[1].split(',')[j] + "车</a></li>";
+
+                    }
+                }
+                html += "</ul>";
+
+            } else {
+                html = "<a id='txt_AB' href='#s1'  code='ip_A'>4车</a>\
+                                        <ul id='ul_select_AB' class='submenu'>\
+                                            <li><a href='#' code='ip_A'>4车</a></li>\
+                                            <li><a href='#'  code='ip_B'>6车</a></li>\
+                                        </ul>";
+            }
+            $('#li_AB').html(html);
+
+            wz = GetQueryString("wz"); //弓位置  A B  4 5 10 13 缺陷详细页视频回放
+            if (wz) {
+                if (wz.indexOf('弓') > 0) {
+                    $('#txt_AB_jc').text(wz);
+                }
+                else {
+                    $('#txt_AB').text(wz);
+                }
+            };
+
+            $('#ul_select_AB>li').click(function () {
+                ReSetImg(); //切换时，图片还原默认。
+                $('#txt_AB').text($(this).text());
+                $('#txt_AB').attr("code", $(this).find('a').attr('code'));
+                changeImgDisplay_label();
+                playNo++;
+                Stop_GT();
+                setTimeout(Play_GT, 2000);
+
+            });
+        };
+        //加载弓
+        function GetreLations(relations) {
+            var html = "";
+            if (relations != "") {
+                var Array_relations = relations.split('#');
+                for (var i = 0; i < Array_relations.length; i++) {
+                    for (var j = 0; j < Array_relations[i].split(':')[1].split(',').length; j++) {
+                        var code = "ip" + (i + 1);
+                        if (j == 0) {
+                            code = code + "_A";
+                        } else {
+                            code = code + "_B";
+                        }
+                        //html += "<li><a href='#' style='width: 50px' code='" + code + "'>" + Array_relations[i].split(':')[1].split(',')[j] + "车</a></li>";
+                        html += '<div class="span3"><label for="' + Array_relations[i].split(':')[1].split(',')[j] + '"><input id="' + Array_relations[i].split(':')[1].split(',')[j] + '" type="radio" checked name="GWZ" value="' + code + '" />' + Array_relations[i].split(':')[1].split(',')[j] + '车</label></div>'
+                    }
+                }
+            } else {
+                html = '<div class="span3"><label for="4a"><input id="4a" type="radio" name="GWZ" value="ip_A" checked />4车</label></div><div class="span3"><label for="6b"><input id="6b" type="radio" name="GWZ" value="ip_B" checked />6车</label></div>';
+            }
+            $('#OriginalFile_txt_AB').html(html);
+        };
+       
+    </script>
+</head>
+<body style="overflow: hidden;">
+    <div id="rec_optionBox" style=" display:none">
+
+        <div style="display:none">
+            <div id="rec_optionBox_select">
+                时间段:<select id='select_time' onchange='changeHisDate()'></select>
+            </div>
+            <div id="rec_optionBox_second">
+                从<input id="Txt_rec_second" type="text" value="0" />秒开始
+            </div>
+
+            <input id="btn_RecOption_Ok" type="button" value="确定" />
+        </div>
+
+        <div class="div_Rec_title fg_blue">选择播放开始时间：<span id="select_time_txt"></span></div>
+
+        <div class="div_Rec_content">
+
+            <div id="slider_time" style="width:100%; display: inline-block">
+            </div>
+            <div id="slider_time_txt" style="padding-left: 10px;">1分钟前</div>
+            <div id="slider_online" style="padding-left: 10px;"></div>
+            <div style="padding-left: 10px; padding-top:10px;">
+
+                <input id="cb_IsframePlay" type="checkbox" checked /><label for="cb_IsframePlay">是否逐帧播放</label>
+
+                <div style="display:none">
+                    帧频：<input id="txt_frameN" type="text" value="50" style="width:30px" /> 毫秒
+                </div>
+            </div>
+        </div>
+        <div class="div_Rec_btn_start">
+            <input id="btn_sliderTime_Ok" class="btn btn-primary" type="button" value="开始播放" />
+        </div>
+    </div>
+
+    <div id="playTime"></div>
+
+    <iframe id="Iframe_gis" name="Iframe_gis" scrolling="no" src="" frameborder="0" style="display:none"></iframe>
+
+    <div id="playbtn_prev_next">
+
+        <img id="btn_prev" class="imgshareing" src="/Common/img/locoPlay/left.png" align="absmiddle" />
+
+        <img id="btn_next" class="imgshareing" src="/Common/img/locoPlay/right.png" align="absmiddle" />
+
+    </div>
+
+
+    <div class="playdiv">
+        <div>
+            <table style="background-color: #333; width: 100%">
+                <tr style="height: 40px;">
+                    <td style="width: 248px; color: #9CDCFE;height: 40px;line-height: 40px;">
+                        <div class="div-menu" style="">
+                            <label id="locomotive_no">请选择</label>
+                            <img src="/Common/img/playico/xia.png" alt="" style="cursor: pointer" />
+                            <div id="TreeAll" class="ztree">
+
+                            </div>
+                        </div>
+                        <!--HXD3C0991-->
+                        <div id="div_ckLink" style="display: inline-block;float:left;">
+                            <input type="checkbox" id="cb_linkQ" />
+                            <label for="cb_linkQ">直连</label>
+
+                        </div>
+                        <a href="#" id="btn_video" class="playbutton2" title="录像" style="vertical-align: bottom;margin-top: 8px;display:none;"><img src="img/video.png" /></a>
+                        <a href="#" id="btn_download" class="playbutton2" title="原始文件" style="vertical-align: bottom;margin-top: 8px;display:none;"><img src="img/download.png" /></a>
+                        <a href="OpenVideoDowndLoad:" id="btn_download_video" class="playbutton2" title="视频下载" style="vertical-align: bottom;margin-top: 8px;display:none;"><img src="/C3/PC/MLiveStreaming/img/downloadVideo.png" /></a>
+                    </td>
+                    <td style="clear:both">
+
+
+                        <div id="btns_other" style="display: none" class="div_KY">
+                            <a id="playbutton1" href="javascript:showPlugin();clickRealPlay1();" class="playbutton2"
+                               title="点击直播I端视频">
+                                <img src="/Common/img/playico/1.png" />
+                            </a><a id="playbutton2" href="javascript:showPlugin();clickRealPlay2();" class="playbutton2"
+                                   title="点击直播II端视频">
+                                <img src="/Common/img/playico/2.png" />
+                            </a>
+                            <!--     <a id="isShuang" href="javascript:window.parent.clickRealPlayTwo();showPlugin();clickRealPlay1();" class="playbutton2 isShuang" title="点击直播双视频" >
+                                <img src="/Common/img/playico/double.png" />
+                            </a>-->
+                            <a href="javascript:hidePlugin();stopRealPlay();" id="ImgStopPlay" class="playbutton2"
+                               title="点击停止直播">
+                                <img src="/Common/img/playico/stop.png" />
+                            </a><a href="javascript:record()" id="ImgRecord" class="playbutton2" title="点击开始录像">
+                                <img src="/Common/img/playico/rec.png" />
+                            </a>
+                            <!--    <a href="#" id="ImgFullScreen" class="playbutton2"  title="点击全屏" onclick="javascript:clickFullScreen()">
+                                 <img src="/Common/img/playico/full.png" />
+                            </a>-->
+
+
+                        </div>
+                        <div id="btns_GT" class="div_GT" style="display: none; color: #fff;">
+
+
+                            <div id="div_GT_DC" class="div_GT_DC" style="height: 25px; display: inline-block">
+                                <ul class="menu">
+                                    <li id="li_AB">
+                                        <a id="txt_AB" href="#s1">四车</a>
+                                        <ul id="ul_select_AB" class="submenu">
+                                            <li><a href="#">四车</a></li>
+                                            <li><a href="#">六车</a></li>
+                                            <!--<li style="width: 110px"><a href="#">双车局部</a></li>-->
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a id="txt_type" href="#s2">红外</a>
+                                        <ul id="ul_select_type" class="submenu">
+                                            <li><a href="#">红外</a></li>
+                                            <li><a href="#">局部</a></li>
+                                            <li><a href="#">全景</a></li>
+                                            <li><a href="#">全通道</a></li>
+                                            <li class="fztd" style="display:none;"><a href="#">辅助通道</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a id="txt_definition" href="#s1">标清</a>
+                                        <ul id="ul_definition" class="submenu">
+                                            <li><a href="#">标清</a></li>
+                                            <li><a href="#">高清</a></li>
+                                            <li><a href="#">超清</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a id="txt_playmode_dc" href="#s2">直播</a>
+                                        <ul id="ul_select_playmode_dc" class="submenu">
+                                            <li><a href="#">直播</a></li>
+                                            <li><a href="#">回放</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="div_GT_JC" class="div_GT_JC" style="height: 25px; display: inline-block">
+                                <ul class="menu">
+                                    <li>
+                                        <a id="txt_AB_jc" href="#s1">A弓</a>
+                                        <ul id="ul_select_AB_jc" class="submenu">
+                                            <li><a href="#">A弓</a></li>
+                                            <li><a href="#">B弓</a></li>
+                                            <!--<li style="width: 110px"><a href="#">双端全景</a></li>-->
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a id="txt_type_jc" href="#s2">红外</a>
+                                        <ul id="ul_select_type_jc" class="submenu">
+                                            <li><a href="#">红外</a></li>
+                                            <li id="jcJB" style="display:none;"><a href="#">局部</a></li>
+                                            <li><a href="#">全景</a></li>
+                                            <li><a href="#">全通道</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a id="txt_playmode_jc" href="#s2">直播</a>
+                                        <ul id="ul_select_playmode_jc" class="submenu">
+                                            <li><a href="#">直播</a></li>
+                                            <li><a href="#">回放</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="div_GT_DC" style="display: inline-block">
+                                <div style="display:none">
+                                    <span>清晰度：</span>
+                                    <div id="slider" style="width: 100px; display: inline-block">
+                                    </div>
+                                    <span id="slider_txt" style="padding-left: 10px;">80</span>
+                                </div>
+                            </div>
+
+                            <div class="div_GT_JC" style="display: inline-block">
+
+                                <a href="#" id="btn_recOption_GT" class="playbutton2" title="回放设置" style="display:none">
+                                    <img src="/Common/img/playico/fix.png" />
+                                </a>
+                            </div>
+
+                            <a href="#" id="btn_play_GT" class="playbutton2" title="播放"><img src="/Common/img/playico/play.png" /></a>
+                            <a href="#" id="btn_stop_GT" class="playbutton2" title="停止" style="display: none"><img src="/Common/img/playico/stop.png" /></a>
+                            <a href="#" id="suoxiao" style="display: none;" class="playbutton2" title="缩小"><img src="/Common/img/playico/small.png" /></a>
+                            <a href="#" id="full" style="display:none;" class="playbutton2" title="全屏"><img src="/Common/img/playico/full.png" /></a>
+                            <a href="#" id="out-full" style="display: none" class="playbutton2" title="退出全屏"><img src="/Common/img/playico/out-full.png" /></a>
+                            <a href="#" id="btn_map_bottom" style="display: none" class="playbutton2" title="地图"><img src="/Common/img/playico/rec.png" /></a>
+                            <a href="javascript:MapToggle()" id="btn_map" class="playbutton2" title="地图">
+                                <img src="/Common/img/playico/rec.png" />
+                            </a>
+                            <a href="#" id="tuiChu" style="display: none" class="playbutton2" title="退出" ><img src="/Common/img/playico/close.png" /></a>
+                        </div>
+                    </td>
+                    <td style="text-align: left;">
+                        <div id="divplaylog" class="playlog">
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:28px;">
+                    <td colspan="4">
+                        <div id="loca_info">
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div id="playImg" class="div_KY">
+                            <img id="locImg" src="/Common/img/test.JPG" />
+                        </div>
+                        <div id="playbox" class="div_GT">
+                            <div id="playbox_mode3">
+                                <div id="playbox_mode3_L" style="float: left">
+                                    <img id="playbox_mode3_1" src="/Common/img/test.JPG" />
+                                    <img id="playbox_mode3_2" src="/Common/img/test.JPG" />
+                                </div>
+                                <div id="playbox_mode3_R" style="float: right">
+                                    <img id="playbox_mode3_3" src="/Common/img/test.JPG" />
+                                </div>
+                                <div class="cls">
+                                </div>
+                            </div>
+                            <div id="playbox_mode2">
+                                <img id="playbox_mode2_1" style="float: left;" src="/Common/img/test.JPG" />
+                                <img id="playbox_mode2_2" style="float: left;" src="/Common/img/test.JPG" />
+                            </div>
+                            <div id="playbox_mode1">
+                                <img id="playbox_mode1_1" src="/Common/img/test.JPG" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="display:none;">
+                    <td colspan="4">
+                        <div id="divdownloadplugin">
+                            <a href="/Common/dll/WebComponents.exe">点击下载直播插件</a>
+                        </div>
+                        <div id="divPlugin" class="plugin">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" id="txt_VIDEO_VENDOR" />
+        </div>
+    </div>
+
+    <!-- 原始文件下载弹出框 -->
+    <div id="OriginalFile">
+        <h4><span class="new-img"></span><span>下载原始文件</span></h4>
+        <div class="hr-div"></div>
+        <div class="row-fluid" style="line-height:70px;">
+            <div class="span2">
+                车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+            </div>
+            <div class="span10" id="new-loco" style="margin-top: 18px;">
+                <div class="div-menus" style="">
+                    <label id="locomotive_NB">请选择</label>
+                    <img src="/Common/img/playico/xia.png" alt="" style="cursor: pointer" />
+                    <div id="OriginalFile_TreeAll" class="ztree">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid" style="line-height:50px;">
+            <div class="span2">
+                时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：
+            </div>
+            <div class="span10"  style="margin-top: 8px;">
+                <input type="text" class="Wdate" id="new-strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+            </div>
+        </div>
+        <div class="row-fluid" style="line-height:50px;">
+            <div class="span2">
+                &nbsp;弓&nbsp;位&nbsp;置&nbsp;：
+            </div>
+            <div class="span10" style="margin-top: 15px;">
+                <div class="row-fluid" id="OriginalFile_txt_AB">
+
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid" style="text-align: right;line-height:50px;">
+            <!--<button type="button" class="btn btn-default">时间增加一秒</button>-->
+            <div class="btn-submit" style="width: 107px;" id="TimeAddOne">
+                <div class="btn-left"></div><div class="btn-middle" style="width: 85px;"></div><div class="btn-right"></div><div class="btn-font">时间增加一秒</div>
+            </div>
+            <div class="btn-submit" id="BtnSubmit">
+                <div class="btn-left"></div><div class="btn-middle"></div><div class="btn-right"></div><div class="btn-font">提&nbsp;&nbsp;&nbsp;&nbsp;交</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

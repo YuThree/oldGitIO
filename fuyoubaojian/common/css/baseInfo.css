@@ -1,0 +1,227 @@
+@charset "UTF-8";
+
+
+.cdct_row input {
+    color:#191D21;
+}
+.cdct_infoInput .labelA {
+    font-size: 14px;
+    color: #464F5C;
+    margin-right: 18px;
+    vertical-align: middle;
+}
+
+/*重置颜色*/
+
+/*布局*/
+.inputBoxReg{
+    position:relative;
+    font-size: 0;
+    display:inline-block;
+    vertical-align: middle;
+}
+.r-leftBox {
+    width: 120px;
+}
+
+.r-rightBox{
+    width: 730px;
+    margin-left: 20px
+}
+
+
+
+.r-leftBox div {
+    width: 120px;
+    height: 140px;
+    border: 1px solid #ced0da;
+    border-radius: 8px;
+    position: relative;
+}
+
+.r-leftBox div img{
+    width: 100%;
+    max-height: 100%;
+}
+/*布局*/
+
+.cdct_row {
+    border: none;
+}
+
+.cdct_row input {
+    width: 140px;
+}
+
+.cdct_infoInput {
+    width: 31%;
+    margin-right: 0;
+}
+
+.cdct_row1_col1 {
+    padding-left: 0;
+}
+
+.cdct_radio {
+    display: inline-block;
+    font-family: "Microsoft YaHei";
+    font-weight: 400;
+    margin-right: 0;
+    height: 36px;
+    line-height: 36px;
+    width: 73px;
+}
+.gender {
+    margin-left: 38px;
+    display: inline-block;
+    height: 36px;
+    width: 65px;
+    line-height: 36px;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: #464F5C!important;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+.cdct_radio label {
+    display: inline-block;
+    height: 36px;
+    width: 40px;
+    line-height: 36px;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: #464F5C!important;
+    padding-right: 8px;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+/*职业照*/
+.jobPic {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.jobPic img{
+    width: 100%;
+    max-height: 100%;
+}
+
+.jobPic label {
+    margin-left: 38px;
+}
+
+.jobPic div{
+    display: inline-block;
+    width: 112px;
+    height: 70px;
+    border: 1px solid #ced0da;
+    border-radius: 8px;
+    position: relative;
+    vertical-align: middle;
+
+}
+/*职业照*/
+
+/*长输入框*/
+.longInput {
+    width: 100%;
+}
+
+.longInput label {
+    margin-left: 38px;
+}
+
+.longInput .inputBoxReg {  
+    width: calc(100% - 137px);
+    margin-left: 3px;
+}
+.longInput .inputBoxReg .cdct_input{
+    width: 100%
+}
+/*长输入框*/
+
+/*文本域*/
+
+/*.textarea label{
+    position: relative;
+    bottom: 80px;
+    padding-right: 0;
+    left: 7px;
+}*/
+.textarea {
+    margin-left: 45px;
+    font-size: 14px;/*
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 80px;*/
+}
+textarea {
+    resize: none;
+}
+
+
+
+/*.textarea  textarea{
+    width:590px;
+    height: 130px;
+    resize:none;
+    border: 1px solid #ced0da;
+    border-radius: 4px;
+    position: relative;
+    left: -20px;
+}*/
+/*文本域*/
+
+/*文件上传*/
+.r-leftBox .upPic {
+    top:0;
+}
+
+.upPic {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+}
+
+/*文件上传*/
+
+.labels {
+    display: inline-block;
+    height: 36px;
+    color: #464F5C;
+    width: 65px;
+    line-height: 36px;
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+    position: relative;
+    top: -128px;
+    left: 38px;
+}
+
+textarea::-webkit-input-placeholder {
+    color:#babeca!important;
+}
+textarea::-moz-placeholder {   /* Mozilla Firefox 19+ */
+    color:#babeca!important;
+}
+ textarea:-moz-placeholder {    /* Mozilla Firefox 4 to 18 */
+    color:#babeca!important;
+}
+ textarea:-ms-input-placeholder {  /* Internet Explorer 10-11 */ 
+    color:#babeca!important;
+}
+
+/*重写样式*/
+.cdct_infoInput{
+    position:relative;
+}
+.cdct_row .errorClass_{
+    top:92%;
+}

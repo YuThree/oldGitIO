@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>按钮添加</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("Validation");
+        loadControl("form");
+        loadControl("mySelectTree");
+        loadJs("/Common/MSystem/script/py.js?v=" + version);
+        loadJs("/Common/MSystem/script/XtButton.js?v=" + version);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#defaultForm").validationEngine({
+                validationEventTriggers: "blur",  //触发的事件  validationEventTriggers:"keyup blur",
+                inlineValidation: true, //是否即时验证，false为提交表单时验证,默认true
+                success: false, //为true时即使有不符合的也提交表单,false表示只有全部通过验证了才能提交表单,默认false
+                promptPosition: "bottomLeft"//提示所在的位置，topLeft, topRight, bottomLeft,  centerRight, bottomRight
+            });
+            loadFlexiGrid(); //加载flexigrid数据
+
+        })
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="row-fluid sortable">
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-list"></i>添加按钮信息
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+                <form id="defaultForm" method="post" runat="server">
+                    <div class="box-content">
+                        <table>
+                            <tr>
+                                <td>
+                                    按钮名称：
+                                </td>
+                                <td>
+                                    <input type="text" id="XT_BUTTON_NAME" name="XT_BUTTON_NAME" style="margin: 0 auto; width: 100px;" />
+                                </td>
+                                <td>
+                                    按钮标签：
+                                </td>
+                                <td>
+                                    <input type="text" id="XT_BUTTON_OBJ_ID" name="XT_BUTTON_OBJ_ID" style="margin: 0 auto; width: 100px;" />
+                                </td>
+
+                                <td>
+                                    后台请求方法：
+                                </td>
+                                <td>
+                                    <input type="text" id="XT_REQ_METHOD" name="XT_REQ_METHOD" style="margin: 0 auto; width: 100px;" />
+                                </td>
+                                <td>
+                                    按钮类型：
+                                </td>
+                                <td>
+                                    <select name="XT_BUTTON_TYPE" id="XT_BUTTON_TYPE" style="margin: 0 auto; width: 120px;">
+                                        <option value="添加">添加</option>
+                                        <option value="修改">修改</option>
+                                        <option value="删除">删除</option>
+                                        <option value="查询">查询</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    备注：
+                                </td>
+                                <td>
+                                    <input type="text" id="XT_MEMO" name="XT_MEMO" style="margin: 0 auto; width: 100px;" />
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="Add()">
+                                        添 加
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-resize-small"></i>按钮列表
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table id="flexTable" style="display: none"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

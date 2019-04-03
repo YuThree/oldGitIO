@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>婚前医学检查登记表</title>
+	<!-- 公用样式 -->
+	<link rel="stylesheet" href="../../common/css/COMMONT.css">
+	<!-- 时间控件 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+	<!-- 侧边菜单 -->
+    <link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+    <!-- 表格 -->
+    <link rel="stylesheet" href="../../jsControl/dataTable/table.css">
+	<style type="text/css">
+		form{width: 100%; height: 100%;overflow: hidden;position: relative;}
+		.rowScroll{ height: calc(100% - 60px);	height: -moz-calc(100% -60px); }
+		.cdct_scroll{ width: 100%;min-height: 100%; }
+	</style>
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">婚前医学检查登记表</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<!-- 基本信息开始 -->
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">夫妻号</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="number" class="cdct_inputNone" required name="fqh">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">姓名</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone" required name="username">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">身份证</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">年龄</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">名族</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">职业</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">联系电话</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">家庭地址</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">户籍地址</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+				<!-- 基本信息结束 -->
+
+				<!-- 三病检测开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">
+							一、三病检测
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">是否咨询</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sbzx1" type="radio" name="sbzx" value="" checked="">
+									<label for="sbzx1">是</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sbzx2" type="radio" name="sbzx" value="" checked="">
+									<label for="sbzx2">否</label>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="HIV" type="checkbox">
+									<label for="HIV">HIV检测</label>
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjc1" type="radio" name="HIVjc" value="">
+									<label for="HIVjc1">未见异常</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjc2" type="radio" name="HIVjc" value="">
+									<label for="HIVjc2">异常</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="md" type="checkbox">
+									<label for="md">梅毒检测</label>
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="mdjc1" type="radio" name="mdjc" value="">
+									<label for="mdjc1">未见异常</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="mdjc2" type="radio" name="mdjc" value="">
+									<label for="mdjc2">异常</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc" style="line-height: 25px;">
+									<input id="yg" type="checkbox">
+									<label for="yg" >乙肝表面</label>
+									抗原检测
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="ygjc1" type="radio" name="ygjc" value="">
+									<label for="ygjc1">阴性</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="ygjc2" type="radio" name="ygjc" value="">
+									<label for="ygjc2">阳性</label>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 三病检测结束 -->
+
+				<!-- 地贫筛查诊断开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">
+							二、地贫筛查诊断
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">血样编号</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">是否怀孕</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sfhy1" type="radio" name="sfhy" value="" checked="">
+									<label for="sfhy1">是</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sfhy2" type="radio" name="sfhy" value="" checked="">
+									<label for="sfhy2">否</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sfhy3" type="radio" name="sfhy" value="" checked="">
+									<label for="sfhy3">不详</label>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">地贫家族史</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc" style="line-height: 25px;">
+									<input id="xcg" type="checkbox">
+									<label for="xcg">血常规检</label>
+									测
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="xcgjc1" type="radio" name="xcgjc" value="">
+									<label for="xcgjc1">阴性</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="xcgjc2" type="radio" name="xcgjc" value="">
+									<label for="xcgjc2">阳性</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+								<label class="cdct_inputLable">
+									检测日期:
+									<input type="text" class="cdct_inputLine cdct_line150 datepicker" placeholder="2018-03-07">
+								</label>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc" style="line-height: 25px;">
+									<input id="yg" type="checkbox">
+									<label for="yg" >血红蛋白</label>
+									电泳检测
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="ygjc1" type="radio" name="ygjc" value="">
+									<label for="ygjc1">阴性</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="ygjc2" type="radio" name="ygjc" value="">
+									<label for="ygjc2">阳性</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+								<label class="cdct_inputLable">
+									检测日期:
+									<input type="text" class="cdct_inputLine cdct_line150 datepicker" placeholder="2018-03-07">
+								</label>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">初筛阳性</span>
+							</div>
+							<div class="cdct_info">
+								<label class="cdct_inputLable">
+									血常规、电泳筛查双阳或任一阳性
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 地贫筛查诊断结束 -->
+
+				<!-- 基因诊断开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit" style="width: 40px;">
+							三、基因诊断
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="xcg" type="checkbox">
+									<label for="xcg">基因诊断</label>
+								</div>
+							</div>
+							<div class="cdct_info">
+								<label class="cdct_inputLable">
+									阳性分裂α
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+								<label class="cdct_inputLable">
+									阳性分裂β
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+								<label class="cdct_inputLable">
+									阳性分裂复合
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+								<label class="cdct_inputLable">
+									检测日期
+									<input type="text" class="cdct_inputLine cdct_line150 datepicker" placeholder="2018-03-07">
+								</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 基因诊断结束 -->
+
+				<!-- 产前诊断开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit" style="width: 40px;">
+							四、产前诊断
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt" style="line-height: 48px;">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="xcg" type="checkbox">
+									<label for="xcg">产前诊断</label>
+								</div>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cqzd1" type="radio" name="cqzd" value="" checked="">
+									<label for="cqzd1">阴性</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cqzd2" type="radio" name="cqzd" value="" checked="">
+									<label for="cqzd2">阳性</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+								<label class="cdct_inputLable">
+									检测日期
+									<input type="text" class="cdct_inputLine cdct_line150 datepicker" placeholder="2018-03-07">
+								</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 产前诊断结束 -->
+
+				<!-- 检测结果开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">
+							检测结果
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">异常情况</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jcjgyc1" type="radio" name="jcjgyc" value="" checked="">
+									<label for="jcjgyc1">未见异常</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jcjgyc2" type="radio" name="jcjgyc" value="" checked="">
+									<label for="jcjgyc2">异常</label>
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">疾病诊断</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 检测结果结束 -->
+
+				<!-- 医生指导意见开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">
+							医生指导意见
+						</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">婚前医学检测证明编号</span>
+							</div>
+							<div class="cdct_info">
+								<input type="number" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">婚检医生指导咨询</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">婚检医生卫生指导</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">备注</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">机构名称</span>
+							</div>
+							<div class="cdct_info">
+								<div data-selectsimu="1" class="cdct_select" >
+									<div class="selectBox">
+										<span data-selectnew="1" class="checkspan">
+											<span class="optD">
+												<span class="fontMain"></span>
+											</span>
+											<span class="selectDown"></span>
+										</span>
+
+										<ul class="hideUl" data-selectbox="1" style="display: none;">
+											<li class="hideUlLi" data-selectoption="1">健康档案1</li>
+											<li class="hideUlLi" data-selectoption="2">健康档案2</li>
+											<li class="hideUlLi" data-selectoption="3">健康档案3</li>
+											<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+												<span class="optD">
+													<span class="fontMain">默认当前机构</span>
+												</span>
+												<span class="selectDown"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">医生签字</span>
+							</div>
+							<div class="cdct_info">
+								<div data-selectsimu="1" class="cdct_select" >
+									<div class="selectBox">
+										<span data-selectnew="1" class="checkspan">
+											<span class="optD">
+												<span class="fontMain"></span>
+											</span>
+											<span class="selectDown"></span>
+										</span>
+
+										<ul class="hideUl" data-selectbox="1" style="display: none;">
+											<li class="hideUlLi" data-selectoption="1">健康档案1</li>
+											<li class="hideUlLi" data-selectoption="2">健康档案2</li>
+											<li class="hideUlLi" data-selectoption="3">健康档案3</li>
+											<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+												<span class="optD">
+													<span class="fontMain">默认当前操作人</span>
+												</span>
+												<span class="selectDown"></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">检查日期</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone datepicker" placeholder="2018-03-07">
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 医生指导建议结束 -->
+			</div>
+		</div>
+
+		<!-- 侧边菜单栏开始 -->
+        <div class="cdct_sideBar">
+            <div class="cdct_toolTip">
+                <span class="toolSpan">婚前检查</span>
+            </div>
+            <div class="cdct_sideBarTop">
+                婚前检查
+                <span class="close"></span>
+            </div>
+            <div class="cdct_sideBarCon">
+                <div class="cdct_sideBarConTitle">
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx1" type="radio" name="xx" value="">
+                        <label for="xx1">今年</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx2" type="radio" name="xx" value="">
+                        <label for="xx2">去年</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx3" type="radio" name="xx" value="">
+                        <label for="xx3">近三年</label>
+                    </div>
+                </div>
+                <div class="cdct_tableBox">
+                    <div class="tablMainOne" style="height: 100%;">
+                        <div class="tableContent tableShowInfo" style="height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cdct_sideBarFooter">
+                <button type="button" class="cdct_btn">上一页</button>
+                <input class="cdct_input datepicker1" placeholder="2018">
+                <button type="button" class="cdct_btn">下一页</button>
+            </div>
+        </div>
+        <!-- 侧边菜单栏结束 -->
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 时间控件 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+	<!-- 侧边菜单 -->
+    <script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+    <!-- 表格 -->
+    <script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+	<script type="text/javascript">
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+
+		// 时间
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				username:{
+					required:true,
+				},
+				fqh:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+		// 表格
+        var dataSet = [
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            [ '01', "2018-03-07", "哈哈哈"],
+            
+        ];
+        var tableObj = $(".tableShowInfo").showTable({
+            data:dataSet,
+            title:[
+                "序号",
+                "发放日期",
+                "备注"
+            ],
+            scrollHeight:".tableShowInfo",
+            scrollHeightPC:45,
+            edit:false
+        });
+	</script>
+</body>
+</html>

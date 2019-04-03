@@ -1,0 +1,418 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>线路管理</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Lib/layer/layer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("Validation");
+        loadControl("form");
+        loadControl("mySelectTree");
+        loadJs("/Common/MFoundation/script/py.js?v=" + version);
+        loadJs("/Common/MFoundation/script/Line.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <!--<style>
+        #txt_linename{height:22px}
+        .box-content input[type="submit"]{height:32px;vertical-align: top;}
+    </style>-->
+    <style>
+        #PrimaryInformation, #OtherInformation {
+            background-color:#40a0d9;
+            margin: 30px 40px 20px;
+            padding-left:20px;
+            font-size: 14px;
+            color:#ffffff;
+            font-weight: bold;
+            font-family: 'Microsoft YaHei';
+            letter-spacing: 2px;
+            line-height:28px;
+        }
+
+
+        #sub, #close {
+            width: 70px;
+            font-size: 14px;
+            font-family: 'Microsoft YaHei';
+            letter-spacing: 2px;
+        }
+
+        .btn-edit {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/Common/MFoundation/img/edit_mouseout.png) no-repeat;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/Common/MFoundation/img/delete_mouseout.png) no-repeat;
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+        select {
+            border-radius: 4px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#defaultForm").validationEngine({
+                validationEventTriggers: "blur",  //触发的事件  validationEventTriggers:"keyup blur",
+                inlineValidation: true, //是否即时验证，false为提交表单时验证,默认true
+                success: false, //为true时即使有不符合的也提交表单,false表示只有全部通过验证了才能提交表单,默认false
+                promptPosition: "bottomLeft"//提示所在的位置，topLeft, topRight, bottomLeft,  centerRight, bottomRight
+            });
+            $('#sub').click(function () {
+                //var aa = [[{ "id": "aa" }], [{ "id": "bb" }]];
+                var bool = $("#defaultForm").validationEngine("validate");
+                if (bool) {
+                    addOrUpdate();
+                }
+            });
+
+            
+            $('#S_btnQuery').click(function () {
+                doQuery(1);
+            });
+
+            $("#ddlPositionStart").mySelect({
+                tag: "StationSection", type: "S", callback: function (rs) {
+                    $("#ddlPositionEnd").html(rs);
+                }
+            });
+
+            $('#LineName').change(function () {
+                var line_code = makePy(this.value);
+            });
+            loadFlexiGrid(); //加载flexigrid数据
+            loadSelect(); //加载下拉列表
+            buttonControl(); //控制按钮状态
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //下拉选择框样式插件
+            //$("select").addClass("select select-primary").attr("data-toggle", "select");
+            //$("select[name='rp']").removeClass("select select-primary").removeAttr("data-toggle", "select");
+        })
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="row-fluid">
+                <div class="box-header well" data-original-title="data-original-title">
+                    <h2>
+                        <i class="icon-list" style="margin-top: 4px;background: url(/Common/MFoundation/img/inquire.png) no-repeat"></i>
+                        查询条件
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn  btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table>
+                        <tr>
+                            <td align="right">
+                                <label style="padding-left:20px"> 线路名称：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <input type="text" id="txt_LineName" class="input-small" />
+                            </td>
+                            <td align="right">
+                                <label>线路行别：</label>
+
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <input type="text" id="txt_direction" style="width: 90px;" />
+                            </td>
+                            <td align="right">
+                                <label>线路类别：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <select type="text" id="txt_LineType" style="width: 100px;">
+                                </select>
+                            </td>
+                            <td align="right">
+                                <label>速度等级：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <input type="text" id="txt_speed_dgr" style="width: 90px;" />
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label>线路等级：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <input type="text" id="txt_line_dgr" style="width: 90px;" />
+                            </td>
+                            <!--<td align="right">
+                                <label style="padding-left:20px"> 数据类型：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <select type="text" id="select1" style="width: 100px; margin-top: 10px">
+                                    <option value="">全部</option>
+                                    <option value="1">正常数据</option>
+                                    <option value="0">定位数据</option>
+                                </select>
+                            </td>-->
+                            <td align="right">
+                                <label>供电方式：</label>
+                            </td>
+                            <td align="left" style="width: 130px">
+                                <input type="text" id="txt_PowerMethod" style="width: 90px;" />
+                            </td>
+                            <td align="right">
+                                <label>悬挂类型：</label>
+                            </td>
+                            <td align="left">
+                                <input type="text" id="txt_HangType" style="width: 90px;" />
+                            </td>
+                            <td align="center" style="width: 130px" colspan="2">
+                                <input type="submit" id="S_btnQuery" class="btn btn-primary" value="查 询" />
+                                <input type="submit" id="A_btnAdd" onclick="addLineModal()" class="btn btn-primary" value="添 加" />
+                            </td>
+
+                           
+                        </tr>
+                    </table>
+                    
+                </div>
+                <!--<div class="box-header well" data-original-title="data-original-title">
+                    <h2>
+                        <i class="icon-resize-small" style="margin-top: 4px;background: url(/Common/MFoundation/img/list.png) no-repeat"></i>
+                        线路列表
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>-->
+                </div>
+                <div class="box-content">
+                    <table id="flexTable" style="display: none"></table>
+                    <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                       style="display: none"></a>
+                    <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                         aria-labelledby="myModalLabel" style="width:820px;">
+                        <div class="modal-body" style="padding-bottom: 0px">
+                            <div id="PrimaryInformation"><img src="img/information.png"><span style="padding-left:5px" >基础信息</span></div>
+                            <!--<button type="button" class="btn btn-primary" id="PrimaryInformation">基础信息</button>-->
+                            <form id="defaultForm" method="post" runat="server">
+                                <table cellspacing="0" cellpadding="0" width="800px" border="0">
+
+                                    <tr>
+                                        <td height="28" width="20%" align="right">
+                                            线路名称：
+                                        </td>
+
+                                        <td height="28" width="30%" align="left">
+                                            <div id="divLineName" style="display: table-cell;">
+                                                <input type="text" id="LineName" name="LineName" style="width: 160px;" />
+                                                <span style="color: red">*</span>
+                                            </div>
+
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            线路编码：
+                                        </td>
+                                        <td height="28" align="left">
+                                            <div id="divLINE_CODE" style="display: table-cell;">
+                                                <input id="LINE_CODE" name="LINE_CODE" type="text" style="width: 160px;" onblur="setTimeout(ExistenceValidate(this.value),2000)"/>
+                                                <span style="color: red">*</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="28" width="20%" align="right">
+                                            线路类别：
+                                        </td>
+                                        <td height="28" width="*" align="left">
+                                            <select type="text" id="Sel_LINE_TYPE"  style="width: 170px"></select>
+                                            <input id="LINE_TYPE" name="LINE_TYPE" type="hidden" />
+                                            <span style="color: red">*</span>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            线路行别：
+                                        </td>
+                                        <td height="25" width="*" align="left">
+                                            <input type="text" id="DIRECTION" name="DIRECTION" style="width: 160px"/>
+                                                <!--<option value="上行">上行</option>
+                                                <option value="下行">下行</option>
+                                            </input>-->
+                                            <span style="color: red">*</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="28" width="20%" align="right">
+                                            线路号：
+                                        </td>
+                                        <td height="50">
+                                            <input type="text" id="LINE_NO" name="LINE_NO" style="width: 160px;" onblur="removeClass(this);"
+                                                   onkeyup="value=value.replace(/\D/g,'')" onafterpaste="value=value.replace(/\D/g,'')" />
+                                            <span style="color: red">*</span>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            路局名称：
+                                        </td>
+                                        <td height="50">
+                                            <input type="text" id="BUREAU_NAME" name="BUREAU_NAME" style="width: 160px;" readonly="readonly" />
+                                            <input type="hidden" id="BUREAU_CODE" name="BUREAU_CODE" />
+                                            <span style="color: red">*</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr><td colspan="4"><div id="OtherInformation"><img src="img/data.png" /><span style="margin-top:10px; padding-left:5px">其他信息</span></div>
+                                        <!--<button type="button" class="btn btn-primary" id="OtherInformation">其他信息</button>-->
+                                        </td></tr>
+                                    <!--<tr>
+                                        <td height="28" width="20%" align="right">
+                                            线路中心经度：
+                                        </td>
+
+                                        <td height="28" width="30%" align="left">
+                                            <input type="text" id="GIS_CENTER_LON" name="GIS_CENTER_LON" style="width: 160px;"onblur="NumValidate(this,this.value)" />&nbsp;<i>°</i>
+                                        </td>-->
+                                        <!--<td>
+                                            <span style="color: red">*</soan>
+                                            </span>
+                                        </td>-->
+                                        <!--<td height="28" width="20%" align="right">
+                                            线路中心纬度：
+                                        </td>
+                                        <td height="28" width="30%" align="left">
+                                            <input type="text" id="GIS_CENTER_LAT" name="GIS_CENTER_LAT" style="width: 160px;"onkeyup="NumValidate(this,this.value)" />&nbsp;<i>°</i><span id="tip">
+</span></td>
+                                    </tr>-->
+                                    <tr>
+                                        <td height="28" width="20%" align="right">
+                                            起始站点：
+                                        </td>
+                                        <td height="28" width="30%" align="left">
+                                            <input type="text" id="ddlPositionStart" name="ddlPositionStart" style="width: 160px;"
+                                                   onblur="removeClass(this);" />
+                                            <!--<select id="ddlPositionStart" name="ddlPositionStart" style='width: 170px;'></select>-->
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            终止站点：
+                                        </td>
+                                        <td height="28" width="30%" align="left">
+                                            <input type="text" id="ddlPositionEnd" name="ddlPositionEnd" style="width: 160px;"
+                                                   onblur="removeClass(this);" />
+                                            <!--<select id="ddlPositionEnd" name="ddlPositionEnd" style='width: 170px;'></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="28" width="20%" align="right">
+                                            起始公里标：
+                                        </td>
+                                        <td height="28" width="30%" align="left">
+                                            <div id="divStartKm" style="display: table-cell;">
+                                                <input type="text" id="StartKm" name="StartKm" style="width: 160px;"  onkeyup="NumValidate(this,this.value)"/>&nbsp;<i>M</i>
+                                            </div>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            终止公里标：
+                                        </td>
+                                        <td height="28" width="*" align="left">
+                                            <div id="divEndKm" style="display: table-cell;">
+                                                <input type="text" id="EndKm" name="EndKm" style="width: 160px;"  onkeyup="NumValidate(this,this.value)"/>&nbsp;<i>M</i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!--<td height="28" width="20%" align="right">
+                                            数据类型：
+                                        </td>
+                                        <td height="28" width="30%" align="left">
+                                            <select type="text" id="IS_SHOW" name="IS_SHOW" style="width: 170px">
+                                                <option value="1">正常数据</option>
+                                                <option value="0">定位数据</option>
+                                            </select>
+                                        </td>-->
+                                        <td height="28" width="20%" align="right">
+                                            运营里程：
+                                        </td>
+                                        <td height="28" width="*" align="left">
+                                            <input type="text" id="OperationMile" name="OperationMile" onkeyup="NumValidate(this,this.value)"  style="width: 160px;" />&nbsp;<i>KM</i>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            速度等级：
+                                        </td>
+                                        <td>
+                                            <input type="text" id="SPEED_DGR" name="SPEED_DGR" style="width: 160px" />
+                                        </td>
+                                    </tr>
+                                    <tr>                                       
+                                       <td height="28" width="20%" align="right">
+                                            线路等级：
+                                        </td>
+                                        <td>
+                                            <input type="text" id="LINE_DGR" name="LINE_DGR" style="width: 160px"/>
+
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            电化开通日期：
+                                        </td>
+                                        <td height="28" width="*" align="left">
+                                            <input id="OPEN_DATE" name="OPEN_DATE" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" style="width:160px" />
+                                        </td>
+                                    </tr>
+                                    <tr>                                        
+                                        <td height="28" width="20%" align="right">
+                                            供电方式：
+                                        </td>
+                                        <td>
+                                            <input type="text" id="PowerMethod" name="PowerMethod" style="width: 160px"/>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            悬挂类型：
+                                        </td>
+                                        <td height="28" width="*" align="left">
+                                            <input type="text" id="HangType" name="HangType" style="width: 160px;" />
+                                        </td>
+                                    </tr>
+                                    <tr>                                        
+                                        <td height="28" width="20%" align="right">
+                                            资产所属单位：
+                                        </td>
+                                        <td>
+                                            <input type="text" id="Department" name="Department" style="width: 160px"/>
+                                        </td>
+                                        <td height="28" width="20%" align="right">
+                                            其他(备注)：
+                                        </td>
+                                        <td height="25" width="*" align="left">
+                                            <input type="text" id="OTHER" name="OTHER" style="width: 160px;" />
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </form>
+                        </div >
+                        <div class="modal-footer" style="margin: 30px 0; text-align:center">
+                            <button type="submit" class="btn btn-primary" id="sub" style="margin-right: 10px">
+                                保存
+                            </button>
+                            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal" style="margin-left: 10px">
+                                关闭
+                            </button>
+                            <input type="text" id="text" style="display: none;" />
+                            <input type="text" id="pid" style="display: none;" />
+                            <input type="text" id="LineCode" style="display: none;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

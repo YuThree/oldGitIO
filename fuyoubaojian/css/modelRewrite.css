@@ -1,0 +1,90 @@
+/*重写样式*/
+body {
+    height: 100%;
+}
+form {
+    height: 100%;
+}
+
+
+
+
+/*设备录入*/
+.equiPutin .container {
+    width: 610px;
+    height: 100%;
+}
+
+.equiPutin .infoBlock {
+    width: 100%;
+    /*overflow: hidden;*/
+}
+
+.equiPutin .main {
+    padding-top: 36px;
+    padding-left: 10px;
+}
+
+.equiPutin .cdct_infoInput {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 290px;
+    height: 36px;
+}
+
+.equiPutin .money {
+    color: #FD9918;
+}
+
+.equiPutin .dw {
+    position: relative;
+}
+
+.equiPutin .dwY {
+    position: absolute;
+    right: 35px;
+    top: 10px;
+}
+
+.equiPutin .lab {
+    float: left;
+}
+
+.equiPutin .sel {
+    float: left;
+}
+
+.equiPutin .sel .selectBox {
+    line-height: 36px;
+    height: 36px;
+}
+
+.equiPutin .sel .checkspan {
+    height: 36px;
+}
+
+.equiPutin .main .cdct_infoInput .timLab {
+    line-height: 30px;
+}
+
+.cdct_asterisk::before {
+    top: 9px;
+}
+
+.cdct_relative {
+    display: inline-block;
+}
+
+.info .label {
+    float: left;
+}
+
+.text2 {
+    float: left;
+    margin-left: 10px;
+}
+
+.text2 .cdct_textarea {
+    resize: none;
+    width: 493px;
+}

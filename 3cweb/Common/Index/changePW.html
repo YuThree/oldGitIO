@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>修改密码</title>
+	<meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("layer");
+        loadControl("Validation");
+    </script>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            font-family:'Microsoft YaHei'
+        }
+        body,html {
+            width:100%;
+        }
+        .html_title{
+            height:25px;
+            width:100%;
+            /*background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);*/
+            border-bottom: 1px solid #ccc;
+            /*border-radius:4px;*/
+            
+        }
+            .html_title h4 {
+                 font-size:14px;
+            font-weight:bold;
+            color:#488cb4;
+            margin-left:4px;
+            float:left;
+            }
+        .html_title img{
+            vertical-align: -40%;
+            display:inline-block;
+            float:left;
+        }
+        #content_body {
+            padding:10px 20px 0 20px;
+            /*width:100%*/
+        }
+        
+        #content_body span {
+            display:inline-block;
+            width:70px;
+            font-size:14px;
+            text-align:justify; 
+            text-align-last:justify;
+            color:#488cb4;
+        }
+         #normal_PW ,#new_PW,#new_PW_repeat{
+           margin:10px auto;
+           width:250px;
+           height:28px;
+        }
+         @media (max-width: 767px) {
+            body {
+                margin:0;
+            padding:0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="html_title">
+        <img src="/Common/Index/images/xiugai.png" />
+        <h4>修改密码</h4>
+    </div>
+    <div id="content_body">
+        <form id="Form1">
+            <div>
+                <span>原始密码：</span><input type="password" class="input validate[required]" id="normal_PW" placeholder="请输入原密码" />
+            </div>
+            <div>
+                <span>新密码：</span><input class="input validate[required,minSize[6]]" type="password" id="new_PW" placeholder="请输入6位及以上密码" />
+            </div>
+            <div>
+                <span>确认密码：</span><input class="input validate[required,minSize[6]]" type="password" id="new_PW_repeat" placeholder="请再次输入密码" />
+            </div>
+            <div>
+                <input type="button" class="btn btn-small btn-primary" value="保存" style="float:right;margin-right:16px;" id="btn_sure" />
+            </div>
+        </form>
+    </div>
+    <script>
+        function makeJudge() {
+            if ($('#Form1').validationEngine("validate") && $('#normal_PW').val() != '' && $('#new_PW').val() != '' && $('#new_PW_repeat').val() != '') {
+                if ($('#new_PW').val() == $('#new_PW_repeat').val() && $('#normal_PW').val() != $('#new_PW_repeat').val()) {
+                    return true;
+                } else if ($('#new_PW').val() != $('#new_PW_repeat').val()) {
+                    layer.msg('两次密码不一致！')
+                    return false;
+                } else if ($('#normal_PW').val() == $('#new_PW_repeat').val()) {
+                    layer.msg('新密码不能和原来密码一样！')
+                    return false;
+                } else {
+                    return false;
+                }
+            } else  {
+                return false;
+            }
+        }
+        $(function () {
+
+            if (GetQueryString('pwd') == 'change') {
+                $('#normal_PW').val('000000');
+                //layer.msg('您当前的密码为初始密码！请先修改后再使用此系统！', 3000)
+   
+            }
+
+
+            $("#Form1").validationEngine({
+                validationEventTriggers: "blur",  //触发的事件  "keyup blur",   
+                inlineValidation: true, //是否即时验证，false为提交表单时验证,默认true   
+                success: false, //为true时即使有不符合的也提交表单,false表示只有全部通过验证了才能提交表单,默认false
+                promptPosition: "bottomLeft" //提示位置，topLeft, topRight, bottomLeft,  centerRight, bottomRight
+                //        validateNonVisibleFields: true
+            });
+
+           
+            $('#btn_sure').click(function () {
+               
+                
+                if (makeJudge()) {
+
+                    var url = '/Common/MFoundation/RemoteHandlers/UserControl.ashx?type=modifyPassword'
+                        + '&password=' + $('#normal_PW').val()
+                        + '&newpassword=' + $('#new_PW').val()
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        async: true,
+                        cache: true,
+                        success: function (result) {
+                            if (result != "" && result != undefined) {
+                                if (result.sign == 'True') {
+                                    layer.confirm('修改成功', { icon: 1, btn: ['确定'] }, function () {
+                                        console.log($('.jquery-lightbox-button-close', window.parent.document))
+
+                                        layer.closeAll();
+                                        if (undefined === window.parent.closeIframe) {
+                                            parent.layer.closeAll();
+                                        } else {
+                                            $(window.parent.closeIframe());
+                                        }
+                                    });
+                                } else {
+                                    layer.msg(result.content)
+                                }
+
+                            } else {
+                                layer.msg('修改失败，请稍后重试！')
+                            }
+                        },
+                        error: function (xhr) {
+                            layer.msg('修改失败，请稍后重试！')
+                            console.warn(xhr)
+                        }
+                    });
+
+                }
+
+               
+            })
+            
+
+        })
+
+    </script>
+</body>
+</html>

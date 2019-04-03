@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/flat-ui.css" rel="stylesheet" type="text/css" />
+    <!-- jQuery 必须-->
+    <style type="text/css">
+        button.s_menu
+        {
+            background: transparent url(/Common/img/i_menu.png) no-repeat left center;
+            padding-left: 26px;
+            width: 100px;
+            color: #CCC;
+        }
+        button.s_menu:hover
+        {
+            color: #FFF;
+        }
+        a.go_home
+        {
+            background: transparent url(/Common/MRTA/img/icon_house.png) no-repeat left center;
+            padding: 4px 12px 4px 26px;
+            width: 100px;
+            color: #CCC;
+            display: inline-block;
+            line-height: 16px;
+        }
+        a.go_home:hover
+        {
+            color: #333333;
+        }
+        a.btn_link, a.btn_play, a.btn_r, a.btn_fullscreen, a.btn_tuichu
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            height: 34px;
+            width: 50px;
+            line-height: 34px;
+            color: #FFF;
+        }
+        a.btn_link:hover
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            color: #FFF;
+        }
+        a.btn_play
+        {
+            background: transparent url(../../img/i_btn_play.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_r
+        {
+            background: transparent url(../../img/i_btn_r.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_fullscreen.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_tuichu
+        {
+            background: transparent url(/Common/Index/images/退出.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .demo-video
+        {
+            border-radius: 6px;
+            padding-top: 20px;
+            left: -1;
+        }
+    </style>
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/MasterJs.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //初始化加载
+        $(document).ready(function () {
+            var str = "test44.mp4";
+            switch (GetQueryString("loco")) {
+                case "CRH2229A":
+                    str = "images/GTCRH2229A_5_1_20140528185403.mp4";
+                    break;
+                case "CRH2237":
+                    str = "images/GTCRH2237_4_1_20140426191626.mp4";
+                    break;
+                case "CRH380A6145":
+                    str = "images/GTCRH380A6145_5_1_20140521052600.mp4";
+                    break;
+            }
+            var media2 = document.getElementById("media2");
+            media2.src = str;
+            media2.play();
+        });
+    </script>
+</head>
+<body style="background-color: #333333; overflow: hidden;">
+    <div align="right" style="z-index: 999; position: relative; color: Black;" >
+        <a href="#" class="btn_play" id="ImgStopPlay"  title="点击停止直播" onclick="javascript:window.parent.clickRealPlayTwoBack();">
+        </a>
+    </div>
+    <div class="demo-video" style="left: -5px; position: absolute">
+        <video class="video-js" width="810" height="630"  controls="controls" id="media2">
+                     <source id="sor" src="test44.mp4"    type="video/mp4">
+                 </video>
+    </div>
+</body>
+</html>

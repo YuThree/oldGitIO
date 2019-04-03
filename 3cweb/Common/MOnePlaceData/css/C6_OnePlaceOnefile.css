@@ -1,0 +1,10 @@
+﻿
+.Transformer_search label{
+    width:80px;
+    display:inline-block;
+    text-align: right;
+}
+.Transformer_search span{
+    display:inline-block;
+    margin: 2px 10px 2px 2px;
+}

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("hint");
+        loadControl("multiSelect");
+        loadJs("/Common/MTask/JS/TaskList.js?v=" + version);
+    </script>
+    <style>
+        .a-mr {
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .source-pic {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 6px;
+            cursor: pointer;
+        }
+        #big-img {
+            position: absolute;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body runat="server" onload="loadTaskTracFlexiGrid()">
+    <img id="big-img" src="" class="hide" />
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="span12">
+                <div class="box-header well" data-original-title>
+                    <h2>
+                        <i class="icon-exclamation-sign"></i>任务跟踪信息</h2>
+                    <div class="box-icon">
+                        <!--  <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>-->
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        <!--    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>-->
+                    </div>
+                </div>
+                <div class="box-content">
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-picture"></i>任务跟踪图</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                            <!--  <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>-->
+                        </div>
+                    </div>
+                    <div class="box-content" id="misTaskTracMap">
+                    </div>
+                    <div class="box-header well" data-original-title>
+                        <h2>
+                            <i class="icon-align-justify"></i>任务跟踪列表</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                            <!--   <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>-->
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <table id="tasktracflexTable">
+                        </table>
+                    </div>
+                </div>
+            </div>  
+            <div  id="modal-container-Send" class="modal" style="width: 50%;
+                left: 600px; top: 300px; display: none">
+                <div class="modal-header">
+                    <button type="button" id="close" aria-hidden='true' class='close' onclick="closeSend()">
+                        ×</button>
+                    <h3>
+                        抄送部门信息</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

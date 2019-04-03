@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GPS定位查找</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link href="/Common/MOnePoleData/css/getGisPoint.css"  rel="stylesheet"/>
+
+
+
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=6G188kAN6mGApve3nM1lrLm3VSCuCEDa" type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+
+
+    <script>
+       loadControl("mySelectTree");
+       loadControl("layer");
+       loadControl("Validation");
+       loadJs("/Common/MGIS/JS/traffic.js?v=" + version);
+       loadCss("/Common/css/gis/gisT1css.css?v=" + version);
+    </script>
+
+</head>
+<body style="overflow-y: hidden">
+    <div id="closeBtn"><img src="img/closeBtn.png" title="关闭本页" onclick="window.close()" /></div>
+    <!--<div id="zheZhaoCeng" style=""></div>&lt;!&ndash;掩饰延时层&ndash;&gt;-->
+    <div id="boxChaXun">
+        <!--左上角盒子-->
+        <div id="cxTop" style="background:url('img/GISout_up.png');width: 100%;height: 11px;max-height:11px"></div>
+        <div id="cxButton" style="background:url('img/GISout_down.png') no-repeat;width: 100%;height: 14px;max-height: 14px;position: absolute;bottom:0;"></div>
+        <div id="chaXun">
+            <div id="boxCXtitle">
+                <div class="cxTitle">
+                    <div>GPS定位查找</div>
+                </div>
+                <div class="cxListTop"></div>
+                <div class="cxList">
+                    <form id="yiganyidangForm">
+                        <div class="yiKuaiSpan" id="">
+                            <span style="color:#3D9BD2">定位点</span><!--<span style="letter-spacing:1px">百度坐标 ：</span><span>谷歌坐标：</span>-->
+                            <div id="ByBaidu" code="baidu" class="typeChoose" style="color:#3BBCD4;"><span class="choose cheack"></span>&ensp;百度坐标</div>
+                            <div id="ByGoogle" code="google" style="margin-left:9px;" class="typeChoose"><span class="choose cheacknot"></span>&ensp;谷歌坐标</div>
+                        </div>
+                        <div class="yiKuaiSpan" style="position:relative;">
+                            <span>经度</span>：
+                            <input id="lng" class="validate[required,custom[number]]" type="text" style="" />
+                            <div class="choosePointMap"><div class="choosePointMapTitle">地图指定点</div></div>
+
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span>纬度</span>：
+                            <input id="lat" class="validate[required,custom[number]]" type="text" style="" />
+                        </div>
+                        <div class="yiKuaiSpan">
+                            <span style="letter-spacing:1px">查找范围</span>：
+                            <input type="text" id="range" style="" class="validate[required],custom[number]" value="200" />
+                        </div>
+                        <div class="cxBtn">
+                            <span id="queryBtn"><img src="img/GISfind.png" alt="" style="vertical-align:-16%;" />&ensp;查询</span>
+                        </div>
+                        <div class="mapChoose">
+                            <span class="mapText" id="dituMap" style="color:rgb(103,179,239)">&ensp;地图</span>
+                            <span class="mapText" id="weixinMap">&ensp;卫星</span>
+                            <span class="mapText" id="sanweiMap">&ensp;三维</span>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="cxListButtom"></div>
+
+            </div>
+
+
+
+            <div></div>
+        </div><!--内部框-->
+    </div><!--左上角盒子-->
+    <div id="map"></div><!--百度地图区-->
+    <div id="boxBiaoZhu">
+        <div class="BiaoZhuInside">
+            <p><span>图例</span><span><img src="img/图例按钮.png" alt="" /></span><br /></p>
+            <hr align="left" style="height:2px;border:none;border-top:1px solid white; width: 80%;margin-left: 7%;margin-top :0;" />
+            <hr align="left" style="height:2px;border:none;border-top:1px solid white; width:80%;margin-left :12%;margin-top :-12px;" />
+            <div style="font-size: .9em ;margin-top: -10px;"><span style="background:url(img/GISgreen.png) no-repeat"></span>&nbsp;当前定位点</div>
+            <div style="font-size: .9em"><span style="background:url(img/GISblack.png) no-repeat"></span>&nbsp;最近支柱</div>
+            <div style="font-size: .9em"><span style="background:url(img/GISviolet.png) no-repeat"></span>&nbsp;定位点</div>
+        </div>
+    </div><!--//图例区-->
+    <script>
+        loadJs("script/getGisPoint.js?v=" + version, "utf-8");
+    </script>
+
+</body>
+</html>

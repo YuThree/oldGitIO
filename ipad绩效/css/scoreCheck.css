@@ -1,0 +1,79 @@
+.y_logPng{
+    width: 11px;
+    background: no-repeat center 11px url(../img/back.png)
+}
+.y_longInput input{
+    width: 290px;
+}
+nav{
+    height:44px;
+}
+nav>div{
+    height:44px;
+    line-height:44px;
+}
+.y_logText{
+    font-size:16px;margin-left: 50%;
+}
+.y_listBox{
+    height:calc(100% - 100px);
+    position: absolute;
+    left: 0;
+    top: 100px;
+    width: 100%;
+}
+.y_listBox>div{
+    height: 100%;
+}
+.y_listBox .y_listBody{
+    height: calc(100% - 50px);
+}
+.y_listBox .y_lisRight{
+    width: calc((100% - 10px) * 0.32);
+}
+.y_listBox .y_lisLeft{
+    width: calc((100% - 10px) * 0.68);
+}
+
+
+
+/* 双高度 */
+@media screen and (min-width: 699px) and (max-width: 768px) {
+    .y_longInput input {
+        width: 220px;
+    }
+    /* .y_listBox{
+        height:calc(100% - 146px);
+        top: 146px;
+    } */
+}
+@media screen and (max-width: 698px) {
+    .y_longInput input {
+        width: 220px;
+    }
+    .y_listBox{
+        height:calc(100% - 146px);
+        top: 146px;
+    }
+}
+
+@media screen and (max-width: 464px) {
+    .y_longInput input {
+        width: 220px;
+    }
+    .y_checkButton{
+        margin-top: -82px;
+    }
+    .y_listBox{
+        height:calc(100% - 146px);top: 146px;
+    }
+}
+/* 三高度 */
+@media screen and (max-width: 360px) {
+    .y_checkButton{
+        margin-top: -82px;
+    }
+    .y_listBox{
+        height:calc(100% - 192px);top: 192px;
+    }
+}

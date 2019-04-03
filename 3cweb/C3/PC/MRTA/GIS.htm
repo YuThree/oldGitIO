@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: 微软雅黑;
+        }
+
+        .anchorBL {
+            display: none;
+        }
+    </style>
+    <style>
+        .test {
+            width: 170px;
+            padding: 50px 10px;
+            border: 5px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+
+            .test span {
+                width: 0;
+                height: 0;
+                font-size: 0;
+                overflow: hidden;
+                position: absolute;
+            }
+
+                .test span.bot {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #beceeb transparent transparent;
+                    left: 20px;
+                    bottom: -40px;
+                }
+
+                .test span.top {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #ffffff transparent transparent;
+                    left: 20px;
+                    bottom: -33px;
+                }
+    </style>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=F75484f6486f962ed1c28985b9ca68c0" type="text/javascript"></script>
+    <script src="http://developer.baidu.com/map/jsdemo/demo/convertor.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js" type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+
+        loadJs("/C3/PC/MRTA/js/BMap.js?v=" + version);
+        loadJs("/C3/PC/MRTA/js/BMapObjData_GIS.js?v=" + version);
+
+    </script>
+
+    <script src="/Common/MGIS/JS/BMapBridgeTune.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/convertor.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <link href="/Lib/lightbox/jquery.lightbox.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/lightbox/jquery.lightbox.min.js" type="text/javascript"></script>
+    <!--弹出框-->
+    <script src="/Lib/ymPrompt/ymPrompt.js" type="text/javascript"></script>
+    <title>实时监控</title>
+</head>
+<body style="background-color: Black" onload="AgainRefsetInterval(); setMapTableRight();">
+    <div id="allmap" style="width: 1000px; height: 500px;">
+    </div>
+    <div id="div1">
+    </div>
+    <div id="div2">
+    </div>
+    <div id="winpop">
+        <!--<div class="title">
+            您有新的消息&nbsp;&nbsp;&nbsp;<span onclick="hid_pop11()">关闭</span>
+        </div>-->
+        <div class="con">
+            <span id="AlarmSpan"></span>
+        </div>
+        <div class="title"><span onclick="hid_pop()" style="margin-right:10px;">关闭</span></div>
+    </div>
+    <a id="tanchu" href="#" class="lightbox"></a><a id="modal-22256" class="btn" role="button"
+                                                    href="#modal-container-22256" data-toggle="modal" style="display: none"></a>
+    <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="width: 645px; height: 400px; z-index: 99999;
+        left: 650px; top: 300px;">
+        <div id="modal-body" style="height: 400px; width: 645px; z-index: 99999; text-align: center">
+            <iframe id="url" scrolling="no" style="height: 360px; width: 620px;"></iframe>
+            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+        <!-- <div class="modal-footer" style="z-index: 99999; text-align: center">
+
+                    </div>-->
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        AutoSize();
+        $(window).resize(function () {
+            AutoSize();
+        });
+
+        bMapbind(); //加载flexigrid数据
+
+
+        $("body").bind("click", function (e) {  //选择线路后点击地图空白查询数据并加载
+          
+            changeLine_org_CarType();
+        
+        })
+
+    })
+
+    function changeLine_org_CarType()  //线路改变加载告警列表事件
+    {
+
+        window.parent.hideMenu(); //调用关闭方法
+        window.parent.clickRealPlayTwoAll();
+
+        var _org = $("#OrgCode", window.parent.document).html().trim(); //获取组织CODE
+        var _line = $("#LineCode", window.parent.document).html().trim(); //获取线路CODE
+        var _locatype = $("#LocoCode", window.parent.document).html().trim(); //获取机车类型
+        var _OrgType = $("#OrgType", window.parent.document).html().trim(); //获取组织类型
+
+        var _InitialOrgCode = window.parent.InitialOrgCode; //获取初始状态
+        var _InitialLineCode = window.parent.InitialLineCode; //获取初始状态
+        var _InitialLocoCode = window.parent.InitialLocoCode; //获取初始状态
+        if (_org == _InitialOrgCode && _line == _InitialLineCode && _locatype == _InitialLocoCode)
+        { } else {
+            SetRefreshMap();
+
+
+            window.parent.SetOldlocaType();
+
+            //   window.parent.frames["iframe_loca"].GetlocaList();
+            //   window.parent.frames["iframe_alarm"].clearAll();
+            //   window.parent.frames["iframe_alarm"].GetList();
+
+            //    window.parent.frames["iframe_loca"].frames["Iframe_chart1"].createBarChart();
+            //   window.parent.frames["iframe_loca"].frames["Iframe_chart2"].createBarChart();
+
+
+
+        }
+    }
+
+    function AutoSize() {
+        var _w = parseInt($(window).width());
+        var _h = parseInt($(window).height());
+
+        $('#allmap').width(_w).height(_h);
+        //$('#winpop').css("bottom", _h / 4)
+        $('#winpop').css("bottom", $("#box_loca", window.parent.document).height())//父页面列表框高度
+
+    }
+
+    function ShowMTwin(str, w, h) {
+        $("#tanchu").attr("href", str + "&lightbox[iframe]=true&lightbox[width]=" + w + "p&lightbox[height]=" + h + "p");
+        $("#tanchu").click();
+    };
+    function setMapTableRight() {
+
+        $('.BMap_noprint').css("right", "100px")
+    }
+</script>

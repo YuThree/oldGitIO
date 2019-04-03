@@ -1,0 +1,210 @@
+﻿body {
+}
+/*插件 播放窗口*/
+.plugin
+{
+	width:100%;
+	height:600px;
+}
+fieldset
+{
+	display:block;
+}
+.playbutton
+{
+    text-decoration: none;
+    background: gray repeat 0px 0px; 
+    width: 80px; 
+    height: 25px; 
+    display: block;
+    text-align:center;
+    vertical-align:middle; 
+    color: White; 
+    border-color: Yellow;
+    border:2px;      
+}
+.playbutton::selection
+{
+   color:Blue;  
+}
+.playbutton span { display: none; }
+
+.playbutton:hover { background: blue repeat 0px -44px; }
+
+.tdb
+{
+ font-size:medium;
+ text-align:center;
+ vertical-align:middle; 
+
+}
+.playdiv
+{
+    
+}
+.buttonCtrl
+{
+    width:80px;
+    height:25px;
+}
+.buttonIconCtrl
+{
+    width:35px;
+    height:35px;
+}
+.divButtonIconCtrl
+{
+    margin-left:10px;
+}
+
+
+.border1 {
+    border: 2px solid #dedede; 
+    -webkit-border-radius: 15px;
+    -webkit-border-bottom-colors: #303 #404 #606 #808 #909 #A0A;
+    -webkit-border-top-colors: #303 #404 #606 #808 #909 #A0A;
+    -webkit-border-left-colors: #303 #404 #606 #808 #909 #A0A;
+    -webkit-border-right-colors: #303 #404 #606 #808 #909 #A0A; 
+    height: inherit; 
+}
+
+
+
+
+ html, body
+        {
+            background-color: #333;
+        }
+        button.s_menu
+        {
+            background: transparent url(/Common/img/i_menu.png) no-repeat left center;
+            padding-left: 26px;
+            width: 100px;
+            color: #CCC;
+        }
+        button.s_menu:hover
+        {
+            color: #FFF;
+        }
+        a.go_home
+        {
+            background: transparent url(/Common/img/i_home.png) no-repeat left center;
+            padding: 4px 12px 4px 26px;
+            width: 100px;
+            color: #CCC;
+            display: inline-block;
+            line-height: 16px;
+        }
+        a.go_home:hover
+        {
+            color: #FFF;
+        }
+        a.btn_link, a.btn_play, a.btn_r, a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            height: 34px;
+            width: 50px;
+            line-height: 34px;
+            color: #333333;
+        }
+        a.btn_link:hover
+        {
+            background: transparent url(../../img/i_btn_bg.png) no-repeat center;
+            color: #FFF;
+        }
+        a.btn_play
+        {
+            background: transparent url(../../img/i_btn_play.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_r
+        {
+            background: transparent url(../../img/i_btn_r.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a.btn_fullscreen
+        {
+            background: transparent url(../../img/i_btn_fullscreen.png) no-repeat center;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+         .playbutton2{background-color:transparent;  opacity:0.8; font-size:20px; font-weight:bold; line-height:35px; vertical-align:middle;}
+          
+
+        .playbutton2 img{ width:30px; height:30px; align-items:center;}
+        .playbutton2:hover img{ -webkit-animation:twinkling 2s infinite ease-in-out;}
+        .playbutton2:link{ background-color:transparent; opacity:0.8;}
+        .playbutton2:visited{background-color:transparent; }
+        
+        .btn_over{ opacity:1 }
+        .btn_out{ opacity:0.8 }
+        
+        
+
+        #locomotive_no{ font-size:15px;}
+        
+           
+ @-webkit-keyframes twinkling{  
+    0%{
+       opacity:0.5; /*透明度为0*/
+     }
+     
+     50%{
+       opacity:1; /*透明度为0*/
+     }
+    100%{
+       opacity:0.5; /*透明度为1*/
+    }
+  }
+        
+ 
+    
+       
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 16px;  
+    height: 16px;  
+    background-color:transparent;  
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);  
+   border-radius: 10px;  
+    background-color: #000;  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+   border-radius: 10px;  
+   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.6);  
+    background-color: #555;  
+  
+}  
+
+
+#div_public{ display:inline-block; height:25px; }
+
+#rec_optionBox{  background-color:rgba(0,0,0,0.9) ; padding:30px; }
+
+.div_Rec_title{ 
+    font-size:17px; font-weight:bold; padding:15px; color:white;
+
+}
+
+#slider_time_txt{
+    padding:10px;
+}
+
+.div_Rec_content{
+     font-size:13px; color:white;
+     padding:10px;
+}
+
+.div_Rec_btn_start{ text-align:center; padding:10px;}

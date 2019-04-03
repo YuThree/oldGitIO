@@ -1,0 +1,73 @@
+
+
+/*不带逗号开始*/
+/*最大盒子的容器样式*/
+    .mainBox{
+        height: calc(100% - 20px);
+        width: calc(100% - 20px);
+        height: -webkit-calc(100% - 20px);
+        width: -webkit-calc(100% - 20px);
+        height: -moz-calc(100% - 20px);
+        width: -moz-calc(100% - 20px);
+        height: -ms-calc(100% - 20px);
+        width: -ms-calc(100% - 20px);
+        height: -o-calc(100% - 20px);
+        width: -o-calc(100% - 20px);
+        margin-top: 10px;
+        margin-left: 10px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    /*左边盒子样式*/
+.leftBox{
+    width:20%;
+
+    height:100%;
+
+    background-color: white;
+    border-top: 1px solid #e9eaef;
+    border-bottom: 1px solid #e9eaef;
+    float: left;
+}
+.leftBox .titleBox{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #fab005;
+}
+.leftBox .treeViewMaxBoxInfo{
+    height: calc(100% - 40px);
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: -ms-calc(100% - 40px);
+    height: -o-calc(100% - 40px);
+    width: 100%;
+}
+.leftBox .treeViewMaxBoxInfo .treeViewMaxBox{
+    width: 100%;
+    min-height: 100%;
+}
+
+/*右边盒子样式*/
+.rightBox{
+    width: 80%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+/*表格样式*/
+.tablMainOne {
+    height: calc(100% - 218px);
+    height: -moz-calc(100% - 218px);
+    height: -o-calc(100% - 218px);
+    height: -ms-calc(100% - 218px);
+    height: -webkit-calc(100% - 218px);
+    width: 100%;
+    border-left: 1px solid #e6eaee;
+    border-right: 1px solid #e6eaee;
+}
+

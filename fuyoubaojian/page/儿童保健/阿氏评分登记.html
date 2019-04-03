@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>阿氏评分登记</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+
+	<!-- 儿童保健公用样式 -->
+	<link rel="stylesheet" href="../../css/children/childrenCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">阿氏评分登记</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col1 cdct_clearfix">
+					<label class="cdct_inputLable">姓名:<input type="text" class="cdct_inputLine cdct_line175"></label>
+					<label class="cdct_inputLable cdct_asterisk">评分时间（分钟）:<input type="text" class="cdct_inputLine cdct_line175 datepicker"></label>
+					<label class="cdct_inputLable cdct_asterisk">评分日期:<input type="text" class="cdct_inputLine cdct_line175 datepicker"></label>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">心跳</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="xt1" type="radio" name="xt" value="">
+							<label for="xt1">不能触摸到，也不能听到心跳</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="xt2" type="radio" name="xt" value="">
+							<label for="xt2">心跳少于100次/分钟</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="xt3" type="radio" name="xt" value="">
+							<label for="xt3">心跳超过100次/分钟</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">呼吸</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="hx1" type="radio" name="hx" value="">
+							<label for="hx1">出生后60秒钟无呼吸</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="hx2" type="radio" name="hx" value="">
+							<label for="hx2">出生后呼吸缓慢、弱、不规律</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="hx3" type="radio" name="hx" value="">
+							<label for="hx3">出生60秒钟内呼吸良好、哭声响亮</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">肌肉张力</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="jrzl1" type="radio" name="jrzl" value="">
+							<label for="jrzl1">四肢肌肉完全松弛</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="jrzl2" type="radio" name="jrzl" value="">
+							<label for="jrzl2">四肢略微呈曲状</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="jrzl3" type="radio" name="jrzl" value="">
+							<label for="jrzl3">四肢活动有力</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">对刺激反应</span>
+					</div>
+					<div class="cdct_info">
+						通常在吸净咽部粘液后，弹小儿足底时，或用导管插入鼻孔时：
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="dcjfy1" type="radio" name="dcjfy" value="">
+							<label for="dcjfy1">毫无反应</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="dcjfy2" type="radio" name="dcjfy" value="">
+							<label for="dcjfy2">面部稍有活动，如皱额等</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="dcjfy3" type="radio" name="dcjfy" value="">
+							<label for="dcjfy3">反应好，小儿哭闹声响、打喷嚏或咳嗽</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">肤色</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="fs1" type="radio" name="fs" value="">
+							<label for="fs1">全身青紫或苍白</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="fs2" type="radio" name="fs" value="">
+							<label for="fs2">躯干红而四肢青紫</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="fs3" type="radio" name="fs" value="">
+							<label for="fs3">全身皮肤颜色红润</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">评分分数</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone" name="info1" required>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">评分结果</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">评分机构</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">评分人</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">评分人1</li>
+										<li class="hideUlLi" data-selectoption="2">评分人2</li>
+										<li class="hideUlLi" data-selectoption="3">评分人3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+				info2:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+	</script>
+</body>
+</html>

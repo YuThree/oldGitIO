@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tableTreeTest</title>
+    <link rel="stylesheet" type="text/css" href="css/treeTable/icon.css" />
+    <link rel="stylesheet" type="text/css" href="css/treeTable/easyui.css" />
+
+</head>
+<body>
+<input type="text" id="url">
+    <input type="button" value="下载" id="down" onclick="down()">
+	
+</table>
+
+
+
+
+
+ <script type="text/javascript" src="js/downer.js"></script>
+<script >
+	<!-- document.getElementById("url").value -->
+	function down(){
+	Downer(document.getElementById("url").value)
+	}
+</script>
+</body>
+</html>

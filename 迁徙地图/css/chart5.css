@@ -1,0 +1,81 @@
+
+.searchBox{
+	height: 90px;
+	line-height: 90px;
+	padding: 0 40px;
+}
+.container{
+	width: 100%;
+	padding: 0 40px;
+}
+
+/* 容器公用 */
+.top{
+	height: 60px;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+
+.main{
+	width: 100%;
+	height: -moz-calc(100% - 60px);
+	height: calc(100% - 60px);
+}
+.chartBoxLeft .box,.chartBoxRight .box{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.top .more{
+	display: inline-block;
+	color: #6FC9FF;
+	font-size: 18px;
+	float: right;
+	cursor: pointer;
+	padding-right: 20px;
+}
+.mainTable{
+	padding: 20px;
+}
+
+
+/* 左边容器 */
+.chartBoxLeft{
+	width: -moz-calc(64% - 20px);
+	width: calc(64% - 20px);
+	float: left;
+	margin-right: 20px;
+}
+
+.chartBoxLeft .box:nth-of-type(1){
+	height: 390px;
+}
+.chartBoxLeft .box:nth-of-type(2){
+	float: left;
+	width: -moz-calc(31% - 20px);
+	width: calc(31% - 20px);
+	margin-right: 20px;
+	height: 350px;
+}
+.chartBoxLeft .box:nth-of-type(3){
+	float: left;
+	width: 69%;
+	height: 350px;
+}
+
+/* 右边容器 */
+.chartBoxRight{
+	float: left;
+	width: 36%;
+}
+
+.chartBoxRight .box:nth-of-type(1){
+	height: 390px;
+}
+.chartBoxRight .box:nth-of-type(2){
+	height: 350px;
+}
+
+
+

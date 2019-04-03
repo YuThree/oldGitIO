@@ -1,0 +1,231 @@
+[data-styleType="1"].m-modal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+	box-shadow: 0 0 10px #cccccc;
+	z-index: 1000000;
+	overflow-x: hidden;
+	background-color: rgba(0, 0, 0, .8);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#32000000,endColorstr=#32000000);
+}
+
+[data-styleType="1"] .m-modal-dialog {
+	font-family: "microsoft yahei", "宋体";
+	margin: 0 auto;
+	width: 600px;
+	border: solid 1px #1ABBF1;
+	background: #0B3757;
+	box-shadow: 0 0 50px -3px #1ABBF1 inset;
+	position: absolute;
+	top:50%;
+	left: 50%;
+
+}
+
+/* [data-styleType="1"] .m-top {
+	background-color: #30A9DE;
+} */
+
+[data-styleType="1"] .m-modal-title {
+	margin: 0;
+	color: #ffffff;
+	padding: 20px 0;
+	font-size: 20px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+[data-styleType="1"] .m-modal-title::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+    border-top: 17px solid #1ABBF1;
+    border-right: 17px solid transparent;
+    z-index: 0;
+}
+[data-styleType="1"] .m-modal-title::before{
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	width: 0;
+    border-top: 17px solid #333;
+    border-right: 17px solid transparent;
+    z-index: 1;
+}
+[data-styleType="1"] .m-top::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+    border-top: 17px solid #1ABBF1;
+    border-left: 17px solid transparent;
+    z-index: 0;
+}
+[data-styleType="1"] .m-top::before{
+	content: "";
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: 0;
+    border-top: 17px solid #333;
+    border-left: 17px solid transparent;
+    z-index: 1;
+}
+[data-styleType="1"] .m-bottom::after{
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+    border-bottom: 17px solid #1ABBF1;
+    border-right: 17px solid transparent;
+    z-index: 0;
+}
+[data-styleType="1"] .m-bottom::before{
+	content: "";
+	position: absolute;
+	bottom: -1px;
+	left: -1px;
+	width: 0;
+    border-bottom: 17px solid #333;
+    border-right: 17px solid transparent;
+    z-index: 1;
+}
+[data-styleType="1"] .m-modal-dialog::after{
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 0;
+    border-bottom: 17px solid #1ABBF1;
+    border-left: 17px solid transparent;
+    z-index: 0;
+}
+[data-styleType="1"] .m-modal-dialog::before{
+	content: "";
+	position: absolute;
+	bottom: -1px;
+	right: -1px;
+	width: 0;
+    border-bottom: 17px solid #333;
+    border-left: 17px solid transparent;
+    z-index: 1;
+}
+
+[data-styleType="1"] .m-modal-close {
+	position: absolute;
+	right: 3px;
+	top: 3px;
+	display: inline-block;
+	font-size: 35px;
+	line-height: 20px;
+	color: #555;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #fff;
+}
+
+
+[data-styleType="1"] .m-middle {
+	padding: 10px 20px 10px 20px;
+	color: #fff;
+}
+
+[data-styleType="1"] .m-bottom {
+	padding: 0 6px 6px;
+	overflow: hidden;
+}
+
+[data-styleType="1"] .m-bottom button {
+	font-family: "microsoft yahei", "宋体";
+	cursor: pointer;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	padding: 5px 15px;
+	float: right;
+	margin: 0 0 0 10px;
+	outline: none;
+	font-size: 14px;
+	color: #333;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+
+[data-styleType="1"] .m-bottom .m-btn-sure {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
+}
+
+[data-styleType="1"] .m-modal-icon1{
+	position: absolute;
+	background: red;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+[data-styleType="1"] .m-modal-icon1::before{
+	content: '';
+	width: 56px;
+	height: 60px;
+	position: absolute;
+	top: -24px;
+	left: -24px;
+	background: url('img/icon.png') no-repeat;
+	background-size: 100%;
+}
+[data-styleType="1"] .m-modal-icon1::after{
+	content: '';
+	width: 56px;
+	height: 60px;
+	position: absolute;
+	top: -24px;
+	right: -24px;
+	background: url('img/icon.png') no-repeat;
+	background-size: 100%;
+	transform:rotate(90deg);
+}
+[data-styleType="1"] .m-modal-icon2{
+	position: absolute;
+	background: red;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+[data-styleType="1"] .m-modal-icon2::before{
+	content: '';
+	width: 56px;
+	height: 60px;
+	position: absolute;
+	bottom: -24px;
+	left: -24px;
+	background: url('img/icon.png') no-repeat;
+	background-size: 100%;
+	transform:rotate(-90deg);
+}
+[data-styleType="1"] .m-modal-icon2::after{
+	content: '';
+	width: 56px;
+	height: 60px;
+	position: absolute;
+	bottom: -24px;
+	right: -24px;
+	background: url('img/icon.png') no-repeat;
+	background-size: 100%;
+	transform:rotate(180deg);
+}

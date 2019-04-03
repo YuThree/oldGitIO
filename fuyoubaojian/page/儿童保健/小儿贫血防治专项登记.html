@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小儿贫血防治专项登记</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+
+	<!-- 儿童保健公用样式 -->
+	<link rel="stylesheet" href="../../css/children/childrenCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">小儿贫血防治专项登记</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col1 cdct_clearfix">
+					<label class="cdct_inputLable">姓名:<input type="text" class="cdct_inputLine cdct_line175"></label>
+					<label class="cdct_inputLable">性别:<input type="text" class="cdct_inputLine cdct_line175"></label>
+					<label class="cdct_inputLable">年龄:<input type="text" class="cdct_inputLine cdct_line175"></label>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">症状体征</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="zztz1" type="checkbox">
+							<label for="zztz1">发育、营养（欠佳、差）</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="zztz2" type="checkbox">
+							<label for="zztz2">精神不振、注意力不集中</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="zztz3" type="checkbox">
+							<label for="zztz3">易烦躁、易疲倦、耳鸣、面色苍白、唇粘膜苍白、睑结膜苍白、黄疸、毛发干燥</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="zztz4" type="checkbox">
+							<label for="zztz4">食欲减退、异食癖、腹泻、肝、脾、淋巴结肿大</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">实验室检查</span>
+					</div>
+					<div class="cdct_info" style="padding-left: 0;">
+						<div class="cdct_row spe_rowj3 spe_rowS">
+							<div class="spe_subRow spe_subT">化验项目</div>
+							<div class="spe_subRow">化验结果</div>
+							<div class="spe_subRow">化验日期</div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">血红蛋白（G/L)</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">红细胞计数（G/L）</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">白细胞计数（G/L）</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">红细胞形态</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">网织红细胞计数（G/L)</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">血小板计数（G/L)</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+						<div class="cdct_row spe_rowj3">
+							<div class="spe_subRow spe_subT">其他</div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone"></div>
+							<div class="spe_subRow"><input type="text" class="cdct_inputNone datepicker"></div>
+						</div>
+
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">诊断意见</span>
+					</div>
+					<div class="cdct_info">
+						<div style="position: relative;" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"  data-pmtNum=500 data-pmtTextArea="1">
+							<textarea class="cdct_textarea" placeholder="请输入诊断意见"></textarea >
+							<div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">防治意见</span>
+					</div>
+					<div class="cdct_info">
+						<div style="position: relative;" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"  data-pmtNum=500 data-pmtTextArea="1">
+							<textarea class="cdct_textarea" placeholder="请输入防治意见"></textarea >
+							<div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">诊断机构</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">诊断医生</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">医生1</li>
+										<li class="hideUlLi" data-selectoption="2">医生2</li>
+										<li class="hideUlLi" data-selectoption="3">医生3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">诊断时间</span>
+					</div>
+					<div class="cdct_info cdct_relative">
+						<input type="text" class="cdct_inputNone datepicker" name="info1" required>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 文本域 -->
+	<script type="text/javascript" src="../../jsControl/textArea/textarea.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+				info2:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+	</script>
+</body>
+</html>

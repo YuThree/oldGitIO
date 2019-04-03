@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>出生医学证明登记</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 侧边菜单栏 -->
+    <link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+    <!-- 表格 -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/children/BaseInformation.css">
+    <!-- 独自样式 -->
+ 
+    
+</head>
+<body>
+    <form id="signupForm">
+        <div class="cdct_tableTitle">出生医学证明登记</div>
+        <div class="scrollJS">
+            <div class="z-Box">
+                <!-- 姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk ">新生儿姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone  datepicker" placeholder="请输入新生儿姓名" >
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">性别</span>
+                            </div>
+                            <div class="cdct_info cdct_relative">
+                                <div class="cdct_radio cdct_radio_suc">
+                                    <input id="RH1" type="radio" name="RH" value="">
+                                    <label for="RH1">男</label>
+                                </div>
+                                <div class="cdct_radio cdct_radio_suc">
+                                    <input id="RH2" type="radio" name="RH" value="">
+                                    <label for="RH2">女</label>
+                                </div>
+                                <div class="cdct_radio cdct_radio_suc">
+                                    <input id="RH3" type="radio" name="RH" value="">
+                                    <label for="RH3">未说明的性别</label>
+                                </div>
+                                <div class="cdct_radio cdct_radio_suc">
+                                    <input id="RH4" type="radio" name="RH" value="">
+                                    <label for="RH4">未知的性别</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 姓名 -->
+
+                <!-- 出生日期 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">出生日期</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone datepicker" placeholder="请选择出生日期">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">出生孕周</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <label class="cdct_inputLable"><input type="text" class="cdct_inputLine cdct_line80">周</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 出生日期 -->
+
+                <!-- 出生地 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">出生地</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">省</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">省</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">市</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">市</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">区/县</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">区/县</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 出生地 -->
+
+                <!-- 体重 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">体重</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <label class="cdct_inputLable"><input type="text" class="cdct_inputLine cdct_line80">kg</label>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">身长</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <label class="cdct_inputLable"><input type="text" class="cdct_inputLine cdct_line80">cm</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 体重 -->
+
+                <!-- 母亲姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">母亲姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入母亲姓名">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">年龄</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入母亲年龄">
+                        </div>
+                    </div>
+                </div>
+                <!-- 母亲姓名 -->
+
+                <!-- 国籍 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">国籍</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">国籍</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">国籍</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">民族</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">民族</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">民族</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 国籍 -->
+
+                <!-- 有效证件类型 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">有效证件类型</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS1" type="radio" name="CS" value="">
+                                <label for="CS1">居民身份证</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS2" type="radio" name="CS" value="">
+                                <label for="CS2">护照</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS3" type="radio" name="CS" value="">
+                                <label for="CS3">其他</label>
+                                <input type="text" class="cdct_inputLine cdct_line80">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">身份证号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入母亲身份证号" >
+                        </div>
+                    </div>
+                </div>
+                <!-- 有效证件类型 -->
+
+                <!-- 现居地址 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">现居地址</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">省</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">省</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">市</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">市</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">区/县</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">区/县</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">镇</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">镇</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">街道</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">街道</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="cdct_inputLable">门牌号<input type="text" class="cdct_inputLine cdct_line175"></label>
+                    </div>
+                </div>
+                <!-- 现居地址 -->
+
+                <!-- 父亲姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">父亲姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入父亲姓名">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">年龄</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入父亲年龄">
+                        </div>
+                    </div>
+                </div>
+                <!-- 父亲姓名 -->
+
+                <!-- 国籍 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">国籍</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">国籍</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">国籍</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">民族</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">民族</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">民族</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 国籍 -->
+
+                <!-- 有效证件类型 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">有效证件类型</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS1" type="radio" name="CS" value="">
+                                <label for="CS1">居民身份证</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS2" type="radio" name="CS" value="">
+                                <label for="CS2">护照</label>
+                            </div>
+                            <div class="cdct_radio cdct_radio_suc">
+                                <input id="CS3" type="radio" name="CS" value="">
+                                <label for="CS3">其他</label>
+                                <input type="text" class="cdct_inputLine cdct_line80">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">身份证号</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input name="firstname3" class="cdct_inputNone " placeholder="请输入父亲身份证号" >
+                        </div>
+                    </div>
+                </div>
+                <!-- 有效证件类型 -->
+
+                <!-- 现居地址 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">现居地址</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">省</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">省</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">市</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">市</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">区/县</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">区/县</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">镇</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">镇</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-selectsimu="1" class="cdct_select">
+                            <div class="selectBox">
+                                <span data-selectnew="1" class="checkspan">
+                                    <span class="optD">
+                                        <span class="fontMain">街道</span>
+                                    </span>
+                                    <span class="selectDown"></span>
+                                </span>
+                                <div class="ulParent">
+                                    <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                        <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                        <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                        <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                        <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                            <span class="optD">
+                                                <span class="fontMain">街道</span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="cdct_inputLable">门牌号<input type="text" class="cdct_inputLine cdct_line175"></label>
+                    </div>
+                </div>
+                <!-- 现居地址 -->
+
+                <!-- 下次随访日期 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">下次随访日期</span>
+                        </div>
+                        <div class="cdct_info">
+                            <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择下次随访日期">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">随访医生签名</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">随访医生签名</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2" >健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">随访医生签名</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 下次随访日期 -->
+
+                <!-- 医疗机构 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">医疗机构</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input type="text" class="cdct_inputNone" placeholder="请输入医疗机构名称">
+                    </div>
+                </div>
+                <!-- 医疗机构 -->
+
+                <!-- 接生人员姓名 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">接生人员姓名</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入接生人员姓名">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">领证人员签字</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入领证人员签字">
+                        </div>
+                    </div>
+                </div>
+                <!-- 接生人员姓名 -->
+
+                <!-- 签发机构名称 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">签发机构名称</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入签发机构名称">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">签发人员签字</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入签发人员签字">
+                        </div>
+                    </div>
+                </div>
+                <!-- 签发机构名称 -->
+
+                <!-- 签发时间 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">签发时间</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone datepicker" placeholder="请输入签发时间">
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt ">
+                            <span class="cdct_tit ">出生证编码</span>
+                        </div>
+                        <div class="cdct_info cdct_relative">
+                            <input type="text" class="cdct_inputNone" placeholder="请输入出生证编码">
+                        </div>
+                    </div>
+                </div>
+                <!-- 签发时间 -->
+            </div>
+        </div>
+
+    </form>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 文本域 -->
+    <script src="../../jsControl/textArea/textarea.min.js" type="text/javascript"></script>
+    <!-- 文本域 -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 侧边菜单栏 -->
+    <script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+    <!-- 表格 -->
+    <script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+    <!-- 控件调用js -->
+    <script src="../../js/baseInfo.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //验证  
+
+        var obj =  $("#signupForm").validate({
+            rules: {
+              firstname: {
+                required: true,
+                minlength: 3
+              },
+              firstname1: {
+                required: true,
+                minlength: 3
+              },
+              firstname3: {
+                required: true,
+                minlength: 3
+              }
+            },
+            errorClass:"errorClass_"
+        });
+        obj.form();
+    </script>
+
+</body>
+</html>

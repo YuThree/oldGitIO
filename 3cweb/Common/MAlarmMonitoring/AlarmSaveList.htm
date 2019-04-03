@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑报警位置</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        loadControl("flexigrid");
+    </script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet'>
+</head>
+<body>
+    <form id="form1" method="POST">
+    <div class="box-content">
+        <table id="flexTable" style="display: none">
+        </table>
+    </div>
+    <div id="re">
+    </div>
+    <input type="hidden" id="vIDs" />
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+
+    var stylemode = GetQueryString("stylemode");//判断类型
+    if (stylemode == "DPC") {
+        stylemode = "";
+    };
+
+    $(function () {
+        if ('DPC' === GetQueryString("category")) {
+            setTimeout(LoadFormDPC(GetQueryString("type")), 1000);
+        } else {
+            setTimeout(LoadForm(), 1000);
+        }
+        $('#btn_edit').click(function () {
+            save();
+        });
+    });
+
+    function LoadFormDPC(type) {
+        fullShow();
+        var _h = $(window).height() - 65;
+        var PageNum = parseInt(_h / 25) - 1;
+        var SaveAlarms;
+        if (!window.localStorage["SaveAlarms"]) {
+            window.localStorage.SaveAlarms = '';
+        }
+        if (!window.localStorage["CansAlarms"]) {
+            window.localStorage.CansAlarms = '';
+        }
+        if (!window.localStorage["MissionAlarms"]) {
+            window.localStorage.MissionAlarms = '';
+        }//如果没有name  初始化缓存
+        if (type == 'Canc') {
+            SaveAlarms = window.localStorage["CansAlarms"].replace(/_/g, ",");
+        } else if (type == 'Mission') {
+            SaveAlarms = window.localStorage["MissionAlarms"].replace(/_/g, ",");
+        }
+        if (SaveAlarms == '' || SaveAlarms==undefined) {
+            fullHide();
+            setTimeout(function () { ymPrompt.alert('请先收藏！'); }, 300)
+            return false;
+        }
+        var _url = '/Common/MAlarmMonitoring/RemoteHandlers/GetMonitorAlarmList.ashx?mode=savelist&category=' + stylemode + '&temp=' + Math.random();
+        var cm = [
+                { display: '<input type="checkbox" class="cb_all" />', name: 'checkbox', width: 20, sortable: false, align: 'center' },
+                { display: '线路', name: 'LINE_CODE', width: 80, align: 'left' },
+                { display: '位置信息', name: 'WZ', width: 300, align: 'left' },
+                { display: '发生时间', name: 'CREATED_TIME', width: 150, align: 'left' },
+                { display: '摘要', name: 'SUMMARY', width: 500, align: 'left' },
+                { display: '缺陷类型', name: 'QXTYPE', width: 160, align: 'left' },
+                { display: '缺陷级别', name: 'SEVERITY', width: 80, align: 'left' },
+                { display: '状态', name: 'STATUS', width: 80, align: 'left' },
+                { display: '检测类型', name: 'CATEGORY_CODE', width: 50, align: 'left' },
+                { display: '工区', name: 'G_TSYS_ORG', width: 80, align: 'left' },
+                { display: '车间', name: 'G_CJ_ORG', width: 100, align: 'left' },
+                { display: '段', name: 'G_DUAN_ORG', width: 80, align: 'left' },
+                { display: '局', name: 'G_JU', width: 80, align: 'left' },
+                { display: '主键', name: 'ID', width: 80, pk: true, hide: true, align: 'left' }
+        ];
+        var option = {
+            url: _url,
+            dataType: 'json',
+            colModel: cm,
+            rp: 5000,
+            method: 'POST',
+            width: 'auto',
+            rowId: 'ID',
+            params: [{ name: 'ids', value: SaveAlarms }],
+            height: _h,
+            onRowDblclick: newRowDblclick, //双击事件
+            usepager: false,
+            onSuccess: function () {
+                if ($("#flexTable").find("tr").length < 1) {
+                    setTimeout(function () { ymPrompt.alert('请先收藏！'); }, 300)
+                };
+                $("#flexTable").find('span[class=status]').each(function () {
+                    var that = $(this);
+                    if (that.text() != '新上报' && that.text() != '已确认') {
+                        that.parent().parent().parent().remove()//移除状态值不为新上报和已确认的行
+                    }
+                })
+                $.getScript("../js/6cweb/gv_checkBoxSele.js", function () {
+                    // alert('gv_checkBoxSele加载完成');
+                });
+
+                $.getScript("js/AlarmSureBox.js", function () {
+                    LoadSureBox('DPC', GetQueryString("alarmid"));
+                });
+                fullHide();
+                $("#list-allnum", window.parent.document).text($('.cb_item').length);
+            }
+        }
+
+        option.newp = 1;
+        $("#flexTable").flexigrid(option).flexOptions(option).flexReload();
+
+    };
+
+    function LoadForm() {
+
+        fullShow();
+
+        var _h = $(window).height() - 65;
+        var PageNum = parseInt(_h / 25) - 1;
+
+        var SaveAlarms = GetSaveAlarms();
+        // $('#vIDs').val(SaveAlarms);
+
+         //  alert('list:' + SaveAlarms);
+        // $('#re').html(SaveAlarms);
+
+        var _url = '/C3/PC/MAlarmMonitoring/RemoteHandlers/GetMonitorLocoAlarmList.ashx?mode=savelist&temp=' + Math.random();
+
+        var cm = [
+
+              { display: '<input type="checkbox" class="cb_all" />', name: 'checkbox', width: 20, sortable: false, align: 'center' },
+                             { display: '设备编号', name: 'LOCOMOTIVE_CODE', width: 80, sortable: false, align: 'center' },
+                             { display: '发生时间', name: 'NOWDATE', width: 140, sortable: false, align: 'center' },
+                             { display: '报警级别', name: 'JB', width: 50, sortable: false, align: 'center' },
+                             { display: '报警状态', name: 'ZT', width: 50, sortable: false, align: 'center' },
+                             { display: '位置信息', name: 'WZ', width: 350, sortable: false, align: 'left' },
+                             { display: '弓位置', name: 'GWZ', width: 60, sortable: false, align: 'center' },
+                             { display: '速度km/h', name: 'SD', width: 80, sortable: false, align: 'center' },
+                             { display: '最高温度℃', name: 'WD', width: 60, sortable: false, align: 'center' },
+                             { display: '环境温度℃', name: 'HJWD', width: 60, sortable: false, align: 'center' },
+                             { display: '导高值mm', name: 'DGZ', width: 70, sortable: false, align: 'center' },
+                             { display: '拉出值mm', name: 'LCZ', width: 70, sortable: false, align: 'center' },
+                             { display: '报警类型', name: 'QXZT', width: 150, sortable: false, align: 'left' },
+                             { display: '报警分析', name: 'alarm_analysis', width: 150, sortable: false, align: 'left' },
+                             { display: '查看', name: 'CZ', width: 80, sortable: false, align: 'center' },
+                             { display: '下载', name: 'XZ', width: 80, sortable: false, hide: true, align: 'center' },
+                             { display: 'ID', name: 'ID', width: 80, sortable: false, pk: true, hide: true, align: 'center' }
+         ];
+
+        var option = {
+            url: _url,
+            dataType: 'json',
+            colModel: cm,
+            rp:5000,
+            method: 'POST',
+            width: 'auto',
+            rowId: 'ID',
+            params: [{ name: 'ids', value: SaveAlarms}],
+            height: _h,
+            onRowDblclick: newRowDblclick, //双击事件
+            usepager: false,
+            onSuccess: function () {
+                $("#flexTable").find('span[class=status]').each(function () {
+                    var that = $(this);
+                    if (that.text() != '新上报' && that.text() != '已确认') {
+                        that.parent().parent().parent().remove()//移除状态值不为新上报和已确认的行
+                    }
+                })
+                $.getScript("../js/6cweb/gv_checkBoxSele.js", function () {
+                    // alert('gv_checkBoxSele加载完成');
+                });
+
+                $.getScript("js/AlarmSureBox.js", function () {
+                    //  alert('AlarmSureBox加载完成');
+                    LoadSureBox('3C', GetQueryString("alarmid"));
+
+                });
+                fullHide();
+
+                $("#list-allnum", window.parent.document).text($('.cb_item').length);
+            }
+        }
+
+        option.newp = 1;
+        $("#flexTable").flexigrid(option).flexOptions(option).flexReload();
+
+
+    };
+    
+    function newRowDblclick(rowData) {
+        var id = rowData.ID.substr(1);  //rowData.属性名,源码中放进json的名;去掉前面的'C'
+        var type = rowData.CATEGORY_CODE;
+        toAlarmDetails(type, id);
+    };
+
+    function selectInfo(rowData)
+    {
+        var id = rowData.id;  //rowData.属性名,源码中放进json的名;去掉前面的'C'
+        window.open("/C3/PC/MAlarmMonitoring/MonitorAlarm3CForm4.htm?alarmid=" + id + '&v=' + version, "_blank");
+    }
+
+</script>

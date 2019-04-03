@@ -1,0 +1,947 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title><!--添加支柱/修改支柱-->
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl('webuploader');
+        loadControl('mytree');
+        loadControl('mySelectTree');
+        loadControl('layer');
+        loadControl('form');
+        loadCss('/Common/MFoundation/css/PoleFormNew_upload.css?v=' + version);
+        loadCss('/Common/MFoundation/css/PoleFormNew.css?v=' + version);
+        loadJs('/Common/MFoundation/script/PoleFormNew_upload.js?v=' + version);
+        loadJs('/Common/MFoundation/script/PoleFormNew.js?v=' + version);
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="main-title">
+            <span class="title-txt"></span><!--添加支柱/修改支柱/支柱详情--><!--title-ico-add、title-ico-update、title-ico-detail-->
+            <span class="close-ico j-page-close"></span>
+        </div>
+        <div class="content">
+            <ul class="base-ul">
+                <li class="base-li-s fl">
+                    <div class="upload-img">
+                        <span id="pole-img-reset" class="reset"></span>
+                        <img id="pole-img" class="hide" src="/Common/MFoundation/css/img/pole1.png" />
+                        <div id="upload-pole-img" class="upload-container fl"></div>
+                    </div>
+                </li>
+            </ul>
+            <form id="pole-form" method="post" runat="server" class="form-horizontal">
+                <input id="pole_img" name="pole_img" type="hidden" />
+                <ul class="base-ul">
+                    <li class="base-li-m base-li-mr0 fr clearfix">
+                        <!-- 基础信息 -->
+                        <div class="subtitle">基础信息<!--（10+1）--></div>
+                        <ul class="info-ul">
+                            <li class="info-li-s">
+                                <label class="label-s">线路<i></i></label><label>：</label>
+                                <!--<input id="line_name" name="line_name" type="text" placeholder="请选择" />-->
+                                <input id="line_name" name="line_name" type="hidden" />
+                                <select id="line_code" name="line_code"><option value="">请选择</option></select><c class="red">*</c>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">区站<i></i></label><label>：</label>
+                                <!--<input id="position_name" name="position_name" type="text" placeholder="请选择" />-->
+                                <input id="position_name" name="position_name" type="hidden" />
+                                <select id="position_code" name="position_code"><option value="">请选择</option></select><c class="red">*</c>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">桥隧<i></i></label><label>：</label>
+                                <!--<input id="brg_tun_name" name="brg_tun_name" type="text" placeholder="请选择" />-->
+                                <input id="brg_tun_name" name="brg_tun_name" type="hidden" placeholder="请选择" />
+                                <select id="brg_tun_code" name="brg_tun_code"><option value="">请选择</option></select>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">行别<i></i></label><label>：</label>
+                                <input id="pole_direction" name="pole_direction" type="text" placeholder="请选择" /><c class="red">*</c>
+                                <!--<select id="pole_direction" name="pole_direction">
+                                    <option value="">请选择</option>
+                                    <option value="上行">上行</option>
+                                    <option value="下行">下行</option>
+                                </select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱号<i></i></label><label>：</label>
+                                <input id="pole_no" name="pole_no" type="text" /><c class="red">*</c>
+                            </li>
+                            <li class="info-li-m info-li-mr0">
+                                <label class="label-s-auto">公里标<i></i></label><label>(m)：</label>
+                                <input id="kmstandard" name="kmstandard" type="text" class="input-defined-1 only-round-number"/>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">铁路局<i></i></label><label>：</label>
+                                <!--<input id="bureau_name" name="bureau_name" type="text" placeholder="请选择" />-->
+                                <input id="bureau_name" name="bureau_name" type="hidden" />
+                                <select id="bureau_code" name="bureau_code"><option value="">请选择</option></select>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">供电段<i></i></label><label>：</label>
+                                <!--<input id="power_section_name" name="power_section_name" type="text" placeholder="请选择"/>-->
+                                <input id="power_section_name" name="power_section_name" type="hidden" />
+                                <select id="power_section_code" name="power_section_code"><option value="">请选择</option></select>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">车间<i></i></label><label>：</label>
+                                <!--<input id="workshop_name" name="workshop_name" type="text" placeholder="请选择" />-->
+                                <input id="workshop_name" name="workshop_name" type="hidden" />
+                                <select id="workshop_code" name="workshop_code"><option value="">请选择</option></select>
+                            </li>
+                            <li class="info-li-s info-li-mr0">
+                                <label class="label-s">工区<i></i></label><label>：</label>
+                                <!--<input id="org_name" name="org_name" type="text" placeholder="请选择" />-->
+                                <input id="org_name" name="org_name" type="hidden" />
+                                <select id="org_code" name="org_code"><option value="">请选择</option></select>
+                            </li>
+                        </ul>
+                        <!-- 支柱属性 -->
+                        <div class="subtitle">支柱属性<!--（22）--></div>
+                        <ul id="pole-profile" class="info-ul">
+                            <li class="info-li-s">
+                                <label class="label-s">锚段号<i></i></label><label>：</label>
+                                <input id="md_code" name="md_code" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">股道<i></i></label><label>：</label>
+                                <input id="track_code" name="track_code" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱类型<i></i></label><label>：</label>
+                                <input id="pole_type_code" name="pole_type_code" type="hidden" />
+                                <input id="pole_type" name="pole_type" type="text" placeholder="请选择" />
+                                <!--<select id="pole_type" name="pole_type"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱型号<i></i></label><label>：</label>
+                                <input id="pole_mdl_code" name="pole_mdl_code" type="hidden" />
+                                <input id="pole_mdl" name="pole_mdl" type="text" placeholder="请选择" />
+                                <!--<select id="pole_mdl" name="pole_mdl"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱用途<i></i></label><label>：</label>
+                                <input id="pole_usage_code" name="pole_usage_code" type="hidden" />
+                                <input id="pole_usage" name="pole_usage" type="text" placeholder="请选择" />
+                                <!--<select id="pole_usage" name="pole_usage"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-m info-li-mr0">
+                                <label class="label-m">接触悬挂安装图号<i></i></label><label>：</label>
+                                <input id="install_img_no" name="install_img_no" class="input-s-auto" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱材质<i></i></label><label>：</label>
+                                <input id="mtr_qlt_code" name="mtr_qlt_code" type="hidden" />
+                                <input id="mtr_qlt" name="mtr_qlt" type="text" placeholder="请选择" />
+                                <!--<select id="mtr_qlt" name="mtr_qlt"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">跨距<i></i></label><label>(m)：</label>
+                                <input id="span_length" name="span_length" type="text" class="input-defined-2"/>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">曲线半径<i></i></label><label>(m)：</label>
+                                <input id="curve_radius" name="curve_radius" type="text" class="input-defined-3"/>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">侧面界限<i></i></label><label>(mm)：</label>
+                                <input id="side_limit_cx" name="side_limit_cx" type="text" class="input-defined-4"/>
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">外轨超高<i></i></label><label>(mm)：</label>
+                                <input id="railface_high" name="railface_high" type="text" class="input-defined-5"/>
+                            </li>
+                            <li class="info-li-m info-li-mr0">
+                                <label class="label-m">附加悬挂安装图号<i></i></label><label>：</label>
+                                <input id="add_img_no" name="add_img_no" class="input-s-auto" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">基础状态<i></i></label><label>：</label>
+                                <input id="pole_bsc_sts" name="pole_bsc_sts" type="text" />
+                                <!--<select id="pole_bsc_sts" name="pole_bsc_sts"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">基础类型<i></i></label><label>：</label>
+                                <input id="pole_basic_type_code" name="pole_basic_type_code" type="hidden" />
+                                <input id="pole_basic_type" name="pole_basic_type" type="text" placeholder="请选择" />
+                                <!--<select id="pole_basic_type" name="pole_basic_type"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">支柱状态<i></i></label><label>：</label>
+                                <input id="pole_status_code" name="pole_status_code" type="hidden" />
+                                <input id="pole_status" name="pole_status" type="text" placeholder="请选择" />
+                                <!--<select id="pole_status" name="pole_status"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">生产厂家<i></i></label><label>：</label>
+                                <input id="mnft_fct" name="mnft_fct" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">投运日期<i></i></label><label>：</label>
+                                <input id="comms_date" name="comms_date" class="Wdate" type="text" />
+                            </li>
+                            <li class="info-li-m info-li-mr0">
+                                <label class="label-m">直线/曲内/曲外<i></i></label><label>：</label>
+                                <input id="curve_direction_code" name="curve_direction_code" type="hidden" />
+                                <input id="curve_direction" name="curve_direction" type="text" class="input-s-auto" placeholder="请选择" />
+                                <!--<select id="curve_direction" name="curve_direction" class="select-s-auto"><option value="">请选择</option></select>-->
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">出厂日期<i></i></label><label>：</label>
+                                <input id="prod_date" name="prod_date" class="Wdate" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">设计寿命<i></i></label><label>：</label>
+                                <input id="dsgn_life" name="dsgn_life" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">检修周期<i></i></label><label>：</label>
+                                <input id="aux_jxzq" name="aux_jxzq" type="text" />
+                            </li>
+                            <li class="info-li-s">
+                                <label class="label-s">地线状态<i></i></label><label>：</label>
+                                <input id="grnd_sts" name="grnd_sts" type="text" />
+                                <!--<select id="grnd_sts" name="grnd_sts"><option value="">请选择</option></select>-->
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="base-li-big base-li-mr0">
+                        <!-- 其他部件 -->
+                        <div class="subtitle">其他部件<!--（24）--></div>
+                        <ul id="check-unit" class="check-ul j-check-unit">
+                            <li><span>补偿装置</span><input id="aux_has_bczz" name="aux_has_bczz" type="hidden" value="0" /></li>
+                            <li><span>分段绝缘器</span><input id="aux_has_fdjyq" name="aux_has_fdjyq" type="hidden" value="0" /></li>
+                            <li><span>分相绝缘器</span><input id="aux_has_fxjyq" name="aux_has_fxjyq" type="hidden" value="0" /></li>
+                            <li><span>处于交叉线岔</span><input id="aux_be_jcxc" name="aux_be_jcxc" type="hidden" value="0" /></li>
+                            <li><span>处于两线无交叉线岔</span><input id="aux_be_lxwjcxc" name="aux_be_lxwjcxc" type="hidden" value="0" /></li>
+                            <li><span>处于三线无交叉线岔</span><input id="aux_be_sxwjcxc" name="aux_be_sxwjcxc" type="hidden" value="0" /></li>
+                            <li><span>处于锚段关节式电分相</span><input id="aux_be_mdgjsdfx" name="aux_be_mdgjsdfx" type="hidden" value="0" /></li>
+                            <li><span>硬横跨</span><input id="aux_has_yhk" name="aux_has_yhk" type="hidden" value="0" /></li>
+                            <li><span>电连接</span><input id="aux_has_dljx" name="aux_has_dljx" type="hidden" value="0" /></li>
+                            <li><span>隔离开关</span><input id="aux_has_glkg" name="aux_has_glkg" type="hidden" value="0" /></li>
+                            <li><span>避雷器</span><input id="aux_has_blq" name="aux_has_blq" type="hidden" value="0" /></li>
+                            <li><span>地磁感应装置</span><input id="aux_has_dcgyzz" name="aux_has_dcgyzz" type="hidden" value="0" /></li>
+                            <li><span>行车标志牌</span><input id="aux_has_xcbzp" name="aux_has_xcbzp" type="hidden" value="0" /></li>
+                            <li><span>接地装置</span><input id="aux_has_jdzz" name="aux_has_jdzz" type="hidden" value="0" /></li>
+                            <li><span>吸上线</span><input id="aux_has_xsx" name="aux_has_xsx" type="hidden" value="0" /></li>
+                            <li><span>回流线</span><input id="aux_has_hlx" name="aux_has_hlx" type="hidden" value="0" /></li>
+                            <li><span>GW线</span><input id="aux_has_gwx" name="aux_has_gwx" type="hidden" value="0" /></li>
+                            <li><span>供电线</span><input id="aux_has_gdx" name="aux_has_gdx" type="hidden" value="0" /></li>
+                            <li><span>PW线</span><input id="aux_has_pwx" name="aux_has_pwx" type="hidden" value="0" /></li>
+                            <li><span>AF线</span><input id="aux_has_afx" name="aux_has_afx" type="hidden" value="0" /></li>
+                            <li><span>加强线</span><input id="aux_has_jqx" name="aux_has_jqx" type="hidden" value="0" /></li>
+                            <li><span>避雷线</span><input id="aux_has_blz" name="aux_has_blz" type="hidden" value="0" /></li>
+                            <li><span>拉线</span><input id="aux_has_lx" name="aux_has_lx" type="hidden" value="0" /></li>
+                            <li><span>中锚</span><input id="aux_has_zm" name="aux_has_zm" type="hidden" value="0" /></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 支撑装置 -->
+                <div class="device-box">
+                    <div class="subtitle">支撑装置<!--（42+40）--></div>
+                    <div>
+                        <ul id="support-tab" class="tab-ul j-support-tab">
+                            <li class="cur-tab"><span class="tab">支撑装置1</span><span class="close-tab j-close-support-tab"></span></li><!---->
+                        </ul>
+                        <span class="add-device-ico j-add-tab-support">添加支撑装置</span>
+                    </div>
+                    <div id="support-container">
+                        <ul class="table-ul">
+                            <li class="fl">
+                                <!-- 支撑装置 表一 -->
+                                <table id="support-table-one" class="edit-table">
+                                    <tr><td colspan="3">上底座安装孔位</td><td><input id="ubmh_num" name="ubmh_num" class="input-auto" type="text" /><input id="sptdvc_no" name="sptdvc_no" type="hidden" /></td></tr>
+                                    <tr><td colspan="3">底座间距</td><td><input id="bspc" name="bspc" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="3">套管座位置</td><td><input id="bshs" name="bshs" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="3">承力索座位置</td><td><input id="mssgs" name="mssgs" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="3">套管环位置</td><td><input id="bshc" name="bshc" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="3">φ55套管单耳位置</td><td><input id="bshse" name="bshse" class="input-auto" type="text" /></td></tr>
+                                    <tr>
+                                        <td colspan="3">结构高度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="strthg_std" name="strthg_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="strthg_msd" name="strthg_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="strthg_sfv" name="strthg_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>腕臂支撑</td>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="arm_len_std" name="arm_len_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="arm_len_msd" name="arm_len_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">平腕臂管</td>
+                                        <td colspan="2">直径（mm）</td>
+                                        <td><input id="hrm_dmt" name="hrm_dmt" class="input-auto only-number" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="hrm_len_std" name="hrm_len_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="hrm_len_msd" name="hrm_len_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">斜腕臂管</td>
+                                        <td colspan="2">直径（mm）</td>
+                                        <td><input id="orm_dmt" name="orm_dmt" class="input-auto only-number" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="orm_len_std" name="orm_len_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="orm_len_msd" name="orm_len_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">斜拉线</td>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="ocb_len_std" name="ocb_len_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="ocb_len_msd" name="ocb_len_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">线径（mm）</td>
+                                        <td><input id="ocbl_dmt" name="ocbl_dmt" class="input-auto only-number" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">臂腕支撑管</td>
+                                        <td colspan="2">在平腕臂位置</td>
+                                        <td>
+                                            <label>标准值：</label><input id="astwhrm_std" name="astwhrm_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="astwhrm_msd" name="astwhrm_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="astwhrm_sfv" name="astwhrm_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">在斜腕臂位置</td>
+                                        <td><input id="astworm" name="astworm" class="input-auto only-number" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">铁帽压板</td>
+                                        <td>平腕臂铁帽压板</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="ipt_hrm_trq_std" name="ipt_hrm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="ipt_hrm_trq_msd" name="ipt_hrm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="ipt_hrm_trq_sfv" name="ipt_hrm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>斜腕臂铁帽压板</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="ipt_orm_trq_std" name="ipt_orm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="ipt_orm_trq_msd" name="ipt_orm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="ipt_orm_trq_sfv" name="ipt_orm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">连接器</td>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="cnt_ctp" name="cnt_ctp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="ctns" name="ctns" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="6">腕臂底座</td>
+                                        <td rowspan="3">平腕臂底座</td>
+                                        <td>螺栓型号</td>
+                                        <td><input id="rmb_hrm_bmdl" name="rmb_hrm_bmdl" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="rmb_hrm_trq_std" name="rmb_hrm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="rmb_hrm_trq_msd" name="rmb_hrm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="rmb_hrm_trq_sfv" name="rmb_hrm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>防松措施</td>
+                                        <td><input id="rmb_hrm_sopt" name="rmb_hrm_sopt" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">斜腕臂底座</td>
+                                        <td>螺栓型号</td>
+                                        <td><input id="rmb_orm_bmdl" name="rmb_orm_bmdl" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="rmb_orm_trq_std" name="rmb_orm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="rmb_orm_trq_msd" name="rmb_orm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="rmb_orm_trq_sfv" name="rmb_orm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>防松措施</td>
+                                        <td><input id="rmb_orm_sopt" name="rmb_orm_sopt" class="input-auto" type="text" /></td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                <!-- 支撑装置 表二 -->
+                                <table id="support-table-two" class="edit-table">
+                                    <tr>
+                                        <td rowspan="11">腕臂及支撑</td>
+                                        <td colspan="2">腕臂状态</td>
+                                        <td><input id="armsp_arm_sts" name="armsp_arm_sts" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">腕臂支撑本体状态</td>
+                                        <td>
+                                            <input id="armsp_arms_sts" name="armsp_arms_sts" class="input-auto" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>平腕臂套管单耳</td>
+                                        <td rowspan="2">紧固力矩<br />（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_hrm_trq_std" name="armsp_hrm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_hrm_trq_msd" name="armsp_hrm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_hrm_trq_sfv" name="armsp_hrm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>斜腕臂套管单耳</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_orm_trq_std" name="armsp_orm_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_orm_trq_msd" name="armsp_orm_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_orm_trq_sfv" name="armsp_orm_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">平腕臂双耳套筒</td>
+                                        <td>顶丝紧固力矩<br />（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_hrm_twtrq_std" name="armsp_hrm_twtrq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_hrm_twtrq_msd" name="armsp_hrm_twtrq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_hrm_twtrq_sfv" name="armsp_hrm_twtrq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>备母紧固力矩<br />（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_hrm_nttrq_std" name="armsp_hrm_nttrq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_hrm_nttrq_msd" name="armsp_hrm_nttrq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_hrm_nttrq_sfv" name="armsp_hrm_nttrq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="armsp_armde_sts" name="armsp_armde_sts" class="input-auto" type="text" />
+                                            <!--<select id="armsp_armde_sts" name="armsp_armde_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="4">斜腕臂双耳套筒</td>
+                                        <td>铜销角度<br />（度）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_ormde_cpn_std" name="armsp_ormde_cpn_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_ormde_cpn_msd" name="armsp_ormde_cpn_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_ormde_cpn_sfv" name="armsp_ormde_cpn_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>防松部件</td>
+                                        <td><input id="armsp_ormde_cmp" name="armsp_ormde_cmp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>紧固力矩<br />（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="armsp_ormde_trq_std" name="armsp_ormde_trq_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="armsp_ormde_trq_msd" name="armsp_ormde_trq_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="armsp_ormde_trq_sfv" name="armsp_ormde_trq_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="armsp_ormdes_sts" name="armsp_ormdes_sts" class="input-auto" type="text" />
+                                            <!--<select id="armsp_ormdes_sts" name="armsp_ormdes_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">腕臂底座</td>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="armb_blf_sts" name="armb_blf_sts" class="input-auto" type="text" />
+                                            <!--<select id="armb_blf_sts" name="armb_blf_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="armbs" name="armbs" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="armb_ctp" name="armb_ctp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">腕臂支撑</td>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="armsp_blf_sts" name="armsp_blf_sts" class="input-auto" type="text" />
+                                            <!--<select id="armsp_blf_sts" name="armsp_blf_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="armsps" name="armsps" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="armsps_ctp" name="armsps_ctp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">套管铰环</td>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="trc_blf_sts" name="trc_blf_sts" class="input-auto" type="text" />
+                                            <!--<select id="trc_blf_sts" name="trc_blf_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="trcs" name="trcs" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="trc_ctp" name="trc_ctp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">套管双耳</td>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="trcde_blf_sts" name="trcde_blf_sts" class="input-auto" type="text" />
+                                            <!--<select id="trcde_blf_sts" name="trcde_blf_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="trcdes" name="trcdes" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="trcde_ctp" name="trcde_ctp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">腕臂本体<br />（含隧道弓形腕臂）</td>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="arms_blf_sts" name="arms_blf_sts" class="input-auto" type="text" />
+                                            <!--<select id="arms_blf_sts" name="arms_blf_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="arms" name="arms" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">有无管帽</td>
+                                        <td>
+                                            <label>标准值：</label><input id="has_cap_std" name="has_cap_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="has_cap_msd" name="has_cap_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">其他特殊腕臂形式</td>
+                                        <td>
+                                            <input id="oth_arm_mdl" name="oth_arm_mdl" class="input-auto" type="text" />
+                                            <!--<select id="oth_arm_mdl" name="oth_arm_mdl" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 定位装置 -->
+                <div>
+                    <div class="subtitle">定位装置<!--（40+34）--></div>
+                    <div>
+                        <ul id="location-tab" class="tab-ul j-location-tab">
+                            <li class="cur-tab"><span class="tab">定位装置1</span><span class="close-tab j-close-location-tab"></span></li><!---->
+                        </ul>
+                        <span class="add-device-ico j-add-tab-location">添加定位装置</span>
+                    </div>
+                    <div id="location-container clearfix">
+                        <ul class="table-ul clearfix">
+                            <li class="fl">
+                                <!-- 定位装置 表一 -->
+                                <table id="location-table-one" class="edit-table">
+                                    <tr>
+                                        <td rowspan="4">定位管</td>
+                                        <td colspan="2">直径（mm）</td>
+                                        <td><input id="lctdmt" name="lctdmt" class="input-auto" type="text" /><input id="lct_id" name="lct_id" type="hidden" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lcttlen_std" name="lcttlen_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lcttlen_msd" name="lcttlen_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="lcttlen_sfv" name="lcttlen_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctt_sts" name="lctt_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctt_sts" name="lctt_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="lcttsb" name="lcttsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="4">定位管双耳套筒</td>
+                                        <td>顶丝</td>
+                                        <td rowspan="2">力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lcttdetwmmt_std" name="lcttdetwmmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lcttdetwmmt_msd" name="lcttdetwmmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>备母</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lcttdesptnt_std" name="lcttdesptnt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lcttdesptnt_msd" name="lcttdesptnt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体状态</td>
+                                        <td>
+                                            <input id="lcttdes_sts" name="lcttdes_sts" class="input-auto" type="text" />
+                                            <!--<select id="lcttdes_sts" name="lcttdes_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">定位管本体状态</td>
+                                        <td>
+                                            <input id="lcttde_lssts" name="lcttde_lssts" class="input-auto" type="text" />
+                                            <!--<select id="lcttde_lssts" name="lcttde_lssts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">定位管支撑双耳套筒斜腕臂侧</td>
+                                        <td>顶丝</td>
+                                        <td rowspan="2">力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lsdeor_tw_mmt_msd" name="lsdeor_tw_mmt_msd" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lsdeor_tw_mmt_std" name="lsdeor_tw_mmt_std" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>备母</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lsdeor_spnt_mmt_msd" name="lsdeor_spnt_mmt_msd" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lsdeor_spnt_mmt_std" name="lsdeor_spnt_mmt_std" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体状态</td>
+                                        <td>
+                                            <input id="lsdeors_sts" name="lsdeors_sts" class="input-auto" type="text" />
+                                            <!--<select id="lsdeors_sts" name="lsdeors_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">定位管支撑双耳套筒定位管侧</td>
+                                        <td>顶丝</td>
+                                        <td rowspan="2">力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lsdeltc_tw_mmt_msd" name="lsdeltc_tw_mmt_msd" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lsdeltc_tw_mmt_std" name="lsdeltc_tw_mmt_std" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>备母</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lsdeltc_spnt_mmt_msd" name="lsdeltc_spnt_mmt_msd" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lsdeltc_spnt_mmt_std" name="lsdeltc_spnt_mmt_std" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体状态</td>
+                                        <td>
+                                            <input id="lsdeltcs_sts" name="lsdeltcs_sts" class="input-auto" type="text" />
+                                            <!--<select id="lsdeltcs_sts" name="lsdeltcs_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td rowspan="3">定位支撑</td>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lsplen_std" name="lsplen_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lsplen_msd" name="lsplen_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="lsplen_sfv" name="lsplen_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctspb_sts" name="lctspb_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctspb_sts" name="lctspb_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="lctspsb" name="lctspsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="8">定位器</td>
+                                        <td colspan="2">类型</td>
+                                        <td>
+                                            <input id="lct_tp" name="lct_tp" class="input-auto" type="text" />
+                                            <!--<select id="lct_tp" name="lct_tp" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">坡度（度）</td>
+                                        <td><input id="lct_slp" name="lct_slp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctblt_sts" name="lctblt_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctblt_sts" name="lctblt_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体</td>
+                                        <td><input id="lctsb" name="lctsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体状态</td>
+                                        <td>
+                                            <input id="lcts_sts" name="lcts_sts" class="input-auto" type="text" />
+                                            <!--<select id="lcts_sts" name="lcts_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">开口销</td>
+                                        <td><input id="lctop" name="lctop" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctlen_std" name="lctlen_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctlen_msd" name="lctlen_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="lctlen_sfv" name="lctlen_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">止钉间隙（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctclrc_std" name="lctclrc_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctclrc_msd" name="lctclrc_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="lctclrc_sfv" name="lctclrc_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">电气连接线</td>
+                                        <td colspan="2">紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="cnwmmt_std" name="cnwmmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="cnwmmt_msd" name="cnwmmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">本体状态</td>
+                                        <td>
+                                            <input id="cnws_sts" name="cnws_sts" class="input-auto" type="text" />
+                                            <!--<select id="cnws_sts" name="cnws_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">定位方式</td>
+                                        <td>
+                                            <input id="lct_mdl" name="lct_mdl" class="input-auto" type="text" />
+                                            <!--<select id="lct_mdl" name="lct_mdl" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                <!-- 定位装置 表二 -->
+                                <table id="location-table-two" class="edit-table">
+                                    <tr><td colspan="2">定位管支撑在平腕臂位置</td><td><input id="lcttwharm" name="lcttwharm" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="2">定位管支撑在斜腕臂位置</td><td><input id="lcttworm" name="lcttworm" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="2">定位支撑在定位管位置</td><td><input id="lctwlctt" name="lctwlctt" class="input-auto" type="text" /></td></tr>
+                                    <tr><td colspan="2">定位支座U螺栓位置</td><td><input id="lctuw" name="lctuw" class="input-auto" type="text" /></td></tr>
+                                    <tr>
+                                        <td rowspan="2">定位支座</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctspmmt_std" name="lctspmmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctspmmt_msd" name="lctspmmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="lctsps_sts" name="lctsps_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctsps_sts" name="lctsps_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="4">定位线夹</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctclmpmmt_std" name="lctclmpmmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctclmpmmt_msd" name="lctclmpmmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="lctclmps_sts" name="lctclmps_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctclmps_sts" name="lctclmps_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctclmp_sts" name="lctclmp_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctclmp_sts" name="lctclmp_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体</td>
+                                        <td><input id="lctclmpsb" name="lctclmpsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="7">定位环</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctrmmt_std" name="lctrmmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctrmmt_msd" name="lctrmmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>销钉开口销</td>
+                                        <td>
+                                            <label>标准值：</label><input id="lctr_pop_std" name="lctr_pop_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="lctr_pop_msd" name="lctr_pop_msd" class="only-number" type="text" />
+                                            <label>安全值：</label><input id="lctr_pop_sfv" name="lctr_pop_sfv" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="lctrs_sts" name="lctrs_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctrs_sts" name="lctrs_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>防松部件</td>
+                                        <td><input id="lctr_lsp_cmp" name="lctr_lsp_cmp" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctrb_sts" name="lctrb_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctrb_sts" name="lctrb_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体</td>
+                                        <td><input id="lctrsb" name="lctrsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>位置</td>
+                                        <td><input id="lctrw" name="lctrw" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">套管单耳斜腕臂侧</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="bshseorm_mmt_std" name="bshseorm_mmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="bshseorm_mmt_msd" name="bshseorm_mmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="bshseorms_sts" name="bshseorms_sts" class="input-auto" type="text" />
+                                            <!--<select id="bshseorms_sts" name="bshseorms_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">套管单耳定位管侧</td>
+                                        <td>紧固力矩（N*m）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="bshseltc_mmt_std" name="bshseltc_mmt_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="bshseltc_mmt_msd" name="bshseltc_mmt_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体状态</td>
+                                        <td>
+                                            <input id="bshseltcs_sts" name="bshseltcs_sts" class="input-auto" type="text" />
+                                            <!--<select id="bshseltcs_sts" name="bshseltcs_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">支持器</td>
+                                        <td>螺栓紧固状态</td>
+                                        <td>
+                                            <input id="lctnt_sts" name="lctnt_sts" class="input-auto" type="text" />
+                                            <!--<select id="lctnt_sts" name="lctnt_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>本体</td>
+                                        <td><input id="spsb" name="spsb" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>开口销</td>
+                                        <td><input id="spop" name="spop" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">防风拉线</td>
+                                        <td>长度（mm）</td>
+                                        <td>
+                                            <label>标准值：</label><input id="wdpcbllen_std" name="wdpcbllen_std" class="only-number" type="text" />
+                                            <label>实测值：</label><input id="wdpcbllen_msd" name="wdpcbllen_msd" class="only-number" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>直径（mm）</td>
+                                        <td><input id="wdpcbl_dmt" name="wdpcbl_dmt" class="input-auto" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>支撑状态</td>
+                                        <td>
+                                            <input id="wdpc_sts" name="wdpc_sts" class="input-auto" type="text" />
+                                            <!--<select id="wdpc_sts" name="wdpc_sts" class="select-auto"><option value="">请选择</option></select>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="save-box">
+            <input id="save-pole" type="button" class="btn btn-primary j-save-pole" value="确认添加/保存修改" /><!--保存修改-->
+        </div>
+    </div>
+</body>
+</html>

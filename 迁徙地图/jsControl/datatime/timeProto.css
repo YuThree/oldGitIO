@@ -1,0 +1,51 @@
+.time_box{
+    width: 100%;
+    font-size: 0;
+}
+.time_box *{
+    vertical-align: middle;
+}
+.time_box .time_slect,.time_box  .time_slectDp{
+    display: inline-block;
+    width: 100px;
+    height: 36px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+.time_box .time_slect{
+    margin-left: 0;
+}
+.time_slectDp .selectBox{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.time_box .time_slect .selectBox,.time_box  .time_slectDp .selectBox{
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+}
+.time_box .time_slect .selectBox [data-selectNew="1"],.time_box  .time_slectDp .selectBox [data-selectNew="1"]{
+    height: 36px;
+    font-size: 14px;
+}
+.time_box .time_start,.time_box .time_end{
+    height: 36px;
+    width: 120px;
+    border:1px solid #189BD8;
+    margin-left: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+.time_box .__startBox,
+.time_box .__endBox{
+    display: inline-block;
+}
+.time_box  .time_slectDp{
+    width: 80px;
+}
+.time_box .companyStart{
+    display: inline-block;
+    margin-left: 5px;
+    display: none;
+}

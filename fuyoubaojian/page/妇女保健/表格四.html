@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--通用css-->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/simulationSelect/selectStyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css"/>
+
+    <!--选单个时间插件-->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/datatime/lq.datetimepick.css"/>
+    <!--开始结束时间插件-->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/datatime2/daterangepicker-bs3.css"/>
+    <link rel="stylesheet" type="text/css" href="../../jsControl/datatime2/daterangepicker.css"/>
+    <!--分页-->
+<link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css" />
+    <link rel="stylesheet" type="text/css" href="../../jsControl/pageing/pageIng.css">
+    <link rel="stylesheet" type="text/css" href="../../jsControl/zUI/zUI.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/tabCom/tabCom.css" />
+    <!-- 独自页面-->
+    <link rel="stylesheet" type="text/css" href="../../css/table/currentCome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/table/currencyForm4.css"/>
+    <style>
+
+        /*表格横向滚动条出现的最小宽度*/
+        .showTable{
+            min-width: 1500px;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class="mainBox">
+    <div class="cdct_toolbar cdct_clearfix">
+        <div class="cdct_icon cdct_i1">保存</div>
+        <div class="cdct_icon cdct_i2 ">保存并新建</div>
+        <div class="cdct_icon cdct_i3">新建家庭</div>
+        <div class="cdct_icon cdct_i4">打印</div>
+    </div>
+    <div class="searchNav clearFloat">
+        <form class="contentBox">
+            <div class="boxInputInfo">
+                <div class="cdct_chk cdct_chk_suc vMiddle">
+                    <input id="chk_suc" type="checkbox">
+                    <label class="labelInpTwo" for="chk_suc">五个字以上</label>
+                </div>
+                <div class="inputParent vMiddle">
+                    <input type="text" class="cdct_input " placeholder="请输入关键字">
+                </div>
+                <div class="searchInfoIcon"></div>
+            </div>
+            <div class="boxInputInfo">
+                <div class="cdct_chk cdct_chk_suc vMiddle">
+                    <input id="chk_suce" type="checkbox">
+                    <label class="labelInpTwo" for="chk_suce">年&emsp;&emsp;龄</label>
+                </div>
+                <div class="inputParent vMiddle">
+                    <input type="text" class="cdct_input cdct_inputTwo" placeholder="输入周">
+                    <label  for="chk_sucd">周</label>
+                    <input type="text" class="cdct_input cdct_inputTwo" placeholder="输入天">
+                    <label for="chk_sucd">天</label>
+                </div>
+            </div>
+            <div class="boxInputInfo">
+                <div class="cdct_chk cdct_chk_suc vMiddle">
+                    <input id="chk_sucd" type="checkbox">
+                    <label class="labelInpTwo" for="chk_sucd">四&nbsp;字&nbsp;内</label>
+                </div>
+                <div class="inputParent vMiddle">
+                    <input type="text" class="cdct_input " placeholder="家庭档案">
+                </div>
+
+            </div>
+
+            <div class="boxSelectInfo">
+                <div class="cdct_chk cdct_chk_suc vMiddle">
+                    <input id="chk_suca" type="checkbox">
+                    <label for="chk_suca" class="labelInpTwo">下&emsp;&emsp;拉</label>
+                </div>
+                <div data-selectsimu="1" class="cdct_select vMiddle">
+                    <div class="selectBox">
+                    <span data-selectnew="1" class="checkspan">
+                        <span class="optD"><span class="fontMain">健康档案</span></span>
+                        <span class="selectDown"></span>
+                    </span>
+                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                <span class="optD"><span class="fontMain" style="opacity: 0.5">这个是默认选项</span></span>
+                                <span class="selectDown"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="boxInputInfo">
+                <div class="cdct_chk cdct_chk_suc vMiddle">
+                    <input id="chk_sucb" type="checkbox">
+                    <label for="chk_sucb" class="labelInpTwo">时&emsp;&emsp;间</label>
+                </div>
+                <div class="lqdataInput vMiddle">
+                    <input type="text" class="cdct_input vMiddle" placeholder="请选择时间">
+                </div>
+            </div>
+            <div class="boxRadioInfo">
+                <div class="cdct_radio cdct_radio_suc"><input id="radio1" type="radio" name="xx" value="" checked><label for="radio1">选项1</label></div>
+                <div class="cdct_radio cdct_radio_suc"><input id="radio2" type="radio" name="xx" value=""><label for="radio2">选项2</label></div>
+            </div>
+        </form>
+        <div class="btnClass">
+            <div class="btnParentClass">
+                <button type="button" class="cdct_btn vPosAbsMiddle">通用按钮</button>
+                <button type="button" class="cdct_btn vPosAbsMiddle cdct_green_btn">绿色按钮</button>
+            </div>
+            <div class="moreInfo"><span class="selectDownIcon"></span><span class="txt">显示更多</span></div>
+        </div>
+        <div class="lineA"></div>
+        <div class="lineB"></div>
+    </div>
+    <!--表格容器-->
+    <div class="tablMainOne">
+
+    </div>
+    <!--分页容器-->
+    <div class="pagetable">
+        <div class="pageFather">
+
+        </div>
+    </div>
+
+
+</div>
+<!--///////////////////////////////公用js////////////////////////////////-->
+<!--jq-->
+<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+
+<!--引入跨页面传值JS-->
+<script type="text/javascript" src="../../index/js/iframeChild.js"></script>
+
+<!--引入模态框相关JS-->
+<script type="text/javascript" src="../../jsControl/modelShow/modelShow.min.js"></script>
+<!--ZUI-->
+<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+
+<!--dataTable-->
+<script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+<!--模拟select-->
+<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+<!--///////////////////////////////公用js END(可能会新增一些JS)////////////////////////////////-->
+<!-- 选单个时间的插件-->
+<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+<!--开始结束时间插件-->
+<script type="text/javascript" src="../../jsControl/datatime2/moment.min.js"></script>
+<script type="text/javascript" src="../../jsControl/datatime2/moment_zh-CN.min.js"></script>
+<script type="text/javascript" src="../../jsControl/datatime2/daterangepicker.min.js"></script>
+<!--分页js-->
+<script type="text/javascript" src="../../jsControl/pageing/pageIng.min.js"></script>
+
+<!--控制导航高度的js-->
+<script src="../../js/searchNavHeight.js"></script>
+<!--控制导航遮罩的js-->
+<script src="../../js/searchNavMask.js"></script>
+
+<!--独自js-->
+<script type="text/javascript" src="../../js/table/currencyForm4.js"></script>
+
+
+
+
+</body>
+</html>

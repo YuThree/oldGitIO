@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>主动获取原始数据</title>
+	<meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("ztree");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("myTree");
+        loadControl("layer");
+        loadControl("Validation");
+        loadControl("trainselect");
+        loadControl("paging");
+        loadJs("/Common/js/6cweb/mydate.js?v=" + version, "utf-8");
+        loadJs("js/OriginalFile.js?v=" + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+        loadCss("css/OriginalFile.css?v=" + version);
+    </script>
+</head>
+<body>
+    <div class="original_body">
+        <div class="title-bg">
+            <span class="alarm-Original-ico title-ico"></span>
+            <span class="title letter-spacing-small">主动获取原始数据</span>
+            <span class="alarm-delay-ico close-ico j-close"></span>
+        </div>
+        <div class="content">
+            <div>
+                <div class="btn-alarm newCreat" id="newcreat">
+                    <span class="newcreat-ico search-ico"></span>
+                    <span>新建任务</span>
+                </div>
+            </div>
+            <div class="divide-line"></div>
+            <div class="condition">
+                <form id="Form1">
+                    <ul class="ul-condition">
+                        <li>
+                            <label>任务名称：</label>
+                            <input id="original_name" class="input-w-big margin-bottom-small" type="text" />
+                        </li>
+                        <li>
+                            <label>设备编号：</label>
+                            <input id="original_loco" class="input-w-big margin-bottom-small" placeholder="请输入关键字" type="text" />
+                        </li>
+                        <li>
+                            <label>创建任务时间：</label>
+                            <input id="s-time" class="Wdate input-w-big margin-bottom-small validate[required]" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" />
+                            <label>&nbsp;至&nbsp;</label>
+                            <input id="e-time" class="Wdate input-w-big margin-bottom-small validate[required]" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, readOnly: true })" />
+                        </li>
+                        <li>
+                            <label>alarm ID：</label>
+                            <input id="original_ID" class="input-w-big margin-bottom-small" type="text" />
+                        </li>
+                        <li>
+                            <label>任务状态：</label>
+                            <!--<input id="original_state" class="input-w-big margin-bottom-small" type="text" />-->
+                            <select id="original_state" name="direction" style="width: 150px; border-radius: 3px;margin-bottom: 0;">
+                                <option value="">全部</option>
+                                <option value="WAIT">处理中</option>
+                                <option value="DONE">已完成</option>
+                                <option value="PAUSE">暂停</option>
+                                <option value="TIMEOUT">已超时</option>
+                                <option value="PLAY">可播放</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <ul class="ul-condition">
+                        <li>
+                            <label>线路区站：</label>
+                            <input id="line-position" class="input-w-big margin-bottom-small" treetype="" code=""  type="text" />
+                        </li>
+                        <li>
+                            <label>行&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label> 
+                            <input id="direction" name="direction" class="input-w-big margin-bottom-small" code="" type="text" style="" />
+                        </li>
+                        <li>
+                            <label>&nbsp;公&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;里&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标：</label>
+                            <input id="s-KM" class="input-w-big margin-bottom-small validate[custom[integerPositive],maxSize[8]]" type="text"/>
+                            <label>&nbsp;至&nbsp;</label>
+                            <input id="e-KM" class="input-w-big margin-bottom-small validate[custom[integerPositive],maxSize[8]]" type="text"/>
+                        </li>
+                        <li>
+                            <label>杆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+                            <input id="original_pole" class="input-w-big margin-bottom-small" type="text" />
+                        </li>
+                        <li>
+                            <div class="btn-alarm j-query-alarm">
+                                <span class="alarm-delay-ico search-ico"></span>
+                                <span>查&nbsp;询</span>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="list">
+                <div class="title-bg" style="background:#c6e8f5;">
+                    <span class="research-ico title-ico"></span>
+                    <span class="title" style="color:#555555;font-weight: normal;">查询结果</span>
+                </div>
+                <div id="inner_cont">
+                    <div class="inner-head row-fluid">
+                        <span class="original_type">数据终端</span>
+                        <span class="original_2">任务名称</span>
+                        <span class="original_eight">任务类型</span>
+                        <span class="original_4">任务描述</span>
+                        <span class="original_3">文件路径</span>
+                        <span class="original_one">创建时间</span>
+                        <span class="original_1">创建人</span>
+                        <span class="original_1">任务状态</span>
+                        <span class="original_do">操作</span>
+                    </div>
+                    <div id="inner-body"></div>
+                </div>
+                <div id="paging"></div>
+            </div>
+        </div>
+    </div>
+     <!-- 新建任务下载弹出框 -->
+    <div id="OriginalFile">
+        <div class="closeimg layui-layer-close"></div>
+        <h4><span class="new-img"></span><span>新建任务</span></h4>
+        <div class="hr-div"></div>
+        <div class="newcreat_title">
+            <p class="newcreat_title_p1 newcreat_title_active">按时间获取数据</p>
+            <p class="newcreat_title_p2">按位置获取数据</p>
+            <p class="newcreat_title_empty"></p>
+        </div>
+        <div class="newcreat_div">
+            <div id="newcreat_time">
+                <div class="row-fluid" style="padding:20px 0;">
+                    <div class="span2" style="padding-top:5px;">
+                        任务名称：
+                    </div>
+                    <div class="span10">
+                        <input id="taskname_time" type="text" maxlength="40"  placeholder="请输入中文、数字或英文字母" />
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2" style="padding-top:5px;">
+                        设备编号：
+                    </div>
+                    <div class="span10" id="new-loco">
+                        <div class="div-menus" style="">
+                            <label id="locomotive_NB">请选择</label>
+                            <img src="/Common/img/playico/xia.png" alt="" style="cursor: pointer" />
+                            <div id="OriginalFile_TreeAll" class="ztree">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：
+                    </div>
+                    <div class="span10"  style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="new-strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" onchange="changeEndTime()" />&nbsp;至&nbsp;<input type="text" class="Wdate" id="new-endTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2">
+                        &nbsp;弓&nbsp;位&nbsp;置：
+                    </div>
+                    <div class="span10">
+                        <div class="row-fluid" id="OriginalFile_txt_AB">
+
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="hr-div"></div>-->
+                <div class="row-fluid" style="text-align: right;">
+                    <div class="btn-alarm" id="BtnSubmit_time">
+                        <span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+            <div id="newcreat_loca">
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        任务名称：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" id="taskname" style="width:382px;" maxlength="40"  placeholder="请输入中文、数字或英文字母"/>
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        线路区站：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" id="LinePosition"/>
+                    </div>
+                    <div class="span2" style="padding-top:5px;">
+                        行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+                    </div>
+                    <div class="span4"  style="padding-top: 8px;">
+                        <input type="text" id="xingbie" name="direction"/>
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        杆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" id="pole_NUM"/>
+                    </div>
+                    <div class="span2" style="padding-top:5px;">
+                        开始时间：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="loca_strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })"/>
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        次数限制：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" id="limit_loco"/>
+                    </div>
+                    <div class="span2" style="padding-top:5px;">
+                        截止时间：
+                    </div>
+                    <div class="span4"  style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="loca_endTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })"/>
+                    </div>
+                </div>
+                <h4><img class="newcreat_loca_img" src="/Common/MAlarmMonitoring/img/open.png"><span>其他设置</span></h4>
+                <div id="newcreat_loca_set">
+                    <div class="row-fluid" style="line-height:50px;">
+                        <div class="span2" style="padding-top:5px;">
+                            设备限制：
+                        </div>
+                        <div class="span10"  style="margin-top: 8px;position:relative;">
+                            <input type="text" id="loca"/>
+                            <img class="line_Click open_img" onclick="add_trainNo();" src="/Common/MAlarmMonitoring/img/open_l.png" style="vertical-align: text-bottom;margin-left:10px;">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2" style="padding-top:25px;">
+                            已选设备：
+                        </div>
+                        <div class="span10"  style="margin-top: 8px;">
+                            <div id="checked_loca"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid" style="text-align: right;margin: 12px auto 0;">
+                    <div class="btn-alarm" id="BtnSubmit_loca">
+                        <span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

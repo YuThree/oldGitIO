@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一杆一档详情页</title>
+    <meta http-equiv="Content-Type" content="textml; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="/Common/MOnePoleData/css/oneChockoneGAN.css" rel="stylesheet" />
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=7AgGlirRrborRvWzwOdAKWiGvpK3YL8S" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="main">
+        <div id="closeNowBtn" onclick="window.close()"><img src="./img_detail/closeBtn.png" alt="关闭本页" title="关闭本页" style="height: 28px;" /></div>
+        <div id="yi_information">
+            <div id="yi_information_nav">
+                <img src="./img_detail/icon-1.png" alt="图片加载失败" style="height: 26px;margin-left: 2%;" />
+                <span class="ji_information">一杆一档详细信息</span>
+                <div class="inspection-contrast j-inspection-contrast" style="display:none">
+                    <span class="btn-inspection btn-inspection-big"></span>
+                    <span class="inspection-text">巡检对比</span>
+                </div>
+            </div>
+
+            <div id="nav_next_infor">
+                <div id="infor_tr">
+                    <table style="border-collapse:separate; border-spacing:0;">
+                        <tr>
+                            <td class="inf_ygyd1" style="font-family: 微软雅黑">杆号</td>
+                            <td class="xiaosanjiao"><div></div></td>
+                            <td class="inf_chuanzhi1" id="ganhao"></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd" style="font-family: 微软雅黑">线路</td>
+                            <td class="xiaosanjiao2"><div></div></td>
+                            <td class="inf_chuanzhi" id="xianlu" style="padding:-1em 0 "></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd1" style="font-family: 微软雅黑">区站</td>
+                            <td class="xiaosanjiao"><div></div></td>
+                            <td class="inf_chuanzhi1" id="quzhan"></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd" style="font-family: 微软雅黑">桥梁，隧道</td>
+                            <td class="xiaosanjiao2"><div></div></td>
+                            <td class="inf_chuanzhi" id="suidao"></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd1" style="font-family: 微软雅黑">行别</td>
+                            <td class="xiaosanjiao"><div></div></td>
+                            <td class="inf_chuanzhi1" id="xingbie"></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd" style="font-family: 微软雅黑">公里标</td>
+                            <td class="xiaosanjiao2"><div></div></td>
+                            <td class="inf_chuanzhi" id="gonglibiao"></td>
+                        </tr>
+                        <tr>
+                            <td class="inf_ygyd1" style="font-family: 微软雅黑">组织机构</td>
+                            <td class="xiaosanjiao"><div></div></td>
+                            <td class="inf_chuanzhi1" id="gongqu"></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div id="allmap">
+                    <h3>map</h3>
+                </div>
+            </div>
+            <div id="shishiImg">
+
+            </div>
+        </div>
+        <div id="alarmList_inf">
+            <div id="alarmLIST_Info">
+                <img src="img_detail/icon-2.png" alt="图片加载失败" style="height: 26px;margin-left: 1%;" />
+                <span class="ji_information">报警列表信息</span>
+            </div>
+            <div id="xiangqingyemian">
+                <div id="xiangqingyemian_nav">
+                    当前报警状态
+                </div>
+                <hr style="height:1px;border:none;border-top:3px solid #E5E5E5" />
+                <div class="xiaosanjiaoxing" style="width: 0;height: 0;border-left: .6em solid transparent;border-right: .6em solid transparent;border-top: .9em solid #E5E5E5;"></div>
+                <div id="xiaotupian">
+                    <div class="xiaotubiao_img"><span class="alarmSmall" id="alarmSmall" style="font-family: 微软雅黑;letter-spacing: 2px">报警列表</span></div>
+                    <div class="xiaotubiao_img1"> <span class="alarmSmall1" style="font-family: 微软雅黑;letter-spacing: 2px">缺陷列表</span></div>
+                    <div class="xiaotubiao_img1-2"><span class="alarmSmall" id="alarmSmall-1" style="font-family: 微软雅黑;letter-spacing: 2px">报警列表</span></div>
+                    <div class="xiaotubiao_img1-1"> <span class="alarmSmall1" style="font-family: 微软雅黑;letter-spacing: 2px">缺陷列表</span></div>
+
+                </div>
+                <div id="alarmTable">
+                    <div class="shijian"><span>发生时间</span></div>
+                    <div class="shijian"><span>设备编号</span></div>
+                    <div class="shijian"><span>报警级别</span></div>
+                    <div class="shijian"><span>报警类型</span></div>
+                    <div class="shijian"><span>拉出值</span></div>
+                    <div class="shijian"><span>导高值</span></div>
+                    <div class="shijian"><span>最高温度</span></div>
+                    <div class="shijian LineInspectBtn" style="display:none;"><span>报警巡检对比</span></div>
+                    <hr style="height:1px;border:none;border-top:1px solid #327EAC;clear:both" />
+
+                    <div id="shujushengcheng1">
+                    </div>
+                    <div class="fenye">
+                        <span class="xiaokuohao1" id="dbzuo">&lt;&lt;</span>
+                        <span class="xiaokuohao1" id="danzuo">&lt;</span>
+                        <span>第</span>
+                        <span class="kongbaifangkuang"></span>
+                        <span>页</span>
+                        <span>共</span>
+                        <span class="gongduoshaoye"></span>
+                        <span>页</span>
+                        <span class="xiaokuohao1" id="danyou">&gt;</span>
+                        <span class="xiaokuohao1" id="dbyou">&gt;&gt;</span>
+                        <span>显示<span class="congduoshaodaoduoshao"></span>条</span>
+                        <span>,共</span>
+                        <span class="duoshaotiao"></span>
+                        <span>条</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr style="height:1px;border:none;border-top:1px dashed #448AB3;margin-top: 1%" />
+            <div id="xiangqingyemian1">
+                <div id="xiangqingyemian_nav1">
+                    <span style="font-family: 微软雅黑">历史信息</span>
+                </div>
+                <hr id="myhr" style="height:0px;border:none;border-top:3px solid #E5E5E5; " />
+                <div class="xiaosanjiaoxing1" style="width: 0;height: 0;border-left: .6em solid transparent;border-right: .6em solid transparent;border-top: .9em solid #E5E5E5"></div>
+
+                <br />
+                <div id="alramTAble">
+                    <div class="shiJIAN"><span>发生时间</span></div>
+                    <div class="shiJIAN"><span>设备编号</span></div>
+                    <div class="shiJIAN"><span>报警级别</span></div>
+                    <div class="shiJIAN"><span>报警类型</span></div>
+                    <div class="shiJIAN"><span>拉出值</span></div>
+                    <div class="shiJIAN"><span>导高值</span></div>
+                    <div class="shiJIAN"><span>最高温度</span></div>
+                    <div class="shiJIAN"><span>报警巡检对比</span></div>
+                    <hr style="height:1px;border:none;border-top:1px solid #327EAC;clear:both" />
+
+                    <div id="lishijiemian">
+
+                    </div>
+                    <div class="fenye1">
+                        <span class="xiaokuohao1" id="danyou1">&lt;&lt;</span>
+                        <span class="xiaokuohao1" id="dbyou1">&lt;</span>
+                        <span>第</span>
+                        <span class="kongbaifangkuang1"></span>
+                        <span>页</span>
+                        <span>共</span>
+                        <span class="gongduoshaoye1" id="gongduoshaoye1"></span>
+                        <span>页</span>
+                        <span class="xiaokuohao1" id="dbzuo1">&gt;</span>
+                        <span class="xiaokuohao1" id="danzuo1">&gt;&gt;</span>
+                        <span>显示<span class="congduoshaodaoduoshao"></span>条</span>
+                        <span>,共</span>
+                        <span class="duoshaotiao"></span>
+                        <span>条</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/Common/MOnePoleData/script/oneChockoneGAN.js" + version></script>
+    <script type="text/javascript">
+
+    </script>
+
+
+
+</body>
+</html>

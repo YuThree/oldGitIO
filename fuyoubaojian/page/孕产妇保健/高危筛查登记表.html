@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高危筛查登记表</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 侧边菜单栏 -->
+    <link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+    <!-- 表格 -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/maternal/highRegistration.css">
+    <!-- 独自样式 -->
+ 
+    
+</head>
+<body>
+    <form id="signupForm">
+        <div class="cdct_tableTitle">高危筛查登记表</div>
+        <div class="cdct_row cdct_row1_col1 cdct_clearfix">
+          <label class="cdct_inputLable cdct_left">姓名:<input type="text" class="cdct_inputLine cdct_line175"></label>
+          <label class="cdct_inputLable cdct_left">评分时间:<input type="text" class="cdct_inputLine cdct_line175 datepicker"></label>
+          <label class="cdct_inputLable cdct_left">评分孕周:<input type="text" class="cdct_inputLine cdct_line80">周</label><input type="text" class="cdct_inputLine cdct_line80">天
+        </div>
+        <div class="cdct_row cdct_row1_col1 cdct_clearfix zTitle">
+          高危因素
+        </div>
+        <div class="scrollJS">
+            <div class="z-Box">
+                <!-- 一般情况 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">一般情况</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">年龄&lt;18岁或≥35岁</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">身高≤1.45米</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">体重&lt;40公斤或&gt;80公斤</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc4" type="checkbox">
+                            <label for="chk_suc4">胸廓脊柱畸形</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 一般情况 -->
+                
+                <!-- 异常产史 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">异常产史</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">自然流产≥2次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">人工流产≥2次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">早产史≥2次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc4" type="checkbox">
+                            <label for="chk_suc4">早期新生儿死亡史1次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc5" type="checkbox">
+                            <label for="chk_suc5">死胎、死产史≥2次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">先天异常儿史1次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">先天异常儿史≥2次</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">附件手术史（宫外孕、卵巢囊肿手术等）</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">难产史</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">疤痕子宫（剖宫产史、肌瘤剔除史）</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">巨大儿分娩史</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">产后出血史</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 异常产史 -->
+
+                <!-- 严重内科合并症 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">严重内科合并症</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">贫血 血红蛋白61-110g/L</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">贫血 血红蛋白31-60g/L</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">贫血 血红蛋白31-60g/L</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc4" type="checkbox">
+                            <label for="chk_suc4">心脏病 心功能Ⅰ-Ⅱ级</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc5" type="checkbox">
+                            <label for="chk_suc5">心脏病心功能 Ⅲ-Ⅳ级</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">糖尿病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">乙肝病毒携带者</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">活动性病毒性肝炎</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">肺心病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">甲状腺功能亢进或低下</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">高血压</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">慢性肺炎</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 严重内科合并症 -->
+
+                <!-- 妊娠合并性病 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">妊娠合并性病</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">淋病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">梅毒</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">艾滋病病毒携带者</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc4" type="checkbox">
+                            <label for="chk_suc4">艾滋病发病者</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc5" type="checkbox">
+                            <label for="chk_suc5">尖锐湿疣</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">沙眼衣原体感染</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 妊娠合并性病 -->
+
+                <!-- 本次妊娠异常情况 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">本次妊娠异常情况</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">骶耻外径&lt;18厘米</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">坐骨结节间径≤8厘米</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">畸形骨盆</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc4" type="checkbox">
+                            <label for="chk_suc4">生殖道畸形</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc5" type="checkbox">
+                            <label for="chk_suc5">臀位、横位(30周后)</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">先兆早产&lt;34周</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">先兆早产34-36周+6</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">盆腔肿瘤</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">羊水过多或过少</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">妊娠期高血压、轻度子痫前期</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">重度子痫前期</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">子痫</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">妊娠晚期阴道流血</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">部分性前置胎盘</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">中央性前置胎盘</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎心率持续≥160次/分</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎盘早剥</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎心率持续≤120次/分但&gt;100次/分</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎心率≤100次/分</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎动&lt;20次/12小时</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">多胎</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">胎膜早破</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">估计巨大儿或JUGR</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">妊娠41-41周+6</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">妊娠≥42周</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">母儿ABO血型不合</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">母儿Rh血型不合</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc6" type="checkbox">
+                            <label for="chk_suc6">Rh阴性血型</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 本次妊娠异常情况 -->
+
+                <!-- 致畸因素 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">致畸因素</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">孕妇及一级亲属有遗传病史</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">妊娠早期接触可疑致畸药物</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">孕妇早期接触物理化学因素病毒感染等</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 致畸因素 -->
+
+                <!-- 社会因素 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">社会因素</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">家庭贫困</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">孕妇或丈夫为文盲或半文盲</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">丈夫长期不在家</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">由居住地到卫生院需要一个小时以上</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社会因素 -->
+
+                <!-- 其他 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit ">其他</span>
+                    </div>
+                    <div class="cdct_info">
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc1" type="checkbox">
+                            <label for="chk_suc1">妊娠胆汁淤积</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc2" type="checkbox">
+                            <label for="chk_suc2">娠合并外科疾病（急性阑尾炎、胆囊炎等）</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">辅助生殖妊娠</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">精神异常</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">智力低下</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="chk_suc3" type="checkbox">
+                            <label for="chk_suc3">先兆流产保胎</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 其他 -->
+
+                <!-- 高危总分 -->
+                <div class="cdct_row cdct_row1_col2">
+                    <div class="cdct_txt">
+                        <span class="cdct_tit cdct_asterisk">高危总分</span>
+                    </div>
+                    <div class="cdct_info">
+                        <input type="text" class="cdct_inputNone">
+                    </div>
+                </div>
+                <!-- 高危总分 -->
+
+                <!-- 筛查单位 -->
+                <div class="cdct_row cdct_row1_col4">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">筛查单位</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">筛查单位</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;" >
+                                                <span class="optD">
+                                                    <span class="fontMain">筛查单位</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">筛查人</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">筛查人</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">筛查人</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 筛查机构 -->
+            </div>
+        </div>
+
+        <!-- 侧边菜单栏开始 -->
+        <div class="cdct_sideBar">
+            <div class="cdct_toolTip">
+                <span class="toolSpan">高危管理</span>
+            </div>
+            <div class="cdct_sideBarTop">
+                高危管理
+                <span class="close"></span>
+            </div>
+            <div class="cdct_sideBarCon">
+                <div class="cdct_sideBarConTitle" style="line-height: normal;">
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx1" type="radio" name="xx" value="">
+                        <label for="xx1">全部显示</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx2" type="radio" name="xx" value="">
+                        <label for="xx2">高危筛查</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx3" type="radio" name="xx" value="">
+                        <label for="xx3">高危妊娠评分</label>
+                    </div>
+                </div>
+                <div class="cdct_tableBox">
+                    <div class="tablMainOne" style="height: 100%;">
+                        <div class="tableContent tableShowInfo" style="height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cdct_sideBarFooter">
+                <button type="button" class="cdct_btn">上一页</button>
+                <input class="cdct_input datepicker1" placeholder="2018">
+                <button type="button" class="cdct_btn">下一页</button>
+            </div>
+        </div>
+        <!-- 侧边菜单栏结束 -->
+    </form>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+    <!-- 侧边菜单栏 -->
+    <script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+    <!-- 表格 -->
+    <script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+    <!-- 独自js -->
+    <script src="../../js/highRegistration.js" type="text/javascript"></script>          
+</body>
+</html>

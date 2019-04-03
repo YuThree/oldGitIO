@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生龋齿情况汇总表</title>
+
+    <!-- 独自页面-->
+    <link rel="stylesheet" href="../../css/studentListPulic.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="main" class="mainBox">
+        <div class="rowScroll">
+            <div class="insidleBox">
+                <div class="titleText">学生龋齿情况汇总表</div>
+                <div class="titleEnd">
+                    <div>学校：</div>
+                    <div>区县：</div>
+                    <div>体检单位：</div>
+                </div>
+                <div class="tableClass">
+                    <table>
+                        <tr>
+                            <td class="tdcol5p8" rowspan="3">性别</td>
+                            <td class="tdcol5p8" rowspan="3">年龄</td>
+                            <td class="tdcol5p8" rowspan="3">人数</td>
+                            <td colspan="7">乳牙</td>
+                            <td colspan="7">恒牙</td>
+                        </tr>
+                        <tr>
+                            <td class="tdcol5p8" rowspan="2">龋均</td>
+                            <td colspan="2">活动龋牙</td>
+                            <td colspan="2">因龋失牙</td>
+                            <td colspan="2">因龋补牙</td>
+                            <td class="tdcol5p8" rowspan="2">龋均</td>
+                            <td colspan="2">活动龋牙</td>
+                            <td colspan="2">因龋失牙</td>
+                            <td colspan="2">因龋补牙</td>
+                        </tr>
+
+                        <tr>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                            <td class="tdcol5p8">人数</td>
+                            <td class="tdcol5p8">牙数</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">男</td>
+                            <td>6-12</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>13-18</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>合计</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">女</td>
+                            <td>6-12</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>13-18</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>合计</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pageEnd">
+                        <div>填报人</div>
+                        <div>填报时间</div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+    <script>
+        document.onkeydown = function (event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == '80') {
+                window.print();
+            }
+        };
+    </script>
+</body>
+
+</html>

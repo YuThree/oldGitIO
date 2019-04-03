@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>报警确认/取消</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <script type="text/javascript">
+        loadControl("mySelectTree");
+        loadControl("layer");
+    </script>
+    <script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js" type="text/javascript"></script>
+    <style>
+        #ZhuanFa div{font-family: "微软雅黑";font-size:12px;margin-top: 6px;}
+        .fastZF{color:#ef5d00;cursor:pointer;}
+        .slowZF{margin-left:20px;color:#7ad23c;cursor:pointer;}
+        .noZF{margin-left:20px;color:#55555;cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div style="padding: 10px; height: 359px;" class="alarmsureTop">
+        <table id="tb_sure" class="table form-horizontal" cellpadding="1" cellspacing="1"
+            style="width: 100%">
+            <tr>
+                <td style="width: 47%;">
+                    <label class="control-label">
+                        报警类型：
+                    </label>
+                    <div id="afcodeYZ" class="controls">
+                        <input id="citySel" type="text" value="" style="width: 160px; margin: 0;"/>
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        报警级别：
+                    </label>
+                    <div id="UseverityYZ" class="controls">
+                        <select id="Useverity" style="width: 200px;" onchange="yzAlarmData()">
+                            <option value="0">请选择</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="DefectMark_td" style="display:none;">
+                    <label class="control-label">
+                        缺陷标志：
+                    </label>
+                    <div class="controls">
+                        <input id="DefectMark" type="text" value="" style="width: 160px;"  readonly="readonly" />
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        标签：
+                    </label>
+                    <div class="controls">
+                        <input id="alarmcode" type="text" value="" style="width: 190px;" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="control-label">
+                        报警分析：
+                    </label>
+                    <div class="controls">
+                        <div id="UtxtDefectYZ">
+                            <textarea name="UtxtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 100%;"
+                                onblur="yzAlarmData()"></textarea>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="control-label">
+                        处理建议：
+                    </label>
+                    <div class="controls">
+                        <textarea name="UtxtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 100%;"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="control-label">
+                        备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：
+                    </label>
+                    <div class="controls">
+                        <textarea name="UtxtNote" id="UtxtNote" rows="2" style="height: 30px; width: 100%;"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">
+                        报&nbsp;&nbsp;告&nbsp;&nbsp;人：
+                    </label>
+                    <div id="Div2" class="controls">
+                        <input name="UtxtReporter" type="text" id="UtxtReporter" style="width: 160px;" readOnly="true" />
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        报告日期：
+                    </label>
+                    <div id="Div1" class="controls">
+                        <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                            style="width: 190px" />
+                    </div>
+                </td>
+            </tr>
+            <tr >
+                <td colspan="2">
+                    <div id="ZhuanFa" style="display:none;">
+                        <label class="control-label">转发类型：</label>
+                        <div class="controls">
+                            <span class="fastZF"><img src="img/chose_0.png" alt="紧急转发" style="margin-right:5px;" />紧急转发</span>
+                            <span class="slowZF"><img src="img/chose_0.png" alt="普通转发" style="margin-right:5px;" />普通转发</span>
+                            <span class="noZF"><img src="img/chose_0.png" alt="不转发" style="margin-right:5px;" />不转发</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+
+    var btntype = 'btnOk';
+    var btntypeName = $("body", parent.document).find("#myModalLabel_2").text();
+    var _Json = getCurUser(); //取登录名和用户名
+    var loc = GetQueryString("loc"); //车号
+    var alarmTime = GetQueryString("alarmTime"); //发生时间
+    var IRVTimeStamp = GetQueryString("IRVTimeStamp"); //时间戳
+    var IRVPATH = GetQueryString("IRVPATH"); //红外路径
+    var VIPATH = GetQueryString("VIPATH"); //可见光路径
+    var OVPATH = GetQueryString("OVPATH"); //全景光路径
+    $(function () {
+        $('#iframe_AlarmSure', window.parent.document).css('height', '380px');
+        //报警分析
+        $('#UtxtDefect').mySelectTree({
+            tag: 'SYSDICTIONARYTREE',
+            cateGory: 'taskwords',
+            codeType: 'UtxtDefect',
+            enableContent: true,
+            onClick: function (event, treeId, treeNode) {
+                $("#UtxtDefect").attr('code', treeNode.id).val(treeNode.name);
+            }
+        });
+        //内部版本
+        if (getConfig('debug') == "1") { 
+            $('#DefectMark_td').css("display", "");  //缺陷标志显示
+            $('#DefectMark').mySelectTree({
+                tag: 'GetDefectMark',
+                cateGory: 'AFLG_CONFIRM',
+                codeType: '3C',
+                enableCheck: true,
+                height: 200,
+                enableFilter: true,
+                onCheck: function (event, treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj(treeId),
+                    nodes = zTree.getCheckedNodes(true),
+                        v = "", code = "";
+                    for (var i = 0, l = nodes.length; i < l; i++) {
+                        v += nodes[i].name + ",";
+                        code += nodes[i].id + ",";
+                    }
+                    if (v.length > 0) v = v.substring(0, v.length - 1);
+                    if (code.length > 0) code = code.substring(0, code.length - 1);
+                    var cityObj = $("#DefectMark");
+                    cityObj.attr("value", v).attr("code", code);
+                    var DefectText = $("#UtxtDefect").val();
+                    if (!$("#" + treeNode.tId + "_check").hasClass("checkbox_true_full_focus")) {
+                        document.getElementById("UtxtDefect").value = DefectText.replace("　" + treeNode.name, "").replace(treeNode.name, "");
+                    } else {
+                        if (DefectText == "") {
+                            document.getElementById("UtxtDefect").value = treeNode.name;
+                        } else {
+                            if (DefectText.indexOf(treeNode.name) > -1) {
+
+                            }else{
+                                document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                            }
+                        }
+                    }
+                },
+                onClick: function (event, treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj(treeId);
+                    zTree.checkAllNodes(false);
+                    zTree.checkNode(treeNode, !treeNode.checked, null, true);
+                    var DefectText = $("#UtxtDefect").val();
+                    if (DefectText == "") {
+                        document.getElementById("UtxtDefect").value = treeNode.name;
+                    } else {
+                        document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                    }
+                }
+            });
+        };
+
+        //报警处理意见
+        $('#UtxtAdvice').mySelectTree({
+            tag: 'SYSDICTIONARYTREE',
+            cateGory: 'taskwords',
+            codeType: 'UtxtAdvice',
+            enableContent: true,
+            onClick: function (event, treeId, treeNode) {
+                $("#UtxtAdvice").attr('code', treeNode.id).val(treeNode.name);
+            }
+        });
+
+        $('#citySel').mySelectTree_Level2({
+            codeType: '3C',
+        });
+        
+        loadSureForm();   //初始化数据
+
+        if (getConfig('debug') != "1") {
+            $("#UtxtReporter").removeAttr("readOnly");  //报告人可修改
+        }
+
+        $("#DefectMark").siblings("a").click(function () {   //清除缺陷标志的checkbox勾选
+            var DefectMarkObj = $.fn.zTree.getZTreeObj("ULDefectMark");
+            DefectMarkObj.checkAllNodes(false);
+        });
+
+    });
+
+    //确认
+    function btnAlarmUpdate() {
+
+        if ($('#citySel').val() == '待判定') {
+            ymPrompt.errorInfo('报警类型不能为“待判定”', null, null, '提示信息', null);
+            return;
+        }
+        if ($('#citySel').val() == '') {
+            ymPrompt.errorInfo('报警类型不能为空', null, null, '提示信息', null);
+            return;
+        }
+
+        if (yzAlarmData()) {
+
+            var afcodeName = $('#citySel').val(); //缺陷类型名
+            var afcode = $('#citySel').attr('code');  //缺陷类型code
+            var severity = document.getElementById('Useverity').value; //等级
+            var DefectMarkName = document.getElementById('DefectMark').value; //缺陷标志name
+            var DefectMarkCode = $('#DefectMark').attr("code"); //缺陷标志code
+            var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+            txtDefect = txtDefect.replace(/\+/g, "＋")
+            var txtAdvice = document.getElementById('UtxtAdvice').value; //处理建议
+            var txtNote = document.getElementById('UtxtNote').value; //备注
+            var txtReporter = document.getElementById('UtxtReporter').value;//报告人
+            var txtReporterCode = _Json.loginId;//报告人code
+            var reportdate = document.getElementById('Ureportdate').value; //日期
+            var Alarmcode = escape($('#alarmcode').val());  //标签
+
+            if (txtDefect.length > 250) {
+                ymPrompt.succeedInfo('缺陷分析最多250个字', null, null, '提示信息', null);
+                return;
+            }
+
+            if (txtAdvice.length > 250) {
+                ymPrompt.succeedInfo('处理建议最多250个字', null, null, '提示信息', null);
+                return;
+            }
+
+            if (txtNote.length > 250) {
+                ymPrompt.succeedInfo('备注最多250个字', null, null, '提示信息', null);
+                return;
+            }
+            if (DefectMarkCode == undefined) {
+                DefectMarkCode = "";
+            }
+
+            //调用更新方法
+            var _url = "/Common/LineInspectionDataAnalysis/RemoteHandlers/HardDIskDataVedioPlay.ashx?action=AlarmSure"
+                    + "&locomotive_code=" + loc
+                    //+ "&IRVPATH=" + IRVPATH
+                    //+ "&VIPATH=" + VIPATH
+                    + "&IRVTimeStamp=" + IRVTimeStamp
+                    + "&btntype=" + btntype
+                    + "&txtReporter=" + escape(txtReporter)
+                    + "&txtReporterCode=" + escape(txtReporterCode)
+                    + "&reportdate=" + reportdate
+                    + "&afcodeName=" + escape(afcodeName)
+                    + "&afcode=" + escape(afcode)
+                    + "&DefectMarkName=" + escape(DefectMarkName)
+                    + "&DefectMarkCode=" + escape(DefectMarkCode)
+                    + "&severity=" + escape(severity) 
+                    + "&eid="
+                    + "&Alarmcode=" + Alarmcode
+                    + "&tmpe=" + Math.random();
+            $.ajax({
+                type: "POST",
+                data: [{ name: 'txtDefect', value: txtDefect }, { name: 'txtAdvice', value: txtAdvice }, { name: 'txtNote', value: txtNote }, { name: 'IRVPATH', value: IRVPATH }, { name: 'VIPATH', value: VIPATH }, { name: 'OVPATH', value: OVPATH }],
+                url: _url,
+                async: false,
+                cache: false,
+                success: function (result) {
+                    if (result.re == "True") {
+                        window.parent.CloseSureBox();
+                    } else {
+                        ymPrompt.errorInfo('操作失败！请联系管理员', null, null, '提示信息', null);
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
+
+    function yzAlarmData() {
+
+        var YZ = 0;
+        if (btntype == "btnOk") {
+            var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+            var severity = document.getElementById('Useverity').value; //等级
+            if (severity != "0") { $('#UseverityYZ').removeClass("control-group error"); }
+            else if (severity == "0") { $('#UseverityYZ').addClass("control-group error").css("marginBottom", "0px"); YZ = 1; }
+            if (txtDefect.replace(/[ ]/g, "") != "" && txtDefect != undefined) {
+                $('#UtxtDefectYZ').removeClass("control-group error");
+            }
+            else if (txtDefect.replace(/[ ]/g, "") == "" || txtDefect == undefined) {
+                $('#UtxtDefectYZ').addClass("control-group error").css("marginBottom", "0px"); YZ = 1;
+            }
+        }
+        if (YZ != 0) {
+            return false;
+        } else {
+            return true;
+        }
+    };  //验证
+
+    //初始化数据
+    function loadSureForm() {
+        $('#UtxtReporter').val(_Json.PersonName); //报告人
+        $("#Ureportdate").val(datehhssNowStr()); //报告时间 给默认时间
+        //默认告警编码的值
+        var alarmvalue = loc + "_" + alarmTime.substring(2, 19).replace(/\D/g, '');
+        $('#alarmcode').attr('value', alarmvalue);
+        //缺陷级别下拉列表
+        $('#Useverity').mySelect({
+            tag: 'SYSDICTIONARY',
+            code: 'SEVERITY',
+            defaultValue: "0",
+            defaultText: "请选择",
+            callback: function () {
+                var debug = getConfig("debug");
+                if (debug == '1') {
+                    LoadDropdSelectedByValue('Useverity', '三类'); //级别 10-28默认为三类
+                }
+            }
+        });
+    };
+</script>

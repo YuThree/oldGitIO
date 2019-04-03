@@ -1,0 +1,21 @@
+.scrollJS {
+    height: calc(100% - 110px);
+}
+.z-Box{
+    width: 100%;
+    min-height: 100%;
+}
+body{
+    height: 100%;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+html{
+    height: 100%;
+}
+
+
+

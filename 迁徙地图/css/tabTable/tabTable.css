@@ -1,0 +1,66 @@
+html{height: 100%;}
+body{
+	background: url('img/bg.png') no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+.tableContainer{
+	width: 100%;
+	height: 100%;
+	padding: 0 40px;
+	overflow: hidden;
+}
+.tableContainer header {
+    background: -webkit-gradient(linear, left bottom, left top, from(#26D3FF), to(#BBF4FF));
+    background: -webkit-linear-gradient(bottom, #26D3FF, #BBF4FF);
+    background: -moz-linear-gradient(bottom, #26D3FF, #BBF4FF);
+    background: linear-gradient(to top, #26D3FF, #BBF4FF);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #19B6EB;
+    margin-bottom: 20px;
+}
+
+
+/* tab切换 */
+.tableTab{
+	margin-bottom: 20px;
+}
+.tableTab .btn{
+	float: left;
+	padding: 0 12px;
+	height: 38px;
+	border: 1px solid #1CC7FF;
+	background: rgba(8, 83, 119, .5);
+	border-radius:4px;
+	line-height: 38px;
+	color: #B5F3FF;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.tableTab .btn:hover,
+.tableTab .btn.on{
+	color: #fff;
+	background: #008BCC;
+}
+
+/* 切换容器 */
+.tableTabMain{
+	height: calc(100% - 210px);
+	width: 100%;
+	overflow: hidden;
+}
+/* 表格 */
+.tablMainOne{
+	height: calc(100% - 150px);
+	width: 100%;
+}
+.pagetable{
+	height: 80px;
+	width: 100%;
+}

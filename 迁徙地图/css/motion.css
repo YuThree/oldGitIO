@@ -1,0 +1,167 @@
+
+html,body{height: 100%; width: 100%;}
+.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.scrollBox{
+    width: 100%;
+    padding: 0 40px;
+}
+.box{
+	height: 765px;
+	width: 100%;
+}
+.box .main{
+	width: 100%;
+	height: 100%;
+}
+.main .left{
+	float: left;
+	width: 35%;
+	height: 100%;
+	border-right: solid 1px #1AA9E8;
+}
+.main .right{
+	float: left;
+	width: 65%;
+	height: 100%;
+}
+.left .top{
+	width: 100%;
+	padding-top: 35px;
+	padding-left: 20px;
+}
+.left .top .avater{
+	float: left;
+	width: 80px;
+	height: 80px;
+	-moz-border-radius: 50%;
+	     border-radius: 50%;
+	background-image: url('../img/avater.png');
+	-moz-background-size: contain;
+	     background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.left .top .info{
+	float: left;
+	color: #fff;
+	padding-left: 34px;
+}
+.left .top .info .patientName{
+	font-size: 20px;
+	margin-bottom: 12px;
+	margin-top: 10px;
+}
+.left .top .info .detail span{
+	color: #fff;
+	font-size: 15px;
+	padding-right: 30px;
+}
+.left .operation {
+	padding: 15px 20px;
+}
+.left .operation .time{
+	float: left;
+	color: #fff;
+	font-size: 15px;
+}
+.left .operation .time span{
+	color: #fff;
+	font-size: 15px;
+}
+.left .operation .op{
+	float: right;
+}
+.left .operation .next,.left .operation .last{
+	color: #1CC7FF;
+	font-size: 16px;
+	padding-left: 70px;
+	cursor: pointer;
+}
+.left .list{
+	width: 100%;
+	border-top: solid 1px #1AA9E8;
+	height: -moz-calc(100% - 170px);
+	height: calc(100% - 170px);
+}
+.left .list li{
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	border-bottom: solid 1px #1AA9E8;
+	overflow: hidden;
+}
+.left .list li span{
+	color: #fff;
+	font-size: 14px;
+	width: 33%;
+	float: left;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 5px;
+}
+.left .list li span.val{
+	width: 34%;
+}
+.left .scrollBox{ padding: 0; }
+
+.right .charts{
+	width: 50%;
+	float: left;
+	margin-bottom: 20px;
+	height: 234px;
+}
+.right .scrollBox{ padding: 0; padding-top:20px; }
+
+/* 容器公用 */
+.right .top{
+	height: 60px;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+
+.right .main{
+	width: 100%;
+	height: -moz-calc(100% - 60px);
+	height: calc(100% - 60px);
+}
+.right .box{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+
+.chartBoxTop{
+	padding-left: 20px;
+	height: 380px;
+}
+.chartBoxTop .box{
+	height: 100%;
+	width: -moz-calc(50% - 20px);
+	width: calc(50% - 20px);
+	float: left;
+	margin-right: 20px;
+}
+.right .box .operation{
+	float: right;
+	padding-right: 5px;
+}
+.right  .chartBoxBottom{
+	width: calc(100% - 40px);
+	margin: 20px;
+}
+.right .cdct_time{
+	margin-right: 10px;
+}
+
+/* 样式重置  时间 */
+.time_box .time_slect{ width: 60px;}
+.time_box .time_start, .time_box .time_end{ margin-left: 10px; width: 100px;}
+.operation .cdct_btnOrange{ margin-bottom: 0;  }
+.operation .cdct_time{ margin-right: 10px;margin-bottom: 0; vertical-align: middle; }

@@ -1,0 +1,127 @@
+﻿@charset "utf-8";
+/*File Name:*.css*/
+/*Project Name:网站*/
+/*Version:1.0(2014-5)*/
+/*Author:ChenCixu*/
+html { color: #000; background:url(/Common/img/login/bg.png); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100% }
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { margin: 0; padding: 0 }
+body, button, input, select, textarea { font: 14px/1.5 '微软雅黑', tahoma, arial, Hiragino Sans GB, \5b8b\4f53 }
+input, select, textarea { font-size: 100% }
+table { border-collapse: collapse; border-spacing: 0 }
+fieldset, img { border: 0 }
+iframe { display: block }
+address, caption, cite, code, dfn, em, th, var { font-style: normal; font-weight: 500 }
+ol, ul { list-style: none }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4 { font-size: 12px; }
+a:hover { text-decoration: underline }
+ins, a { text-decoration: none }
+a { text-decoration: none; color: #333 }
+a:hover { text-decoration: underline; color: #06C }
+.red a, .red { color: #F30 }
+.red a:hover { color: #F30 }
+.blue, .blue a { color: #16C }
+a.blue:hover { color: #16C }
+.gray, .gray a { color: #999 }
+.green, .green a { color: #066601 }
+.f_clear:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0 }
+.f_clear { zoom: 1 }
+.f_left, .f_right { display: inline }
+.f_left, .fl { float: left }
+.f_right, .fr { float: right }
+.f_bold { font-weight: bold }
+.disNo { display: none }
+.t_c { text-align: center; }
+.position_rel { position: relative; }
+/* CSS空白 */
+.blank1, .blank3, .blank6, .blank8, .blank10, .blank15, .blank20 { margin: 0px auto; padding: 0px; font-size: 0px; line-height: 0px; clear: both; }
+.blank1 { height: 1px; }
+.blank3 { height: 3px; }
+.blank6 { height: 6px; }
+.blank8 { height: 8px; }
+.blank10 { height: 10px; }
+.blank15 { height: 15px; }
+.blank20 { height: 20px; }
+.clearfix:after { content: "\0020"; display: block; height: 0; clear: both }
+.clearfix { _zoom: 1 }
+*+html .clearfix { overflow: hidden }
+.h_nav, .h_search { width: 960px; margin: 0 auto; clear: both }
+/*网站主导航*/
+.header { position: relative; height: 70px;  vertical-align:middle; }
+.header{background:rgba(0,0,0,0);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3f000000,endColorstr=#3f000000);zoom:1;}
+.header a{ float:right; margin-right:20px; font-size:16px; color:#FFF; line-height:60px;}
+
+:root .header{filter:none\9;}
+#logo 
+{
+    
+    padding-left:59px;
+    width: 1522px;margin: 0 auto; height: 70px; font-size:80px; font-weight:bold; color:White; text-align:left;
+         -webkit-animation: neon_blue 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon_blue 1.5s ease-in-out infinite alternate;
+  animation: neon_blue 1.5s ease-in-out infinite alternate;
+       
+       }
+
+#box_login
+{
+     position:absolute; right:50px; top:220px;
+     color:White; 
+            
+            }       
+#box_login a{ color:White; text-decoration:none; font-size:20px; }
+
+.pageBody{ position:absolute; top:0; left:0; }
+.layout{ clear: both; position: relative}
+.layout li a{ display: inline-block;height: 100%;width: 100%; color: #FFF;font-size: 18px;  -webkit-text-shadow: 1px 1px 1px #000; -moz-text-shadow: 1px 1px 1px #000; text-shadow: 1px 1px 1px #000;}
+.layout li a img{ position: absolute; z-index: 4}
+.layout li a span{ position: absolute;  bottom: 0px;width: 100%;height: 30px;text-align: center; z-index: 5 }
+.layout li a span{background:rgba(0,0,0,0.25);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3f000000,endColorstr=#3f000000);zoom:1;}
+:root .layout li a span{filter:none\9;}
+.layout li.column_9 a span,.layout li.column_10 a span{ height: 60px}
+
+img{-webkit-backface-visibility: hidden;-webkit-transition: opacity 0.3s ease-out;-moz-transition: opacity 0.3s ease-out;-o-transition: opacity 0.3s ease-out;transition: opacity 0.3s ease-out;}
+img:hover{opacity:0.8}
+.column_1,.column_2,.column_3,.column_4,.column_5,.column_6,.column_7,.column_8,.column_9,.column_10{position: absolute;z-index: 4; color: #ffffff}
+.column_1{ width: 320px;height: 160px; left: 0;top: 0;}
+.column_2{ width: 320px;height: 160px; left: 0;top: 170px; background-color: #ff3300}
+.column_3{ width: 160px;height: 160px; left: 0;top: 340px; background-color:#066601}
+.column_4{ width: 490px;height: 160px; left: 0px;top: 340px; background-color:#066601}
+.column_5{ width: 490px;height: 330px; left: 330px;top: 0px; background-color:#066601}
+.column_6{ width: 160px;height: 160px; left: 660px;top: 0px; background-color:#066601}
+.column_7{ width: 160px;height: 160px; left: 660px;top: 170px; background-color:#066601}
+.column_8{ width: 320px;height: 160px; left: 500px;top: 340px; background-color:#066601}
+.column_9{ width: 160px;height: 160px; left: 830px;top: 0px; background-color:#066601}
+.column_10{ width: 160px;height: 330px; left: 830px;top: 170px; background-color:#066601}
+.bg_bottom{ position: absolute;z-index: 2;bottom: 0;width: 100%; background: url(/Common/img/login/bg_bottom.jpg) no-repeat center bottom; text-align:center;}
+.bg_bottom #foot{ position:absolute; bottom:30px; text-align:center; width:100%; color:#9BD5EA}
+.wrap_bg{ background: url(/Common/img/login/bg_top.jpg) no-repeat center top; min-height:500px;}
+
+.pageBody a{ position:absolute;}
+.pageBody span 
+{
+    display:block; position:absolute; bottom:0px; text-align:center; color:White; font-size:20px;width: 100%;height: 30px; line-height:30px; vertical-align:middle;
+    background:rgba(0,0,0,0.25); 
+                
+                }
+                
+           
+@-webkit-keyframes neon_blue 
+{
+  from {
+    text-shadow: 0 0 2px #228DFF,
+               0 0 4px #228DFF,
+               0 0 8px  #228DFF,
+               0 0 16px  #228DFF
+  }
+  to {
+    text-shadow: 0 0 1px #228DFF,
+                0 0 2px #228DFF,
+               0 0 4px #228DFF,
+               0 0 8px #228DFF
+  }
+}
+    

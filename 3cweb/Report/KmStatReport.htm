@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备行驶里程统计</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("progress");
+        loadControl("layer");
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#startDate").val(AddMonths(new Date(), -1).format("yyyy-MM-dd"));
+            $("#endDate").val(now.format("yyyy-MM-dd"));
+            $("#url").width(document.body.clientWidth - 5);
+            $("#url").height(document.body.scrollHeight - 143);
+            $("#juselect").mySelect({
+                tag: "Organization",
+                code: "TOPBOSS",
+                type: "J"
+            });
+            $("#duanselect").mySelect({
+                tag: "Organization",
+                type: "JWD,CLD,GDD"
+            });
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 6,
+                height: 200
+            });
+            $("#ddlzt + button").css("margin-top", "-10px");
+            $("#startDate,#endDate").mouseover(function () { $(this).css("cursor", "pointer"); }).mouseout(function () { $(this).css("cursor", "default"); });
+
+
+            $('.dropdown-toggle').click(function () {
+                $('#portoutExcel').css({ left: $('.caret').parent().offset().left + "px", top: $('.caret').parent().offset().top + $('.caret').parent().outerHeight() + "px" })
+            })
+        });
+
+        //局下拉联动段
+        function bureauChange(code) {
+            if (code == "0") {
+                code = "";
+            }
+            $("#duanselect").mySelect({
+                tag: "Organization",
+                code: code,
+                type: "JWD,CLD,GDD"
+            });
+
+        };
+
+        //段下拉联动车间
+        function duanChange(code) {
+            if (code == "0") {
+                code = "";
+            }
+        };
+
+        function btnQuery() {
+            var obj = document.getElementById('ddlzt');
+            var zt = getSelectedItem(obj);
+
+            var url = "KmStatReport.aspx?startDate=" + $("#startDate").val()
+            + "&endDate=" + $("#endDate").val()
+            + "&ju=" + $("#juselect").val()
+            + "&duan=" + $("#duanselect").val()
+            + "&status=" + zt
+            + "&_w=" + $("#url").width()
+            + "&_h=" + $("#url").height()
+            + "&v=" + version;
+            $("#url").attr("src", url).css("display", "block");
+            fullShow();
+        };
+        function importToExcel(type) {
+            var obj = document.getElementById('ddlzt');
+            var zt = getSelectedItem(obj);
+
+            var url = "/C3/PC/MAlarmMonitoring/downLoad3CRunStatus.ashx?startDate=" + $("#startDate").val()
+            + "&endDate=" + $("#endDate").val()
+            + "&ju=" + $("#juselect").val()
+            + "&juname=" + $("#juselect").find("option:selected").text()
+            + "&duan=" + $("#duanselect").val()
+            + "&duanname=" + $("#duanselect").find("option:selected").text()
+            + "&status=" + zt
+            + "&_w=" + $("#url").width()
+            + "&_h=" + $("#url").height()
+            + "&type=" + type;
+            $.ajax({
+                type: "POST",
+                beforeSend: function () {
+                    fullShow();
+                },
+                url: url,
+                async: true,
+                cache: true,
+                success: function (result) {
+                    fullHide();
+                    if (result.url != '' && result.url != undefined) {
+                        Downer(result.url)
+                    } else {
+                        layer.msg('导出失败！')
+                    }
+                },
+                error: function () {
+                    fullHide();
+                    layer.msg('导出错误！')
+                }
+
+
+            })
+
+
+        }
+        //获取选中项
+        function getSelectedItem(obj) {
+            var slct = "";
+            for (var i = 0; i < obj.options.length; i++)
+                if (obj.options[i].selected == true) {
+                    slct += "," + obj.options[i].value;
+                }
+            return slct.substring(1);
+        };
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid">
+            <div class="box span12">
+                <!--查询条件块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-search"></i>统计条件</h2>
+                </div>
+                <div class="box-content">
+                    局：<select id="juselect" name="juselect" style="width: 130px;" onchange="bureauChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>
+                    段：<select id="duanselect" name="duanselect" style="width: 130px;" onchange="duanChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>
+                    起始时间：
+                    <input id="startDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"
+                        runat="server" style="width: 120px" readonly="readonly" />
+                    终止时间：<input id="endDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"
+                        runat="server" style="width: 120px" readonly="readonly" />
+                    状态：<select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                        style="width: 352px;" size="3">
+                        <option value="AFSTATUS01" selected>新上报</option>
+                        <option value="AFSTATUS03" selected>已确认</option>
+                        <option value="AFSTATUS04">已计划</option>
+                        <option value="AFSTATUS07">检修中</option>
+                        <option value="AFSTATUS02">已取消</option>
+                        <option value="AFSTATUS05">已关闭</option>
+                    </select>
+                    <button id="btnQuery" onclick="btnQuery()" class="btn btn-primary" style="margin-top: -7px;">
+                        查询</button>
+                    <button type="button" id="S_btnExlnew" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 68px; margin-bottom: 8px;">
+                        导 &nbsp;出<span class="caret" style="margin-top: 6px"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" id="portoutExcel" style="position: fixed; min-width: 100px; left: 928.531px; top: 81px;">
+                        <li id="">
+                            <a href="javascript:void(0)" onclick="importToExcel('Excel')">
+                                <i class="icon-file">
+                                </i>Excel
+                            </a>
+                        </li>
+                        <li id="">
+                            <a href="javascript:void(0)" onclick="importToExcel('Word')">
+                                <i class="icon-file">
+                                </i>Word
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--列表块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-eye-open"></i>设备行驶里程统计</h2>
+                </div>
+                <div>
+                    <iframe id="url" style="display: none;"></iframe>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

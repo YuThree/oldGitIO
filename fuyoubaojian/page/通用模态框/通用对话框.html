@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../common/js/jquery.js"></script>
+    <script type="text/javascript" src="../../jsControl/modelShow/modelShow.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/COMMONT.css" />
+    <link rel="stylesheet" href="../../jsControl/modelShow/modelShow.css" />
+    <link rel="stylesheet" href="../../jsControl/modelShow/modelShowY.css" />
+</head>
+<body>
+    <div id="sb">失败模态框</div>
+    <div id="cg">成功模态框</div>
+    <div id="jg">警告模态框</div>
+    <div id="scts">删除提示</div>
+    <p>/////////////修改密码及修改个人资料//////////////</p>
+    <div class="modifyPassword">修改密码</div>
+    <div class="changePersonalBasicInformation">修改个人资料</div>
+    <script src="" type="text/javascript"></script>
+<script type="text/javascript">
+    $("#sb").on("click",function(){
+        $.modelShow({
+            forText:{
+                title:"<div style='display: block;padding-top: 15px;position: static; margin: 0;width: 100%;' class='sweet-alert'>"+'<div style="margin-top:0;margin-bottom:0;" class="sa-icon sa-error animateErrorIcon" style="display: block;"><span class="sa-x-mark animateXMark"><span class="sa-line sa-left"></span><span class="sa-line sa-right"></span></span></div></div>'
+                +"<span style='font-weight:400;'>操作失败</span>",
+                content:"<div style='font-size:18px;color:#354052;line-height:22px;text-align:center;'>操作错误,请刷新浏览器试试</div>",
+                cancel:"取消"
+            },
+            forStyle:{
+                dialog:{width:"354px"}
+            },
+            forFunction:{
+                sure:function(ele,a,e,THIS){a.close()},
+                cancel:function(ele,a,e,THIS){
+                    a.close()
+                },
+                createModelEnd:function(ele,a,e,THIS){
+                  ele.find(".m-top").css({
+                    backgroundImage: "none",
+                    backgroundColor: "transparent",
+                    border: "none"
+                  })
+                    ele.find(".m-modal-close").remove();
+                    ele.find(".m-modal-title>span").remove();
+                    ele.find(".m-btn-cancel").remove();
+                    ele.find(".m-middle").css({
+                    	marginBottom:"20px"
+                    })
+                }
+            }
+
+        });
+    });
+    $("#cg").on("click",function(){
+        $.modelShow({
+            forText:{
+                title:"<div style='display: block;padding-top: 15px;position: static; margin: 0;width: 100%;' class='sweet-alert'>"+'<div style="margin-top:0;margin-bottom:0;" class="sa-icon sa-success animate" style="display: block;"><span class="sa-line sa-tip animateSuccessTip"></span><span class="sa-line sa-long animateSuccessLong"></span><div class="sa-placeholder"></div><div class="sa-fix"></div></div></div>'
+                +"<span style='font-weight:400;'>提示</span>",
+                content:"<div style='font-size:18px;color:#354052;line-height:22px;text-align:center;'>保存成功</div>",
+                cancel:"取消"
+            },
+            forStyle:{
+                dialog:{width:"354px"}
+            },
+            forFunction:{
+                sure:function(ele,a,e,THIS){a.close()},
+                cancel:function(ele,a,e,THIS){
+                    a.close()
+                },
+                createModelEnd:function(ele,a,e,THIS){
+                    ele.find(".m-top").css({
+                        backgroundImage: "none",
+                        backgroundColor: "transparent",
+                        border: "none"
+                    })
+                    ele.find(".m-modal-close").remove();
+                    ele.find(".m-modal-title>span").remove();
+                    ele.find(".m-btn-cancel").remove();
+                    ele.find(".m-middle").css({
+                    	marginBottom:"20px"
+                    })
+                }
+            }
+
+        });
+    });
+    $("#jg").on("click",function(){
+        $.modelShow({
+            forText:{
+                title:"<div style='display: block;padding-top: 15px;position: static; margin: 0;width: 100%;' class='sweet-alert'>"+'<div style="margin-top:0;margin-bottom:0;" class="sa-icon sa-warning pulseWarning" style="display: block;"><span class="sa-body pulseWarningIns"></span><span class="sa-dot pulseWarningIns"></span></div>'+'</div>'
+                +"<span style='font-weight:400;'>取消申请</span>",
+                content:"<div style='font-size:18px;color:#354052;line-height:22px;text-align:center;'>确认要取消患者<span style='color:green;font-size:18px'>周丽君</span>的会诊申请？</div>",
+                cancel:"取消"
+            },
+            forStyle:{
+                dialog:{width:"354px"}
+            },
+            forFunction:{
+                sure:function(ele,a,e,THIS){a.close()},
+                cancel:function(ele,a,e,THIS){
+                    a.close()
+                },
+                createModelEnd:function(ele,a,e,THIS){
+                    ele.find(".m-top").css({
+                        backgroundImage: "none",
+                        backgroundColor: "transparent",
+                        border: "none"
+                    })
+                    ele.find(".m-modal-close").remove();
+                    ele.find(".m-modal-title>span").remove();
+                    ele.find(".m-middle").css({
+                    	marginBottom:"20px"
+                    })
+                }
+            }
+
+        });
+    })
+    $("#scts").on("click",function(){
+        $.modelShow({
+            forText:{
+                title:"<div style='text-align: center;margin-top:20px'><img src='../../common/img/delmodel.png'></div>"+'</div>'
+                +"<span style='font-weight:400;'>取消申请</span>",
+                content:"<div style='font-size:18px;color:#354052;line-height:22px;text-align:center;'>确认要删除<span style='color:green;font-size:18px;'>周丽君</span>的会诊申请？</div>",
+                cancel:"取消"
+            },
+            forStyle:{
+                dialog:{width:"354px"}
+            },
+            forFunction:{
+                sure:function(ele,a,e,THIS){a.close()},
+                cancel:function(ele,a,e,THIS){
+                    a.close()
+                },
+                createModelEnd:function(ele,a,e,THIS){
+                    ele.find(".m-top").css({
+                        backgroundImage: "none",
+                        backgroundColor: "transparent",
+                        border: "none"
+                    })
+                    ele.find(".m-modal-close").remove();
+                    ele.find(".m-modal-title>span").remove();
+                    ele.find(".m-middle").css({
+                    	marginBottom:"20px"
+                    })
+                },
+            }
+
+        });
+    })
+
+    // 修改密码
+    $(".modifyPassword").on("click", function(){
+
+        var Obj = $.modelShow({
+           forText:{
+               title:'修改密码',
+               cancel: "取消",
+               sure: "确定",
+               content:"<iframe style='width: 100%;border: none;height:100%;' src='修改密码修改个人信息/修改密码.html'></iframe>",
+           },
+           forStyle: { 
+                dialog:{
+                    width: "500px"
+                },
+                title: {
+                    textAlign: "left"
+                },
+                content: {
+                    height: "240px",
+                    padding:'0px'
+                },
+                footer: {
+                    textAlign: "center",
+                },
+                // sure: {
+                //     float: "inherit"
+                // },
+                // cancel: {
+                //     float: "inherit"
+                // }
+            }
+       });
+    });
+
+
+
+    // 修改个人基本资料
+    $(".changePersonalBasicInformation").on("click",function(){
+       var Obj = $.modelShow({
+           forText:{
+               title:'个人基本资料',
+               cancel: "取消",
+               sure: "确认",
+               content:"<iframe style='width: 100%;border: none;height:100%;' src='修改密码修改个人信息/修改个人资料.html'></iframe>",
+           },
+           forStyle: { 
+                dialog:{
+                    width: "920px"
+                },
+                title: {
+                    textAlign: "center"
+                },
+                content: {
+                    height: "530px",
+                    padding:'20px'
+                },
+                footer: {
+                    textAlign: "center"
+                },
+                // sure: {
+                //     float: "inherit"
+                // },
+                // cancel: {
+                //     float: "inherit"
+                // }
+            }
+       });
+       
+    });
+
+</script>
+
+</body>
+</html>

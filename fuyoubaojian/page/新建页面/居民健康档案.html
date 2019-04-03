@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>居民健康档案</title>
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabCom/tabCom.css" />
+    <!-- 下拉css -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/simulationSelect/selectStyle.css" />
+    <!--选单个时间插件-->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/datatime/lq.datetimepick.css" />
+    
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+
+    <!-- 独自页面-->
+    <link rel="stylesheet" href="../../css/jMHDA.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="main" class="mainBox">
+        <div class="rowScroll">
+            <div class="insidleBox">
+                <div class="insideRow">
+                    <span class="txt">编&ensp;&ensp;&ensp;&ensp;号</span>
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="number" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <span class="txtG">一</span>
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <span class="txtG">一</span>
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <span class="txtG">一</span>
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                    <input type="text" class="cdct_input littleInput" maxlength="1">
+                </div>
+                <div class="insideRow marginL293Text">
+                    居民健康档案
+                </div>
+                <div class="insideRow">
+                    <span class="txt">姓&ensp;&ensp;&ensp;&ensp;名</span>
+                    <input type="text" class="cdct_input long_input">
+                </div>
+                <div class="insideRow marginR14">
+                    <span class="txt">现 住 &nbsp;址</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">省</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">省</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">市</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">市</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">县</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">县/区</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">镇</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">镇</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">街道</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">街道</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">门 牌 号</span>
+                    <input type="text" class="cdct_input input110">
+                </div>
+                <div class="insideRow marginR14">
+                    <span class="txt">户籍地址</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">省</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">省</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">市</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">市</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">县</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">县/区</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">镇</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">镇</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox short_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">街道</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">街道</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">门 牌 号</span>
+                    <input type="text" class="cdct_input input110">
+                </div>
+                <div class="insideRow">
+                    <span class="txt">联系电话</span>
+                    <input type="text" class="cdct_input long_input">
+                </div>
+                <div class="insideRow">
+                    <span class="txt">乡镇（街 道）名称</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox long_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">武侯街道</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">武侯街道</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow marginB70">
+                    <span class="txt">村（居） 委会名称</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox long_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">武侯委员会</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">武侯委员会</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">建档单位</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox long_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">默认读取</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">默认读取</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">建 档 人</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox long_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">默认读取</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">默认读取</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">责任医生</span>
+                    <div data-selectsimu="1" class="cdct_select">
+                        <div class="selectBox long_input">
+                            <span data-selectnew="1" class="checkspan">
+                                <span class="optD">
+                                    <span class="fontMain">默认读取</span>
+                                </span>
+                                <span class="selectDown"></span>
+                            </span>
+                            <div class="ulParent">
+                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                        <span class="optD">
+                                            <span class="fontMain">默认读取</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insideRow">
+                    <span class="txt">建档日期</span>
+                    <div class="lqdataInput">
+                        <input type="text" class="cdct_input datepicker" placeholder="请选择时间">
+                    </div>
+
+                </div>
+                <div>
+                    <div class="btn canel">取消</div>
+                    <div class="btn next">下一步</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+    <!-- jq -->
+    <script src="../../common/js/jquery.js" type="text/javascript"></script>
+    <!-- jq -->
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+    <!-- 选单个时间的插件-->
+    <script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+
+    <script>
+
+        $(function () {
+            var all = $(".cdct_select");
+            for (var i = 0; i < all.length; i++) {
+                $(all[i]).simulationSelect({
+                    selectText: '{a}<span class="selectDown"></span>',
+                });
+            }
+            /*调用时间插件*/
+            $(".datepicker").on("click", function (e) {
+                e.stopPropagation();
+                $(this).lqdatetimepicker({
+                    css: 'datetime-day',
+                    dateType: "YYYY-MM-DD"   //YYYY-MM-DD  年 月 日
+                });
+            });
+            // 滚动条
+            $(".rowScroll").panel({
+                iWheelStep: 32,
+            });
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

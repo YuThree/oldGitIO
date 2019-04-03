@@ -1,0 +1,23 @@
+.cdct_row .cdct_info .z-textarea {
+    resize: none;
+    border:none;
+    box-shadow: none;
+}
+.scrollJS {
+    height: calc(100% - 60px);
+}
+.z-Box{
+    width: 100%;
+    min-height: 100%;
+}
+body{
+    height: 100%;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+html{
+    height: 100%;
+}

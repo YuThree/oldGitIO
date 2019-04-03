@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>缺陷列表</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadJs("/C3/PC/MDetectionOfTrace/js/MonitorLocoStateC3AlarmList.js?v=" + version);
+    </script>
+    <script language="javascript">
+        //初始化加载
+        $(document).ready(function () {
+            setTimeout('loadFlexiGrid()', 300); //加载flexigrid数据
+        })
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="row-fluid">
+                <div id="ptable" class="span12">
+                    <table id="flexTable" style="display: none">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

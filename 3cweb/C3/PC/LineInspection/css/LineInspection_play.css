@@ -1,0 +1,372 @@
+﻿*{
+    font-family:微软雅黑;
+}
+html {
+    height:100%;
+}
+body{
+    height:100%;
+    overflow:hidden;
+}
+.controller{
+    width:83.9%;
+    height:100px;
+    
+    position:absolute;
+    left:0;
+    transition:ease-in-out all  .5s;
+    top:0;
+    z-index:1
+}
+.controller_contentLeft{
+     position:absolute;
+     left:0;
+    width:5px;
+    height:100px;
+    /*float:left;*/
+    background:url(../img/LineInspection_play_titleLeft.png);
+}
+.controller_content{
+    padding:25px 0;
+    float:left;
+    /*width:99.37%;*/
+    width:100%;
+    height:50px;
+    background:url(../img/LineInspection_play_Content.png);
+
+}
+.controller_contentRight{
+    position:absolute;
+     right:0;
+    /*float:right;*/
+    width:5px;
+    height:100px;
+    background:url(../img/LineInspection_play_titleRight.png);
+}
+.controller a{
+    float:left;
+}
+
+/*.controller:hover{
+    transition:ease-in-out all  .5s;
+    top:0;
+}*/
+.echarsAndJpg{
+    width:16.1%;
+    height:100%;
+    position:absolute;
+    right:0;
+    top:0;
+    background:black;
+    z-index:1
+}
+.rightSixDiv{
+    outline:solid 1px #ccc;
+    width:100%;
+    height:16.66%;
+    position:relative;
+
+}
+.chooseOne{
+    outline:solid 2px #41D0F4;
+    z-index:1;
+}
+/*.echar_title{
+    position:absolute;
+    top:0;
+    right:0;
+    color:white;
+}*/
+.content_jpg{
+    position:absolute;
+    z-index:0;
+    top:100px;
+    width:83.9%;
+    background:url(/C3/PC/LineInspection/img/bg.jpg) ;
+    background-size:100% 100%;
+}
+.LineInspection_details{
+    margin-left:20px;
+}
+.LineInspection_Magnifier{
+    margin-left:15px;
+}
+#btn_pause{
+    display:none;
+}
+#query_btn{
+    margin-left:35px;
+}
+#compara_btn,#shotCut_btn,.LineInspection_button_play{
+    margin-left:30px;
+
+}
+.LineInspection_button_play,.LineInspection_contrl{
+    float:left;
+}
+.LineInspection_button_play{
+    display:inline-block;
+    height:38px;
+    background:#111111;
+    border-radius:5px;
+    padding:6px 3px;
+}
+.LineInspection_contrl{
+    display:inline-block;
+    /*width:700px;*/
+    width:40%;
+    height:50px;
+    margin-left:40px;
+    margin-top:-5px;
+}
+.LineInspection_button_play>a{
+    margin:0 3px;
+    cursor:pointer;
+}
+ #Sms_slider{
+    background: url(../img/LineInspection_play_bar.png) ;
+    border: none;
+    border-radius:9px;
+    height: 18px;
+    margin:10px 0 5px 0;
+ }
+ #Sms_slider .ui-slider-handle {
+    border-color: transparent;
+    border: none;
+    background: url(../img/LineInspection_play_circl.png) no-repeat;
+    width: 25px;
+    height: 25px;
+}
+ #Sms_slider .ui-widget-header{
+     background: url(../img/LineInspection_play_bar_bg.png) ;
+     left:5px;
+     top:20%;
+     height:10px;
+    border-radius:5px;
+ }
+ #_Content,#_Content_End,#_Content_Pecent{
+     color:#41D0F4;
+ }
+ .QueryBuilder{
+     position:absolute;
+     z-index:1;
+     display:none;
+     width:516px;
+     height:210px;
+     background:url(../img/LineInspection_play_QueryBuilder2.png) no-repeat;
+     /*background:red;*/
+     top:69px;
+     left:54px;
+ }
+  #Submit1,#btn_hideSoBox{
+      display:inline-block;
+  }
+ #Submit1 div,#btn_hideSoBox div{
+     display:inline-block;
+     height:22px;
+     width:42px;
+     text-align:center;
+     line-height:22px;
+     font-size:12px;
+     color:white;
+     background:url(../img/LineInspection_play_searchInside.png)
+ }
+  #Submit1:hover div,#btn_hideSoBox:hover div{
+      color:#41D0F4;
+      background:url(../img/LineInspection_play_searchInsideHover.png)
+  }
+ .LineInspection_details_inside{
+     position:absolute;
+     z-index:1;
+     width:274px;
+     height:290px;
+     top:100px;
+     right:16.1%;
+ }
+ .LineInspection_details_inside>div{
+     display:inline-block;
+     height:100%;
+ }
+ .insideLeft{
+     position:absolute;
+     left:0;
+     width:5px;
+     background:url(../img/LineInspection_play_DetailsLeft.png) no-repeat;
+ }
+ .insideRight{
+     position:absolute;
+     right:0;
+     width:5px;
+     background:url(../img/LineInspection_play_DetailsInsideRight.png) no-repeat;
+ }
+ .insideContent{
+     width:100%;
+     background:url(../img/LineInspection_play_DetailsContent.png);
+
+ }
+ .tble{
+     width:90%;
+     padding:10px 0 10px 10px;
+     color:white;
+ }
+ .tble table{
+     width:100%;
+     table-layout:fixed ;
+ }
+  .tble td{
+      padding:7px 0 7px 0;
+      word-wrap:break-word;
+  }
+  .firstTRTd{
+      width:70px;
+  }
+  .btn_hide{
+      position:absolute;
+      bottom:10px;
+      right:10px;
+      cursor:pointer;
+  }
+  #QueryInside{
+      width:95%;
+      margin:30px auto 0;
+      height:80%;
+      color:white;
+  }
+  #QueryInside table{
+      width:100%;
+      text-align:center;
+  }
+  #QueryInside input{
+      margin-top:5px;
+      width:150px;
+  }
+  #QueryInside select{
+      margin-top:5px;
+
+  }
+  #QueryInside select{
+      width:160px;
+      border-radius:3px;
+  }
+  /*#KmChoose input{
+      width:63px;
+  }*/
+/*#bigIMG_OVER{
+    text-align:center;
+    background:black;
+}*/
+  #bigIMG_OVER img{
+      width:100%;
+      height:100%
+  }
+  .rightSixDiv{
+      cursor:pointer;
+  }
+
+  .rightSixDiv img{
+      
+     width:100%;
+      height:100%
+  }
+  .rightSixDiv:nth-of-type(1),.rightSixDiv:nth-of-type(2),.rightSixDiv:nth-of-type(3){
+      background:url(/C3/PC/LineInspection/img/bg.jpg) ;
+    background-size:100% 100%;
+  }
+  #bigIMG_HD,#bigIMG_DLV{
+      display:none;
+  }
+  @media screen and (min-width:1441px) and (max-width:1600px) {
+      #query_btn{
+            margin-left:8px;
+        }
+        #compara_btn,#shotCut_btn,.LineInspection_button_play{
+             margin-left:8px;
+
+        }
+        .LineInspection_details{
+             margin-left:10px;
+             }
+    .LineInspection_contrl {
+             margin-left:20px;
+    }
+     .QueryBuilder{
+         left:25px;
+     }
+         .controller a img{
+               height:45px;
+           }
+        .controller_content {
+            padding:30px 0;
+        }
+        .LineInspection_button_play a img{
+            height:35px;
+        }
+        .LineInspection_button_play{
+             height:35px;
+             padding:5px 2px;
+        }
+  }
+   @media screen and (min-width:1367px) and (max-width:1440px) {
+      #query_btn{
+            margin-left:5px;
+        }
+        #compara_btn,#shotCut_btn,.LineInspection_button_play{
+             margin-left:5px;
+
+        }
+        .LineInspection_details{
+             margin-left:10px;
+             }
+        .LineInspection_contrl {
+             margin-left:20px;
+             margin-top:-10px;
+    }
+         .QueryBuilder{
+         left:20px;
+     }
+           .controller a img{
+               height:40px;
+           }
+        .controller_content {
+            padding:30px 0;
+        }
+        .LineInspection_button_play a img{
+            height:30px;
+        }
+        .LineInspection_button_play{
+             height:30px;
+             padding:5px 2px;
+        }
+  }
+    @media screen and (max-width:1366px) {
+      #query_btn{
+            margin-left:10px;
+        }
+        #compara_btn,#shotCut_btn,.LineInspection_button_play{
+             margin-left:10px;
+
+        }
+        .LineInspection_details{
+             margin-left:10px;
+             }
+          .LineInspection_contrl {
+             margin-left:20px;
+             margin-top:-10px;
+    }
+           .QueryBuilder{
+         left:10px;
+     }
+           .controller a img{
+               height:35px;
+           }
+        .controller_content {
+            padding:30px 0;
+        }
+        .LineInspection_button_play a img{
+            height:25px;
+        }
+        .LineInspection_button_play{
+             height:25px;
+             padding:5px 2px;
+        }
+  }

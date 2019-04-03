@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>线路巡检</title>
+	<meta charset="utf-8" />
+    <!-- public js-->
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("mySelectTree");
+        loadControl('layer');
+        loadControl("Validation");
+        loadControl("paging");
+    </script>
+
+
+
+    <!--引入css js   本页-->
+    <link href="/C3/PC/LineInspection/css/LineInspection_list.css" rel="stylesheet" />
+    <script src="/C3/PC/LineInspection/js/LineInspection_list.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- title-->
+    <div class="html_title">
+        <img src="img/lineInspection _title.png" />
+        <h4>线路巡检</h4>
+    </div>
+    <!-- title   end-->
+
+
+    <!-- search-->
+    <div class="html_content">
+        <div>
+            <span>线&nbsp;&nbsp;路：</span>
+            <input type="text" id="line_tree" />
+        </div>
+        <!--<div>
+            <span>行&nbsp;&nbsp;别：</span>
+            <select id="direction">
+                <option value="0" selected="selected">全部</option>
+                <option value="上行">上行</option>
+                <option value="下行">下行</option>
+            </select>
+        </div>-->
+        <div>
+            <span>巡检批次：</span>
+            <input id="InspectionBatch" type="text"/>
+        </div>
+        <div>
+            <span>巡检时间：</span>
+            <input id="startTime" class="Wdate start_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})" value="" />
+            <span>&nbsp;至</span>
+            <input id="endTime" class="Wdate end_time" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})" value="" />
+
+        </div>
+        <div>
+            <img src="img/lineInspection _btn.png" alt="Alternate Text" class="search_btn"/>
+        </div>
+    </div>
+    <!-- search end-->
+
+    <!-- list-->
+    <div class="html_list">
+        <div class="list_title">
+            <img src="img/lineInspection _search.png" alt="Alternate Text" />
+            <span>查询结果</span>
+        </div>
+        <div id="dataTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>线路名称</th>
+                        <th>月度巡检批次</th>
+                        <th>巡检时间</th>
+                        <th>播放</th>
+                    </tr>
+                </thead>
+                <tbody class="listbody">
+                    
+                </tbody>
+            </table>
+            <div id="paging"></div>
+        </div>
+    </div>
+    <!-- list  end-->
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

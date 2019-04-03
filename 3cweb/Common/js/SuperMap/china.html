@@ -1,0 +1,75 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>��ͼ���������ؼ�</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        #map {
+            position: relative;
+            height: 768px;
+            width:100%;
+            border: 1px solid #3473b7;
+        }
+    </style>
+    <script src='libs/SuperMap.Include.js'></script>
+    <script type="text/javascript">
+       // var host = document.location.toString().match(/file:\/\//) ? "http://192.168.1.130:8091" : 'http://' + document.location.host;
+        var map, layerWorld;
+        var url = "http://192.168.1.130:8091/iserver/services/map-china400/rest/maps/China";
+
+        function init() {
+
+
+            //var _h = $(window).height();
+            //var _w = $(window).width();
+
+            //$('#map').height(_h).width(_w);
+
+            map = new SuperMap.Map("map", {
+                controls: [ //��ʼ��Map��,��ӿؼ���map
+                new SuperMap.Control.Navigation({
+                    dragPanOptions: { //���� DragPan �ؼ�������
+                        enableKinetic: true //����ʹ����ק������Ĭ��Ϊfalse
+                    },
+                    autoActivate: true, //��ӵ���ͼ�Ŀؼ��Ƿ��Զ���Ч��Ĭ��Ϊtrue
+                    documentDrag: true, //������ק��ͼ��ʹ��ͼ�ܹ�ƽ�Ƶ���ͼ�����⡣Ĭ��Ϊfalse
+                    handleRightClicks: true, //�Ƿ���Ӧ�Ҽ������Ĭ��Ϊfalse
+                    //zoomBoxEnabled:false, //�Ƿ������û��������ſ�Ĭ��Ϊtrue
+                    zoomBoxKeyMask: 4, //ͬʱ����Altʱ�������ſ�Ĭ��ΪSuperMap.Handler.MOD_SHIFT,Ĭ��ֵΪ1
+                    //zoomWheelEnabled:false, //�Ƿ������û��������������ŵ�ͼ��Ĭ��Ϊtrue
+                    pinchZoomOptions: { //���� PinchZoom �ؼ�������
+                        autoActivate: false //��������ӵ���ͼ��ʱ���Զ�����ÿؼ���Ĭ��Ϊtrue
+                    }
+                })], allOverlays: true
+            });
+            layerWorld = new SuperMap.Layer.TiledDynamicRESTLayer("China", url, { transparent: true, cacheEnabled: true }, { maxResolution: "auto" }); //��ȡͼ������ַ
+            layerWorld.events.on({ "layerInitialized": addLayer });
+
+
+            map.events.on({ "rightclick": callbackFunction }); //���click�¼�
+
+        }
+
+        //����ͼ����map
+        function addLayer() {
+            map.addLayer(layerWorld);
+            map.setCenter(new SuperMap.LonLat(0, 0), 2);
+        }
+
+        function callbackFunction(e) {
+            alert("����¼�");
+
+        }
+
+    </script>
+</head>
+<body onload="init()">
+    <div id="map"></div>
+</body>
+</html>

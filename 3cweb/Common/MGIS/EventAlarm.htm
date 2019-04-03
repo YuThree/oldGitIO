@@ -1,0 +1,132 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapBridgeTune.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <script src="/Common/MGIS/JS/EventAlarm.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPosition.js"></script>
+    <script src="/Common/MGIS/JS/BMapObjData.js"></script>
+    <script type="text/javascript">
+        //页面加载是调用
+        //页面加载是调用
+        $(document).ready(function () {
+            var CateGory = GetQueryString("CateGory");
+            if (CateGory == "1C") {
+                $("#_YSButton").css("display", "");
+            }
+            var _w = parseInt($(window).width()) + 17;
+            var _h = $(window).height();
+            $("#mapDiv").width(_w).height(_h);
+            document.getElementById('loading').style.display = 'none'; // 加载时候如果网速慢提示正在加载请稍后。。。。
+            var mapLevel = document.getElementById('mapLevel').value; //获取当前地图显示层次
+            bMapTwobind(mapLevel);
+
+            try {
+                document.getElementById('UserLogon').style.display = 'none';
+
+            } catch (e) {
+                //  alert("地图加载不成功，请检查网络！");
+
+            }
+
+
+        });
+        function GJ() {
+            window.open("/Common/MGIS/Event_Sms.htm?id=" + GetQueryString("id") + "&Category_Code=1C" + '&v=' + version);
+        }
+        function ShowMTwin(str, w, h) {
+            $("#tanchu").attr("href", str + "&lightbox[iframe]=true&lightbox[width]=" + w + "p&lightbox[height]=" + h + "p");
+            $("#tanchu").click();
+        };
+    </script>
+    <style>
+        .test {
+            width: 170px;
+            padding: 50px 10px;
+            border: 0px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+
+            .test span {
+                width: 0;
+                height: 0;
+                font-size: 0;
+                overflow: hidden;
+                position: absolute;
+            }
+
+                .test span.bot {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #beceeb transparent transparent;
+                    left: 20px;
+                    bottom: -40px;
+                }
+
+                .test span.top {
+                    border-width: 20px;
+                    border-style: solid dashed dashed;
+                    border-color: #ffffff transparent transparent;
+                    left: 20px;
+                    bottom: -33px;
+                }
+
+        .anchorBL {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span>
+        </div>
+    </div>
+    <div id="_Button" style="display: block; left: 60px; top: 5px; position: absolute;
+        z-index: 1000;">
+        <a href='#' class='btn btn-primary' id="_YSButton" onclick='GJ()' style='background: #4A6F9C; color: White; display:none;'>原始轨迹</a>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='#' class='btn btn-primary' onclick='window.close()' style='background: #4A6F9C;
+            color: White;'>关闭本页</a>
+    </div>
+    <a id="tanchu" href="#" class="lightbox"></a>
+    <div class="main">
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 1190px; border: 0px solid gray; text-align: center;
+                    z-index: 1" id="mapDiv">
+                </div>
+                <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                   style="display: none"></a>
+                <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                     aria-labelledby="myModalLabel" style="width: 640px; height: 650px; z-index: 99999;
+                    left: 650px; top: 300px;">
+                    <div id="modal-body" style="height: 640px; width: 630px; z-index: 99999; text-align: center">
+                        <iframe id="url" scrolling="no" style="height: 600px; width: 620px;"></iframe>
+                        <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                            关闭
+                        </button>
+                    </div>
+                    <!-- <div class="modal-footer" style="z-index: 99999; text-align: center">
+
+                    </div>-->
+                </div>
+                <!--设备弹出模态窗口获取红外视频文件-->
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        <input id="mapLevel" runat="server" />
+    </div>
+</body>
+</html>

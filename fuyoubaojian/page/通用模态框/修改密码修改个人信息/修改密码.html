@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>修改密码</title>
+        <!-- 公共样式-->
+        <link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="../../../common/css/cdctCom/cdct.css">
+        <!-- 独自样式 -->
+        <style>
+             .changePWD {
+                 line-height: 50px;
+                 width: 100%;
+                 margin-right: 0;
+            }
+            .changePWD input {
+                margin-top:7px;
+            }
+            .cdct_infoInput .labelA {
+                font-size: 14px;
+            }
+            body {
+                padding: 40px;
+            }
+            .cdct_row input {
+                color:#191D21;
+            }
+            .inputBoxReg{
+    position:relative;
+    font-size: 0;
+    float: right;
+ 
+    vertical-align: middle;
+}
+        </style>    
+    </head>
+    <body>
+        <form class="formDiv" >
+            <!-- 修改密码 -->
+            <div class="cdct_infoInput changePWD">
+              <label class="labelA" for="oldPsw">旧密码</label>
+              <div class="inputBoxReg"><input id="oldPsw" class="cdct_input cdct_right" placeholder="请输入旧密码"></div>
+            </div>
+            <div class="cdct_infoInput changePWD">
+              <label class="labelA" for="newPsw">新密码</label>
+              <div class="inputBoxReg"><input id="newPsw" class="cdct_input cdct_right" placeholder="请输入新密码"></div>
+            </div>
+            <div class="cdct_infoInput changePWD">
+              <label class="labelA" for="trueNew">确认密码</label>
+              <div class="inputBoxReg"><input id="trueNew" class="cdct_input cdct_right" placeholder="请再次输入新密码"></div>
+            </div>
+        </form>
+    </body>
+</html>

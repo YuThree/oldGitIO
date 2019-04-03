@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3C装置运行月度情况汇总表</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            document.getElementById('startDate').value = AddMonths(new Date(), -1).format("yyyy-MM-dd") + " 00:00:00";
+            document.getElementById('endDate').value = dateNowStr() + "23:59:59";
+            //$("#startDate").val(AddMonths(new Date(), -1).format("yyyy-MM-dd hh:mm:ss"));
+            //$("#endDate").val(now.format("yyyy-MM-dd hh:mm:ss"));
+            $("#url").width(document.body.clientWidth - 5);
+            $("#url").height($(window).height() - 143);
+            $("#juselect").mySelect({
+                tag: "Organization",
+                code: "TOPBOSS",
+                type: "J"
+            });
+            $("#duanselect").mySelect({
+                tag: "Organization",
+                type: "JWD,CLD,GDD"
+            });
+            //            $("#locomotive").mySelect({
+            //                tag: "LOCOMOTIVE",
+            //                code: "",
+            //                type: true
+            //            });
+            $("#startDate,#endDate").mouseover(function () { $(this).css("cursor", "pointer"); }).mouseout(function () { $(this).css("cursor", "default"); });
+        });
+
+        //局下拉联动段
+        function bureauChange(code) {
+            if (code == "0") {
+                code = "";
+            }
+            $("#duanselect").mySelect({
+                tag: "Organization",
+                code: code,
+                type: "JWD,CLD,GDD"
+            });
+            //            $("#locomotive").mySelect({
+            //                tag: "LOCOMOTIVE",
+            //                code: code,
+            //                type: true
+            //            });
+
+        };
+
+        //段下拉联动车间
+        function duanChange(code) {
+            if (code == "0") {
+                code = "";
+            }
+            //            $("#locomotive").mySelect({
+            //                tag: "LOCOMOTIVE",
+            //                code: code,
+            //                type: true
+            //            });
+        };
+
+        function btnQuery() {
+            var url = "3CRunStatus.aspx?startDate=" + $("#startDate").val()
+            + "&endDate=" + $("#endDate").val()
+            + "&ju=" + $("#juselect").val()
+            + "&duan=" + $("#duanselect").val()
+            //            + "&locomotive=" + $("#locomotive").val()
+            + "&category=" + GetQueryString("category")
+            + "&_w=" + $("#url").width()
+            + "&_h=" + $("#url").height()
+            + "&v=" + version;
+            $("#url").attr("src", url).css("display", "block");
+            fullShow();
+            //            setTimeout('$("#url")[0].contentWindow.fullShow()', 500);
+        };
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid">
+            <div class="box span12">
+                <!--查询条件块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-search"></i>统计条件
+                    </h2>
+                </div>
+                <div class="box-content">
+                    局：<select id="juselect" name="juselect" style="width: 130px;" onchange="bureauChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>
+                    段：<select id="duanselect" name="duanselect" style="width: 130px;" onchange="duanChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>
+                    <!--设备号：<select id="locomotive" name="locomotive" style="width: 130px;">
+                        <option value="0">全部</option>
+                    </select>-->
+                    起始时间：
+                    <input id="startDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                           runat="server" style="width: 135px" readonly="readonly" />
+                    终止时间：<input id="endDate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                                runat="server" style="width: 135px" readonly="readonly" />
+                    <button id="btnQuery" onclick="btnQuery()" class="btn btn-primary" style="margin-top: -7px;">
+                        查询
+                    </button>
+                </div>
+                <!--列表块-->
+                <div class="box-header well">
+                    <h2>
+                        <i class="icon-eye-open"></i>3C装置运行月报
+                    </h2>
+                </div>
+                <div>
+                    <iframe id="url" style="display: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

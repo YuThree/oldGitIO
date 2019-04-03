@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js"></script>
+   
+    <script src="/Common/js/6cweb/LoadPubFile_base2_min.js" type="text/javascript"></script>
+    <script>
+        loadControl("trainselect");
+        loadJs("/C3/PC/MLiveStreaming/js/GTplayer.js?v=" + version);
+    </script>
+    <link href="/C3/PC/MRTA/css/mrta_big.css" rel="stylesheet" type="text/css" />
+    <script>
+        var locaCode = '';
+        var t1;
+
+        var ID1;
+        var ID2;
+        var ID3;
+        var ID4;
+
+
+        $(function () {
+
+
+            AutoSize();
+
+            // GetlocaList();
+            //    t1 = setInterval(GetlocaList, 120 * 1000);
+
+            $(window).resize(function () {
+                AutoSize();
+
+            });
+
+            $('#btn_so').click(function () {
+
+                  $("body", parent.document).find("#iframe_map").contents()[0].defaultView.refushLocos(true);
+
+            })
+
+            $('#btn_fb').click(function () {
+                window.parent.ShowMTwin("/C3/PC/MRTA/FXGIS.html?1=1&Category_Code=3C&v=" + version, "96", "99");
+            });
+            //下拉选择控件
+            $('#txt_so').LocoSelect({
+                position: 'mrta_big_loca'
+            });
+
+            //设备编号控件
+            $('#txt_so').inputSelect({
+                type: 'loca',
+                contant: 2,
+                position: 'mrta_big_loca'
+            });
+
+        })
+
+        function clearAll() {
+            locaCode = '';
+
+
+            if ($.browser.msie) {
+                //IE 
+                window.frames["Iframe2"].hidePlugin();
+                window.frames["Iframe2"].stopRealPlay();
+            }
+            else {
+                //FF                  
+                $("#Iframe2").contents()[0].defaultView.hidePlugin();
+                $("#Iframe2").contents()[0].defaultView.stopRealPlay();
+            }
+
+
+        }
+
+        function PlayPre() {
+            var _h = parseInt($(window).height());
+            $('#box_play').height(_h);
+        }
+
+
+        //停止直播。
+        function clickRealPlayTwoAll() {
+
+             $('#Iframe3').hide();
+            $('#t_play').show();
+            $('#t_report').show();
+            // $('#Iframe2').show();
+
+            
+
+            var _h = parseInt($(window).height());
+            $('#box_play').height(_h / 8 * 7);
+            
+        }
+
+
+        function AutoSize() {
+            var _h = parseInt($(window).height());
+            var _w = parseInt($(window).width()) / 3;
+
+            $('.box1_1').width(_w*3).height(_h);
+            if (FunEnable('Fun_SubStation') == "True") {
+                var fz = $(window).height() * 0.016104 * 2.5;
+            } else {
+                var fz = $(window).height() * 0.016104 * 3;
+            }
+            
+
+            // $('.boxTitle_loca').width(_w).height(_h / 6);
+            $('.boxTitle_loca2').width(_w).height(_h / 8).css("font-size", fz + "px"); ;
+
+            $('.title_bg').css("font-size", fz + "px"); ;
+
+
+            
+
+
+            $('.box5-6').width(_w).height(_h / 8 * 7);
+
+            $('.box5-6_1').width(_w).height(_h / 8 * 7 / 2); //竖排
+            $('.box5-6_1').width(_w / 2).height(_h / 8 * 7).css('float', 'left'); //横排
+
+            $('.box5-6_2').width(_w*3).height(_h / 8 * 7 / 2); //竖排
+            //$('.box5-6_2').width(_w / 2).height(_h / 8 * 7).css('float', 'left'); //横排
+
+            $('#locas').height(_h - $('.title_bg').height());
+
+
+        }
+
+        ///设置当前车辆
+        function Setloca(_locaCode) {
+            $('#locas>div').removeClass('locaItem_over');
+            $('#' + _locaCode).addClass('locaItem_over');
+            var _Index = $('#locas>div.locaItem_over').index();
+            if (_Index == 0) {
+                $("#locas").scrollTop(0)
+            } else {
+                $("#locas").scrollTop(_Index * 31)
+            };          
+         
+        }
+
+        function SetGis(_locaCode) {
+
+            if ($.browser.msie) {
+                //IE                         
+                window.parent.frames["iframe_map"].SetLocaGIS(locaCode);
+
+            }
+            else {
+                //FF
+                $("body", parent.document).find("#iframe_map").contents()[0].defaultView.SetLocaGIS(locaCode);
+
+            }
+        }
+
+        function showInfo(json_index)
+        {
+            $('body', parent.document).find('#iframe_map').contents()[0].defaultView.getC3SmsInfo2_json_index(json_index)
+        }
+
+        function showLocoItem_class(_class,_isShow)
+        {
+            if (_class == '') {
+
+                if(_isShow)
+                    $('.locaItem').show();
+                else
+                    $('.locaItem').hide();
+            }
+            else {
+
+                $('.locaItem').hide();
+
+                if (_isShow)
+                    $('.' + _class).show();
+            }
+        }
+
+        //function showLoco(_v)
+        //{
+        //    if (_v) {
+        //        $('.locaItem').show();
+        //    }
+        //    else {
+        //        $('.locaItem').hide();
+        //    }
+        //}
+
+        function GetNewTime()
+        {
+           return  $('.locaItem:first').find('.m_loca1').attr('title');
+        }
+
+
+        function GetlocaList() {
+
+            var locasJSON = $("body", parent.document).find("#iframe_map").contents()[0].defaultView.GetLocaJson();
+
+            var result = '';
+
+            var LocoDispMode = $("body", parent.document).find('input[name="rd1"]:checked').val();
+
+
+            for (var i = 0; i < locasJSON.length; i++) {
+
+                var m = locasJSON[i];
+
+                //P_ORG_NAME
+                var disp = '';
+                if (m.type.indexOf(LocoDispMode) == -1) {
+
+                    //未选中，隐藏。
+                    disp = 'display:none';
+                }
+                
+
+                result += "<div class='locaItem "+m.type.replace(',',' ')+"' style='"+disp+"' type='"+m.type+"' id='" + m.TRAIN_NO + "' onclick='showInfo(" + i + ")' >\
+    <div class='m_loca0 d'  title='" + m.TRAIN_NO + "'>" + m.TRAIN_NO + "</div>\
+    <div class='m_loca_p d'  title='" + m.ORG_NAME_3C + "'>" + m.ORG_NAME_3C + "</div>\
+    <div class='m_loca_p d'  title='" + m.P_ORG_NAME + "'>" + m.P_ORG_NAME + "</div>\
+    <div class='m_loca_ju d'  title='" + m.BUREAU_NAME + "'>" + m.BUREAU_NAME + "</div>\
+    <div class='m_loca1 d'  title='" + m.DETECT_TIME + "'>" + m.DETECT_TIME + "</div>\
+    <div class='m_loca2 d' title='" + m.WZ + "'>" + m.WZ + "</div>\
+    <div class='cls'></div>\
+</div>";
+
+
+
+
+            }
+
+            $('#locas').html(result);
+            bind();
+             
+            $('#equipment_number', parent.document).html($('#locas').children().length);
+
+        }
+
+        function bind() {
+
+            $('.locaItem').click(function () {
+
+                locaCode = $(this).attr('id');
+
+                $('#locas>div').removeClass('locaItem_over');
+                $('#' + locaCode).addClass('locaItem_over');
+                var _Index = $('#locas>div.locaItem_over').index();
+                //if (_Index == 0) {
+                //    $("#locas").scrollTop(0)
+                //} else {
+                //    $("#locas").scrollTop(_Index * 31)
+                //};
+                SetGis(locaCode);
+
+            }).dblclick(function () {
+
+                locaCode = $(this).attr('id');
+
+                clickRealPlayTwoAll();
+
+                $('#locas>div').removeClass('locaItem_over');
+                $('#' + locaCode).addClass('locaItem_over');
+                var _Index = $('#locas>div.locaItem_over').index();
+                //if (_Index == 0) {
+                //    $("#locas").scrollTop(0)
+                //} else {
+                //    $("#locas").scrollTop(_Index * 31)
+                //};
+                Setloca(locaCode);
+
+            })
+
+
+
+            if (locaCode == '') {
+
+                locaCode = $('.locaItem:first').attr('id');
+
+//                setTimeout(function () {
+//                    Setloca(locaCode);
+//                }, 3000);
+            }
+            
+
+            $('#locas>div').removeClass('locaItem_over');
+            $('#' + locaCode).addClass('locaItem_over');
+            var _Index = $('#locas>div.locaItem_over').index();
+            if (_Index == 0) {
+                $("#locas").scrollTop(0)
+            } else {
+                $("#locas").scrollTop(_Index * 31)
+            };
+            //查询动车号ID
+                 ID1 = $("#locas .locaItem").eq(0).attr("id");
+                 ID2 = $("#locas .locaItem").eq(1).attr("id");
+                 ID3 = $("#locas .locaItem").eq(2).attr("id");
+                 ID4 = $("#locas .locaItem").eq(3).attr("id");
+
+            //  $("#Iframe2").attr("src", "../MLiveStreaming/MonitorLocoPlayMini.htm?IsP=YES&page=meta_big_loca&locomotiveCode=" + locaCode);
+
+        }
+
+
+        //选择联动赋值
+        function onClickForLocomotiveCode(loco) {
+            //  locomotiveCode = loco;
+        };
+
+        //双屏模式
+        function clickRealPlayTwo() {
+
+            $('#Iframe3').show();
+        //    $('.Iframe_chart').hide();
+
+            $('#t_report').hide();
+
+            document.getElementById('Iframe3').src = "../MLiveStreaming/MonitorLocoPlayNewTwo.htm?Loco=" + locaCode + "&v=" + version;
+        };
+
+
+        //第二屏关闭联动
+        function clickRealPlayTwoBack() {
+
+            $('#Iframe3').hide();
+         //   $('.Iframe_chart').show();
+
+            $('#t_report').show();
+
+
+
+
+            // document.getElementById('Iframe3').src = "C3Bar.htm";
+        };
+
+        function showOPInfo(_msg)
+        {
+          //  alert(_msg);
+        }
+
+        function GetLocaTxt()
+        {
+            return $('#txt_so').val();
+        }
+
+        $(document).ready(function () {
+            $(".btn_look").click(function () {
+                $(".div_look", window.parent.document).toggle();
+            });
+        })
+    </script>
+</head>
+<body bgColor="transparent" style="background-color:rgba(0,0,0,0.7)">
+
+
+<div class="box1_1 floatL">
+    
+    <div class="title_bg">
+            <div class="m_loca0 d fg_blue">设备编号</div>
+            <div class="m_loca_p d fg_blue">3C设备归属段</div>
+            <div class="m_loca_p d fg_blue">车辆配属段</div>
+            <div class="m_loca_ju d fg_blue">局</div>           
+            <div class="m_loca1  d fg_blue">时间</div>
+            <div class="m_loca2 d">
+                <span class="fg_blue">位置</span>
+                <div class="m_loca_so">                   
+                    <input id="txt_so" type="text" placeholder="设备编号" />
+                    <!--<img src="images/search.png" id="btn_so" />-->
+                    <!--<img src="images/screen.png" class="btn_look" />-->
+                    <input id="btn_so" type="button" value="搜索" />
+                    <input type="button" class="btn_look"  value="多屏监测" />
+                </div>
+            </div>
+            
+
+            <div class="cls"></div>
+        
+    </div>
+
+    
+
+    <div id="locas">
+        <img src="/Common/img/loading1.gif"  align="absmiddle" />
+         <!--<div class="locaItem">
+            <div class="m_locaNo d">车号</div>
+            <div class="m_mapInfo  d">位置信息</div>
+            <div class="m_type d">缺陷类型</div>
+            <div class="m_level d">一级</div>
+            <div class="m_memo d">缺陷描述</div>
+          
+        </div>
+        
+          <div class="cls"></div>
+        <div class="locaItem locaItem_over">
+           <div class="m_locaNo d">车号</div>
+            <div class="m_mapInfo  d">位置信息</div>
+            <div class="m_type d">缺陷类型</div>
+            <div class="m_level d">二级</div>
+            <div class="m_memo d">缺陷描述</div>
+             <div class="cls"></div>
+        </div>
+  
+     
+        <div  class="locaItem">
+            <div class="m_locaNo d">车号</div>
+            <div class="m_mapInfo  d">位置信息</div>
+            <div class="m_type d">缺陷类型</div>
+            <div class="m_level d">三级</div>
+            <div class="m_memo d">缺陷描述</div>
+             <div class="cls"></div>
+        </div>
+        
+         <div  class="locaItem">
+            <div class="m_locaNo d">车号</div>
+            <div class="m_mapInfo  d">位置信息</div>
+            <div class="m_type d">缺陷类型</div>
+            <div class="m_level d">一级</div>
+            <div class="m_memo d">缺陷描述</div>
+             <div class="cls"></div>
+        </div>
+
+         <div  class="locaItem">
+            <div class="m_locaNo d">车号</div>
+            <div class="m_mapInfo  d">位置信息</div>
+            <div class="m_type d">缺陷类型</div>
+            <div class="m_level d">一级</div>
+            <div class="m_memo d">缺陷描述</div>
+             <div class="cls"></div>
+        </div>-->
+    </div>
+   
+
+</div>
+
+<div class="cls"></div>
+
+
+
+</body>
+</html>

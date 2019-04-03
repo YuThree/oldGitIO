@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            width: 650px;
+            height: 650px;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 30px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test">
+        <div id="drawing" style="width:100%;height: 100%;position: relative;">
+        </div>
+    </div>
+
+    <script src="jquery-1.11.0.js"></script>
+    <script src="svg.js"></script>
+    <script src="util.js"></script>
+    <script src="svg/city.js"></script>
+    <script src="demo.js"></script>
+    <script>
+        //模拟后台数据
+        var eee = [{
+            administrativeCode: 220122205, //行政编码，对应地图坐标，必传
+            grade: 1, //等级控制颜色
+            modelTitle: '青海省<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;">1</span>直接访问: 275人', //鼠标移入显示的内容，不传不显示
+            mm: "哈" //后台可直接配置任何参数，如mm
+        }, {
+            administrativeCode: 220122105,
+            modelTitle: '烧锅镇',
+            grade: 4
+        }, {
+            administrativeCode: 220122206,
+            grade: 2
+        }, {
+            administrativeCode: 220122201,
+            grade: 1
+        }, {
+            administrativeCode: 220122210,
+            grade: 4
+        }, {
+            administrativeCode: 220122202,
+            grade: 1
+        }]
+        //判断浏览器是否支持svg
+        if (SVG.supported) {
+            start({
+                el: '#drawing',
+                gradeColor: gradeColor,
+                body: eee, //后端传入的配置
+                data: city, //地图展示数据
+                clickBack: '#389BB7', //点击地图改变的颜色
+                mouseoverBack: '#389BB7', //鼠标移入某块时改变的颜色
+                clickFuc: function (obj) { //鼠标点击了某块回调
+                    console.log(obj)
+                }
+            });
+        } else {
+            alert('SVG not supported')
+        }
+    </script>
+</body>
+
+</html>

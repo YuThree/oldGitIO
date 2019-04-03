@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Common/DPCExcelAlarm/js/Problem.js"></script>
+    <script src="/Lib/layer/layer.js"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("Validation");
+        loadControl("form");
+        loadControl("mySelectTree");
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#btn_close').find('img').click(function () {
+                var isSubsystem_WJ = GetQueryString('isSubsystem_WJ'); //是否是独立系统
+                if (GetQueryString("btnClose") != null) {
+                    window.close();
+                }
+                else {
+                    if (isSubsystem_WJ === 'true') {
+                        logOut();
+                        window.location = "/Common/login.htm?C3_WJ=Problem&=" + version;
+                    } else {
+                        window.close();
+                        //window.location = "/C3/index.htm?userName=" + escape(getCurUser().name) + '&v=' + version;
+                    }
+                }
+
+            })
+
+        });
+    </script>
+
+    <!-- 动态菜单CSS -->
+    <link rel="stylesheet" type="text/css" href="/Common/DPCExcelAlarm/css/Problem.css" />
+    <title>6C问题库管理</title>
+
+</head>
+<body>
+    <div class="html_title">
+        <img src="img/logo.png" /><label>乌鲁木齐铁路局</label>
+        <span style="position:absolute;right:20px">
+            <img src="img/admin.png" />
+            <span id="UserName">Admin</span>
+            <a id="ModifyCode" style="cursor:pointer;font-size:12px;margin-left:15px" title="修改密码" class="hide">修改密码</a>
+            <a id="btn_close"><img src="img/closed.png" style="cursor:pointer;margin-left:10px; margin-right: 28px;" title="退出登录" /></a>
+        </span>
+
+    </div>
+    <div class="middle">
+        <div class="leftMenu">
+
+            <div class="minIcon InOne"></div>
+            <div class="menu_list">
+                <ul>
+                    <li class="">
+                        <span class="fuMenu"><img src="img/manage_warehouse.png" />&ensp;&ensp;6C问题库管理</span>
+                        <img class="xiala" src="img/menuUlchoose.png" />
+                        <div class="div1" style="display: block;">
+                            <p class="zcd removes" id="zcd5" ifSrc="ProblemList.html">问题库管理</p>
+                            <p class="zcd" id="zcd2" ifsrc="/Common/MGIS/GIS_WU.html">问题库GIS</p>
+                            <p class="zcd" id="zcd3" ifSrc="/Report/comprehensiveAnalysis.htm">问题库统计</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div id="frameX" class="iframBox">
+            <iframe id="frameContent" src="ProblemList.html"></iframe>
+        </div>
+    </div>
+</body>
+</html>

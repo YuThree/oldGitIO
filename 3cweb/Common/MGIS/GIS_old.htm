@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=F75484f6486f962ed1c28985b9ca68c0" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js" type="text/javascript"></script>
+
+    <script src="/Common/MGIS/JS/convertor.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapJS.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapLine.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapUserContainer.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPosition.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapSubstation.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapC3.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapC3Sms.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapPole.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapObjData.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapBridgeTune.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/GIS.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script src="/Lib/Echarts-3.0/echarts.min.js"></script>
+    <script type="text/javascript">
+        loadControl("mytree");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("hint");
+        loadControl("elevatezoom");
+        loadCss("/Common/css/gis/GIS.css?v=" + version);
+
+        loadJs("/C3/PC/MRTA/js/C3AlarmImg_big.js?v=" + version)
+    </script>
+ 
+
+
+    <script type="text/javascript">
+        $(function () {
+            var json = GetSeverityJson();
+            for (var i = 0; i < json.length; i++) {
+                if (json[i].code == "一类")
+                    $("#sp_type1").text(json[i].name);
+                if (json[i].code == "二类")
+                    $("#sp_type2").text(json[i].name);
+                if (json[i].code == "三类")
+                    $("#sp_type3").text(json[i].name);
+            }
+        })
+    </script>
+    <!-- modal / dialog library -->
+    <script src="/Common/MGIS/JS/BMGIS.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#one2").click(function () {
+                $("#con_one_2_div").animate({ "height": "580px" });
+                $("#con_one_2_div table").css({ "display": "block" });
+            });
+            $("#one1").click(function () {
+                $("#con_one_2_div").animate({ "height": "20px" });
+                $("#con_one_2_div table").css({ "display": "none" });
+            });
+            $("#ddlzt").siblings().css("width","150px");
+        });
+    </script>
+</head>
+<body>
+    <div class="box-content" id='con_one_2_div'>
+        <ul class="main_ul" id='Ul_One'>
+            <!--<li id="one1" onclick="setTab('one',1,2);"><a id="GISA" onclick="Color('GIS')" 
+                href="#" style="color: white;font-size:18px">实时GIS</a> </li>-->
+            <li id="one2" onclick="setTab('one',2,2);OnlondbqxMapbind();ColseC3AlarmInfo();"><a
+                id="qxGIS" href="#" onclick="Color('QXGIS')" style="color: #53aede;font-size:18px">缺陷GIS</a> </li>
+            <li style="float: right;"><a id="FullScreen" href="#" style="display: none;" onclick="javascript:window.parent.toFullScreen('1');toADisplay('1');">
+                全屏</a>
+                <input type="button" value="关闭" id="Button1" onclick="window.close();" class="btn btn-primary" />
+            </li>
+        </ul>
+        <div class="cls"></div>
+        <table >
+                    <tr>
+                        <td style="width:65px;">线路：</td>
+                        <td>
+                            <select id="lineselect" name="lineselect" style="width: 150px;" onchange="lineChange(this.value)">
+                                <option value="0">全部</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>区站：</td>
+                        <td>
+                            <input type="text" id="txtqz" style="width: 140px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>行别：</td>
+                        <td>
+                            <select name="ddlxb" id="ddlxb" style="width: 150px;">
+                                <option value="0">全部</option>
+                                <option value="上行">上行</option>
+                                <option value="下行">下行</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>杆号：</td>
+                        <td>
+                            <input type="text" id="txtpole" style="width: 140px;">
+                        </td>
+                   </tr>
+                   <tr>
+                        <td>公里标：(m)</td>
+                        <td>
+                            <input type="text" id="txtstartkm" style="width: 58px;" />至<input type="text" id="txtendkm"
+                                style="width: 58px;" />
+                        </td>
+                   </tr>
+                   <tr>
+                        <td>发生时间：</td>
+                        <td>
+                            <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})"
+                                style="width: 140px">
+                            至
+                            <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})"
+                                style="width: 140px">
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>局：</td>
+                        <td>
+                            <select id="juselect" name="juselect" style="width: 150px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>段：</td>
+                        <td>
+                            <select id="duanselect" name="duanselect" style="width: 150px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </td>
+                   </tr>
+                   <tr>
+                        <td>车间：</td>
+                        <td>
+                            <select id="chejianselect" name="chejianselect" style="width: 150px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>工区：</td>
+                        <td>
+                            <select id="gongquselect" name="gongquselect" style="width: 150px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height:42px;">
+                        <td>缺陷类型：</td>
+                        <td>
+                            <input id="citySel" type="text" value="" style="width: 140px; margin: 0;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span id="span_ddllx">检测类型：</span>
+                        </td>
+                        <td>
+                            <span id="span2_ddllx">
+                                <select name="dll_lx" id="dll_lx" style="margin: 0 auto; width: 150px;">
+                                    <option value="0">全部</option>
+                                    <option value="1C">1C</option>
+                                    <option value="2C">2C</option>
+                                    <option value="3C">3C</option>
+                                    <option value="4C">4C</option>
+                                    <option value="5C">5C</option>
+                                    <option value="6C">6C</option>
+                                </select>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr style="height:40px;">
+                        <td>状态：</td>
+                        <td>
+                            <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                                size="1" style="180px">
+                                <option value="AFSTATUS01" selected>新上报</option>
+                                <option value="AFSTATUS04">已计划</option>
+                                <option value="AFSTATUS03">已确认</option>
+                                <option value="AFSTATUS02">已取消</option>
+                                <option value="AFSTATUS05">已关闭</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button class="btn btn-small btn-primary" onclick="TimeAlarmInfo()" style="font-size:16px;">查询</button>
+                        </td>
+                    </tr>
+                </table>
+    </div>
+    <div id="ImgTypeBox">
+        <div>
+            <input id="cb_type1" type="checkbox" checked style="vertical-align: middle; display: inline;" /><span
+                style="vertical-align: middle; color: White; display: inline;"><label id="lbl_type1"
+                    style='display: inline;' for="cb_type1"><span id="sp_type1"></span><img style='width: 20px;
+                        height: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico1.png'></label></span>
+        </div>
+        <div>
+            <input id="cb_type2" type="checkbox" checked style="vertical-align: middle;" /><span
+                style='color: White;'><label id="lbl_type2" for="cb_type2" style='display: inline;'><span id="sp_type2"></span><img
+                    style='width: 20px; height: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico2.png'></label></span>
+        </div>
+        <div>
+            <input id="cb_type3" type="checkbox" checked style="vertical-align: middle;" /><span
+                style='color: White;'><label id="lbl_type3" for="cb_type3" style='display: inline;'><span id="sp_type3"></span><img
+                    style='width: 20px; height: 20px; display: inline;' align="absmiddle" src='/Common/MGIS/img/ico3.png'></label></span>
+        </div>
+    </div>
+    <div id="C3Alarm" style="display: none; position: absolute;  right: 0px;
+        z-index: 410; background-color: #333333;">
+        <div style="position: absolute; left: -25px; top: 10px;">
+            <a href="#" onclick="ColseC3AlarmInfo()" style="font-size: 30px; color: White;">X</a>
+        </div>
+        <div id='C3Alarm_1' style="overflow-y: auto; overflow-x: hidden;">
+            <div class="box-content">
+                <div id="tablejbxx">
+                    <table class="table1 fg_blue" id="tableinfo" style="color: White;">
+                        <tr>
+                            <td colspan="2">
+                                设备编号：<strong><span id="trainNo"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                时间：<strong><span id="raised_time"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                地点：<strong><span id="WZ"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                报警温度：<strong><span id="wendu"></span><span>℃</span></strong>
+                            </td>
+                            <td style="">
+                                环境温度：<strong><span id="hjwendu"></span><span>℃</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                导高值：<strong><span id="dgz"></span><span>mm</span></strong>
+                            </td>
+                            <td>
+                                拉出值：<strong><span id="lcz"></span><span>mm</span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%;">
+                                速度：<strong><span id="sudu"></span><span>km/h </span></strong>
+                            </td>
+                            <td style="width: 50%;">
+                                弓位置：<strong><span id="BOW_TYPE"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                报警级别：<strong> <span id="severity"></span></strong>
+                            </td>
+                            <td>
+                                报警状态：<strong><span id="status"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" colspan="2">
+                                报警类型：<strong> <span id="SUMMARYDIC"></span></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                <input type="submit" name="E_btnOk2" value="报警确认" id="E_btnOk2" title="确认疑似缺陷属实"
+                                    class="btn btn-primary " />
+                                <input type="submit" name="E_btnCan2" value="报警取消" id="E_btnCan2" title="疑似缺陷属于误报，取消该缺陷显示"
+                                    class="btn btn-primary" />
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                报警分析： <strong><span id="txtDefect"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                处理建议： <strong><span id="txtAdvice"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td colspan="3">
+                                备注： <strong><span id="txtNote"></span></strong><a href="#" onclick="Map()">
+                                    <img src='/Common/img/roll.gif'></a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 300px">
+                                报告人：<strong><span id="txtReporter"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                报告日期： <strong><span id="reportdate"></span></strong>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                设备厂商：<strong><span id="vendor"></span> </strong>线路：<strong><span id="wwdw"></span>
+                                </strong>
+                            </td>
+                            <td>
+                                区站：<strong><span id="QZ"></span> </strong>
+                            </td>
+                            <td>
+                                桥隧：<strong><span id="brige"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                杆号：<strong><span id="pole_number"></span> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="display: none">
+                                供电段： <strong><span id="GDD"></span></strong>
+                            </td>
+                            <td style="display: none">
+                                供电车间：<strong><span id="CJ"></span> </strong>
+                            </td>
+                            <td style="display: none">
+                                供电班组：<strong><span id="BZ"></span> </strong>
+                            </td>
+                            <td style="width: 200px; display: none">
+                                公里标：<strong><span id="km_mark"></span></strong> 状态变化时间：<strong><span id="status_time"></span>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr id="jltr" style="display: none;">
+                            <td style="width: 100px">
+                                交路号：<strong><span id="jlh"></span></strong>
+                            </td>
+                            <td colspan="2">
+                                运用区段：<strong><span id="crossing_no"></span></strong> 线路：<strong><span id="line_code"></span>
+                                </strong>车站：<strong><span id="STATION_NO"></span> </strong>
+                                <input id="taskid" type="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="text-align: center; z-index: 9999; display: none">
+                <div id="irvAA">
+                </div>
+            </div>
+        </div>
+        <div id='C3Alarm_2'>
+            <img src='' id="hw"></div>
+        <div id='C3Alarm_3'>
+            <img src='' id="kjg"></div>
+        <div id='C3Alarm_4'>
+            <div id="linechart" style="background: center no-repeat url('/Common/img/world-map.png');">
+            </div>
+        </div>
+    </div>
+    <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-container-update" class="modal hide fade" role="dialog"
+        aria-labelledby="myModalLabel" style="top: 50%; width: 1400px; left: 30%; z-index: 9999;">
+        <div class="modal-header">
+            <h3>
+                <span id="updatetitle"></span>
+            </h3>
+            <input id="updatetype" type="hidden" />
+        </div>
+        <div class="modal-body form-horizontal">
+            <table id="tb_sure" class="table" cellpadding="1" cellspacing="1" style="width: 93%">
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报警类型：</label>
+                        <div id="afcodeYZ" class="controls">
+                            <input id="Text1" type="text" value="" style="width: 160px; margin: 0;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报警级别：</label>
+                        <div id="UseverityYZ" class="controls">
+                            <select id="Useverity" style="width: 100px" onchange="yzAlarmData()">
+                                <option>请选择</option>
+                                <option>一类</option>
+                                <option>二类</option>
+                                <option>三类</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            报警分析：</label>
+                        <div class="controls">
+                            <div id="UtxtDefectYZ">
+                                <textarea name="txtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 900px;"
+                                    onblur="yzAlarmData()"></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            处理建议：</label>
+                        <div class="controls">
+                            <textarea name="txtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="control-label">
+                            备注：</label>
+                        <div class="controls">
+                            <textarea name="txtNote" id="UtxtNote" rows="2" style="height: 30px; width: 900px;"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">
+                            报告人：</label>
+                        <div id="Div3" class="controls">
+                            <input name="txtReporter" type="text" id="UtxtReporter" style="width: 100px;" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="control-label">
+                            报告日期：</label>
+                        <div id="Div4" class="controls">
+                            <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                style="width: 150px" />
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td colspan="2">
+                        <div class="control-group error">
+                            *红框内必填
+                        </div>
+                    </td>
+                </tr>-->
+            </table>
+            <input type="checkbox" id="cb_showTask" class="zrw" /><label for="cb_showTask" style="display: inline;"
+                class="zrw"><h3 style="display: inline;">
+                    转任务</h3>
+            </label>
+            <div id="box_task" class="zrw" style="height: 200px; display: none">
+                <iframe id="iframe_task" name="iframe_task" style="width: 100%; height: 210px;" seamless
+                    src="" scrolling="no" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="Button4" class="btn btn-primary zrw" style="display: none">
+                确认并转任务
+            </button>
+            <button id="Button2" class="btn btn-primary" onclick="btnAlarmUpdate()">
+                确认
+            </button>
+            <button id="btncols" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span></div>
+    </div>
+    <a id="tanchu" href="#" class="lightbox"></a>
+    <div class="main">
+        <div class="mainbox">
+            <div id="con_one_1" style="display: none;">
+                <div style="width: 100%; height: 930px; border: 0px solid gray; text-align: center;
+                    z-index: 1" id="mapDiv">
+                </div>
+                <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                    style="display: none"></a>
+                <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+                    aria-labelledby="myModalLabel" style="width: 710px; height: 395px; z-index: 99999;
+                    left: 650px; top: 300px;">
+                    <div id="modal-body" style="height: 380px; width: 700px; z-index: 99999; text-align: center">
+                        <iframe id="url" scrolling="no" style="height: 360px; width: 700px;"></iframe>
+                        <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                            关闭</button>
+                    </div>
+                    <!-- <div class="modal-footer" style="z-index: 99999; text-align: center">
+                        
+                    </div>-->
+                </div>
+                <!--设备弹出模态窗口获取红外视频文件-->
+            </div>
+        </div>
+        <div id="con_one_2" >
+            
+            <div style="border: 0px solid gray; text-align: center; z-index: 1; position: inherit;
+                " id="qxDiv">
+            </div>
+        </div>
+    </div>
+    <div style="display: none">
+        <input id="mapLevel" runat="server" />
+    </div>
+    <div id="chartOne" style="margin-top: 5px; text-align: center; width: 500px; height: 200px;
+        display: none;">
+    </div>
+    <div id="chartTwo" style="margin-top: 5px; text-align: center; width: 200px; height: 100px;
+        display: none;">
+    </div>
+    <div id="div1">
+    </div>
+    <div id="div2">
+    </div>
+    <div id="winpop">
+        <div class="title">
+            您有新的消息&nbsp;&nbsp;&nbsp;<span onclick="hid_pop()">关闭</span></div>
+        <div class="con">
+            <span id="AlarmSpan"></span>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+<script>
+    $(function () {
+        LoadSureBox('3C', GetQueryString("alarmid"))
+    })
+
+</script>

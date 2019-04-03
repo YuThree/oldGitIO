@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>设备录入</title>
+	<link rel="stylesheet" href="../../common/css/COMMONT.css">
+	<!-- 时间选择器 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+	<!-- 下拉 -->
+	<link rel="stylesheet" href="../../jsControl/simulationSelect/selectStyle.css">
+	<!-- 独自样式 -->
+	<link rel="stylesheet" href="../../css/modelRewrite.css">
+</head>
+<body>
+	<form class="equiPutin" action="" id="form">
+		<div class="container">
+			<div class="infoBlock">
+				<div class="main">
+					<div class="cdct_infoInput">
+						<label class="cdct_subLabel">姓&emsp;&emsp;名</label>
+						<div class="cdct_relative">
+							<input type="text" name="info1" class="cdct_input ">
+						</div>
+					</div>
+					<div class="cdct_infoInput">
+						<label class="cdct_subLabel timLab">发放时间</label>
+						<div class="lqdataInput">
+							<input type="text" class="cdct_input datepicker" placeholder="请选择时间">
+						</div>
+					</div>
+					<div class="cdct_infoInput dw">
+						<label class="cdct_subLabel">补助金额</label>
+						<input type="text" class="cdct_input">
+						<span class="dwY">元</span>
+					</div>
+					<div class="cdct_infoInput dw">
+						<label class="cdct_subLabel cdct_Mtext">个人付费金&emsp;&emsp;额</label>
+						<input type="text" class="cdct_input">
+						<span class="dwY">元</span>
+					</div>
+					<div class="cdct_infoInput">
+						<label class="cdct_subLabel lab">报告机构</label>
+						<div data-selectsimu="1" class="cdct_select sel" data-valuea="%5B%22CMOB-ZVTI-TWZW-OERP%22%5D">
+							<div class="selectBox">
+								<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain">请选择机构</span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+							<div class="ulParent" style="z-index: 10000000; position: absolute; width: 100%; left: 0px; top: 100%; bottom: auto; height: 0px;"><ul class="hideUl" data-selectbox="1" style="display: none;">
+									<li class="hideUlLi" data-selectoption="1" id="NUDB-BJNX-GTIR-VGQX">民族1</li>
+									<li class="hideUlLi" data-selectoption="2" id="FNYN-SPHY-EVGM-DGNO">民族2</li>
+									<li class="hideUlLi" data-selectoption="3" id="RULY-PPCF-EXXL-CNTP">民族3</li>
+									<li class="hideUlLi" data-selectoption="-1" style="display: none;" id="CMOB-ZVTI-TWZW-OERP">
+										<span class="optD">
+											<span class="fontMain">请选择机构</span>
+										</span>
+										<span class="selectDown"></span>
+									</li>
+								</ul></div></div>
+						</div>
+					</div>
+					<div class="cdct_infoInput">
+						<label class="cdct_subLabel lab cdct_Mtext">发放医生姓&emsp;&emsp;名</label>
+						<div data-selectsimu="1" class="cdct_select sel" data-valuea="%5B%22CMOB-ZVTI-TWZW-OERP%22%5D">
+							<div class="selectBox">
+								<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain">请选择厂家</span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+							<div class="ulParent" style="z-index: 10000000; position: absolute; width: 100%; left: 0px; top: 100%; bottom: auto; height: 0px;"><ul class="hideUl" data-selectbox="1" style="display: none;">
+									<li class="hideUlLi" data-selectoption="1" id="NUDB-BJNX-GTIR-VGQX">民族1</li>
+									<li class="hideUlLi" data-selectoption="2" id="FNYN-SPHY-EVGM-DGNO">民族2</li>
+									<li class="hideUlLi" data-selectoption="3" id="RULY-PPCF-EXXL-CNTP">民族3</li>
+									<li class="hideUlLi" data-selectoption="-1" style="display: none;" id="CMOB-ZVTI-TWZW-OERP">
+										<span class="optD">
+											<span class="fontMain">请选择厂家</span>
+										</span>
+										<span class="selectDown"></span>
+									</li>
+								</ul></div></div>
+						</div>
+					</div>
+					<div class="info">
+                        <label for="ll" class="cdct_subLabel label">简&emsp;&emsp;介</label>
+                        <div class="text2" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="300" data-pmttextarea="1">
+                            <textarea class="cdct_textarea" placeholder="请输入您的意见"></textarea>
+                            <div data-pmttextshow="1" style="position: absolute;bottom: 5px;right: 10px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">300字</span></div></div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 下拉 -->
+	<script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+	<!-- 时间选择 -->
+	<script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+	<!-- 文本域 -->
+	<script src="../../jsControl/textArea/textarea.min.js" type="text/javascript"></script>
+	<!-- 下拉 -->
+	<script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+
+
+	<script type="text/javascript">
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+		    $(allEle[i]).simulationSelect({
+		        selectText:'{a}<span class="selectDown"></span>'
+		    });
+		}
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form()
+	</script>
+</body>
+</html>

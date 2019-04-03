@@ -1,0 +1,19 @@
+[data-selectSimu="1"] .hideDiv{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	border-right: 1px solid #e6eaee;
+	border-left: 1px solid #e6eaee;
+	border-bottom: 1px solid #e6eaee;
+	border-top:1px solid #e6eaee;
+	height: 150px;
+}
+[data-selectSimu="1"] .treeViewUl{
+	padding-left: 0px;
+}
+[data-selectSimu="1"] .hideDiv .treeInfo{
+	width: 100%;
+}
+.hideDiv .treeViewSpan:hover{
+	color:white;
+}

@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("jqueryUI_2");
+        loadControl("form");
+    </script>
+    <link href="/Lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="/C3/PC/MAlarmMonitoring/js/core.js"></script>
+    <style>
+        #imgdiv canvas {
+            max-width: 100%;
+            max-height: 90%;
+        }
+
+       
+
+        .sbox {
+            width: 380px;
+            height: 35px;
+            line-height: 25px;
+            vertical-align: middle;
+            color: #fff;
+        }
+
+        .myslider {
+            margin: 5px;
+            width: 150px;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .sboxt {
+            width: 70px;
+            text-align: left;
+        }
+
+        .lab {
+            margin-left: 10px;
+        }
+
+        #box_option {
+            position: fixed;
+            right: 10px;
+            top: 300px;
+            width: 303px;
+            padding: 15px;
+            background: url(ImgTmp/ShowImg_bg.png) no-repeat;
+            cursor: move;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        #btns {
+            padding: 2px 5px 5px;
+            margin-top: 6px;
+        }
+        #btns span{
+            cursor:pointer;
+            font-size:16pt;
+
+        }
+        #btns span:hover{
+
+            color:#54bbff
+
+        }
+
+        #btn_L{ float:left; width:30%;}
+
+        #slider_play {
+            float: right;
+            width: 60%;
+            margin-top: 15px;
+            height: 0.4em;
+        }
+        #slider_play .ui-slider-range {
+                background: #FACE1C;
+        }
+        #slider_play .ui-slider-handle, #slider1 .ui-slider-handle, #slider2 .ui-slider-handle {
+            border-color: transparent;
+            border: none;
+            background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+            background-size: contain;
+            width: 25px;
+            height: 25px;
+            margin-top: -3px;
+            margin-left: -6px;
+            cursor: pointer;
+            border-bottom: none;
+        }
+        #slider1 .ui-slider-handle{
+            margin-top:4px;
+        }
+        #slider2 .ui-slider-handle {
+            background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+            margin-top: 8px;
+        } 
+        #slider1, #slider2 {
+            height: 0.4em;
+        } 
+        #slider_play.ui-widget-content {
+            border: 1px solid #666;
+            background: none;
+        }
+        #slider1,#slider2 {
+            background: url(ImgTmp/playbar.png) no-repeat;
+            border:none;
+            width:190px;
+            height:18px;
+            margin:4px 0 0 0;
+        } 
+        #div_option {
+            padding: 10px;
+            width: 290px;
+            border-radius: 10px;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+    </style>
+</head>
+<body>
+    <form id="form1" method="POST">
+        <img id="img" title="Before"/>
+        <div id="imgdiv">
+            <canvas id="demo" title="After" style="width:3000px;"></canvas>
+        </div>
+      
+
+        <div id="box_option">
+           
+           
+
+            <center id="btns">
+                       
+                <div class="fl sboxt" style="width:95px;">
+
+                    <textarea id="X_Img" name="X_Img" style="width:200px; height:200px; display:none;"></textarea>
+                    <textarea id="Img_src" name="Img_src" style="width:200px; height:200px;display:none;"></textarea>
+
+
+                    <span id="btn_up" title="上一帧"><img src="ImgTmp/left.png" alt="上一帧" /></span>
+                    <span id="btn_play" title="播放" style="margin-left:-5px;"><img src="ImgTmp/play.png" alt="播放" /></span>
+                    <span id="btn_pause" title="暂停" style="margin-left: -5px; display: none"><img src="ImgTmp/pause.png" alt="暂停" /></span>
+                    <span id="btn_last" title="下一帧" style="margin-left:-5px;"><img src="ImgTmp/right.png" alt="下一帧" /></span>
+                  
+                </div>
+                <div id="slider_play"></div>
+                <div class="cls"></div>
+            </center>
+
+            <div id="div_option">
+
+                <div class="sbox">
+                    <div class="fl sboxt" style="padding-left:10px;">亮&nbsp;&nbsp;&nbsp;度</div>
+                    <div id="slider1" class="myslider fl"></div>
+                    <div id="lab_1" class="lab fl">0</div>
+                    <div class="cls"></div>
+                </div>
+                <div class="sbox">
+                    <div class="fl sboxt" style="padding-left:10px;">对比度</div>
+                    <div id="slider2" class="myslider fl"></div>
+                    <div id="lab_2" class="lab fl">0</div>
+                    <div class="cls"></div>
+                </div>
+                <div class="sbox" style="text-align:center;display: none;">
+                    <!--<input type="button" id="btn_do" value="保存" class="btn btn-success" />-->
+                    <img id="btn_do" src="ImgTmp/keep.png" alt="保存" style="margin-left: 100px;cursor:pointer;" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <script>
+        var Img_type = GetQueryString("type");
+        var Is_doing = true;
+
+        var QJ_JSON;
+      
+        var timer_play;
+
+        if (window.opener.JsonAlarm.PLAY_IDX[0].OA > -1) {
+        
+            QJ_JSON = window.opener.JsonAlarm.OA_PICS;
+        } else if (window.opener.JsonAlarm.PLAY_IDX[0].OB > -1) {
+          
+            QJ_JSON = window.opener.JsonAlarm.OB_PICS;
+        }
+
+        var KJG_JSON = window.opener.JsonAlarm.VI_PICS;
+
+        var playMax = 0;
+        var playIndex = 0;//播放序号
+
+        if (Img_type == "1") {
+            playMax = KJG_JSON.length;
+         
+        }
+        else {
+            playMax = QJ_JSON.length;
+        }
+
+
+        var canvas = document.getElementById("demo"),
+              demo = canvas.getContext("2d");
+        var img = document.getElementById("img");
+
+        $(function () {
+
+            $("#box_option").draggable();
+            $("#slider1").slider({
+                value: 0,
+                min: -100,
+                max: 100,
+                step: 1,
+                slide: function (event, ui) {
+
+                    $('#lab_1').text(ui.value);
+
+                },
+                change: function (event, ui) {
+                    changebySlider();
+                }
+            });
+            $("#slider2").slider({
+                value: 0,
+                min: -100,
+                max: 100,
+                step: 1,
+                slide: function (event, ui) {
+                    $('#lab_2').text(ui.value);
+
+                },
+                change: function (event, ui) {
+                    changebySlider();
+                }
+            });
+
+
+          
+            $("#slider_play").slider({
+                value: 0,
+                min: 0,
+                max: (playMax-1),
+                step: 1,
+                range: "min",
+                slide: function (event, ui) {
+                    //  $('#lab_2').text(ui.value);
+                    playIndex = ui.value;
+                },
+                change: function (event, ui) {
+                    //  B_GoTo(ui.value);
+
+                    if (event.keyCode == undefined) 
+                    {
+                        //非按键操作
+                        if (event.originalEvent == undefined) {
+                            //设置值
+                        }
+                        else {
+                            //鼠标点击
+                            B_GoTo(ui.value);
+                        }
+                    }
+                    else {
+                        //按键操作
+                    }
+
+                   
+
+                   // alert(event.orginalEvent);
+                }
+            });
+           
+
+
+            $('#btn_do').click(function () {
+
+                saveAsLocalImage();
+
+            })
+            $('#btn_up').click(function () {
+
+                B_upImg();
+                $('#btn_pause').hide();
+                $('#btn_play').show();
+                $('#div_option').show();
+                clearInterval(timer_play);
+
+            })
+            $('#btn_last').click(function () {
+
+                B_lastImg();
+                $('#btn_pause').hide();
+                $('#btn_play').show();
+                $('#div_option').show();
+                clearInterval(timer_play);
+            })
+
+          
+
+            $('#btn_play').click(function () {
+                //播放
+                $('#div_option').toggle();
+                Is_doing = false;
+
+                $(this).hide();
+                $('#btn_pause').show();
+
+                timer_play = setInterval(function () {
+                    B_lastImg();
+                }, 500);
+
+
+            });
+
+            $('#btn_pause').click(function () {
+                //暂停
+                $('#div_option').toggle();
+                Is_doing = true;
+
+                $(this).hide();
+                $('#btn_play').show();
+
+
+
+                clearInterval(timer_play);
+
+                changebySlider();
+
+            });
+
+
+            img.onload = function () {
+
+                changebySlider();
+
+            };
+
+          //  $('#img').attr('width', $(window).width())
+            //  img.src = GetQueryString("Img");
+            var _index= parseInt( GetQueryString("index"));
+            
+            B_GoTo(_index);
+
+            //按钮颜色改变
+            $("#btn_up img").hover(function () {
+                $(this).attr("src", "ImgTmp/left-light.png")
+            }, function () {
+                $(this).attr("src", "ImgTmp/left.png")
+            });
+            $("#btn_last img").hover(function () {
+                $(this).attr("src", "ImgTmp/right-light.png")
+            }, function () {
+                $(this).attr("src", "ImgTmp/right.png")
+            });
+            $("#btn_play img").hover(function () {
+                $(this).attr("src", "ImgTmp/play-light.png")
+            }, function () {
+                $(this).attr("src", "ImgTmp/play.png")
+            });
+            $("#btn_pause img").hover(function () {
+                $(this).attr("src", "ImgTmp/pause-light.png")
+            }, function () {
+                $(this).attr("src", "ImgTmp/pause.png")
+            });
+            $("#btn_do").hover(function () {
+                $(this).attr("src", "ImgTmp/keep-light.png")
+            }, function () {
+                $(this).attr("src", "ImgTmp/keep.png")
+            });
+
+        })
+
+        function B_upImg() {
+
+            if (playIndex > 0) {
+                playIndex--;
+            } else {
+                playIndex = playMax - 1;
+            }
+
+            B_play();
+        }
+
+        function B_lastImg() {
+
+            if (playIndex < playMax-1) {
+                playIndex++;
+            } else {
+                playIndex = 0;
+            }
+
+            B_play();
+
+        }
+
+        function B_GoTo(_index) {
+           
+            playIndex = _index;
+            B_play();
+        }
+      
+
+        function B_play() {
+         
+            if (Img_type == "1")
+                img.src ='/FtpRoot'+ KJG_JSON[playIndex].split('/FtpRoot')[1];
+            else
+                img.src = '/FtpRoot' + QJ_JSON[playIndex].split('/FtpRoot')[1];
+                                    
+
+                $("#slider_play").slider("value", playIndex);
+        }
+
+        function show(__mat) {
+            canvas.width = __mat.col;
+            canvas.height = __mat.row;
+
+            var data_Img=cv.RGBA2ImageData(__mat);
+
+            demo.putImageData(data_Img, 0, 0);
+
+ 
+
+        }
+
+
+        function changeImg(p1, p2) {
+            var mat = cv.imread(img);
+
+
+         //   cv.imwrite(mat);
+
+            if (Is_doing) {
+                $('#img').hide();
+                $('#imgdiv').show();
+                var mat2 = cv.brightnessContrast(mat, p1, p2);
+
+                return mat2;
+            }
+            else {
+
+                $('#img').show();
+                $('#imgdiv').hide();
+            }
+
+            return mat;
+        }
+
+
+        function changebySlider() {
+            var p1 = parseFloat($("#slider1").slider("value"));
+            var p2 = parseFloat($("#slider2").slider("value"));
+            var mat2 = changeImg(p1, p2);
+            show(mat2);
+        }
+
+
+        function saveAsLocalImage() {
+            fullShow();
+            var myCanvas = document.getElementById("demo");
+            var image = myCanvas.toDataURL("image/png");//.replace("image/png", "image/octet-stream");
+            //  window.location.href = image;
+            var img = image.split(',')[1];
+            var _img = document.getElementById("img").src;
+            $("#X_Img").val(img);
+            $("#Img_src").val(_img);
+
+            var options = {
+                url: "RemoteHandlers/ShowImg.ashx?alarmid=" + GetQueryString("alarmid"),
+                type: 'POST',
+                success: function (result) {
+                    fullHide();
+                    alert(result)
+                    window.opener._url = "?r=" + Math.random();
+                }
+            };
+            $('#form1').ajaxSubmit(options);
+
+            
+        }
+
+    </script>
+
+</body>
+</html>

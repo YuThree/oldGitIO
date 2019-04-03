@@ -1,0 +1,343 @@
+@charset "UTF-8";
+html,body{ height: 100%; }
+body{
+	color:#7f8fa4;
+	background: #F2F4F6;
+}
+ul{
+	padding: 0;
+}
+
+/* 清除浮动 */
+
+.cdct_clearfix::before,
+.cdct_clearfix::after {
+	display: table;
+	content: " ";
+}
+
+.cdct_clearfix::after {
+	clear: both;
+}
+
+.cdct_clearfix {
+	*zoom: 1;
+}
+
+/* 主体 */
+.cdct_form{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	position: relative;
+}
+
+/* 工具栏 */
+.cdct_toolbar{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 50px;
+	line-height: 50px;
+	background: #fff;
+	border: solid 1px #e6eaee;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding-left: 15px;
+	margin-bottom: 10px;
+}
+.cdct_toolbar .cdct_icon{
+	float: left;
+	height: 100%;
+	margin-right: 30px;
+	cursor: pointer;
+}
+.cdct_toolbar .cdct_icon::before{
+	content: '';
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	-moz-background-size: 100%;
+	background-size: 100%;
+	height: 50px;
+	vertical-align: top;
+	margin-right: 5px;
+}
+/*通用按钮图标*/
+.cdct_toolbar .cdct_i1.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/bc_icon.png');
+}
+.cdct_toolbar .cdct_i2.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/xz_icon.png');
+}
+.cdct_toolbar .cdct_i3.cdct_icon::before{
+	width: 22px;
+	background-image: url('img/commonImg/xg_icon.png')
+}
+.cdct_toolbar .cdct_i4.cdct_icon::before{
+	width: 22px;
+	background-image: url('img/commonImg/dl_icon.png');
+}
+.cdct_toolbar .cdct_i5.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/ck_icon.png');
+}
+.cdct_toolbar .cdct_i6.cdct_icon::before{
+	width: 20px;
+	background-image: url('img/commonImg/hfzw_icon.png');
+}
+.cdct_toolbar .cdct_i7.cdct_icon::before{
+	width: 17px;
+	background-image: url('img/commonImg/cl_icon.png');
+}
+.cdct_toolbar .cdct_i8.cdct_icon::before{
+	width: 22px;
+	background-image: url('img/commonImg/dy_icon.png');
+}
+.cdct_toolbar .cdct_i9.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/sctwo_icon.png');
+}
+.cdct_toolbar .cdct_i10.cdct_icon::before{
+	width: 22px;
+	background-image: url('img/FamilyDoctor/ks_icon.png');
+}
+.cdct_toolbar .cdct_i11.cdct_icon::before{
+	width:23px;
+	background-image: url('img/commonImg/icon_bjgrxx.png');
+}
+.cdct_toolbar .cdct_i12.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/xjgr_icon.png');
+}
+.cdct_toolbar .cdct_i13.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/icon_grda.png');
+}
+.cdct_toolbar .cdct_i14.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/xjbc_icon.png');
+}
+
+.cdct_toolbar .cdct_i15.cdct_icon::before{
+	width: 25px;
+	background-image: url('img/commonImg/xjzx_icon.png');
+}
+.cdct_toolbar .cdct_i16.cdct_icon::before{
+	width: 22px;
+	background-image: url('img/commonImg/congz_icon.png');
+}
+.cdct_toolbar .cdct_i17.cdct_icon::before{
+	width: 19px;
+	background-image: url('img/commonImg/zx_icon.png');
+}
+.cdct_toolbar .cdct_i18.cdct_icon::before{
+	width: 17px;
+	background-image: url('img/FamilyDoctor/icon_yl.png');
+}
+.cdct_toolbar .cdct_i19.cdct_icon::before{
+	width:20px;
+	background-image: url('img/FamilyDoctor/icon_swdj.png');
+}
+.cdct_toolbar .cdct_i20.cdct_icon::before{
+	width:21px;
+	background-image: url('img/FamilyDoctor/icon_daqc.png');
+}
+.cdct_toolbar .cdct_i21.cdct_icon::before{
+	width: 21px;
+	background-image: url('img/commonImg/icon_dcexcet.png');
+}
+/*注册服务*/
+.cdct_toolbar .cdct_i22.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/RegistrationServices/zcfw_tbxt.png');
+}
+.cdct_toolbar .cdct_i23.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/RegistrationServices/zcfw_splc.png');
+}
+.cdct_toolbar .cdct_i24.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/RegistrationServices/zcfw_jj.png');
+}
+.cdct_toolbar .cdct_i25.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/RegistrationServices/zcfw_tg.png');
+}
+.cdct_toolbar .cdct_i26.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_tjmb.png');
+}
+.cdct_toolbar .cdct_i27.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_jy.png');
+}
+.cdct_toolbar .cdct_i28.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xy.png');
+}
+.cdct_toolbar .cdct_i29.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_scjtcy.png');
+}
+.cdct_toolbar .cdct_i30.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_ckjtcy.png');
+}
+.cdct_toolbar .cdct_i31.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_yfjzjl.png');
+}
+.cdct_toolbar .cdct_i32.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzjtys.png');
+}
+.cdct_toolbar .cdct_i33.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzzytzbs.png');
+}
+.cdct_toolbar .cdct_i34.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzzyyfw.png');
+}
+.cdct_toolbar .cdct_i35.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzzlnlpg.png');
+}
+.cdct_toolbar .cdct_i36.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_wscyzl.png');
+}
+.cdct_toolbar .cdct_i37.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzcqsf.png');
+}
+.cdct_toolbar .cdct_i38.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/FamilyDoctor/icon_xzchsf.png');
+}
+.cdct_toolbar .cdct_i39.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/commonImg/icon_bjgrxx.png');
+}
+.cdct_toolbar .cdct_i40.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/commonImg/icon_qy.png');
+}
+.cdct_toolbar .cdct_i41.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/commonImg/icon_ty.png');
+}
+.cdct_toolbar .cdct_i42.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/ycfdj_icon.png');
+}
+.cdct_toolbar .cdct_i43.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/fmjl_icon.png');
+}
+.cdct_toolbar .cdct_i44.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/fmbz_icon.png');
+}
+.cdct_toolbar .cdct_i45.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/xjazbgrdj_icon.png');
+}
+.cdct_toolbar .cdct_i46.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/xjazbrs_icon.png');
+}
+.cdct_toolbar .cdct_i47.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/xjmdgrdj_icon.png');
+}
+.cdct_toolbar .cdct_i48.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/xjmdsf_icon.png');
+}
+.cdct_toolbar .cdct_i49.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/xjgwsc_icon.png');
+}
+.cdct_toolbar .cdct_i50.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/maternal/fh_icon.png');
+}
+
+.cdct_toolbar .cdct_i51.cdct_icon::before{
+	width: 18px;
+	background-image: url('img/commonImg/ex_icon.png');
+}
+/* tab容器 切换以及ifram */
+
+.cdct_tabContainer{
+	position: absolute;
+	top: 68px;
+	width: -moz-calc(100% - 20px);
+	width: calc(100% - 20px);
+	bottom: 10px;
+	overflow: hidden;
+}
+/* tab切换 以及tab控件样式重写 */
+
+.cdct_tabBox{
+	width: 100%;
+	height: 68px;
+	line-height: 68px;
+	background: #fff;
+	border-right: solid 1px #e9eaef;
+	border-left: solid 1px #e9eaef;
+	padding-left: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.cdct_tabBox .consulationSearchDiv{
+	height: 100%;
+	overflow: hidden;
+}
+.cdct_tabBox .selectSearchDiv{
+	margin-top: 9px;
+}
+
+.consulationSearchDiv .selectSearchDiv .ul .Searchli{
+	width: 140px;
+	line-height: 26px;
+	padding-right: 1px;
+}
+.consulationSearchDiv .selectSearchDiv .ul .Searchli span{
+	width: 100%;
+	margin-top: 8px;
+	color: #5C6777;
+	font-size: 16px;
+}
+
+.isSearch,.moveIsSearch{
+	width: 130px;
+}
+.consulationSearchDiv .selectSearchDiv .ul .Searchli.changeLi span{
+	color: #30B3F9;
+	font-size: 18px;
+}
+
+/* ifram */
+.cdct_iframe{
+	width: 100%;
+	height: -moz-calc(100% - 68px);
+	height: calc(100% - 68px);
+	overflow: hidden;
+}
+.cdct_iframe iframe{
+	border: none;
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+}
+    

@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>视频录像</title>
+    <meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("jqueryUI_2");
+        loadControl("mySelectTree");
+        loadControl("layer");
+        loadControl("Validation");
+        loadControl("trainselect");
+        loadJs("js/videotape.js?v=" + version);
+        loadJs("js/videotapePlay.js?v=" + version);
+        loadCss("css/videotape.css?v=" + version);
+    </script>
+</head>
+<body>
+    <!-- 左边容器 -->
+    <div class="videotape-left">
+        <!-- 导航/控制条 -->
+        <div class="videotape-left-nav">
+            <div class="controller_contentLeft"></div>
+            <div class="controller_contentRight"></div>
+            <div class="videotape-logo">
+                <div></div>
+                <p>视频录像</p>
+            </div>
+            <div class="logo-rightimg"></div>
+            <div class="btnGroup">
+                <div id="NewBuild">
+                    <div class="NewBuild-left"></div><div class="NewBuild-middle"></div><div class="NewBuild-right"></div><div class="NewBuild-font">新&nbsp;建</div>
+                </div>
+                <div id="BtnSearch">
+                    <div class="NewBuild-left"></div><div class="NewBuild-middle"></div><div class="NewBuild-right"></div><div class="NewBuild-font">查&nbsp;询</div>
+                </div>
+                <div id="Gwz">
+                    <div class="NewBuild-left"></div><div class="NewBuild-middle"></div><div class="NewBuild-right"></div><div class="NewBuild-font">弓位置</div>
+                    <span class="Gwz-droup">
+                        <span class="Gwz-droup-bg"></span>
+                        <span class="Gwz-droup-content">
+                            
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="LineInspection_button_play">
+                <a id="btn_less"><img src="/C3/PC/LineInspection/img/LineInspection_play_left.png" alt="前一帧" title="前一帧" /></a>
+                <a id="btn_play" title="暂停" style="display:none"><img src="/C3/PC/LineInspection/img/LineInspection_play_play.png" alt="暂停" /></a>
+                <a id="btn_pause" title="播放"><img src="/C3/PC/LineInspection/img/LineInspection_play_stop.png" alt="播放" /></a>
+                <a id="btn_next"><img src="/C3/PC/LineInspection/img/LineInspection_play_right.png" alt="后一帧" title="后一帧" /></a>
+                <a id="btn_repeat"><img src="/C3/PC/LineInspection/img/LineInspection_play_replay.png" alt="重播" title="重播" /></a>
+            </div>
+            <div class="LineInspection_contrl" style="position:relative;">
+                <div id="Sms_slider"></div>
+                <strong id="_Content">播放信息：<label id="_Content_Sta_Lab"></label></strong>
+                <strong id="_Content_Pecent">&ensp;&ensp;当前进度：&ensp;<label id="_Content_Pecent_Lab"></label></strong>
+            </div>
+        </div>
+        <!-- 播放视频容器 -->
+        <div class="videotape-left-play">
+            <img src="/C3/PC/LineInspection/img/bg.jpg" alt="" />
+        </div>
+    </div>
+    <!-- 右边容器 -->
+    <div class="videotape-right clearfix">
+        <!--红外图像-->
+        <div class="videotape-right-IR videotape-right-border">
+            <div class="fourPicDetail">
+                <span>已完成到：<strong class="IR_time">0000-00-00 00:00:00</strong></span>
+            </div>
+            <img src="/C3/PC/LineInspection/img/bg.jpg" alt="" />
+            <div class="Img-Title Img-Active">
+                <span>红外图像</span>
+            </div>
+        </div>
+        <!--局部图像-->
+        <div class="videotape-right-VI">
+            <div class="fourPicDetail">
+                <span>已完成到：<strong class="VI_time">0000-00-00 00:00:00</strong></span>
+            </div>
+            <img src="/C3/PC/LineInspection/img/bg.jpg" alt="" />
+            <div class="Img-Title">
+                <span>可见光图像</span>
+            </div>
+        </div>
+        <!--全景图像-->
+        <div class="videotape-right-OAB">
+            <div class="fourPicDetail">
+                <span>已完成到：<strong class="OAB_time">0000-00-00 00:00:00</strong></span>
+            </div>
+            <img src="/C3/PC/LineInspection/img/bg.jpg" alt="" />
+            <div class="Img-Title">
+                <span>全景图像</span>
+            </div>
+        </div>
+        <!--辅助通道图像-->
+        <div class="videotape-right-FZ">
+            <div class="fourPicDetail">
+                <span>已完成到：<strong class="FZ_time">0000-00-00 00:00:00</strong></span>
+            </div>
+            <img src="/C3/PC/LineInspection/img/bg.jpg" alt="" />
+            <div class="Img-Title">
+                <span>辅助图像</span>
+            </div>
+        </div>
+    </div>
+    <!-- 新建弹出框 -->
+    <div id="newbuild">
+        <h4><span class="new-img"></span><span>新建</span></h4>
+        <div class="hr-div"></div>
+        <div class="row-fluid">
+            <div class="span2">
+                车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+            </div>
+            <div class="span10" id="new-loco">
+                <div class="div-menu" style="">
+                    <label id="locomotive_no">请选择</label>
+                    <img src="/Common/img/playico/xia.png" alt="" style="cursor: pointer" />
+                    <div id="TreeAll" class="ztree">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题：
+            </div>
+            <div class="span10">
+                <input type="text" id="new-title"  maxlength="100"/>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                线&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路：
+            </div>
+            <div class="span5">
+                <input type="text" id="new-line" />
+            </div>
+            <div class="span2" style="margin-left:0px;">
+                行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+            </div>
+            <div class="span3" style="margin-left:0px;">
+                <select id="new-DIRECTION" name="new_DIRECTION">
+                    <option value="">暂无</option>
+                    <option value="上行">上行</option>
+                    <option value="下行">下行</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                发生时间：
+            </div>
+            <div class="span10">
+                <input type="text" class="Wdate" id="new-strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />&nbsp;至&nbsp;<input type="text" class="Wdate" id="new-endTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                采集通道：
+            </div>
+            <div class="span10">
+                <div class="row-fluid">
+                    <div class="span3">
+                        <input id="img-HW" type="checkbox" checked name="CJTD" value="img-HW" />红外
+                    </div>
+                    <div class="span3">
+                        <input id="img-JB" type="checkbox" checked name="CJTD" value="img-JB" />局部
+                    </div>
+                    <div class="span3">
+                        <input id="img-QJ" type="checkbox" checked name="CJTD" value="img-QJ" />全景
+                    </div>
+                    <div class="span3">
+                        <input id="img-FZ" type="checkbox" checked name="CJTD" value="img-FZ" />辅助
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                &nbsp;弓&nbsp;位&nbsp;置&nbsp;：
+            </div>
+            <div class="span10">
+                <div class="row-fluid" id="txt_AB">
+
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid" style="text-align: right;">
+            <div class="btn-submit" id="BtnSubmit">
+                <div class="btn-left"></div><div class="btn-middle"></div><div class="btn-right"></div><div class="btn-font">提&nbsp;&nbsp;&nbsp;&nbsp;交</div>
+            </div>
+        </div>
+    </div>
+    <!-- 查询弹出框 -->
+    <div id="Search-Box">
+        <h4><span class="Search-img"></span><span>查询</span></h4>
+        <div class="hr-div"></div>
+        <div class="row-fluid Search-title">
+            <div>
+                <label>设备编号：</label><input type="text" id="txtloccode" class="Search-Input" placeholder="请输入关键字" />
+            </div>
+            <div>
+                <label>标&nbsp;&nbsp;&nbsp;&nbsp;题：</label><input type="text" id="Search-Title" class="Search-Input" />
+            </div>
+            <div>
+                <label>线&nbsp;&nbsp;&nbsp;&nbsp;路：</label><input type="text" id="location" class="Search-Input" />
+            </div>
+            <div>
+                <label>行&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                <select id="direction" name="new_DIRECTION" class="Search-Input">
+                    <option value="">暂无</option>
+                    <option value="上行">上行</option>
+                    <option value="下行">下行</option>
+                </select>
+            </div>
+            <div>
+                <div class="Btn-Search" id="btnsearch">
+                    <div class="btn-left"></div><div class="btn-middle"></div><div class="btn-right"></div><div class="btn-font">查&nbsp;&nbsp;&nbsp;&nbsp;询</div>
+                </div>
+            </div>
+        </div>
+        <div class="hr-div"></div>
+        <div id="Search-table">
+        </div>
+        <div class="row-fluid" id="Search-Page">
+            <div class="page">
+                <div class="page-bg">
+                    <a href="#" class="page-top">
+                        <img src="/Common/MGIS/img/gis-img/top.png" alt="" />
+                    </a> <a href="#" class="page-pre">
+                        <img src="/Common/MGIS/img/gis-img/pre.png" alt="" />
+                    </a> &nbsp;&nbsp;第&nbsp;&nbsp;<input class="page-numb pagecolor"
+                                                         id="page-numb" />
+                    &nbsp;&nbsp;页,共&nbsp;<span class="pagecolor" id="pageCount">12345</span>&nbsp;&nbsp;页,当前页<span class="pagecolor" id="PageSize"></span>条,共<span class="pagecolor" id="Count"></span>条数据
+                    <a href="#" class="page-nex">
+                        <img src="/Common/MGIS/img/gis-img/nex.png" alt="" />
+                    </a> <a href="#" class="page-last">
+                        <img src="/Common/MGIS/img/gis-img/last.png" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

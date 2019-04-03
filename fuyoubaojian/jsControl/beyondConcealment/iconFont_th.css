@@ -1,0 +1,105 @@
+.ofh{
+	overflow: auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display:inline-block;
+}
+.titleDiv{
+	font-size:14px;
+	color:#ffffff;
+	line-height:21px;
+	background:#4a90e2;
+	border-radius:4px;
+	max-width:308px;
+	padding:15px 15px 18px 15px;
+	z-index:1000000000000000;
+	display:none;
+}
+.titleDiv:before{
+	content:"";
+	display:block;
+	  width:10px;
+    height:0px;
+    border-width:10px;
+    position:absolute;
+    left:-30px;
+    top:15px;
+    border-style:solid;
+    border-color:transparent #4a90e2 transparent transparent;
+	  
+}
+.titleDiv.titleDivRight:before{
+	content:"";
+	display:block;
+	  width:10px;
+    height:0px;
+    border-width:10px;
+    position:absolute;
+    right:-30px;
+    top:15px;
+    left:auto;
+    border-style:solid;
+    border-color: transparent transparent transparent #4a90e2; 
+}
+.titleDiv.titleDivTop{
+	position:absolute;
+	bottom:20px;
+	left:50%;
+	transform:translate(-50%,0);
+	-webkit-transform:translate(-50%,0);
+	-moz-transform:translate(-50%,0);
+	-ms-transform:translate(-50%,0);
+	-o-transform:translate(-50%,0);
+	white-space: nowrap;
+}
+.titleDiv.titleDivTop:before{
+	content:"";
+	display:block;
+	  width:10px;
+    height:10px;
+    border-width:10px;
+    position:absolute;
+	right: 18px;
+    top: -18px;
+    left:auto;
+    border-style:solid;
+    border-color:transparent transparent #4a90e2 transparent ; 
+}
+.titleDivIcon.titleDiv{
+	font-size:12px;
+	color:#ffffff;
+	line-height:21px;
+	background-color:rgba(0,0,0,0.8);
+	border-radius:4px;
+	max-width:308px;
+	padding:3px 8px;
+	border-radius:4px;
+    position: absolute;
+    display: none;
+}
+.titleDivIcon.titleDiv:before{
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-width: 5px;
+    position: absolute;
+    left: 14%;
+    top: -10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+}
+.titleDivIcon.titleDiv.titleDivRight:before{
+	content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-width: 5px;
+    position: absolute;
+    right: 14%;
+    top: -10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+    left: auto;
+}
+

@@ -1,0 +1,175 @@
+.CTXD-left-menu{
+    z-index: 1035;
+    width: 100px;background-color:#1d2531;position:absolute;left: 0;top:70px;bottom: 45px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    }
+.CTXD-left-menu .CTXD-left-ul .li{
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+    margin-top: 25px;
+	cursor:pointer;
+}
+.CTXD-left-menu .CTXD-left-ul .li .icon{
+    position:relative;
+}
+.CTXD-left-menu .CTXD-left-ul .li .icon .infoNum,.treeViewSpan .infoNum{
+	width:20px;
+	height:20px;
+	position:absolute;
+    right: 10px;
+    top: -10px;
+	background-color:#ff7800;
+	border-radius:100%;
+	color:white;
+	text-align: center;
+	line-height:20px;
+	font-size:14px;
+}
+.treeViewSpan .infoNum{
+	top:10px;
+}
+.CTXD-left-menu .CTXD-left-ul .li .icon img{
+	    border-radius: 100%;
+    margin-top: 4px;
+}
+.CTXD-left-menu .CTXD-left-ul .span{
+    font-size:14px;
+    color:#b7c0cd;
+    line-height:36px;
+    text-align:left;
+        margin-top: 5px;
+    display: inline-block;
+}
+#oneLevalMenu{
+	width:100%;
+	padding-top:20px;
+}
+.zUIpanelScrollBox,.zUIpanelScrollBar{
+    width:3px;
+    top:4px;
+    right:2px;
+    border-radius:5px;
+	z-index:1000000;
+}
+.zUIpanelScrollBox{
+  
+        background:#fff;opacity:0.8;
+    filter:alpha(opacity=80);
+}
+.zUIpanelScrollBar{
+  background:rgba(0,0,0,1);opacity:0.5;
+    filter:alpha(opacity=50);
+}
+[alt="user-img"] {
+    border: 1px solid rgba(0, 103, 204, 1);;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-color: rgba(0, 103, 204, 0.5);
+    background-size: 60%;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+span[alt="user-img"]:hover {
+    background-color: rgba(10,134,277,0.2);
+}
+.back_a{
+	position:absolute;
+	width:100%;
+text-align: center;
+    bottom: 30px;
+	
+}
+.back_a:hover{
+	opacity:0.8;
+}
+.caret{
+	border:none;
+	display:inline-block;
+	height:4px;
+	width:7px;
+	background-positon:center;
+	    background-repeat: no-repeat;
+}
+#ihUername{
+	text-align:center;
+}
+
+/*图片预览*/
+.showImageProm{
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+    height: 100%;
+    width: 100%;
+    z-index:10000;
+}
+.showImageProm .problemImgItemS{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-size: auto auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.showImageProm .problemImgItemS .cha{
+	display:none;
+}
+.showImageProm .problemImgItemS img{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	-ms-transform:translate(-50%,-50%);
+	-o-transform:translate(-50%,-50%);
+}
+.showImageProm  .controllerDivLeft,.showImageProm  .controllerDivRight{
+    position: absolute;
+    height: 88px;
+    width: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 50%;
+    margin-top: -44px;
+    z-index: 100;
+    opacity: 0.3;
+}
+.showImageProm  .controllerDivLeft{
+    left: 3%;
+}
+.showImageProm  .controllerDivLeft:hover,.showImageProm  .controllerDivRight:hover{
+    opacity: 1;
+}
+.showImageProm  .controllerDivRight{
+    right:3%;
+ }
+.showImageProm  .close:hover{
+    opacity: 1;
+}
+.showImageProm  .close{
+    position: absolute;
+    width: 40px;height: 40px;background-size: 20px 20px;
+    right: 20px;
+    top: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 100;
+    background-color: #2ea2f8;
+    opacity: 0.7;
+    border-radius: 100%;
+}
+#menuLevalOneBox .treeViewSpan .treeIcon{
+    left: 200px!important;
+}

@@ -1,0 +1,27 @@
+cin{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    line-height: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    vertical-align: sub;
+}
+cin[data-value="0"]{
+    background-color: #ffffff;
+}
+cin[data-value="1"]:before{
+    content: " ";
+    font-size: 0;
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    background-color: #5d91ff;
+    left: 15%;
+    top: 15%;
+    border-radius: 3px;
+}

@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("mySelectTree");
+    </script>
+    <script src="/Common/js/6cweb/mydate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#startdate").val(getDateStr(new Date(), -6));
+            $("#enddate").val(getDateStr(new Date()));
+            $("#url").width(document.body.clientWidth - 15);
+            $("#url").height($(window).height() - 143);
+            $('#ddlorg').mySelectTree({
+                tag: 'ORGANIZATION',
+                type: '',
+                onClick: function (event, treeId, treeNode) {
+                    $("#hf_ddlorg").val(treeNode.id);
+                    $("#ddlorg").val(treeNode.name);
+                    $("#hf_type_ddlorg").val(treeNode.treeType);
+                }
+            });
+            $("#ddlLine").mySelect({
+                tag: "LINE",
+                code: "",
+                type: true
+            });
+
+        });
+        function btnQuery() {
+            var url = "LineReport.aspx?startDate=" + $("#startdate").val()
+            + "&endDate=" + $("#enddate").val()
+            + "&locomotive=" + $("#locomotiveselect").val()
+            //            + "&lineCode=" + $("#ddlLine option:selected").val()
+            //            + "&lineName=" + $("#ddlLine option:selected").text()
+            + "&orgCode=" + $("#hf_ddlorg").val()
+            + "&orgName=" + $("#ddlorg").val()
+            + "&weekCount=" + $("#ddlWeek option:selected").val()
+            + "&_w=" + $("#url").width()
+            + "&_h=" + $("#url").height();
+            $("#url").attr("src", url).css("display", "block")
+        }
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box-header well" data-original-title>
+                <h2 id="title">
+                </h2>
+            </div>
+            <div class="box-content">
+                <div class="k-content">
+                    <div class="chart-wrapper">
+                        <table>
+                            <tr>
+                                <td>
+                                    部门：
+                                </td>
+                                <td>
+                                    <input id="ddlorg" type="text" style="width: 120px;" />
+                                    <input id="hf_ddlorg" style="display: none;" />
+                                    <input id="hf_type_ddlorg" style="display: none;" />
+                                </td>
+                                <!--<td>
+                                    &nbsp;&nbsp;&nbsp;线路：
+                                </td>
+                                <td>
+                                    <select id="ddlLine" name="lineselect" style="width: 80px;">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </td>-->
+                                <td>
+                                    &nbsp;&nbsp;&nbsp;对比周：
+                                </td>
+                                <td>
+                                    <select id="ddlWeek" name="weekselect" style="width: 80px;">
+                                        <option value="1">一周前</option>
+                                        <option value="2">两周前</option>
+                                        <option value="3">三周前</option>
+                                        <option value="4">四周前</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;发生时间：
+                                </td>
+                                <td>
+                                    <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                        style="width: 88px;" />
+                                    <label id="label1">
+                                        至</label>
+                                    <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                        style="width: 88px;" />
+                                </td>
+                                <td>
+                                    &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" onclick="btnQuery();"
+                                        value="查询" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="box-header well" data-original-title>
+                <h2>
+                    分析结果
+                </h2>
+            </div>
+            <div class="box-content">
+                <iframe id="url" style="display: none;"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

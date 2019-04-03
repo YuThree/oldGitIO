@@ -1,0 +1,1532 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3C缺陷详情</title>
+
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css" rel="stylesheet" type="text/css" />
+    <style>
+        .tooltip-inner {
+            max-width: inherit;
+            max-height: inherit;
+            text-align: left !important;
+            line-height: 22px;
+        }
+
+        #bjfx_div .tooltip {
+            left: 0 !important;
+        }
+
+        .sptime {
+            display: inline-block;
+            width: 120px;
+        }
+
+        #btn_raised_time, #btn_created_time {
+            cursor: pointer;
+        }
+
+        #btns_all {
+            position: relative;
+            height: 30px;
+            line-height: 30px;
+        }
+
+            #btns_all a {
+                margin: 0 1px 0 0;
+            }
+
+        .row-fluid [class*="span"] {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            min-height: 20px;
+        }
+
+        .box-header {
+            min-height: 11px;
+            height: 11px;
+        }
+
+        .accordion-group {
+            margin-bottom: 0px;
+        }
+
+        .btn-analysis {
+            display: inline-block;
+            padding: 5px 12px;
+            background: url(img/btn_blue.png) no-repeat;
+            background-size: 114px 28px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .i-analysis {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 3px;
+            margin-bottom: -2px;
+            background: url(img/icon_analysis.png) no-repeat;
+            background-size: 12px 12px;
+        }
+
+        .yellowOne {
+            color: #EA7B54;
+        }
+
+        #AlarmCode, #HideAlarmCode {
+            display: inline-block; /*内联对象需加*/
+            max-width: 200px;
+            /*height: 26px;*/
+            min-height: 26px;
+            margin-bottom: -12px;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        }
+
+        #cursor { /*接触点*/
+            position: absolute;
+            display: none;
+            height: 1px;
+            width: 1px;
+            background: url(ImgTmp/img_jc_point.png) no-repeat;
+        }
+
+        #circle-zx { /*中心点*/
+            position: absolute;
+            display: none;
+            height: 14px;
+            width: 14px;
+            background: url(ImgTmp/circle_zx_big.png) no-repeat;
+        }
+
+        #circle-zx-big { /*中心点（big）*/
+            position: absolute;
+            display: none;
+            height: 14px;
+            width: 14px;
+            background: url(ImgTmp/circle_zx_big.png) no-repeat;
+        }
+
+        .pic-splicing-3 {
+            display: inline-block;
+            background-image: url(/C3/PC/MAlarmMonitoring/img/pic_splicing_3.png);
+        }
+
+        #LC {
+            position: absolute;
+            display: none;
+            max-width: 180px;
+            min-height: 100px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #000;
+            opacity: 0.9;
+            z-index: 9999;
+        }
+
+            #LC h3 {
+                padding-bottom: 6px;
+                border-bottom: 1px solid #3dd5f1;
+                text-align: center;
+                color: #3dd5f1;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 4px;
+            }
+
+        .ul-block-smallest {
+            float: left;
+            position: relative;
+            padding: 8px 0 0 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+            .ul-block-smallest li {
+                float: left;
+                width: 100%;
+                display: inline-block;
+                position: relative;
+                margin-bottom: 16px;
+            }
+
+                .ul-block-smallest li:last-child {
+                    text-align: center;
+                }
+
+                .ul-block-smallest li label {
+                    display: inline-block;
+                    margin-bottom: 0;
+                    font-size: 12px;
+                    color: #fff;
+                }
+
+                .ul-block-smallest li input {
+                    width: 80px;
+                    height: 24px;
+                    padding: 1px;
+                    margin-bottom: 0;
+                }
+
+                .ul-block-smallest li .btn-bg-white {
+                    width: 68px;
+                    height: 28px;
+                    background-position: -0px -0px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                    .ul-block-smallest li .btn-bg-white:hover {
+                        background-position: -100px -0px;
+                        color: #3dd5f1;
+                    }
+
+                .ul-block-smallest li .btn-save {
+                    display: inline-block;
+                    padding: 6px 0 6px 14px;
+                    letter-spacing: 14px;
+                    color: #fff;
+                }
+
+                    .ul-block-smallest li .btn-save:hover {
+                        color: #3dd5f1;
+                    }
+
+                .ul-block-smallest li .btn-exit {
+                    display: inline-block;
+                    padding: 6px 0 6px 2px;
+                    letter-spacing: 2px;
+                    color: #fff;
+                }
+
+                    .ul-block-smallest li .btn-exit:hover {
+                        color: #3dd5f1;
+                    }
+
+        .ui-state-disabled {
+            opacity: 1 !important;
+        }
+        /* 向下的箭头 */
+        .dot-bottom {
+            position: absolute;
+            top: 149px;
+            left: 100px;
+            font-size: 0;
+            line-height: 0;
+            border-width: 10px;
+            border-color: #000;
+            border-bottom-width: 0;
+            border-style: dashed;
+            border-top-style: solid;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+        /* 向上的箭头 */
+        .dot-top {
+            position: absolute;
+            top: -10px;
+            left: 100px;
+            font-size: 0;
+            line-height: 0;
+            border-width: 10px;
+            border-color: #000;
+            border-top-width: 0;
+            border-style: dashed;
+            border-bottom-style: solid;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .btn_close {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url(ImgTmp/small_close.png) center no-repeat;
+            background-size: 24px 24px;
+            cursor: pointer;
+        }
+
+        .word-break {
+            max-width: 100px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .layui-layer-tips i.layui-layer-TipsT {
+            bottom: -6px;
+        }
+         .locale_big .tooilp_span {
+            /*width: 70px;*/
+            text-align: justify;
+            text-align-last: justify;
+            display:inline-block;
+            margin-left:0;
+        }
+       .locale_big .tooilp_value {
+            display:inline-block;
+            margin-left:0;
+            float:left;
+}
+        #datamessage {
+            color: white;
+            display: inline-block;
+            position: absolute;
+            bottom: 12px;
+            left: 14px;
+            z-index: 101;
+            width: 17px;
+            height: 17px;
+            line-height: 14px;
+            background: #f56c6c;
+            border-radius: 9px;
+        }
+    </style>
+
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Lib/jcanvas/jcanvas.min.js" type="text/javascript"></script>
+    <script>
+
+        loadControl("layer");
+        loadCss("/C3/PC/css/3CForm4.css?v=" + version);
+        loadControl("jqueryUI_2");
+        loadControl("paging");
+        loadControl("webuploader"); //上传图片组件
+        loadControl('myUploadImg');
+        loadControl("mySelectSample");
+        loadControl("trainselect");
+        loadJs("/C3/PC/MAlarmMonitoring/js/MonitorAlarm3CForm4.js?v=" + version);
+
+
+        loadJs("/C3/PC/MRTA/js/C3AlarmImg_big.js?v=" + version);
+
+        loadJs("/Common/MAlarmMonitoring/js/AlarmEditBox.js?v=" + version);
+
+        loadJs("/Common/MAlarmMonitoring/js/AlarmSaveList.js?v=" + version);
+        loadJs("/C3/PC/MAlarmMonitoring/js/MonitorAlarm3CForm4_lc.js?v=" + version); //设置拉出值
+        loadJs("/Lib/Echarts-2.0/2.0/echarts.min.js?v=" + version); //设置拉出值
+        loadControl("saveMissonAndCancle");//批量转任务
+
+    </script>
+
+
+
+    <script src="/Common/js/6cweb/mydate.js"></script>
+</head>
+<body style="overflow: hidden;display: none">
+    <input type="hidden" id="gotopoleinfo_id" />
+    <a id="A1" href="#" class="lightbox"></a>
+    <div id="noteCtrl">
+        <div id="block-control" class="pull_up"></div>
+        <div id="note">
+            <a href="#" onclick="ShowAllImg()">
+                <img id="qjbtn" src="ImgTmp/pic.png" alt="全景" title='全景【快捷键"F"】' />
+            </a> <a href="#" style="margin-left: 10px;"
+                    onclick="upImg()">
+                <img class="note-left" src="ImgTmp/left.png" alt="上一帧" title='上一帧【快捷键"←"或"A"】' />
+            </a>
+            <a href="#" style="margin-left: -5px;" onclick="dbImgShuffling()" id="all-play">
+                <img class="iconstar" src="/C3/PC/MAlarmMonitoring/ImgTmp/play.png" alt="播放/暂停" title='播放/暂停【快捷键"空格"】' />
+            </a>
+            <a href="#" style="margin-left: -5px;" onclick="lastImg()">
+                <img class="note-right" src="ImgTmp/right.png" alt="下一帧" title='下一帧【快捷键"→"或"D"】' />
+            </a>
+            <a href="#" id="A2" onclick='GoToAlarmFrame()'>
+                <img src="ImgTmp/jump.png" alt="跳转到缺陷帧" title='跳转到缺陷帧【快捷键"T"】' />
+            </a>
+            <div id="slider">
+            </div><span class="xuhao"><span class="xuhao-play" style="color:#FACE1C;">1</span>/<span class="xuhao-all">11</span></span>
+        </div>
+    </div>
+    <div id="note-IR">
+        <div class="note-move">
+        </div>
+        <a href="#" onclick="upImg_IR()">
+            <img class="note-IR-left" src="ImgTmp/left.png" alt="上一帧" title="上一帧" />
+        </a>
+        <a href="#" onclick="lastImg_IR()">
+            <img class="note-IR-right" src="ImgTmp/right.png" alt="下一帧" title="下一帧" />
+        </a>
+        <a href="#" id="btn_Set_cw" class="editorBtn"><img class="note-IR-cw" src="ImgTmp/temperature.png" alt="红外测温" title="红外测温" /></a>
+        <a href="#" id="btn_Set_hw" onclick="SetFrame('IR')">
+            <img class="note-IR-setup editorBtn" src="ImgTmp/setup.png" alt="设置红外缺陷帧" title="设置红外缺陷帧" />
+        </a>
+        <a href="#" id="btn_Set_jc" class="editorBtn"><img class="note-IR-jc" src="ImgTmp/jc_point.png" alt="接触点坐标" title="接触点坐标" /></a>
+        <a href="#" id="btn_Set_zx" class="editorBtn"><img class="note-IR-zx" src="ImgTmp/zx_point.png" alt="中心点坐标" title="中心点坐标" /></a>
+        <div class="CW_warpper editorBtn">
+            <a href="#" id="btn_cw_single"><img class="note_cw_single" src="ImgTmp/single.png" alt="" title="单点测温" /></a>
+            <a href="#" id="btn_cw_continue"><img class="note_cw_continue" src="ImgTmp/continue.png" alt="" title="单点连续测温" /></a>
+            <a href="#" id="btn_cw_area"><img class="note_cw_area" src="ImgTmp/area.png" alt="" title="区域测温" /></a>
+            <a href="#" id="btn_cw_clean"><img class="note_cw_clean" src="ImgTmp/clean.png" alt="" title="清除" /></a>
+        </div>
+        <span class="IRxuhao"><span class="IRxuhao-play" style="color:#FACE1C;">1</span>/<span class="IRxuhao-all">11</span></span>
+    </div>
+    <div id="note-VI">
+        <div class="note-move">
+        </div>
+        <a href="#" onclick="upImg_VI()">
+            <img class="note-VI-left" src="ImgTmp/left.png" alt="上一帧" title="上一帧" />
+        </a>
+        <a href="#" onclick="lastImg_VI()">
+            <img class="note-VI-right" src="ImgTmp/right.png" alt="下一帧" title="下一帧" />
+        </a>
+        <a href="#" id="btn_Set_kjg" onclick="SetFrame('VI')">
+            <img class="note-VI-setup editorBtn" src="ImgTmp/setup.png" alt="设置可见光缺陷帧" title="设置可见光缺陷帧" />
+        </a>
+        <a href="#" id="a_BKJG" onclick="BKJGImg()">
+            <img class="note-light" src="ImgTmp/brightness.png" alt="亮度调节" title="亮度调节" />
+        </a>
+        <span class="IRxuhao"><span class="VIxuhao-play" style="color:#FACE1C;">1</span>/<span class="VIxuhao-all">11</span></span>
+    </div>
+    <div id="note-OAB">
+        <div class="note-move">
+        </div>
+        <a href="#" onclick="upImg_OAB()">
+            <img class="note-OAB-left" src="ImgTmp/left.png" alt="上一帧" title="上一帧" />
+        </a>
+        <a href="#" onclick="lastImg_OAB()">
+            <img class="note-OAB-right" src="ImgTmp/right.png" alt="下一帧" title="下一帧" />
+        </a>
+        <a href="#" id="btn_Set_all" onclick="SetFrame('OAB')">
+            <img class="note-OAB-setup editorBtn" src="ImgTmp/setup.png" alt="设置全景缺陷帧" title="设置全景缺陷帧" />
+        </a>
+        <a href="#" id="a_BQJ" onclick="BQJImg()">
+            <img src="ImgTmp/brightness.png" alt="亮度调节" title="亮度调节" />
+        </a>
+        <span class="IRxuhao"><span class="OABxuhao-play" style="color:#FACE1C;">1</span>/<span class="OABxuhao-all">11</span></span>
+    </div>
+    <div>
+        <div class="carousel-inner" id="BigDiv" style="display: none; z-index: 100001; position: absolute;">
+            <div class="item">
+                <img id="BigImg" onclick="BigdbImgShuffling()" ondblclick="CloseALLimg()" style="height: 100%;
+                    width: 100%;" src="/Common/img/ImgTmp/C31.JPG" data-zoom-image="/Common/img/ImgTmp/C31.JPG" />
+            </div>
+        </div>
+        <div class="RowLR">
+            <div class="L" style="position: relative; background: #fff">
+                <img id="hw" height="150" src="" onclick="PauseImgShuffling()" />
+                <img id="hw-Backup" /><!-- 隐藏的红外图 -->
+                <img id="hw_ts" height="150" src="" style="display:none;" />
+                <canvas id="myCanvas" width="515" height="433" style="border:0px solid red;position:absolute;top:0;left:0;z-index:0;display:none;"></canvas>
+                <!-- 红外温度测量-end -->
+                <canvas id="tempCavars" width="515" height="433"></canvas>
+                <canvas id="cavars" width="515" height="433"></canvas>
+                <div id="L-bg" style="width: 100%; height: 100%; position: absolute; top: 0;">
+                    <img id="hw-bg" height="40" src="/Common/img/loading1.gif" style="position: absolute;
+                        left: 50%; top: 50%; margin-left: -20px; margin-top: -20px;" />
+                    <p style="position: absolute; top: 65%; left: 45%;">
+                        图片加载中……
+                    </p>
+                </div>
+            </div>
+            <div class="R" style="position: relative;">
+                <img id="kjg" height="150" src="" onclick="ALLimg(this,'KJG')" data-zoom-image="/Common/img/ImgTmp/C31.JPG" />
+                <div id="R-bg" style="width: 100%; height: 100%; position: absolute; top: 0;">
+                    <img id="kjg-bg" height="40" src="/Common/img/loading1.gif" style="position: absolute;
+                        left: 50%; top: 50%; margin-left: -20px; margin-top: -20px;" />
+                    <p style="position: absolute; top: 65%; left: 45%;">
+                        图片加载中……
+                    </p>
+                </div>
+            </div>
+            <div class="cls">
+            </div>
+            <div class="tab-pane active carousel-caption" id="panel-6652" style="text-align: left;
+                height: 30px;">
+                <img id="btn_locInfoControl" class="imgshareing" src="/Common/img/locoPlay/left.png" align="middle" title="【快捷键“G”】" />
+                <p id="locInfo" style="display: inline-block; line-height: 25px; vertical-align: middle;
+                    margin: 0px;">
+                </p>
+                <button id="btn-save" class="btn btn-info">保&nbsp;&nbsp;存</button>
+                <button id="btn-start" class="btn btn-primary editorBtn">编辑模式</button>
+                <button id="btn-close" class="btn btn-primary">返&nbsp;&nbsp;回</button>
+            </div>
+        </div>
+        <div class="RowLR" style="position: relative;">
+            <div id="divDropButton" class="btn-group" role="group" style="position: absolute;
+                 top: 0; z-index: 1;">
+                <button id="dropButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="width: 133px; background-color: #1B1B1B;
+                    color: White; background-image: none; text-shadow: none; border-color: #FFF;
+                    border-width: 3px; border-radius: 7px;padding-left: 0;">
+                    <span id="chartTitle">温度曲线</span> <span class="glyphicon glyphicon-chevron-down"
+                                                            style="color: White;"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width: 127px; width: 127px; background-color: #1B1B1B;border-color: #FFF;border-width: 3px;">
+                    <li style="background-color: #1B1B1B; color: White; background-image: none; text-shadow: none;
+                        border-color: #FFF; border-width: 5px; border-radius: 7px;">
+                        <a id="wd" href="javascript:void(0);" style="color: White;">
+                            温度曲线
+                        </a>
+                    </li>
+                    <li><a id="lc" href="javascript:void(0);" style="color: White;">拉出值曲线</a></li>
+                    <li><a id="dg" href="javascript:void(0);" style="color: White;">导高值曲线</a></li>
+                    <li><a id="wdd" href="javascript:void(0);" style="color: White;">温度导高值曲线</a></li>
+                </ul>
+            </div>
+            <div class="L">
+                <div id="linechart" style="height: 150px;">
+                </div>
+                <div id="lc_chart" style="height: 150px; display: none;">
+                </div>
+                <div id="dg_chart" style="height: 150px; display: none;">
+                </div>
+                <div id="wd_chart" style="height: 150px; display: none;">
+                </div>
+                <div id="lcm_chart" style="display: none;z-index:1;position:absolute;top:0;">
+                </div>
+                <img id="allimg" style="display: none" src="/Common/img/暂无图片.png" ondblclick="ALLimg(this)" onclick="PauseImgShuffling()" />
+            </div>
+            <div class="R" id="bottom-R">
+                <div class="alarm-btn-box" data-original-title="data-original-title">
+                    <h2>
+                        <span id="C3title">基本信息</span>
+                    </h2>
+                    <ul class="ul-block-btn">
+
+                        <li id="ckdj" onclick="marker_bug()" style="display:none;" class="editorBtn">
+                            <span class="pic-btn btn-defects-ico"></span><span class="text-span text-width-m captions">典型缺陷</span>
+                        </li>
+                        <li id="signPortout" onclick="marker_postOut()" style="display:none;" class="editorBtn">
+                            <span class="pic-btn btn-mark-ico"></span><span class="text-span text-width-m captions">周报标志</span>
+                        </li>
+                        <li id="alarm_clock" style="display:initial;">
+                            <span class="pic-btn btn-lock-ico"></span><span class="text-span text-width-s captions">锁定</span>
+                        </li>
+                        <li id="btn_editWZ" class="editorBtn">
+                            <span class="pic-btn btn-edit-ico"></span><span class="text-span text-width-m captions">编辑位置</span>
+                        </li>
+                        <li id="lcm" style="display:none;" class="editorBtn">
+                            <span class="pic-btn btn-lc-ico"></span><span class="text-span text-width-m captions">拉出选择</span>
+                        </li>
+                        <li class="j-alarm-upload editorBtn">
+                            <span class="pic-btn btn-upload-ico"></span><span class="text-span text-width-m captions j-alarm-upload-2">上传图片</span>
+                        </li>
+                        <li class="j-alarm-upload_3C editorBtn">
+                            <span class="pic-btn btn-upload-ico"></span><span class="text-span text-width-m captions j-alarm-upload-2">上传图片</span>
+                        </li>
+                        <li class="j-alarm-history">
+                            <span class="pic-btn btn-history-ico"></span><span class="text-span text-width-s captions">历史</span>
+                        </li>
+                        <li id="OriginalFile" style="display:none;">
+                            <span class="pic-btn btn-of-ico"></span><span class="text-span text-width-m captions"  style="top:-50px;"><a href="#" id="OriginalFile_look">主动获取原始数据</a></span><span class="text-span text-width-m captions" style=""><a href="#" id="OriginalFile_time">新建原始数据获取</a></span>
+                        </li>
+                        <li class="j-analysis-detail" style="display:none;">
+                            <span class="pic-btn btn-inspection-ico"></span><span class="text-span text-width-s captions">巡检</span>
+                        </li>
+                        <li id="btn_sendinfo">
+                            <span class="pic-btn btn-send-ico"></span><span class="text-span text-width-m captions">发送短信</span>
+                        </li>
+                        <li class="j-sample" style="display: none;">
+                            <span class="btn-sample-ico"></span><span class="text-span text-width-m captions">确认样本</span>
+                        </li>
+                        <li id="Scene_sample" style="display: none;">
+                            <span class="btn-chang-ico"></span><span class="text-span text-width-m captions">场景样本</span>
+                            <input id="SampleValue" type="hidden" />
+                        </li>
+                        <li id="j-alarm-datamessage" style="display: none;position:relative">
+                            <span style="background:url(/C3/PC/MAlarmMonitoring/img/AbnormalData.png) center center no-repeat;width:13px;height:20px;display:inline-block;position:relative"></span><span class="text-span text-width-m captions">异常提醒</span><span id="datamessage" >11</span>
+                        </li>
+                    </ul>
+                    <a name="btn_notice" id="btn_notice" title="下载整改通知书" class="btn btn-primary" style="font-size:14px;display:none;padding: 3.5px 4px;line-height: 14px;margin-right:6px;">通</a>
+                    <a name="btn_Feedback" id="btn_Feedback" title="下载整治反馈单" class="btn btn-primary" style="font-size:14px;display:none;padding: 3.5px 4px;line-height: 14px;">馈</a>
+                </div>
+
+                <!-- 内容区域 start -->
+                <div class="box-content">
+                    <div id="tablejbxx" class="block-body collapse in" style="height:100%;">
+                        <div id="TOP_three">
+                            <!-- 报警现场 -->
+                            <div class="locale">
+                                <div class="imgdiv bg-blue subtitle">
+                                    <span class="dot-right dot-right-locale"></span>
+                                    <span class="subtitle-name">
+                                        <span>报</span>
+                                        <span>警</span>
+                                        <span>现</span>
+                                        <span>场</span>
+                                    </span>
+                                </div>
+                                <div class="locale_big">
+                                    <ul class="ul-block-locale">
+                                        <!-- 第一行 -->
+                                        <li class="li-display-block">
+                                            <label class="field-name"><span>位置<i></i></span></label><label class="label-colon-wz">：  </label>
+                                            <span class="wz-info font-bold">
+                                                <span id="WZ">
+                                                    <a href="javascript:void(0)" id="polenoinfo" data-rel="tooltip" title="查看杆号详细情况">支柱</a>
+                                                </span>
+                                                <span id="WZ_fz" class="icon icon-orange icon-tag ml-ss" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;"></span>
+                                                <span id="jltr" style="display:none">
+                                                    交路号：<span id="jlh"></span>
+                                                    运用区段：<span id="crossing_no"></span>
+                                                    线路： <span id="line_code"></span>
+                                                    车站：<span id="STATION_NO"></span>
+                                                </span>
+                                                <a href="#" id="satellites" class="ml-ss">
+                                                    <img src='/Common/img/roll.gif' style="display: inline-block" id="map_img" />
+                                                    <span id="xj" class="xj" title="查看地理位置【快捷键'M'】"></span>
+                                                </a>
+                                                <span class="locale_big_gs"><span id="DUTY_RANGE"></span></span>
+                                            </span>
+                                        </li>
+                                        <!-- 第二行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>时间<i></i></span>：  </label>
+                                            <span id="raised_time" class="font-bold"></span>
+                                            <span id="btn_raised_time" class="icon icon-orange icon-info" title="" data-html="true" data-rel="tooltip" style="display: none"></span>
+                                            <span id="btn_created_time" class="icon icon-orange icon-info" title="" data-html="true" data-rel="tooltip" style="display: none"></span>
+                                            <a id="btn_GJ" href="#" class="icon icon-orange icon-transfer-ew" title="查看缺陷发生时前后2小时的轨迹" data-rel="tooltip"></a>
+                                            <a id="btn_vedio_play" href="#" class="" title="播放原始数据" data-rel="tooltip" style="display: none;"></a>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>设备编号<i></i></span>：  </label>
+                                            <span id="trainNo" class="font-bold"></span>
+                                            <span id="trainInfo" class="icon icon-orange icon-tag" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;"></span>
+                                        </li>
+                                        <li class="li-w-small">
+                                            <label class="field-name"><span>弓位置<i></i></span>：  </label>
+                                            <span id="BOW_TYPE" class="font-bold"></span>
+                                        </li>
+                                        <!-- 第三行 -->
+                                        <li class="li-display-block">
+                                            <label class="field-name"><span>同点对比<i></i></span></label><label class="label-colon-vs">：  </label>
+                                            <button type="button" class="btn btn-vs j-vs" data-rel="tooltip" title="设置分析条件" onclick="document.getElementById('modal-condition').click();"></button>
+                                            <span id="div_Detail" class="font-bold"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="clear: both"></div>
+                                <div class="cls"></div>
+                            </div>
+
+                            <!-- 检测值 -->
+                            <div class="test">
+                                <div class="imgdiv bg-green subtitle">
+                                    <span class="dot-right dot-right-test"></span>
+                                    <span class="subtitle-name">
+                                        <span>检</span>
+                                        <span>测</span>
+                                        <span>值</span>
+                                    </span>
+                                </div>
+                                <div class="test_big">
+                                    <ul class="ul-block-test">
+                                        <!-- 第一行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>拉出值<i></i></span>：  </label>
+                                            <span id="lcz" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>导高值<i></i></span>：  </label>
+                                            <span id="dgz" class="font-bold"></span>
+                                            <span id="dgzdcz" class="icon icon-orange icon-alert" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;"></span>
+                                        </li>
+                                        <li class="li-w-small">
+                                            <label class="field-name"><span>速度<i></i></span>：  </label>
+                                            <span id="sudu" class="font-bold"></span>
+                                            <span id="yxjl" class="icon icon-orange icon-info" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;"></span>
+                                        </li>
+                                        <!-- 第二行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>环境温度<i></i></span>：  </label>
+                                            <span id="hjwendu" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>报警温度<i></i></span>：  </label>
+                                            <span id="wendu" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-small">
+                                            <label class="field-name"><span>燃弧大小<i></i></span>：  </label>
+                                            <span id="arcArea" class="font-bold"></span>
+                                        </li>
+                                        <!-- 第三行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>燃弧形状<i></i></span>：  </label>
+                                            <span id="rh-shape" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>燃弧时长<i></i></span>：  </label>
+                                            <span id="rh-duration" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-small" title="">
+                                            <label class="field-name"><span>燃弧个数<i></i></span>：  </label>
+                                            <span id="rh-number" class="font-bold" style="cursor:pointer;"></span>
+                                        </li>
+                                        <!-- 第四行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>tax监控状态<i></i></span>：  </label>
+                                            <span id="tax-monitor-status" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>tax调车状态<i></i></span>：  </label>
+                                            <span id="tax-shunting-state" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-small">
+                                            <label class="field-name"><span>tax本补机<i></i></span>：  </label>
+                                            <span id="tax-filling-machine" class="font-bold"></span>
+                                        </li>
+                                        <!-- 第五行 -->
+                                        <li class="li-w-big" style="display: none;">
+                                            <label class="field-name"><span>设备部件<i></i></span>：  </label>
+                                            <span id="devTarget" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle" title="">
+                                            <label class="field-name"><span>燃弧像素<i></i></span>：  </label>
+                                            <span id="rh-pixel" class="font-bold"  style="cursor:pointer;"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+
+                            <!-- 报警分析 -->
+                            <div class="analyse">
+                                <div class="imgdiv bg-blue subtitle">
+                                    <span class="dot-right dot-right-analyse"></span>
+                                    <span class="subtitle-name">
+                                        <span>报</span>
+                                        <span>警</span>
+                                        <span>分</span>
+                                        <span>析</span>
+                                    </span>
+                                </div>
+                                <div class="analyse_big">
+                                    <ul class="ul-block-analyse">
+                                        <!-- 第一行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>报警类型<i></i></span>：  </label>
+                                            <span id="SUMMARYDIC" class="font-bold"></span>
+                                            <span id="orAlarmType" class="icon icon-orange icon-tag" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;display:none;"></span>
+                                        </li>
+                                        <li class="li-w-middle">
+                                            <label class="field-name"><span>报警级别<i></i></span>：  </label>
+                                            <span id="severity" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-small">
+                                            <label class="field-name"><span>报告人<i></i></span>：  </label>
+                                            <span id="Reporter" class="font-bold"></span>
+                                            <span id="Reporte_time" class="icon icon-orange icon-info" title="" data-html="true" data-rel="tooltip" style="cursor:pointer;"></span>
+                                        </li>
+                                        <!-- 第二行 -->
+                                        <li class="li-display-block">
+                                            <label class="field-name"><span>报警分析<i></i></span></label><label class="label-colon-defect">：  </label>
+                                            <span id="txtDefect" class="font-bold"></span>
+                                        </li>
+                                        <!-- 第三行 -->
+                                        <li class="li-display-block">
+                                            <label class="field-name"><span>处理建议<i></i></span></label><label class="label-colon-advice">：  </label>
+                                            <span id="txtAdvice" class="font-bold"></span>
+                                        </li>
+                                        <!-- 第四行 -->
+                                        <li class="li-w-big">
+                                            <label class="field-name"><span>标签<i></i></span>：  </label>
+                                            <span id="AlarmCode" title="" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-middle" style="display:none;">
+                                            <label class="field-name"><span>编码<i></i></span>：  </label>
+                                            <span id="HideAlarmCode" class="font-bold"></span>
+                                        </li>
+                                        <li class="li-w-max">
+                                            <label class="field-name"><span>备注<i></i></span></label><label class="label-colon-note">：  </label>
+                                            <span id="txtNote" class="font-bold"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                        <!-- 报警状态 -->
+                        <div class="state">
+                            <div class="imgdiv bg-green subtitle">
+                                <span class="dot-right dot-right-state"></span>
+                                <span class="subtitle-name">
+                                    <span>报</span>
+                                    <span>警</span>
+                                    <span>状</span>
+                                    <span>态</span>
+                                </span>
+                            </div>
+                            <ul id="ul_status">
+                                <li class="li_status_out" id="li_new">新上报</li>
+                                <li class="li_status_out" id="li_yqx">已确认</li>
+                                <li class="li_status_out" id="li_yjh">已计划</li>
+                                <li class="li_status_out" id="li_jxz">检修中</li>
+                                <li class="li_status_out_colse" id="li_ygb">已关闭</li>
+                                <li class="li_status_over_colse" id="li_cancle" style="display: none">已取消</li>
+                            </ul>
+                            <div id="cancelNumber">
+                                <span>销号状态：</span>
+                                <img src="img/noStatus.png" width="78" height="52" />
+                            </div>
+                            <div style="clear: both;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="btns_all" class="accordion-group" style="text-align: center; border-style: none;
+                    margin-top: 0px;">
+                    <div id="irvAA">
+                    </div>
+                    <a name="E_btnOk2" id="E_btnOk2" title="确认疑似缺陷属实【快捷键'Q'】" class="btn  btn-danger editorBtn">
+                        <i class="icon-white icon-ok-sign">
+                        </i>确认
+                    </a><a name="E_btnCan2" id="E_btnCan2" title="疑似缺陷属于误报，取消该缺陷显示【快捷键'E'】" class="btn  btn-success editorBtn">
+                        <i class="icon-white icon-remove-sign"></i>取消
+                    </a><input type="hidden" id="setSaveMissionAndCancle" /><!--<a id="E_save" title="加入待处理列表"
+                                                                               class="btn btn-info">
+                        <i id="i_save" class="icon icon-white icon-star-on"></i>收藏
+                    </a><a id="E_saveList" title="批量处理" class="btn btn-info editorBtn">
+                        <i class="icon icon-white icon-compose">
+                        </i>批量
+                    </a>-->
+                    <div class="btn-group dropup" style="display: inline-block; vertical-align: middle;
+                        margin: 0 -4px;">
+                        <a href="#" title="导出按钮" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-print icon-white"></i>导出<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="javascript:void(0)" id="portURLBtn" onclick="importToWord()" style="text-align: left;
+                                padding: 10px 15px;"><i class="icon-file"></i>预览缺陷报告</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" id="portOutBtn" style="text-align: left;
+                                padding: 10px 15px;"><i class="icon-file"></i>导出缺陷报告</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" id="flashPortOutBtn" style="text-align: left;
+                                padding: 10px 15px;display:none"><i class="icon-file"></i>重新生成缺陷报告</a>
+                            </li>
+                            <li id="irvA">
+                                <a href="javascript:void(0)" style="text-align: left; padding: 10px 15px;">
+                                    <i class="icon-download-alt"></i>导出MFC3
+                                </a>
+                            </li>
+                            <li id="irvB">
+                                <a href="javascript:void(0)" onclick="getPath('IR_PICS');" style="text-align: left; padding: 10px 15px;">
+                                    <i class="icon-download-alt"></i>导出红外GIF
+                                </a>
+                            </li>
+                            <li id="irvC">
+                                <a href="javascript:void(0)" onclick="getPath('VI_PICS');" style="text-align: left; padding: 10px 15px;">
+                                    <i class="icon-download-alt"></i>导出局部GIF
+                                </a>
+                            </li>
+                            <li id="irvD">
+                                <a href="javascript:void(0)" onclick="getPath('OA_PICS');" style="text-align: left; padding: 10px 15px;">
+                                    <i class="icon-download-alt"></i>导出全景GIF
+                                </a>
+                            </li>
+                            <li id="irvA_HistoryAlarm" class="hide">
+                                <a href="javascript:void(0)" style="text-align: left; padding: 10px 15px;">
+                                    <i class="icon-download-alt"></i>导出MFC3(含报警历史)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" id="btn_replay" class="btn btn-primary">
+                        <i class="icon icon-triangle-e icon-white">
+                        </i>回放
+                    </a><a id="modal-task" data-toggle="modal" class="btn btn-primary " onclick="taskOpen()">
+                        <i class="icon-eye-open icon-white"></i>查看任务
+                    </a>
+                    <a id="E_btnTask" onclick="btnOnClick('btnTask')"
+                       title="转到任务处理" class="btn btn-primary editorBtn">
+                        <i class="icon-tasks icon-white"></i>任务处理
+                    </a>
+                    <div class="btn-group dropup" id="ReturnAgain" style="display: inline-block; vertical-align: middle;margin: 0 -4px;display:none;">
+                        <a href="#" title="重解析按钮" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            重新解析
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(1)" style="text-align: left; padding: 10px 15px;"><i class="icon-all"></i>全部</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(3)" style="text-align: left; padding: 10px 15px;"><i class="icon-img"></i>全景</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(2)" style="text-align: left; padding: 10px 15px;"><i class="icon-img"></i>局部</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(4)" style="text-align: left; padding: 10px 15px;"><i class="icon-img"></i>全景和局部</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" id="Support" onclick="returnAgain(6)" style="text-align: left; padding: 10px 15px;"><i class="icon-img"></i>辅助</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(5)" style="text-align: left; padding: 10px 15px;"><i class="icon-parame"></i>几何参数</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(7)" style="text-align: left; padding: 10px 15px;"><i class="icon-local"></i>位置</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="returnAgain(8)" style="text-align: left; padding: 10px 15px;"><i class="icon-local"></i>GPS转换</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" id="S_pre" onclick="PreAlarm(true)" title="查看上一条缺陷【快捷键'W'】" style="display: inline-block;">
+                        <img src="ImgTmp/preone.png" alt="上一条" style="display: inline-block;" />
+                    </a><a href="#" id="S_next" onclick="PreAlarm(false)" title="查看下一条缺陷【快捷键'S'】" style="display: inline-block;">
+                        <img src="ImgTmp/nextone.png" alt="下一条" style="display: inline-block;" />
+                    </a><a href="#" id="S_btclose" title="关闭本页【快捷键'C'】" style="display: inline-block;">
+                        <img src="ImgTmp/close.png" alt="关闭" style="display: inline-block;" />
+                    </a>
+                    <!--<a id="S_next" name="S_btnExl" title="查看下一条缺陷" class="btn btn-primary"
+                           onclick="NextAlarm()" style="padding:6px 12px;">
+                            <i class="icon-circle-arrow-right icon-white icon-2x"></i>
+                    </a><a id="S_btclose" class="btn btn-primary btn-lg " title="关闭本页" style="padding:5px 12px">
+                        <i class="icon icon-close icon-white icon-2x">
+                        </i>
+                    </a>-->
+                    <a id="tanchu" href="#" class="lightbox"></a>
+                    <!--任务按钮要用，不能删-->
+                </div>
+            </div>
+            <div class="cls">
+            </div>
+        </div>
+        <div style="position: absolute; left: 305px; top: 200px; width: 200px;">
+        </div>
+    </div>
+    <a id="modal-td" href="#modal-container-td" data-toggle="modal" style="display: none">
+    </a>
+    <!--弹出模态-->
+    <div aria-hidden="true" id="modal-container-td" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="width: 850px; left: 550px; top: 350px">
+        <div class="modal-header">
+            <h3>
+                详细信息
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center">
+                <iframe id="alarmInfo" height="550px" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <a id="modal-repeat" href="#modal-container-repeat" data-toggle="modal" style="display: none">
+    </a>
+    <!--弹出模态-->
+    <div aria-hidden="true" id="modal-container-repeat" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="width: 1400px; height: 1050px; left: 370px;
+        top: 290px">
+        <div class="modal-header">
+            <h3>
+                详细信息
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center">
+                <iframe id="repeatInfo" height="910px" width="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="Button3" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <!--<div id="box_gis" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 900px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    地理位置
+                </h4>
+            </div>
+            <div style="padding: 8px;">
+                地理位置：<strong><span id="_WZ"></span></strong> &nbsp;<strong>东经<span id="gisX"></span>
+                    &nbsp;北纬 <span id="gisY"></span></strong>&nbsp;&nbsp;&nbsp; <span id="xj2" class="xj">
+                    </span></strong>
+            </div>
+            <div class="modal-content">
+                <div id="mapDiv" style="width: 100%; height: 450px">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn_closeEditBox" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>
+        </div>
+    </div>-->
+    <div id="box_delay" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 500px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    延时
+                </h4>
+            </div>
+            <div class="modal-content">
+                <div id="box_delay_content">
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" id="btn_closeEditBox" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>-->
+        </div>
+    </div>
+    <div style="background-color: black;">
+        <!-- <span id="btn_Set_hw" style="display: none" title="设置红外缺陷帧" class="icon32 icon-white icon-gear btn_setFrame"
+              onclick="SetFrame('IR')"></span><span id="btn_Set_kjg" style="display: none" title="设置可见光缺陷帧"
+                                                    class="icon32 icon-white icon-gear btn_setFrame" onclick="SetFrame('VI')">
+        </span><span id="btn_Set_all" style="display: none" title="设置全景缺陷帧" class="icon32 icon-white icon-gear btn_setFrame"
+                     onclick="SetFrame('OAB')"></span>-->
+    </div>
+    <a id="modal-condition" href="#modal-condition-td" data-toggle="modal" style="display: none">
+    </a>
+    <div aria-hidden="true" id="modal-condition-td" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" style="float: left;">
+                同点对比&nbsp;&nbsp;&nbsp;<span id="td_title"></span>
+            </h4>
+            <span id="td-Title" style="float: left;"></span>
+        </div>
+        <div class="modal-content">
+            <table class="table table-striped" style="width: 560px;">
+                <tr>
+                    <td style="padding: 12px;">
+                        起始时间
+                    </td>
+                    <td>
+                        <input id="startTime" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd  HH:mm:ss' })"
+                               style="width: 130px" readonly="readonly" />
+                    </td>
+                    <td style="padding: 12px;">
+                        终止时间
+                    </td>
+                    <td>
+                        <input id="endTime" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd  HH:mm:ss' })"
+                               style="width: 130px" readonly="readonly" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        间距
+                    </td>
+                    <td>
+                        <input id="range" type="text" style="width: 130px;" value="100" />
+                    </td>
+                    <td style="padding: 12px;">
+                        重复次数
+                    </td>
+                    <td>
+                        <input id="repeatCount" type="text" style="width: 130px;" value="2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        缺陷类型
+                    </td>
+                    <td class="tdLx">
+                        <input id="citySel" type="text" value="非干扰" code="FGR" style="width: 130px; margin: 0;" />
+                    </td>
+                    <td class="tdXb" style="padding: 12px;">
+                        行别
+                    </td>
+                    <td class="tdXb">
+                        <select id="direction" style="width: 140px; border-radius: 3px;">
+                            <option value="0">全部</option>
+                            <option value="上行">上行</option>
+                            <option value="下行">下行</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">级别</td>
+                    <td colspan="3">
+                        <input type="checkbox" id="grade-one" checked="checked" name="JB" value="一类" /><label class="gradeOne">一级</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="grade-two" checked="checked" name="JB" value="二类" /><label class="gradeTwo">二级</label>&nbsp;&nbsp;
+                        <input type="checkbox" id="grade-three" checked="checked" name="JB" value="三类" /><label class="gradeThree">三级</label>&nbsp;&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        状态
+                    </td>
+                    <td colspan="3">
+                        <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                                style="width: 350px" size="3">
+                            <option value="AFSTATUS01" selected="selected">新上报</option>
+                            <option value="AFSTATUS04" selected="selected">已计划</option>
+                            <option value="AFSTATUS03" selected="selected">已确认</option>
+                            <option value="AFSTATUS02">已取消</option>
+                            <option value="AFSTATUS05">已关闭</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btn_fx" class="btn btn-primary" data-dismiss="modal">
+                分析
+            </button>
+        </div>
+    </div>
+    <input id="taskid" type="hidden" />
+    <!-- 弹出发送信息模态框 -->
+    <div class="modal fade" id="SendInfo" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img style="margin-left:5px;" src="ImgTmp/send-tel.png" alt="" /><h4 class="modal-title send-color">短信通知</h4>
+                    <img style="float:right;cursor:pointer;" data-dismiss="modal" src="ImgTmp/send-close.png" alt="" />
+                    <hr />
+                </div>
+                <div class="modal-body">
+                    <div class="send-left">
+                        <div style="height:62px;">
+                            <span class="send-color">&nbsp;接&nbsp;收&nbsp;人：</span>
+                            <div id="send-jsr"></div>
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="send-color">短信内容：</span><textarea id="send-dxnr" maxlength="340"></textarea>
+                        </div>
+                        <p id="sendp"></p>
+                    </div>
+                    <div class="send-right">
+                        <h5 class="send-color">通讯录</h5>
+                        <input id="send-search" type="text" value="" placeholder="请输入姓名，电话或组织机构" maxlength="26" />
+                        <div class="send-right-title">
+                            <span class="send-name">姓名</span>
+                            <span class="send-number" style="width: 73px; color: #3670CF;">电话</span>
+                            <span class="send-duan">组织机构</span>
+                        </div>
+                        <div class="send-ul">
+                            <ul id="send-ul"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <hr />
+                    <button id="SendEnter" class="btn btn-primary">发送信息</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改销号状态模态框 -->
+    <!--<div class="modal fade" id="Cancel_Number" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog">
+        <div class="modal-header">
+            <h3>
+                修改销号状态
+            </h3>
+        </div>
+        <div class="modal-body">
+            销号状态：
+            <select id="Cancel_Number_code">
+                <option value="无">无</option>
+                <option value="已销号">已销号</option>
+                <option value="未销号">未销号</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="updateCancelNumber();">确认</button>
+            <button id="closeCancel_Number" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">关闭</button>
+        </div>
+    </div>-->
+
+    <!--历史记录 start-->
+    <div id="alarm-history" class="box-middle hide">
+        <input class="act" type="hidden" value="history" />
+        <!--<span class="pic-splicing-1 close-ico j-close"></span>-->
+        <div class="box-title">
+            <span class="pic-splicing-1 title-ico"></span>
+            <span class="title">检测数据修改历史</span>
+        </div>
+        <div class="table-block">
+            <table id="table-history" class="table-g">
+                <tr>
+                    <td></td>
+                    <td>
+                        <ul class="ul-block-middle hide">
+                            <li>
+                                <label>操作时间:</label>
+                                <label>2016-10-10 10:10:10</label>
+                            </li>
+                            <li>
+                                <label>操作人:</label>
+                                <label>admin</label>
+                            </li>
+                            <li>
+                                <label>修改项:</label>
+                                <div>
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                    <span class="j-alarm-tip">报警类型</span>
+                                    <input type="hidden" class="tip-info" value="" />
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <div id="paging"></div>
+        </div>
+    </div>
+    <!--历史记录 end-->
+    <!-- 上传图片 -->
+    <div id="upload-pic" class="hide"></div>
+    <!-- 拉出值设置 start -->
+    <div id="cursor"></div>
+    <div id="circle-zx"></div>
+    <div id="circle-zx-big" class="ui-draggable"></div>
+    <div id="LC" class="ui-draggable">
+        <span class="btn_close j-close"></span>
+        <span class="dot-bottom j-dot"></span>
+        <h3>拉出值设置</h3>
+        <ul class="ul-block-smallest">
+            <li>
+                <label>帧&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数：</label>
+                <label id="curFrame">1</label>
+            </li>
+            <li>
+                <label>坐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标：</label>
+                <label id="curCoordinates"></label>
+            </li>
+            <li id="row_LC_orig">
+                <label>原始拉出值：</label>
+                <label id="orig_LC"></label>
+            </li>
+            <li id="row_LC">
+                <label>设置拉出值：</label>
+                <!--<input id="curLC_null" type="text" value="" />-->
+                <input id="curLC" type="text" value="" />
+                <!-- 图片原始尺寸下的拉出值 -->
+                <input class="origLC" type="hidden" value="" />
+                <!-- 图片原始尺寸下的中心点坐标 -->
+                <input class="midpoint" type="hidden" pixel-x="" pixel-y="" />
+                <!-- 图片当前尺寸下的中心点坐标进行比例缩放后的值 -->
+                <input class="curMidpoint" type="hidden" pixel-x="" pixel-y="" />
+                <!-- 后台传的拉出值比例 -->
+                <input class="proportionLC" type="hidden" value="" />
+            </li>
+            <li>
+                <span class="pic-splicing-3 btn-bg-white j-set-lc">
+                    <span class="btn-save">确认</span>
+                </span>
+                <span class="pic-splicing-3 btn-bg-white j-exit">
+                    <span class="btn-exit">退出计算</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <!-- 拉出值设置 end -->
+    <!-- 上传图片 start -->
+    <div id="upload-pic_3C" class="box-middle box-style-2 box-size-2 hide">
+        <!--<span class="pic-splicing-2 close-ico-2 j-close"></span>-->
+        <input class="act" type="hidden" value="upload-pic" />
+        <div class="box-title-2"><span class="pic-splicing-2 upload-ico-2"></span><span class="title-2">上传图片</span></div>
+        <div class="wrapper mt-s">
+            <div class="upload-title">
+                <span>地图附加图片</span>
+                <span id="ctlBtn-map" class="btn-upload hide">开始上传</span>
+            </div>
+            <div class="picker-box">
+                <div id="fileList-map"></div>
+                <div class="cp_img_jia" id="filePicker-map"></div>
+                <div class="file-info">共0张图片</div>
+                <input type="hidden" class="file-count" value="0" />
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="upload-title">
+                <span>局部附加图片</span>
+                <span id="ctlBtn-vi" class="btn-upload hide">开始上传</span>
+            </div>
+            <div class="picker-box">
+                <div id="fileList-vi"></div>
+                <div class="cp_img_jia" id="filePicker-vi"></div>
+                <span class="file-info">共0张图片</span>
+                <input type="hidden" class="file-count" value="0" />
+            </div>
+        </div>
+        <div class="wrapper margin-b40">
+            <div class="upload-title">
+                <span>全景附加图片</span>
+                <span id="ctlBtn-oa" class="btn-upload hide">开始上传</span>
+            </div>
+            <div class="picker-box">
+                <div id="fileList-oa"></div>
+                <div class="cp_img_jia" id="filePicker-oa"></div>
+                <span class="file-info">共0张图片</span>
+                <input type="hidden" class="file-count" value="0" />
+            </div>
+        </div>
+        <div class="btn-box">
+            <span id="ctlBtn" class="btn-upload">开始上传</span>
+            <span id="close-upload" class="btn-upload-cancel">关闭</span>
+        </div>
+    </div>
+    <!-- 上传图片 end -->
+    <!-- 预览图片 start -->
+    <div id="preview-pic" class="hide">
+        <img src="" />
+    </div>
+    <!-- 预览图片 end -->
+    <!-- 确认样本 start -->
+    <div id="sample-box" style="display:none;">
+        <h3 class="t">确认样本</h3>
+        <ul class="sample-ul">
+            <li>
+                <label class="lab">样&nbsp;本&nbsp;库&nbsp;：</label>
+                <div id="sample_library">
+                    <span class="radio-span sample_b" for="z_sample"><input type="radio" name="sample_type" id="z_sample" /><label>正样本</label></span>
+                    <!--<span class="radio-span sample_b" for="f_sample"><input type="radio" name="sample_type" id="f_sample" /><label>负样本</label></span>-->
+                    <span class="radio-span sample_b mr-0" for="n_sample"><input type="radio" name="sample_type" id="n_sample" /><label>非样本</label></span>
+                </div>
+            </li>
+            <li id="alarm_type_li">
+                <label class="lab">报警类型：</label>
+                <input id="alarmType" type="text" />
+            </li>
+        </ul>
+        <div id="sample_detail_content" class="hide float-l">
+            <div id="z_sample_detail_content" class="hide">
+                <label class="control-label">样本详细类型：</label>
+                <span id="z_sample_detail"></span>
+            </div>
+            <div id="f_sample_detail_content" class="hide">
+                <input id="f_sample_detail" type="text" style="width: 160px;" />
+            </div>
+        </div>
+        <div><input id="btn-sample-confirm" type="button" class="btn btn-primary float-r" value="确认" /></div>
+    </div>
+    <!-- 确认样本 end -->
+
+    <!-- 新建任务下载弹出框 start-->
+    <div id="OriginalFileBox">
+        <!--<div class="closeimg layui-layer-close"></div>-->
+        <h4><span class="new-img"></span><span>新建任务</span></h4>
+        <div class="hr-div"></div>
+        <div class="newcreat_title">
+            <p class="newcreat_title_p1 newcreat_title_active">按时间获取数据</p>
+            <p class="newcreat_title_p2">按位置获取数据</p>
+            <p class="newcreat_title_empty"></p>
+        </div>
+        <div class="newcreat_div">
+            <div>
+                <div class="row-fluid">
+                    <div class="span2" style="padding-top: 3px ;">
+                        原由缺陷：
+                    </div>
+                    <div id="alarmDescription" class="span10" style="font-weight:bold;padding-right: 26px;"></div>
+                </div>
+            </div>
+            <div id="newcreat_time">
+                <div class="row-fluid" style="padding:10px 0;">
+                    <div class="span2" style="padding-top:5px;">
+                        任务名称：
+                    </div>
+                    <div class="span10">
+                        <input id="taskname_time" type="text" maxlength="40" placeholder="请输入中文、数字或英文字母" />
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2" style="padding-top:5px;">
+                        设备编号：
+                    </div>
+                    <div class="span10" id="new-loco">
+                        <div class="div-menus" style="">
+                            <label id="locomotive_NB">请选择</label>
+                            <img src="/Common/img/playico/xia.png" alt="" style="cursor: pointer" />
+                            <div id="OriginalFile_TreeAll" class="ztree">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="padding-top:5px;">
+                        时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：
+                    </div>
+                    <div class="span10" style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="new-strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" onchange="changeEndTime()" />&nbsp;至&nbsp;<input type="text" class="Wdate" id="new-endTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="line-height: 22px;">
+                        弓&nbsp;位&ensp;置：
+                    </div>
+                    <div class="span10">
+                        <div class="row-fluid" id="OriginalFile_txt_AB">
+
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="hr-div"></div>-->
+                <div class="row-fluid" style="text-align: right;">
+                    <div class="btn-alarm" id="BtnSubmit_time">
+                        <span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+            <div id="newcreat_loca">
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="line-height: 40px;">
+                        任务名称：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" id="taskname" style="width:382px;" maxlength="40" placeholder="请输入中文、数字或英文字母" />
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="line-height: 40px;">
+                        线路区站：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" id="LinePosition" />
+                    </div>
+                    <div class="span2" style="line-height: 40px;">
+                        行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+                    </div>
+                    <div class="span4" style="padding-top: 8px;">
+                        <input type="text" id="xingbie" name="direction" />
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="line-height: 40px;">
+                        杆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" id="pole_NUM" />
+                    </div>
+                    <div class="span2" style="line-height: 40px;">
+                        开始时间：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="loca_strTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+                    </div>
+                </div>
+                <div class="row-fluid" style="line-height:50px;">
+                    <div class="span2" style="line-height: 40px;">
+                        次数限制：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" id="limit_loco" />
+                    </div>
+                    <div class="span2" style="line-height: 40px;">
+                        截止时间：
+                    </div>
+                    <div class="span4" style="margin-top: 8px;">
+                        <input type="text" class="Wdate" id="loca_endTime" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false })" />
+                    </div>
+                </div>
+                <h4><img class="newcreat_loca_img" src="/Common/MAlarmMonitoring/img/open.png" /><span>其他设置</span></h4>
+                <div id="newcreat_loca_set">
+                    <div class="row-fluid" style="line-height:50px;">
+                        <div class="span2" style="padding-top:5px;">
+                            设备限制：
+                        </div>
+                        <div class="span10" style="margin-top: 8px;position:relative;">
+                            <input type="text" id="loca" />
+                            <span class="btn-alarm" title="点击添加左侧设备至下方" onclick="add_trainNo();" style="cursor: pointer;height: 25px;width: 35px;line-height: 28px;text-align: center;">添加</span>
+                            <!--<img class="line_Click open_img" onclick="add_trainNo();" src="/Common/MAlarmMonitoring/img/open_l.png" style="vertical-align: text-bottom;margin-left:10px;" />-->
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2" style="padding-top:25px;">
+                            已选设备：
+                        </div>
+                        <div class="span10" style="margin-top: 8px;">
+                            <div id="checked_loca"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid" style="text-align: right;margin: 12px auto 0;">
+                    <div class="btn-alarm" id="BtnSubmit_loca">
+                        <span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 新建任务下载弹出框 end -->
+</body>
+</html>
+
+<script>
+    $(function () {
+        loadC3Form();
+        if ('1' === getConfig("debug")) {
+            loadC3Dev();
+        }
+    })
+ //   accessCount();
+    setTimeout(accessCount, 1000);
+        loadControl("elevatezoom");
+        loadControl("cloudzoom");
+
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("progress");
+
+        loadCss("/C3/PC/MAlarmMonitoring/css/MonitorAlarm3CForm4_upload.css?v=" + version, 'utf-8');//上传图片css
+        loadJs("/C3/PC/MAlarmMonitoring/js/MonitorAlarm3CForm4_upload.js?v=" + version, 'utf-8');//上传图片js
+
+        
+        loadCss("/C3/PC/MAlarmMonitoring/css/MonitorAlarm3CForm4_OriginaFile.css?v=" + version, 'utf-8');//新建任务css
+        loadJs("/C3/PC/MAlarmMonitoring/js/MonitorAlarm3CForm4_OriginaFile.js?v=" + version, 'utf-8');//新建任务js
+
+        loadJs("/Common/MDataMessage/js/publicDataMessage.js?r=" + version, 'utf-8');//异常提醒js
+</script>
+
+
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>

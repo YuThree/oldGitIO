@@ -1,0 +1,171 @@
+.scoll{ height: 100%; }
+.tableHeadFixed {
+    width: 100%;
+    height: -moz-calc(100% - 347px);
+    height: calc(100% - 347px);
+    overflow: hidden;
+}
+.tableHeadFixed .tableHeadClass1{
+    width:100%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox20{
+    width: 7.14%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox100{
+    width: 100%;
+}
+.tableHeadFixed .tableHeadClass1 .colBox33{
+    width: 33.333333%;
+}
+
+
+.tableHeadFixed .tableHeadClass1 .line82{
+    line-height: 46px;
+    height:46px;
+}
+.tableHeadFixed .tableHeadClass1 .line36{
+    line-height: 36px;
+    height:36px;
+}
+.tableHeadFixed .tableHeadClass1 .line46{
+    line-height: 46px;
+    height:46px;
+}
+.tableHeadFixed .headCom{
+    text-align: center;
+    float: left;
+    
+}
+
+.tableHeadFixed .tableHeadClass1 .litleTab {
+    width: 4%;
+}
+.tableHeadFixed .tableHeadClass1  .doubleTab {
+    width: 9.5%;
+}
+.br1{
+    border-right: 1px solid #1AA9E8;
+}
+.bl1{
+    border-left: 1px solid #1AA9E8;
+}
+.bt1{
+    border-top: 1px solid #1AA9E8;
+}
+.bb1{
+    border-bottom: 1px solid #1AA9E8;
+}
+.tableHeadFixed:after,.tableHeadFixed .tableHeadClass1:after{
+    clear: both;
+    content:" ";
+    display:block;
+}
+.tableHeadFixed .tableHeadClass1{
+    border:1px solid #1AA9E8;
+    border-bottom: none;
+    background: rgba(38,123,182,.4);
+}
+
+.colBox20 {
+    color: #fff;
+}
+
+.colBox100 {
+    color: #fff;
+}
+
+/* 布局样式 */
+
+html {
+    height: 100%;
+}
+
+body {
+    background: url('../main/img/bg.png');
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.mainBox {
+    height: 100%;
+}
+.titleBox {
+    border:solid 1px #1AA9E8;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.littleTitle {
+    display: block;
+    font-size: 20px;
+    color: #FFFFFF;
+    border-left: 4px #E17940 solid;
+    -moz-border-radius: 2px;
+         border-radius: 2px;
+    margin-left: 21px;
+    padding-left: 7px;
+    padding-top: 4px;
+    margin-top: 23px;
+}
+
+.finds {
+    padding: 20px;
+}
+
+.litleInp {
+    width: 80px;
+}
+
+.blueBtn {
+    width: 120px;
+    background: #008BCC;
+    border: 1px #1ABBF1 solid;
+}
+
+.showTable {
+    border:solid 1px #1AA9E8;
+}
+
+
+/* 颜色标识 */
+
+/* 合格 */
+.showTableBody .showTableTr .nice {
+    color: #27D47B;
+}
+
+.showTableBody .showTableTr .greet {
+    color: #1CE0E7;
+}
+
+.showTableBody .showTableTr .up {
+    color:#E19723 ;
+}
+
+.showTableBody .showTableTr .fat {
+    color: #C63532;
+}
+
+.showTableBody .showTableTr .thin {
+    color: #DDDB20;
+}
+
+.showTableBody .showTableTr  .watch {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #1AA9E8;
+}
+
+
+
+
+
+
+
+.tableBodyClass1{
+   height: -moz-calc(100% - 5px);
+   height: calc(100% - 5px);
+}

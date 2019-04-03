@@ -1,0 +1,78 @@
+
+
+body,html{
+    height: 100%;
+}
+.mainBox{
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    height: -webkit-calc(100% - 20px);
+    width: -webkit-calc(100% - 20px);
+    height: -moz-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    height: -ms-calc(100% - 20px);
+    width: -ms-calc(100% - 20px);
+    height: -o-calc(100% - 20px);
+    width: -o-calc(100% - 20px);
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: white;
+}
+form {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.cdct_tit ,.cdct_info,span,label{
+    color: #7F8FA4;
+}
+.scrollJS {
+    height: calc(100% - 60px);
+}
+
+.z-Box{
+    width: 100%;
+    min-height: 100%;
+}
+
+.zTitle {
+    text-align: center;
+    background: #F2F4F6;
+}
+
+.h200{
+    height: 200px;
+}
+.h135{
+    height: 135px;
+}
+.cdct_textarea,.ztextArea{
+    height: 100%;
+}
+.longW .cdct_select{
+    width: 100%;
+}
+.longW .cdct_select .selectBox{
+    width: 100%;
+    border: none;
+}
+.noPl{
+    padding-left: 0;
+}
+[data-tableSelect="1"]::after{
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 6px;
+    background-image: url(../../common/css/cdctCom/Select.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+}

@@ -1,0 +1,251 @@
+.tableHeadFixed {
+    min-width: 2600px;
+}
+
+.tableHeadFixed .tableHeadClass1 {
+    width: 100%;
+}
+
+.tableHeadFixed .tableHeadClass1 .colBox20 {
+    width: 5.26318%;
+}
+
+.tableHeadFixed .tableHeadClass1 .colBox100 {
+    width: 100%;
+}
+
+.tableHeadFixed .tableHeadClass1 .colBox33 {
+    width: 50%;
+    height: 36px;
+
+}
+
+.tableHeadFixed .tableHeadClass1 .colBox33:last-child {
+    border-right: none;
+}
+
+.tableHeadFixed .tableHeadClass1 .line82 {
+    line-height: 82px;
+    height: 82px;
+}
+
+.tableHeadFixed .tableHeadClass1 .line36 {
+    line-height: 36px;
+    height: 36px;
+}
+
+.tableHeadFixed .tableHeadClass1 .line46 {
+    line-height: 46px;
+    height: 46px;
+}
+
+.tableHeadFixed .headCom {
+    text-align: center;
+    float: left;
+}
+
+.br1 {
+    border-right: 1px solid #1AA9E8;
+}
+
+.bl1 {
+    /* border-left: 1px solid #1AA9E8; */
+}
+
+.bt1 {
+    border-top: 1px solid #1AA9E8;
+}
+
+.bb1 {
+    border-bottom: 1px solid #1AA9E8;
+}
+.tableHeadFixed .tableHeadClass1 .colBox33 {
+    color: #fff;
+}
+.tableHeadFixed:after,
+.tableHeadFixed .tableHeadClass1:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+
+.tableHeadFixed .tableHeadClass1 {
+    border: 1px solid #1AA9E8;
+    border-right: none;
+    border-left: none;
+}
+
+.colBox20 {
+    color: #fff;
+}
+
+.colBox100 {
+    color: #fff;
+}
+
+/* 布局样式 */
+
+html {
+    height: 100%;
+}
+
+body {
+    background: url('./main/img/bg.png');
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    padding-right: 40px;
+    overflow: hidden;
+}
+
+.mainBox {
+    height: 100%;
+}
+.titleBox {
+    border:solid 1px #1AA9E8;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.littleTitle {
+    display: block;
+    font-size: 20px;
+    color: #FFFFFF;
+    border-left: 4px #E17940 solid;
+    border-radius: 2px;
+    margin-left: 21px;
+    padding-left: 7px;
+    padding-top: 4px;
+    margin-top: 23px;
+}
+
+.finds {
+    padding: 20px;
+}
+
+.litleInp {
+    width: 80px;
+}
+
+.blueBtn {
+    width: 120px;
+    background: #008BCC;
+    border: 1px #1ABBF1 solid;
+}
+
+.showTable {
+    border-bottom:solid 1px #1AA9E8;
+}
+
+.bigBox {
+    border-left:solid 1px #1AA9E8;
+    border-right:solid 1px #1AA9E8;
+    border-bottom:solid 1px #1AA9E8;
+    height: calc(100% - 150px);
+}
+
+.scoll {
+    height: 100%;
+}
+
+.pagetable {
+    height: 100px;
+    margin-top: 20px;
+}
+
+
+.showTable .showTableHeadScroll .showTableHTd:last-child,
+.showTable .showTableBodyScroll .showTableTd:last-child{
+    border-right: none;
+}
+
+
+.searches {
+    padding-top: 20px;
+}
+
+.br1:last-child {
+    border-right: none;
+}
+
+.showTable .showTableBodyScroll .showTableTd:first-child {
+    border-left: none;
+}
+
+.showTableBody .showTableTr:last-child .showTableTd {
+    border-bottom: none;
+}
+
+/* 颜色标识 */
+
+/* 合格 */
+.showTableBody .showTableTr .nice {
+    color: #27D47B;
+}
+
+.showTableBody .showTableTr .greet {
+    color: #1CE0E7;
+}
+
+.showTableBody .showTableTr .up {
+    color:#E19723 ;
+}
+
+.showTableBody .showTableTr .fat {
+    color: #C63532;
+}
+
+.showTableBody .showTableTr .thin {
+    color: #DDDB20;
+}
+
+.showTableBody .showTableTr  .watch {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #1AA9E8;
+}
+
+
+.timeControl .cdct_subLabel {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    padding-right: 8px;
+    max-width: 102px;
+}
+
+.timesControl .cdct_subLabel {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    padding-right: 8px;
+    max-width: 102px;
+}
+
+.timeControl::before {
+    left: 77px;
+}
+
+.timesControl::before {
+    left: 77px;
+}
+
+
+
+
+/* 
+
+.showTable {
+    height: 100%;
+} */
+
+.pageFather {
+    margin-top: 0;
+}

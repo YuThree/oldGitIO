@@ -1,0 +1,211 @@
+/* 四角样式 */
+.cdct_angleBorder{
+    position: relative;
+    border: solid 1px #1AA9E8;
+}
+.cdct_angleBorder::before,.cdct_angleBorder::after,.cdct_angleBorderBottom::before,.cdct_angleBorderBottom::after{
+    content: "";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.cdct_angleBorder::before{
+    background-image: url('image/topL.png');
+    top: -5px;
+    left: -5px;
+}
+.cdct_angleBorder::after{
+    background-image: url('image/topR.png');
+    top: -5px;
+    right: -5px;
+}
+.cdct_angleBorderBottom{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.cdct_angleBorderBottom::before{
+    background-image: url('image/bottomL.png');
+    bottom: -5px;
+    left: -5px;
+}
+.cdct_angleBorderBottom::after{
+    background-image: url('image/bottomR.png');
+    bottom: -5px;
+    right: -5px;
+}
+
+
+/* 时间 */
+
+.timeControl {
+    display: inline-block;
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+}
+.timeSlotPut {
+    display: inline-block;
+    width: 150px;
+    height: 34px;
+    border: 1px solid #00AEFF;
+    outline: none;
+    padding: 0;
+    font-size: 12px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background: #00AEFF;
+    color: #fff;
+}
+
+.timeSlotPut:focus {
+    background: #008BCC;
+    border: 1px solid #008BCC;
+}
+
+.timeSlotPut::-webkit-input-placeholder{
+    color: #fff;
+}
+.timeSlotPut:-moz-placeholder{
+    color: #fff;
+}
+.timeSlotPut::-moz-placeholder{
+    color: #fff;
+}
+.timeSlotPut:-ms-input-placeholder{
+    color: #fff;
+}
+
+.timeControl:after {
+    content: " ";
+    font-size: 0;
+    width: 10px;
+    height: 7px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    margin-top: -4px;
+    background-image: url(Image/selectX2.png);
+    z-index: 10;
+}
+
+
+.timeControl:before {
+    content: " ";
+    font-size: 0;
+    width: 16px;
+    height: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    margin-top: -8px;
+    background-image: url(Image/date2.png);
+    z-index: 10;
+}
+/* 时间段样式 */
+
+.timesControl {
+    display: inline-block;
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+}
+.timeSlotPut2 {
+    display: inline-block;
+    width: 250px;
+    height: 34px;
+    border: 1px solid #00AEFF;
+    outline: none;
+    padding: 0;
+    font-size: 12px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background: #00AEFF;
+    color: #fff;
+}
+
+.timeSlotPut2:focus {
+    background: #008BCC;
+    border: 1px solid #008BCC;
+}
+
+.timeSlotPut2::-webkit-input-placeholder{
+    color: #fff;
+}
+.timeSlotPut2:-moz-placeholder{
+    color: #fff;
+}
+.timeSlotPut2::-moz-placeholder{
+    color: #fff;
+}
+.timeSlotPut2:-ms-input-placeholder{
+    color: #fff;
+}
+
+.timesControl:after {
+    content: " ";
+    font-size: 0;
+    width: 10px;
+    height: 7px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    margin-top: -4px;
+    background-image: url(Image/selectX2.png);
+    z-index: 10;
+}
+
+
+.timesControl:before {
+    content: " ";
+    font-size: 0;
+    width: 16px;
+    height: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    margin-top: -8px;
+    background-image: url(Image/date2.png);
+    z-index: 10;
+}
+/* charts title */
+.cdct_chartsTitle{
+    position: relative;
+    color: #fff;
+    display: inline-block;
+    padding: 0 15px;
+    padding-right: 0;
+    height: 36px;
+    line-height: 33px;
+    background: #0A3253;
+    border: solid 2px #2CA6F3;
+    border-right: 0;
+    font-size: 18px;
+}
+.cdct_chartsTitle::after{
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 36px;
+    right: -15px;
+    top: -2px;
+    background: url('image/chartTitleBg.png') no-repeat;
+}
+
+.selects {
+    display: inline-block;
+    height: 36px;
+}

@@ -1,0 +1,869 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑报警位置</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("form");
+        loadControl("Validation");
+        loadControl("layer");
+        loadControl("mySelectTree");
+    </script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet'>
+    <style>
+        .tooltip-inner {
+            max-width: 150px;
+        }
+    </style>
+    <script type="text/javascript">
+        var alarmID = GetQueryString("alarmid");
+        var category = GetQueryString("category");
+        $(function () {
+            $('[rel="tooltip"],[data-rel="tooltip"]').tooltip({ "placement": "right", delay: { show: 0, hide: 0 }, });
+            var debug = getConfig("debug")
+            if (FunEnable('Fun_EditPosition') == "True") {
+                $('.debug').show();
+            }
+            else {
+                $('.debug').hide();
+            }
+
+            //绑定行别
+            $("#POLE_DIRECTION").mySelectTree({
+                tag: 'SYSDICTIONARYTREE',
+                codeType: '3C',
+                cateGory: 'DRTFLG',
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $("#POLE_DIRECTION").attr('code', treeNode.id).val(treeNode.name);
+                }
+            });
+
+            LoadForm();
+
+            $("#form1").validationEngine({
+                validationEventTriggers: "blur",  //触发的事件  "keyup blur",
+                inlineValidation: true, //是否即时验证，false为提交表单时验证,默认true
+                success: false, //为true时即使有不符合的也提交表单,false表示只有全部通过验证了才能提交表单,默认false
+                promptPosition: "topLeft"//提示位置，topLeft, topRight, bottomLeft,  centerRight, bottomRight
+            });
+
+            $('#btn_edit').click(function () {
+                var bool = $("#form1").validationEngine("validate");
+                if (bool) {
+                    save();
+                }
+            });
+
+            if (getConfig('debug') == "1" || getConfig('debug') == "0") {
+                $('#span_getkm').show().click(function () {
+                    GETKM();
+                });
+            }
+
+        });
+
+        function GetValid() {
+            return $("#form1").validationEngine("validate");
+        }
+
+        var svalue3 = [];
+        function LoadForm() {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "RemoteHandlers/AlarmEdit.ashx?active=Load&alarmid=" + alarmID,
+                data: "JSON",
+                async: false,
+                success: function (data) {
+                    var jsondata = eval('(' + data + ')');
+                    //window.parent.SetIstypical(jsondata.IS_TYPICAL);
+                    //$('#lineselect').mySelect({
+                    //    tag: 'LINE',
+                    //    async: false,
+                    //    defaultText: '暂无'
+                    //});
+                    $('#lineselect').mySelectTree({ //线路
+                        tag: 'LINE',
+                        height: 250,
+                        enableFilter: true,
+                        onClick: function (event, treeId, treeNode) {
+                            lineChange(treeNode.id, treeNode.name);
+                            $('#lineselect').attr("code", treeNode.id).val(treeNode.name);
+                        }
+                    });
+                    $('#lineselect').attr("code", jsondata.LINE_CODE).val(jsondata.LINE_NAME);
+                    $("#LINE_NAME").val(jsondata.LINE_NAME);
+
+
+                    $('#positionselect').mySelect({ //区站
+                        tag: 'STATIONSECTION',
+                        async: false,
+                        code: jsondata.LINE_CODE,
+                        defaultText: '暂无'
+                    });
+                    $('#positionselect').val(jsondata.POSITION_CODE);
+                    $("#POSITION_NAME").val(jsondata.POSITION_NAME);
+
+
+                    $('#brgtunselect').mySelect({ //桥隧
+                        tag: 'BRIDGETUNE',
+                        async: false,
+                        code: jsondata.POSITION_CODE,
+                        defaultText: '暂无'
+                    });
+                    $('#brgtunselect').val(jsondata.BRG_TUN_CODE);
+                    $("#BRG_TUN_NAME").val(jsondata.BRG_TUN_NAME);
+
+                    $('#POLE_DIRECTION').val(jsondata.DIRECTION); //行别
+                    $('#txt_km').val(jsondata.KM_MARK); //公里标
+                    $('#POLE_NO').val(jsondata.POLE_NUMBER); //支柱
+
+                    $('#juselect').mySelect({ //局
+                        tag: 'ORGANIZATION',
+                        async: false,
+                        type: 'J',
+                        defaultText: '暂无'
+                    });
+                    $('#juselect').val(jsondata.BUREAU_CODE);
+                    $("#BUREAU_NAME").val(jsondata.BUREAU_NAME);
+
+                    $('#duanselect').mySelect({ //段
+                        tag: 'ORGANIZATION',
+                        code: jsondata.BUREAU_CODE,
+                        async: false,
+                        type: 'GDD',
+                        defaultText: '暂无'
+                    });
+                    $('#duanselect').val(jsondata.POWER_SECTION_CODE);
+                    $("#POWER_SECTION_NAME").val(jsondata.POWER_SECTION_NAME);
+
+                    $('#chejianselect').mySelect({ //车间
+                        tag: 'ORGANIZATION',
+                        code: jsondata.POWER_SECTION_CODE,
+                        async: false,
+                        type: 'CJ',
+                        defaultText: '暂无'
+                    });
+                    $('#chejianselect').val(jsondata.WORKSHOP_CODE);
+                    $("#WORKSHOP_NAME").val(jsondata.WORKSHOP_NAME);
+                    if (jsondata.WORKSHOP_CODE!='') {
+                        $('#gongquselect').mySelect({ //工区
+                            tag: 'ORGANIZATION',
+                            async: false,
+                            code: jsondata.WORKSHOP_CODE,
+                            defaultText: '暂无'
+                        });
+                    }
+                    $('#gongquselect').val(jsondata.ORG_CODE);
+                    $("#ORG_NAME").val(jsondata.ORG_NAME);
+
+                    var APT = jsondata.AssistantPosition;
+                    $('#txt_fzdw').val(APT); //辅助定位
+                    if (APT != "") {
+                        if (APT.indexOf("][") == -1) {
+                            $('#fzdwbtn1').val(APT.replace("[", "").replace("]", ""));
+                            $('#fzdwbtn2').hide();
+                        } else {
+                            var APT1 = APT.split('][')[0].replace("[", "");
+                            var APT2 = APT.split('][')[1].replace("]", "");
+                            $('#fzdwbtn1').val(APT1);
+                            $('#fzdwbtn2').val(APT2);
+                        }
+                    }
+                    fzdwsure();
+
+                    if (category == "3C") {
+                        $("#NVALUE1").val(jsondata.NVALUE1); //速度
+                        $('#NVALUE2').val(jsondata.NVALUE2); //导高值
+                        $('#NVALUE3').val(jsondata.NVALUE3); //拉出值
+                        $("#NVALUE4").val(jsondata.NVALUE4); //报警温度
+                        $("#NVALUE5").val(jsondata.NVALUE5); //环境温度
+                        $("#SVALUE3").val(JSON.stringify(jsondata.SVALUE3)); //全帧详情
+                        $("#DVALUE1").val(jsondata.DVALUE1); //收到FaulI文件时间
+                        $('#DVALUE2').val(jsondata.DVALUE2); //收到红外视频时间
+                        $('#DVALUE3').val(jsondata.DVALUE3); //收到可见光视频时间
+                        $("#DVALUE4").val(jsondata.DVALUE4); //收到全景I视频时间
+                        $("#DVALUE5").val(jsondata.DVALUE5); //收到全景II视频时间
+                    }
+
+                    var tabUl = "";
+                    var tabContent = "";
+                    if (jsondata.SVALUE3 && jsondata.SVALUE3.FRAME_INFO) {
+                        svalue3 = jsondata.SVALUE3;
+                        $("#IRV_DIR").val(jsondata.SVALUE3.IRV_DIR);
+                        $("#VI_DIR").val(jsondata.SVALUE3.VI_DIR);
+                        $("#OVA_DIR").val(jsondata.SVALUE3.OVA_DIR);
+                        $("#OVB_DIR").val(jsondata.SVALUE3.OVB_DIR);
+                        $("#IRV_NUM").val(jsondata.SVALUE3.IRV_NUM);
+                        $("#VI_NUM").val(jsondata.SVALUE3.VI_NUM);
+                        $("#OVA_NUM").val(jsondata.SVALUE3.OVA_NUM);
+                        $("#OVB_NUM").val(jsondata.SVALUE3.OVB_NUM);
+                        $("#PLAY_IDX").val(JSON.stringify(jsondata.SVALUE3.PLAY_IDX));
+                        $("#START_IDX").val(jsondata.SVALUE3.START_IDX);
+                        $("#FAULT_IDX").val(jsondata.SVALUE3.FAULT_IDX);
+                        $("#VI_IDX").val(jsondata.SVALUE3.VI_IDX);
+                        $("#OVA_IDX").val(jsondata.SVALUE3.OVA_IDX);
+                        $("#OVB_IDX").val(jsondata.SVALUE3.OVB_IDX);
+                        for (var i = 0; i < jsondata.SVALUE3.FRAME_INFO.length; i++) {
+                            var val = jsondata.SVALUE3.FRAME_INFO[i].split(',');
+                            tabUl += '<li' + (jsondata.SVALUE3.FAULT_IDX == i ? ' class="active"' : "") + '><a href="#tab' + i + '" ' + (jsondata.SVALUE3.FAULT_IDX == i ? ' style="background-color: red;"' : "") + ' data-toggle="tab">' + (i + 1) + '帧</a></li>';
+                            tabContent += '<div class="tab-pane fade in ' + (jsondata.SVALUE3.FAULT_IDX == i ? "active" : "") + '" id="tab' + i + '" name="tab' + i + '">\
+                            <table>\
+                                <tr>\
+                                    <td height="25" align="right">\
+                                        交路号：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="validate[custom[integer],min[-1]]" type="text" id="tab' + i + '_jlh" style="width: 80px; margin-right: 30px;" value="' + val[1] + '" />\
+                                    </td>\
+                                    <td height="25" align="right">\
+                                        公里标：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="validate[custom[integer]]" type="text" id="tab' + i + '_km" style="width: 80px; margin-right: 30px;" value="' + val[2] + '" />\
+                                    </td>\
+                                    <td height="25" align="right">\
+                                        红外最高温度：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="" type="text" id="tab' + i + '_maxTemp" style="width: 80px; margin-right: 30px;" value="' + val[3] / 100 + '" />\
+                                    </td>\
+                                    <td height="25" align="right">\
+                                        环境温度：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="" type="text" id="tab' + i + '_envTemp" style="width: 80px; margin-right: 30px;" value="' + val[4] / 100 + '" />\
+                                    </td>\
+                                </tr>\
+                                <tr>\
+                                    <td height="25" align="right">\
+                                        导高值：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="validate[custom[integer],min[0]]" type="text" id="tab' + i + '_dgz" style="width: 80px;"  value="' + val[5] + '" />\
+                                    </td>\
+                                    <td height="25" align="right">\
+                                        拉出值：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="validate[custom[integer]]" type="text" id="tab' + i + '_lcz" style="width: 80px;"  value="' + val[6] + '" />\
+                                    </td>\
+                                    <td height="25" align="right">\
+                                        机车速度：\
+                                    </td>\
+                                    <td height="25" align="left">\
+                                        <input class="validate[custom[integer],min[0]]" type="text" id="tab' + i + '_speed" style="width: 80px;" value="' + val[7] + '" />\
+                                    </td>\
+                                </tr>\
+                            </table>\
+                        </div>';
+                        }
+                        $("#Tab").html(tabUl);
+                        $("#TabContent").html(tabContent);
+                    }
+
+
+                }
+            });
+        };
+        //线路改变
+        function lineChange(value, text) {
+            $('#positionselect').mySelect({
+                tag: 'STATIONSECTION',
+                code: value,
+                defaultText: '暂无'
+            });
+            $("#LINE_NAME").val(text);
+            $("#POSITION_NAME").val(''); //区站
+            $("#BRG_TUN_NAME").val(''); //桥隧
+            $('#brgtunselect').val(''); //桥隧
+        };
+        //区站改变
+        function positionChange(value, text) {
+            $('#brgtunselect').mySelect({
+                tag: 'BRIDGETUNE',
+                code: value,
+                defaultText: '暂无'
+            });
+            $("#POSITION_NAME").val(text);
+        };
+        //桥隧改变
+        function brgtunChange(value, text) {
+            $("#BRG_TUN_NAME").val(text);
+        };
+        //局改变
+        function juChange(value, text) {
+            $('#duanselect').mySelect({
+                tag: 'ORGANIZATION',
+                type: 'GDD',
+                code: value,
+                defaultText: '暂无'
+            });
+            $("#BUREAU_NAME").val(text);
+            $('#gongquselect').html('<option value="0">暂无</option>')
+            $('#chejianselect').html('<option value="0">暂无</option>')
+        };
+        //段改变
+        function duanChange(value, text) {
+            $('#chejianselect').mySelect({
+                tag: 'ORGANIZATION',
+                type: 'CJ',
+                code: value,
+                defaultText: '暂无'
+            });
+            $("#POWER_SECTION_NAME").val(text);
+            $('#gongquselect').html('<option value="0">暂无</option>')
+        };
+        //车间改变
+        function chejianChange(value, text) {
+            $('#gongquselect').mySelect({
+                tag: 'ORGANIZATION',
+                code: value,
+                defaultText: '暂无'
+            });
+            $("#WORKSHOP_NAME").val(text);
+
+        };
+        //工区改变
+        function gongquChange(value, text) {
+            $("#ORG_NAME").val(text);
+        };
+        //辅助定位信息判断
+        function fzdwsure() {
+            var fzdwval = $('#txt_fzdw').val();
+            if (fzdwval == "") {
+                $('#fzdwbtn1').parent().parent().hide();
+                $('#txt_fzdw').css('marginBottom', '9px');
+            }
+        };
+        //辅助定位信息按钮点击事件
+        function fzdwClick(obj) {
+            var btnvalue = $(obj).val();
+            var btnarray = btnvalue.split(' ');
+            if (btnarray[0].indexOf('行') != -1) {
+                $('#POLE_DIRECTION').val(btnarray[0]);
+            }
+            if (btnarray[1].indexOf('K') != -1) {
+                var KMval = btnarray[1].split('+')[0];
+                var KMMARK = (parseInt(KMval.substring(1, KMval.length)) * 1000) + parseInt(btnarray[1].split('+')[1]);
+                KMMARK = KMMARK.toString();
+                $('#txt_km').val(KMMARK);
+                $('#POLE_NO').val(btnarray[2].replace('支柱', ''));
+            } else {
+                $('#txt_km').val("");
+                $('#POLE_NO').val(btnarray[1].replace('支柱', ''));
+            }
+
+
+        };
+
+        //获取公里标
+        function GETKM() {
+            var lineCode = $('#lineselect').attr("code");//线路
+            var position = $('#positionselect').val();//区站
+            var bridgetune = $('#brgtunselect').val();//桥隧
+            var dirct = $('#POLE_DIRECTION').val();//行别
+            var poleNO = $('#POLE_NO').val();//杆号
+            var url = '/Common/MOnePoleData/RemoteHandlers/MyDeviceList.ashx?action=getKM&lineCode=' + lineCode + '&position=' + position + '&bridgetune=' + bridgetune + '&direction=' + escape(dirct) + '&poleNO=' + poleNO;
+            $.ajax({
+                type: 'POST',
+                url: url,
+                cache: false,
+                async: true,
+                success: function (result) {
+                    var json = eval("(" + result + ")");
+                    //alert(json.length);
+                    if (json.length == 1) {
+                        $('#txt_km').val(json[0].polekm0);
+                        layer.msg('设置成功！');
+                    } else if (json.length == 0) {
+                        layer.msg('无数据！');
+                    } else {
+                        layer.msg('返回信息太多，请确认线路、区站、行别、杆号、桥隧是否选填完整！');
+                    }
+
+                },
+                error: function () {
+
+                }
+            })
+        };
+
+        //保存位置信息
+        function save() {
+            var lineCode = $('#lineselect').attr("code");//线路
+            var linename = $('#lineselect').val();//线路
+            $("#JSON").val($("#SVALUE3").val()); //提交请求时对SVALUE3赋值
+            var options = {
+                url: "RemoteHandlers/AlarmEdit.ashx?active=Save&alarmid=" + alarmID + "&lineCode=" + lineCode + "&linename=" + linename,
+                type: 'POST',
+                success: function (result) {
+                    ymPrompt.alert(result, null, null, '提示信息', function (mes) {
+                        if (mes == "ok") {
+                            switch (category) {
+                                case "1C":
+                                    window.parent.loadC1Form();
+                                    break;
+                                case "2C":
+                                    window.parent.loadC2Form();
+                                    break;
+                                case "3C":
+                                    //新增
+                                    if ('1' === getConfig("debug") && window.parent.location.href.indexOf("MonitorAlarm3CForm4") > 0) {
+                                        isRefresh = true;
+                                    }
+                                    window.parent.loadC3Form();
+                                    break;
+                                case "4C":
+                                    window.parent.loadC4Form();
+                                    break;
+                                case "DailyWalk":
+                                    window.parent.getDetail();
+                            }
+                            //                            window.parent.CloseEditBox();
+                            window.parent.CloseEdBox();
+                        }
+                    });
+                }
+            };
+            $('#form1').ajaxSubmit(options);
+
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" method="POST">
+        <div class="box-content">
+            <table cellspacing="0" cellpadding="0" width="100%" border="0" style="margin: 0px;
+            padding: 0px;">
+            <tr>
+                <td height="25" align="right">
+                    所属铁路局：
+                </td>
+                <td height="25" align="left">
+                    <select id="juselect" name="juselect" style="width: 180px;" onchange="juChange(this.value,this.options[this.options.selectedIndex].text)">
+                        <option value="0">暂无</option>
+                    </select>
+                </td>
+                <td height="25" align="right">
+                    所属供电段：
+                </td>
+                <td height="25" align="left">
+                    <select id="duanselect" name="duanselect" style="width: 180px;" onchange="duanChange(this.value,this.options[this.options.selectedIndex].text)">
+                        <option value="0">暂无</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="25" align="right">
+                    所属车间：
+                </td>
+                <td height="25" align="left">
+                    <select id="chejianselect" name="chejianselect" style="width: 180px;" onchange="chejianChange(this.value,this.options[this.options.selectedIndex].text)">
+                        <option value="0">暂无</option>
+                    </select>
+                </td>
+                <td height="25" align="right">
+                    所属工区：
+                </td>
+                <td height="25" align="left">
+                    <select id="gongquselect" name="gongquselect" style="width: 180px;" onchange="gongquChange(this.value,this.options[this.options.selectedIndex].text)">
+                        <option value="0">暂无</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="25" align="right">
+                    线路名称：
+                </td>
+                <td height="25" align="left">
+                    <!--<select id="lineselect" name="lineselect" style="width: 180px;" onchange="lineChange(this.value,this.options[this.options.selectedIndex].text)">
+                    </select>-->
+                    <input id="lineselect" name="lineselect" style="width:170px;" type="text"/>
+                </td>
+                <td height="25" align="right">
+                    区、站名称：
+                </td>
+                <td height="25" align="left">
+                    <select id="positionselect" name="positionselect" style="width: 180px;" onchange="positionChange(this.value,this.options[this.options.selectedIndex].text)">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="25" align="right">
+                    桥隧名称：
+                </td>
+                <td height="25" align="left">
+                    <select id="brgtunselect" name="brgtunselect" style="width: 180px;" onchange="brgtunChange(this.value,this.options[this.options.selectedIndex].text)">
+                    </select>
+                </td>
+                <td height="25" align="right">
+                    行别：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="POLE_DIRECTION" name="POLE_DIRECTION" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr>
+                <td height="25" align="right">
+                    杆号：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" type="text" id="POLE_NO" name="POLE_NO" style="width: 170px;" />
+                    <span style="display:none;cursor:pointer;" id="span_getkm" class="icon icon-orange icon-compose" data-html="true" data-rel="tooltip" title="根据线路、区站、行别、杆号、桥隧反推出公里标" ></span>
+                </td>
+                 <td height="25" align="right">
+                    所属公里标：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integerPositive],maxSize[8]]" onblur="removeClass(this);" type="text" id="txt_km" name="txt_km" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td height="25" align="right">
+                    导高值：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" class="validate[custom[integer]]" type="text"
+                        id="NVALUE2" name="NVALUE2" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    拉出值：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" class="validate[custom[integer]]" type="text"
+                        id="NVALUE3" name="NVALUE3" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td height="25" align="right">
+                    报警温度：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" class="validate[custom[integer]]" type="text"
+                        id="NVALUE4" name="NVALUE4" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    环境温度：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" class="validate[custom[integer]]" type="text"
+                        id="NVALUE5" name="NVALUE5" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right" style="display: none;">
+                    速度：
+                </td>
+                <td height="25" align="left" style="display: none;">
+                    <input onblur="removeClass(this);" class="validate[custom[integer]]" type="text"
+                        id="NVALUE1" name="NVALUE1" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    卫星数量：
+                </td>
+                <td height="25" align="left">
+                    <input onblur="removeClass(this);" class="validate[custom[integer],min[0]]" type="text"
+                        id="NVALUE6" name="NVALUE6" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    FaulI文件时间：
+                </td>
+                <td height="25" align="left">
+                    <input id="DVALUE1" name="DVALUE1" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})"
+                        style="width: 170px" />
+                </td>
+                <td height="25" align="right">
+                    红外视频时间：
+                </td>
+                <td height="25" align="left">
+                    <input id="DVALUE2" name="DVALUE2" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})"
+                        style="width: 170px" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    可见光视频时间：
+                </td>
+                <td height="25" align="left">
+                    <input id="DVALUE3" name="DVALUE3" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})"
+                        style="width: 170px" />
+                </td>
+                <td height="25" align="right">
+                    全景I视频时间：
+                </td>
+                <td height="25" align="left">
+                    <input id="DVALUE4" name="DVALUE4" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})"
+                        style="width: 170px" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    全景II视频时间：
+                </td>
+                <td height="25" align="left">
+                    <input id="DVALUE5" name="DVALUE5" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy/MM/dd HH:mm:ss'})"
+                        style="width: 170px" />
+                </td>
+                <td height="25" align="right">
+                </td>
+                <td height="25" align="left">
+                </td>
+            </tr>
+            <tr>
+                <td height="25" align="right">
+                    辅助定位：
+                </td>
+                <td colspan="3" height="25" align="left">
+                    <input id="txt_fzdw" name="txt_fzdw" style="width: 85%;margin-bottom:2px;" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center;">
+                    <input class="btn btn-primary" onclick="fzdwClick(this)" style="margin-bottom:9px;margin-right:20px;" id="fzdwbtn1" type="button" title="点击将修改对应控件值" value=" " />
+                    <input class="btn btn-primary" onclick="fzdwClick(this)" style="margin-bottom:9px;" id="fzdwbtn2" type="button" title="点击将修改对应控件值" value=" " />
+                </td>
+            </tr>
+            <tr style="display: none;">
+                <td height="25" align="right">
+                    全帧数据：
+                </td>
+                <td colspan="3" height="25" align="left">
+                    <textarea id="SVALUE3" onblur="removeClass(this);" style="width: 85%; height: 100px;"></textarea>
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    红外图片目录名：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="IRV_DIR" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    可见光图片目录名：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="VI_DIR" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    本端全景图片目录名：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="OVA_DIR" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    对端全景图片目录名：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="OVB_DIR" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    红外图片数量：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="IRV_NUM" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    可见光图片数量：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="VI_NUM" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    本端全景图片数量：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="OVA_NUM" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    对端全景图片数量：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="OVB_NUM" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    播放索引：
+                </td>
+                <td height="25" align="left">
+                    <input type="text" id="PLAY_IDX" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    图片起始序号：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="START_IDX" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    红外缺陷帧序号：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="FAULT_IDX" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    可见光缺陷帧序号：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="VI_IDX" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td height="25" align="right">
+                    本端全景缺陷帧序号：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[0]]" type="text" id="OVA_IDX" style="width: 170px;" />
+                </td>
+                <td height="25" align="right">
+                    对端全景缺陷帧序号：
+                </td>
+                <td height="25" align="left">
+                    <input class="validate[custom[integer],min[-1]]" type="text" id="OVB_IDX" style="width: 170px;" />
+                </td>
+            </tr>
+            <tr class="debug">
+                <td colspan="4">
+                    <ul id="Tab" class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">1</a></li>
+                        <li><a href="#tab2" data-toggle="tab">2</a></li>
+                        <li><a href="#tab2" data-toggle="tab">3</a></li>
+                        <li><a href="#tab2" data-toggle="tab">4</a></li>
+                        <li><a href="#tab2" data-toggle="tab">5</a></li>
+                        <li><a href="#tab2" data-toggle="tab">6</a></li>
+                    </ul>
+                    <div id="TabContent" class="tab-content" style="padding-left: 20px;">
+                        <div class="tab-pane fade in active" id="tab1">
+                            <table>
+                                <tr>
+                                    <td height="25" align="right">
+                                        交路号：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[-1]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        公里标：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        红外最高温度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        环境温度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="25" align="right">
+                                        导高值：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[-1000]]" type="text" style="width: 80px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        拉出值：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        机车速度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[0]]" type="text" style="width: 80px;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab2">
+                            <table>
+                                <tr>
+                                    <td height="25" align="right">
+                                        交路号：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[-1]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        公里标：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        红外最高温度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        环境温度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px; margin-right: 30px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="25" align="right">
+                                        导高值：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[0]]" type="text" style="width: 80px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        拉出值：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer]]" type="text" style="width: 80px;" />
+                                    </td>
+                                    <td height="25" align="right">
+                                        机车速度：
+                                    </td>
+                                    <td height="25" align="left">
+                                        <input class="validate[custom[integer],min[0]]" type="text" style="width: 80px;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr style="display: none">
+                <td colspan="4" style="text-align: center">
+                    <input id="btn_edit" type="button" value="修改" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="re">
+    </div>
+    <input type="text" id="BUREAU_NAME" name="BUREAU_NAME" style="display: none;" /> 
+    <input type="text" id="POWESECTION_NAME" name="POWESECTION_NAME" style="display: none;" />
+    <input type="text" id="WORKSHOP_NAME" name="WORKSHOP_NAME" style="display: none;" />
+    <input type="text" id="ORG_NAME" name="ORG_NAME" style="display: none;" />
+    <input type="text" id="LINE_NAME" name="LINE_NAME" style="display: none;" />
+    <input type="text" id="POSITION_NAME" name="POSITION_NAME" style="display: none;" />
+    <input type="text" id="BRG_TUN_NAME" name="BRG_TUN_NAME" style="display: none;" />
+    <input type="text" id="JSON" name="JSON" style="display: none;" />
+    </form>
+</body>
+</html>

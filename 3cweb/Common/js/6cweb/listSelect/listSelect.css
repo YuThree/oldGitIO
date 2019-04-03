@@ -1,0 +1,192 @@
+﻿@charset 'utf-8';
+
+.result_Container {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    border: 1px solid blue;
+}
+.list_Container {
+    position: absolute;
+    display: none;
+    width: 300px;
+    height: 170px;
+    padding: 5px;
+    margin-top: -7px;
+    margin-left: 0px;
+    border: 1px solid #4DC3F0;
+    background-color: #D7F4FF;
+    font-size: 12px;
+    color: #6d6d6d;
+    text-shadow: none;
+    overflow: auto;
+    z-index: 999;
+}
+.list_ContainerWhite {
+    position: absolute;
+    display: none;
+    width: 660px;
+    height: 170px;
+    padding: 5px;
+    margin-top: 31px;
+    margin-left: 0px;
+    background-color: white;
+    border: 1px solid #4DC3F0;
+    font-size:12px;
+    color: #6d6d6d;
+    text-shadow: none;
+    overflow: auto;
+    z-index: 999;
+}
+.list_ContainerWhite li {
+    position: relative;
+    float: left;
+    width: 119px;
+}
+.hilight {
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px #ccc;
+}
+.colorFor .start,
+.colorFor .end {
+    display: inline-block;
+}
+.start,
+.end {
+    display: none;
+    position: absolute;
+    right: 35px;
+    width: 16px;
+    height: 16px;
+    background-color: #3e9fd9;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    z-index: 999;
+}
+.end {
+    right: 15px;
+    background-color: #ef5d00;
+}
+.colorFor {
+    background-color: #D3EDFF;
+}
+.chooseColor {
+    color: #5392B8;
+}
+.pole_SureBtn,
+.pole_FindInput {
+    position: fixed;
+    top: 0px;
+    padding: 5px;
+    background: white;
+    border: 1px solid #4DC3F0;
+    border-top: 0 solid #4DC3F0;
+    z-index: 1000;
+}
+.pole_FindInput {
+    border-top: 1px solid #4DC3F0;
+    border-bottom: 0 solid #4DC3F0;
+    height: 27px;
+}
+.hilight #SelectName {
+    color: #2c2c2c;
+}
+.hilight #SelectDuan {
+    color: #6e6e6e;
+}
+li.list_Item {
+    padding: 5px;
+    margin: 0px;
+    list-style: none;
+}
+#SelectName {
+    display: inline-block;
+    width: 150px;
+    color: #6d6d6d;
+    background-color: #3e9fd9;
+}
+#SelectDuan {
+    display: inline-block;
+    width: 100px;
+    margin-left: 10px;
+    color: #c5c5c5;
+}
+.select_icon {
+    top: -2px;
+    margin-left: -25px;
+    font-size: 14px;
+    color: #8b8b8b;
+}
+
+/*滚动条样式修改*/
+#ul_txtloccode::-webkit-scrollbar{
+    background-color: white;
+    width: 15px;
+}
+#ul_txtloccode::-webkit-scrollbar-thumb{
+    background-color: #D7F4FF;
+    border-radius: 5px;
+    height: 60px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.6);
+}
+#ul_txtloccode::-webkit-scrollbar-button:start{
+    background: url(/C3/PC/MAlarmMonitoring/ImgTmp/up.png) no-repeat;   
+    background-size: cover;
+}
+#ul_txtloccode::-webkit-scrollbar-button:end{
+    background: url(/C3/PC/MAlarmMonitoring/ImgTmp/down.png) no-repeat;   
+    background-size: cover;
+}
+
+/*分页样式*/
+.pole-page {
+    width: auto;
+    height: 21px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 21px;
+}
+.pole-page a {
+    display: inline-block;
+    height: 21px;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+.pole-page .pole-page-top {
+    width: 30px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background: url(/Common/js/6cweb/listSelect/img/top.png) 5px 7px no-repeat #699dbe;
+}
+.pole-page .pole-page-pre {
+    width: 19px;
+    background: url(/Common/js/6cweb/listSelect/img/pre.png) 5px 7px no-repeat #699dbe;
+}
+.pole-page .pole-page-nex {
+    width: 19px;
+    background: url(/Common/js/6cweb/listSelect/img/next.png) 6px 7px no-repeat #699dbe;
+}
+.pole-page .pole-page-last {
+    width: 30px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: url(/Common/js/6cweb/listSelect/img/last.png) 5px 7px no-repeat #699dbe;
+}
+.pole-page-numb {
+    display: inline-block;
+    width: 60px;
+    height: 21px;
+    background: #699dbe;
+    color: #ffffff;
+    text-align: center;
+    line-height: 20px;
+}
+.pole-page .pole-pagecolor {
+    color: #699dbe;
+}

@@ -1,0 +1,115 @@
+
+html,body{
+    height: 100%;
+}
+body{
+    background: url(../img/bg.png) center center no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.loginBg{
+    width: 100%;
+    background: url(../img/loginLogo.png) center center no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+}
+.loginInput{
+    width: 691px;height: 264px;
+    position: absolute;top:50%;left: 50%;
+    padding-left: 6%;
+}
+.error{
+    border: 1px solid red;
+}
+.errorS,.errorL{
+    display: none;
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top :63px;
+    left: 20px;
+}
+.error+.errorS{
+    display: block;
+}
+.cdct_input{
+    width:494px;
+    height:64px;
+    background:rgba(15,36,74,1);
+    border-radius:4px;
+    padding-left: 80px;
+    color: white;
+    font-size: 17px;
+}
+.logBtn{
+    width: 494px;height: 64px;
+    background:linear-gradient(90deg,rgba(74,178,255,1),rgba(0,138,242,1));
+    filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#4AB2FF,endcolorstr=#008AF2,gradientType=1);
+    border-radius:4px;
+    box-shadow:4px 0px 10px rgba(32,39,35,0.35);
+    color: white;
+    line-height: 64px;
+    text-align: center;font-size: 23px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+.cdct_infoInput{
+    margin-bottom: 35px;
+}
+.inputicon{
+    display: inline-block;
+    width: 21px;height: 24px;
+    position: absolute;
+    top:20px;
+    left: 38px;
+}
+.icon_user{
+    background: url(../img/icon_user.png) no-repeat center center
+}
+.icon_password{
+    background: url(../img/icon_password.png) no-repeat center center
+}
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #2D82BE;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #2D82BE;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #2D82BE
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #2D82BE;
+}
+input::-ms-clear, input::-ms-reveal{display: none;}
+@media screen and (min-width: 1660px) and (max-width: 1919px) {
+    .loginInput{
+        padding-left: 4%;
+    }
+}
+@media screen and (min-width: 1440px) and (max-width: 1659px) {
+    .loginInput{
+        padding-left: 3%;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1439px) {
+    .loginInput{
+        padding-left: 2%;
+    }
+}
+@media screen and (min-width: 1280px) and (max-width: 1365px) {
+    .loginInput{
+        padding-left: 1.5%;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+    .loginInput{
+        padding-left: 1%;
+    }
+}

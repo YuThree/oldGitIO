@@ -1,0 +1,667 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>任务详细信息</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl('webuploader');
+        loadControl("mySelectTree");
+        loadControl("form");
+        loadControl("layer");
+        loadCss("/Common/MTask/css/upload.css?v=" + version);
+        loadJs("/Common/MTask/JS/upload.js?v=" + version);
+        loadJs("/Common/MTask/JS/TaskForm_New.js?v=" + version);
+    </script>
+    <style>
+        #ym-window {
+            position: fixed !important;
+        }
+
+        .atuo_Cheack {
+            display: none;
+        }
+
+        .nav-tabs > li {
+            margin-bottom: -1px;
+            margin-left: 10px;
+            width: 113px;
+            text-align: center;
+            padding: 6px 0;
+        }
+
+            .nav-tabs > li:nth-of-type(1) {
+                margin-left: 0;
+            }
+
+        .box-content .nav-tabs {
+            margin-left: 10px;
+        }
+
+        .nav-tabs > li > a {
+            border: 1px solid #ccc;
+        }
+
+            .nav-tabs > li > a:hover, .nav-tabs > li > a {
+                padding: 6px 0;
+                border-bottom: 2px solid #488cb4;
+            }
+
+        .nav-tabs {
+            border-bottom: 2px solid #488cb4;
+            height: 37px;
+        }
+
+            .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+                padding: 6px 0;
+                border: 2px solid #488cb4;
+                border-bottom-color: transparent;
+            }
+
+        .table {
+            width: calc(100% - 2px);
+            margin-bottom: 0;
+        }
+
+        .lititle_title {
+            background: #018AA6;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .showTable .lititle_titleTD {
+            width: 70px;
+            padding-right: 0px;
+            text-align: right;
+        }
+
+        .lititle_titleTD img {
+            vertical-align: top;
+            cursor: pointer;
+        }
+
+        .insideTable {
+            width: 100%;
+            table-layout: fixed;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+            .insideTable td {
+                border-top: 0px;
+                padding: 6px;
+            }
+
+        .four_font_title {
+            width: 55px;
+            display: inline-block;
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        .six_font_title {
+            display: inline-block;
+            width: 85px;
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        .titleshow_height_no {
+            /*max-height: 320px;*/
+            overflow-y: auto;
+        }
+        /*.insideTable [id*="list_show"] {
+            display:none;
+        }*/
+        .insideTable [id*="list_show"] img {
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(function () {
+            //$('.create').remove();
+            $(function () { $("[data-toggle='tooltip']").tooltip(); });
+            $('.insideTable').parent().css('padding', 0)
+            //title隐藏
+            $('.lititle_titleTD img').click(function () {
+                if ($(this).attr('src') == 'img/more_.png') {
+                    $(this).attr('src', 'img/more-.png')
+                    $(this).parent().parent().find('.insideTable').hide()
+                } else {
+                    $(this).attr('src', 'img/more_.png')
+                    $(this).parent().parent().find('.insideTable').show()
+                }
+            })
+            //抄送隐藏
+            $('#isShowSnend').click(function () {
+                if ($('.send_hid').hasClass('hide')) {
+                    $(this).attr('src', 'img/more_.png')
+                    $('.send_hid').removeClass('hide');
+                    TOSEND = 'on';
+                    $('#TOSEND').val(TOSEND)
+                } else {
+                    $(this).attr('src', 'img/more-.png')
+                    $('.send_hid').addClass('hide');
+                    TOSEND = 'off';
+                    $('#TOSEND').val(TOSEND)
+                }
+            })
+            //加载对应按钮
+            $('.nav-tabs li a').click(function () {
+                $('.btnTr input').hide();
+                switch ($(this).attr('class')) {
+                    case 'taskChangeMission':
+                        $('#btnTask').show();
+                        $('#tr-upload').show();
+                        break;
+                    case 'taskDistribute':
+                        $('#btnSend').show();
+                        $('.changeMissHide').hide();
+                        $('#tr-upload').show();
+                        break;
+                    case 'taskReviewInfo':
+                        $('#btnCheck').show();
+                        $('#tr-upload').show();
+                        break;
+                    case 'taskComplete':
+                        $('#btnComplete').show();
+                        $('#tr-upload').show();
+                        break;
+                    case 'taskCancel':
+                        $('#btnCancel').show();
+                        $('#tr-upload').hide();
+                        break;
+
+
+                }
+                $('#btn_close').show();
+
+            })
+
+            $('#DEAL_TIME').val(datehhssNowStr())//默认当前时间
+
+            if (GetQueryString("ShowSimple") != undefined && GetQueryString("ShowSimple") == "1") {
+                $('.SimpleHide,.btnTr,#btnDiv').hide();
+                $('#tree').height('170px');
+                $('#DIVRECV_DEPTNAME').css('margin-left', '0');
+                $('#DIVRECV_Lab').removeClass('control-label').css('padding-top', '5px')
+                $('label[for=TASK_DESCRIPT],label[for=PROPOSAL]').css('width', '65px')
+                $('#DIVTASK_DESCRIPT,#DIVDEAL_RESULT').css('margin-left', '65px')
+                $('#label-upload').removeClass('control-label').css('padding-left', '5px');
+                $('#upload-resource-file').parent().css('margin-left', '0');
+                $('body').css('padding', '0');
+                $('#DUE_TIME').css('width', '145px');
+                $('#upload-resource-file').css('max-width','698px');
+                //$('label[for=TASK_DESCRIPT]').removeClass('control-label')
+            }
+            if (GetQueryString("ShowUploadCss") != undefined && GetQueryString("ShowUploadCss") == "1") {
+                $('#label-upload').removeClass('control-label').css('padding-left', '5px');
+                $('#upload-resource-file').parent().css('margin-left', '0');
+                $('body').css('padding', '0');
+                $('#DUE_TIME').css('width', '145px');
+                $('#upload-resource-file').css('max-width', '540px');
+            }
+
+            //自动匹配接收机构
+            //if (GetQueryString("category") == 'DPC') {
+            $('.atuo_Cheack').show();
+            $('.atuoHide').css('visibility', 'hidden');
+            $('#AUTOMATICCHOOSE').click();
+            //$('#DIVRECV_DEPTNAME label').removeClass('control-label');
+            //}
+            $('#AUTOMATICCHOOSE').change(function () {
+                if ($('#AUTOMATICCHOOSE').is(':checked')) {
+                    $('#ORG_NAME').css('display', '');
+                    $('.atuoHide').css('visibility', 'hidden');
+                } else {
+                    $('.atuoHide').css('visibility', '');
+                    $('#ORG_NAME').css('display', 'none');
+                }
+            })
+            loadTaskForm();
+
+            //资源
+            $('#upload-resource-file').myUploadFile({
+                fileListId: '#fileList',
+                filePickerId: '#filePicker',
+                uploadBtnId: '#ctlBtn',
+                server: '/Common/MAlarmMonitoring/RemoteHandlers/UploadFiles.ashx',
+                action: 'UpLoad'
+            });
+            var closeBtn = GetQueryString('closeBtn');
+            if (closeBtn === 'hide') {
+                $('.j-close').addClass('hide');
+            }
+        });
+
+        $(document).ready(function () {
+            //关闭
+            $('.j-close').click(function () {
+                //if (self.frameElement && self.frameElement.tagName == "IFRAME") {
+                //    //$('#modal-container-22256', window.parent.document).css('display', 'none');
+                //    //$('.modal-backdrop', window.parent.document).remove();
+                //    window.parent.location.reload();
+                //}
+                $('#btnDiv>#close', window.parent.document).click();
+            });
+        });
+    </script>
+</head>
+<body runat="server">
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+
+                <form id="taskForm" method="post" runat="server" class="form-horizontal">
+                    <div class="box-header well SimpleHide" data-original-title="data-original-title">
+                        <h2>
+                            <img src="img/basic_data.png" /> 任务详情
+                        </h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content SimpleHide titleshow_height_no">
+                        <table class="table showTable" cellpadding="1" cellspacing="1">
+                            <tr>
+                                <td class="lititle_titleTD">
+                                    <img src="img/more_.png" title="展开/隐藏" class="fault_show"/> <span class="lititle_title">缺陷</span>
+                                </td>
+                                <td>
+                                    <table class="insideTable">
+                                        <tr>
+                                            <td><span class="four_font_title">检测类型</span>：<span id="list_show-faultClassification"></span></td>
+                                            <td><span class="four_font_title">缺陷级别</span>：<span id="list_show-faultLevel"></span></td>
+                                            <td colspan="2"><span class="four_font_title">缺陷类型</span>：<span id="list_show-faultType"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span class="four_font_title" style="float:left">缺陷描述</span><span style="float:left">：</span><span id="list_show-faultDescribe" style="float:left;width:calc(100% - 72px)"></span></td>
+                                            <td colspan="2"><span class="four_font_title">缺陷分析</span>：<span id="list_show-faultAnalyze"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="lititle_titleTD">
+                                    <img src="img/more_.png" title="展开/隐藏" class="little_img" />  <span class="lititle_title">任务</span>
+                                </td>
+                                <td class="creat_hide">
+                                    <table class="insideTable">
+                                        <tr>
+                                            <td><span class="four_font_title">任务编号</span>：<span id="list_show-number"></span></td>
+                                            <td><span class="four_font_title">数据来源</span>：<span id="list_show-comfrom"></span></td>
+                                            <td><span class="four_font_title">状态</span>：<span id="list_show-status"></span></td>
+                                            <td><span class="six_font_title">状态更新时间</span>：<span id="list_show-time"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="four_font_title">发起者</span>：<span id="list_show-startMsg">
+                                                    <!--某某(陌陌)
+                                                    <img class="show_time_Ico" src="img/time.png" data-toggle="tooltip" data-placement="right" title="time" />-->
+                                                </span>
+                                            </td>
+                                            <td><span class="four_font_title">派发者</span>：<span id="list_show-payoutMsg">                    </span></td>
+                                            <td colspan="2"><span class="four_font_title">接收者</span>：<span id="list_show-saveMsg">      </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span class="four_font_title">任务描述</span>：<span id="list_show-describe"></span></td>
+                                            <td colspan="2"><span class="four_font_title">意见</span>：<span id="list_show-opinion"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="lititle_titleTD">
+                                    <img src="img/more_.png" title="展开/隐藏" class="Check_img"/> <span class="lititle_title">复测</span>
+                                </td>
+                                <td>
+                                    <table class="insideTable">
+                                        <tr>
+                                            <td><span class="four_font_title">复测机构</span>：<span id="list_show-checkOrg"></span></td>
+                                            <td><span class="four_font_title">复测人</span>：<span id="list_show-checkName"></span></td>
+                                            <td><span class="four_font_title">复测值</span>：<span id="list_show-checkVal"></span></td>
+                                            <td><span class="six_font_title">复测工作票</span>：<span id="list_show-checkTicNumber"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span class="four_font_title">复测日期</span>：<span id="list_show-checkTime"></span></td>
+                                            <td colspan="2"><span class="four_font_title">复测情况</span>：<span id="list_show-checkCase"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="lititle_titleTD">
+                                    <img src="img/more_.png" title="展开/隐藏" class="Deal_img"/> <span class="lititle_title">处理</span>
+                                </td>
+                                <td>
+                                    <table class="insideTable">
+                                        <tr>
+                                            <td><span class="four_font_title">处理机构</span>：<span id="list_show-dealOrg"></span></td>
+                                            <td><span class="four_font_title">处理者</span>：<span id="list_show-dealName"></span></td>
+                                            <td><span class="four_font_title">处理时间</span>：<span id="list_show-dealTime"></span></td>
+                                            <td><span class="six_font_title">处理工作票</span>：<span id="list_show-dealTicNumber"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><span class="four_font_title">处理情况</span>：<span id="list_show-dealCase"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><span class="four_font_title">处理结果</span>：<span id="list_show-dealResult"></span></td>
+                                            <td colspan="2"><span class="four_font_title">调整值</span>：<span id="list_show-dealVal"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><span class="four_font_title">备注</span>：<span id="list_show-dealRemark"></span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box-header well SimpleHide viewHide" data-original-title="data-original-title">
+                        <h2>
+                            <img src="img/operation.png" /> 任务操作信息
+                        </h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content viewHide">
+                        <ul class="nav nav-tabs SimpleHide">
+                            <li class="active create"><a href="#taskChangeMission" data-toggle="tab" class="taskChangeMission">转任务 </a></li>
+                            <li class="handle"><a href="#taskChangeMission" data-toggle="tab" class="taskDistribute">派发</a></li>
+                            <li class="handle"><a href="#taskReviewInfo" data-toggle="tab" class="taskReviewInfo">复测信息</a></li>
+                            <li class="handle"><a href="#taskComplete" data-toggle="tab" class="taskComplete">完成</a></li>
+                            <li class="handle"><a href="#taskComplete" data-toggle="tab" class="taskCancel">取消</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="taskChangeMission">
+                                <table class="table" cellpadding="1" cellspacing="1">
+                                    <tr>
+                                        <td>
+                                            <div style="float:left;">
+                                                <label id="DIVRECV_Lab" class="control-label" style="user-select:none;float:left">
+                                                    接收机构：
+                                                </label>
+                                                <input name="AUTOMATICCHOOSE" class="atuo_Cheack" id="AUTOMATICCHOOSE" type="checkbox" style="margin-top:7px;float:left;display:none" />
+                                                <label id="atuoCtrl" class="atuo_Cheack" for="AUTOMATICCHOOSE" style="user-select:none;float:left;width:60px;margin-top: 5px;">
+                                                    自动匹配
+                                                </label>
+                                              <label id="ORG_NAME" class="" for="" style="user-select:none;float:left;margin-top:5px;"></label>  
+                                            </div>
+
+                                            <div id="DIVRECV_DEPTNAME" class="atuoHide" style="display:inline-block;float:left;margin-left:20px">
+                                                <input name="RECV_DEPTNAME" id="RECV_DEPTNAME" type="text" />
+                                            </div>
+
+                                            <input name="RECV_DEPT" id="RECV_DEPT" type="hidden" />
+                                        </td>
+                                        <td>
+                                            <label class="control-label" for="DUE_TIME">
+                                                计划完成时间：
+                                            </label>
+                                            <div class="controls">
+                                                <input name="DUE_TIME" id="DUE_TIME" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!--<tr>
+                                        <td colspan="2">
+                                            <label class="control-label" for="DUE_TIME">
+                                                计划完成时间：
+                                            </label>
+                                            <div class="controls">
+                                                <input name="DUE_TIME" id="DUE_TIME" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                                            </div>
+                                        </td>
+                                    </tr>-->
+                                    <tr class="changeMissHide" style="display:none;">
+                                        <td colspan="2">
+                                            <label class="control-label" for="TASK_DESCRIPT">
+                                                任务描述：
+                                            </label>
+                                            <div id="DIVTASK_DESCRIPT" class="controls ">
+                                                <textarea name="TASK_DESCRIPT" id="TASK_DESCRIPT" style="width: 100%; height: 50px"
+                                                          maxlength="200"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td colspan="2">
+                                            <label class="control-label" for="PROPOSAL">
+                                                意见：
+                                            </label>
+                                            <div id="DIVDEAL_RESULT" class="controls">
+                                                <textarea name="PROPOSAL" id="PROPOSAL" style="width: 100%;" maxlength="200"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                   
+                                    
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="taskReviewInfo">
+                                <div class="SimpleHide">
+                                    <table class="table" cellpadding="1" cellspacing="1">
+                                        <tr>
+                                            <td class="hide">
+                                                <label class="control-label" for="">复测机构：</label><div class="controls">
+                                                    <input name="CHECK_DEPTNAME" id="CHECK_DEPTNAME" type="text" />
+                                                </div>
+                                                <input name="CHECK_DEPT" id="CHECK_DEPT" type="hidden" />
+
+                                            </td>
+                                            <td>
+                                                <label class="control-label" for="">复测人：</label>
+                                                <div class="controls">
+                                                    <select class="hide" id="check_name" name="" onchange="onChangeObj(this.options[this.options.selectedIndex].value, CHECKER); onChangeObj(this.options[this.options.selectedIndex].text, CHECEKRNAME)"
+                                                            style="width: 170px;">
+                                                        <option value="0">全部</option>
+                                                    </select>
+                                                    <input name="CHECEKRNAME" id="CHECEKRNAME" type="text" />
+                                                </div>
+                                                
+                                                <input name="CHECKER" id="CHECKER" type="hidden" />
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="control-label" for="">复测值：</label><div class="controls">
+                                                    <input name="CHECK_VALUE" id="CHECK_VALUE" type="text" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" for="">复测工作票：</label>
+                                                <div class="controls">
+                                                    <!--<input name="CHECK_TICKET" id="CHECK_TICKET" type="text" />-->
+                                                    <input name="CHECK_TICKET_1" id="CHECK_TICKET_1" type="text" />&nbsp;-&nbsp;
+                                                    <input name="CHECK_TICKET_2" id="CHECK_TICKET_2" type="text" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <label class="control-label" for="">复测日期：</label>
+                                                <input id="raise-time" type="hidden"/>
+                                                <input id="check-time" name="CHECK_TIME" type="text" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: true })"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <label class="control-label" for="">复测情况：</label><div id="" class="controls">
+                                                    <textarea name="CHECK_DESCRIPT" id="CHECK_DESCRIPT" style="width: 100%;" maxlength="200"></textarea>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="taskComplete">
+
+                                <table class="table" cellpadding="1" cellspacing="1">
+                                    <tr class="hide">
+                                        <td>
+                                            <label class="control-label" for="">处理机构：</label><div class="controls">
+                                                <input name="DEAL_DEPTNAME" id="DEAL_DEPTNAME" type="text" />
+                                            </div>
+                                            <input name="DEAL_DEPT" id="DEAL_DEPT" type="hidden" />
+                                        </td>
+                                        <td>
+                                            <label class="control-label" for="">处理者：</label><div class="controls">
+                                              <select id="deal_name" name="" onchange="onChangeObj(this.options[this.options.selectedIndex].value, DEALER); onChangeObj(this.options[this.options.selectedIndex].text, DEALERNAME)"
+                                                    style="width: 170px;">
+                                                <option value="0">全部</option>
+                                            </select>
+                                            </div>
+                                            <input name="DEALER" id="DEALER" type="hidden" />
+                                            <input name="DEALERNAME" id="DEALERNAME" type="hidden" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="control-label" for="">整治日期：</label><div class="controls">
+                                                <input name="DEAL_TIME" id="DEAL_TIME" type="text" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', isShowToday: true })"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <label class="control-label" for="">处理工作票：</label>
+                                            <div class="controls">
+                                                <!--<input name="DEAL_TICKET" id="DEAL_TICKET" type="text" />-->
+                                                <input name="DEAL_TICKET_1" id="DEAL_TICKET_1" type="text" />&nbsp;-&nbsp;
+                                                <input name="DEAL_TICKET_2" id="DEAL_TICKET_2" type="text" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="control-label" for="">调整值：</label><div class="controls">
+                                                <input name="DEAL_VALUE" id="DEAL_VALUE" type="text" />
+                                            </div>
+                                        </td>
+                                        <td><label class="control-label" for=""></label></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label class="control-label" for="">取消原因：</label><div id="" class="controls">
+                                                <textarea name="DEAL_DESCRIPT" id="DEAL_DESCRIPT" style="width: 100%;max-width:100%;" maxlength="200"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label class="control-label" for="">处理结果：</label><div id="" class="controls">
+                                                <textarea name="DEAL_RESULT" id="DEAL_RESULT" style="width: 100%;max-width:100%;" maxlength="200"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label class="control-label" for="">备注：</label><div id="" class="controls">
+                                                <textarea name="REMARK" id="REMARK" style="width: 100%;max-width:100%;" maxlength="200"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+
+                        </div>
+                        
+                            <table class="table" cellpadding="1" cellspacing="1" style="table-layout: fixed; display:none">
+                                <tr class="SimpleHide">
+                                    <td>
+                                        <label class="control-label" for="SENDDEPTNAMES">
+                                            <img id="isShowSnend" src="img/more-.png" title="是否抄送" /> 抄送机构：
+                                        </label>
+                                        <div id="DIVSENDDEPTNAMES" class="controls send_hid hide">
+                                            <textarea name="SENDDEPTNAMES" id="SENDDEPTNAMES" style="width: 100%;max-width:100%;"></textarea>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label class="control-label send_hid hide" for="DIVSENDDEPT">
+                                               选择抄送机构：
+                                        </label>
+                                        <div id="DIVSENDDEPT" class="controls send_hid hide">
+                                            <input name="SENDDEPTNAME" id="SENDDEPTNAME" type="text" /><input type="button"
+                                                                                                              value="提交" onclick="onChangeObjs()" class="btn-primary" style="width: 30px" />
+                                        </div>
+                                        <input name="SENDDEPT" id="SENDDEPT" type="hidden" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    
+                    <input type="hidden" id="id" name="id" />
+
+                    
+                    <input type="hidden" name="TOSEND" id="TOSEND" value="off" />
+
+                    <input type="hidden" name="TASK_CODE" id="TASK_CODE"/>
+                    <input type="hidden" name="DATATYPE" id="DATATYPE"/>
+                    <input type="hidden" name="STATUS" id="STATUS"/>
+                    <input type="hidden" name="STATUS_TIME" id="STATUS_TIME"/>
+                    <input type="hidden" name="SPONSORNAME" id="SPONSORNAME" /><!--发起人-->
+                    <input type="hidden" name="SPONSOR" id="SPONSOR" />
+                    <input type="hidden" name="SPONSOR_DEPTNAME" id="SPONSOR_DEPTNAME" />
+                    <input type="hidden" name="SPONSOR_DEPT" id="SPONSOR_DEPT" />
+
+                    <input type="hidden" name="SPONSOR_TIME" id="SPONSOR_TIME" />
+                    <input type="hidden" name="DEADLINE" id="DEADLINE" />
+
+                    <input type="hidden" name="DISPOSERNAME" id="DISPOSERNAME" /><!--派发者-->
+                    <input type="hidden" name="DISPOSER" id="DISPOSER" />
+                    <input type="hidden" name="DISPOSE_DEPTNAME" id="DISPOSE_DEPTNAME" />
+                    <input type="hidden" name="DISPOSE_DEPT" id="DISPOSE_DEPT" />
+                    <input type="hidden" name="DISPOSE_TIME" id="DISPOSE_TIME" />
+
+                    <input type="hidden" name="RECEIVERNAME" id="RECEIVERNAME" /><!--接收者-->
+                    <input type="hidden" name="RECEIVER" id="RECEIVER" />
+                    
+
+
+                    <input type="hidden" name="SEVERITY" id="SEVERITY" />
+                    <input type="hidden" name="CATEGORY_CODE" id="CATEGORY_CODE" />
+                    <input type="hidden" name="CODE" id="CODE" />
+                    <input type="hidden" name="SUMMARY" id="SUMMARY" />
+                    <input type="hidden" name="RESOURCE" id="RESOURCE" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                  
+                </form>
+                <!-- start 上传图片、上传文件 -->
+                <table class="table form-horizontal" cellpadding="1" cellspacing="1">
+                    <tr id="tr-upload" class="hide">
+                        <td>
+                            <label class="control-label" id="label-upload" style="user-select:none;float:left" >
+                                复测图片上传：
+                            </label>
+                            <div class="controls" style="margin-left: 160px;">
+                                <div id="upload-resource-file" class="fl"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="btnTr">
+                        <td colspan="2" style="text-align: center">
+                            <input id="btnTask" class="btn btn-primary hide" type="button" onclick="event_task('toTask')" value="提交" />
+                            <input id="btnSend" class="btn btn-primary hide" type="button" onclick="event_task('toTaskBute')" value="提交" />
+                            <input id="btnCheck" class="btn btn-primary hide" type="button" onclick="event_task('checkTask')" value="保存" />
+                            <input id="btnComplete" class="btn btn-primary hide" type="button" onclick="event_task('toTaskComplete')" value="提交" />
+                            <input id="btnCancel" class="btn btn-primary hide" type="button" onclick="event_task('toTaskCancel')" value="提交" />
+                            <input id="btn_close" class="btn btn-primary j-close" type="button" value="关闭" />
+                            <!--<button id='btn_close' aria-hidden='true' class='btn btn-primary' data-dismiss='modal'>关闭</button>-->
+                            <!--<div id="btnDiv"></div>-->
+                        </td>
+                    </tr>
+                </table>
+                <!-- end 上传图片、上传文件 -->
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+[data-linkBox='1'] .topBox{
+    border:1px solid #e6eaee;
+    width:78px;
+    height:27px;
+    float: left;
+    font-size:15px;
+    color:#aa88f1;
+    line-height: 27px;
+    text-align: center;
+    margin-top: 6px;
+    box-sizing: border-box;
+    margin-left: 5px;
+}
+[data-linkBox='1'] .topBox.change{
+    position: relative;
+    border:2px solid #aa88f1;
+    border-bottom: none;
+    font-size:15px;
+    color:#aa88f1;
+    font-weight: 600;
+
+    margin-top: 0;
+    height: 35px;
+    line-height: 35px;
+}
+[data-linkBox='1'] .topBox:first-child.change{
+    margin-left: 0;
+}
+[data-linkBox='1'] .topBox.change:after{
+    content: " ";
+    font-size: 0;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    left: 0;
+
+}
+[data-linkBox='1'] .top{
+    height: 35px;
+    width: 100%;
+    background-color: white;
+    border-bottom:2px solid #aa88f1;
+}
+[data-linkBox="1"]{
+    background-color:#ffffff;
+    border:1px solid #e6eaee;
+    box-shadow:0 0 4px 0 rgba(0,0,0,0.22);
+    width:418px;
+    height:188px;
+}
+
+[data-linkBox='1'] .childBoxClass{
+
+}
+[data-linkBox='1'] .childBoxClass .child{
+    font-size:14px;
+    color:#7f8fa4;
+    width: 78px;
+    float: left;
+    margin-top: 7px;
+    margin-left: 5px;
+    text-align: center;
+}

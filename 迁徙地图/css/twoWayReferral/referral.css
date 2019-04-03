@@ -1,0 +1,115 @@
+@charset "UTF-8";
+/*主体*/
+html,body{height: 100%;}
+body{
+    font-family: 'Microsoft YaHei';
+    background: #F3F6F8;
+    color: #1A1D21;
+    padding: 0 15px;
+    font-size: 16px;
+}
+/* 布局 */
+.mainBox{
+    width: 100%;
+    height: 100%;
+}
+.cdct_Scroll{
+    width: 100%;
+    min-width: 1300px;
+    padding: 20px 0;
+}
+.cdct_container{
+    overflow: hidden;
+    width: 1300px;
+    background: #fff;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.04) ;
+    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.04) ;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.04) ;
+    -moz-border-radius: 4px ;
+    border-radius: 4px ;
+    min-height: 800px;
+}
+/*主体*/
+.referral{
+    border-bottom: 1px dashed #B4B4B4;
+}
+.referralTop{
+    color: #393F46;
+    font-size: 34px;
+    text-align: center;
+    margin-top: 44px;
+    margin-bottom: 20px;
+}
+.referralSubtitle{
+    color: #393F46;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.refDiv{
+    margin-left: 60px;
+    margin-bottom: 28px;
+}
+.refFont{
+    color: #1A1D21;
+    font-size: 16px;
+
+}
+
+.refInp{
+    width: 150px;
+    border-bottom: 1px solid #C8C8C8;
+    padding-left: 20px;
+    margin: 0 8px;
+    height: 22px;
+}
+.refInpM{
+    width: 280px;
+    border-bottom: 1px solid #C8C8C8;
+    padding-left: 20px;
+    margin: 0 8px;
+    height: 22px;
+}
+.refInpJG{
+    width: 220px;
+    border-bottom: 1px solid #C8C8C8;
+    padding-left: 20px;
+    margin: 0 8px;
+    height: 22px;
+    margin-bottom: 27px;
+    margin-left: 60px;
+}
+.refInpmin{
+    width: 100px;
+    border-bottom: 1px solid #C8C8C8;
+    padding-left: 20px;
+    margin: 0 8px;
+    height: 22px;
+}
+.refInRm{
+    width: 200px;
+    padding-left:10px;
+    height: 22px;
+}
+
+
+.refDivRQ{
+    margin-right: 84px;
+    margin-top: 22px;
+    margin-bottom: 42px;
+}
+.refInrq{
+    width: 60px;
+    text-align: center;
+    padding-left:10px;
+    height: 22px;
+}
+.refInDivRm{
+    margin-top: 126px;
+}
+.refInDivRm1{
+    margin-top: 10px;
+}
+
+

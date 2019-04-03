@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script>
+        loadControl("flexigrid");
+        loadControl("mytree");
+        loadControl("lightbox");
+        loadJs("/Common/Mail/script/Mail.js?v=" + version);
+    </script>
+</head>
+<body runat="server" onload="loadMailFlexiGrid()">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid ">
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-search"></i>查询条件
+                    </h2>
+                </div>
+                <div class="box-content">
+                    人员姓名：<input type="text" id="USER_NAME" class="smallInput" style="width: 80px" />
+                    电话号码：<input type="text" id="MAIL_TEL" class="smallInput" style="width: 100px" />
+                    短信标题：<input type="text" id="MAIL_TITLE" class="smallInput" style="width: 200px" />
+                    时间：<input id="startTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                              style="width: 150px" />至
+                    <input id="endTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                           style="width: 150px" />&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" id="S_so1" runat="server"
+                                                                              class="btn btn-primary" onclick="doQuery();">查询</a> <a href="#" id="A1" class="btn btn-primary"
+                                                                                                                                     onclick="addMail();">新增</a>
+                </div>
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-eye-open"></i><span id="listTitle">短信池信息</span>
+                    </h2>
+                </div>
+                <div class="box-content">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#home" data-toggle="tab"><i class="icon-plus-sign"></i>待发送短信</a></li>
+                        <li><a href="#profile" data-toggle="tab"><i class="icon-minus-sign"></i>已发送短信</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                            <table id="toDoMailFlexTable" style="display: none"></table>
+                        </div>
+                        <div class="tab-pane" id="profile">
+                            <table id="doMailFlexTable" style="display: none"></table>
+                        </div>
+                        <a id="modal-xz" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+                           style="display: none"></a>
+                        <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" style="width: 98%;
+                            height: 80%; left: 23%">
+                            <div style="text-align: center">
+                                <iframe id="url" name="child" scrolling="yes" width="100%" onload="Javascript:iFrameHeight(this)"
+                                        frameborder="0"></iframe>
+                                <div id="btnDiv">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

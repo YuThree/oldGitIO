@@ -1,0 +1,511 @@
+﻿body 
+{
+    padding:0px; margin:0px auto;
+    background-color:#000;
+    color:#fff;
+    overflow:hidden;
+    font-size:10px;
+    font-family:微软雅黑;
+}
+
+ul{ margin:0px; padding:0px;}
+
+
+#box_map,#box_alarm,#box_loca,#XZForm{ position:absolute;}
+
+#box_map{ top:0; left:0;}
+#box_alarm{ top:0; right:0;}
+#box_loca,#XZForm{ bottom:0; left:178px;border-top:1px solid #12A7AF;}
+
+.title_bg{ width:100%; height:28px;  vertical-align:middle; line-height:28px; font-weight:bold;}
+
+#alarms{ width:100%; overflow-y:auto;}
+
+.alarmItem { width:100%; display:block;
+              color:#EAE7E7; background-color:#1E1E1E;
+               padding:3px 0px;
+              border-top:solid 1px #2B2B2B;
+              cursor:pointer;
+              }
+.alarmItem:hover
+{
+  color:#FDFBB0;
+    background-color: rgba(0,0,0,0.6);
+    
+    
+    
+    }
+
+.alarmItem_over{ width:100%;
+                 padding:3px 0px;
+                 color:#DDB3FD; background-color:#000;
+                 cursor:pointer;
+                  }
+
+.m_locaNo{float:left; padding:0.1% 0.2%; width:20%; min-width:80px; }
+.m_mapInfo{float:left; padding:0.1% 0.2%; width:19%;min-width:80px; }
+.m_type{float:left;padding:0.1% 0.2%; width:35%;}
+.m_type_t{float:left; padding:0.1% 0.2%; width:34%;}
+.m_level{float:left;padding:0.1% 0.2%; width:8%;min-width:30px;}
+.m_memo{float:left; padding:0.1% 0.2%; width:24%; }
+
+.m_loca{float:left;  padding:0.1% 0.2%; width:23%;}
+.m_sTime{float:left; padding:0.1% 0.2%; width:23%;}
+.m_eTime{float:left; padding:0.1% 0.2%; width:23%;}
+.m_locus{float:left; padding:0.1% 0.2%; width:23%;}
+
+@media screen and (max-width: 480px) { /*1920*/
+    .m_type{
+        width:50%;
+    }
+    .m_type_t {
+        width:46%;
+    }
+    
+}
+
+
+@media screen and (max-width: 415px) { /*1660*/
+    .m_type{
+        width:48%;
+    }
+    .m_type_t {
+        width:46%;
+    }
+    
+}
+
+
+@media screen and (max-width: 400px) { /*1600*/
+    .m_type{
+        width:46%;
+    }
+    .m_type_t {
+        width:44%;
+    }
+    
+}
+
+@media screen and (max-width: 360px) { /*1440*/
+    .m_type{
+        width:42%;
+    }
+    .m_type_t {
+        width:40%;
+    }
+    
+}
+
+@media screen and (max-width: 342px) { /*1366*/
+    .m_type{
+        width:40%;
+    }
+    .m_type_t {
+        width:39%;
+    }
+    
+}
+
+
+@media screen and (max-width: 320px) { /*1280*/
+    .m_type{
+        width:35%;
+    }
+    .m_type_t {
+        width:33%;
+    }
+    
+}
+
+@media screen and (max-width: 288px) { /*1152*/
+     .m_type,.m_type_t {
+        display:none;
+
+    }
+    .m_mapInfo{width:120px;}
+}
+
+@media screen and (max-width: 256px) { /*1024*/
+    .m_type,.m_type_t {
+        display:none;
+
+    }
+    .m_mapInfo{width:120px;}
+}
+
+
+
+.m_taskCode{float:left; padding:3px 5px; width:18%; }
+.m_taskdescript{float:left; padding:3px 5px; width:20%; }
+.m_severity{float:left; padding:3px 5px; width:5%;}
+.m_deptname{float:left; padding:3px 5px;}
+.m_sponsorname{float:left; padding:3px 5px; }
+.m_cz{float:left; padding:3px 5px; width:17%; }
+
+
+.floatL{ float:left;}
+
+#locas{ width:100%;overflow-y:auto;}
+
+.locaItem { width:100%;height:25px;
+              color:#EAE7E7;
+             
+               padding:3px 0px;
+           
+              cursor:pointer;
+              }
+
+.locaItem_over{width:100%;height:25px;
+                 padding:3px 0px;
+                 color:#FDFBB0; background-color:#000; 
+                 cursor:pointer;
+                 }
+.m_loca_ju{float:left; padding:3px 5px; width:11%;  }
+.m_loca_p{float:left; padding:3px 5px; width:12%;  }
+.m_loca0{float:left; padding:3px 5px; width:10%;  }
+.m_loca1{float:left; padding:3px 5px; width:14%;  }
+.m_loca2{float:left; padding:3px 5px; width:33%;  }
+
+.m_loca3{float:left; padding:3px 5px; width:6%;  }
+.m_loca4{float:left; padding:3px 5px; width:6%;  }
+
+
+.posistionR{ position:relative;}
+.boxTitle{ position:absolute; top:0; left:0; 
+           width:100px; height:100px; 
+           font-size:16px; text-align:center;
+           background-color:rgba(110,83,152,0.5);
+           
+           color:#fff;
+           text-shadow:5px 2px 6px #000
+           
+           }
+.boxTitle_1{ padding-top:5px; line-height:150%;}
+
+.boxTitle_loca{ position:absolute; top:0; left:0; 
+           width:100px; height:100px; 
+           font-size:16px; text-align:center;
+           background-color:rgba(15,15,17,0.5);
+           text-shadow:5px 2px 6px #000
+           }
+.boxTitle_loca2{ 
+           width:100px; height:100px; 
+           padding:0px 0px 0px;
+           font-size:16px; text-align:center;
+           background-color:rgba(15,15,17,0.5);
+           text-shadow:0px 0px 6px #FDFBB0;
+           animation:neon1 1.5s ease-in-out infinite alternate;
+           -webkit-animation:neon1 1.5s ease-in-out infinite alternate;
+           
+           
+           
+           }
+
+.m_loca_so{ float:right; width:80%; text-align:right;}
+#txt_so{ width:130px;-webkit-border-radius:5px; padding:0;/*background-image:url(/Common/MRTA/img/equipment.png);*/border:0;height:30px;background-size: cover;padding-left: 3px;}
+#txt_so:hover{ background-color:#F8F9D5;}
+
+#btn_so,#btn_queryS,#btn_portIn,#btn_portCtrl{ cursor:pointer;/*vertical-align: middle;*/-webkit-border-radius: 5px;padding: 5px;background-color: #5C89FA;color: White;border-width: 0px;}
+#btn_so:hover,#btn_queryS:hover,#btn_portIn:hover,#btn_portCtrl:hover{ background-color:Blue; color:White;}
+
+.btn_look{cursor: pointer;margin-left: 40px;/*vertical-align: middle;*/-webkit-border-radius: 5px;padding: 5px;background-color: #5C89FA;color: White;border-width: 0px;}
+.btn_look:hover{background-color:Blue; color:White;}
+
+.boxTitle_loca_1{ padding:5px 5px 0px 5px; text-align:left; font-weight:bold;}
+.boxTitle_loca_1 img{ margin:0px 5px;}
+
+.cls{ clear:both; overflow:hidden;}
+.d{white-space:nowrap; text-overflow:ellipsis; overflow: hidden; }
+
+#btn_fb{ right:5px; position:absolute;cursor:pointer;-webkit-border-radius:5px; padding:5px;  background-color:#5C89FA; color:White; border-width:0px;}
+#btn_fb:hover{background-color:Blue; color:White;}
+
+#ImgTypeBox{ position:absolute; top:400px; left:10px; z-index:400; width:168px;
+              background-color:rgba(15,15,17,0.5); padding:5px;border-right:1px solid #12A7AF;
+              
+             }
+#ImgTypeBox img { padding:5px 0px;}
+
+
+
+#t_locoAll_Children{position:absolute; top:0px; left:153px; z-index:400; width:140px;
+              background-color:rgba(15,15,17,0.5);
+              display:none;
+
+
+}
+
+    #t_locoAll_Children div {
+        padding:10px;
+    }
+
+#LockBox
+{
+     position:absolute; top:10px; right:490px; z-index:2;
+     
+     /*background-color:rgba(15, 83, 117, 0.9); padding:10px;
+     
+     border-radius: 10px;  
+     
+     box-shadow:0px 0px 5px rgba(255, 255, 255, .5),
+                1px 1px 5px rgba(255, 255, 255, .5)*/
+
+             
+    
+    }
+    #LockButton
+{
+     position:absolute; top:10px; left:10px; z-index:2;
+     
+     /*background-color:rgba(15, 83, 117, 0.9); padding:10px;
+     
+     border-radius: 10px;  
+     
+     box-shadow:0px 0px 5px rgba(255, 255, 255, .5),
+                1px 1px 5px rgba(255, 255, 255, .5)*/
+
+             
+    
+    }
+#LockButton:hover
+{
+    animation: neon_blue 1.5s ease-in-out infinite alternate;
+    
+    }
+
+#LockBox:hover
+{
+    animation: neon_blue 1.5s ease-in-out infinite alternate;
+    
+    }
+
+/*滚动条样式修改*/
+::-webkit-scrollbar{
+	width: 12px;  
+    height: 12px; 
+    background-color:white;
+}
+::-webkit-scrollbar-track:horizontal  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgy.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-track:vertical  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgx.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-button:start:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-left.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-right.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:start:vertical{
+    background: url(/Lib/scrollBar/images/scroll-top.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:vertical{
+    background: url(/Lib/scrollBar/images/scroll-down.png) no-repeat;
+	width: 12px;  
+    height: 12px;
+}  
+::-webkit-scrollbar-thumb  
+{    
+   -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.6);  
+   background-color: #ABDFF3;
+}
+
+
+
+/*glow for webkit*/
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px  #fff,
+               0 0 30px  #fff,
+               0 0 40px  #FF1177,
+               0 0 70px  #FF1177,
+               0 0 80px  #FF1177,
+               0 0 100px #FF1177,
+               0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #fff,
+               0 0 15px #fff,
+               0 0 20px #FF1177,
+               0 0 35px #FF1177,
+               0 0 40px #FF1177,
+               0 0 50px #FF1177,
+               0 0 75px #FF1177;
+  }
+}
+
+
+
+@-webkit-keyframes neon_blue {
+  from {
+    text-shadow: 0 0 5px #228DFF,
+               0 0 10px #228DFF,
+               0 0 20px  #228DFF,
+               0 0 25px  #228DFF
+
+
+  }
+  to {
+    text-shadow: 0 0 2px #228DFF,
+                0 0 5px #228DFF,
+               0 0 10px #228DFF,
+               0 0 12px #228DFF
+
+
+  }
+}
+
+
+
+.fg_blue{
+  -webkit-animation: neon_blue 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon_blue 1.5s ease-in-out infinite alternate;
+  animation: neon_blue 1.5s ease-in-out infinite alternate;
+}
+
+
+.fg_white{
+  text-shadow:0 0 1px #fff, 0 0 2px #fff, 0 0 3px red
+}
+
+
+
+#ItemBox
+{
+    z-index:5;
+    position:absolute;
+    top:0;
+    left:500px;
+    background-color: rgba(0,0,0,0.7);
+    
+    -webkit-border-radius:20px;
+
+    box-shadow:-5px 0 5px rgba(255, 255, 255, .5), /*左边阴影*/  
+                0 5px 5px rgba(255, 255, 255, .5); /*底边阴影*/
+    
+    
+     display:none;
+ 
+    
+    }
+    #ItemBox li
+    {
+         list-style:none;
+         padding: 11px 20px 5px; font-size:25px;
+         
+         line-height:150%;
+         
+                 }
+   
+.ItemBox_content,.ItemBox_content a{ font-size:22px;}
+
+    
+    #closeInfoBtn
+    {
+        position:absolute;
+        right:20px;
+        top:20px;
+      
+        
+        }
+        #closeInfoBtn a{  font-size:30px;     }
+        
+        
+
+a{
+  text-decoration:none; 
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+
+.a_red{
+  color:#EFDEB8;
+
+}
+.a_red:hover
+{
+ color:#ffffff;  
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate; 
+}
+
+
+#play1,#play2,#play1_gis
+{
+    position:absolute;
+    z-index:10500;
+    
+    }
+    
+#allp
+{
+    position:absolute;
+    z-index:10000;
+     left:0px; top:0px; 
+     background:rgba(0,0,0,0.5);
+    
+    }
+
+/*DPC变电所和车辆状态切换标签css*/
+.tags_toggle{
+	position:absolute;
+	z-index: 5;
+	width: 179px;
+	height:78px;
+	/*padding:5px;*/
+	background-color: rgba(15,15,17,0.5);
+	left:0;
+	bottom:445px;
+}
+.tags_toggle .chooseBtWithBorde{
+    text-align:center;
+	padding:5px 0;
+    border:1px solid rgba(15,15,17,0.0);
+    border-left:none;
+    border-right:1px solid #12A7AF;
+}
+.tags_toggle .chooseBtWithBorde .btn-info{
+	background: #4E4E4E;
+}
+.tags_toggle_img{
+	vertical-align: top;
+	margin-left:3px;
+	cursor: pointer;
+    position:absolute;
+    top: 26px;
+}
+
+.tags_toggle .choose_one {
+    border:1px solid #12A7AF;
+    border-left:none;
+    border-right:none;
+    background-color:rgba(0,0,0,0.47)
+}
+#XZForm{
+	display:none;
+}
+#showdisAlarmBox {
+    transition:linear all .2s;
+    display:none;
+    position:absolute;top:50px;left:50px;width:400px;height:250px;background:black;
+    border-radius:5px;
+    box-shadow: 0 0 10px #12A7AF;
+}

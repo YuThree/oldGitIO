@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>卫生计生监督协管信息报告登记表</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 侧边菜单栏 -->
+    <link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+    <!-- 表格 -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/children/wsjsjdxgxxxcdjb.css">
+    <!-- 独自样式 -->
+
+
+</head>
+
+<body>
+    <div class="mainBox">
+        <form id="signupForm">
+            <div class="cdct_tableTitle">卫生计生监督协管信息报告登记表</div>
+            <div class="scrollJS">
+                <div class="z-Box">
+                    
+                    <!-- 报告机构 -->
+                    <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col cdct_colLeft">
+                                <div class="cdct_txt">
+                                    <span class="cdct_tit ">报告机构</span>
+                                </div>
+                                <div class="cdct_info noPl longW">
+                                    <div data-selectsimu="1" class="cdct_select">
+                                        <div class="selectBox">
+                                            <span data-selectnew="1" class="checkspan">
+                                                <span class="optD">
+                                                    <span class="fontMain"></span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </span>
+                                            <div class="ulParent">
+                                                <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                    <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                    <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                    <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                    <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                        <span class="optD">
+                                                            <span class="fontMain"></span>
+                                                        </span>
+                                                        <span class="selectDown"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_col cdct_colRight">
+                                <div class="cdct_txt">
+                                    <span class="cdct_tit ">记录时间</span>
+                                </div>
+                                <div class="cdct_info " data-tableSelect="1">
+                                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择记录时间">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 巡查机构 -->
+                    <!-- 巡查人 -->
+                    <div class="cdct_row cdct_row1_col4">
+                        <div class="cdct_col cdct_colLeft">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">报告人</span>
+                            </div>
+                            <div class="cdct_info cdct_relative">
+                                <input name="firstname3" class="cdct_inputNone " placeholder="报告人">
+                            </div>
+                        </div>
+                        <div class="cdct_col cdct_colRight">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">信息类别</span>
+                            </div>
+                            <div class="cdct_info noPl longW">
+                                <div data-selectsimu="1" class="cdct_select">
+                                    <div class="selectBox">
+                                        <span data-selectnew="1" class="checkspan">
+                                            <span class="optD">
+                                                <span class="fontMain"></span>
+                                            </span>
+                                            <span class="selectDown"></span>
+                                        </span>
+                                        <div class="ulParent">
+                                            <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                                <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                                <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                                <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                                <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                    <span class="optD">
+                                                        <span class="fontMain"></span>
+                                                    </span>
+                                                    <span class="selectDown"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 巡查人 -->
+
+                    <!-- 报告时间 -->
+                    <div class="cdct_row cdct_row1_col2">
+                            <div class="cdct_txt ">
+                                <span class="cdct_tit ">报告时间</span>
+                            </div>
+                            <div class="cdct_info cdct_relative " data-tableSelect="1">
+                                <input name="firstname3" class="cdct_inputNone datepicker" placeholder="请选择报告时间">
+                            </div>
+                    </div>
+                    <!-- 报告时间 -->
+
+                    <!-- 信息内容 -->
+                    <div class="cdct_row cdct_row1_col2 h200">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">信息内容</span>
+                        </div>
+                        <div class="cdct_info">
+                                <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="300" data-pmttextarea="1">
+                                <textarea class="cdct_textarea" placeholder="地点与内容"></textarea>
+                                <div data-pmttextshow="1" style="position: absolute;bottom: 5px;right: 20px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">300字</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 信息内容 -->
+
+                    <!-- 备注 -->
+                    <div class="cdct_row cdct_row1_col2 h135">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit ">备注</span>
+                        </div>
+                        <div class="cdct_info">
+                                <div class="ztextArea" style="position: relative;" data-pmttextstring="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>" data-pmtnum="300" data-pmttextarea="1">
+                                <textarea class="cdct_textarea" placeholder="备注"></textarea>
+                                <div data-pmttextshow="1" style="position: absolute;bottom: 5px;right: 20px;"><div style="float:right"><span style="color:#2da1f8;">0字</span>/<span style="color:#7f8fa4;padding-left:0px;">300字</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 备注 -->
+
+                   
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 侧边菜单栏 -->
+    <script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+    <!-- 表格 -->
+    <script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+    <!-- 文本域js -->
+    <script src="../../jsControl/textArea/textarea.min.js" type="text/javascript"></script>
+    <!-- 文本域js -->
+
+    <!-- 控件调用js -->
+    <script src="../../js/baseInfo.js" type="text/javascript"></script>
+</body>
+
+</html>

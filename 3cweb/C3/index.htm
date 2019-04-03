@@ -1,0 +1,155 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>3C数据接收与分析终端</title>
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script>
+        document.write('<script src="/Common/js/6cweb/MasterJs.js?r='+Math.random()+'" type="text/javascript"><\/script>');
+    </script>
+  
+
+    <link href="/Lib/lightbox/jquery.lightbox.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/lightbox/jquery.lightbox.min.js" type="text/javascript"></script>
+    <script src="/Lib/jquery.flip/jquery.flip.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/gbin1.js" type="text/javascript"></script>
+    <script>
+        document.write('<link href="/Common/Index/css/index.css?r=' + version + '" rel="stylesheet" type="text/css"/>');
+        document.write('<script src="/Common/Index/js/index.js?r=' + version + '" type="text/javascript"><\/script>');
+    </script>
+
+
+    <script>
+
+        function Axs() {
+            $(".jquery-lightbox-button-close").css("display", "block").removeAttr("disabled");
+        };
+        function Ayc() {
+            $(".jquery-lightbox-button-close").css("display", "none").attr("disabled", "true");
+        };
+
+       // urlControl_new();
+        $(document).ready(function () {
+            if (FunEnable('Fun_app_3C') === 'True') {
+                $('#app_3C').css('display', 'inline-block');
+                $('.app_ico').mouseenter(function () {
+                    $('.app_ico').addClass('app_ico_hover');
+                    $('.qr_box').show();
+                }).mouseleave(function () {
+                    $('.app_ico').removeClass('app_ico_hover');
+                    $('.qr_box').hide();
+                });
+            } else {
+                $('#app_3C').css('display', 'none');
+            }
+        });
+    </script>
+</head>
+<body style="overflow: hidden;">
+    <div class="wrap_bg clearfix">
+        <div class="header">
+            <a style="color: white" id="btn_close" href="#"><img src="/Common/Index/images/out.png" style="width: 22px; height: 22px;padding-top:18px;" title="退出登录"/></a>
+            <a href="javascript:void(0);" style="text-decoration:none;"><label id="Iname"></label></a>
+            <a href="javascript:void(0);" style="text-decoration:none;" id="Abnormal"><span class="Abnormal-img"></span>异常提醒（<label id="Abnormal-font">0</label>）</a>
+            <a id="app_3C" href="javascript:void(0);" style="text-decoration:none;">
+                <span class="app_ico">APP下载</span>
+                <div class="qr_box hide">
+                    <img src="/Common/MDownloadApp/img/appCode.png" />
+                    <div class="txt_box">
+                        <span class="one">3C APP</span>
+                        <span>扫描二维码</span>
+                        <span>安装3C客户端</span>
+                    </div>
+                </div>
+            </a>
+            <div id="logo2"><span>3C数据接收与分析终端</span></div>
+        </div>
+        <div class="pageBody">
+            <div class="layout">
+
+                <!-- 左上 -->
+                <div id="LeftTop">
+                    <div class="box2_2_nomargin  box1_8h">
+                    <script>
+                        CurrentCateGory = "3C";
+                        GetItem("box2_2  box1_8h j5", CurrentCateGory, "mrta3C"); //实时监控
+                    </script>
+                    </div>
+                    <div class="box2_2_nomargin  box1_8h">
+                        <script>
+                            GetItem("box2_1 box0_9h", CurrentCateGory, "alarm3c"); //检测数据
+                            GetItem("box2_1 box1h", CurrentCateGory, "fault3c"); //缺陷库
+                        </script>
+                    </div>
+                    <div class="cls"></div>
+                </div>
+                <!-- 右上 -->
+                <div id="RightTop">
+                     <div class="box2_2_nomargin  box1_8h">
+                        <script>
+                            GetItem("box2_1 box0_9h", CurrentCateGory, "video"); //视频直播
+                            GetItem("box2_1 box1h", CurrentCateGory, "task"); //任务管理
+                        </script>
+                    </div>
+                     <div class="box2_2_nomargin">
+                        <script>
+                            GetItem("box2_1 box0_9h", CurrentCateGory, "GJ"); //设备轨迹
+                            GetItem("box2_1 box1h", CurrentCateGory, "deviceStatus3C"); //设备状态
+                        </script>
+                    </div>               
+                    <div class="cls"></div>
+                </div>
+                <!-- 左下 -->
+                <div id="LeftBottom">
+                    <script>
+                        GetItem("box2_1 box1h", CurrentCateGory, "soft"); //线路巡检, 硬盘数据分析
+                        GetItem("box2_1 box1h", CurrentCateGory, "gis"); //GIS分析
+                    </script>
+                    <div class="cls">
+                    </div>
+                    <script>
+                        if (FunEnable('Fun_Problem') == 'True') {
+                            GetItem("box2_1", CurrentCateGory, "intelligence_3c"); //智能分析
+                            GetItem("box2_1", CurrentCateGory, "problem_3c");//乌局问题库管理(只有外部版本才有)
+                        } else {
+                            GetItem("box4_1", CurrentCateGory, "intelligence_3c"); //智能分析
+                        }
+                    </script>
+                    <div class="cls">
+                    </div>
+                </div>
+                <!-- 右下 -->
+                <div id="RightBottom">
+                    <div>
+                        <script>
+                            if (flag) { //（内部版本）
+                                GetItem("box2_1 box1h", CurrentCateGory, "report_common"); //统计报表
+                                GetItem("box2_1 box1h", CurrentCateGory, "base", "line,position,Locomotive,LocationInfo,pole,CrossList"); //基础数据
+                            } else { //（外部版本）
+                                GetItem("box4_1 box1h", CurrentCateGory, "report_common"); //统计报表
+                            };
+                        </script>
+                        <div class="cls">
+                        </div>
+                    </div>
+                    <div>
+                        <script>
+                            if (flag) { //（内部版本）
+                                GetItem("box2_1", CurrentCateGory, "sys_txtLeft", "org,orgm,dataPermisson,Permission,log,menu,user,dictionary"); //系统管理
+                            } else { //（外部版本）
+                                GetItem("box2_1", CurrentCateGory, "sys_txtLeft", "org,orgm,dataPermisson,Permission,log,menu,user,dictionary,Locomotive"); //系统管理
+                            }
+                            GetItem("box2_1", CurrentCateGory, "help_txtLeft"); //帮助
+                        </script>
+                        <div class="cls">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="bg_bottom"><div id="foot">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有</div></div>
+    </div>
+    <a href="#" class="button-back" title="返回"><img src="/Common/MRTA/img/buttonreload.png" width="40" height="40" alt="返回" /></a>
+</body>
+</html>

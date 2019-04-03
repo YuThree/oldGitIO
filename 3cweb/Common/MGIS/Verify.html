@@ -1,0 +1,941 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>验证工具</title>
+    <script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=2.0&services=true" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js" type="text/javascript"></script>
+    <script src="http://developer.baidu.com/map/jsdemo/demo/convertor.js" type="text/javascript"></script>
+    <script src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js" type="text/javascript"></script>
+    <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet" />
+    <!--加载检索信息窗口-->
+    <script src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js" type="text/javascript"></script>
+    <link href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" rel="stylesheet" />
+    <script src="/Common/MGIS/JS/Verify.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/convertor.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/xfk.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/Chart.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/GIS.js" type="text/javascript"></script>
+
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mySelectTree.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/myTree.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <script src="/Common/MGIS/JS/Blob.js"></script>
+    <script src="/Common/MGIS/JS/FileSaver.js"></script>
+    <link href="/Common/css/gis/verify.css" rel="stylesheet" />
+    <link href="/Common/css/gis/verify_more.css" rel="stylesheet" />
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("ztree");
+        loadControl("layer");
+        loadControl("mySelectTree");
+        loadControl("jqueryUI");
+        loadControl("jqueryUI_2");
+        loadControl("multiSelect");
+        loadControl("hint");
+        loadControl("Validation");
+        loadJs("/Common/js/6cweb/mySelectTree_Level2.js?v=" + version);
+        loadJs("/Common/js/6cweb/myTree.js?v=" + version);
+        loadJs("/Common/MGIS/JS/verify_more.js?v=" + version);
+    </script>
+    <script type="text/javascript">
+        //页面加载是调用
+        var map;
+        var jbJson;
+        $(document).ready(function () {
+            $(".mapText").click(function () {
+                if (this.id == "weixinMap") {
+                    $(this).css("color", "rgb(103,179,239)")
+                    $("div[title='显示卫星影像']").click();
+                    $('.mapText:eq(0)').css("color", "white");
+                    $('.mapText:eq(2)').css("color", "white");
+
+                }
+                if (this.id == "dituMap") {
+                    $(this).css("color", "rgb(103,179,239)")
+                    $("div[title='显示普通地图']").click();
+                    $('.mapText:eq(1)').css("color", "white");
+                    $('.mapText:eq(2)').css("color", "white");
+
+                }
+                if (this.id == "sanweiMap") {
+                    $(this).css("color", "rgb(103,179,239)")
+                    $("div[title='显示三维地图']").click();
+                    $('.mapText:eq(0)').css("color", "white");
+                    $('.mapText:eq(1)').css("color", "white");
+                }
+            });
+            //$(".map_IMG_picture").click(function () {
+            //    if (this.title == "拖动地图") {
+            //        drawingManager.close();
+
+            //    }
+            //    else if (this.title == "框选地图") {
+            //        drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
+            //        drawingManager.open();
+
+            //    }
+            //    else if (this.title == "取消框选") {
+            //        clearAll();
+
+            //    }
+            //    else if (this.title == "清除") {
+            //     QC();
+            //    }
+            //    else if (this.title == "测距") {
+            //        CJOpen();
+            //    }
+            //});
+
+            $(".map_IMG_picture:eq(0)").click(function () {
+                CJOpen();
+            })
+            $(".map_IMG_picture:eq(1)").click(function () {
+                drawingManager.close();
+            })
+            $(".map_IMG_picture:eq(2)").click(function () {
+                drawingManager.setDrawingMode(BMAP_DRAWING_RECTANGLE);
+                drawingManager.open();
+            })
+            $(".map_IMG_picture:eq(3)").click(function () {
+                clearAll();
+            })
+            $(".map_IMG_picture:eq(4)").click(function () {
+                QC();
+            })
+
+
+
+            $(".tab_content").hide(); //Hide all content
+            $("ul.tabsUper li:first").addClass("active").show(); //Activate first tab
+            $(".tab_content:first").show(); //Show first tab content
+            $(".tabsUper a:eq(0)").css("color", "#3f95c9");
+
+
+            //On Click Event
+            $("ul.tabsUper li").click(function () {
+                $("ul.tabsUper li").removeClass("active"); //Remove any "active" class
+                $(this).addClass("active"); //Add "active" class to selected tab
+                $(".tab_content").hide(); //Hide all tab content
+                var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+                $(activeTab).fadeIn(); //Fade in the active content
+                return false;
+            });
+
+            $("#startdate").val(getDateStr_day(new Date(), -1));
+            $("#enddate").val(datehhssNowStr());
+            jbJson = GetSeverityJson();
+            var jsHtml = "";
+            for (var i = 0; i < jbJson.length; i++) {
+                jsHtml += "<option value='" + jbJson[i].code + "'>" + jbJson[i].name + "</option>";
+            }
+            if (jsHtml) {
+                $("#jb").html(jsHtml);
+            }
+            //setInterval(startRequest, 10000);
+            try {
+                var _h = (parseInt($(window).height()));
+                var _w = parseInt($(window).width());
+                $("#orBmapDiv").width(_w).height(_h);
+                $("#locomotiveselect").mySelect({
+                    tag: "LOCOMOTIVE",
+                    code: "",
+                    type: true
+                });
+
+                $('#lineselect,#_lineselect').mySelect({
+                    tag: 'LINE'
+                });
+
+                $("#juselect").mySelect({
+                    tag: "Organization", code: "TOPBOSS", type: "J"
+                }).change(function () {
+                    var jcode = $(this).val();
+                    if (jcode == "0") {
+                        $("#duanselect").html("");
+                    }
+                    else {
+                        $("#duanselect").mySelect({
+                            tag: "Organization",
+                            code: jcode
+                            //  ,type: "JWD" || "CLD"
+                        })
+                    }
+                });
+                loadOrgSelect("_juselect", "_duanselect", "_chejianselect", "_gongquselect");
+                $('#citySel').mySelectTree_Level2({
+                    isSelectChildren: true
+                });
+                VerifyMapbind();
+            } catch (e) {
+                //  alert("地图加载不成功，请检查网络！");
+
+            }
+            //  hideC3infobyID("jltr"); //隐藏动车数据的交路运用区段信息查询信息
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 6,
+                height: 200
+            });
+            $("#jb").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 6,
+                height: 100
+            });
+            $('#XB').mySelectTree({
+                tag: 'Get_Drection',
+                height: 50,
+                width: 128,
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $('#XB').val(treeNode.name).attr({ "code": treeNode.id });
+                }
+            });
+            $('#ddlxb').mySelectTree({
+                tag: 'Get_Drection',
+                height: 50,
+                width: 128,
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $('#ddlxb').val(treeNode.name).attr({ "code": treeNode.id });
+                }
+            });
+            $('#btn_search').click(function () {
+                Q_Alarm();
+                $('#box_search').modal('toggle');
+
+            });
+            $('#btn_reset').click(function () {
+                $("#citySel").val("");
+                $("#txt_fx").val("");
+                $("#txt_temp_hw1").val("");
+                $("#txt_temp_hw2").val("");
+                $("#txt_temp_hj1").val("");
+                $("#txt_temp_hj2").val("");
+                $("#txt_bow").val("");
+                $("#txt_dg1").val("");
+                $("#txt_dg2").val("");
+                $("#txt_lc1").val("");
+                $("#txt_lc2").val("");
+                $("#txt_speed1").val("");
+                $("#txt_speed2").val("");
+                $("#txt_id").val("");
+
+            });
+
+
+            $('#btn_openSearch').click(function () {
+                $('#box_search').modal().css({
+                    width: 'auto',
+                    'margin-left': function () {
+                        return -($(this).width() / 2);
+                    },
+                    'margin-top': function () {
+                        return -($(this).height() / 2);
+                    }
+                });
+            });
+            $('#btn_openClick').click(function () {
+                $('#box_click').modal().css({
+                    width: 'auto',
+                    'margin-left': function () {
+                        return -($(this).width() / 2);
+                    },
+                    'margin-top': function () {
+                        return -($(this).height() / 2);
+                    }
+                });
+            });
+
+            document.getElementById("saveBtn").onclick = function (event) {
+                saveAsExcel();
+                event.preventDefault();
+                var BB = self.Blob;
+                saveAs(
+                      new BB(
+                          ["\ufeff" + document.getElementById("txtDC").value] //\ufeff防止utf8 bom防止中文乱码
+                        , { type: "text/plain;charset=utf8" }
+                    )
+                    , document.getElementById("filename").value
+                );
+            };
+            //鼠标移到图片上简单的交互效果
+
+            $(".map_IMG_picture").click(function () {
+                $("#xiaotupianfuji a").removeClass("fuckYou");
+                $(this).addClass("fuckYou");
+
+
+            })
+            $(".tabsUper a:eq(1)").click(function () {
+                $("#tab4 a:eq(1)").css("color", "#3f95c9");
+                $("#tab4 a:eq(1)").css("font-size", "1.1em");
+                $("#tab1 a:eq(1)").css("font-size", "1em");
+            })
+            $("#xiaotupianfuji a:eq(2)").click(function () {
+                $(".BMapLib_box BMapLib_hander").css("background-color", "#125475");
+                //调用拖动地图的方法；
+
+            })
+
+
+
+
+        });
+        function lineChange(value) {
+            $('#txtqz').jHint({
+                type: 'StationSection',
+                line: value
+            });
+
+        }
+        function OrgChange(value) {
+            if (value == "0") {
+                value = $("#juselect").val();
+                if (value == "0") {
+                    value = "";
+                }
+            }
+            $("#locomotiveselect").mySelect({
+                tag: "LOCOMOTIVE",
+                code: value,
+                type: true
+            });
+        }
+
+
+        var imgbtn = true;
+        function imgbtnChange() {
+            if (imgbtn) {
+                $("#imgButton").attr("src", "/Common/img/101.png").removeClass("img_out").addClass("img_in");
+                $("#div_tj").removeClass("dh_out").addClass("dh_in");
+            }
+            else {
+                $("#imgButton").attr("src", "/Common/img/100.png").removeClass("img_in").addClass("img_out");
+                $("#div_tj").removeClass("dh_in").addClass("dh_out");
+            }
+            imgbtn = !imgbtn;
+        }
+
+        function OnloadMap() {
+            $('.BMapLib_last').attr('title', "框选操作区域");
+        }
+    </script>
+    <style>
+    </style>
+</head>
+<body onload="OnloadMap()">
+    <div id="judgeContrl" data-toggle="modal" data-target="#judge" style="display:none">人工判断控制</div>
+    <div class="modal fade" id="judge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        异常结果——人工判断
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="humanJudge" rows="2" style="width:98%" autofocus=autofocus autofocus=autofocus autofocus=autofocus autofocus=autofocus required=required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" id="saveRedact" class="btn btn-primary" data-dismiss="modal">
+                        保存
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <div class="div_tj_title"></div><!--表头 -->
+    <div class="div_tj_bottom"></div><!--表尾 -->
+    <!--表体 结果框-->
+    <div class="div_tj_content">
+        <div class="list_title">
+            <div>
+                <p><img src="/Common/MGIS/img/yz_icon.png" /><span>&nbsp;查询结果</span></p>
+                <p id="lable_title">
+
+                </p>
+            </div>
+            <div>
+                <p><img src="/Common/MGIS/img/yz_back.png" />&nbsp;返回查询</p>
+            </div>
+        </div>
+        <div class="list_body_title"></div>
+        <div class="list_body">
+            <div class="list_body_divTitle">
+                <div>
+                    <div class="first_number">序号&nbsp;</div>
+                    <div id="number_sort"><img src="/Common/MGIS/img/yz_up.png" /></div>
+                </div>
+                <div>线路区间  </div>
+                <div>行别      </div>
+                <div>
+                    <div class="km_Mark">公里标</div>
+                    <div id="km_sort"><img src="/Common/MGIS/img/yz_up.png" /></div>
+                </div>
+                <div>杆号      </div>
+                <div>异常结果</div>
+            </div>
+            <div class="table_list">
+                <table>
+                    <thead style="display:none">
+                        <tr>
+                            <td>
+                                <div>
+                                    <div>序号&nbsp;</div>
+                                    <div><img src="/Common/MGIS/img/yz_up.png" title="升序" /><img src="/Common/MGIS/img/yz_down.png" title="降序" /></div>
+                                </div>
+
+                            </td>
+                            <td>线路区间</td>
+                            <td>行别</td>
+                            <td>公里标</td>
+                            <td>杆号</td>
+                            <td>异常结果</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!--分页-->
+            <div id="cxFenYe">
+                <div class="yeJiao dbleft" onclick="yemianTiaozhuan('first')" title="回到首页">&lt;&lt;</div>
+                <div class="yeJiao sgleft" onclick="yemianTiaozhuan('less')" title="上一页">&lt;</div>
+                <div class="yeJiao sgright" onclick="yemianTiaozhuan('next')" title="下一页">&gt;</div>
+                <div class="yeJiao dbright" onclick="yemianTiaozhuan('end')" title="回到尾页">&gt;&gt;</div>
+                <div class="yeJiao" id="yeMaQu">
+                    <p style="font-size: 12px"><span id="nowPage">0/0</span>页&nbsp;共<span id="sumPage">0</span>条，现<span id="pageRange">0~0</span>条</p>
+                </div>
+            </div>
+        </div>
+        <div class="list_body_bottom"></div>
+    </div>
+
+    <!--表体 查询框-->
+    <div id="div_tj">
+        <div style="float:left;">
+            <table id="cxContent">
+                <tr>
+                    <td>
+                        &nbsp; 组织机构：
+                    </td>
+                    <td>
+                        <input id="org_tree" type="type" name="name" value="" />
+                    </td>
+                    <td>
+                        &nbsp; 行别：
+                    </td>
+                    <td>
+                        <div style="margin-top: 10px;">
+                            <input type="text" id="ddlxb" name="ddlxb" />
+                        </div>
+                        <!--<select name="ddlxb" id="ddlxb">
+                            <option value="">全部</option>
+                            <option value="上行">上行</option>
+                            <option value="下行">下行</option>
+                        </select>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp; 线路区间：
+                    </td>
+                    <td>
+                        <input id="linen_tree" type="type" name="name" value="" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="display:none;">
+                    <td>
+                        &nbsp;  &nbsp;&nbsp;区站：
+                    </td>
+                    <td colspan="3"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="container">
+            <br />
+            <div class="tab_container">
+
+                <div id="tab1" class="tab_content" style="display: none; ">
+                    <ul class="tabsUper">
+                        <li class="active"><a href="#tab1">定位数据查询</a></li>
+                        <li id="myActiCive"><a href="#tab4">缺陷数据查询</a></li>
+                    </ul>
+                    <br />
+                    <br />
+                    <table id="table_list">
+                        <tr>
+                            <td>
+                                &nbsp;两点距离大于(m)：
+                            </td>
+                            <td>
+                                <input type="text" id="jl" style="width:180px; border-radius: 5px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;两点距离小于(m)：
+                            </td>
+                            <td>
+                                <input type="text" id="_jl" style="width: 180px; border-radius: 5px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;数&nbsp;&nbsp;&nbsp;  据&nbsp;&nbsp;&nbsp;  类&nbsp;&nbsp;&nbsp;  型：
+                            </td>
+                            <td>
+                                <select name="ddlyc" id="ddlyc" style="width: 190px; border-radius: 5px;">
+
+                                    <option value="0" selected="selected"></option>
+                                    <option value="2">杆号异常</option>
+                                    <option value="3">距离过大异常</option>
+                                    <option value="4">距离过小异常</option>
+                                    <option value="5">偏移数据</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;公&ensp;&nbsp;里&nbsp;&ensp;标（m）：</td>
+                            <td>
+                                <input type="text" id="kmStart" style="width: 72px; border-radius: 5px;" />
+                                至
+                                <input type="text" id="kmEnd" style="width: 72px; border-radius: 5px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;杆&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;号：</td>
+                            <td>
+                                <input type="text" id="proNumber" style="width: 180px; border-radius: 5px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center;">
+                                <img src="./img/dqueryBtn.png" alt="查询" id="myBtnTd" />
+                                <img src="./img/statisticsBtn.png" alt="统计" id="statisticsBtn" />
+                                <img src="./img/danalyzeBtn.png" alt="分析" id="analyzeBtn" />
+                                <img src="./img/ddwonBtn.png" alt="导出" id="saveBtn" />
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div id="tab4" class="tab_content">
+                    <ul class="tabsUper">
+                        <li class="active"><a href="#tab1">定位数据查询</a></li>
+                        <li><a href="#tab4">缺陷数据查询</a></li>
+                    </ul>
+                    <br />
+                    <br />
+                    <table>
+
+                        <tr>
+                            <td style="width:80px;">公里标(m):</td>
+                            <td>
+                                <input type="text" id="txtstartkm" style="width: 93px; border-radius: 5px;" />
+                                至
+                                <input type="text" id="txtendkm" style="width: 92px; border-radius: 5px;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>  开始时间：</td>
+                            <td>
+                                <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, isShowClear: false })"
+                                       style="width: 220px" />
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 结束时间：</td>
+                            <td>
+                                <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss', isShowToday: false, isShowClear: false })"
+                                       style="width: 220px" />
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>  设&nbsp; 备&nbsp;号：</td>
+                            <td>
+                                <select id="locomotiveselect" name="locomotiveselect" style="width: 230px;margin:0;">
+                                    <option value="0">
+                                        全部
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="display:none">
+                                检测类型：
+                            </td>
+                            <td style="display:none">
+                                <select name="dll_lx" id="dll_lx" style="margin: 0 auto; width: 150px;">
+                                    <option value="0">全部</option>
+                                    <option value="1C">1C</option>
+                                    <option value="2C">2C</option>
+                                    <option value="3C">3C</option>
+                                    <option value="4C">4C</option>
+                                    <option value="5C">5C</option>
+                                    <option value="6C">6C</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                级&nbsp; &nbsp;&nbsp; &nbsp;别：
+                            </td>
+                            <td>
+                                <select name="jb" id="jb" title="级别" multiple="multiple" style="width: 226px;" size="3">
+                                    <option value="一类">一类</option>
+                                    <option value="二类">二类</option>
+                                    <option value="三类">三类</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                状&nbsp; &nbsp;&nbsp; &nbsp;态：
+                            </td>
+                            <td colspan="3">
+                                <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic" style="width: 226px;" size="3">
+                                    <option value="AFSTATUS01">新上报</option>
+                                    <option value="AFSTATUS03">已确认</option>
+                                    <option value="AFSTATUS04">已计划</option>
+                                    <option value="AFSTATUS07">检修中</option>
+                                    <option value="AFSTATUS02">已取消</option>
+                                    <option value="AFSTATUS05">已关闭</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button class="btn btn-small btn-primary chaxunalarm" onclick="Q_Alarm()" style="width:40%;margin-top:5px;font-family:微软雅黑">查询告警</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="btn_openSearch" type="button" class="btn btn-small btn-success chaxunalarm" value="更多条件" style="width:40%;margin:-12%;margin-top: -15%;font-family:微软雅黑" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pictureMap">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<span class="nowPoint">输入定位坐标点：</span> <input type="text" id="Text1" style="width:180px; border-radius: 5px;" /><img src="./img/定位.png" class="pointPicter" onclick="SaveDW()" id="xiaobuding" />
+                    <div id="xiaotupianfuji">
+                        <a class="map_IMG_picture" title="测距"><img src="./img/测距.png" /></a>
+                        <a class="map_IMG_picture" title="拖动地图"><img src="./img/制定区域.png" /></a>
+                        <a class="map_IMG_picture" title="框选地图"><img src="./img/框选地图.png" /></a>
+                        <a class="map_IMG_picture " title="取消框选"><img src="./img/取消框选.png" /></a>
+                        <a class="map_IMG_picture" title="清除"><img src="./img/清除.png" /></a>
+                    </div>
+                    <div id="mapWeiXin">
+                        <div class="mapText" id="dituMap">地图</div>
+                        <div class="mapText" id="weixinMap" onclick="">卫星</div>
+                        <div class="mapText" id="sanweiMap">三维</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="con_one_2" style="display: none;">
+    </div>
+    <div style="width: 98%; height: 930px; border: 0px solid gray; text-align: center;
+                    z-index: 1" id="orBmapDiv">
+    </div>
+
+    <a id="modal-update" href="#modal-container-update" data-toggle="modal" style="display: none">
+    </a><a id="modal-DW" href="#modal-container-DW" data-toggle="modal" style="display: none">
+    </a>
+    <div id="box_search" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 850px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">更多查询条件</h4>
+            </div>
+            <div class="modal-content">
+                <div id="search_bg">
+                    <div class="row-fluid row_Search">
+
+                        <div class="row-fluid  row_Search">
+                            <div class="span4">
+                                <span class="so_LT">报警类型：</span>
+                                <input id="citySel" type="text" value="" code="" style="width: 150px; margin: 0;" />
+                            </div>
+                            <div class="span4">
+                                <span class="so_LT">报警分析：</span>
+                                <input id="txt_fx" name="txt_fx" type="text" value="" code="" style="width: 150px; margin: 0;" />
+                            </div>
+                        </div>
+                        <div class="row-fluid row_Search">
+                            <div class="span4">
+                                <span class="so_LT">最高温度：</span>
+                                <input id="txt_temp_hw1" name="txt_temp_hw1" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                                至
+                                <input id="txt_temp_hw2" name="txt_temp_hw2" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                            </div>
+                            <div class="span4">
+                                <span class="so_LT">环境温度：</span>
+                                <input id="txt_temp_hj1" name="txt_temp_hj1" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                                至
+                                <input id="txt_temp_hj2" name="txt_temp_hj2" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                            </div>
+                            <div class="span4">
+                                <span class="so_LT">弓位置：</span>
+                                <input id="txt_bow" name="txt_bow" type="text" value="" style="width: 50px; margin: 0;" />
+                            </div>
+                        </div>
+                        <div class="row-fluid row_Search">
+                            <div class="span4">
+                                <span class="so_LT">导高值：</span>
+                                <input id="txt_dg1" name="txt_dg1" type="text" class="validate[custom[integer]]"
+                                       value="" style="width: 40px; margin: 0;" />
+                                至
+                                <input id="txt_dg2" name="txt_dg2" type="text" class="validate[custom[integer]]"
+                                       value="" style="width: 40px; margin: 0;" />
+                            </div>
+                            <div class="span4">
+                                <span class="so_LT">拉出值：</span>
+                                <input id="txt_lc1" name="txt_lc1" type="text" class="validate[custom[integer]]"
+                                       value="" style="width: 40px; margin: 0;" />
+                                至
+                                <input id="txt_lc2" name="txt_lc2" type="text" class="validate[custom[integer]]"
+                                       value="" style="width: 40px; margin: 0;" />
+                            </div>
+                            <div class="span4">
+                                <span class="so_LT">速度：</span>
+                                <input id="txt_speed1" name="txt_speed1" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                                至
+                                <input id="txt_speed2" name="txt_speed2" class="validate[custom[integer]]" type="text"
+                                       value="" style="width: 40px; margin: 0;" />
+                            </div>
+                        </div>
+                        <div class="row-fluid row_Search">
+                            <div class="span12">
+                                <span class="so_LT">告警ID：</span>
+                                <input id="txt_id" name="txt_id" multiple=multiple type="text" class="validate[custom[integer]]"
+                                       value="" style="width: 600px; margin: 0;" />例如：(id,id,id)
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn_search">
+                        查 询
+                    </button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" id="btn_reset">
+                        清空条件
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box_click" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 850px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">更多查询</h4>
+            </div>
+            <div class="modal-content">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn_search">
+                        查 询
+                    </button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" id="btn_reset">
+                        清空条件
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" id="modal-container-update" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel" style="top: 50%; width: 50%; left: 50%; z-index: 9999;">
+        <div class="modal-header">
+            <h3>
+                <span id="updatetitle"></span>
+            </h3>
+            <input id="updatetype" type="hidden" />
+        </div>
+        <div class="modal-body form-horizontal">
+            <table id="tb_sure" class="table" cellpadding="1" cellspacing="1" style="width: 100%;
+                height: 450px;">
+                <tr>
+                    <td>
+                        局：
+                    </td>
+                    <td>
+                        <select id="_juselect" name="juselect" style="width: 80px;"></select>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp; 段：
+                    </td>
+                    <td>
+                        <select id="_duanselect" name="duanselect" style="width: 80px;"></select>
+
+                        <div style="display:none;">
+                            <select id="_chejianselect" name="chejianselect" style="width: 80px;"></select>
+                            <select id="_gongquselect" name="gongquselect" style="width: 80px;"></select>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;&nbsp; 线路：
+                    </td>
+                    <td>
+                        <select id="_lineselect" name="lineselect" style="width: 80px;" onchange="lineChange(this.value)"></select>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;行别：
+                    </td>
+                    <td>
+                        <div style="margin-top: 10px;">
+                            <input type="text" id="XB" name="ddlxb" style="width: 80px;" />
+                        </div>
+                        <!--<select name="ddlxb" id="XB" style="width: 80px;">
+                            <option value="">全部</option>
+                            <option value="上行">上行</option>
+                            <option value="下行">下行</option>
+                        </select>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        区站：
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="txtqz" style="width: 100px;" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button id="Button2" class="btn btn-primary" onclick="Save()">
+                确认
+            </button>
+            <button id="btncols" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                关闭
+            </button>
+        </div>
+    </div>
+    <div id="ImgTypeBox" style="bottom:0px;">
+        <div class="pointWeizhi">图例<img src="./img/地图.png" alt="......" class="pointimg" /></div>
+        <hr style="height:1px;border:none;border-top:1px solid white;" />
+        <hr style="height:1px;border:none;border-top:1px solid white;" />
+        <div class="pointWeizhi"><img src="./img/绿色水滴.png" />&nbsp;&ensp;正常数据点</div>
+        <div class="pointWeizhi"><img src="./img/红色水滴.png" />&nbsp;&ensp;异常数据点&nbsp;&ensp;&nbsp;&ensp;</div>
+        <div class="pointWeizhi"><img src="./img/黑色水滴.png" />&nbsp;&ensp;两点距离过大数据点</div>
+        <div class="pointWeizhi"><img src="./img/黄色水滴.png" />&nbsp;&ensp;两点距离过小数据点</div>
+        <div class="pointWeizhi"><img src="./img/紫色水滴.png" />&nbsp;&ensp;数据偏移点</div>
+        <div class="pointWeizhi"><img src="./img/橙色水滴.png" />&nbsp;&ensp;边界杆&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</div>
+    </div>
+    <div style="display:none;">
+        <textarea id="txtDC" rows="5" cols="50000">
+            主键,局编号,局,线路编号,线路,区站编号,区站,桥隧编号,桥隧名称,行别,公里标,杆号,编号,帧号,经度,纬度,百度经度,百度纬度,时间
+
+
+        </textarea>
+        <input type="text" name="filename" id="filename" value="hello.csv" />
+    </div>
+
+
+
+    <div class="bottom_list">
+        <div class="list_arrows">
+            <img src="./img/nextpage.png" alt="收缩/展开" title="收缩/展开" />
+        </div>
+        <div class="lsit_content">
+            <div></div>
+            <div><img src="./img/titleIco.png" alt="Alternate Text" />&nbsp;定位数据统计结果<a id="backToLine">&lt; 返回</a></div>
+            <div></div>
+        </div>
+        <div class="table_black">
+            <table class="table_black_table">
+                <thead>
+                    <tr>
+                        <th>线路</th>
+                        <th>行别</th>
+                        <th>开始公里标、杆号</th>
+                        <th>结束公里标、杆号</th>
+                        <th>支柱数量</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <div class="list_scall_div">
+                <table class="list_scall">
+                    <tbody id="table_black_content">
+                        <!--<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>-->
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="second_list">
+            <table class="second_list_table">
+                <thead>
+                    <tr>
+                        <th>线路</th>
+                        <th>区站</th>
+                        <th>行别</th>
+                        <th>开始公里标、杆号</th>
+                        <th>结束公里标、杆号</th>
+                        <th>支柱数量</th>
+                        <th>供电组织机构</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <div class="second_list_scall_div">
+                <table class="second_list_scall">
+                    <tbody id="second_table_black_content">
+                        <!--<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>-->
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+</html>

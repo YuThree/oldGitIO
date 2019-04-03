@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模态框</title>
+	<link rel="stylesheet" href="../../common/css/COMMONT.css" />
+    <link rel="stylesheet" href="../../jsControl/modelShow/modelShow.css" />
+    <link rel="stylesheet" href="../../jsControl/modelShow/modelShowY.css" />
+</head>
+<body>
+	<div id="yffmbz">孕妇分娩补助登记</div>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../jsControl/modelShow/modelShow.min.js"></script>
+    <script type="text/javascript">
+        // 孕妇分娩补助登记
+        $("#yffmbz").on("click",function(){
+           var Obj = $.modelShow({
+               forText:{
+                   title:'孕妇分娩补助登记',
+                   cancel: "取消",
+                   sure: "确认",
+                   content:"<iframe style='width: 100%;border: none;height:100%;' src='./孕妇分娩补助登记.html'></iframe>",
+               },
+               forStyle: { 
+                    dialog:{
+                        width: "670px"
+                    },
+                    title: {
+                        textAlign: "center"
+                    },
+                    content: {
+                        height: "450px",
+                    },
+                    footer: {
+                        textAlign: "center"
+                    },
+                }
+           });      
+        });
+
+        
+    </script>
+</body>
+</html>

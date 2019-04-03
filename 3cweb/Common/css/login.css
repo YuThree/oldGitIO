@@ -1,0 +1,92 @@
+﻿@charset "utf-8";
+/*File Name:login.css*/
+/*Project Name:后台管理系统*/
+/*Version:1.0(2011-08)*/
+/*Author:ChenCixu*/
+body, html { font:12px "微软雅黑", Arial, Helvetica, sans-serif; }
+html { color:#000;  background:url(/Common/img/login/bg.png); }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td { margin:0; padding:0; }
+table { border-collapse:collapse; }
+button { cursor:pointer }
+fieldset, img { border:none; }
+em, th { font-style:normal; font-weight:normal; }
+li { list-style:none; }
+h1, h2, h3, h4, h5, h6 { font-size:100%; }
+/* CSS空白 */
+.blank1, .blank6, .blank8, .blank10, .blank16, .blank20 { margin:0px auto; padding:0px; font-size:0px; line-height:0px; clear:both; }
+.blank1 { height:1px; }
+.blank6 { height:6px; }
+/*主体内容*/
+.body_bg{ background: url(/Common/img/login/bg_top.jpg) no-repeat center top;}
+.pageBody{ clear:both; padding-top:152px}
+/*Header*/
+
+
+.sys_tit{ clear:both; text-align: center; display:block;  color: #FFFFFF;text-align: center; font:45px '微软雅黑';letter-spacing:3px}
+.box{ }
+.login_c{ background:url(images/b_login_box.jpg) no-repeat; width:431px; height:203px; margin:0 auto; padding:10px 20px;}
+.login_c h3{  height:30px; clear:both; padding:10px 5px 5px 30px;}
+.login_c h3 span{ float:left; width:98px; height:28px;}
+.login_c ul{ padding:10px 10px 10px 215px;}
+.login_c ul li { height:40px; padding:6px 0px;}
+.login_c ul li:nth-of-type(4){height:20px;padding: 0;}
+.login_c ul li label{ float:left; width:70px;line-height: 30px; text-align:right; font-size:16px}
+.login_c ul li input{ float:left; width:250px; border:1px solid #468ec4; height:36px; padding:0px 4px;}
+
+#rem_Password{width:20px;height:20px;margin-left:69px}
+#remember{line-height:18px;width: 100px;}
+
+.login_c ul li input.login_code{ width: 100px}
+.login_c ul li.btn{ padding-left:70px;}
+.login_c ul li input.login_go{ height:45px; width:260px; border:none;color: #ffffff;font-weight: bold;cursor: pointer; font-size: 20px; line-height:45px; float:left; background:url(/Common/img/login/btn_go.png) no-repeat;}
+.login_c ul li input.login_go:hover{
+    background:url(/Common/img/login/btn_go1.png) no-repeat;
+}
+.btn_p{ padding-left:5px; line-height:35px;}
+.btn_p a{ padding-right:10px; color:#278dd4; text-decoration:none}
+.btn_p a:hover{ text-decoration:underline;}
+.foot{ clear:both; margin:10px auto 10px auto; width:630px; text-align:center;}
+.foot p{ line-height:22px; font-size:12px; color:#036}
+/*20140517*/
+.bg_bottom{ position: absolute;z-index: -1;bottom: 0;height: 345px;width: 100%; background: url(/Common/img/login/bg_bottom.jpg) no-repeat center bottom; text-align:center;}
+.bg_bottom #foot{ position:absolute; bottom:40px; text-align:center; width:100%; color:#9BD5EA}
+.wrap_bg{ background: url(/Common/img/login/bg_top.jpg) no-repeat center top; /*position: absolute; z-index: 3;top: 0;height: 345px; width:100%;*/ height:1200px;}
+.loginBox {
+width: 626px;
+height: 306px;
+padding: 0 20px;
+color: #000;
+
+border-radius: 8px;
+font: 14px/1.5em 'Microsoft YaHei';
+margin: 10px auto;
+}
+.loginBox{ background: url(/Common/img/login/login_bg3.png) no-repeat;}
+
+ .code
+        {
+            background-image: url(code.jpg);
+            font-family: Arial;
+            font-style: italic;
+            color: Red;
+            border: 0;
+            padding: 2px 3px;
+            letter-spacing: 3px;
+            font-weight: bolder;
+        }
+        .unchanged
+        {
+            border: 0;
+        }
+
+.loginBox input[type=text]:focus{
+    border:2px solid #468ec4;
+}
+.loginBox input[type=password]:focus{
+    border:2px solid #468ec4;
+}
+.IphoneCode-btn{
+	padding:9.5px;
+	margin-left: 19px;
+	font-family:"微软雅黑";
+}

@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>弓网综合装置分析报告</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("mySelectTree");
+        loadControl("multiSelect");
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#startDate").val(datelastMonthhhssNowStr().split(' ')[0]);
+            $("#endDate").val(datehhssNowStr().split(' ')[0]);
+            $("#report").width(document.body.clientWidth - 30);
+            $("#report").height(document.body.scrollHeight - 190);
+
+            $("#lineselect").mySelect({
+                tag: "Line"
+            });
+            loadOrgSelect("juselect", "duanselect", "chejianselect", "gongquselect");
+
+
+            //            $('#txtqz').jHint({
+            //                type: 'StationSection',
+            //                line: ''
+            //            });
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 5
+            });
+            $('#citySel').mySelectTree({
+                cateGory: 'AFCODE',
+                codeType: '1C',
+                tag: "SYSDICTIONARYTREE",
+                onClick: function (event, treeId, treeNode) {
+                    $("#citySel").attr('code', treeNode.id).val(treeNode.name);
+                }
+            });
+            $("#btnQuery").click(function () {
+
+                //                var line_code = $("#ddlLine").val();
+                //                var txtqz = $("#txtqz").val();
+                //                var direction = $("#ddlDirection").val();
+                //                var txtpole = $("#txtpole").val();
+                //                var kmstart = $("#kmstart").val();
+                //                var kmend = $("#kmend").val();
+                //                var startDate = $("#startDate").val();
+                //                var endDate = $("#endDate").val();
+
+                var ju = document.getElementById('juselect').value; //局
+                var duan = document.getElementById('duanselect').value; //段
+                var duanText = document.getElementById('duanselect').text; //段名称
+                var chejian = document.getElementById('chejianselect').value; //车间
+                var gongqu = document.getElementById('gongquselect').value; //工区
+                var line = document.getElementById('lineselect').value; //线路
+                var xb = document.getElementById('ddlDirection').value; //行别
+                var txtstartkm = document.getElementById('kmstart').value; //开始公里标
+                var txtendkm = document.getElementById('kmend').value; //开始公里标
+                var afcode = $("#citySel").attr("code"); //报警类型
+                var afcodeName = document.getElementById('citySel').value; //报警类型
+                var ddlzt = getSelectedItem(document.getElementById('ddlzt'));
+                var startdate = document.getElementById('startDate').value;
+                var enddate = document.getElementById('endDate').value;
+                var txtpole = document.getElementById('txtpole').value;
+
+
+                var url = 'C1Report.aspx?duan=' + escape(duan) +
+                '&duanText=' + escape(duanText) +
+                 '&chejian=' + escape(chejian) +
+                 '&ju=' + escape(ju) +
+                 '&gongqu=' + escape(gongqu) +
+                 '&line=' + escape(line) +
+                 '&xb=' + escape(xb) +
+                 '&txtstartkm=' + txtstartkm +
+                 '&txtendkm=' + txtendkm +
+                 '&ddlzt=' + ddlzt +
+                 '&startdate=' + startdate +
+                 '&enddate=' + enddate +
+                 '&txtpole=' + txtpole +
+                 '&afcodeName=' + escape(afcodeName) +
+                 '&afcode=' + afcode +
+                 '&_w=' + $("#report").width() +
+                 '&_h=' + $("#report").height() +
+                 '&temp=' + Math.random();
+
+                $('#report').attr("src", url).css("display", "block");
+                return false;
+            })
+
+        });
+
+        //获取选中项
+        function getSelectedItem(obj) {
+            var slct = "";
+            for (var i = 0; i < obj.options.length; i++)
+                if (obj.options[i].selected == true) {
+                    slct += obj.options[i].value + ',';
+                }
+            return slct.substr(0, slct.length - 1);
+        };
+
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <!--查询条件块-->
+                <div class="box-header well" data-original-title>
+                    <h2>
+                        <i class="icon-search"></i>查询条件</h2>
+                </div>
+                <div class="box-content">
+                    <table>
+                        <tr>
+                            <td>
+                                线路：
+                            </td>
+                            <td>
+                                <select id="lineselect" style="width: 100px;">
+                                    <option value="0">全部</option>
+                                </select>
+                            </td>
+                            <td>
+                                行别：
+                            </td>
+                            <td>
+                                <select id="ddlDirection" style="width: 100px;">
+                                    <option value="0">--全部--</option>
+                                    <option value="上行">上行</option>
+                                    <option value="下行">下行</option>
+                                </select>
+                            </td>
+                            <td>
+                                杆号：
+                            </td>
+                            <td valign="top">
+                                <input id="txtpole" style="width: 96px; height: 24px;" />
+                            </td>
+                            <td>
+                                公里标(m)：
+                            </td>
+                            <td valign="top">
+                                <input id="kmstart" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                    onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                    style="width: 96px; height: 24px;" />
+                            </td>
+                            <td align="center">
+                                至
+                            </td>
+                            <td valign="top">
+                                <input id="kmend" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                    onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                    style="width: 96px; height: 24px;" />
+                            </td>
+                            <td>
+                                起始时间：
+                                <input id="startDate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                    runat="server" style="width: 100px" readonly="readonly" runat="server">
+                            </td>
+                            <td>
+                                终止时间：
+                                <input id="endDate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                    runat="server" style="width: 100px" readonly="readonly" runat="server">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                局：
+                            </td>
+                            <td>
+                                <select id="juselect" style="width: 100px;">
+                                    <option value="0">全部</option>
+                                </select>
+                            </td>
+                            <td>
+                                段：
+                            </td>
+                            <td>
+                                <select id="duanselect" style="width: 100px;">
+                                    <option value="0">全部</option>
+                                </select>
+                            </td>
+                            <td>
+                                车间：
+                            </td>
+                            <td>
+                                <select id="chejianselect" style="width: 100px;">
+                                    <option value="0">全部</option>
+                                </select>
+                            </td>
+                            <td>
+                                工区：
+                            </td>
+                            <td>
+                                <select id="gongquselect" style="width: 100px;">
+                                    <option value="0">全部</option>
+                                </select>
+                            </td>
+                            <td>
+                                报警类型：
+                            </td>
+                            <td>
+                                <input id="citySel" type="text" value="" style="width: 90px; margin: 0;" />
+                            </td>
+                            <td colspan="2">
+                                状态：
+                                <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                                    style="width: 100px" size="5">
+                                    <option value="AFSTATUS01" selected>新上报</option>
+                                    <option value="AFSTATUS04" selected>已计划</option>
+                                    <option value="AFSTATUS03" selected>已确认</option>
+                                    <option value="AFSTATUS02">已取消</option>
+                                    <option value="AFSTATUS05">已关闭</option>
+                                </select>&nbsp;&nbsp;&nbsp;
+                                <button id="btnQuery" class="btn btn-primary">
+                                    查询</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--列表块-->
+                <div class="box-header well" data-original-title>
+                    <h2>
+                        <i class="icon-eye-open"></i>弓网综合装置分析报告</h2>
+                </div>
+                <div class="box-content">
+                    <iframe id="report" style="display: none;"></iframe>
+                </div>
+            </div>
+            <!--/span-->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,535 @@
+﻿@charset 'utf-8';
+
+/* -------------------------------- common -------------------------------- */
+body {
+    font-family: 'Microsoft YaHei';
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+ul > li {
+    list-style: none;
+}
+.clearfix:before {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide {
+    display: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+/* -------------------------------- title -------------------------------- */
+.main-title {
+    height: 34px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.main-title > .title-txt {
+    float: left;
+    display: inline-block;
+    height: 34px;
+    font-size: 14px;
+    font-weight: bold;
+    text-indent: 24px;
+    line-height: 34px;
+    color: #488cb4;
+    letter-spacing: 2px;
+}
+.main-title > .title-ico-add {
+    background: url(/Common/MFoundation/css/img/main_title_ico_add.png) 0 8px no-repeat;
+}
+.main-title > .title-ico-update {
+    background: url(/Common/MFoundation/css/img/main_title_ico_update.png) 0 8px no-repeat;
+}
+.main-title > .title-ico-detail {
+    background: url(/Common/MFoundation/css/img/main_title_ico_detail.png) 0 8px no-repeat;
+}
+.main-title > .close-ico {
+    float: right;
+    display: inline-block;
+    width: 24px;
+    height: 34px;
+    background: url(/Common/MFoundation/css/img/close_page.png) 0 5px no-repeat;
+    cursor: pointer;
+}
+.main-title > .close-ico:hover {
+    background: url(/Common/MFoundation/css/img/close_page_hover.png) 0 5px no-repeat;
+}
+.subtitle {
+    height: 30px;
+    margin-bottom: 19px;
+    background-color: #41a0da;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-indent: 20px;
+}
+/* -------------------------------- 操作按钮 -------------------------------- */
+.save-box {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 98.5%;
+    padding: 13px 13px;
+    background-color: #ffffff;
+    text-align: center;
+}
+.save-box input {
+    margin-bottom: 0;
+}
+/* -------------------------------- 基本结构 ul -------------------------------- */
+.content {
+    padding: 19px 0.6% 40px 0.6%;
+}
+.base-ul {
+    width: 100%;
+}
+.base-ul > li {
+    display: inline-block;
+    margin-right: 0.6%;
+}
+.base-ul > .base-li-mr0 {
+    margin-right: 0;
+}
+.base-li-s {
+    width: 15.625%;
+}
+.base-li-m {
+    width: 83.35%;
+}
+.base-li-big {
+    width: 100%;
+}
+/* -------------------------------- 上传图片 -------------------------------- */
+.upload-img {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 362px;
+    border-radius: 12px;
+    border: 1px solid #cdcdcd;
+    font-size: 14px;
+    color: #000000;
+}
+.upload-img img {
+    height: 100%;
+    border-radius: 12px;
+}
+.upload-img .reset {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(/Common/MFoundation/css/img/reset.png) no-repeat;
+    cursor: pointer;
+}
+.upload-img .reset:hover {
+    background: url(/Common/MFoundation/css/img/reset_hover.png) no-repeat;
+}
+.upload-container {
+    margin: 133px 34.82%;
+}
+.wrapper > .picker-box {
+    padding: 0;
+    border-bottom: none;
+}
+.cp_img_jia {
+    background: url(/Common/MTask/img/upload_img.png) no-repeat;
+}
+/* -------------------------------- 基础信息、支柱属性 ul -------------------------------- */
+.info-ul {
+    width: 100%;
+}
+.info-ul > li {
+    display: inline-block;
+    margin-right: 2.1%;
+    margin-bottom: 19px;
+}
+.info-ul > .info-li-mr0 {
+    margin-right: 0;
+}
+.info-li-s {
+    width: 14.07%;
+}
+.info-li-m {
+    width: 17.47%;
+}
+.info-ul > li input {
+    width: 126px;
+    margin-bottom: 0;
+    font-size: 12px;
+}
+.info-ul > li select {
+    width: 136px;
+    margin-bottom: 0;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.info-ul > li span {
+    float: left;
+    display: inline-block;
+    min-width: 10px;
+    max-width: 43%;
+    height: 28px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    overflow: hidden;
+    /*text-decoration: underline;
+    color: orange;*/
+}
+.info-ul > .info-li-m span {
+    min-width: 10px;
+    max-width: 43%;
+}
+.info-ul > li .input-defined-1 {
+    width: 107px;
+}
+.info-ul > li .input-defined-2 {
+    width: 107px;
+}
+.info-ul > li .input-defined-3 {
+    width: 107px;
+}
+.info-ul > li .input-defined-4 {
+    width: 94px;
+}
+.info-ul > li .input-defined-5 {
+    width: 95px;
+}
+
+/* ------------------------ 字段名 两端对齐 ------------------------ */
+.info-ul > li label {
+    float: left;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 28px;
+}
+.label-s { 
+    display: inline-block;
+    width: 58px;
+    height: 28px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 28px;
+    text-align: justify;
+    overflow: hidden;
+    vertical-align: top;
+}
+.label-s i { 
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+.label-m { 
+    display: inline-block;
+    width: 112px;
+    height: 28px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 28px;
+    text-align: justify;
+    overflow: hidden;
+    vertical-align: top;
+}
+.label-m i { 
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+.label-s-auto { 
+    display: inline-block;
+    width: 112px;
+    height: 28px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 28px;
+    text-align: justify;
+    overflow: hidden;
+    vertical-align: top;
+}
+.label-s-auto i { 
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+/* -------------------------------- 其他部件 ul -------------------------------- */
+.check-ul {
+    width: 100%;
+    margin-bottom: 19px;
+    border-bottom: 1px solid #cdcdcd;
+}
+.check-ul > li {
+    display: inline-block;
+    width: 136px;
+    height: 28px;
+    margin-right: 1.58%;
+    margin-bottom: 19px;
+    border: 1px solid #838383;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #838383;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+}
+.check-ul > li:hover {
+    border: 1px solid #3b9ddc;
+    color: #3b9ddc;
+}
+.check-ul > .check-li {
+    border: 1px solid #3b9ddc;
+    background: url(/Common/MFoundation/css/img/check.png) right bottom no-repeat;
+    color: #3b9ddc;
+}
+/* -------------------------------- 切换 tab -------------------------------- */
+.device-box {
+    margin-bottom: 19px;
+    border-bottom: 1px solid #cdcdcd;
+}
+.tab-ul {
+    display: inline-block;
+}
+.tab-ul > li {
+    position: relative;
+    display: inline-block;
+    width: 110px;
+    height: 35px;
+    margin-bottom: -1px;
+    margin-right: 12px;
+    background-color: #ffffff;
+    border: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 12px;
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+.tab-ul > .cur-tab {
+    border-bottom: 1px solid #ffffff;
+}
+.tab {
+    padding: 8px 5px;
+}
+.close-tab {
+    position: absolute;
+    display: none;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    background: url(/Common/MFoundation/css/img/close_tab.png) no-repeat;
+}
+.add-device-ico {
+    display: inline-block;
+    background: url(/Common/MFoundation/css/img/add_ico.png) no-repeat;
+    font-size: 12px;
+    line-height: 14px;
+    color: #39a2d2;
+    text-indent: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+/* -------------------------------- 表格排列布局 ul -------------------------------- */
+.table-ul {
+    width: 97.9%;
+    padding: 19px 1.01%;
+    margin-bottom: 19px;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+}
+.table-ul > li {
+    display: inline-block;
+    width: 46.82%;
+    margin-right: 6.34%;
+}
+.table-ul > li:last-child {
+    margin-right: 0;
+}
+/* -------------------------------- 支撑装置、定位装置 table -------------------------------- */
+.edit-table {
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+}
+.edit-table tr td {
+    padding: 5px 1.10%;
+    border: 1px solid #c6c6c6;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.edit-table tr td input,
+.edit-table tr td label {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.edit-table input {
+    width: 17.6%;
+}
+.edit-table .input-auto {
+    width: 97%;
+    margin-bottom: 0;
+    font-size: 12px;
+}
+.edit-table .select-auto {
+    width: 136px;
+    margin-bottom: 0;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.edit-table tr td:last-child {
+    width: 55.27%;
+    text-align: left;
+}
+.edit-table tr td:last-child label {
+    margin-left: 3.36%;
+}
+.edit-table tr td:last-child label:first-child {
+    margin-left: 0;
+}
+.edit-table tr td:last-child span {
+    display: inline-block;
+    min-height: 14px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    /*text-decoration: underline;
+    color: orange;*/
+}
+.red {
+    color: red;
+}
+/* -------------------------------- 根据分辨率修改样式 -------------------------------- */
+@media screen and (max-width: 1601px) {
+    .base-li-s {
+        width: 19.625%;
+    }
+    .base-li-m {
+        width: 79.35%;
+    }
+    .info-ul > li {
+        margin-right: 0.5%;
+    }
+    .info-li-s {
+        width: 15.10%;
+    }
+    .info-li-m {
+        width: 19.8%;
+    }
+    .info-ul > li input {
+        width: 100px;
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+    .info-ul > li select {
+        width: 110px;
+        margin-bottom: 0;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+    .check-ul > li {
+        margin-right: 0.98%;
+    }
+    .edit-table input {
+        width: 15%;
+    }
+    
+    .info-ul > li .input-defined-1 {
+        width: 81px;
+    }
+    .info-ul > li .input-defined-2 {
+        width: 80px;
+    }
+    .info-ul > li .input-defined-3 {
+        width: 80px;
+    }
+    .info-ul > li .input-defined-4 {
+        width: 70px;
+    }
+    .info-ul > li .input-defined-5 {
+        width: 70px;
+    }
+}
+@media screen and (max-width: 1441px) {
+    .info-ul > li {
+        margin-right: 2.6%;
+    }
+    .info-li-s {
+        width: 17.10%;
+    }
+    .label-s-auto {
+        width: 58px;
+    }
+    .info-ul > li .input-s-auto {
+        width: 50px;
+    }
+    .info-ul > li .select-s-auto {
+        width: 60px;
+    }
+    .edit-table tr td:last-child label {
+        margin-left: 0.1%;
+    }
+    .info-ul > li .input-defined {
+        width: 70px;
+    }
+}
+@media screen and (max-width: 1401px) {
+    .info-ul > li {
+        margin-right: 1%;
+    }
+     .info-li-s {
+        width: 18.10%;
+    }
+    .info-li-m {
+        width: 19.2%;
+    }
+    .edit-table input {
+        width: 14%;
+    }
+    .info-ul > li .input-defined {
+        width: 80px;
+    }
+}
+@media screen and (max-width: 1367px) {
+    .edit-table input {
+        width: 13%;
+    }
+}
+@media screen and (max-width: 1281px) {
+    .info-ul > li {
+        margin-right: 0;
+    }
+     .info-li-s {
+        width: 19.10%;
+    }
+    .info-li-m {
+        width: 19.1%;
+    }
+    .edit-table input {
+        width: 10%;
+    }
+}

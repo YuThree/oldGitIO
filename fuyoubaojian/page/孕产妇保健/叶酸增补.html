@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>叶酸增补</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+	<!-- 侧边菜单栏 -->
+	<link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+	<link rel="stylesheet" type="text/css" href="../../jsControl/zUI/zUI.css" />
+	<!-- 表格 -->
+	<link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+	<style type="text/css">
+		body{ overflow: hidden; }
+		/*表格横向滚动条出现的最小宽度*/
+        .showTable{
+            min-width: 320px;
+        }
+	</style>
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">叶酸发放登记表</div>
+		<div class="cdct_row cdct_row1_col4">
+			<div class="cdct_col cdct_colLeft">
+				<div class="cdct_txt">
+					<span class="cdct_tit">姓名</span>
+				</div>
+				<div class="cdct_info cdct_relative">
+					<input type="text" class="cdct_inputNone" name="firstname" required>
+				</div>
+			</div>
+			<div class="cdct_col cdct_colRight">
+				<div class="cdct_txt">
+					<span class="cdct_tit">身份证号</span>
+				</div>
+				<div class="cdct_info">
+					<input type="text" class="cdct_inputNone">
+				</div>
+			</div>
+		</div>
+		<div class="cdct_row cdct_row1_col4">
+			<div class="cdct_col cdct_colLeft">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">发放时间</span>
+				</div>
+				<div class="cdct_info">
+					<input type="text" class="cdct_inputNone datepicker">
+				</div>
+			</div>
+			<div class="cdct_col cdct_colRight">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">发放数量</span>
+				</div>
+				<div class="cdct_info">
+					<input type="number" class="cdct_inputNone">
+				</div>
+			</div>
+		</div>
+		<div class="cdct_row cdct_row1_col4">
+			<div class="cdct_col cdct_colLeft">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">发放单位</span>
+				</div>
+				<div class="cdct_info">
+					<div data-selectsimu="1" class="cdct_select" >
+						<div class="selectBox">
+							<span data-selectnew="1" class="checkspan">
+								<span class="optD">
+									<span class="fontMain"></span>
+								</span>
+								<span class="selectDown"></span>
+							</span>
+
+							<ul class="hideUl" data-selectbox="1" style="display: none;">
+								<li class="hideUlLi" data-selectoption="1">瓶</li>
+								<li class="hideUlLi" data-selectoption="2">片</li>
+								<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+									<span class="optD">
+										<span class="fontMain">瓶</span>
+									</span>
+									<span class="selectDown"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cdct_col cdct_colRight">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">发放机构</span>
+				</div>
+				<div class="cdct_info">
+					<div data-selectsimu="1" class="cdct_select" >
+						<div class="selectBox">
+							<span data-selectnew="1" class="checkspan">
+								<span class="optD">
+									<span class="fontMain"></span>
+								</span>
+								<span class="selectDown"></span>
+							</span>
+
+							<ul class="hideUl" data-selectbox="1" style="display: none;">
+								<li class="hideUlLi" data-selectoption="1">某科室</li>
+								<li class="hideUlLi" data-selectoption="2">二科室</li>
+								<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+									<span class="optD">
+										<span class="fontMain">请选择</span>
+									</span>
+									<span class="selectDown"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cdct_row cdct_row1_col4">
+			<div class="cdct_col cdct_colLeft">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">服用剂量</span>
+				</div>
+				<div class="cdct_info">
+					<input type="number" class="cdct_inputNone">
+				</div>
+			</div>
+			<div class="cdct_col cdct_colRight">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">剂量单位</span>
+				</div>
+				<div class="cdct_info">
+					<div data-selectsimu="1" class="cdct_select" >
+						<div class="selectBox">
+							<span data-selectnew="1" class="checkspan">
+								<span class="optD">
+									<span class="fontMain"></span>
+								</span>
+								<span class="selectDown"></span>
+							</span>
+
+							<ul class="hideUl" data-selectbox="1" style="display: none;">
+								<li class="hideUlLi" data-selectoption="1">片</li>
+								<li class="hideUlLi" data-selectoption="2">瓶</li>
+								<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+									<span class="optD">
+										<span class="fontMain">片</span>
+									</span>
+									<span class="selectDown"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cdct_row cdct_row1_col4">
+			<div class="cdct_col cdct_colLeft">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">每次服用次数</span>
+				</div>
+				<div class="cdct_info">
+					<label><input type="number" class="cdct_inputLine cdct_line80">次</label>
+				</div>
+			</div>
+			<div class="cdct_col cdct_colRight">
+				<div class="cdct_txt">
+					<span class="cdct_tit cdct_asterisk">登记机构</span>
+				</div>
+				<div class="cdct_info">
+					<div data-selectsimu="1" class="cdct_select" >
+						<div class="selectBox">
+							<span data-selectnew="1" class="checkspan">
+								<span class="optD">
+									<span class="fontMain"></span>
+								</span>
+								<span class="selectDown"></span>
+							</span>
+
+							<ul class="hideUl" data-selectbox="1" style="display: none;">
+								<li class="hideUlLi" data-selectoption="1">机构1</li>
+								<li class="hideUlLi" data-selectoption="2">机构2</li>
+								<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+									<span class="optD">
+										<span class="fontMain">默认当前机构</span>
+									</span>
+									<span class="selectDown"></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cdct_row cdct_row1_col2">
+			<div class="cdct_txt">
+				<span class="cdct_tit cdct_asterisk">医生姓名</span>
+			</div>
+			<div class="cdct_info">
+				<div data-selectsimu="1" class="cdct_select" >
+					<div class="selectBox">
+						<span data-selectnew="1" class="checkspan">
+							<span class="optD">
+								<span class="fontMain"></span>
+							</span>
+							<span class="selectDown"></span>
+						</span>
+
+						<ul class="hideUl" data-selectbox="1" style="display: none;">
+							<li class="hideUlLi" data-selectoption="1">李医生</li>
+							<li class="hideUlLi" data-selectoption="2">王医生</li>
+							<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+								<span class="optD">
+									<span class="fontMain">默认当前操作人</span>
+								</span>
+								<span class="selectDown"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 侧边菜单栏开始 -->
+		<div class="cdct_sideBar">
+			<div class="cdct_toolTip">
+				<span class="toolSpan">叶酸增补</span>
+			</div>
+			<div class="cdct_sideBarTop">
+				叶酸增补
+				<span class="close"></span>
+			</div>
+			<div class="cdct_sideBarCon">
+				<div class="cdct_sideBarConTitle" >
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx1" type="radio" name="xx" value="">
+						<label for="xx1">今年</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx2" type="radio" name="xx" value="">
+						<label for="xx2">去年</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx3" type="radio" name="xx" value="">
+						<label for="xx3">近三年</label>
+					</div>
+				</div>
+				<div class="cdct_tableBox">
+					<div class="tablMainOne" style="height: 100%;">
+						<div class="tableContent tableShowInfo" style="height: 100%;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cdct_sideBarFooter">
+				<button type="button" class="cdct_btn">上一页</button>
+				<input class="cdct_input datepicker1" placeholder="2018">
+				<button type="button" class="cdct_btn">下一页</button>
+			</div>
+		</div>
+		<!-- 侧边菜单栏结束 -->
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+	<!--ZUI-->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 侧边菜单栏 -->
+	<script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+	<!-- 表格 -->
+	<script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				firstname:{
+					required:true,
+				}
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+		// 侧边栏表格
+		var dataSet = [
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+			[ "01", "2018-03-07", "哈"],
+		    
+		];
+
+		var tableObj=$(".tableShowInfo").showTable({
+		    data:dataSet,
+		    title:[
+		        "序号",
+		        "发放日期",
+		        "备注"
+		    ],
+		    scrollHeight:".tableShowInfo",
+		    scrollHeightPC:45,
+		    edit:false
+		});
+
+		/*为表格添加横向滚动条*/
+		$(".tablMainOne").panel({
+		    iWheelStep:32,
+		    vScroll:false,
+		    scrollWResize:true
+		});
+
+	</script>
+</body>
+</html>

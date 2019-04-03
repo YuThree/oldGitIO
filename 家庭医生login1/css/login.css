@@ -1,0 +1,186 @@
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+  margin: 0;
+  padding: 0;
+}
+/*
+ 设置默认字体
+ * */
+body,button, input, select, textarea ,div ,span ,a,li /* for ie */ {
+  font-family:微软雅黑; font-size:14px;font-weight: 400;color: #1A1D21;
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/*
+ 重置列表元素
+ */
+ul, ol { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+/*
+ 重置a标签元素
+ */
+a { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active{color: #1A1D21;}
+a:visited{color: #1A1D21;}
+/**
+   重置表单元素
+*/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+
+/*清除密码框和input框的叉叉和眼睛*/
+::-ms-clear, ::-ms-reveal{display: none;}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+*:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+}
+body{
+    background: url(../img/bg.png) center center no-repeat;
+    /* background-size: cover; */
+    overflow: hidden;
+}
+/* 相对定位 */
+.cdct_relative{
+    position: relative;
+}
+.cdct_input {
+    display: inline-block;
+    /* width: 200px; */
+    /* height: 36px; */
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    background: #0D4061;
+    border: 1px solid #189BD8;
+    padding: 0 12px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+}
+.loginBg{
+    width: 532px;display: inline-block;position: absolute;
+    background: url(../img/logo.png) center 0 no-repeat;
+    height: 491px;
+    top: 50%;
+    margin-top: -240px;
+    left: 50%;
+    margin-left: 10%;
+}
+.loginInput{
+    width: 389px;height: 284px;
+    margin:207px auto 0;padding: 41px;
+    background:rgba(231,242,255,1);
+    box-shadow:0px 7px 51px 0px rgba(0,52,97,0.93);
+    border-radius:6px;
+}
+.error{
+    border: 1px solid red;
+}
+.errorS,.errorL{
+    display: none;
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top :47px;
+    left: 20px;
+}
+.error+.errorS{
+    display: block;
+}
+.cdct_input{
+    width:308px;
+    height:44px;
+    background:#3F7ADD;
+    border-radius:4px;
+    padding-left: 45px;
+    color: white;
+    font-size: 14px;
+}
+.logBtn{
+    width: 308px;height: 44px;
+    background:linear-gradient(90deg,#FFA44D,#FFBA56);
+    filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#FFA44D,endcolorstr=#FFBA56,gradientType=1);
+    border-radius:4px;box-shadow:0px 7px 21px 0px rgba(56,29,0,0.7);
+    color: white;
+    line-height: 44px;
+    text-align: center;font-size: 23px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+.cdct_infoInput{
+    margin-bottom: 35px;
+}
+.inputicon{
+    display: inline-block;
+    width: 21px;height: 44px;
+    position: absolute;
+    top:0;
+    left: 15px;
+}
+.icon_user{
+    background: url(../img/icon_user.png) no-repeat center center
+}
+.icon_password{
+    background: url(../img/icon_password.png) no-repeat center center
+}
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    RGBA(113, 159, 229, 1);font-size: 14px;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    RGBA(113, 159, 229, 1);font-size: 14px;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    RGBA(113, 159, 229, 1);font-size: 14px;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    RGBA(113, 159, 229, 1);font-size: 14px;
+}
+input::-ms-clear, input::-ms-reveal{display: none;}
+
+.titleText{
+    position: absolute;
+    top: 95px;
+    /* background: red; */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 46px;
+    font-weight: 500;
+    color: white;
+    /* text-shadow: 5px 5px 8px rgb(73, 72, 72,0.42); */
+    text-shadow: 2px 4px 8px #0F4D9E;
+    letter-spacing: 5px;
+}
+@media screen and (max-width: 1149px) {
+    .loginBg{
+        margin-left: -250px;
+    }
+} 

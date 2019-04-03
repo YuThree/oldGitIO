@@ -1,0 +1,866 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>支柱详情</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadCss('/Common/MFoundation/css/PoleFormNew.css?v=' + version);
+        loadJs('/Common/MFoundation/script/PoleFormNew.js?v=' + version);
+    </script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="main-title">
+            <span class="title-txt title-ico-detail">支柱详情</span>
+            <span class="close-ico j-page-close"></span>
+        </div>
+        <div class="content">
+            <ul class="base-ul">
+                <li class="base-li-s fl">
+                    <div class="upload-img">
+                        <img id="pole-img" src="/Common/MFoundation/css/img/pole1.png" />
+                    </div>
+                </li>
+                <li class="base-li-m base-li-mr0 fr clearfix">
+                    <!-- 基础信息 -->
+                    <div class="subtitle">基础信息</div>
+                    <ul class="info-ul">
+                        <li class="info-li-s">
+                            <label class="label-s">线路<i></i></label><label>：</label>
+                            <span id="line_name" name="line_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">区站<i></i></label><label>：</label>
+                            <span id="position_name" name="position_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">桥隧<i></i></label><label>：</label>
+                            <span id="brg_tun_name" name="brg_tun_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">行别<i></i></label><label>：</label>
+                            <span id="pole_direction" name="pole_direction"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱号<i></i></label><label>：</label>
+                            <span id="pole_no" name="pole_no"><!--测试--></span>
+                        </li>
+                        <li class="info-li-m info-li-mr0">
+                            <label class="label-s-auto">公里标<i></i></label><label>(m)：</label>
+                            <span id="kmstandard" name="kmstandard"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">铁路局<i></i></label><label>：</label>
+                            <span id="bureau_name" name="bureau_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">供电段<i></i></label><label>：</label>
+                            <span id="power_section_name" name="power_section_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">车间<i></i></label><label>：</label>
+                            <span id="workshop_name" name="workshop_name"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s info-li-mr0">
+                            <label class="label-s">工区<i></i></label><label>：</label>
+                            <span id="org_name" name="org_name"><!--测试--></span>
+                        </li>
+                    </ul>
+                    <!-- 支柱属性 -->
+                    <div class="subtitle">支柱属性</div>
+                    <ul id="pole-profile" class="info-ul">
+                        <li class="info-li-s">
+                            <label class="label-s">锚段号<i></i></label><label>：</label>
+                            <span id="md_code" name="md_code"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">股道<i></i></label><label>：</label>
+                            <span id="track_code" name="track_code"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱类型<i></i></label><label>：</label>
+                            <span id="pole_type" name="pole_type"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱型号<i></i></label><label>：</label>
+                            <span id="pole_mdl" name="pole_mdl"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱用途<i></i></label><label>：</label>
+                            <span id="pole_usage" name="pole_usage"><!--测试--></span>
+                        </li>
+                        <li class="info-li-m info-li-mr0">
+                            <label class="label-m">接触悬挂安装图号<i></i></label><label>：</label>
+                            <span id="install_img_no" name="install_img_no"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱材质<i></i></label><label>：</label>
+                            <span id="mtr_qlt" name="mtr_qlt"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">跨距<i></i></label><label>(m)：</label>
+                            <span id="span_length" name="span_length"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">曲线半径<i></i></label><label>(m)：</label>
+                            <span id="curve_radius" name="curve_radius"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">侧面界限<i></i></label><label>(mm)：</label>
+                            <span id="side_limit_cx" name="side_limit_cx"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">外轨超高<i></i></label><label>(mm)：</label>
+                            <span id="railface_high" name="railface_high"><!--测试--></span>
+                        </li>
+                        <li class="info-li-m info-li-mr0">
+                            <label class="label-m">附加悬挂安装图号<i></i></label><label>：</label>
+                            <span id="add_img_no" name="add_img_no"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">基础状态<i></i></label><label>：</label>
+                            <span id="pole_bsc_sts" name="pole_bsc_sts"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">基础类型<i></i></label><label>：</label>
+                            <span id="pole_basic_type" name="pole_basic_type"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">支柱状态<i></i></label><label>：</label>
+                            <span id="pole_status" name="pole_status"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">生产厂家<i></i></label><label>：</label>
+                            <span id="mnft_fct" name="mnft_fct"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">投运日期<i></i></label><label>：</label>
+                            <span id="comms_date" name="comms_date"><!--测试--></span>
+                        </li>
+                        <li class="info-li-m info-li-mr0">
+                            <label class="label-m">直线/曲内/区外<i></i></label><label>：</label>
+                            <span id="curve_direction" name="curve_direction"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">出厂日期<i></i></label><label>：</label>
+                            <span id="prod_date" name="prod_date"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">设计寿命<i></i></label><label>：</label>
+                            <span id="dsgn_life" name="dsgn_life"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">检修周期<i></i></label><label>：</label>
+                            <span id="aux_jxzq" name="aux_jxzq"><!--测试--></span>
+                        </li>
+                        <li class="info-li-s">
+                            <label class="label-s">地线状态<i></i></label><label>：</label>
+                            <span id="grnd_sts" name="grnd_sts"><!--测试--></span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="base-li-big base-li-mr0">
+                    <!-- 其他部件 -->
+                    <div class="subtitle">其他部件</div>
+                    <ul id="check-unit" class="check-ul j-check-unit">
+                        <li id="aux_has_bczz" name="aux_has_bczz">补偿装置</li>
+                        <li id="aux_has_fdjyq" name="aux_has_fdjyq">分段绝缘器</li>
+                        <li id="aux_has_fxjyq" name="aux_has_fxjyq">分相绝缘器</li>
+                        <li id="aux_be_jcxc" name="aux_be_jcxc">处于交叉线岔</li>
+                        <li id="aux_be_lxwjcxc" name="aux_be_lxwjcxc">处于两线无交叉线岔</li>
+                        <li id="aux_be_sxwjcxc" name="aux_be_sxwjcxc">处于三线无交叉线岔</li>
+                        <li id="aux_be_mdgjsdfx" name="aux_be_mdgjsdfx">处于锚段关节式电分相</li>
+                        <li id="aux_has_yhk" name="aux_has_yhk">硬横跨</li>
+                        <li id="aux_has_dljx" name="aux_has_dljx">电连接</li>
+                        <li id="aux_has_glkg" name="aux_has_glkg">隔离开关</li>
+                        <li id="aux_has_blq" name="aux_has_blq">避雷器</li>
+                        <li id="aux_has_dcgyzz" name="aux_has_dcgyzz">地磁感应装置</li>
+                        <li id="aux_has_xcbzp" name="aux_has_xcbzp">行车标志牌</li>
+                        <li id="aux_has_jdzz" name="aux_has_jdzz">接地装置</li>
+                        <li id="aux_has_xsx" name="aux_has_xsx">吸上线</li>
+                        <li id="aux_has_hlx" name="aux_has_hlx">回流线</li>
+                        <li id="aux_has_gwx" name="aux_has_gwx">GW线</li>
+                        <li id="aux_has_gdx" name="aux_has_gdx">供电线</li>
+                        <li id="aux_has_pwx" name="aux_has_pwx">PW线</li>
+                        <li id="aux_has_afx" name="aux_has_afx">AF线</li>
+                        <li id="aux_has_jqx" name="aux_has_jqx">加强线</li>
+                        <li id="aux_has_blz" name="aux_has_blz">避雷线</li>
+                        <li id="aux_has_lx" name="aux_has_lx">拉线</li>
+                        <li id="aux_has_zm" name="aux_has_zm">中锚</li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- 支撑装置 -->
+            <div class="device-box">
+                <div class="subtitle">支撑装置</div>
+                <div>
+                    <ul id="support-tab" class="tab-ul j-support-tab">
+                        <li class="cur-tab"><span class="tab">支撑装置1</span></li>
+                    </ul>
+                </div>
+                <div id="support-container">
+                    <ul class="table-ul">
+                        <li class="fl">
+                            <!-- 支撑装置 表一 -->
+                            <table id="support-table-one" class="edit-table">
+                                <tr><td colspan="3">上底座安装孔位</td><td><span id="ubmh_num" name="ubmh_num"><!--测试--></span><input id="sptdvc_no" name="sptdvc_no" type="hidden" /></td></tr>
+                                <tr><td colspan="3">底座间距</td><td><span id="bspc" name="bspc"><!--测试--></span></td></tr>
+                                <tr><td colspan="3">套管座位置</td><td><span id="bshs" name="bshs"><!--测试--></span></td></tr>
+                                <tr><td colspan="3">承力索座位置</td><td><span id="mssgs" name="mssgs"><!--测试--></span></td></tr>
+                                <tr><td colspan="3">套管环位置</td><td><span id="bshc" name="bshc"><!--测试--></span></td></tr>
+                                <tr><td colspan="3">φ55套管单耳位置</td><td><span id="bshse" name="bshse"><!--测试--></span></td></tr>
+                                <tr>
+                                    <td colspan="3">结构高度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="strthg_std" name="strthg_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="strthg_msd" name="strthg_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="strthg_sfv" name="strthg_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>腕臂支撑</td>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="arm_len_std" name="arm_len_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="arm_len_msd" name="arm_len_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">平腕臂管</td>
+                                    <td colspan="2">直径（mm）</td>
+                                    <td><span id="hrm_dmt" name="hrm_dmt"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="hrm_len_std" name="hrm_len_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="hrm_len_msd" name="hrm_len_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">斜腕臂管</td>
+                                    <td colspan="2">直径（mm）</td>
+                                    <td><span id="orm_dmt" name="orm_dmt"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="orm_len_std" name="orm_len_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="orm_len_msd" name="orm_len_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">斜拉线</td>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="ocb_len_std" name="ocb_len_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="ocb_len_msd" name="ocb_len_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">线径（mm）</td>
+                                    <td><span id="ocbl_dmt" name="ocbl_dmt"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">臂腕支撑管</td>
+                                    <td colspan="2">在平腕臂位置</td>
+                                    <td>
+                                        <label>标准值：</label><span id="astwhrm_std" name="astwhrm_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="astwhrm_msd" name="astwhrm_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="astwhrm_sfv" name="astwhrm_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">在斜腕臂位置</td>
+                                    <td><span id="astworm" name="astworm"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">铁帽压板</td>
+                                    <td>平腕臂铁帽压板</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="ipt_hrm_trq_std" name="ipt_hrm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="ipt_hrm_trq_msd" name="ipt_hrm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="ipt_hrm_trq_sfv" name="ipt_hrm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>斜腕臂铁帽压板</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="ipt_orm_trq_std" name="ipt_orm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="ipt_orm_trq_msd" name="ipt_orm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="ipt_orm_trq_sfv" name="ipt_orm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">连接器</td>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="cnt_ctp" name="cnt_ctp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="ctns" name="ctns"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="6">腕臂底座</td>
+                                    <td rowspan="3">平腕臂底座</td>
+                                    <td>螺栓型号</td>
+                                    <td><span id="rmb_hrm_bmdl" name="rmb_hrm_bmdl"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="rmb_hrm_trq_std" name="rmb_hrm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="rmb_hrm_trq_msd" name="rmb_hrm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="rmb_hrm_trq_sfv" name="rmb_hrm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>防松措施</td>
+                                    <td><span id="rmb_hrm_sopt" name="rmb_hrm_sopt"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">斜腕臂底座</td>
+                                    <td>螺栓型号</td>
+                                    <td><span id="rmb_orm_bmdl" name="rmb_orm_bmdl"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="rmb_orm_trq_std" name="rmb_orm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="rmb_orm_trq_msd" name="rmb_orm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="rmb_orm_trq_sfv" name="rmb_orm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>防松措施</td>
+                                    <td><span id="rmb_orm_sopt" name="rmb_orm_sopt"><!--测试--></span></td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <!-- 支撑装置 表二 -->
+                            <table id="support-table-two" class="edit-table">
+                                <tr>
+                                    <td rowspan="11">腕臂及支撑</td>
+                                    <td colspan="2">腕臂状态</td>
+                                    <td><span id="armsp_arm_sts" name="armsp_arm_sts"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">腕臂支撑及本体状态</td>
+                                    <td>
+                                        <span id="armsp_arms_sts" name="armsp_arms_sts"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>平腕臂套管单耳</td>
+                                    <td rowspan="2">紧固力矩<br />（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_hrm_trq_std" name="armsp_hrm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_hrm_trq_msd" name="armsp_hrm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_hrm_trq_sfv" name="armsp_hrm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>斜腕臂套管单耳</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_orm_trq_std" name="armsp_orm_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_orm_trq_msd" name="armsp_orm_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_orm_trq_sfv" name="armsp_orm_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">平腕臂双耳套筒</td>
+                                    <td>顶丝紧固力矩<br />（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_hrm_twtrq_std" name="armsp_hrm_twtrq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_hrm_twtrq_msd" name="armsp_hrm_twtrq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_hrm_twtrq_sfv" name="armsp_hrm_twtrq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>备母紧固力矩<br />（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_hrm_nttrq_std" name="armsp_hrm_nttrq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_hrm_nttrq_msd" name="armsp_hrm_nttrq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_hrm_nttrq_sfv" name="armsp_hrm_nttrq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="armsp_armde_sts" name="armsp_armde_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">斜腕臂双耳套筒</td>
+                                    <td>铜销角度<br />（度）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_ormde_cpn_std" name="armsp_ormde_cpn_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_ormde_cpn_msd" name="armsp_ormde_cpn_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_ormde_cpn_sfv" name="armsp_ormde_cpn_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>防松部件</td>
+                                    <td><span id="armsp_ormde_cmp" name="armsp_ormde_cmp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>紧固力矩<br />（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="armsp_ormde_trq_std" name="armsp_ormde_trq_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="armsp_ormde_trq_msd" name="armsp_ormde_trq_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="armsp_ormde_trq_sfv" name="armsp_ormde_trq_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="armsp_ormdes_sts" name="armsp_ormdes_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">腕臂底座</td>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="armb_blf_sts" name="armb_blf_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="armbs" name="armbs"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="armb_ctp" name="armb_ctp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">腕臂支撑</td>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="armsp_blf_sts" name="armsp_blf_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="armsps" name="armsps"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="armsps_ctp" name="armsps_ctp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">套管铰环</td>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="trc_blf_sts" name="trc_blf_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="trcs" name="trcs"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="trc_ctp" name="trc_ctp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">套管双耳</td>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="trcde_blf_sts" name="trcde_blf_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="trcdes" name="trcdes"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="trcde_ctp" name="trcde_ctp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">腕臂本体<br />（含隧道弓形腕臂）</td>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="arms_blf_sts" name="arms_blf_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="arms" name="arms"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">有无管帽</td>
+                                    <td>
+                                        <label>标准值：</label><span id="has_cap_std" name="has_cap_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="has_cap_msd" name="has_cap_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">其他特殊腕臂形式</td>
+                                    <td>
+                                        <span id="oth_arm_mdl" name="oth_arm_mdl" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 定位装置 -->
+            <div>
+                <div class="subtitle">定位装置</div>
+                <div>
+                    <ul id="location-tab" class="tab-ul j-location-tab">
+                        <li class="cur-tab"><span class="tab">定位装置1</span></li>
+                    </ul>
+                </div>
+                <div id="location-container clearfix">
+                    <ul class="table-ul clearfix">
+                        <li class="fl">
+                            <!-- 定位装置 表一 -->
+                            <table id="location-table-one" class="edit-table">
+                                <tr>
+                                    <td rowspan="4">定位管</td>
+                                    <td colspan="2">直径（mm）</td>
+                                    <td><span id="lctdmt" name="lctdmt"><!--测试--></span><input id="lct_id" name="lct_id" type="hidden" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lcttlen_std" name="lcttlen_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lcttlen_msd" name="lcttlen_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="lcttlen_sfv" name="lcttlen_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctt_sts" name="lctt_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="lcttsb" name="lcttsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">定位管双耳套筒</td>
+                                    <td>顶丝</td>
+                                    <td rowspan="2">力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lcttdetwmmt_std" name="lcttdetwmmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lcttdetwmmt_msd" name="lcttdetwmmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>备母</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lcttdesptnt_std" name="lcttdesptnt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lcttdesptnt_msd" name="lcttdesptnt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体状态</td>
+                                    <td>
+                                        <span id="lcttdes_sts" name="lcttdes_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">定位管本体状态</td>
+                                    <td>
+                                        <span id="lcttde_lssts" name="lcttde_lssts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">定位管支撑双耳套筒斜腕臂侧</td>
+                                    <td>顶丝</td>
+                                    <td rowspan="2">力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lsdeor_tw_mmt_msd" name="lsdeor_tw_mmt_msd"><!--测试--></span>
+                                        <label>实测值：</label><span id="lsdeor_tw_mmt_std" name="lsdeor_tw_mmt_std"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>备母</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lsdeor_spnt_mmt_msd" name="lsdeor_spnt_mmt_msd"><!--测试--></span>
+                                        <label>实测值：</label><span id="lsdeor_spnt_mmt_std" name="lsdeor_spnt_mmt_std"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体状态</td>
+                                    <td>
+                                        <span id="lsdeors_sts" name="lsdeors_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">定位管支撑双耳套筒定位管侧</td>
+                                    <td>顶丝</td>
+                                    <td rowspan="2">力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lsdeltc_tw_mmt_msd" name="lsdeltc_tw_mmt_msd"><!--测试--></span>
+                                        <label>实测值：</label><span id="lsdeltc_tw_mmt_std" name="lsdeltc_tw_mmt_std"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>备母</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lsdeltc_spnt_mmt_msd" name="lsdeltc_spnt_mmt_msd"><!--测试--></span>
+                                        <label>实测值：</label><span id="lsdeltc_spnt_mmt_std" name="lsdeltc_spnt_mmt_std"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体状态</td>
+                                    <td>
+                                        <span id="lsdeltcs_sts" name="lsdeltcs_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="3">定位支撑</td>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lsplen_std" name="lsplen_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lsplen_msd" name="lsplen_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="lsplen_sfv" name="lsplen_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctspb_sts" name="lctspb_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="lctspsb" name="lctspsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="8">定位器</td>
+                                    <td colspan="2">类型</td>
+                                    <td>
+                                        <span id="lct_tp" name="lct_tp" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">坡度（度）</td>
+                                    <td><span id="lct_slp" name="lct_slp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctblt_sts" name="lctblt_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体</td>
+                                    <td><span id="lctsb" name="lctsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体状态</td>
+                                    <td>
+                                        <span id="lcts_sts" name="lcts_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">开口销</td>
+                                    <td><span id="lctop" name="lctop"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctlen_std" name="lctlen_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctlen_msd" name="lctlen_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="lctlen_sfv" name="lctlen_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">止钉间隙（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctclrc_std" name="lctclrc_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctclrc_msd" name="lctclrc_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="lctclrc_sfv" name="lctclrc_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">电气连接线</td>
+                                    <td colspan="2">紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="cnwmmt_std" name="cnwmmt_std"></span>
+                                        <label>实测值：</label><span id="cnwmmt_msd" name="cnwmmt_msd"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">本体状态</td>
+                                    <td>
+                                        <span id="cnws_sts" name="cnws_sts"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">定位方式</td>
+                                    <td>
+                                        <span id="lct_mdl" name="lct_mdl" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <!-- 定位装置 表二 -->
+                            <table id="location-table-two" class="edit-table">
+                                <tr><td colspan="2">定位管支撑在平腕臂位置</td><td><span id="lcttwharm" name="lcttwharm"><!--测试--></span></td></tr>
+                                <tr><td colspan="2">定位管支撑在斜腕臂位置</td><td><span id="lcttworm" name="lcttworm"><!--测试--></span></td></tr>
+                                <tr><td colspan="2">定位支撑在定位管位置</td><td><span id="lctwlctt" name="lctwlctt"><!--测试--></span></td></tr>
+                                <tr><td colspan="2">定位支座U螺栓位置</td><td><span id="lctuw" name="lctuw"><!--测试--></span></td></tr>
+                                <tr>
+                                    <td rowspan="2">定位支座</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctspmmt_std" name="lctspmmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctspmmt_msd" name="lctspmmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="lctsps_sts" name="lctsps_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4">定位线夹</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctclmpmmt_std" name="lctclmpmmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctclmpmmt_msd" name="lctclmpmmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="lctclmps_sts" name="lctclmps_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctclmp_sts" name="lctclmp_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体</td>
+                                    <td><span id="lctclmpsb" name="lctclmpsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="7">定位环</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctrmmt_std" name="lctrmmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctrmmt_msd" name="lctrmmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>销钉开口销</td>
+                                    <td>
+                                        <label>标准值：</label><span id="lctr_pop_std" name="lctr_pop_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="lctr_pop_msd" name="lctr_pop_msd"><!--测试--></span>
+                                        <label>安全值：</label><span id="lctr_pop_sfv" name="lctr_pop_sfv"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="lctrs_sts" name="lctrs_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>防松部件</td>
+                                    <td><span id="lctr_lsp_cmp" name="lctr_lsp_cmp"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctrb_sts" name="lctrb_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体</td>
+                                    <td><span id="lctrsb" name="lctrsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>位置</td>
+                                    <td><span id="lctrw" name="lctrw"></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">套管单耳斜腕臂侧</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="bshseorm_mmt_std" name="bshseorm_mmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="bshseorm_mmt_msd" name="bshseorm_mmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="bshseorms_sts" name="bshseorms_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">套管单耳定位管侧</td>
+                                    <td>紧固力矩（N*m）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="bshseltc_mmt_std" name="bshseltc_mmt_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="bshseltc_mmt_msd" name="bshseltc_mmt_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体状态</td>
+                                    <td>
+                                        <span id="bshseltcs_sts" name="bshseltcs_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">支持器</td>
+                                    <td>螺栓紧固状态</td>
+                                    <td>
+                                        <span id="lctnt_sts" name="lctnt_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>本体</td>
+                                    <td><span id="spsb" name="spsb"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>开口销</td>
+                                    <td><span id="spop" name="spop"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">防风拉线</td>
+                                    <td>长度（mm）</td>
+                                    <td>
+                                        <label>标准值：</label><span id="wdpcbllen_std" name="wdpcbllen_std"><!--测试--></span>
+                                        <label>实测值：</label><span id="wdpcbllen_msd" name="wdpcbllen_msd"><!--测试--></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>直径（mm）</td>
+                                    <td><span id="wdpcbl_dmt" name="wdpcbl_dmt"><!--测试--></span></td>
+                                </tr>
+                                <tr>
+                                    <td>支撑状态</td>
+                                    <td>
+                                        <span id="wdpc_sts" name="wdpc_sts" class="span-auto"><!--测试--></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

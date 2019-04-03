@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta charset="utf-8" />
+    <title>远动问题库管理</title>
+    <style>
+        .myselectBox {
+            border-radius: 5px;
+        }
+
+        .ztree_box {
+            padding: 0;
+        }
+
+        div.box-content {
+            padding: 0;
+        }
+
+        ::-webkit-input-placeholder {
+            text-align: right;
+        }
+
+        #divContent, #divCause, #divDetail {
+            display: inline-block;
+            width: 470px;
+            letter-spacing: 1px;
+            line-height: 22px;
+            padding-bottom: 7px;
+        }
+    </style>
+
+    <!-- public js-->
+    <script src="/Lib/jquery-1.7.2/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Lib/layer/layer.js"></script>
+
+
+
+    <!--引入css js   本页-->
+
+    <link href="/Common/DPCExcelAlarm/css/publicCss.css" rel="stylesheet" /><!--公用css-->
+    <link href="/Common/DPCExcelAlarm/css/ProblemList.css" rel="stylesheet" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Common/js/6cweb/MasterJs.js"></script>
+    <script type="text/javascript" src="/Common/js/6cweb/mySelectTree_Level2.js"></script>
+
+    <script src="/Common/YuanDong/js/YuanDongList.js" type="text/javascript"></script>
+    <script src="/Lib/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl('webuploader');
+        loadControl("flexigrid");
+        loadControl("jqueryUI");
+        loadControl("Validation");
+        loadControl("form");
+        loadControl("mySelectTree");
+        loadControl("multiSelect");
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+        loadCss("/Common/DPCExcelAlarm/css/Problem_upload.css?v=" + version);
+        loadJs("/Common/DPCExcelAlarm/js/Problem_upload.js?v=" + version);
+    </script>
+</head>
+<body>
+    <!-- start: slider -->
+    <div id="view-pic-process" class="img-box hide">
+        <!--<span class="close-pic-ico j-close-pic"></span>-->
+        <ul class="img_switch img_switch_hook">
+            <li><img class="sliderimg" src="" alt="" /></li>
+            <li><img class="sliderimg" src="" alt="" /></li>
+            <li><img class="sliderimg" src="" alt="" /></li>
+        </ul>
+        <div class="img_control img_control_hook">
+            <ul>
+                <li class="active"></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end: slider -->
+    <div class="html_content">
+        <div style="margin-top: 20px; margin-bottom:20px">
+            <form id="Form1">
+                <table class="QueryCondition">
+                    <tr>
+                        <td align="right">
+                            <span class="four_txt">处所：</span>
+                        </td>
+                        <td align="left">
+                            <input type="text" id="txt_location" />
+                        </td>
+                        <td align="right">
+                            <span>问题分类：</span>
+                        </td>
+                        <td align="left">
+                            <input id="question_classify" type="text" />
+                        </td>
+                        <td align="right">
+                            <span>销号状态：</span>
+                        </td>
+                        <td align="left">
+                            <select type="text" id="txt_ProcessStatus">
+                                <option value="">全部</option>
+                                <option value="未销号">未销号</option>
+                                <option value="已销号">已销号</option>
+                            </select>
+                        </td>
+                        <td align="right">
+                            <span>发生日期：</span>
+                        </td>
+                        <td align="left">
+                            <input type="text" id="txt_StartDate" class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+                            <span>至</span>
+                            <input type="text" id="txt_EndDate" class="Wdate" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+                        </td>
+                        <td rowspan="3" id="btn-td" style="padding-left:8px">
+                            <input type="button" id="S_btnQuery" class="btn btn-primary" value="查 询" />
+                            <input type="button" id="S_btnAdd" class="btn btn-primary" value="添 加" />
+                            <br />
+                            <input type="button" id="S_btnImport" class="btn btn-primary" value="导 入" />
+                            <input type="button" id="S_btnExport" class="btn btn-primary" value="导 出" />
+
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td align="right">
+                            <span>负责单位：</span>
+                        </td>
+                        <td align="left">
+                            <input type="text" id="duty_units">
+                        </td>
+                        <td align="right">
+                            <span>问题等级：</span>
+                        </td>
+                        <td align="left">
+                            <input type="text" id="txt_lv">
+                        </td>
+                        <td align="right">
+                            <span>专业分类：</span>
+                        </td>
+                        <td align="left">
+                            <input id="major_classify" type="text">
+
+                        </td>
+                        <td colspan="2">
+                            <a style="margin-left:40%" id="downMedal">下载导入模板</a>
+                        </td>
+
+
+                    </tr>
+
+
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="box-content" style="margin-left:20px">
+        <table id="flexTable" style="display: none,"></table>
+        <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+             aria-labelledby="myModalLabel">
+            <!--<div id="Warning" style="height:"></div>-->
+            <div class="modal-body" style="padding-bottom: 0px; padding-top: 40px">
+                <form id="defaultForm">
+                    <table id="defaultTable" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td height="28" width="19%" align="right">
+                                发生日期：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input type="text" id="HAPPEN_DATE" name="HAPPEN_DATE" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" class="Wdate validate[required]">
+                                <span style="color: red">*</span>
+
+                            </td>
+                            <td height="28" width="19%" align="right">
+                                处所：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input id="LOCATION" class="validate[required]" type="text" name="LOCATION" />
+                                <span style="color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right">
+                                问题分类：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input id="QUESTION_CLASSIFY" type="text" name="QUESTION_CLASSIFY" class="validate[required]" />
+                                <span style="color: red">*</span>
+                            </td>
+                            <td height="28" width="19%" align="right">
+                                专业分类：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input id="MAJOR_CLASSIFY" name="MAJOR_CLASSIFY" type="text" class="validate[required]" />
+                                <span style="color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right">
+                                问题等级：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input id="LV" name="LV" type="text" class="validate[required]" />
+                                <span style="color: red">*</span>
+                            </td>
+                            <td height="28" width="19%" align="right">
+                                负责单位：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <select id="DUTY_UNITS" multiple="multiple" class="validate[required]"></select>
+                                <span style="color: red">*</span>
+                                <input id="txt_DUTY_UNITS" name="DUTY_UNITS" type="hidden" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="18%" align="right">
+                                整改日期：
+                            </td>
+                            <td height="28" width="32%" align="left">
+                                <input id="RECTIFY_DATE" type="text" class="Wdate" name="RECTIFY_DATE" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+                            </td>
+                            <td height="28" width="19%" align="right">
+                                处理人：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <input type="text" id="HANDLER" name="HANDLER">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right">
+                                销号状态：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <select type="text" id="ProcessStatus" name="process_status" class="validate[required]">
+                                    <option value="">请选择</option>
+                                    <option value="未销号">未销号</option>
+                                    <option value="已销号">已销号</option>
+                                </select>
+                                <span style="color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                                问题内容：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3">
+                                <textarea id="CONTENT" name="CONTENT" type="text" style="width:89%;height:60px" class="validate[required,maxSize[1000]]" oninput=""></textarea>
+                                <span style="color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                                问题原因：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3">
+                                <textarea type="text" id="CAUSE" name="CAUSE" style="width:89%;height:60px" class="validate[maxSize[1000]]"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19" align="right" style="vertical-align: text-bottom;">
+                                问题处理详情：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3">
+                                <textarea id="DETAIL" name="DETAIL" type="text" style="width:89%;height:60px" class="validate[maxSize[1000]]"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <input id="resourceBefore" type="hidden" name="before_repair_pic" />
+                    <input id="resourceAfter" type="hidden" name="after_repair_pic" />
+                </form>
+                <table id="defaultTable-upload" cellspacing="0" cellpadding="0" border="0" style="width:100%">
+                    <tr>
+                        <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                            整改前图片：
+                        </td>
+                        <td height="28" width="250" align="left">
+                            <input type="hidden" id="add-resourceBefore" />
+                            <input type="hidden" id="add-resourceAfter" />
+                            <div id="processdetails-resourceBefore"></div><!--整改前图片-->
+                        </td>
+                        <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                            整改后图片：
+                        </td>
+                        <td height="28" width="250" align="left">
+                            <div id="processdetails-resourceAfter"></div><!--整改后图片-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="DUTY_UNITSformError parentFormdefaultForm formError" style="top: 84.563px; left: 520px; margin-top: 0px; opacity: 0.87;display:none"><div class="formErrorContent">* 不能为空<br></div><div class="formErrorArrow"><div class="line10"><!-- --></div><div class="line9"><!-- --></div><div class="line8"><!-- --></div><div class="line7"><!-- --></div><div class="line6"><!-- --></div><div class="line5"><!-- --></div><div class="line4"><!-- --></div><div class="line3"><!-- --></div><div class="line2"><!-- --></div><div class="line1"><!-- --></div></div></div>
+            <div class="modal-footer" style="margin-top:10px;text-align:center">
+                <button class="btn btn-primary" id="sub" style="margin-right: 10px">
+                    保存
+                </button>
+                <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal" style="margin-left: 10px">
+                    关闭
+                </button>
+                <input type="hidden" id="file" />
+                <input type="hidden" id="text" />
+                <input type="hidden" id="pid" />
+            </div>
+            <!-- search end-->
+            <!-- list-->
+        </div>
+        <div aria-hidden="true" id="modal-container-22257" class="modal hide fade" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div id="modal_header">问题处理详情</div>
+            <div class="modal-body" style="padding:15px 0px 0px">
+
+                <form id="defaultForm1">
+                    <table id="defaultTable1" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td height="28" width="22%" align="right">
+                                <label> 发生日期</label>：
+
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divHappenDate"></div>
+                            </td>
+                            <td height="28" width="22%" align="right">
+                                <label> 处所</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divLocation"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="22%" align="right">
+                                <label>负责单位</label>：
+
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divDutyUnits"></div>
+                            </td>
+                            <td height="28" width="22%" align="right">
+                                <label> 专业分类</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divMajorClassify"></div>
+                            </td>
+                        </tr>
+                        <tr class="blue1">
+                            <td height="28" width="22%" align="right">
+                                <label>问题分类</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divQuestionClassify"></div>
+                            </td>
+                            <td height="28" width="22%" align="right">
+                                <label> 问题等级</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divLV"></div>
+                            </td>
+
+                        </tr>
+                        <tr class="blue1">
+                            <td height="28" width="22%" align="right" style="vertical-align:text-top">
+                                <label> 问题内容</label>：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3" style="vertical-align:top">
+                                <div id="divContent"></div>
+                            </td>
+                        </tr>
+                        <tr class="blue1">
+                            <td height="28" width="22%" align="right" style="vertical-align:text-top">
+                                <label>问题原因</label>：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3" style="vertical-align:top">
+                                <div id="divCause"></div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td height="28" width="18%" align="right">
+                                <label> 整改日期</label>：
+                            </td>
+                            <td height="28" width="32%" align="left">
+                                <div id="divRectifyDate"></div>
+                            </td>
+                            <td height="28" width="22%" align="right">
+                                <label> 处理人</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divHandler"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="22%" align="right">
+                                <label>销号状态</label>：
+                            </td>
+                            <td height="28" width="31%" align="left">
+                                <div id="divProcessStatus"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="22%" align="right" style="vertical-align:text-top">
+                                <label>问题处理详情</label>：
+                            </td>
+                            <td height="28" width="80%" align="left" colspan="3" style="vertical-align:top">
+                                <div id="divDetail"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                                <label>整改前图片</label>：
+                            </td>
+                            <td height="28" width="280" align="left">
+                                <div id="divPicBefore"></div>
+                            </td>
+                            <td height="28" width="19%" align="right" style="vertical-align: text-bottom;">
+                                <label>整改后图片</label>：
+                            </td>
+                            <td height="28" width="280" align="left">
+                                <div id="divPicAfter"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align:center; margin-top:10px">
+                <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+            <!-- search end-->
+            <!-- list-->
+        </div>
+    </div>
+
+    <!-- list  end-->
+
+
+</body>
+</html>

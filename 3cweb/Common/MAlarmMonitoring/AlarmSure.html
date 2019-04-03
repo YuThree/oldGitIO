@@ -1,0 +1,1719 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>报警确认/取消</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Common/js/6cweb/MasterJs.js"></script>
+    <link href="/Lib/bootstrap/css/opa-icons.css" rel='stylesheet' />
+    <script type="text/javascript">
+        loadControl("mySelectTree");
+        loadControl("layer");
+        loadControl("mySelectSample");
+    </script>
+    <script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js" type="text/javascript"></script>
+    <style>
+        #repeateTable {
+            border: solid #cccccc;
+            border-width: 1px 0px 0px 1px;
+        }
+
+            #repeateTable td {
+                text-align: center;
+                border: solid #cccccc;
+                border-width: 0px 1px 1px 0px;
+            }
+
+            #repeateTable th {
+                text-align: center;
+                border: solid #cccccc;
+                border-width: 0px 1px 1px 0px;
+            }
+
+        #ZhuanFa div {
+            font-family: "微软雅黑";
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .fastZF {
+            color: #ef5d00;
+            cursor: pointer;
+        }
+
+        .slowZF {
+            margin-left: 20px;
+            color: #7ad23c;
+            cursor: pointer;
+        }
+
+        .noZF {
+            margin-left: 20px;
+            color: #55555;
+            cursor: pointer;
+        }
+
+        .radio-span {
+            display: inline-block;
+            height: 28px;
+            margin-left: 0;
+            margin-right: 8px;
+            line-height: 28px;
+            cursor: pointer;
+        }
+
+        .mr-0 {
+            margin-right: 0;
+        }
+
+        .radio-span input[type="radio"] {
+            margin: -3px 0 0 0;
+        }
+
+        .radio-span label {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        #sample_detail_content {
+            padding-left: 89px;
+            padding-top: 92px;
+        }
+
+        #f_sample_detail_content {
+            margin-left: 89px;
+        }
+
+        #ym-window {
+            z-index: 2547483647 !important;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding:0px 10px; height: 360px;" class="alarmsureTop">
+        <table id="tb_sure" class="table form-horizontal" cellpadding="1" cellspacing="1"
+               style="width: 100%">
+            <tr class="DPC_hide">
+                <td style="width: 47%;">
+                    <label class="control-label">
+                        报警类型：
+                    </label>
+                    <div id="afcodeYZ" class="controls">
+                        <input id="citySel" type="text" value="" style="width: 160px; margin: 0;" readonly="readonly" />
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        报警级别：
+                    </label>
+                    <div id="UseverityYZ" class="controls">
+                        <select id="Useverity" style="width: 170px;" onchange="yzAlarmData()">
+                            <option value="0">请选择</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr class="DPC_hide">
+                <td id="DefectMark_td" style="display:none;">
+                    <label class="control-label">
+                        缺陷标志：
+                    </label>
+                    <div class="controls">
+                        <input id="DefectMark" type="text" value="" style="width: 160px;" readonly="readonly" />
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签：
+                    </label>
+                    <div class="controls">
+                        <input id="alarmcode" type="text" value="" style="width: 160px;" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="control-label">
+                        报警分析：
+                    </label>
+                    <div class="controls">
+                        <div id="UtxtDefectYZ">
+                            <textarea name="UtxtDefect" id="UtxtDefect" rows="3" style="height: 40px; width: 100%;"></textarea>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="DPC_hide">
+                <td colspan="2">
+                    <label class="control-label">
+                        处理建议：
+                    </label>
+                    <div class="controls">
+                        <textarea name="UtxtAdvice" id="UtxtAdvice" rows="3" style="height: 40px; width: 100%;"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="control-label">
+                        备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：
+                    </label>
+                    <div class="controls">
+                        <textarea name="UtxtNote" id="UtxtNote" rows="2" style="height: 30px; width: 100%;"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">
+                        报&nbsp;&nbsp;告&nbsp;&nbsp;人：
+                    </label>
+                    <div id="Div2" class="controls">
+                        <input name="UtxtReporter" type="text" id="UtxtReporter" style="width: 100px;" readOnly="true" />
+                    </div>
+                </td>
+                <td>
+                    <label class="control-label">
+                        报告日期：
+                    </label>
+                    <div id="Div1" class="controls">
+                        <input name="Ureportdate" type="text" id="Ureportdate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                               style="width: 150px" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="hide" id="td_SceneSampl">
+                    <label class="control-label">场景样本：</label>
+                    <div class="controls">
+                        <textarea id="SceneSample_Sure" class="" code="" type="text" onclick="" style="width: 100%;margin-bottom:0" readonly="readonly"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="sample_library" class="hide">
+                        <label class="control-label">
+                            样&nbsp;&nbsp;本&nbsp;&nbsp;库：
+                        </label>
+                        <div id="Div1" class="controls" style="margin-top:0">
+                            <span class="radio-span sample_b"><input type="radio" name="sample_type" id="z_sample" /><label>正样本</label></span>
+                            <!--<span class="radio-span sample_b"><input type="radio" name="sample_type" id="f_sample" /><label>负样本</label></span>-->
+                            <span class="radio-span sample_b mr-0"><input type="radio" name="sample_type" id="n_sample" /><label>非样本</label></span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div id="ZhuanFa" class="hide">
+                        <label class="control-label">转发类型：</label>
+                        <div class="controls">
+                            <span class="fastZF"><img src="img/chose_0.png" alt="紧急转发" style="margin-right:5px;" />紧急转发</span>
+                            <span class="slowZF"><img src="img/chose_0.png" alt="普通转发" style="margin-right:5px;" />普通转发</span>
+                            <span class="noZF"><img src="img/chose_0.png" alt="不转发" style="margin-right:5px;" />不转发</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="sample_detail_content" class="hide">
+        <div id="z_sample_detail_content" class="hide">
+            <label class="control-label">样本详细类型：</label>
+            <span id="z_sample_detail"></span>
+        </div>
+        <div id="f_sample_detail_content" class="hide">
+            <input id="f_sample_detail" type="text" style="width: 160px;" />
+        </div>
+    </div>
+    <div id="checkBox_sure" style="display:none;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="cb_showTask" class="zrw" /><label for="cb_showTask" style="display: inline;" class="zrw">
+            <h3 style="display: inline;">
+                转任务
+            </h3>
+        </label>
+    </div>
+    <div id="box_task" class="zrw" style="display: none">
+        <iframe id="iframe_task" name="iframe_task" style="width: 100%; height: 380px;" seamless
+                src="" scrolling="no" frameborder="0"></iframe>
+    </div>
+    <!--<div id="checkBox_repeat">
+        &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="cb_showRepeat" class="zrw" /><label
+            for="cb_showRepeat" style="display: inline;" class="zrw">
+            <h3 style="display: none;">
+                重复报警列表
+            </h3>
+        </label>
+    </div>-->
+    <div id="box_repeat" class="zrw" style="display: none;">
+        <div id="repeat-body" style="width: 90%; margin: 10px 0px 20px 50px;">
+        </div>
+    </div>
+    <input type="hidden" id="hf_alarmID" />
+</body>
+</html>
+<script>
+
+    var btntype = 'btnOk';
+    var alarmID = GetQueryString("alarmid");
+    var category = GetQueryString("category");
+    var btntypeName = $("body", parent.document).find("#myModalLabel_2").text();
+    var eid = GetQueryString("eid");
+    var IsCancle = GetQueryString("IsCancle");
+    var _Json = getCurUser(); //取登录名和用户名
+    var DPC_batch_cancle = ""; // DPC批量取消识别字段
+    var _JSON; //3C详情报警确认判断拉出值使用
+    var _ISOUTTIME = "";  //转发过时否
+    var repeatJson; //重复报警确认判断拉出值使用
+    var sample_type_rs; //正样本详细类型名称
+    var sample_type_code; //正样本详细类型code
+    var _cur_sample = ''; //当前样本类型
+    var temp_sample_code = '';
+    var temp_sample_val = '';
+    var temp_OrigialAlarm = ''; //当前报警类型
+
+    $(function () {
+
+        bindCK(false);
+
+        if (btntypeName.trim() != '报警确认') {
+            btntype = 'btnCan';
+            //$(".alarmsureTop").css("height", "430");
+        }
+        if (FunEnable('Fun_TaskManage') == "False") {
+            $('#checkBox_sure').hide();
+        }
+
+        switch (alarmID) {
+            case 'BatchOk':
+                alarmID = $("body", parent.document).find("#iframe_AlarmSaveList").contents()[0].defaultView.GetHF_ids();
+                break;
+        }
+
+        $('#hf_alarmID').val(alarmID);
+
+        $('#iframe_task').attr('src', '/Common/MTask/TaskHandle.htm?id=BatchOk&alarmid=' + alarmID + '&type=openFaultTask&toTaskType=batchTotask&category=' + category + '&v=' + version);
+
+        $('#cb_showRepeat').click(function () {
+            var v = this.checked;
+            if (v) {
+                $('#box_repeat').css("display", "");
+            }
+            else {
+                $('#box_repeat').css("display", "none");
+            }
+
+        });
+
+        $('#cb_showTask').click(function () {
+            var v = this.checked;
+            bindCK(v);
+        })
+
+
+        //报警分析
+        $('#UtxtDefect').mySelectTree({
+            tag: 'SYSDICTIONARYTREE',
+            cateGory: 'taskwords',
+            codeType: 'UtxtDefect',
+            enableContent: true,
+            onClick: function (event, treeId, treeNode) {
+                $("#UtxtDefect").attr('code', treeNode.id).val(treeNode.name);
+            }
+        });
+        //缺陷标志
+        if (getConfig('debug') == "1") { //内部版本
+            $('#DefectMark_td').css("display", "");
+            if (category == "REPEAT") {
+                $('#td_SceneSampl').hide();
+            } else {
+                $('#td_SceneSampl').show();
+            }
+            if (btntypeName.trim() != '报警确认') {
+                $('#DefectMark').mySelectTree({
+                    tag: 'GetDefectMark',
+                    cateGory: 'AFLG_CONCEL',
+                    codeType: '3C',
+                    height: 350,
+                    enableCheck: true,
+                    enableFilter: true,
+                    onCheck: function (event, treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj(treeId),
+                        nodes = zTree.getCheckedNodes(true),
+                         v = "", code = "";
+                        for (var i = 0, l = nodes.length; i < l; i++) {
+                            v += nodes[i].name + ",";
+                            code += nodes[i].id + ",";
+                        }
+                        if (v.length > 0) v = v.substring(0, v.length - 1);
+                        if (code.length > 0) code = code.substring(0, code.length - 1);
+                        var cityObj = $("#DefectMark");
+                        cityObj.attr("value", v).attr("code", code);
+                        var DefectText = $("#UtxtDefect").val();
+                        if (!$("#" + treeNode.tId + "_check").hasClass("checkbox_true_full_focus")) {
+                            document.getElementById("UtxtDefect").value = DefectText.replace("　" + treeNode.name, "").replace(treeNode.name, "");
+                        } else {
+                            if (DefectText == "") {
+                                document.getElementById("UtxtDefect").value = treeNode.name;
+                            } else {
+                                if (DefectText.indexOf(treeNode.name) > -1) {
+
+                                } else {
+                                    document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                                }
+                            }
+                        }
+                    },
+                    onClick: function (event, treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj(treeId);
+                        zTree.checkAllNodes(false);
+                        zTree.checkNode(treeNode, !treeNode.checked, null, true);
+                        var DefectText = $("#UtxtDefect").val();
+                        if (DefectText == "") {
+                            document.getElementById("UtxtDefect").value = treeNode.name;
+                        } else {
+                            document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                        }
+                    },
+                    callback: function () {
+                        if (temp_OrigialAlarm !== '' && temp_OrigialAlarm !== undefined) {
+                            var dropLi = $(document).find('#ULDefectMark li');
+                            var dropA = $(dropLi).find('a');
+                            var tempV = '';
+                            if (temp_OrigialAlarm.indexOf('打弓') > -1) {
+                                for (i = 0; i < dropLi.length; i++) {
+                                    if ($(dropA[i]).attr('title') === '打弓误报') {//checkbox_false_full
+                                        $(dropA[i]).prev().addClass('checkbox_true_full');
+                                        tempV = $(dropA[i]).attr('title');
+                                    }
+                                };
+                            }
+                            if (temp_OrigialAlarm.indexOf('拉出值') > -1) {
+                                for (i = 0; i < dropLi.length; i++) {
+                                    if ($(dropA[i]).attr('title') === '拉出值误报') {//checkbox_false_full
+                                        $(dropA[i]).prev().addClass('checkbox_true_full');
+                                        tempV = $(dropA[i]).attr('title');
+                                    }
+                                };
+                            }
+                            if (temp_OrigialAlarm.indexOf('导高超限') > -1) {
+                                for (i = 0; i < dropLi.length; i++) {
+                                    if ($(dropA[i]).attr('title') === '导高误报') {//checkbox_false_full
+                                        $(dropA[i]).prev().addClass('checkbox_true_full');
+                                        tempV = $(dropA[i]).attr('title');
+                                    }
+                                };
+                            }
+                            if (temp_OrigialAlarm.indexOf('运行降弓') > -1) {
+                                for (i = 0; i < dropLi.length; i++) {
+                                    if ($(dropA[i]).attr('title') === '运行降弓误报') {//checkbox_false_full
+                                        $(dropA[i]).prev().addClass('checkbox_true_full');
+                                        tempV = $(dropA[i]).attr('title');
+                                    }
+                                };
+                            }
+                            $('#DefectMark').val(tempV);
+                        }
+
+                    }
+                });
+            }
+            else {
+                $('#DefectMark').mySelectTree({
+                    tag: 'GetDefectMark',
+                    cateGory: 'AFLG_CONFIRM',
+                    codeType: '3C',
+                    enableCheck: true,
+                    height: 350,
+                    enableFilter: true,
+                    onCheck: function (event, treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj(treeId),
+                        nodes = zTree.getCheckedNodes(true),
+                         v = "", code = "";
+                        for (var i = 0, l = nodes.length; i < l; i++) {
+                            v += nodes[i].name + ",";
+                            code += nodes[i].id + ",";
+                        }
+                        if (v.length > 0) v = v.substring(0, v.length - 1);
+                        if (code.length > 0) code = code.substring(0, code.length - 1);
+                        var cityObj = $("#DefectMark");
+                        cityObj.attr("value", v).attr("code", code);
+                        var DefectText = $("#UtxtDefect").val();
+                        if (!$("#" + treeNode.tId + "_check").hasClass("checkbox_true_full_focus")) {
+                            document.getElementById("UtxtDefect").value = DefectText.replace("　" + treeNode.name, "").replace(treeNode.name, "");
+                        } else {
+                            if (DefectText == "") {
+                                document.getElementById("UtxtDefect").value = treeNode.name;
+                            } else {
+                                document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                            }
+                        }
+                    },
+                    onClick: function (event, treeId, treeNode) {
+                        var zTree = $.fn.zTree.getZTreeObj(treeId);
+                        zTree.checkAllNodes(false);
+                        zTree.checkNode(treeNode, !treeNode.checked, null, true);
+                        var DefectText = $("#UtxtDefect").val();
+                        if (DefectText == "") {
+                            document.getElementById("UtxtDefect").value = treeNode.name;
+                        } else {
+                            document.getElementById("UtxtDefect").value = DefectText + "　" + treeNode.name;
+                        }
+                    }
+                });
+            }
+            if (window.parent.location.href.indexOf("C3RepeatAlarmImg") < 0 && category != "REPEAT") {
+                $('#sample_library').show()//样本选择
+            }
+            $('#f_sample_detail').mySelectTree({
+                tag: 'GET_SAMPLE_LIBRARY',
+                cateGory: 'SMPLFLG|DRTFLG_FUB',
+                codeType: '3C',
+                _hegiht: '200',
+                mis_px: '10',
+                enableFilter: true,
+                enableCheck: true,
+                onCheck: function (event, treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj(treeId),
+                    nodes = zTree.getCheckedNodes(true),
+                     v = "", code = "";
+                    for (var i = 0, l = nodes.length; i < l; i++) {
+                        v += nodes[i].name + ",";
+                        code += nodes[i].id + ",";
+                    }
+                    if (v.length > 0) {
+                        v = v.substring(0, v.length - 1);
+                    }
+                    if (code.length > 0) {
+                        code = code.substring(0, code.length - 1);
+                    }
+                    $("#f_sample_detail").val(v).attr("code", code);
+                },
+                onClick: function (event, treeId, treeNode) {
+                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                    treeObj.checkAllNodes(false);
+                    treeObj.checkNode(treeNode, !treeNode.checked, null, true);
+
+                    $('#f_sample_detail').val('');
+                    if (treeNode.pId === '' || treeNode.pId === null) {
+                        var arr = treeNode.children,
+                            code = '';
+                        for (var j = 0; j < arr.length; j++) {
+                            code += arr[j].id + ',';
+                        }
+                        if (code.length > 0) {
+                            code = code.substring(0, code.length - 1);
+                        }
+                        $("#f_sample_detail").val(treeNode.name).attr('code', code);
+                    } else {
+                        $("#f_sample_detail").val(treeNode.name).attr('code', treeNode.id);
+                    }
+                }
+            });
+
+            $(document).find('#f_sample_detail').click(function () {
+                if (self.frameElement && self.frameElement.tagName == "IFRAME") {
+                    $('#iframe_AlarmSure', window.parent.document).css('height', '460px');
+                    //$('#mybox1', window.parent.document).css('height', '840px');
+                }
+            });
+        };
+        $('.radio-span').click(function () {
+            var radio = $(this).find('input:radio');
+            var id = $(radio).attr('id');
+            $(radio).attr('checked', 'checked');
+            click_sample(id);
+        });
+        $('input:radio').click(function () {
+            var id = $(this).attr('id');
+            click_sample(id);
+        });
+        //报警处理意见
+        $('#UtxtAdvice').mySelectTree({
+            tag: 'SYSDICTIONARYTREE',
+            cateGory: 'taskwords',
+            codeType: 'UtxtAdvice',
+            enableContent: true,
+            onClick: function (event, treeId, treeNode) {
+                $("#UtxtAdvice").attr('code', treeNode.id).val(treeNode.name);
+            }
+        });
+        if (category != "REPEAT") {
+            $("#checkBox_repeat").css("display", "none");
+            $('#citySel').mySelectTree_Level2({
+                codeType: category,
+                onClick: function () {
+                    get_sample_type();
+                },
+            });
+        } else {
+            $("body", parent.document).find("#iframe_AlarmSure").height(390)
+            $('#citySel').mySelectTree_Level2({
+                codeType: '3C',
+                onClick: function () {
+                    get_sample_type();
+                    $("body", parent.document).find("#iframe_AlarmSure").height(390)
+                },
+                callback: function () {
+                    $('#citySel').click(function () {
+                        $("body", parent.document).find("#iframe_AlarmSure").height(480)
+                    })
+                }
+            });
+            $("#UtxtDefect").val("重复报警");
+        }
+
+        loadSureForm();
+
+        //批量确认
+        if (IsCancle != undefined && IsCancle == '1') {
+            $("#checkBox_sure").hide();
+            $("#box_task").hide();
+            if ($("#citySel").val() == "待判定") {
+                $("#citySel").val("干扰").attr('code', "AFGR");
+            }
+        };
+        if (FunEnable('Fun_SendLocale') == "True" && category != "REPEAT" && btntypeName.trim() == '报警确认') {
+            $("#ZhuanFa").show();
+            //$(".alarmsureTop").css("height", "430");
+
+            //级别改变
+            $("#Useverity").change(function () {
+                if ($(this).val() == "一类" || $(this).val() == "二类") {
+                    if (_ISOUTTIME == "True") {
+                        $(".slowZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                        $(".slowZF>img").attr("src", "img/chose_1.png");
+                        $(".noZF>img").attr("src", "img/chose_0.png");
+                        $(".fastZF>img").attr("src", "img/chose_0.png");
+                    } else {
+                        $(".noZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                        $(".noZF>img").attr("src", "img/chose_1.png");
+                        $(".fastZF>img").attr("src", "img/chose_0.png");
+                    }
+                } else if ($(this).val() == "三类") {
+                    if (_ISOUTTIME == "True") {
+                        $(".noZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                        $(".noZF>img").attr("src", "img/chose_1.png");
+                        $(".slowZF>img").attr("src", "img/chose_0.png");
+                        $(".fastZF>img").attr("src", "img/chose_0.png");
+                    } else {
+                        $(".noZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                        $(".noZF>img").attr("src", "img/chose_1.png");
+                        $(".fastZF>img").attr("src", "img/chose_0.png");
+                    }
+                } else {
+                }
+            });
+        };
+
+        $(".fastZF").click(function () {  //紧急转发点击事件
+            if ($(this).css("cursor") == "pointer") {
+                $(this).addClass("choiceZF").siblings().removeClass("choiceZF");
+                $(this).find("img").attr("src", "img/chose_1.png");
+                if ($(".slowZF").css("cursor") == "pointer") {
+                    $(".slowZF").find("img").attr("src", "img/chose_0.png");
+                }
+                if ($(".noZF").css("cursor") == "pointer") {
+                    $(".noZF").find("img").attr("src", "img/chose_0.png");
+                }
+            }
+        });
+        $(".slowZF").click(function () {  //普通转发点击事件
+            if ($(this).css("cursor") == "pointer") {
+                $(this).addClass("choiceZF").siblings().removeClass("choiceZF");
+                $(this).find("img").attr("src", "img/chose_1.png");
+                if ($(".fastZF").css("cursor") == "pointer") {
+                    $(".fastZF").find("img").attr("src", "img/chose_0.png");
+                }
+                if ($(".noZF").css("cursor") == "pointer") {
+                    $(".noZF").find("img").attr("src", "img/chose_0.png");
+                }
+            }
+        });
+        $(".noZF").click(function () {  //不转发点击事件
+            if ($(this).css("cursor") == "pointer") {
+                $(this).addClass("choiceZF").siblings().removeClass("choiceZF");
+                $(this).find("img").attr("src", "img/chose_1.png");
+                if ($(".slowZF").css("cursor") == "pointer") {
+                    $(".slowZF").find("img").attr("src", "img/chose_0.png");
+                }
+                if ($(".fastZF").css("cursor") == "pointer") {
+                    $(".fastZF").find("img").attr("src", "img/chose_0.png");
+                }
+            }
+        });
+
+        $("#DefectMark").siblings("a").click(function () {   //清除缺陷标志的checkbox勾选
+            var DefectMarkObj = $.fn.zTree.getZTreeObj("ULDefectMark");
+            DefectMarkObj.checkAllNodes(false);
+        });
+
+        if (getConfig('debug') != "1") {
+            $("#UtxtReporter").removeAttr("readOnly");
+        }
+        if (GetQueryString('PDCcancle') == 'PDCcancle') {
+            $('#td_SceneSampl').css('display', 'none');
+            $('#sample_detail_content').hide();
+            $('.DPC_hide').hide();//隐藏页面
+            $("body", parent.document).find("#iframe_AlarmSure").height(220);
+            $("#tb_sure").parent().height(200);
+            DPC_batch_cancle = "cancle";
+        } else if (GetQueryString('PDCcancle') == 'DPCmission') {
+            $('#sample_detail_content').hide();
+            $('#tb_sure').parent().hide();
+            $('#checkBox_sure').hide();
+            $('#box_task').show();
+            $("body", parent.document).find("#iframe_AlarmSure").height(350);
+        }
+    });
+
+    /**
+     * @desc 点击不同的样本
+     * @param
+     */
+    function click_sample(id) {
+
+        if ('z_sample' === id) { //点击正样本
+
+            _cur_sample = '正样本';
+            hide_element('FUB');
+            $('#z_sample_detail').html(sample_type_rs).attr('code', sample_type_code);
+            get_sample_type();
+
+        } else if ('f_sample' === id) { //点击负样本
+
+            _cur_sample = '负样本';
+            hide_element('ZHB');
+            $('#f_sample_detail').trigger('click');
+
+        } else if ('n_sample' === id) { //点击非样本
+
+            _cur_sample = '非样本';
+            hide_element('ALL');
+
+        }
+    }
+
+    /**
+     * @desc 确认样本中，隐藏不同的元素
+     * @param
+     */
+    function hide_element(hideType) {
+        if ('ALL' === hideType) { //隐藏全部样本
+            if (!$('#sample_detail_content').hasClass('hide')) {
+                $('#sample_detail_content').addClass('hide');
+            }
+            if (!$('#f_sample_detail_content').hasClass('hide')) {
+                $('#f_sample_detail_content').addClass('hide');
+            }
+            if (!$('#z_sample_detail_content').hasClass('hide')) {
+                $('#z_sample_detail_content').addClass('hide');
+            }
+        }
+        if ('ZHB' === hideType) { //隐藏正样本
+            if ($('#sample_detail_content').hasClass('hide')) {
+                $('#sample_detail_content').removeClass('hide');
+            }
+            if ($('#f_sample_detail_content').hasClass('hide')) {
+                $('#f_sample_detail_content').removeClass('hide');
+            }
+            if (!$('#z_sample_detail_content').hasClass('hide')) {
+                $('#z_sample_detail_content').addClass('hide');
+            }
+        }
+        if ('FUB' === hideType) { //隐藏负样本
+            if ($('#sample_detail_content').hasClass('hide')) {
+                $('#sample_detail_content').removeClass('hide');
+            }
+            if ($('#z_sample_detail_content').hasClass('hide')) {
+                $('#z_sample_detail_content').removeClass('hide');
+            }
+            if (!$('#f_sample_detail_content').hasClass('hide')) {
+                $('#f_sample_detail_content').addClass('hide');
+            }
+        }
+    }
+
+    /**
+     * @desc 获取正样本的详细类型
+     * @param
+     */
+    function get_sample_type() {
+        $.ajax({
+            type: 'post',
+            url: '/Common/MAlarmMonitoring/RemoteHandlers/AlarmSure.ashx?active=Sample_Z&alarmcode=' + $('#citySel').attr('code'),
+            cache: false,
+            async: false,
+            success: function (result) {
+                if ('' !== result && undefined !== result) {
+                    if (result.SUCCESS === 'true') {
+                        sample_type_rs = result.SAMPLE_NAME;
+                        sample_type_code = result.SAMPLE_CODE;
+                        if ('正样本' === _cur_sample) {
+                            $('#z_sample_detail').html(sample_type_rs).attr('code', sample_type_code);
+                        } else {
+                            $('#z_sample_detail').html(result.error).attr('code', '');
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function bindCK(v) {
+
+        if (v) {
+            $('#iframe_task').attr('src', '/Common/MTask/TaskForm.htm?id=BatchOk&type=openFaultTask&openType=&ShowSimple=1&v=' + version)
+
+            $("body", parent.document).find("#btn_SureAndTask").show();
+
+            if (FunEnable('Fun_SendLocale') == "True") {
+                $("body", parent.document).find("#iframe_AlarmSure").height(645)//转发
+            } else {
+                $("body", parent.document).find("#iframe_AlarmSure").height(600);
+            }
+
+            $("body", parent.document).find("#mybox1").css({
+                'margin-top': function () {
+                    return -($(this).height() / 2)-40;
+                },
+            })
+
+            $('#box_task').show();
+
+        } else {
+
+            $("body", parent.document).find("#btn_SureAndTask").hide();
+
+            if (FunEnable('Fun_SendLocale') == "True" && btntypeName.trim() == '报警确认') {
+                $("body", parent.document).find("#iframe_AlarmSure").height(540)//转发
+
+            } else {
+                if (getConfig('debug') == '1') {
+                    $("body", parent.document).find("#iframe_AlarmSure").height(478);
+                } 
+            }
+
+            $("body", parent.document).find("#mybox1").css({
+                'margin-top': function () {
+                    return -($(this).height() / 2)-40;
+                },
+          
+            })
+            $('#box_task').hide();
+        }
+    }
+    //确认
+    function btnAlarmUpdate(alertOnce) {
+        //重复报警使用。
+        var ids = $("#alarmid", window.parent.document).val();
+        if (category == "REPEAT" && ids.split(",").length <= 1) {
+            layer.msg('请至少选择两条以上数据再操作');
+            return false;
+        }
+
+
+        btntypeName = $("body", parent.document).find("#myModalLabel_2").text();
+        if (btntypeName.trim() != '报警确认') { //报警取消
+            btntype = 'btnCan';
+            if (getConfig('For6C') == '3C') {
+                if ($('#citySel').val() == '待判定') {
+                    ymPrompt.errorInfo('报警类型不能为“待判定”', null, null, '提示信息', null);
+                    return;
+                }
+                //if ($('#citySel').val() == '温差报警') {
+                //    ymPrompt.errorInfo('报警类型不能为“温差报警”', null, null, '提示信息', null);
+                //    return;
+                //}
+            }
+        }
+        else {
+            btntype = 'btnOk';
+            if (getConfig('For6C') == '3C') {
+                if ($('#citySel').val() == '待判定') {
+                    ymPrompt.errorInfo('报警类型不能为“待判定”', null, null, '提示信息', null);
+                    return;
+                }
+                //if ($('#citySel').val() == '温差报警') {
+                //    ymPrompt.errorInfo('报警类型不能为“温差报警”', null, null, '提示信息', null);
+                //    return;
+                //}
+            }
+
+        }
+        if (GetQueryString('PDCcancle') == 'PDCcancle') {
+            ids = $("body", parent.document).find("#iframe_AlarmSaveList").contents()[0].defaultView.GetHF_ids();
+        }
+
+
+        if (yzAlarmData()) {
+
+            var afcodeName = $('#citySel').val(); //缺陷类型
+            var afcode = $('#citySel').attr('code');
+
+            var severity = document.getElementById('Useverity').value; //等级
+            var DefectMarkName = document.getElementById('DefectMark').value; //缺陷标志name
+            var DefectMarkCode = $('#DefectMark').attr("code"); //缺陷标志code
+            var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+            txtDefect = txtDefect.replace(/\+/g, "＋")
+            var txtAdvice = document.getElementById('UtxtAdvice').value; //处理建议
+            var txtNote = document.getElementById('UtxtNote').value; //备注
+            //var txtReporter = _Json.PersonName;//报告人
+            var txtReporter = document.getElementById('UtxtReporter').value;//报告人
+            var txtReporterCode = _Json.loginId;//报告人code
+            var reportdate = document.getElementById('Ureportdate').value; //日期
+            var txtSceneSample = $('#SceneSample_Sure').val();//场景样本名称
+            var dropContent = $(document).find('.SampleContent');
+            var dropSpan = $(dropContent).find('span');
+            var SceneSample_Name = txtSceneSample.split(',');
+            //var SceneSample_Name = txtSceneSample.substring(0, txtSceneSample.length - 1).split(',');
+            var SceneSample_Code = '';
+            for (var i = 0; i < dropSpan.length; i++) {
+                for (var j = 0; j < SceneSample_Name.length; j++) {
+                    if ($(dropSpan[i]).attr('title') === SceneSample_Name[j]) {
+                        SceneSample_Code += $(dropSpan[i]).attr('code') + ',';
+                    };
+                };
+            };
+            temp_sample_val = temp_sample_val.substring(0, temp_sample_val.length - 1);//场景样本编码
+            temp_sample_code = temp_sample_code.substring(0, temp_sample_code.length - 1);//场景样本编码
+            var Alarmcode = escape($('#alarmcode').val());
+            //  document.getElementById('iframe_task')
+            $(window.frames["iframe_task"].document).find("#PROPOSAL").val(txtAdvice);
+            $(window.frames["iframe_task"].document).find("#REMARK").val(txtNote);
+            // alarmID = GetQueryString("alarmid");
+
+            if (txtDefect.length > 250) {
+                ymPrompt.succeedInfo('缺陷分析最多250个字', null, null, '提示信息', null);
+                return;
+            }
+
+            if (txtAdvice.length > 250) {
+                ymPrompt.succeedInfo('处理建议最多250个字', null, null, '提示信息', null);
+                return;
+            }
+
+            if (txtNote.length > 250) {
+                ymPrompt.succeedInfo('备注最多250个字', null, null, '提示信息', null);
+                return;
+            }
+            if (DefectMarkCode == undefined) {
+                DefectMarkCode = "";
+            }
+
+            var ZFtext = $(".choiceZF").text();
+            var ZFnumber = "";
+            if (FunEnable('Fun_SendLocale') == "True" && category != "REPEAT" && btntypeName.trim() == '报警确认') {
+                if (ZFtext == "紧急转发") {
+                    ZFnumber = 1;
+                } else if (ZFtext == "普通转发") {
+                    ZFnumber = 2;
+                }
+                else {
+                    ZFnumber = "";
+                }
+            }
+            //样本
+            var SAMPLE_CODE = '';
+            var SAMPLE_NAME = '';
+            var SAMPLE_DETAIL_CODE = '';
+            var SAMPLE_DETAIL_NAME = '';
+
+            //样本
+            if ('正样本' === _cur_sample) {
+                SAMPLE_NAME = '正样本';
+                SAMPLE_CODE = 'DRTFLG_ZHB';
+                SAMPLE_DETAIL_NAME = $('#z_sample_detail').html();
+                SAMPLE_DETAIL_CODE = $('#z_sample_detail').attr('code');
+            }
+            if ('负样本' === _cur_sample) {
+                SAMPLE_NAME = '负样本';
+                SAMPLE_CODE = 'DRTFLG_FUB';
+                SAMPLE_DETAIL_NAME = $('#f_sample_detail').val();
+                SAMPLE_DETAIL_CODE = $('#f_sample_detail').attr('code');
+            }
+            if ('非样本' === _cur_sample) {
+                SAMPLE_NAME = '';
+                SAMPLE_CODE = '';
+                SAMPLE_DETAIL_NAME = '';
+                SAMPLE_DETAIL_CODE = '';
+            }
+
+            //调用更新方法
+            var _url = "RemoteHandlers/AlarmSure.ashx?active=Save_3c&category=" + category
+                    + "&btntype=" + btntype
+                    + "&txtReporter=" + escape(txtReporter)
+                    + "&txtReporterCode=" + escape(txtReporterCode)
+                    + "&reportdate=" + reportdate
+                    + "&afcodeName=" + escape(afcodeName)
+                    + "&afcode=" + escape(afcode)
+                    + "&DefectMarkName=" + escape(DefectMarkName)
+                    + "&DefectMarkCode=" + escape(DefectMarkCode)
+                    + "&severity=" + escape(severity)
+                    + "&eid=" + eid
+                    + "&Alarmcode=" + Alarmcode
+                    + "&tseverity=" + ZFnumber
+                    + "&SAMPLE_CODE=" + SAMPLE_CODE
+                    + "&SAMPLE_NAME=" + SAMPLE_NAME
+                    + "&SAMPLE_DETAIL_CODE=" + SAMPLE_DETAIL_CODE
+                    + "&SAMPLE_DETAIL_NAME=" + SAMPLE_DETAIL_NAME
+                    + "&SCENCESAMPLE_NAME=" + SceneSample_Name
+                    + "&SCENCESAMPLE_CODE=" + SceneSample_Code.substring(0, SceneSample_Code.length - 1)
+                    + "&tmpe=" + Math.random();
+            if (severity == "一类" && getConfig('debug') == "1") {
+                ymPrompt.confirmInfo({
+                    message: '当前正在操作的是一级报警<br/>',
+                    handler: function (tp) {
+                        if (tp == 'ok') {
+                            $.ajax({
+                                type: "POST",
+                                data: [{ name: 'alarmid', value: alarmID },
+                                       { name: 'ids', value: ids },
+                                       { name: 'SAMPLE_NAME', value: SAMPLE_NAME },
+                                       { name: 'SAMPLE_CODE', value: SAMPLE_CODE },
+                                       { name: 'SAMPLE_DETAIL_NAME', value: SAMPLE_DETAIL_NAME },
+                                       { name: 'SAMPLE_DETAIL_CODE', value: SAMPLE_DETAIL_CODE },
+                                       { name: 'txtDefect', value: txtDefect },
+                                       { name: 'txtAdvice', value: txtAdvice },
+                                       { name: 'txtNote', value: txtNote }],
+                                url: _url,
+                                async: false,
+                                cache: false,
+                                success: function (result) {
+
+                                    var parent_url = window.parent.location.href;
+
+                                    if (result != null && result != "") {
+                                        switch (category) {
+                                            case "1C":
+                                                window.parent.loadDeviceForm();
+                                                break;
+                                            case '3C':
+                                                if (alertOnce != 'alertOnce') {
+                                                    window.parent.CloseSureBox();
+                                                    if (parent_url.indexOf('OrbitGIS.htm') > -1) {
+                                                        //轨迹页面
+                                                        window.parent.reload();
+                                                    }
+                                                    else {
+                                                        //新增
+                                                        if ('1' === getConfig("debug") && window.parent.location.href.indexOf("MonitorAlarm3CForm4") > 0) {
+                                                            isRefresh = true;
+                                                        }
+                                                        window.parent.loadC3Form();
+                                                        window.parent.SaveListReLoad();
+                                                    }
+                                                    if (SAMPLE_NAME === '正样本') {
+                                                        setTimeout("download_sample_file()", 1000);
+                                                    }
+                                                }
+                                                break;
+                                            case '4C':
+                                                alarmID = responseData;
+                                                $('#hf_alarmID').val(result);
+                                                break;
+                                            case 'REPEAT':
+                                                ymPrompt.succeedInfo('操作成功！', null, null, '提示信息', function () { window.parent.CloseSureBox(); });
+
+                                                window.parent.fresh();
+
+                                                if (btntypeName.trim() == '报警确认' && ids.split(",").length > 1) {
+                                                    window.parent.location.href = "/Common/MDataAnalysis/C3RepeatAlarmImg.aspx?showclose=true&searchtype=1&alarmid=" + ids.split(",")[0] + "&id=" + ids.split(",")[1];
+                                                }
+                                                break;
+                                            case 'DPC':
+                                                //alert('cc')
+                                                DelStorageSaveAlarms(alarmID)
+                                                if (alertOnce != 'alertOnce') {
+                                                    if (top !== self) {
+                                                        if (window.parent.parent.location.href.indexOf('MonitorAlarmList.htm') > -1 || window.parent.location.href.indexOf('MonitorAlarmList.htm') > -1) {
+                                                            var documentAlarmStatus = $('#ddlzt', window.parent.parent.document);
+                                                            if (undefined === documentAlarmStatus) {
+                                                                documentAlarmStatus = $('#ddlzt', window.parent.document);
+                                                            }
+                                                            var curAlarmStatus = documentAlarmStatus.val();
+                                                            var param = '';
+                                                            for (var i = 0; i < curAlarmStatus.length; i++) {
+                                                                param += curAlarmStatus[i];
+                                                                if (i !== curAlarmStatus.length - 1) {
+                                                                    param += '$';
+                                                                }
+                                                            }
+                                                            if (window.parent.parent.location.href.indexOf('alarmStatus') > -1) {
+                                                                var temp_href = window.parent.parent.location.href.replace('alarmStatus', 't1');
+                                                                window.parent.parent.location.href = temp_href + '&alarmStatus=' + param;
+                                                            } else {
+                                                                window.parent.parent.location.href = window.parent.parent.location.href + '&alarmStatus=' + param;
+                                                            }
+                                                        }
+                                                    }
+                                                    ymPrompt.succeedInfo('操作成功！', null, null, '提示信息', function () {
+                                                        $('#S_so1', parent.document).click();
+                                                        $('#btn_closeSureBox,#btn_closeSaveListBox,#S_btnQuery', parent.document).click();
+                                                    });
+                                                }
+                                        }
+                                    } else {
+                                        ymPrompt.errorInfo('操作失败！请联系管理员', null, null, '提示信息', null);
+                                    }
+
+                                }
+                            });
+                        }
+                        if (tp == 'cancel') {
+                            return;
+                        }
+                        if (tp == 'close') {
+                            return;
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "POST",
+                    data: [{ name: 'alarmid', value: alarmID },
+                        { name: 'ids', value: ids },
+                        { name: 'SAMPLE_NAME', value: SAMPLE_NAME },
+                        { name: 'SAMPLE_CODE', value: SAMPLE_CODE },
+                        { name: 'SAMPLE_DETAIL_NAME', value: SAMPLE_DETAIL_NAME },
+                        { name: 'SAMPLE_DETAIL_CODE', value: SAMPLE_DETAIL_CODE },
+                        { name: 'txtDefect', value: txtDefect },
+                        { name: 'txtAdvice', value: txtAdvice },
+                        { name: 'txtNote', value: txtNote }],
+                    url: _url,
+                    async: false,
+                    cache: false,
+                    success: function (result) {
+
+                        var parent_url = window.parent.location.href;
+
+                        if (result != null && result != "") {
+                            switch (category) {
+                                case "1C":
+                                    window.parent.loadDeviceForm();
+                                    break;
+                                case '3C':
+                                    window.parent.CloseSureBox();
+                                    if (parent_url.indexOf('OrbitGIS.htm') > -1) {
+                                        //轨迹页面
+                                        window.parent.reload();
+                                    }
+                                    else {
+                                        //新增
+                                        if ('1' === getConfig("debug") && window.parent.location.href.indexOf("MonitorAlarm3CForm4") > 0) {
+                                            isRefresh = true;
+                                        }
+                                        window.parent.loadC3Form();
+                                        window.parent.SaveListReLoad();
+                                    }
+                                    break;
+                                case '4C':
+                                    alarmID = responseData;
+                                    $('#hf_alarmID').val(result);
+                                    break;
+                                case 'REPEAT':
+                                    ymPrompt.succeedInfo('操作成功！', null, null, '提示信息', function () { window.parent.CloseSureBox(); });
+
+                                    window.parent.fresh();
+
+                                    if (btntypeName.trim() == '报警确认' && ids.split(",").length > 1) {
+                                        window.parent.location.href = "/Common/MDataAnalysis/C3RepeatAlarmImg.aspx?showclose=true&searchtype=1&alarmid=" + ids.split(",")[0] + "&id=" + ids.split(",")[1];
+                                    }
+                                    break;
+                                case 'DPC':
+                                    //alert('cc')
+                                    DelStorageSaveAlarms(alarmID)
+                                    if (alertOnce != 'alertOnce') {
+                                        ymPrompt.succeedInfo('操作成功！', null, null, '提示信息', function () {
+                                            if (top !== self) {
+                                                if (window.parent.parent.location.href.indexOf('MonitorAlarmList.htm') > -1 || window.parent.location.href.indexOf('MonitorAlarmList.htm') > -1) {
+                                                    var documentAlarmStatus = $('#ddlzt', window.parent.parent.document);
+                                                    if (undefined === documentAlarmStatus) {
+                                                        documentAlarmStatus = $('#ddlzt', window.parent.document);
+                                                    }
+                                                    var curAlarmStatus = documentAlarmStatus.val();
+                                                    var param = '';
+                                                    for (var i = 0; i < curAlarmStatus.length; i++) {
+                                                        param += curAlarmStatus[i];
+                                                        if (i !== curAlarmStatus.length - 1) {
+                                                            param += '$';
+                                                        }
+                                                    }
+                                                    if (window.parent.parent.location.href.indexOf('alarmStatus') > -1) {
+                                                        var temp_href = window.parent.parent.location.href.replace('alarmStatus', 't1');
+                                                        window.parent.parent.location.href = temp_href + '&alarmStatus=' + param;
+                                                    } else {
+                                                        window.parent.parent.location.href = window.parent.parent.location.href + '&alarmStatus=' + param;
+                                                    }
+                                                }
+                                            }
+                                            $('#S_so1', parent.document).click();
+                                            $('#btn_closeSureBox,#btn_closeSaveListBox,#S_btnQuery', parent.document).click();
+                                        });
+                                    }
+                            }
+                        } else {
+                            ymPrompt.errorInfo('操作失败！请联系管理员', null, null, '提示信息', null);
+                        }
+
+                    }
+                });
+            }
+        }
+        else {
+            return false;
+        }
+    };
+
+    /**
+     * @desc 下载样本库文件
+     * @param
+     */
+    function download_sample_file() {
+        var url = '/C3/PC/MAlarmMonitoring/RemoteHandlers/downloadSampleFile.ashx?alarmID=' + GetQueryString('alarmid');
+        $.ajax({
+            type: "POST",
+            url: url,
+            async: true,
+            cache: true,
+            success: function (re) {
+                console.log('请求成功');
+            }
+        });
+    };
+
+    function yzAlarmData() {
+
+        var YZ = 0;
+        if (btntype == "btnOk") {
+            var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+            //var afcode = document.getElementById('dll_zt').value; //缺陷类型
+            var severity = document.getElementById('Useverity').value; //等级
+            // if (afcode != "0") { document.getElementById('afcodeYZ').className = ""; }
+            //else if (afcode == "0") { document.getElementById('afcodeYZ').className = "control-group error"; YZ = 1; }
+            if (severity != "0") { document.getElementById('UseverityYZ').className = "controls"; }
+            else if (severity == "0") { document.getElementById('UseverityYZ').className = "controls control-group error"; YZ = 1; }
+            if (txtDefect.replace(/[ ]/g, "") != "" && txtDefect != undefined) {
+
+                document.getElementById('UtxtDefectYZ').className = "";
+
+
+
+            }
+            else if (txtDefect.replace(/[ ]/g, "") == "" || txtDefect == undefined) {
+
+                document.getElementById('UtxtDefectYZ').className = "control-group error"; YZ = 1;
+                //ymPrompt.alert('报警分析不能为空', null, null, '提示信息', function (mes) { });
+            }
+        }
+        else if (btntype == "btnCan") {
+            var severity = document.getElementById('Useverity').value; //等级
+            var txtDefect = document.getElementById('UtxtDefect').value; //缺陷分析
+            if (severity != "0") { document.getElementById('UseverityYZ').className = "controls"; }
+            else if (severity == "0") {
+                if (DPC_batch_cancle == "") {
+                    document.getElementById('UseverityYZ').className = "controls control-group error"; YZ = 1;
+                }
+            }
+            if (txtDefect.replace(/[ ]/g, "") != "" && txtDefect != undefined) { document.getElementById('UtxtDefectYZ').className = ""; }
+            else if (txtDefect.replace(/[ ]/g, "") == "" || txtDefect == undefined) { document.getElementById('UtxtDefectYZ').className = "control-group error"; YZ = 1; }
+
+        }
+        if (YZ != 0) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    //拉出值检查匹配级别
+    function checkSeverity() {
+        var jsonarray;
+        var locno;//车号
+        if (category == "REPEAT") {
+            jsonarray = repeatJson;
+            locno = jsonarray.DETECT_DEVICE_CODE;
+        } else if (category == "3C") {
+            jsonarray = _JSON;
+            locno = jsonarray.LOCNO;
+        } else {
+            return;
+        }
+        var citySelValue = $('#citySel').attr("code"); //类型
+        var severityValue = document.getElementById('Useverity').value; //等级
+        if (citySelValue == "AFCODELCZ") {
+            var faultpull = parseInt(jsonarray.FAULTPULL);  //缺陷帧拉出值
+            if (locno.indexOf('380D') != -1 || locno.indexOf('380BL') != -1) {
+                if (Math.abs(faultpull) >= 500) {
+                    if (severityValue != "一类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "一类";
+                    }
+                } else if (Math.abs(faultpull) >= 450 && Math.abs(faultpull) < 500) {
+                    if (severityValue != "三类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "三类";
+                    }
+                } else {
+                    layer.msg('拉出值不超限，请确认报警类型！');
+                }
+            } else if (locno == 'CRH380B-5881' || locno == 'CRH380B-5882' || locno == 'CRH380B-5883' || locno == 'CRH380B-5884') {
+                if (Math.abs(faultpull) >= 500) {
+                    if (severityValue != "一类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "一类";
+                    }
+                } else {
+                    if (severityValue != "三类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "三类";
+                    }
+                }
+            } else {
+                if (Math.abs(faultpull) >= 500) {
+                    if (severityValue != "一类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "一类";
+                    }
+                } else if (Math.abs(faultpull) >= 450 && Math.abs(faultpull) < 500) {
+                    if (severityValue != "二类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "二类";
+                    }
+                } else {
+                    if (severityValue != "三类") {
+                        layer.msg('缺陷帧拉出值与报警等级不匹配,已为您设置为匹配的报警等级！');
+                        document.getElementById('Useverity').value = "三类";
+                    }
+                }
+            }
+            $("#Useverity").change();
+        }
+    };
+
+    function yzTask() {
+
+        var obj = $(window.frames["iframe_task"].document).find("#RECV_DEPT");
+        if (obj.val() == "") {
+            ymPrompt.alert('接受机构不能为空', null, null, '提示信息', function (mes) {
+                if (mes == "ok") {
+                    $(window.frames["iframe_task"].document).find("#RECV_DEPTNAME").focus();
+                    $(window.frames["iframe_task"].document).find("#DIVRECV_DEPTNAME").addClass("control-group error");
+                }
+            });
+            return false;
+        }
+        //if ($(window.frames["iframe_task"].document).find("#RECEIVER").val() == "") {
+        //    ymPrompt.alert('接受者不能为空', null, null, '提示信息', function (mes) {
+        //        if (mes == "ok") {
+        //            $(window.frames["iframe_task"].document).find("#RECEIVERNAME").focus();
+        //            $(window.frames["iframe_task"].document).find("#DIVRECEIVER").addClass("control-group error");
+        //        }
+        //    });
+        //    return false;
+        //}
+        if ($(window.frames["iframe_task"].document).find("#TASK_DESCRIPT").val() == "") {
+            ymPrompt.alert('任务描述不能为空', null, null, '提示信息', function (mes) {
+                if (mes == "ok") {
+
+                    $(window.frames["iframe_task"].document).find("#TASK_DESCRIPT").focus();
+                    $(window.frames["iframe_task"].document).find("#DIVTASK_DESCRIPT").addClass("control-group error");
+                }
+            });
+            return false;
+        }
+
+        return true;
+    }
+
+    //确认并转任务
+    function SureAndTask() {
+        btntype = "btnOk";
+
+        var ids = $("#alarmid", window.parent.document).val();
+        var ids = window.parent.GetQueryString('alarmid');
+        if (category == 'DPC') {
+            var ids = $("body", parent.document).find("#iframe_AlarmSaveList").contents()[0].defaultView.GetHF_ids()
+
+        }
+        if (GetQueryString('PDCcancle') == 'PDCcancle') {
+            //不确认报警
+        } else {
+            if (!yzAlarmData()) {
+
+                return;
+            }
+        }
+
+
+        if (!yzTask()) {
+            return;
+        }
+
+        //alert(ids)
+        if (GetQueryString('PDCcancle') == 'PDCcancle') {
+            //不确认报警
+        } else {
+            btnAlarmUpdate('alertOnce');
+            //$('#iframe_task').contents()[0].defaultView.SEVERITY.value = $("#Useverity").val(); //缺陷级别
+            //$('#iframe_task').contents()[0].defaultView.SUMMARY.value = $("#citySel").val(); //缺陷类型
+            //$('#iframe_task').contents()[0].defaultView.CODE.value = $("#citySel").attr('code'); //缺陷类型编码
+        }
+
+
+        switch (category) {
+            case '3C':
+                //$('#iframe_task').contents()[0].defaultView.toTaskAndBute();
+                $('#iframe_task').contents()[0].defaultView.taskHandle('toTaskAndBute', 'commit');
+                //setTimeout(ReLoadForm, 1000);
+
+                break;
+            case '4C':
+
+                if (alarmID == "") {
+                    alarmID = $('#hf_alarmID').val();
+                }
+
+                //$('#iframe_task').contents()[0].defaultView.toTaskAndBute2(alarmID);
+                $('#iframe_task').contents()[0].defaultView.taskHandle('toTaskAndBute', 'commit');
+
+
+                $("body", parent.document).find("#btn_sureAlarm").hide();
+                //  $('#btn_sureAlarm',parent.document).hide();
+                window.parent.loadFlexiqxGrid();
+                break;
+            case 'REPEAT':
+                //$('#iframe_task').contents()[0].defaultView.toTaskAndBute3(category, ids);
+                $('#iframe_task').contents()[0].defaultView.taskHandle('toTaskAndBute', 'commit');
+                break;
+            case 'DPC':
+                //$('#iframe_task').contents()[0].defaultView.toTaskAndBute4(category, ids);
+                $('#iframe_task').contents()[0].defaultView.taskHandle('toTaskAndBute', 'commit');
+                break;
+        }
+
+        //    $('#iframe_task').contents().find("#btnTaskAndBute").click();
+
+
+
+
+
+    }
+
+    //转任务
+    function TaskDpc() {
+        //var ids = $("#alarmid", window.parent.document).val();
+        //if (category == 'DPC') {
+        //    var ids = $("body", parent.document).find("#iframe_AlarmSaveList").contents()[0].defaultView.GetHF_ids()
+        //}
+        //$('#iframe_task').contents()[0].defaultView.toTaskAndBute4(category, ids);
+
+        //$('#iframe_task').contents()[0].defaultView.setAlarmId(ids);
+
+        $(window.frames['iframe_task'].document).find('#form_recv_dept_1').attr('name', ''); //接收机构编码
+        $(window.frames['iframe_task'].document).find('#form_recv_deptname_1').attr('name', ''); //接收机构名称
+
+        $('#iframe_task').contents()[0].defaultView.task_uploadFile('toTask', 'commit');
+    }
+
+    function ReLoadForm() {
+        window.parent.loadC3Form();
+        window.parent.CloseSureBox();
+    }
+
+
+    function SetSureForm(PersonName, reportdate, ALARM_ANALYSIS, PROPOSAL, REMARK, SUMMARYDIC, SUMMARYDIC_code, SEVERITY) {
+
+
+        $("#UtxtReporter").val(PersonName); //报告人
+        $("#Ureportdate").val(reportdate); //报告时间 给默认时间
+        $("#UtxtDefect").val(ALARM_ANALYSIS); //缺陷分析
+        $("#UtxtAdvice").val(PROPOSAL); //处理建议
+        $("#UtxtNote").val(REMARK); //备注
+        $("#citySel").val(SUMMARYDIC.replace("&nbsp;", "")); //故障类型
+        $('#citySel').attr('code', SUMMARYDIC_code);
+
+        LoadDropdSelected('Useverity', SEVERITY.replace("&nbsp;", "")); //级别
+
+    }
+
+
+    function loadSureForm() {
+        if (category == "REPEAT") {
+            if (window.parent.opener.AlarmJson || window.parent.htmlJson) {
+                var list = window.parent.opener.AlarmJson ? window.parent.opener.AlarmJson : window.parent.htmlJson;
+                var _Index = 0;
+                $("#List1_1", window.parent.document).find("li").each(function () {
+                    if ($(this).children("input").is(":checked")) {
+                        _Index = $(this).index();
+                        return false;
+                    }
+                });
+                repeatJson = list[_Index]; //重复报警确认判断拉出值使用
+                if (list[_Index].CUST_ALARM_CODE == "") {
+                    $('#alarmcode').attr('value', list[_Index].DETECT_DEVICE_CODE + "_" + list[_Index].RAISED_TIME.substring(2, 19).replace(/\D/g, ''));
+                } else {
+                    $('#alarmcode').attr('value', list[_Index].CUST_ALARM_CODE);
+                }
+
+                //缺陷级别下拉列表
+                $('#Useverity').mySelect({
+                    tag: 'SYSDICTIONARY',
+                    code: 'SEVERITY',
+                    defaultValue: "0",
+                    defaultText: "请选择",
+                    callback: function () {
+                        LoadDropdSelected('Useverity', list[_Index].SEVERITY); //级别
+                    }
+                });
+                $("#citySel").val(list[_Index].CODE_NAME); //故障类型
+                $("#citySel").attr('code', list[_Index].CODE); //类型
+                $("#Ureportdate").val(datehhssNowStr()); //报告时间 给默认时间
+                //重复报警对比页报告人默认为登录姓名
+                $('#UtxtReporter').val(_Json.PersonName);
+
+                var detail = "";
+
+
+                //线路条件查询
+                if (list[_Index].TYPE == "line") {
+                    detail += (list[_Index].LINE_NAME == "" ? "" : list[_Index].LINE_NAME + ",") + (list[_Index].POSITION_NAME == "" ? "" : list[_Index].POSITION_NAME + "站,") + list[_Index].DIRECTION + "," + list[_Index].KM_MARK;
+                }
+                    //gps条件查询
+                else {
+                    if (list[_Index].LINE_NAME != null && list[_Index].LINE_NAME != "") {
+                        detail += (list[_Index].LINE_NAME == "" ? "" : list[_Index].LINE_NAME + ",") + (list[_Index].POSITION_NAME == "" ? "" : list[_Index].POSITION_NAME + "站,") + list[_Index].DIRECTION + "," + list[_Index].KM_MARK;
+                    }
+                    detail += "东经" + list[_Index].GIS_X + "北纬" + list[_Index].GIS_Y;
+                }
+
+                //重复报警使用。
+                var ids = $("#alarmid", window.parent.document).val();
+
+                $("#UtxtDefect").val(detail + "周围" + (window.parent.opener.Distance ? window.parent.opener.Distance + "米范围内" : ($("#range", window.parent.opener.document).val() ? $("#range", window.parent.opener.document).val() + "米范围内" : "")) + "，在" + list[list.length - 1].RAISED_TIME + "到" + list[_Index].RAISED_TIME + "之间，检测出" + ids.split(",").length + "次疑似缺陷告警");
+            }
+            return;
+        }
+        if ("1C" != category) {
+            if (GetQueryString("alarmid") != "BatchOk") {
+
+                var url = "RemoteHandlers/AlarmSure.ashx?active=Load&alarmid=" + GetQueryString("alarmid");
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    async: false,
+                    cache: false,
+                    success: function (result) {
+                        var json = eval('(' + result + ')');
+                        if (json != undefined) {
+                            _JSON = json; //判断拉出值使用
+                            $('#UtxtReporter').val(_Json.PersonName);
+                            $("#Ureportdate").val(datehhssNowStr()); //报告时间 给默认时间
+                            $("#UtxtDefect").val(json.ALARM_ANALYSIS); //缺陷分析
+                            $("#DefectMark").val(json.AFLG_NAME).attr("code", json.AFLG_CODE); //缺陷标志codename
+                            $("#UtxtAdvice").val(json.PROPOSAL); //处理建议
+                            $("#UtxtNote").val(json.REMARK); //备注
+                            $("#citySel").val(json.SUMMARYDIC.replace("&nbsp;", "")); //故障类型
+                            $("#citySel").attr('code', json.DIC_CODE); //类型
+
+                            $('#SceneSample_Sure').val(json.SCENCESAMPLE_NAME);//场景样本名称
+                            $('#SceneSample_Sure').attr('title', json.SCENCESAMPLE_NAME);
+                            _cur_sample = json.SAMPLE_NAME;
+                            var temp_sample_code = json.SCENCESAMPLE_CODE;//场景样本名
+                            var temp_sample_val = json.SCENCESAMPLE_NAME;//场景样本编码
+
+                            temp_OrigialAlarm = window.parent.OrigialAlarm;
+                            if (temp_OrigialAlarm !== '' && temp_OrigialAlarm !== undefined&&getConfig('debug') == "1") {
+                                if (temp_OrigialAlarm.indexOf('打弓') > -1) {
+                                    $('#UtxtDefect').val("打弓误报");
+                                };
+                                if (temp_OrigialAlarm.indexOf('拉出值') > -1) {
+                                    $('#UtxtDefect').val("拉出值误报");
+                                }; if (temp_OrigialAlarm.indexOf('运行降弓') > -1) {
+                                    $('#UtxtDefect').val("运行降弓误报");
+                                }; if (temp_OrigialAlarm.indexOf('导高超限') > -1) {
+                                    $('#UtxtDefect').val("导高误报");
+                                };
+                            };
+                            if (getConfig('debug') == "1") { //内部版本
+                                if ('正样本' === json.SAMPLE_NAME) {
+                                    $('#z_sample').attr('checked', 'checked');
+                                    sample_type_rs = json.SAMPLE_DETAIL_NAME;
+                                    sample_type_code = json.SAMPLE_DETAIL_CODE;
+                                    $('#z_sample_detail').html(json.SAMPLE_DETAIL_NAME).attr('code', json.SAMPLE_DETAIL_CODE);
+
+                                    get_sample_type();
+                                    hide_element('FUB'); //隐藏负样本
+                                } else if ('负样本' === json.SAMPLE_NAME) {
+                                    $('#f_sample').attr('checked', 'checked');
+                                    //$('#f_sample_detail').val(json.SAMPLE_DETAIL_NAME).attr('code', json.SAMPLE_DETAIL_CODE);
+                                } else {
+                                    $('#n_sample').attr('checked', 'checked');
+                                }
+                            }
+
+                            _ISOUTTIME = json.ISOUTTIME;
+                            if (_ISOUTTIME == "True") {
+                                $(".noZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                                $(".noZF>img").attr("src", "img/chose_1.png");
+                            } else {
+                                $(".slowZF").css("cursor", "default");
+                                $(".slowZF>img").attr("src", "img/no_chose.png");
+                                $(".noZF").addClass("choiceZF").siblings().removeClass("choiceZF");
+                                $(".noZF>img").attr("src", "img/chose_1.png");
+                            }
+                            // $("#alarmcode").val(json.CUST_ALARM_CODE);//报警编码
+                            //默认告警编码的值
+                            var alarmvalue = $('#HideAlarmCode', window.parent.document).text();
+                            $('#alarmcode').attr('value', alarmvalue);
+
+                            //加载场景样本下拉框
+
+                            if (getConfig('debug') == "1") { //内部版本
+                                $("#SceneSample_Sure").mySelect_Sample({
+                                    tag: "none",
+                                    codeType: "3C",
+                                    cateGory: "SCENE_SAMPLE",
+                                    p_code: "SCENE_SAMPLE",
+                                    enableFilter: true,
+                                    mark: false,
+                                    onClick: function (CODE, VALUE, obj) {
+                                        var reg_code = new RegExp(obj.attr('code') + ',', 'g');
+                                        var reg_val = new RegExp(obj.attr('title') + ',', 'g');
+
+                                        if ('' !== CODE) {
+                                            temp_sample_code += CODE + ',';
+                                        } else {
+                                            temp_sample_code = temp_sample_code.replace(reg_code, '');
+                                        }
+                                        if ('' !== VALUE) {
+                                            temp_sample_val += VALUE + ',';
+                                        } else {
+                                            temp_sample_val = temp_sample_val.replace(reg_val, '');
+                                        }
+                                    },
+                                    callback: function () {
+                                        $('#SceneSample_Sure').click(function () {
+                                            $("body", parent.document).find("#iframe_AlarmSure").height(690)
+                                        });
+                                        $(document).click(function (e) {
+                                            if (!$(e.target).closest(".divContainer").length && $(e.target).attr('id') != 'SceneSample_Sure') {
+                                                $("body", parent.document).find("#iframe_AlarmSure").height(540);
+                                            };
+                                            
+                                        });
+                                        $('.divContainer>img').click(function () {
+                                            $("body", parent.document).find("#iframe_AlarmSure").height(540);
+                                        })
+                                        $('#SceneSample_Sure').next('a[name="ztree"]').hide();
+                                        var dropContent = $(document).find('.SampleContent');
+                                        var dropSpan = $(dropContent).find('span');
+                                        if (json.SCENCESAMPLE_CODE !== '' && json.SCENCESAMPLE_CODE !== '') {
+                                            for (var k = 0; k < dropSpan.length; k++) {
+                                                $(dropSpan[k]).removeClass('checkSpan');
+                                            }
+                                        }
+                                        
+
+                                        var scencesample_code = json.SCENCESAMPLE_CODE.split(',');
+                                        var scencesample_name = json.SCENCESAMPLE_NAME.split(',');
+
+                                        for (var j = 0; j < scencesample_code.length; j++) {
+                                            for (var i = 0; i < dropSpan.length; i++) {
+                                                if (scencesample_code[j] === $(dropSpan[i]).attr('code')) {
+                                                    $(dropSpan[i]).addClass('checkSpan');
+                                                    temp_sample_code += scencesample_code[j] + ',';
+                                                    temp_sample_val += scencesample_name[j] + ',';
+                                                }
+                                            }
+                                        };
+
+                                    }
+                                    //height:85,
+                                    //width:400    //迷你款
+                                });
+                            }
+                            
+                            //缺陷级别下拉列表
+                            $('#Useverity').mySelect({
+                                tag: 'SYSDICTIONARY',
+                                code: 'SEVERITY',
+                                defaultValue: "0",
+                                defaultText: "请选择",
+                                callback: function () {
+
+                                    var debug = getConfig("debug");
+                                    if (debug == '1') {
+                                        if (btntypeName.trim() == '报警确认' && json.DIC_CODE == "AFCODELCZ") {
+                                            LoadDropdSelectedByValue('Useverity', json.SEVERITY_CODE.replace("&nbsp;", ""));
+                                        } else {
+                                            LoadDropdSelectedByValue('Useverity', '三类'); //级别默认为三类
+                                        }
+                                        $("#Useverity").change();
+                                    } else {
+                                        LoadDropdSelectedByValue('Useverity', json.SEVERITY_CODE.replace("&nbsp;", "")); //级别 系统默认判断值
+                                    }
+                                }
+                            });
+                            if (btntypeName.trim() == '报警确认' && getConfig("debug") == '1') {
+                                setTimeout(checkSeverity, 500);
+                            }
+                        }
+                    }
+                });
+            } else {
+                var url = "RemoteHandlers/AlarmSure.ashx?active=Load&alarmid=" + (alarmID.split(",")[0] == '' ? alarmID.split(",")[1] : alarmID.split(",")[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    async: false,
+                    cache: false,
+                    success: function (result) {
+                        var json = eval('(' + result + ')');
+                        if (json != undefined) {
+                            $('#UtxtReporter').val(_Json.PersonName);
+                            $("#Ureportdate").val(datehhssNowStr()); //报告时间 给默认时间
+                            $("#UtxtDefect").val(json.ALARM_ANALYSIS); //缺陷分析
+                            $("#DefectMark").val(json.AFLG_NAME).attr("code", json.AFLG_CODE); //缺陷标志codename
+                            $("#UtxtAdvice").val(json.PROPOSAL); //处理建议
+                            $("#UtxtNote").val(json.REMARK); //备注
+                            $("#citySel").val(json.SUMMARYDIC.replace("&nbsp;", "")); //故障类型
+                            $("#citySel").attr('code', json.DIC_CODE); //类型
+                            $('#SceneSample_Sure').val(json.SCENCESAMPLE_NAME);//场景样本名称
+                            var temp_sample_code = json.SCENCESAMPLE_CODE;//场景样本名
+                            var temp_sample_val = json.SCENCESAMPLE_NAME;//场景样本编码
+                            if ('正样本' === json.SAMPLE_NAME) {
+                                $('#z_sample').attr('checked', 'checked');
+                                $('#z_sample_detail').html(json.SAMPLE_DETAIL_NAME).attr('code', json.SAMPLE_DETAIL_CODE);
+                                get_sample_type();
+                                hide_element('FUB'); //隐藏负样本
+                            } else if ('负样本' === json.SAMPLE_NAME) {
+                                $('#f_sample').attr('checked', 'checked');
+                                //$('#f_sample_detail').val(json.SAMPLE_DETAIL_NAME).attr('code', json.SAMPLE_DETAIL_CODE);
+                            } else {
+                                $('#n_sample').attr('checked', 'checked');
+                            }
+                            //默认告警编码的值
+                            var alarmvalue = $('#HideAlarmCode', window.parent.document).text();
+                            $('#alarmcode').attr('value', alarmvalue);
+                            //缺陷级别下拉列表
+                            $('#Useverity').mySelect({
+                                tag: 'SYSDICTIONARY',
+                                code: 'SEVERITY',
+                                defaultValue: "0",
+                                defaultText: "请选择",
+                                callback: function () {
+                                    LoadDropdSelectedByValue('Useverity', json.SEVERITY_CODE.replace("&nbsp;", "")); //级别 系统默认判断值
+                                }
+                            });
+                        }
+                    }
+                })
+            }
+        }
+    };
+
+    function alertSuccessInfo(re) {
+        ymPrompt.succeedInfo(re, null, null, '提示信息', function () { window.parent.CloseSureBox() });
+    }
+
+</script>

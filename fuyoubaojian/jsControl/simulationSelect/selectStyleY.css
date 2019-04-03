@@ -1,0 +1,65 @@
+/*
+为select多种类型做的样式扩展编写
+Y和H两个是防止冲突所编写的
+*/
+
+.hideDiv{
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border:1px solid #cccccc;
+    background-color: white;
+    padding-top: 1px;
+    z-index: 100;
+}
+.hideDiv .menuStr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.hideDiv .menuStr .xtxq_qx{
+    border:none;
+}
+.hideDiv .menuStr .xtxq_mbxz{
+    margin-top: 0px;
+}
+.hideDiv .radio label{
+    line-height: 20px;
+    font-size: 14px;
+}
+.hideDiv .menuStr .radio input[type=radio]{
+    width: 16px;
+    height: 17px;
+    margin-top: 8px;
+}
+.hideDiv .inputSearch{
+    background-color:#ffffff;
+    border:1px solid #cccfd4;
+    border-radius:4px;
+    width:calc(100% - 203px);
+    width:-webkit-calc(100% - 203px);
+    width:-moz-calc(100% - 203px);
+    width:-ms-calc(100% - 203px);
+    width:-o-calc(100% - 203px);
+    height:35px;
+}
+[data-selectSimu="1"] .dataTableUserDefined table.dataTable thead th, [data-selectSimu="1"] .dataTableUserDefined table.dataTable thead td{
+    line-height: 20px;
+}
+.hideDiv .tableQXSelect{
+    width: calc(100% - 20px);
+    width: -webkit-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    width: -ms-calc(100% - 20px);
+    width: -o-calc(100% - 20px);
+    margin-left: 10px;
+}
+[data-selectSimu="1"] .txt10{
+    display: block;
+    float: left;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+.hideDiv .treeInfo{width:100%;}

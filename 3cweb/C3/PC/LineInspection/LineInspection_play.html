@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>线路巡检数据分析</title>
+    <meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <!-- 放大镜 -->
+    <script src='/Lib/jquery.elevatezoom-2.5.5/jquery.elevatezoom.js' type="text/javascript" charset="utf-8"></script>
+    <script src="/Lib/Echarts-3.0/echarts.min.js" type="text/javascript"></script>
+    <script>
+        loadControl("jqueryUI_2");
+        loadControl("mySelectTree");
+        loadControl("layer");
+        loadControl("Validation");
+
+        //本页js css
+        loadJs("/C3/PC/LineInspection/js/LineInspection_play.js?v=" + version, 'utf-8');
+        loadCss("/C3/PC/LineInspection/css/LineInspection_play.css?v=" + version);
+    </script>
+</head>
+<body >
+    <!-- top title controler-->
+    <div class="controller">
+        <div class="controller_contentLeft"></div>
+        <div class="controller_contentRight"></div>
+        <div class="controller_content">
+            <a href="#" id='query_btn'><img src="img/LineInspection_play_search.png" alt="查询" /></a>
+            <a href="#" id="compara_btn"><img src="img/LineInspection_play_compara.png" alt="对比分析" /></a>
+            <a href="#" id="shotCut_btn"><img src="img/LineInspection_play_changeCut.png" alt="正反镜头" title="正反镜头" /></a>
+            <div class="LineInspection_button_play">
+                <a id="btn_less"><img src="img/LineInspection_play_left.png" alt="前一帧" title="前一帧" /></a>
+                <a id="btn_play" title="暂停"><img src="img/LineInspection_play_play.png" alt="暂停" /></a>
+                <a id="btn_pause" title="播放"><img src="img/LineInspection_play_stop.png" alt="播放" /></a>
+                <a id="btn_next"><img src="img/LineInspection_play_right.png" alt="后一帧" title="后一帧" /></a>
+                <a id="btn_repeat"><img src="img/LineInspection_play_replay.png" alt="重播" title="重播" /></a>
+            </div>
+
+            <div class="LineInspection_contrl" style="position:relative;">
+                <div id="Sms_slider"></div>
+                <strong id="_Content">当前位置：<label id="_Content_Sta_Lab"></label></strong>
+                <!--<strong id="_Content_End">&ensp;数据采集时间：<label id="_Content_end_Lab"></label></strong>-->
+                <strong id="_Content_Pecent">&ensp;&ensp;当前进度：&ensp;<label id="_Content_Pecent_Lab"></label></strong>
+                
+                
+            </div>
+            <a class="LineInspection_Magnifier" href="#">
+                <img src="img/LineInspection_play_Magnifier.png" alt="启用/关闭放大" title="启用/关闭放大" />
+            </a>
+            <a class="LineInspection_details" href="#">
+                <img src="img/LineInspection_play_DetailsHover.png" alt="详细信息" title="详细信息" />
+            </a>
+        </div>
+    </div>
+    <!--query-->
+    <div class="QueryBuilder">
+        <div id="QueryInside">
+            <form id="linspForm">
+                <table>
+                    <tbody>
+                        <tr style="display:none">
+                            <td width="100">
+                                开始时间：
+                            </td>
+                            <td>
+                                <input name="Ureportdate" type="text" id="startTime" class="Wdate">
+                            </td>
+                            <td width="110">
+                                结束时间：
+                            </td>
+                            <td>
+                                <input name="Ureportdate" type="text" id="endTime" class="Wdate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                区&ensp;&ensp;&nbsp;&nbsp;&nbsp;间：
+                            </td>
+                            <td>
+                                <input type="text" id="LineTreeselect" value="" />
+                                <!--<select id="LineTreeselect" name="direction"></select>-->
+                            </td>
+                            <td>
+                                行&ensp;&ensp;&nbsp;&nbsp;&nbsp;别：
+                            </td>
+                            <td>
+                                <select id="direction" name="direction">
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="上行" >上行</option>
+                                    <option value="下行">下行</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <!--<tr>
+                    <td>
+                        区&ensp;&ensp;&nbsp;&nbsp;&nbsp;间：
+                    </td>
+                    <td>
+                        <input type="text"  id="LineTreeselect" value=""/>
+                    </td>
+                </tr>-->
+
+                        <tr>
+                            <td>
+                                公&nbsp;里&ensp;标：
+                            </td>
+                            <td  id="KmChoose">
+                                <!--<input type="text" class="validate[custom[integerPositive],maxSize[7]]" id="kmStart" />至<input type="text" class="validate[custom[integerPositive],maxSize[7]]" id="kmEnd" />-->
+                                <input type="text" class="validate[custom[integerPositive],maxSize[7]]" id="kmStart" />
+                            </td>
+                            <td>杆&ensp;&ensp;&nbsp;&nbsp;&nbsp;号：</td>
+                            <td><input type="text" class="validate[maxSize[7]]" id="polNumber" /></td>
+
+                        </tr>
+
+                        <tr>
+                            <td>播放间隔：</td>
+                            <td><input type="text" class="validate[min[300],custom[integer]]" id="playSpeed" placeholder="400                    （ms）" value="" /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align:right;">
+                                <a href="#" name="btnOk" id="Submit1"><div>筛选</div> </a> &ensp;
+                                <a href="#" id="btn_hideSoBox"><div>取消</div></a>
+                                &ensp;&ensp;&ensp;
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <!--details-->
+    <div class="LineInspection_details_inside">
+        <div class="insideLeft"></div>
+        <div class="insideRight"></div>
+        <div class="insideContent">
+            <div class="btn_hide"><img src="img/LineInspection_play_Detailsshow.png" alt="Alternate Text" /></div>
+            <div class="tble">
+                <table>
+                    <tr>
+                        <td class="firstTRTd">位&ensp;&ensp;&ensp;&ensp;置：</td>
+                        <td id="location"></td>
+                    </tr>
+                    <tr>
+                        <td>时&ensp;&ensp;&ensp;&ensp;间：</td>
+                        <td id="timer"></td>
+                    </tr>
+                    <tr>
+                        <td>设备编号：</td>
+                        <td id="deviceID"></td>
+                    </tr>
+                    <tr>
+                        <td>弓&ensp;位&ensp;置：</td>
+                        <td id="bowLocation"></td>
+                    </tr>
+                    <tr>
+                        <td>导&ensp;高&ensp;值：</td>
+                        <td id="topValue"></td>
+                    </tr>
+                    <tr>
+                        <td>拉&ensp;出&ensp;值：</td>
+                        <td id="outValue"></td>
+                    </tr>
+
+                    <tr>
+                        <td>速&ensp;&ensp;&ensp;&ensp;度：</td>
+                        <td id="carSpeed"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- right echars  and  jpg -->
+    <div class="echarsAndJpg">
+        <div class="rightSixDiv littleimg" id="DLV_IMG_DIR"><img id="RED" /></div><!--红外图片-->
+        <div class="rightSixDiv littleimg" id="HD_IMG_DIR"><img id="HD" /></div><!--高清局部图片-->
+        <div class="rightSixDiv littleimg chooseOne" id="OVER_IMG_DIR"><img id="OVER" /></div><!--全景图片-->
+        <div id="main1" class="rightSixDiv">
+            <!--<div class="echar_title">温度</div>-->
+        </div>
+        <div id="main2" class="rightSixDiv">
+            <!--<div class="echar_title">拉出</div>-->
+        </div>
+        <div id="main3" class="rightSixDiv">
+            <!--<div class="echar_title">导高</div>-->
+        </div>
+    </div>
+
+    <!-- content jpg -->
+    <div id="bigIMG_OVER" class="content_jpg">
+        <img id="F" src="img/bg.jpg" data-zoom-image=""/>
+    </div><!--全景图片-->
+    <!--<div id="bigIMG_HD" class="content_jpg"><img id="H" data-zoom-image=""/></div><!--高清局部图片-->
+    <!--<div id="bigIMG_DLV" class="content_jpg"><img id="R" data-zoom-image=""/></div>-->
+</body>
+</html>

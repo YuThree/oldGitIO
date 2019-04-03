@@ -1,0 +1,188 @@
+﻿@CHARSET "UTF-8";
+/* reset -------------------------------- */
+* {
+    padding: 0;
+    margin: 0;
+}
+body,html {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+}
+select,textarea, input[type="text"], input[type="button"] {
+    font-family: Microsoft Yahei;
+    font-size: 12px;
+}
+img {
+    border: 0;
+}
+body, ul {
+    margin: 0;
+}
+ul, ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+.none {
+    display: none;
+}
+.row-fluid {
+    width: 100%;
+}
+/* common alarm-delay -------------------------------- */
+.alarm-trend-ico {
+    display: block;
+    width: auto;
+    background-image: url(../img/alarm_trend.png); 
+}
+/* title -------------------------------- */
+.title-bg {
+    height: 34px;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.title-ico {
+    float: left;
+    display: inline-block;
+    width: 26px; 
+    height: 23px;
+    margin: 6px 7px 6px 8px;
+    background-position: -0px -0px;
+}
+.title {
+    float: left;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 34px;
+    font-weight: bolder;
+    color: #43a1da;
+}
+.close-ico {
+    float: right;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 5px 5px 0 0;
+    background-position: -70px -0px; 
+    cursor: pointer;
+}
+.close-ico:hover {
+    background-position: -95px -0px;
+}
+/* content -------------------------------- */
+.content {
+    width: 96%;
+    height: 100%;
+    margin: 1% 2% 0 2%;
+}
+/* content condition -------------------------------- */
+.ul-condition li {
+    display: inline-block;
+    margin-right: 2%;
+    margin-bottom: 6px; 
+}
+.ul-condition li:last-child{
+    margin-right: 0; 
+}
+.input-w-small {
+    width: 50px;
+}
+.input-w-middle {
+    width: 80px;
+}
+.input-w-big {
+    width: 150px;
+}
+input.margin-bottom-small,select.margin-bottom-small {
+    margin-bottom: 0;
+}
+.time-ico {
+    display: inline-block;
+    width: 22px; 
+    height: 22px;
+    margin-bottom: -7px;
+    margin-left: 5px;
+    background-position: -160px -0px; 
+    cursor: pointer;
+}
+.time-ico:hover ,.time-ico-cur {
+    background-position: -125px -0px;
+}
+.time-menu {
+    position: absolute;
+    float: left;
+    display: none;
+    z-index: 1314;
+    /*width: 160px;*/
+    width: 40px;
+    text-align: center;
+    top: 0;
+    left: 0;
+    padding: 4px 0;
+    margin: 1px 0 0;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
+.time-menu li {
+    display: inline-block;
+    margin: 0;
+    padding: 3px 5px;
+    cursor: pointer;
+    color: #555;
+    background-color: #fff;
+}
+.time-menu .divide-li {
+    display: block;
+    padding: 0;
+    border: 1px dashed #ccc;
+}
+.time-menu li:hover {
+    color: #000;
+    background-color: #00BFFF;
+}
+.time-menu li.divide-li:hover {
+    color: #555;
+    background-color: #fff;
+}
+.search-ico {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-bottom: -2px;
+    background-position: -45px -0px;
+}
+.btn-alarm {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #43a1da;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+.divide-line {
+    display: inline-block;
+    width: 100%;
+    margin: 13px 0 19px 0;
+    border-top: 1px solid #ccc;
+}
+/* echarts -------------------------------- */
+.statistical-charts {
+    width: 90%;
+    height: 750px;
+    margin: 0 auto;
+    padding: 15px 5px;
+    border:1px solid #CDCDCD;
+    box-shadow: 0 0 5px 1px #ccc ;
+}

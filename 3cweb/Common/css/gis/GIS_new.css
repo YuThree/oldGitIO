@@ -1,0 +1,689 @@
+﻿obdy
+{
+    width: 100%;
+}
+*
+{
+    margin: 1;
+    padding: 1;
+}
+ul, li
+{
+    list-style: none;
+}
+.main
+{
+    width: 99%;
+    border: 0px solid #ccc;
+    font-size: 12px;
+}
+.main_ul
+{
+    height: 20px;
+    line-height: 20px;
+    width: 92%;
+	font-size: 16px;
+}
+.main ul li
+{
+    float: left;
+    width: 180px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+}
+.main ul li.hover
+{
+    color: red;
+}
+.mainbox
+{
+    float: left;
+    width: 100%;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+#winpop
+{
+    width: 200px;
+    height: 0px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #999999;
+    margin: 0;
+    padding: 1px;
+    overflow: hidden;
+    display: none;
+    background: #FFFFFF;
+    z-index: 9999;
+    position: fixed;
+    text-align: center;
+    width: 200px;
+    bottom: 0px;
+    height: 80px;
+    _position: absolute;
+}
+#winpop .title
+{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    background: #FFCC00;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+#winpop .con
+{
+    width: 100%;
+    height: 80px;
+    overflow-y: auto;
+    line-height: 80px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #FF0000;
+    text-decoration: underline;
+    text-align: center;
+}
+#silu
+{
+    font-size: 13px;
+    color: #999999;
+    position: absolute;
+    right: 10;
+    bottom: 0px;
+    text-align: right;
+    text-decoration: underline;
+    line-height: 22px;
+}
+.table1
+{
+    width: 100%;
+    margin-bottom: 18px;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+}
+.table1 th, .table1 td
+{
+    padding: 8px;
+    line-height: 18px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+}
+a:link
+{
+    text-decoration: none;
+}
+a:visited
+{
+    text-decoration: none;
+}
+a:hover
+{
+    text-decoration: none;
+}
+a:active
+{
+    text-decoration: none;
+}
+
+#ImgTypeBox img
+{
+    padding: 5px 0px;
+}
+#_ImgTypeBox img
+{
+    padding: 5px 0px;
+}
+
+lable
+{
+    display: inline-block;
+}
+
+
+#sm_so_box
+{
+    position: absolute;
+    left: 170px;
+    top: 5px;
+    z-index: 10000;
+    background-color: rgba(15,15,17,0.5);
+    padding: 5px;
+    display: block;
+    color: white;
+}
+
+
+
+
+.map_btn a
+{
+    color: white;
+}
+
+.map_btn
+{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    z-index: 10000;
+    background-color: rgba(15, 83, 117, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, .5), 1px 1px 5px rgba(255, 255, 255, .5);
+    color: white;
+}
+.map_btn:hover
+{
+    background-color: rgba(2, 62, 91, 0.9);
+}
+
+.map_btn:hover
+{
+    background-color: rgba(2, 62, 91, 0.9);
+}
+
+.test
+{
+    width: 170px;
+    padding: 50px 10px;
+    border: 5px solid #beceeb;
+    position: relative;
+    height: 5px;
+}
+.test span
+{
+    width: 0;
+    height: 0;
+    font-size: 0;
+    overflow: hidden;
+    position: absolute;
+}
+.test span.bot
+{
+    border-width: 20px;
+    border-style: solid dashed dashed;
+    border-color: #beceeb transparent transparent;
+    left: 20px;
+    bottom: -40px;
+}
+.test span.top
+{
+    border-width: 20px;
+    border-style: solid dashed dashed;
+    border-color: #ffffff transparent transparent;
+    left: 20px;
+    bottom: -33px;
+}
+
+
+.anchorBL
+{
+    display: none;
+}
+.fg_blue
+{
+    -webkit-animation: neon_blue2 1s ease-in-out infinite alternate;
+    -moz-animation: neon_blue2 1s ease-in-out infinite alternate;
+    animation: neon_blue2 1s ease-in-out infinite alternate;
+}
+.fg_blue span
+{
+    color: #F0E68C;
+}
+#box1_1 #ImgTypeBox
+{
+    position: static;
+    z-index: 999;
+    background-color: transparent;
+    padding: 5px 0px 5px 10px;
+    display: block;
+    width:auto;
+    color: white;
+}
+#box1_1 #_ImgTypeBox
+{
+    position: static;
+    z-index: 999;
+    background-color: transparent;
+    padding: 0px 0px 5px 10px;
+    display: block;
+    width:auto;
+    color: white;
+}
+#ImgTypeBox img
+{
+    padding: 4px 0px !important;
+}
+#con_one_2_div{position: absolute;bottom: 0;left: 0;background-color: black;
+			opacity: 1;padding: 0px;color: White;z-index:411;border-top:1px solid #ffffff;display:none;
+			}
+#Button1{position: fixed;top: 1%;right: 1%;font-size: 12px;}
+#one1{width: 40%;float: left;text-align: center;border-right: 1px solid #ccc;/*border-bottom: 1px solid #ccc;*/padding: 2px;}
+#one2{width: 40%;float: left;text-align: center;/*border-bottom: 1px solid #ccc;*/padding: 2px;}
+.BMap_bubble_content a{color:#369bd7}
+
+
+#box2_1,#box3_1{
+    float:left;
+    height:100%;
+}
+.deliver{
+    width:6px;
+    float:left;
+    height:100%;
+    margin:0 10px;
+    background:url(/Common/MGIS/img/gis-img/deliver.png) no-repeat;
+}
+#box2_1{
+width:73%;
+position:relative;
+}
+#box2_1 .title_bg,.box3_1_title{
+    height:30px;
+    line-height:30px;
+    font-size:15px;
+    letter-spacing:4px;
+}
+#box2_1 .title_bg {
+    text-align: center;
+}
+#alarms .alarmItem{
+    background-color:transparent;
+    border-top:none;
+}
+#trains .trainItem{
+    background-color:transparent;
+    border-top:none;
+}
+#box2_1 .m_locaNo{
+    width:10%;
+}
+#box2_1 .m_level{
+    width:10%;
+}
+#box2_1 .m_type_t{
+    margin-left:3%;
+    word-break:break-all;
+    word-wrap:break-word;
+    text-align:left;
+}
+#box2_1 #alarms{
+    /*height: 60%;*/
+    height: 125px;
+    overflow-y:auto;
+    line-height: 23px;
+    text-align: center;
+}
+#box2_1 #trains{
+    /*height: 60%;*/
+    height: 125px;
+    overflow-y:auto;
+    line-height: 23px;
+    text-align: center;
+}
+.list {
+    text-align: center;
+}
+.page{
+    text-align:right;
+    position:absolute;
+    bottom:0;
+    right:10px;
+}
+.page a{
+    display:inline-block;
+    margin:0;
+    padding:0;
+    vertical-align: top;
+}
+.page .page-bg{
+    background:url(/Common/MGIS/img/gis-img/pagebg.png) no-repeat #000000;
+    background-size:cover;
+    border-radius:8px;
+    height:24px;
+    line-height:24px;
+}
+.page-numb,.page-numb-train{
+    background:url(/Common/MGIS/img/gis-img/page.png) no-repeat;
+    display:inline-block;
+    width:60px;
+    text-align:center;
+    /*vertical-align: middle;*/
+    line-height:20px;
+}
+.page .pagecolor{
+    color:#8ac6fe;
+}
+#box3_1{
+   width:24%;
+}
+.box3_1_title{
+    width:100%;
+}
+#box1_1{
+    position:absolute;
+    left:0;
+    z-index:999;
+    background-color: black;
+}
+#box1_1 .box1_1Inside{
+    width:145px;
+    margin: 2px ;
+    border: 1px solid white;
+    color: white;
+}
+#search_bg_left{
+    width:60%;
+    display:inline-block;
+}
+#txtloccode,#startdate,#enddate,#sdate,#edate{
+    width:70%;
+    margin-bottom:4px;
+}
+#ddlorg{
+    width:194px;
+    margin-bottom:4px;
+}
+#jb,#ddlzt{
+    width:210px;
+}
+.ui-multiselect{
+    height:24px;
+}
+#search_bg_right{
+    display:inline-block;
+    width:30%;
+    vertical-align:top;
+    /*margin:25px auto 0;*/
+    text-align:center;
+    position:relative;
+    
+}
+#search_bg_right img{margin-top:15px;}
+.box3_1_bottom{
+    width:100%;
+    text-align:right;
+    position:relative;
+}
+#C3Alarm .boxTitle{
+    background-color:rgba(0,0,0,0.8);
+    text-shadow: none;
+    box-shadow:1px 1px 5px #FFFFFF inset;
+}
+#C3Alarm .boxTitle .fg_white{
+    text-shadow: none;
+}
+#C3Alarm_2,#C3Alarm_3,#C3Alarm_4{
+    position:relative;
+}
+#myDiv{
+    color: White;
+    right:20px;
+    width: 824px;
+    /*height: 380px;*/
+    z-index: 99; 
+    position: absolute; 
+    /*background: url(/Common/MGIS/img/gis-img/big-bg.png) no-repeat;*/
+    display:none; 
+    box-shadow: 0 0 10px #0e5fff;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+}
+#search_bg1{
+    padding:10px;
+}
+#btn_search,#btn_remove{
+    background: url(/Common/MGIS/img/gis-img/surce.png) no-repeat;
+    display:inline-block;
+    width:46px;
+    height:26px;
+    line-height:26px;
+    text-align:center;
+    cursor:pointer;
+}
+#btn_search:hover,#btn_remove:hover{
+    background: url(/Common/MGIS/img/gis-img/surce-light.png) no-repeat;
+}
+#btn_openSearch,#btn_colse,#btn_query,#ExportReport,#btn_query_train{
+    cursor:pointer;
+}
+.Report-menu{
+    width:126px;
+    height:58px;
+    position:absolute;
+    background:url(/Common/MGIS/img/gis-img/Report-menu.png) no-repeat;
+    top: 90px;
+    left: -100px;
+    display:none;
+}
+.Report-menu ul li{
+    cursor:pointer;
+    margin:11px 0 0 10px;
+    text-align:left;
+}
+.Report-menu ul li:hover{
+    color:#7FB3FF;
+}
+.search_bg_jb,.search_bg_ddlzt{margin-bottom:4px;}
+.sp_type_img{
+    width: 18px; height: 18px;
+}
+#ul_txtloccode{
+    height:150px;
+}
+#droup_txtloccode{
+    padding:5px 10px;
+}
+#btn_reset{
+    position:absolute;
+    right:-10px;
+    top:-10px;
+    cursor:pointer;
+}
+#closeBtn{
+    position:fixed;
+    top:5px;
+    left:5px;
+    cursor:pointer;
+}
+.listTitle > span {
+    position:absolute;
+    top:-34px;
+    display: inline-block;
+    background-color: #cccccc;
+    border-radius: 2px;
+    border: 1px solid #aaaaaa;
+    font-size: 16px;
+    cursor: pointer;
+    /*background:url(/Common/MGIS/img/gis-img/boxUpOrDown.png) no-repeat;*/
+}
+.listTitle > .alarm-list {
+    left:20px;
+    padding: 5.5px 8px;
+}
+.listTitle > .train-list {
+    left:145px;
+    padding: 7px 8px;
+}
+.listTitle > .list-active {
+    top:-34px;
+    border-top: 3px solid #ffffff;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #000000;
+}
+.listTitle div{
+    position: absolute;
+    top: -28px;
+    left: 567px;
+    width: 274px;
+    height: 30px;
+    background: url(/Common/MGIS/img/gis-img/boxUpOrDown.png) no-repeat;
+    text-align: center;
+}
+.listTitle p{
+    text-align:center;
+    font-size:15px;
+    letter-spacing:5px;
+}
+.listTitle p img{
+    position: relative;
+    margin-top: 2px;
+    cursor:pointer;
+}
+.listTitle hr:nth-of-type(1){
+    color:white;height:1px;margin-top:-5px;margin-bottom:-1px;border:none;border-top:1px solid white; width: 95%;
+}
+.listTitle hr:nth-of-type(2){
+    color:white;height:1px;margin-top:1px;margin-bottom:-1px;border:none;border-top:1px solid white; width: 95%;margin-left: 5%; 
+}
+.ratate{
+    transform:rotate(180deg);
+}
+
+/*滚动条样式修改*/
+::-webkit-scrollbar{
+	width: 12px;  
+    height: 12px; 
+    background-color:white;
+}
+::-webkit-scrollbar-track:horizontal  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgy.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-track:vertical  
+{  
+   background-color: transparent;
+   background: url(/Lib/scrollBar/images/scroll-bgx.png) repeat;
+   background-position:center;
+}
+::-webkit-scrollbar-button:start:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-left.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:horizontal{
+    background: url(/Lib/scrollBar/images/scroll-right.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:start:vertical{
+    background: url(/Lib/scrollBar/images/scroll-top.png) no-repeat;
+	width: 12px;  
+    height: 12px;   
+}
+::-webkit-scrollbar-button:end:vertical{
+    background: url(/Lib/scrollBar/images/scroll-down.png) no-repeat;
+	width: 12px;  
+    height: 12px;
+}  
+::-webkit-scrollbar-thumb  
+{    
+   -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.6);  
+   background-color: #ABDFF3;
+}
+
+
+
+/*兼容各种尺寸屏幕*/
+
+@media screen and (max-width:1661px) and (min-width:1441px) {
+    /*#box1_1{width:8.5%;}*/
+    #ImgTypeBox img{padding: 3px 0px !important;}
+    #box2_1{width: 72%;}
+    #search_bg_left{width:62%;}
+    #txtloccode, #startdate, #enddate{width:62%;margin-bottom: 2px}
+    #ddlorg{width:147px;margin-bottom:3px;}}
+    #jb, #ddlzt{width:163px}
+    .search_bg_jb,.search_bg_ddlzt{margin-bottom:2px;}
+    #con_one_2_div{min-height:239px;}
+    .Report-menu{left: -115px;}
+    #closeBtn img{width:30px;}
+}
+@media screen and (max-width:1441px) and (min-width:1367px) {
+    /*#box1_1{width:9%;}*/
+    #ImgTypeBox img{padding: 3px 0px !important;}
+    #box2_1{width: 71%;}
+    #search_bg_left{width:62%;}
+    #txtloccode, #startdate, #enddate{width:62%;margin-bottom: 2px}
+    #ddlorg{width:130px;margin-bottom:2px;}
+    #jb, #ddlzt{width:154px}
+    .search_bg_jb,.search_bg_ddlzt{margin-bottom:2px;}
+    #box3_1{width:25%;}
+    #droup_txtloccode{padding:5px 10px;margin-top: -210px;margin-left: -120px;}
+    .Report-menu{left: -120px;}
+    #closeBtn img{width:28px;}
+}
+@media screen and (max-width:1367px) and (min-width:1281px) {
+    /*#box1_1{width:10%;}*/
+    #ImgTypeBox img{padding: 1px 0px !important;}
+    #box2_1{width: 70%;}
+    #search_bg_left{width:62%;}
+    #txtloccode, #startdate, #enddate{width:60%;margin-bottom: 1px}
+    #ddlorg{width:127px;margin-bottom:1px;}
+    #jb, #ddlzt{width:142px}
+    .search_bg_jb,.search_bg_ddlzt{margin-bottom:1px;}
+    .sp_type_img{width:16px;height:16px;}
+    #box3_1{width:25%;}
+    #search_bg_right{width:20%;margin:1px 0 0 20px;}
+    #ul_txtloccode{height:95px;}
+    #droup_txtloccode{padding:5px 10px;margin-top: -220px;margin-left: -120px;}
+    #btn_colse{position: absolute;right: 15px;top: -30px;width:70px;}
+    #con_one_2_div{min-height:195px;}
+    #box2_1 #alarms{height:45%;}
+    .Report-menu{top: 58px;left: -125px;}
+    #closeBtn img{width:25px;}
+}
+@media screen and (max-width:1281px) and (min-width:1025px) {
+    /*#box1_1{width:10%;}*/
+    #ImgTypeBox img{padding: 1px 0px !important;}
+    #box2_1{width: 70%;}
+    #search_bg_left{width:67%;}
+    #txtloccode, #startdate, #enddate{width:60%;margin-bottom: 1px}
+    #ddlorg{width:120px;margin-bottom:1px;}
+    #jb, #ddlzt{width:143px}
+    .search_bg_jb,.search_bg_ddlzt{margin-bottom:1px;}
+    .sp_type_img{width:16px;height:16px;}
+    #box3_1{width:25%;}
+    #search_bg_right{width:20%;margin:2px 0 0 8px;}
+    #ul_txtloccode{height:95px;}
+    #droup_txtloccode{padding:5px 10px;margin-top: -220px;margin-left: -135px;}
+    #btn_colse{position: absolute;right: 0;top: -32px;width: 80px;}
+    .Report-menu{top: 58px;left: -125px;}
+    #closeBtn img{width:23px;}
+}
+@media screen and (max-width:1025px){
+    /*#box1_1{width:13%;}*/
+    .deliver{margin:0 5px;}
+    #ImgTypeBox img{padding: 1px 0px !important;}
+    #box2_1{width: 68%;}
+    #search_bg_left{width:73%;}
+    #txtloccode, #startdate, #enddate{width:59%;margin-bottom: 1px}
+    #ddlorg{width:123px}
+    #jb, #ddlzt{width:140px}
+    .search_bg_jb,.search_bg_ddlzt{margin-bottom:1px;}
+    .sp_type_img{width:16px;height:16px;}
+    #box3_1{width:28%;}
+    #search_bg_right{width:18%;margin:15px 0 0 0;}
+    #ul_txtloccode{height:115px;}
+    #droup_txtloccode{padding:5px 10px;margin-top: -220px;margin-left: -200px;}
+    #btn_colse{position: absolute;right: 0;top: -35px;width: 58px;}
+    #box2_1 .m_type_t{margin-left: 0;}
+    .Report-menu{top: 38px;left: -125px;}
+    #closeBtn img{width:20px;}
+}   
+@media screen and (max-width:1921px) and (min-width:1661px) {
+    #jb, #ddlzt{width:210px}
+}

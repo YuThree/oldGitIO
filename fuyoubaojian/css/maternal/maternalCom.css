@@ -1,0 +1,13 @@
+body{ overflow: hidden; }
+form{width: 100%; height: 100%; overflow: hidden;}
+.rowScroll{ height: calc(100% - 60px);	height: -moz-calc(100% -60px); }
+.cdct_scroll{ width: 100%;min-height: 100%; }
+.spe_LH{ line-height: 64px; }
+.spe_LH2{ line-height: 80px; }
+.spe_nopadding{ padding-left: 0; }
+.spe_nopadding .cdct_row{ padding-left: 15px; }
+.spe_row{ background: #F2F4F6; text-align: center;}
+.showTable{  min-width: 320px;}
+.spe_radio{
+	margin-right: 13px;
+}

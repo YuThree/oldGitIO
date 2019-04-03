@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>轨迹列表</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Lib/layer/skin/laypage.css" rel="stylesheet" type="text/css" />
+    <script src="/Lib/layer/laypage.js" type="text/javascript"></script>
+    <script src="/Common/js/artTemplate/template.js" type="text/javascript"></script>
+    <link href="/Lib/bootstrap/css/bootstrap-glyphicon.css"  rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        loadControl("paging");
+        loadControl("layer");
+        loadJs("/C3/PC/MDetectionOfTrace/js/MonitorLocoGJListNew.js?v=" + version);
+    </script>
+    <style>
+        .span12
+        {
+            position: relative;
+        }
+        
+        .span2
+        {
+            position: relative;
+        }
+        
+        .button_img_show
+        {
+            position: absolute;
+            width: 35px;
+            height: 50px;
+            background: url("/Common/img/100.png") center no-repeat;
+            background-size: contain;
+            right: -35px;
+            top: 50%;
+            cursor: pointer;
+        }
+        
+        .button_img_hide
+        {
+            position: absolute;
+            width: 35px;
+            height: 50px;
+            background: url("/Common/img/101.png") center no-repeat;
+            background-size: contain;
+            left: 0;
+            top: 50%;
+            cursor: pointer;
+            display: none;
+        }
+        
+        body
+        {
+            text-shadow: 0 -1px 1px rgba(0, 0, 0, 0);
+        }
+        
+        .col_100
+        {
+            float: left;
+            width: 35px;
+            height: 20px;
+            text-align: center;
+        }
+        
+        .col_100_header
+        {
+            padding: 0px 7px;
+        }
+        
+        .col_150
+        {
+            float: left;
+            width: 49px;
+            height: 20px;
+            text-align: center;
+        }
+        
+        .col_200
+        {
+            float: left;
+            width: 150px;
+            height: 20px;
+            text-align: left;
+        }
+        
+        .col_400
+        {
+            float: left;
+            width: 400px;
+            height: 20px;
+            text-align: left;
+        }
+        
+        .head
+        {
+            height: 35px;
+            border: 1px solid #ccc;
+            background: #fafafa url(/Lib/flexigrid/images/fhbg.gif) repeat-x bottom;
+            overflow: hidden;
+            border-bottom: 0px;
+            padding: 5px 0px;
+        }
+        
+        .head .col_200, .head .col_100, .head .col_150
+        {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .body
+        {
+            border: 1px solid #ccc;
+            border-width: 0 0 1px 0;
+            height: 400px;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+        
+        .body .col_200
+        {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .rail_one, .rail_two, .rail_three, .rail_four
+        {
+            float: left;
+        }
+        
+        .rail_num
+        {
+            height: 20px;
+            padding: 4px 0;
+        }
+        
+        .rail_num_one
+        {
+            float: left;
+            height: 40px;
+            padding-top: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+        
+        .rail_num_all
+        {
+            float: left;
+            border-radius: 5px;
+            background-color: #eee;
+        }
+        
+        .rail-1
+        {
+            width: 1033px;
+            height: 51px;
+        }
+        
+        .rail-2
+        {
+            width: 1033px;
+        }
+        
+        .rail-3
+        {
+            width: 1033px;
+        }
+        
+        .rail-4
+        {
+            width: 1033px;
+        }
+        
+        .rail-1, .rail-2, .rail-3, .rail-4
+        {
+            background-color: #f9f9f9;
+            padding: 5px 0px;
+            margin: 2px 0px;
+            border: solid 1px #DDDDDD;
+        }
+        
+        #layPage
+        {
+            padding-top: 3px;
+        }
+        
+        .glyphicon-time
+        {
+            color: #E66F6F;
+        }
+        
+        .glyphicon-flash
+        {
+            color: #a2a346;
+        }
+        
+        .glyphicon-globe
+        {
+            color: #87d34d;
+        }
+        
+        .glyphicon-remove
+        {
+            color: red;
+        }
+        
+        .label-success
+        {
+            margin-left: 20px;
+        }
+        
+        .glyphicon-ok, .glyphicon-arrow-up
+        {
+            color: #48a827;
+        }
+        .laypage_total label
+        {
+            margin-top: 3px;
+        }
+        #box_whereMemo
+        {
+            padding: 5px 5px 5px 15px;
+            background: #c6e8f5;
+        }
+        
+        #txt_whereTitle
+        {
+            float: left;
+            width: 70px;
+            padding-top: 6px;
+        }
+        
+        #txt_whereMemo
+        {
+            display: inline-block;
+            float: left;
+            width: 100%;
+        }
+        
+        .whereBlock
+        {
+            margin: 1px 5px;
+            padding: 5px;
+            float: left;
+        }
+        
+        .lableClose
+        {
+            cursor: pointer;
+        }
+        
+        .cls
+        {
+            clear: both;
+        }
+        
+        #search_bg span
+        {
+            display: inline-block;
+            width: 60px;
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        .listContainer
+        {
+            margin-top: -150px;
+            margin-left: 215px;
+        }
+        a :hover
+        {
+            text-decoration: none;
+        }
+    </style>
+    <script id="test" type="text/html">
+        {{each list as value i}}
+        <div class="rail-2">
+            <div class="rail_two" style='margin-top: 4px;'>
+                <div style="height: 20px;">
+                    <div class="col_200">
+                        <span class="label label-success" style='padding-bottom: 0px;'>{{value.item[0].LOCOMOTIVE_CODE}}</span>
+                    </div>
+                    <div class="col_200">
+                        <span class="glyphicon glyphicon-time"></span><span>{{value.item[0].DETECT_TIME}}</span>
+                    </div>
+                    <div class="col_150">
+                        <!--<span class="glyphicon glyphicon-flash" title='速度'></span>-->
+                        <img src="/Common/img/speed.png" alt="速度" style="vertical-align: inherit; " />
+                        <span>{{value.item[0].SPEED}}</span>
+                    </div>
+                    <div class="col_150">
+                        <a href="javascript:Map('{{#value.item[0].WZ}}',{{value.item[0].GIS_LON_O}},{{value.item[0].GIS_LAT_O}});"><span class="glyphicon glyphicon-globe" title='卫星数'></span><span>{{value.item[0].SATELLITE_NUM}}</span></a>
+                    </div>
+                    <div class="col_150">
+                        {{value.item[0].PULLING_VALUE_X}}
+                    </div>
+                    <div class="col_150">
+                        {{value.item[0].LINE_HEIGHT_X}}
+                    </div>
+                </div>
+                <div style="height: 20px; margin-top: 10px; color: #888;">
+                    <div class="col_400" style='overflow:hidden;'>
+                        <span style="padding-left: 20px;" title='{{#value.item[0].WZ}}'>{{#value.item[0].WZ}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="rail_num_all">
+                {{each value.item as v2 j}}
+                <div class="rail_num" style="border-top: 0;">
+                    <div class="col_100">
+                        <span class="label label-info" style='padding-bottom: 0px;'>{{v2.PORT_NUMBER}}</span>
+                    </div>
+                    <div class="col_100">
+                        {{#convert_bow_status(v2.BOW_UPDOWN_STATUS)}}
+                    </div>
+                    <div class="col_150">
+                        {{v2.IRV_TEMP}}
+                    </div>
+                    <div class="col_150">
+                        {{v2.ENV_TEMP}}
+                    </div>
+                    <!--<div class="col_150">
+                        {{v2.PULLING_VALUE}}
+                    </div>
+                    <div class="col_150">
+                        {{v2.LINE_HEIGHT}}
+                    </div>-->
+                    {{if is_debug()}}
+                    <div class="col_100">
+                        {{#convert(v2.TEMP_SENSOR_STATUS)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_CON_IR)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_REC_IR)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_CON_VI)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_REC_VI)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_CON_OV)}}
+                    </div>
+                    <div class="col_100">
+                        {{#convert(v2.IS_REC_OV)}}
+                    </div>
+                    <div class="col_100 FU_HIDE">
+                        {{#convert(v2.IS_CON_FZ)}}
+                    </div>
+                    <div class="col_100 FU_HIDE">
+                        {{#convert(v2.IS_REC_FZ)}}
+                    </div>
+                    {{else}}{{/if}}
+                </div>
+                {{/each}}
+            </div>
+            <div style="clear: both;">
+            </div>
+        </div>
+        {{/each}}
+    </script>
+</head>
+<body>
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="row-fluid">
+                <div id="ptable" class="span12">
+                    <div style="overflow: hidden;">
+                        <div style="width: auto;">
+                            <div class="head">
+                                <div class="head-first" style="float: left; height: 40px; border-width: 1px 0 0 1px;">
+                                    <div style="height: 20px;">
+                                        <div class="col_200">
+                                            <span style='padding-bottom: 0px; margin-left: 20px;'>设备编号</span>
+                                        </div>
+                                        <div class="col_200">
+                                            时间
+                                        </div>
+                                        <div class="col_150">
+                                            速度
+                                        </div>
+                                        <div class="col_150">
+                                            卫星数
+                                        </div>
+                                        <div class="col_100 col_100_header">
+                                            拉出值
+                                        </div>
+                                        <div class="col_100 col_100_header">
+                                            导高值
+                                        </div>
+                                    </div>
+                                    <div style="height: 20px;">
+                                        <div class="col_400">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="head-second" style="float: left; height: 40px; border-width: 1px 1px 0 1px;">
+                                    <div>
+                                        <div class="col_100">
+                                            弓位置
+                                        </div>
+                                        <div class="col_100">
+                                            弓状态
+                                        </div>
+                                        <div class="col_100 col_100_header">
+                                            红外温度
+                                        </div>
+                                        <div class="col_100 col_100_header">
+                                            环境温度
+                                        </div>
+                                        <!--<div class="col_100 col_100_header">
+                拉出值
+            </div>
+            <div class="col_100 col_100_header">
+                导高值
+            </div>-->
+                                        <div class="col_100" debug="true">
+                                            温度连接
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            红外连接
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            红外录像
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            细节连接
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            细节录像
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            全景连接
+                                        </div>
+                                        <div class="col_100" debug="true">
+                                            全景录像
+                                        </div>
+                                        <div class="col_100 FU_HIDE" debug="true">
+                                            辅助连接
+                                        </div>
+                                        <div class="col_100 FU_HIDE" debug="true">
+                                            辅助录像
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body" style="overflow-x: auto;">
+                                <div id="flexTable">
+                                </div>
+                            </div>
+                            <div>
+                                <div id="layPage" style="margin-top: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="box_gis" style="display: none" class="modal fade" role="dialog">
+        <div style="width: 900px" class="modal-dialog ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    地理位置
+                </h4>
+            </div>
+            <div style="padding: 8px;">
+                地理位置：<strong><span id="_WZ"></span></strong> &nbsp;<strong>东经<span id="gisX"></span>
+                    &nbsp;北纬 <span id="gisY"></span></strong>&nbsp;&nbsp;&nbsp; <span id="xj2" class="xj">
+                    </span></strong>
+            </div>
+            <div class="modal-content">
+                <div id="mapDiv" style="width: 100%; height: 400px">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true" type="text/javascript"></script>

@@ -1,0 +1,523 @@
+﻿*{
+    font-family:'Microsoft Yahei';
+}
+body {
+    overflow:hidden;
+}
+/*::-webkit-scrollbar*/
+/*{
+    width: 10px;*/
+    /*height: 16px;  */
+    /*background-color: #ccc;
+
+}*/
+/*::-webkit-scrollbar-thumb
+{
+    
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #ABDFF3;
+}*/
+#cxContent input,#cxContent select{
+    width:115px; 
+    border-radius: 5px;    
+    padding: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+#cxContent select{
+    margin-top:10px;
+}
+#cxContent{
+   text-align:center;
+}
+#tab1 td{
+    margin:0;
+    line-height: 45px;
+    text-align:center;
+}
+.tab_content img{
+    margin:10px 5px
+}
+#table_list input,#table_list select{
+    margin-top:10px;
+}
+#table_list img{
+    display:inline-block;
+    float:left;
+}
+#div_tj{
+    width:400px; 
+    padding:0  5px 0 15px;
+    left:.5%;
+    position: absolute; 
+    color: White; 
+    z-index:99; 
+    background:url('/Common/MGIS/img/yz_bgContent.png');
+    top:20px;
+    /*display:none;*/
+}
+
+.div_tj_title{
+    width:400px;
+    height:10px;
+    padding:0 10px;
+    position: absolute; 
+    z-index:99; 
+    border-radius: 5px 5px 0 0;
+    top:10px;
+    left:.5%;
+    background:url('/Common/MGIS/img/yz_bgTitle.png');
+}
+.div_tj_bottom{
+    width:400px;
+    height:10px;
+    padding:0 10px;
+    position: absolute; 
+    left:.5%;
+    z-index:99; 
+    border-radius: 0 0 5px 5px;
+    top:778px;
+    background:url('/Common/MGIS/img/yz_bgbottom.png');
+}
+.div_tj_content{
+    width:400px; 
+    padding:0  10px 0 10px;
+    left:.5%;
+    position: absolute; 
+    color: White; 
+    z-index:99; 
+    background:url('/Common/MGIS/img/yz_bgContent.png');
+    top:20px;
+    height:758px;
+}
+#cxFenYe{
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    height: 31px;
+    width: 95%;
+    border-radius: 5px;
+    line-height: 31px;
+    background: url("/Common/MGIS/img/yz_fy_bbdcontent.png");
+    color: #96E4FF;
+}
+
+.yeJiao{
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    margin: 3px 0 2px 6px;
+    cursor: pointer;
+    text-align: center;
+    background: url("/Common/MOnePoleData/img/yeweiInsidBG.png");
+}
+.yeJiao:hover{
+	color:yellow;
+}
+#yeMaQu{
+    width: 225px;color: white;
+     white-space:nowrap;
+     text-overflow:ellipsis;
+}
+#yeMaQu p{
+    width: 98%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+#yeMaQu span{
+    color: #67BCFD;
+}
+.list_title{
+    height:70px;
+    width:400px;
+}
+.list_title>div{
+    float:left;
+}
+.list_title>div:nth-of-type(1){
+    width:65%;
+    height:80%;
+    margin-top:10px;
+    padding-left:3%
+}
+.list_title>div:nth-of-type(1)>p>img{
+    vertical-align:top;
+}
+.list_title>div:nth-of-type(1)>p>span{
+    font-size:15px;
+     font-weight:normal;
+     line-height:25px;
+}
+.list_title>div:nth-of-type(2){
+    line-height:40px;
+}
+.list_title>div:nth-of-type(2)>p{
+    font-size:16px;
+    margin:0;
+    font-weight:normal;
+    letter-spacing:1px;
+}
+.list_title>div:nth-of-type(2)>p>img,.showReally img{
+    cursor:pointer;
+}
+#lable_title{
+    display:inline-block;width:375px;height:45px;
+}
+.list_body{
+    width:94.5%;
+    margin:0 auto;
+    height:640px;
+    position:relative;
+    background:url('/Common/MGIS/img/yz_List_content.png')
+}
+.list_body_title{
+    margin:20px auto 0;
+    width:94.5%;
+    height:8px;
+    background:url('/Common/MGIS/img/yz_list_Title.png')
+}
+
+.list_body_bottom{
+    margin:0 auto;
+    width:94.5%;
+    height:8px;
+    background:url('/Common/MGIS/img/yz_list_Botoom.png')
+}
+.list_body table{
+    table-layout:fixed ;
+    margin:0 auto ;
+    width:98%;
+    text-align:center;
+}.list_body table td{
+     overflow:hidden;
+     white-space:nowrap;
+     text-overflow:ellipsis;
+ }
+.list_body table thead tr{
+    border-bottom:1px solid #3A93DB;
+    height:30px;
+}
+.list_body thead td>div{
+    height:30px;
+    width:45px;
+    margin:0 auto;
+}
+.list_body thead td>div>div{
+    float:left;
+    height:8px;
+    line-height:30px;
+    width:30px;
+}
+.list_body thead td>div>div:nth-of-type(2){
+    margin-top:5px;
+    width:15px;
+}
+.list_body thead img{
+    display:block;
+    margin-bottom:2px;
+    cursor:pointer;
+}
+.list_body table tbody tr{
+    height:30px;
+}
+.list_body table  tr td:nth-of-type(1){
+    width:14.6%;
+}
+.list_body table  tr td:nth-of-type(2){
+    width:17.4%;
+}
+.list_body table  tr td:nth-of-type(3){
+    width:09.2%;
+}
+.list_body table  tr td:nth-of-type(4){
+    width:14.1%;
+}
+.list_body table  tr td:nth-of-type(5){
+    width:14.1%;
+}
+.list_body table  tr td:nth-of-type(6){
+    width:30.6%;
+}
+.list_body table tbody tr {
+    border-bottom:1px dashed #39475C 
+}
+.table_list{
+    height:570px;overflow:auto;margin:2px 0;
+}
+.list_body_divTitle>div{
+    display:inline-block;
+    height:30px;
+    margin:0 auto;
+    line-height:30px;
+    float:left;
+
+}
+.list_body_divTitle{
+    width:360px;
+    height:30px;
+    text-align:center;
+    border-bottom:1px solid #3A93DB;
+    margin:0 auto;
+}
+.list_body_divTitle>div:nth-of-type(1){
+     width:14.6%;
+}
+.list_body_divTitle>div:nth-of-type(2){
+      width:17.4%;
+}
+.list_body_divTitle>div:nth-of-type(3){
+    width:09.2%;
+}
+.list_body_divTitle>div:nth-of-type(4){
+     width:14.6%;
+}
+.list_body_divTitle>div:nth-of-type(5){
+     width:14.1%;
+}
+.list_body_divTitle>div:nth-of-type(6){
+     width:30.1%;
+}
+
+.list_body_divTitle>div>div{
+    display:inline-block;
+    float:left;
+    height:30px;
+    line-height:30px;
+}
+
+.list_body_divTitle>div>div:nth-of-type(2){
+     height:25px;
+    margin-top:5px;
+    width:12px;
+}
+.list_body_divTitle img{
+    display:block;
+    margin-bottom:2px;
+    cursor:pointer;
+}
+.table_list input{
+    padding:0;
+    margin-bottom:0;
+}
+.table_list img{
+    float:right;
+    margin-right:5px;
+}
+.km_Mark{
+    width:40px;
+    color:#67BCFD;
+    cursor:pointer;
+}
+.first_number{
+    margin-left:5px;
+    width:30px;
+    cursor:pointer;
+    color:#67BCFD;
+}
+td{
+    word-wrap:break-word;
+}
+.xlqjName{
+    background:black;
+    outline:1px solid #67BCFD;
+}
+.alarmItem_over{
+	color: #DDB3FD;
+}
+/*色块样式*/
+#org_tree_list,#ddlxb_list,#linen_tree_list,#kmIconbig,#kmIconsmall,#proIcoNumber{
+    height:14px;
+    line-height:14px;
+    font-size:12px;
+    margin:2px;
+    float:left;
+}
+.icon-remove{
+    vertical-align: middle;
+}
+
+/*排序样式*/
+#number_sort,#km_sort{
+    margin-top:10px;
+}
+#number_sort img,#km_sort img{
+    display:none;
+}
+
+
+#table_list img {
+    margin: 10px 8px; 
+}
+.bottom_list {
+    position:absolute;
+    bottom:-240px;
+    left:440px;
+    width:65%;
+    height:265px;
+    /*background:red;*/
+}
+.list_arrows {
+    margin:0 auto;
+     background:url(/Common/MGIS/img/ssbg.png);
+    height:46px;width:83px;
+    position:relative;
+    z-index:1;
+}
+    .list_arrows img {
+       margin:16% 34%;
+       cursor:pointer;
+    }
+.lsit_content {
+    background:url(/Common/MGIS/img/bottomContentBg.png);
+    height:240px;width:100%;
+    margin-top:-21px;
+    position:relative;
+}
+.lsit_content > div {
+    width:97%;
+    height:100%;
+    float:left;
+    line-height:50px;
+    color:#3FA0D9;
+    font-weight:bold;
+    font-size:14px;
+    /*background:red;*/
+}
+   #backToLine {
+        float:right;
+        display:none;
+        font-weight:normal;
+    }
+   #backToLine:hover{cursor:pointer;}
+    .lsit_content > div > img {
+        vertical-align:-5%;
+    }
+    .lsit_content > div:nth-of-type(1) {
+         width:15px;
+         background:url(/Common/MGIS/img/listbgR.png)
+    }
+    .lsit_content > div:nth-of-type(3) {
+         float:right;
+         width:15px;
+         background:url(/Common/MGIS/img/listbgL.png)
+
+    }
+.table_black ,.second_list{
+    background:black;
+    width:97.5%;
+    position:absolute;
+    z-index:2;
+    left:10px;
+    bottom:10px;
+    height:180px;
+    padding:5px
+}
+.second_list {
+    display:none;
+    z-index:3;
+}
+    .table_black table,.second_list table {
+        width:100%;
+        color:white;
+        border-right:1px solid #585858;
+    }
+        .list_scall ,.second_list_scall{
+            border-bottom:1px solid #585858;
+        }
+    .table_black tbody ,.second_list tbody{
+        max-height:150px;
+        overflow:hidden;
+    }
+    .table_black tr ,.second_list tr{
+        line-height:30px;
+    }
+    .table_black table td,.table_black table th,.second_list table td,.second_list table th{
+    border-left:1px solid #585858;border-top:1px solid #585858;text-align: center;
+}
+    .table_black thead th:nth-of-type(1), .table_black tbody td:nth-of-type(1) {
+        width:20%
+    }
+    .table_black thead th:nth-of-type(2), .table_black tbody td:nth-of-type(2) {
+        width:8%
+    }
+    .table_black thead th:nth-of-type(3) , .table_black tbody td:nth-of-type(3){
+        width:30%
+    }
+    .table_black thead th:nth-of-type(4) , .table_black tbody td:nth-of-type(4){
+        width:30%
+    }
+
+    .second_list thead th:nth-of-type(1), .second_list tbody td:nth-of-type(1) {
+        width:20%
+    }
+    .second_list thead th:nth-of-type(2), .second_list tbody td:nth-of-type(2) {
+        width:20%
+    }
+    .second_list thead th:nth-of-type(3) , .second_list tbody td:nth-of-type(3){
+        width:5%
+    }
+    .second_list thead th:nth-of-type(4) , .second_list tbody td:nth-of-type(4){
+        width:18%
+    }
+    .second_list thead th:nth-of-type(5) , .second_list tbody td:nth-of-type(5){
+        width:18%
+    }
+    .second_list thead th:nth-of-type(6) , .second_list tbody td:nth-of-type(6){
+        width:8%
+    }
+
+.list_scall_div ,.second_list_scall_div{
+    max-height:145px;
+    overflow:auto;
+}
+
+
+.list_tr_choose {
+    color:yellow;
+    /*background:#ccc;*/
+}
+
+.list_tr:hover {
+    background:#3FA0D9;
+    cursor:pointer;
+}
+
+#ImgTypeBox {
+    z-index: 0;
+}
+
+@media screen and (max-width:1600px) {
+
+
+
+
+}
+@media screen and (max-width:1440px) {
+
+
+
+
+}
+@media screen and (max-width:1366px) {
+    .lsit_content > div{
+            width: 94%;
+
+
+    }
+
+
+
+}
+@media screen and (max-width:1365px) {
+
+    .bottom_list {
+        left:426px;
+    }
+    .table_black, .second_list{
+        width:96.5%;
+    }
+
+}

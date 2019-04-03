@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>逻辑拓扑</title>
+    <link href="css/base.css" rel="stylesheet" type="text/css">
+    <link href="/Common/MTopo/css/jquery.snippet.min.css" rel="stylesheet">
+    <script src="/Common/MTopo/js/jquery.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/site.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/demo.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/device.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/snippet/jquery.snippet.min.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/excanvas.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/jtopo-min.js" type="text/javascript"></script>
+    <!--操作-->
+    <script src="/Common/MTopo/js/MisAlarm.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisLine.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisObjData.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisPosition.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisSms.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisSubstation.js" type="text/javascript"></script>
+    <script src="/Common/MTopo/js/MisUserContainer.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/js/6cweb/mySelectTree.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        loadControl("mytree");
+        loadControl("mySelectTree");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+        loadControl("hint");
+    </script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <style type="text/css">
+        
+    </style>
+    <script>
+
+        function disabledMouseWheel() {
+            if (document.addEventListener) {
+                document.addEventListener('DOMMouseScroll', scrollFunc, false);
+            } //W3C
+            window.onmousewheel = document.onmousewheel = scrollFunc; //IE/Opera/Chrome
+        }
+        function scrollFunc(evt) {
+            return false;
+        }
+        $(document).ready(function () {
+            Showloging();
+            setTimeout('GetLoad()', 1000);
+        });
+        function GetLoad() {
+            disabledMouseWheel();
+            var centerLon = decodeURIComponent(GetQueryString("centerLon"), null, null);
+            var centerLat = decodeURIComponent(GetQueryString("centerLat"), null, null);
+            var xunit = decodeURIComponent(GetQueryString("xunit"), null, null);
+            var yunit = decodeURIComponent(GetQueryString("yunit"), null, null);
+            var type = decodeURIComponent(GetQueryString("type"), null, null);
+            var json = GetQueryString("json");
+            var CX = GetQueryString("CX"); //判读是否是查询
+            var startTime = GetQueryString("startTime"); //开始时间
+            var endTime = GetQueryString("endTime"); //结束时间+其他条件（拼接字符串）
+            var TopoStyle = GetQueryString("TopoStyle"); //模式(地图和拓扑)
+            if (TopoStyle == null) {
+                TopoStyle = "";
+            }
+
+            //初始时间值
+            document.getElementById('startdate').value = ServerTime("Days", getConfig("FaultTimePeriod"));
+            document.getElementById('enddate').value = ServerTime("0", "0");
+
+            var V_CateGory = "0"; //0为取全部数据
+            // loadControl("ztree");
+
+            loadOrgSelect("juselect", "duanselect", "chejianselect", "gongquselect");
+
+            $('#lineselect').mySelect({
+                tag: 'LINE'
+            });
+            $('#txtqz').jHint({
+                type: 'StationSection',
+                line: ''
+            });
+
+            V_CateGory = GetQueryString("Category_Code").toUpperCase();
+            if (GetQueryString("Category_Code") != undefined && GetQueryString("Category_Code") != "") {
+                V_CateGory = GetQueryString("Category_Code").toUpperCase();
+                if (V_CateGory == "DPC") {
+                    V_CateGory = "0";
+                }
+
+
+                if (V_CateGory != "0") {
+                    $('#dll_lx').val(V_CateGory).attr('disabled', "true");
+                }
+            }
+            var codeTypes = V_CateGory;
+            if (codeTypes == "0")
+                codeTypes = "";
+            $('#citySel').mySelectTree({
+                tag: 'SYSDICTIONARYTREE',
+                cateGory: 'AFCODE',
+                CodeType: V_CateGory,
+                onClick: function (event, treeId, treeNode) {
+                    $('#citySel').val(treeNode.name);
+                }
+            });
+
+            if (GetQueryString("dllzt") != undefined && GetQueryString("dllzt") != "") {
+
+                var ids = GetQueryString("dllzt");
+                // parameter += '&dllzt=' + ids;
+
+                //设置ddlzt的状态。。。。暂略
+
+                $("#ddlzt").attr("value", ""); //清空选中项。 
+                // var ids = '1,3,6'; //设置选中框ID。 
+                var id_Ojbect = (ids).split(","); //分割为Ojbect数组。 
+                var count = $("#ddlzt option").length; //获取下拉框的长度。 
+                for (var c = 0; c < id_Ojbect.length; c++) {
+                    for (var c_i = 0; c_i < count; c_i++) {
+                        if ($("#ddlzt").get(0).options[c_i].value == id_Ojbect[c]) {
+                            $("#ddlzt").get(0).options[c_i].selected = true; //设置为选中。 
+                        }
+                    }
+                }
+
+            }
+            //设置选中状态
+            $('#ddlzt').val('AFSTATUS03');
+            $("#ddlzt>option[value='AFSTATUS04']").attr('selected', true);
+
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 5
+            });
+
+
+
+
+            if (GetQueryString("id") != undefined && GetQueryString("id") != "") {
+                //设置ID，以便查询使用....暂略
+            }
+
+
+            if (GetQueryString("AlarmTime") != "" && GetQueryString("AlarmTime") != undefined) {
+                var startDate = GetQueryString("AlarmTime")
+                $('#startdate').val(startDate);
+            }
+
+            if (GetQueryString("startdate") != "" && GetQueryString("startdate") != undefined) {
+                var startDate = GetQueryString("startdate")
+                $('#startdate').val(startDate);
+            }
+
+            if (GetQueryString("enddate") != "" && GetQueryString("enddate") != undefined) {
+                var startDate = GetQueryString("enddate")
+                $('#enddate').val(startDate);
+            }
+
+            if (GetQueryString("line") != "" && GetQueryString("line") != undefined) {
+                var lineCode = GetQueryString("line")
+                $('#ddlLine').val(lineCode);
+            }
+
+
+            //查询状态
+            if (CX == "1") {
+                GetAlarmMisLine("", "", "", "", CX, startTime, endTime);
+            }
+            else {
+                //第一次加载状态
+                if (centerLon == 'null') {
+                    GetAlarmMisLine("", "", "", "", CX, startTime, endTime);
+                }
+                else {
+                    //缺陷定位状态
+                    var Alarmscene = GetAlarmMisLine(centerLat, centerLon, xunit, yunit, CX, startTime, endTime);
+                    switch (type) {
+                        case "1":
+                            getYJC3ClickSmsInfo(json, 4);
+                            break;
+                        case "3":
+                            break;
+                        case "5":
+                            YJonclickAlarm(json, 4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        //单击
+        function onclicks(event, node) {
+            document.getElementById('rightmenu').innerHTML = "<li>" + event.target.name + "</li>";
+        }
+
+
+      
+    </script>
+</head>
+<body>
+    <div class="box-content">
+        <table>
+            <tr>
+                <td>
+                    线路：
+                </td>
+                <td>
+                    <select id="lineselect" name="lineselect" style="width: 80px;" onchange="lineChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;区站：
+                </td>
+                <td>
+                    <input type="text" id="txtqz" style="width: 70px;" />
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;行别：
+                </td>
+                <td>
+                    <select name="ddlxb" id="ddlxb" style="width: 80px;">
+                        <option value="0">全部</option>
+                        <option value="上行">上行</option>
+                        <option value="下行">下行</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;杆号：
+                </td>
+                <td>
+                    <input type="text" id="txtpole" style="width: 70px;">
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;公里标(m)：
+                </td>
+                <td>
+                    <input type="text" id="txtstartkm" style="width: 99px;" />至<input type="text" id="txtendkm"
+                        style="width: 99px;" />
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;发生时间：
+                </td>
+                <td>
+                    <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})"
+                        style="width: 88px">
+                    至
+                    <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd 23:59:59'})"
+                        style="width: 88px">
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    局：
+                </td>
+                <td>
+                    <select id="juselect" name="juselect" style="width: 80px;">
+                        <option value="0">全部</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;段：
+                </td>
+                <td>
+                    <select id="duanselect" name="duanselect" style="width: 80px;">
+                        <option value="0">全部</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;车间：
+                </td>
+                <td>
+                    <select id="chejianselect" name="chejianselect" style="width: 80px;">
+                        <option value="0">全部</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;工区：
+                </td>
+                <td>
+                    <select id="gongquselect" name="gongquselect" style="width: 80px;">
+                        <option value="0">全部</option>
+                    </select>
+                </td>
+                <td>
+                    <span id="ddlgongqu"></span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;缺陷类型：
+                </td>
+                <td>
+                    <!--<span id="dll_zt" style="display: none"></span>-->
+                    <input id="citySel" type="text" value="" style="width: 75px; margin: 0;" />
+                    <span id="span_ddllx">&nbsp;&nbsp;&nbsp;检测类型：</span> <span id="span2_ddllx">
+                        <select name="dll_lx" id="dll_lx" style="margin: 0 auto; width: 60px;">
+                            <option value="0">全部</option>
+                            <option value="1C">1C</option>
+                            <option value="2C">2C</option>
+                            <option value="3C">3C</option>
+                            <option value="4C">4C</option>
+                            <option value="5C">5C</option>
+                            <option value="6C">6C</option>
+                        </select>
+                    </span>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;状态：
+                </td>
+                <td>
+                    <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                        style="width: 100px" size="5">
+                        <option value="AFSTATUS01" selected>新上报</option>
+                        <option value="AFSTATUS04">已计划</option>
+                        <option value="AFSTATUS03">已确认</option>
+                        <option value="AFSTATUS02">已取消</option>
+                        <option value="AFSTATUS05">已关闭</option>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;
+                    <button class="btn btn-small btn-primary" onclick="TimeAlarmInfo()">
+                        查询</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="rightmenu" class="menuJtopo" style="display: none;">
+    </div>
+    <div id="clickmenu" class="outsideJtopo" style="display: none;">
+        <div class="menuJtopo" id="inside">
+        </div>
+        <sjtopo><iJtopo></iJtopo></sjtopo>
+    </div>
+    <div id="content">
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>检测计划管理</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        loadControl("layer");
+        loadControl("mySelectTree");
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <link href="/Lib/jquery.easyui/easyui.css" rel="stylesheet" />
+    <script src="/Lib/jquery.easyui/jquery.easyui.min.js"></script>
+    <script src="/Lib/jquery.easyui/easyui-lang-zh_CN.js"></script>
+    <script src="/Lib/jquery.easyui/datagrid-detailview.js"></script>
+    <link href="/Common/MPlan/css/PlanManagement.css" rel="stylesheet" />
+    <script src="/Common/MPlan/js/PlanManagement.js"></script>
+</head>
+<body>
+    <div class="html_title">
+        <span class="pic pic_1"></span>
+        <h4>检测计划管理</h4>
+    </div>
+    <div class="main">
+        <div class="main_search">
+            <span>
+                <label>检测计划日期：</label>
+                <input id="startdate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /> 至 
+                <input id="enddate" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+            </span>
+            <span>
+                <label>添乘部门：</label>
+                <input type="text" id="department"/>
+            </span>
+            <span>
+                <label>线路：</label>
+                <select id="lineselect" name="lineselect">
+                    <option value="0">全部</option>
+                </select>
+            </span>
+            <span>
+                <label>行别：</label>
+                <input type="text" id="direction" />
+            </span>
+            <span>
+                <button type="button" id="btn_search" onclick="doQuery();" class="btn btn-small btn-primary">查 询</button>
+                <button type="button" id="btn_add" onclick="AddPlan();" class="btn btn-small btn-primary">添 加</button>
+            </span>
+        </div>
+        <div class="main_content">
+            <table id="main_content" style="width: 100%;" url="" toolbar="#toolbar" pagination="true" fitcolumns="true"
+                   singleselect="true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'CZ'" width="40" align="center">
+                            操作
+                        </th>
+                        <th data-options="field:'CATEGORY_NAME'" width="30" align="center">
+                            检测类型
+                        </th>
+                        <th data-options="field:'START_DATE'" width="40" align="center">
+                            计划开始日期
+                        </th>
+                        <th data-options="field:'END_DATE'" width="40" align="center">
+                            计划结束日期
+                        </th>
+                        <th data-options="field:'LOCOMOTIVE_NO'" width="30" align="center">
+                            车次
+                        </th>
+                        <th data-options="field:'LOCOMOTIVE_CODE'" width="30" align="center">
+                            车号
+                        </th>
+                        <th data-options="field:'PASSEN_DEPT'" width="30" align="center">
+                            添乘部门
+                        </th>
+                        <th data-options="field:'PASSENGER'" width="30" align="center">
+                            添乘人员
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+    <a id="modal-22256" class="btn" role="button" href="#modal-container-22256" data-toggle="modal"
+       style="display: none"></a>
+    <div aria-hidden="true" id="modal-container-22256" class="modal hide fade" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-body" style="width: 100%; height: 100%;padding:0;">
+            <iframe id="iframe_add" name="iframe_add" style="width: 100%; height: 99%;" seamless src="" scrolling="no" frameborder="0"></iframe>
+        </div>
+        <div class="modal-footer" style="margin: 30px 0; text-align:center;display:none;">
+            <button id="close" aria-hidden="true" class="btn btn-primary" data-dismiss="modal" style="margin-left: 10px">
+                关闭
+            </button>
+        </div>
+    </div>
+</body>
+</html>

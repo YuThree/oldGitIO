@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>报警与巡检对比分析</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta charset="utf-8" />
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Lib/Echarts-3.0/echarts.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl('flexigrid');
+        loadControl('elevatezoom');
+        loadControl('jqueryUI_2');
+        loadControl('layer');
+        loadCss('/C3/PC/MAlarmMonitoring/css/alarm_inspection_analysis.css?v=' + version);
+        loadJs('/C3/PC/MAlarmMonitoring/js/alarm_inspection_analysis.js?v=' + version);
+    </script>
+</head>
+<body>
+    <div class="row-fluid row-height">
+        <!-- 对比分析 -->
+        <div class="row-fluid">
+            <div class="box-title">
+                <h1>报警与巡检对比分析</h1>
+                <table id="top-table-param" class="top-table">
+                    <tr>
+                        <td class="col15"><span class="color-darkBlue">支柱</span></td>
+                        <td class="col16"><span class="btn-arrow j-prev-pole" title="上一杆">&laquo;</span><span id="data-pole-number" code="" class="btn-arrow j-pole-detail"></span><span class="btn-arrow j-next-pole" title="下一杆">&raquo;</span></td>
+
+                        <td class="col2"></td>
+                        <td class="col15"><span class="color-darkBlue">线路</span></td>
+                        <td class="col16"><span id="data-line-name"></span></td>
+
+                        <td class="col2"></td>
+                        <td class="col15"><span class="color-darkBlue">区站</span></td>
+                        <td class="col25"><span id="data-position-name"></span></td>
+
+                        <td class="col2"></td>
+                        <td class="col15"><span class="color-darkBlue">行别</span></td>
+                        <td class="col16"><span id="data-direction"></span></td>
+
+                        <td class="col2"></td>
+                        <td class="col15"><span class="color-darkBlue">公里标</span></td>
+                        <td class="col16"><span id="data-km-mark-o"></span></td>
+                    </tr>
+                </table>
+                <input type="hidden" id="data-bridge-tune" />
+            </div>
+            <div class="box-car-content">
+                <!--巡检信息轮播-->
+                <div class="carousel-box">
+                    <!-- 左箭头 -->
+                    <a class="carousel-arrow-left j-slide-left"><img src="img/arrow_left.jpg" /></a>
+                    <!-- 巡检信息 -->
+                    <div id="carousel-info" class="info-box">
+                        <ul id="car-info" class="ul-car-info">
+                            <!--<li class="li-dark-blue">
+                                <span class="icon-new"></span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>1</span>
+                                <input line-inspect-id="" type="hidden" />
+                            </li>-->
+                            <!--<li class="current li-blue border-green">
+                                <span class="icon-flag icon-camera-white"></span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>1</span>
+                                <input line-inspect-id="" type="hidden" />
+                            </li>
+                            <li class="border-gray">
+                                <span class="icon-flag icon-camera-blue"></span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>1</span>
+                                <input line-inspect-id="" type="hidden" />
+                            </li>-->
+                            <!--<li class="border-green current">
+                                <span class="pic-flag pic-camera pic-camera-green"></span>
+                                <span class="padding-top">2016-08-30 14:54:45</span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>1</span>
+                                <input line-inspect-id="" type="hidden" />
+                                <span class="blank-white blank-green" isSelect="T"></span>
+                            </li>
+                            <li class="border-gray">
+                                <span class="pic-flag pic-camera pic-camera-gray"></span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>2016-08-30 14:54:45</span>
+                                <span>1</span>
+                                <input line-inspect-id="" type="hidden" />
+                                <span class="blank-white" isSelect="F"></span>
+                            </li>-->
+                        </ul>
+                    </div>
+                    <!-- 右箭头 -->
+                    <a class="carousel-arrow-right j-slide-right"><img src="img/arrow_right.jpg" /></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <!--报警、巡检信息详情-->
+                <div class="box-table-info">
+                    <table class="con-table-info">
+                        <tr>
+                            <td class="padding-right" colspan="2">报警信息</td>
+                            <td class="td-border bg-gray"></td>
+                            <td class="padding-left" colspan="2">巡检信息</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" rowspan="2">
+                                <!--第一列-->
+                                <!-- 报警播放控制 -->
+                                <div id="alarm-note">
+                                    <a href="javascript:void(0)" class="note-1 j-alarm-note-1" title="上一张"><img src="img/player_prev.png" alt="上一张" />       </a>
+                                    <a href="javascript:void(0)" class="note-2 j-alarm-note-2" title="播放/暂停"><img src="img/player_play.png" alt="播放/暂停" /> </a>
+                                    <a href="javascript:void(0)" class="note-3 j-alarm-note-3" title="下一张"><img src="img/player_after.png" alt="下一张" />      </a>
+                                    <div id="alarm-slider"></div>
+                                </div>
+                                <input type="hidden" id="alarm-default-surface" surface="A" />
+                            </td>
+                            <td class="text-dark-blue"><span id="alarm-raised-time"><!--2016/8/30 14:54:45--></span></td>
+                            <td class="bg-gray">发生日期</td>
+                            <td class="text-default-blue"><span id="inspection-raised-time"><!--2016/8/30 14:54:45--></span></td>
+                            <td rowspan="2" class="text-center">
+                                <!--最后列-->
+                                <!-- 巡检播放控制 -->
+                                <div id="inspection-note">
+                                    <a href="javascript:void(0)" class="note-1 j-inspection-note-1" title="上一张"><img src="img/player_prev.png" alt="上一张" />       </a>
+                                    <a href="javascript:void(0)" class="note-2 j-inspection-note-2" title="播放/暂停"><img src="img/player_play.png" alt="播放/暂停" /> </a>
+                                    <a href="javascript:void(0)" class="note-3 j-inspection-note-3" title="下一张"><img src="img/player_after.png" alt="下一张" />      </a>
+                                    <a href="javascript:void(0)" class="note-4 j-inspection-note-4" title="正面"><img src="img/player_surface_A_hover.png" alt="正面" />      </a>
+                                    <a href="javascript:void(0)" class="note-5 j-inspection-note-5" title="反面"><img src="img/player_surface_B.png" alt="反面" />      </a>
+                                    <div id="inspection-slider"></div>
+                                </div>
+                                <input type="hidden" id="inspection-default-surface" surface="A" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right padding-right"><span id="alarm-locomotive-code"><!--CRH5G-5175--></span></td>
+                            <td class="bg-gray">设备编号</td>
+                            <td class="text-left padding-left"><span id="inspection-locomotive-code"><!--CRH5G-5175--></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right padding-right" colspan="2"><span id="alarm-analysis">干扰 一类 1610101124 天窗检修 slslsl... 线夹打弓 已确认</span></td>
+                            <td class="bg-gray">报警分析</td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!--报警、巡检图像详情-->
+                <div class="box-table-img">
+                    <table class="con-table-img">
+                        <tr>
+                            <td><img id="alarm-infrared" class="j-alarm-infrared" src="img/无图.png" /><!--报警 红外图像--></td>
+                            <td rowspan="2">红<br />外<br />图<br />像</td>
+                            <td><img id="inspection-infrared" class="j-inspection-infrared" src="img/无图.png" /><!--巡检 红外图像--></td>
+                        </tr>
+                        <tr>
+                            <td><span id="alarm-infrared-param"><!--报警 最高温度：97℃ 环境温度：18℃ 导高值：5495mm 拉出值：111mm 速度：229km/h--></span></td>
+                            <td><span id="inspection-infrared-param"><!--巡检 最高温度：97℃ 环境温度：18℃ 导高值：5495mm 拉出值：111mm 速度：229km/h--></span></td>
+                        </tr>
+                        <tr>
+                            <td><img id="alarm-visible-light" class="j-alarm-visible-light" src="img/无图.png" /><!--报警 可见光图像--></td>
+                            <td>可<br />见<br />光<br />图<br />像</td>
+                            <td><img id="inspection-visible-light" class="j-inspection-visible-light" src="img/无图.png" /><!--巡检 可见光图像--></td>
+                        </tr>
+                        <tr>
+                            <td><img id="alarm-panorama" class="j-alarm-panorama" src="img/无图.png" /><!--报警 全景图像--></td>
+                            <td>全<br />景<br />图<br />像</td>
+                            <td><img id="inspection-panorama" class="j-inspection-panorama" src="img/无图.png" /><!--巡检 全景图像--></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-black"><div id="alarm-temperature"><!--报警 温度曲线图--></div></td>
+                            <td>温<br />度<br />曲<br />线<br />图</td>
+                            <td class="bg-black"><div id="inspection-temperature"><!--巡检 温度曲线图--></div></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-black"><div id="alarm-pull-out"><!--报警 拉出曲线图--></div></td>
+                            <td>拉<br />出<br />曲<br />线<br />图</td>
+                            <td class="bg-black"><div id="inspection-pull-out"><!--巡检 拉出曲线图--></div></td>
+                        </tr>
+                        <tr>
+                            <td class="bg-black"><div id="alarm-high-conductivity"><!--报警 导高曲线图--></div></td>
+                            <td>导<br />高<br />曲<br />线<br />图</td>
+                            <td class="bg-black"><div id="inspection-high-conductivity"><!--巡检 导高曲线图--></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

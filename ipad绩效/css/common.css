@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    font-weight: 400;
+    background: rgba(243,245,247,1);
+}
+.y_clear{
+    clear: both;
+}
+.y_left{
+    float: left;
+}
+.y_right{
+    float: right;
+}
+.y_center{
+    text-align: center;
+}
+/* nav区 ------------------------------------start*/
+nav{
+    height:60px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 2px 13px 0px rgba(217,217,217,0.5);
+    padding: 0 16px;
+}
+nav>div{
+    display: inline-block;
+    height:60px;
+    line-height:60px;
+}
+.y_logText{
+    font-size:19px;font-weight: bold;
+    color:rgba(87,87,87,1);
+}
+/* 查询条件-----------------------------start */
+.y_queryBox{
+    padding: 0 0 0 16px;overflow: hidden;
+}
+.y_queryBox .y_queryText{
+    margin-right: 5px;
+    color:rgba(77,84,94,1);line-height: 36px;
+}
+.y_formBox{
+    position: relative;margin-top: 10px;
+    display: inline-block;margin-right: 30px; line-height: 36px;
+}
+.y_formBox input,.y_formBox select{
+    width:120px;
+    height:36px;
+    background:rgba(255,255,255,1);
+    border-radius:2px;
+    border:1px solid rgba(225,225,225,1);
+    box-sizing: border-box;
+    padding-left: 5px;
+    
+}
+.y_formBox select{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+.y_haveSelect::after{
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 5px;
+    margin-left: -22px;
+    margin-right: 0px;
+    background: url('../img/CombinedShape.png') no-repeat;
+}
+.y_haveTime::after{
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: -32px;
+    margin-right: 0px;
+    margin-bottom: -3px;
+    background: url('../img/icon_time.png') no-repeat;
+}
+.y_queryButton{
+    text-align: center;
+    color: white;
+    width: 100px;
+    background:linear-gradient(90deg,rgba(79,206,252,1),rgba(49,180,249,1));
+    border-radius:3px;
+}
+.y_queryButton div{
+    background: 20px center url('../img/Group.png') no-repeat;
+}
+.y_checkButton{
+    text-align: center;
+    color: white;
+    width: 100px;
+    background:linear-gradient(90deg,rgba(255,153,32,1),rgba(247,111,30,1));
+    border-radius:3px;
+}
+.marginL20{margin-left: 20px;}
+.marginL15{margin-left: 15px;}
+.marginL10{margin-left: 10px;}
+.marginL0{margin-left: 0px;}
+.marginR20{margin-right: 20px;}
+.marginR15{margin-right: 15px;}
+.marginR10{margin-right: 10px;}
+.marginR0{margin-right: 0px;}
+.marginT_10{margin-top: -10px;}
+.y_w100{width: 100%;}
+/* list ---------------------------------------------start */
+.y_listBox{
+    padding: 10px;box-sizing: border-box;
+    color: #464F5C;overflow: hidden;
+}
+.y_listBox .y_listBody div,.y_listBox .y_listTitle{
+    display: -webkit-flex;
+    display: flex;
+    height: 50px;
+}
+.y_listBox .y_listTitle{
+    font-size: 15px;
+    font-weight: bold;
+    background:linear-gradient(180deg,rgba(225,233,248,1),rgba(234,245,255,1)) rgba(250,251,252,1);
+}
+.y_listBody>div:nth-child(2n+1){
+    background:rgba(255,255,255,1);
+}
+.y_listBody>div:nth-child(2n){
+    background:rgba(248,252,254,1);
+}
+.y_listBox span{
+    display: inline-block;text-align: center;
+}
+.y_listBox .y_listSpan{
+    line-height: 50PX;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.y_listBody>div{
+    box-sizing: border-box;
+    border-top: 1px solid rgba(230,234,238,1);
+}
+.y_listBody{
+    overflow-y: auto;
+}
+.y_listSpan span{
+    color: #23A1DF;
+}
+.item1 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+.item1p3 {
+    -webkit-flex: 1.3;
+    flex: 1.3;
+}
+.item2 {
+    -webkit-flex: 2;
+    flex: 2;
+}
+
+.y_model{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.7);
+    top:0;
+    left: 0;
+    display: none;
+}
+.y_model .y_modelBox{
+    width: 289px;position: absolute;
+    height: 230px;margin-left: -145px;margin-top: -115px;
+    background:rgba(255,255,255,1);top:0;left: 50%;opacity: 0;
+    box-sizing: border-box;
+    padding-top: 27px;
+    border-radius: 5px;overflow: hidden;
+}
+.y_model .y_modelBoxPng{
+    height: 52px;
+    background: center center no-repeat url(../img/Warner.png)
+}
+.y_model .y_modelBoxText{
+    margin-top: 25px;
+    line-height: 25px;font-size: 15px;color: #888888;
+}
+.y_model .y_modelBoxButton{
+    box-sizing: border-box;font-size: 17px;
+    width: 50%;height: 47px;line-height: 47px;
+    border-top:1px solid rgba(241,241,241,1);
+}
+.y_model .y_modelBoxFoot{
+    position: absolute;width: 100%;
+    bottom: 0;overflow: hidden;
+}
+.sure{
+    color: white;background:#30B3F9;
+}
+.cancel{
+    color: #30B3F9;background: white
+}

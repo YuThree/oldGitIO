@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>健康信息卡</title>
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <link rel="stylesheet" type="text/css" href="../../css/tabCom/tabCom.css" />
+    <!-- 下拉css -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/simulationSelect/selectStyle.css" />
+    <!--选单个时间插件-->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/datatime/lq.datetimepick.css" />
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+
+    <!-- 独自页面-->
+    <link rel="stylesheet" href="../../css/healthCard.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="main" class="mainBox">
+        <div class="cdct_toolbar cdct_clearfix">
+            <div class="cdct_icon cdct_i1">保存</div>
+        </div>
+        <div class="titleTop">健康信息卡</div>
+        <div class="rowScroll">
+            <div class="titleBottomBar">
+                <div class="faceText">（正面）</div>
+                <div class="faceCard cdct_clearfix">
+                    <div class="insideBox">
+                        <span class="txt">姓&ensp;&ensp;&ensp;&ensp;名</span>
+                        <input type="text" class="cdct_input">
+                    </div>
+                    <div class="insideBox">
+                        <span class="txt">性&ensp;&ensp;&ensp;&ensp;别</span>
+                        <input type="text" class="cdct_input">
+                    </div>
+
+                    <div class="insideBox">
+                        <span class="txt">出生日期</span>
+                        <input type="text" class="cdct_input">
+                    </div>
+                    <div class="insideBox">
+                        <span class="txt">健康档案编号</span>
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <input type="number" class="cdct_input littleInput" maxlength="1">
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <span class="txtG">一</span>
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                        <input type="text" class="cdct_input littleInput" maxlength="1">
+                    </div>
+                    <div class="insideBox">
+                        <span class="txt">ABO血型</span>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz1" type="radio" name="xx">
+                            <label for="zz1">A</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz2" type="radio" name="xx">
+                            <label for="zz2">B</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz3" type="radio" name="xx">
+                            <label for="zz3">C</label>
+                        </div>
+                    </div>
+                    <div class="insideBox">
+                        <span class="txt">RH 血型</span>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz4" type="radio" name="rh">
+                            <label for="zz4">Rh阴性</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz5" type="radio" name="rh">
+                            <label for="zz5">Rh阳性</label>
+                        </div>
+                        <div class="cdct_radio cdct_radio_suc">
+                            <input id="zz6" type="radio" name="rh">
+                            <label for="zz6">其他</label>
+                        </div>
+                    </div>
+                    <div class="insideBox">
+                        <span class="txt">慢性病患者情况</span>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm1" type="checkbox">
+                            <label for="mm1">无</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm2" type="checkbox">
+                            <label for="mm2">高血压</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm3" type="checkbox">
+                            <label for="mm3">烦躁不安</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm4" type="checkbox">
+                            <label for="mm4">糖尿病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm5" type="checkbox">
+                            <label for="mm5">脑卒中</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm6" type="checkbox">
+                            <label for="mm6">冠心病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm7" type="checkbox">
+                            <label for="mm7">哮喘</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm8" type="checkbox">
+                            <label for="mm8">职业病</label>
+                        </div>
+                        <div class="cdct_chk cdct_chk_suc">
+                            <input id="mm9" type="checkbox">
+                            <label for="mm9" class="marginR10">其他疾病</label>
+                            <input type="text" class="cdct_input">
+                        </div>
+                    </div>
+                    <div class="areaDiv">
+                        <span class="txt cdct_left">过敏史</span>
+                        <div class="area" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"
+                            data-pmtNum=300 data-pmtTextArea="1">
+                            <textarea class="cdct_textarea" placeholder=""></textarea >
+                							<div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+                						</div>
+                                    </div>
+                            </div>
+                            <div class="faceText">（反面）</div>
+                            <div class="faceCard cdct_clearfix">
+                                    <div class="insideBox">
+                                        <span class="txt">家庭住址</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">家庭电话</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">紧急情况联系人</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">联系人电话</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">建档机构名称</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">联系电话</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">责任医生或护士</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="insideBox">
+                                        <span class="txt">联系电话</span>
+                                        <input type="text" class="cdct_input">
+                                    </div>
+                                    <div class="areaDiv">
+                                        <span class="txt cdct_left">其他说明</span>
+                                        <div class="area" data-pmtTextString="<div style='float:right'><span style='color:#2da1f8;'>{N}字</span>/<span style='color:#7f8fa4;padding-left:0px;'>{A}字</span></div>"
+                                            data-pmtNum=300 data-pmtTextArea="1">
+                                            <textarea class="cdct_textarea" placeholder=""></textarea >
+                                                <div data-pmtTextShow="1" class="cdct_textareaInfo"></div>
+                                            </div>
+                                        </div>
+                                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- jq -->
+    <script src="../../common/js/jquery.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+
+    
+	<!-- 文本域 -->
+	<script type="text/javascript" src="../../jsControl/textArea/textarea.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 滚动条
+            $(".rowScroll").panel({
+                iWheelStep: 32,
+            });
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

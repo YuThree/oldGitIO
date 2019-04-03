@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    font-weight: 400;
+    background:center center no-repeat url(../img/loginBg.png);
+    background-size: cover;
+}
+
+.y_outBox {
+    height: 276px;
+    width: 346px;
+    /* background: red; */
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-top: 316px;
+    margin-left: -173px;
+    background:rgba(255,255,255,1);
+    opacity:0.9;
+    border-radius:8px;
+    box-shadow:10px 0px 24px rgba(38,67,109,0.3);
+}
+
+.y_top {
+    height: 182px;
+    width: 100%;
+    margin: auto;
+    background: no-repeat center center url(../img/LOGO.png);
+    background-size:contain;
+    margin-top: 87px;
+}
+
+.y_content {
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.y_content .y_borderBox {
+    border-radius: 5px;
+}
+
+.y_bottom {
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 50px;position: absolute;
+    bottom: -80px;
+    left:87px;
+    font-size: 12px;
+}
+.y_ogin{
+    overflow: hidden;position: relative;
+    border-bottom: #19A7FF 1px solid;
+    margin-bottom: 30px;
+}
+.y_borderBox{
+    width: 100%;
+    padding: 44px 44px 5px 44px;
+    box-sizing: border-box
+}
+
+.y_ogin>div {
+    display: inline-block;
+    float: left;
+}
+
+.y_ogin .y_removeValue{
+    font-size: 14px;position: absolute;right: 0;
+    display: none;top: 10px;
+}
+
+.y_ogin .y_label {
+    width: 22px;
+    height: 38px;
+}
+.y_use{
+    background: no-repeat center center url(../img/icon_user.png)
+}
+.y_pasw{
+    background: no-repeat center center url(../img/icon_02.png)
+}
+
+
+
+.y_content input {
+    box-sizing: border-box;
+    padding-left: 17px;
+    width: 220px;
+    height: 39px;
+    background-color: transparent;
+    text-decoration: none;
+    color: #000000;
+    text-align: left;
+    border-color: transparent;
+    outline-style: none;
+}
+
+.y_button {
+    text-align: center;
+    width:264px;
+    height:45px;color: #FFFFFF;font-size: 16px;
+    background:rgba(25,167,255,1);
+    border-radius:4px;
+    height: 45px;
+    line-height: 45px;
+    margin: auto;
+}
+.y_clear{
+    clear: both;
+}

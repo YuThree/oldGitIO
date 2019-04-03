@@ -1,0 +1,77 @@
+
+.showTable{
+    box-sizing: border-box;
+
+    float: left;
+    width: 100%;}
+.showTable .showTableHeadScroll{
+    width: 100%;
+    text-align: center;
+}
+
+.showTable .showTableHead{
+    height: 45px;
+    line-height: 45px;
+    box-sizing: border-box;
+}
+.showTable .showTableHeadScroll .showTableHTr:after,.showTable .showTableBodyScroll .showTableTr:after{
+    display: block;
+    content: " ";
+    clear: both;
+    font-size: 0;
+}
+.showTable .showTableBodyScroll .showTableT,.showTable .showTableHeadScroll .showTableHTr{
+    width: 100%;
+}
+.showTable .showTableHeadScroll .showTableHTd,.showTable .showTableBodyScroll .showTableTd{
+    float: left;
+}
+.showTable .showTableBodyScroll .showTableTd{
+    height: 36px;
+    line-height: 36px;
+}
+
+
+/*head td*/
+.showTable .showTableHeadScroll .showTableHTd,.showTable .showTableBodyScroll .showTableTd{
+     box-sizing: border-box;
+     border:1px solid #e6eaee;
+     border-right: none;
+ }
+.showTable .showTableHeadScroll .showTableHTd{
+    color: #464F5C;
+}
+.showTable .showTableBodyScroll .showTableTd{
+    border-top:none;
+}
+
+
+.showTable .showTableHeadScroll .showTableHTd:last-child,.showTable .showTableBodyScroll .showTableTd:last-child{
+
+    border-right:1px solid #e6eaee;
+
+}
+
+.showTable .showTableHeadScroll .showTableHTr,.showTable .showTableBodyScroll .showTableTr{
+    width: 100%;
+    text-align: center;
+}
+.showTable .showTableBodyScroll .showTableTr.two,.showTable .showTableHeadScroll .showTableHTr.one{
+    background-color: #f6fafc;
+}
+.showTable .showTableBodyScroll .showTableTr.one{
+    background-color: #ffffff;
+}
+.showTable .showTableBodyScroll .showTableTr.select,.showTable .showTableBodyScroll .showTableTr.two.select{
+    background-color: rgba(235,173,32,0.25);
+}
+.showTable .showTableBody{
+    width: 100%;
+}
+.showTable  .showTableBodyScroll{
+    width: 100%;
+    min-height: 100px;
+}
+.showTable .showTableHeadScroll .showTableHTr:hover, .showTable .showTableBodyScroll .showTableTr:hover {
+    background-color: #e9f6fe;
+}

@@ -1,0 +1,118 @@
+/*带逗号开始*/
+
+/*带逗号结束*/
+
+
+/*不带逗号开始*/
+/*最大盒子的容器样式*/
+.mainBox{
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    height: -webkit-calc(100% - 20px);
+    width: -webkit-calc(100% - 20px);
+    height: -moz-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    height: -ms-calc(100% - 20px);
+    width: -ms-calc(100% - 20px);
+    height: -o-calc(100% - 20px);
+    width: -o-calc(100% - 20px);
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+/*顶部样式*/
+.mainBox .titleTop{
+    width: 100%;
+    background-color: #a17ded;
+    color: white;
+    text-align: center;
+    border-radius: 4px 4px 0 0 ;
+    height: 60px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 60px;
+}
+.rowScroll{
+    height: calc(100% - 120px);
+}
+/*顶部下面的样式*/
+.mainBox .titleBottomBar{
+    width: 100%;
+    
+    box-sizing: border-box;
+    background: #FFFFFF;
+    padding: 0 35px 0 35px;
+    overflow: hidden;
+}
+.faceText{
+    color:#2CA9E8;
+    font-size: 16px;
+    margin-top: 33px;margin-bottom: 12px;text-align: center;
+}
+.faceCard{
+    border: 1px solid rgba(206,208,218,1);
+    padding: 15px 30px 15px 30px;
+}
+.insideBox{
+    display: inline-block;
+    height: 36px;margin-right: 30px;margin-bottom: 20px;
+}
+.nomarginR{
+    margin-right: 0;
+}
+.titleBottomBar  .txt{
+    display: inline-block;
+    width: 60px;
+    margin-right: 10px;
+    word-wrap: break-word;    
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.titleBottomBar .txtG{
+    display: inline-block;
+    color: #7f8fa4;
+    margin-right: 0;
+    width: 16px;
+}
+.titleBottomBar  .txt .t{
+    color: #7f8fa4;
+    font-size: 14px;
+}
+.titleBottomBar  .txt .info {
+    font-weight: 400;
+    color: #7f8fa4;
+}
+.littleInput{
+    width: 36px;
+}
+
+.cdct_chk, .cdct_radio{
+    margin-right: 30px;
+}
+.marginR10{
+    margin-right: 10px;
+}
+.area{
+    position: relative;
+    float: left;
+    margin-left: 4px;
+    width: calc(100% - 85px);
+}
+.cdct_textarea{
+    resize: none;
+}
+/*不带逗号结束*/
+
+@media screen and (max-width: 1362px){
+    .areaDiv{
+        margin-top: 20px;
+    }
+}
+
+
+
+
+
+

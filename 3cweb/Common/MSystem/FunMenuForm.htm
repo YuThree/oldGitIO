@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>菜单详细</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("Validation");
+        loadControl("form");
+    </script>
+    <!-- 日期控件 -->
+    <script src="/Common/MSystem/script/FunMenu.js" type="text/javascript"></script>
+</head>
+<body onload="funMenuForm()">
+    <div class="row-fluid ">
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header well" data-original-title>
+                    <h2>
+                        <i class="icon-edit"></i>菜单详细信息</h2>
+                </div>
+                <div class="box-content">
+                    <form id="funMenuForm" method="post">
+                    <table cellspacing="1" cellpadding="1" width="100%">
+                        <tr>
+                            <td>
+                                父编码：
+                            </td>
+                            <td colspan="2">
+                                <div id="divSUBCODE" class="control-group error">
+                                    <input id="SUBCODE" name="SUBCODE" type="text" onblur="removeClass(this);" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                编码：
+                            </td>
+                            <td>
+                                <div id="divCODE" class="control-group error">
+                                    <input id="CODE" name="CODE" type="text" onblur="removeClass(this);" />
+                                </div>
+                            </td>
+                            <td>
+                                名称：
+                            </td>
+                            <td>
+                                <div id="divNAME" class="control-group error">
+                                    <input id="NAME" name="NAME" type="text" onblur="removeClass(this);" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                相对路径：
+                            </td>
+                            <td>
+                                <input id="URL" name="URL" type="text" />
+                            </td>
+                            <td>
+                                样式：
+                            </td>
+                            <td>
+                                <input id="IMG" name="IMG" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                是否停用：
+                            </td>
+                            <td>
+                                <input id="FLAG" name="FLAG" type="text" />
+                            </td>
+                            <td>
+                                是否顶级：
+                            </td>
+                            <td>
+                                <input id="LEAF" name="LEAF" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                所属模块：
+                            </td>
+                             <td colspan="3">
+                               <input id="PARENTCODE" name="PARENTCODE" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: center">
+                                <input id="btnSave" type="button" class="btn btn-primary" onclick="funMenuSave()" style="width: 70px;"
+                                       value="保存" />
+                                <input id="btnClose" type="button" class="btn btn-primary" onclick="parent.document.getElementById('close').click();" style="width: 70px;"
+                                       value="取消" />
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+/*带逗号开始*/
+.searchNav .boxInputInfo:after,.searchNav:after,.searchNav .contentBox:after{
+    clear: both;
+    content: " ";
+    display: block;
+}
+.searchNav .boxInputInfo,.searchNav .boxRadioInfo,.searchNav .boxSelectInfo,.searchNav .moreInfo{
+    font-size: 0;
+    float: left;
+    margin-top: 16px;
+    margin-left: 20px;
+    position: relative;
+    height: 36px;
+}
+
+/*带逗号结束*/
+
+/*搜索导航样式*/
+.vMiddle{
+    vertical-align: middle;
+}
+.maskEle{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.05);
+}
+.vPosAbsMiddle{
+    position: relative;
+    top: 50%;
+    float: left;
+    margin-left: 10px;
+    margin-top: -18px;
+}
+.searchInfoIcon{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-image: url(../../common/img/search.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.searchNav {
+    width: 100%;
+    min-height: 68px;
+    position: relative;
+    max-height: 120px;
+    padding-bottom: 16px;
+    background-color: #f6f9fb;
+    border: 1px solid #e6eaee;
+    border-bottom: 0px;
+}
+/*.searchNav .contentBox>:first-child{
+    margin-left: 15px;
+}*/
+.searchNav .lineA{
+    border:1px dashed #e6eaee;
+    position: absolute;
+    width: 100%;
+    z-index: 10000;
+    left: 0;
+    top: 60px;
+}
+.searchNav .lineB{
+    border:1px solid #e6eaee;
+    position: absolute;
+    width: 100%;
+    z-index: 100000;
+    left: 0;
+    top: 112px;
+}
+.searchNav .boxInputInfo .inputParent{
+    display: inline-block;
+    position: relative;
+}
+.searchNav .boxInputInfo .cdct_input{
+    width: 200px;
+}
+
+.searchNav .boxInputInfo .lqdataInput.w2 .cdct_input{
+    width: 200px;
+}
+.searchNav .boxInputInfo .searchInfoIcon{
+    top: 50%;
+    margin-top: -7px;
+    right: 10px;
+}
+.searchNav .moreInfo .selectDownIcon{
+    display: inline-block;
+    vertical-align: middle;
+    width: 9px;
+    height: 6px;
+    background-position: center;
+    background-image: url(../../common/img/icon_gdtj.png);
+    background-repeat: no-repeat;
+
+}
+.searchNav .moreInfo .txt{
+    vertical-align: middle;
+    color: #33b4fa;
+}
+.searchNav .moreInfo{
+    height: 36px;
+    line-height: 36px;
+    position: absolute;
+    right: 80px;
+    top: 62px;
+    z-index: 1000000;
+    cursor: pointer;
+}
+.searchNav .contentBox{
+    width: calc(100% - 224px);
+    width: -moz-calc(100% - 224px);
+    width: -ms-calc(100% - 224px);
+    width: -webkit-calc(100% - 224px);
+    width: -o-calc(100% - 224px);
+    min-height: 68px;
+    height: auto;
+    position: absolute;
+    z-index: 10000;
+    background-color: #EBF2F7;
+}
+.searchNav .btnClass .btnParentClass{
+    position: absolute;
+    width: 224px;
+    right: 0px;
+    top: 0%;
+    background-color: #EBF2F7;
+    height: 100%;
+    max-height: 170px;
+    z-index: 100000;
+}
+.searchNav .btnClass{
+    position: absolute;
+    width: 224px;
+    right: 0px;
+    top: 0%;
+    background-color: #EBF2F7;
+    height: 100%;
+    z-index: 11000;
+}
+.searchNav .boxInputInfo .cdct_input.cdct_inputTwo{
+    width: 80px;
+}
+.labelInpTwo{
+    display: inline-block;
+    line-height: 18px;
+    width: 81px;
+    color: #464F5C;
+}
+.cdct_chk, .cdct_radio {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    height: 36px;
+    line-height: 36px;
+}
+/*分页盒子的样式*/
+.pagetable{
+    width: 100%;
+    height:80px;
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    border: 1px solid #e6eaee;
+}
+.pageFather {
+    position: relative;
+    overflow: hidden;
+    margin-top:22px;
+}
+/*不带逗号结束*/
+
+/*一些样式的重写开始*/
+/*导航框*/
+.cdct_toolbar{
+    margin-bottom: 0;
+    border-bottom: none;
+}
+/*单选框*/
+.searchNav .boxRadioInfo{
+    padding-top: 3px;
+}
+/*下拉框*/
+[data-selectSimu="1"] .selectBox{
+    margin-right: 0;
+    width: 200px;
+    background-color: white;
+}
+.cdct_select{
+    display: inline-block;
+}
+.cdct_chk, .cdct_radio{
+    margin-right: 10px;
+}
+[data-selectSimu="1"] .ulParent{
+    z-index: 10000000;
+}
+/*开始结束时间*/
+.searchNav .boxInputInfo .cdct_input.daterangepickerInp{
+    width: 220px;
+    padding-left: 30px;
+}

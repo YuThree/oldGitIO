@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高危妊娠评分表</title>
+    <meta charset="UTF-8">
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="../../common/css/COMMONT.css">
+    <!-- 通用样式 -->
+
+    <!-- 滚动条样式 -->
+    <link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+    <!-- 滚动条样式 -->
+
+    <!-- 时间控件样式 -->
+    <link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+    <!-- 时间控件样式 -->
+
+    <!-- 验证样式 -->
+    <link rel="stylesheet" href="../../jsControl/validate/validata.css">
+    <!-- 验证样式 -->
+
+    <!-- 侧边菜单栏 -->
+    <link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+    <!-- 表格 -->
+    <link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+    <!-- 独自样式 -->
+    <link rel="stylesheet" href="../../css/maternal/highPregnancy.css">
+    <!-- 独自样式 -->
+ 
+    
+</head>
+<body>
+    <form id="signupForm">
+        <div class="cdct_tableTitle">高危妊娠评分表</div>
+        <div class="cdct_row cdct_row1_col1 cdct_clearfix">
+          <label class="cdct_inputLable cdct_left">姓名:<input type="text" class="cdct_inputLine cdct_line175"></label>
+          <label class="cdct_inputLable cdct_left poi">评分时间:<input type="text" class="cdct_inputLine cdct_line175 datepicker"></label>
+          <label class="cdct_inputLable cdct_left poi">评分孕周:<input type="text" class="cdct_inputLine cdct_line80">周</label><input type="text" class="cdct_inputLine cdct_line80">天
+        </div>
+        <div class="scrollJS">
+            <div class="z-Box">
+                <!-- 项目 -->
+                <div class="cdct_row cdct_rows_col5">
+                    <div class="cdct_rowLeft">
+                        <span class="cdct_tit">项目</span>
+                    </div>
+                    <div class="cdct_rowRight">
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox2  xmBox">
+                                5分(A级)
+                            </div>
+                            <div class="cdct_col pointBox2  xmBox">
+                                10分(B级)
+                            </div>
+                            <div class="cdct_col pointBox2  xmBox">
+                                20分(c级)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 项目 -->
+
+                <!-- 基本情况 -->
+                <div class="cdct_row cdct_rows_col5">
+                    <div class="cdct_rowLeft">
+                        <span class="cdct_tit">基本情况</span>
+                    </div>
+                    <div class="cdct_rowRight">
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc1" value="5" type="checkbox">
+                                    <label for="chk_suc1">1.年龄＜18岁或≥35岁</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc2" value="10" type="checkbox">
+                                    <label for="chk_suc2">1.年龄≥40岁</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc3" value="20" type="checkbox">
+                                    <label for="chk_suc3">1.胸廓畸形伴轻度肺功能不全</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc4" value="5" type="checkbox">
+                                    <label for="chk_suc4">2.身高≤145cm</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc5" value="10" type="checkbox">
+                                    <label for="chk_suc5">2.身高≤145cm伴体重≤40kg</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc6" value="20" type="checkbox">
+                                    <label for="chk_suc6">2.体质指数:BMI＜32</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc7" value="5" type="checkbox">
+                                    <label for="chk_suc7">3.体质指数：28＞BMI＞24</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc8" value="10" type="checkbox">
+                                    <label for="chk_suc8">3.体质指数：32＞BMI＞28</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc9" value="20" type="checkbox">
+                                    <label for="chk_suc9">3.重大智力低下</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc10" value="5" type="checkbox">
+                                    <label for="chk_suc10">4.年龄≥30岁伴结婚两年不孕</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc11" value="10" type="checkbox">
+                                    <label for="chk_suc11">4.产道（软、骨）畸形，骨盆狭小</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc12" value="20" type="checkbox">
+                                    <label for="chk_suc12">4.精神病活动期</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc13" value="5" type="checkbox">
+                                    <label for="chk_suc13">5.轻度智力低下</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc14" value="10" type="checkbox">
+                                    <label for="chk_suc14 " value="20">5.中度智力低下</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc15" value="10" type="checkbox">
+                                    <label for="chk_suc15">6.精神病静止期</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 基本情况 -->
+
+                <!-- 异常妊娠分娩史 -->
+                <div class="cdct_row cdct_rows_col5">
+                    <div class="cdct_rowLeft">
+                        <span class="cdct_tit">异常妊娠分娩史</span>
+                    </div>
+                    <div class="cdct_rowRight">
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc16" value="5" type="checkbox">
+                                    <label for="chk_suc16">6.流产≥2次</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc17" value="10" type="checkbox">
+                                    <label for="chk_suc17">7.一次自然流产或早产≥2次</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc18" value="5" type="checkbox">
+                                    <label for="chk_suc18">7.国产儿死亡史</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc19" value="10" type="checkbox">
+                                    <label for="chk_suc19">8.婴儿未存活、畸形儿</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc20" value="10" type="checkbox">
+                                    <label for="chk_suc20">9.阴道难产史、疤痕子宫（剖宫产史、肌瘤剔除史）</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 异常妊娠分娩史 -->
+
+                <!-- 妊娠合并症 -->
+                <div class="cdct_row cdct_rows_col3">
+                    <div class="cdct_col cdct_colLeft">
+                        <span class="cdct_tit cdct_asterisk">妊娠合并症</span>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">心血管病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc21" value="5" type="checkbox">
+                                        <label for="chk_suc21">8.原发高血压，BP持续≥140/90mmhg</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc22" value="10" type="checkbox">
+                                        <label for="chk_suc22">10.原发高血压，BP持续160/90mmhg</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc23" value="20" type="checkbox">
+                                        <label for="chk_suc23">5.心脏病,心功能Ⅲ-Ⅳ级</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc25" value="10" type="checkbox">
+                                        <label for="chk_suc25">11.心脏病，心功能Ⅰ-Ⅱ级</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc26" value="20" type="checkbox">
+                                        <label for="chk_suc26">6.房颤</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc27" value="10" type="checkbox">
+                                        <label for="chk_suc27">12.心肌炎后遗症，心律失常</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc28" value="20" type="checkbox">
+                                        <label for="chk_suc28">7.先心(紫绀型)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc29" value="20" type="checkbox">
+                                        <label for="chk_suc29">8.肺动脉高压</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">肝病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc30" value="5" type="checkbox">
+                                        <label for="chk_suc30">10.乙、丙肝病毒携带者</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc31" value="10" type="checkbox">
+                                        <label for="chk_suc31">13.肝内胆汁淤症（ICP）</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc32" value="20" type="checkbox">
+                                        <label for="chk_suc32">9.重症肝炎</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc33" value="5" type="checkbox">
+                                        <label for="chk_suc33">9.心肌炎</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc34" value="10" type="checkbox">
+                                        <label for="chk_suc34">14.急性肝炎或慢性肝炎</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc35" value="20" type="checkbox">
+                                        <label for="chk_suc35">10.急性脂肪肝</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">肾病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc36" value="10" type="checkbox">
+                                        <label for="chk_suc36">15.肾炎伴肾功能轻度损害</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc37" value="20" type="checkbox">
+                                        <label for="chk_suc37">11.肾炎伴肾功能中度损害</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">血液病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc38" value="5" type="checkbox">
+                                        <label for="chk_suc38">11.中度贫血（60g/L≤HB＜80g/L）</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc39" value="10" type="checkbox">
+                                        <label for="chk_suc39">16.中度贫血HB＜60g/L</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc40" value="20" type="checkbox">
+                                        <label for="chk_suc40">12.再障</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc40" value="10" type="checkbox">
+                                        <label for="chk_suc40">17.血小板＜75万L</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc41" value="20" type="checkbox">
+                                        <label for="chk_suc41">13.血小板≤50万L</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">呼吸道疾病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc42" value="5" type="checkbox">
+                                        <label for="chk_suc42">12.肺结核稳定期</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc43" value="10" type="checkbox">
+                                        <label for="chk_suc43">18.肺结核活动期</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc44" value="20" type="checkbox">
+                                        <label for="chk_suc44">14.开放性、粟粒性肺结核</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc45" value="10" type="checkbox">
+                                        <label for="chk_suc45">19.哮喘</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc46" value="20" type="checkbox">
+                                        <label for="chk_suc46">15.哮喘伴肺功能不全</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">内分泌病</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc47" value="5" type="checkbox">
+                                        <label for="chk_suc47">13.甲亢、糖尿病不需要用药</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc48" value="10" type="checkbox">
+                                        <label for="chk_suc48">20.甲亢、糖尿病需要用药者</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc49" value="20" type="checkbox">
+                                        <label for="chk_suc49">16.甲亢危象、糖尿病酮症酸中毒</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">肿瘤</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc50" value="10" type="checkbox">
+                                        <label for="chk_suc50">21.子宫肌瘤或卵巢囊肿≥6cm</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc51" value="20" type="checkbox">
+                                        <label for="chk_suc51">17.恶性肿瘤</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">其他</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc52" value="5" type="checkbox">
+                                        <label for="chk_suc52">14.偶发癫痫</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc53" value="10" type="checkbox">
+                                        <label for="chk_suc53">22.癫痫需药物控制</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc54" value="20" type="checkbox">
+                                        <label for="chk_suc54">18.自身免疫性疾病活动期</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc55" value="10" type="checkbox">
+                                        <label for="chk_suc55">23.自身免疫性疾病静止期</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc56" value="20" type="checkbox">
+                                        <label for="chk_suc56">19.AIDS</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc57" value="10" type="checkbox">
+                                        <label for="chk_suc57">24.性病（梅毒、淋病）</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <!-- 妊娠合并症 -->
+
+                <!-- 妊娠并发症 -->
+                <div class="cdct_row cdct_rows_col3">
+                    <div class="cdct_col cdct_colLeft">
+                        <span class="cdct_tit cdct_asterisk">妊娠并发症</span>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">胎位不正</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc58" value="5" type="checkbox">
+                                        <label for="chk_suc58">15.孕32-36孕周横位、臀位</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc59" value="10" type="checkbox">
+                                        <label for="chk_suc59">25.≥37孕周横位、臀位</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">先兆早产胎膜早破</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc60" value="5" type="checkbox">
+                                        <label for="chk_suc60">16.34-36孕周</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc61" value="10" type="checkbox">
+                                        <label for="chk_suc61">26.＜34孕周</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">过期妊娠</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc62" value="5" type="checkbox">
+                                        <label for="chk_suc62">17.≥42孕周</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc63" value="10" type="checkbox">
+                                        <label for="chk_suc63">27.≥42孕周伴胎盘功能低下</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">妊娠高血压</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc64" value="5" type="checkbox">
+                                        <label for="chk_suc64">18.妊娠期高血压</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc65" value="10" type="checkbox">
+                                        <label for="chk_suc65">28.高血压合并妊娠</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc66" value="20" type="checkbox">
+                                        <label for="chk_suc66">20.先兆子痫与子痫，HeIIp综合征</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">产前出血</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc67" value="5" type="checkbox">
+                                        <label for="chk_suc67">19.产前出血（28孕周）</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc68" value="10" type="checkbox">
+                                        <label for="chk_suc68">29.≥孕周的边缘性及部分性前置胎盘</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc69" value="20" type="checkbox">
+                                        <label for="chk_suc69">21.完全性前置胎盘，胎盘早剥</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">羊水量异常</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc70" value="10" type="checkbox">
+                                        <label for="chk_suc70">30.羊水过多伴症状或羊水过少</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">双胎、巨大儿</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc71" value="10" type="checkbox">
+                                        <label for="chk_suc71">31.双胎、巨大儿</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">FRG</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc72" value="5" type="checkbox">
+                                        <label for="chk_suc72">21.宫高为第10百分位左右</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc73" value="10" type="checkbox">
+                                        <label for="chk_suc73">32.宫高为＜第10百分位</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc74" value="20" type="checkbox">
+                                        <label for="chk_suc74">23.宫高＜第5百分位</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">胎动</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc75" value="5" type="checkbox">
+                                        <label for="chk_suc75">22.胎动＜10次/12小时</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc76" value="10" type="checkbox">
+                                        <label for="chk_suc76">33.胎动消失</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">母子血型不合</span>
+                            </div>
+                            <div class="cdct_row cdct_row1_col4 textBox2">
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc77" value="5" type="checkbox">
+                                        <label for="chk_suc77">23.ABO溶血症</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc78" value="10" type="checkbox">
+                                        <label for="chk_suc78">34.RH溶血症</label>
+                                    </div>
+                                </div>
+                                <div class="cdct_col pointBox3">
+                                    <div class="cdct_chk cdct_chk_suc">
+                                        <input id="chk_suc79" value="20" type="checkbox">
+                                        <label for="chk_suc79">24.已有过Rh溶血症史</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <!-- 妊娠并发症 -->
+
+                <!-- 社会及环境因素 -->
+                <div class="cdct_row cdct_rows_col5">
+                    <div class="cdct_rowLeft">
+                        <span class="cdct_tit">社会及环境因素</span>
+                    </div>
+                    <div class="cdct_rowRight">
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc80" value="5" type="checkbox">
+                                    <label for="chk_suc80">24.被动或主动吸烟≥20支/日，酗酒、文盲、无产前检查、流动人员、家庭经济困难、卫生条件差，其中有两项者</label>
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc81" value="10" type="checkbox">
+                                    <label for="chk_suc81">35.早孕期接触农药、放射线等化学、物理因素</label>
+                                </div> 
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdct_row cdct_row1_col4">
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                    <input id="chk_suc82" value="10" type="checkbox">
+                                    <label for="chk_suc82">36.家庭中受歧视</label>
+                                </div> 
+                            </div>
+                            <div class="cdct_col pointBox3">
+                                <div class="cdct_chk cdct_chk_suc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社会及环境因素 -->
+
+                <!-- 初次 -->
+                <div class="cdct_row cdct_rows_col3">
+                    <div class="cdct_col cdct_colLeft">
+                        <span class="cdct_tit cdct_asterisk">初次</span>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_row">
+                            <div class="cdct_txt">
+                                <span class="cdct_tit">高危项目</span>
+                            </div>
+                            <div class="cdct_info points">
+                                <label class="poi" for="chk_suc8">A级:</label><input id="lvA" value="0" type="text" class="cdct_inputLine cdct_line80">分
+                                <label class="poi" for="chk_suc8">B级:</label><input id="lvB" value="0" type="text" class="cdct_inputLine cdct_line80">分
+                                <label class="poi" for="chk_suc8">C级:</label><input id="lvC" value="0" type="text" class="cdct_inputLine cdct_line80">分
+                                <label class="poi" for="chk_suc8">总分:</label><input id="toP" value="0" type="text" class="cdct_inputLine cdct_line80">分
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <!-- 初次 -->
+
+                <!-- 评分机构 -->
+                <div class="cdct_row cdct_row1_col4 bottomR">
+                    <div class="cdct_col cdct_colLeft">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">评分机构</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">评分机构</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3">健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">评分机构</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cdct_col cdct_colRight">
+                        <div class="cdct_txt">
+                            <span class="cdct_tit cdct_asterisk">评分人</span>
+                        </div>
+                        <div class="cdct_info">
+                            <div data-selectsimu="1" class="cdct_select">
+                                <div class="selectBox">
+                                    <span data-selectnew="1" class="checkspan">
+                                        <span class="optD">
+                                            <span class="fontMain">评分人</span>
+                                        </span>
+                                        <span class="selectDown"></span>
+                                    </span>
+                                    <div class="ulParent">
+                                        <ul class="hideUl" data-selectbox="1" style="display: none;">
+                                            <li class="hideUlLi" data-selectoption="1">健康档案1</li>
+                                            <li class="hideUlLi" data-selectoption="2">健康档案2</li>
+                                            <li class="hideUlLi" data-selectoption="3" >健康档案3</li>
+                                            <li class="hideUlLi" data-selectoption="-1" style="display: none;">
+                                                <span class="optD">
+                                                    <span class="fontMain">评分人</span>
+                                                </span>
+                                                <span class="selectDown"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 评分机构 -->
+            </div>
+        </div>
+
+        <!-- 侧边菜单栏开始 -->
+        <div class="cdct_sideBar">
+            <div class="cdct_toolTip">
+                <span class="toolSpan">高危管理</span>
+            </div>
+            <div class="cdct_sideBarTop">
+                高危管理
+                <span class="close"></span>
+            </div>
+            <div class="cdct_sideBarCon">
+                <div class="cdct_sideBarConTitle" style="line-height: normal;">
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx1" type="radio" name="xx" value="">
+                        <label for="xx1">全部显示</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx2" type="radio" name="xx" value="">
+                        <label for="xx2">高危筛查</label>
+                    </div>
+                    <div class="cdct_radio cdct_radio_suc">
+                        <input id="xx3" type="radio" name="xx" value="">
+                        <label for="xx3">高危妊娠评分</label>
+                    </div>
+                </div>
+                <div class="cdct_tableBox">
+                    <div class="tablMainOne" style="height: 100%;">
+                        <div class="tableContent tableShowInfo" style="height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cdct_sideBarFooter">
+                <button type="button" class="cdct_btn">上一页</button>
+                <input class="cdct_input datepicker1" placeholder="2018">
+                <button type="button" class="cdct_btn">下一页</button>
+            </div>
+        </div>
+        <!-- 侧边菜单栏结束 -->
+    </form>
+    <!-- jq -->
+    <script src="../../common/js/jquery.min.js" type="text/javascript"></script>
+
+    <!-- 滚动条js -->
+    <script src="../../jsControl/zUI/zUI.min.js" type="text/javascript"></script>
+    <!-- 滚动条js -->
+
+    <!-- 下拉js -->
+    <script src="../../jsControl/simulationSelect/simulationSelect.min.js" type="text/javascript"></script>
+    <!-- 下拉js -->
+
+    <!-- 时间控件js -->
+    <script src="../../jsControl/datatime/lq.datetimepick.min.js" type="text/javascript"></script>
+    <!-- 时间控件js -->
+
+    <!-- 验证js -->
+    <script src="../../jsControl/validate/jquery.validate.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/messages_zh.js" type="text/javascript"></script>
+    <script src="../../jsControl/validate/regAddMethod.js" type="text/javascript"></script>
+    <!-- 验证js -->
+
+    <!-- 侧边菜单栏 -->
+    <script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+    <!-- 表格 -->
+    <script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+    <!-- 独自js -->
+    <script src="../../js/highPregnancy.js" type="text/javascript"></script>          
+</body>
+</html>

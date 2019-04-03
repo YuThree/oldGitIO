@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <!-- 动态菜单CSS -->
+    <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/LineCoverage.css" />
+    <link rel="stylesheet" type="text/css" href="css/changeGoogleTranslate.css" />
+    <title>自动生成文件夹名字</title>
+
+</head>
+
+<body>
+    <div class="borebox">
+        <span>输入中文</span>
+        <textarea name="" id="google" cols="30" rows="10"></textarea>
+    </div>
+    <div class="borebox borebox2">
+        <!-- <span>有道翻译</span> -->
+        <textarea name="" id="ydtrans" cols="30" rows="10"></textarea>
+    </div>
+    <div class="borebox borebox3">
+        <!-- <span>百度翻译</span> -->
+        <textarea name="" id="bdtrans" cols="30" rows="10"></textarea>
+    </div>
+    <input type="text" id='input' style="opacity: 0;">
+    <div style="color:black;line-height: 50px;float: left;width: 100%;">输出：</div>
+    <div class="log" style="float: left;"></div>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var casearry = [];
+            $('#google').on('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    youdao();
+                    baidu();
+                }
+            })
+            $('.borebox2,.borebox3').click(function () {
+                var text = $(this).find('textarea').val();
+                var input = document.getElementById("input");
+                input.value = text; // 修改文本框的内容
+                input.select(); // 选中文本
+                document.execCommand("copy"); // 执行浏览器复制命令
+                var date = new Date();
+                $('.log').html(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '<br/>复制成功！！！！')
+            })
+
+        })
+
+        function youdao() {
+            var appKey = '67bf08cf27c5ee8c';
+            var key = 'sj1W0r7jcRivjywHLz02TOuz9Lvrz4pT';//注意：暴露appSecret，有被盗用造成损失的风险
+            var salt = (new Date).getTime();
+            var query = $('#google').val();
+            // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+            var from = '';
+            var to = 'en';
+            var str1 = appKey + query + salt + key;
+            var sign = md5(str1);
+            $.ajax({
+                url: 'https://openapi.youdao.com/api?',
+                type: "post",
+                dataType: 'jsonp',
+                data: {
+                    q: query,
+                    appKey: appKey,
+                    salt: salt,
+                    from: from,
+                    to: to,
+                    sign: sign
+                },
+                success: function (res) {
+                    console.log(res);
+                    casearry = res.translation[0].split(' ');
+
+                    $.each(casearry, function (index, Element) {
+                        casearry[index] = Element.substring(0, 1).toUpperCase() + casearry[index].substring(
+                            1,
+                            casearry[index].length);
+                    });
+                    casearry[0] = casearry[0].substring(0, 1).toLowerCase() + casearry[0].substring(1,
+                        casearry[0].length)
+                    var nowtrans = '';
+                    $.each(casearry, function (index, Element) {
+                        nowtrans += Element;
+                    });
+                    $('#ydtrans').val(nowtrans)
+                }
+            })
+        }
+        function baidu() {
+
+            var appid = '20190108000255477';
+            var key = 'zrd8OQFO7LKBnLA0OHik';
+            var salt = (new Date).getTime();
+            var query = 'apple';
+            // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+            var from = 'en';
+            var to = 'zh';
+            var str1 = appid + query + salt + key;
+            var sign = md5(str1);
+
+
+
+            $.ajax({
+                url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
+                type: "get",
+                dataType: 'jsonp',
+                data: {
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: from,
+                    to: to,
+                    sign: sign
+                },
+                success: function (res) {
+                    console.log(res);
+                    casearry = res.translation[0].split(' ');
+
+                    $.each(casearry, function (index, Element) {
+                        casearry[index] = Element.substring(0, 1).toUpperCase() + casearry[index].substring(
+                            1,
+                            casearry[index].length);
+                    });
+                    casearry[0] = casearry[0].substring(0, 1).toLowerCase() + casearry[0].substring(1,
+                        casearry[0].length)
+                    var nowtrans = '';
+                    $.each(casearry, function (index, Element) {
+                        nowtrans += Element;
+                    });
+                    $('#bdtrans').val(nowtrans)
+                }
+            })
+
+        }
+    </script>
+
+</body>
+
+</html>

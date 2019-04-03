@@ -1,0 +1,120 @@
+﻿/*分页*/
+.pageWrap {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Microsoft YaHei;
+    color: #2494f2;
+}
+a.page_arrow {
+    float: left;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    margin-left: 0;
+    margin-right: 4px;
+    /*background-color: #2495f3;*/
+    background-color: #699dbe;
+    font-size: 20px;
+    font-family: serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    line-height: 28px;
+    color: white;
+}
+a.page_arrow_small {
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+    line-height: 20px;
+
+}
+input.page_input {
+    float: left;
+    display: inline-block;
+    width: 60px;
+    height: 26px;
+    padding: 0 0 0 8px;
+    /*border: 1px solid #2495f3;*/
+    margin-bottom: 0;
+    border: 1px solid #699dbe;
+    line-height: 18px;
+    outline: none;
+    border-radius:0;
+}
+input.page_input_small {
+     height: 18px;
+     width: 40px;
+}
+a.goTo {
+    float: left;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    margin-left: 0px;
+    /*background-color: #2495f3;*/
+    background-color: #699dbe;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    line-height: 28px;
+    color: white;
+}
+a.goTo_small {
+    height: 20px;
+    line-height: 20px;
+
+    width: 28px;
+}
+.wrapTwo {
+    float: left;
+    display: inline-block;
+    margin-left: 4px;
+    padding: 3px 0 3px 0;
+    text-align: center;
+}
+.wrapTwo_small {
+    padding: 0px 0 0px 0;
+}
+    .wrapTwo_small .page_text ,.wrapTwo_small .page_num{
+          font-size: 12px;
+    
+    }
+.page_text {
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: black;
+}
+.page_num {
+    font-size: 16px;
+    letter-spacing: 2px;
+    /*color: #2495f3;*/
+    color: #699dbe;
+}
+
+/*no_data --------------------------------*/
+.no_data_box {
+    width: 100%;
+    margin-top: 150px;
+    text-align: center;
+    font-size: 32px;
+    color: #2494f2;
+}
+.no_data_bg {
+    background-size: 312px 211px;
+}
+.no_data_bg div {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 100px;
+    line-height: 40px;
+    font-family: Microsoft Yahei;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 10px;
+    color: #268DDF;
+}

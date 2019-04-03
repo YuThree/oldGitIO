@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梅毒感染新生儿登记</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+
+	<!-- 儿童保健公用样式 -->
+	<link rel="stylesheet" href="../../css/children/childrenCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">梅毒感染新生儿登记</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">姓名</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone" name="info1" required>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">性别</span>
+						</div>
+						<div class="cdct_info cdct_relative">
+							<input type="text" class="cdct_inputNone" name="info2" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">出生体重(Kg)</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">出生身长(CM)</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">随访情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfqk1" type="radio" name="sfqk" value="">
+							<label for="sfqk1">未失访</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfqk2" type="radio" name="sfqk" value="">
+							<label for="sfqk2">失访,</label>
+							死亡原因<input type="text" class="cdct_inputLine cdct_line175">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">存活情况</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="chqk1" type="radio" name="chqk" value="">
+							<label for="chqk1">存活</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="chqk2" type="radio" name="chqk" value="">
+							<label for="chqk2">死亡,死亡原因</label>
+							<input type="text" class="cdct_inputLine cdct_line175">
+						</div>
+						<label class="cdct_inputLable">
+							死亡时间
+							<input type="text" class="cdct_inputLine cdct_line150 datepicker">
+						</label>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">相关症状</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz1" type="checkbox">
+							<label for="xgzz1">未发现</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz2" type="checkbox">
+							<label for="xgzz2">水泡—大疱，红斑，丘疹，扁平湿疣</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz3" type="checkbox">
+							<label for="xgzz3">鼻炎或喉炎</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz4" type="checkbox">
+							<label for="xgzz4">全身性淋巴结肿大</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz5" type="checkbox">
+							<label for="xgzz5">骨髓炎，骨软骨炎及骨膜炎</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz6" type="checkbox">
+							<label for="xgzz6">贫血</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz7" type="checkbox">
+							<label for="xgzz7">肝脾肿大</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz8" type="checkbox">
+							<label for="xgzz8">不详</label>
+						</div>
+						<div class="cdct_chk cdct_chk_suc">
+							<input id="xgzz9" type="checkbox">
+							<label for="xgzz9">其他</label>
+							<input type="text" class="cdct_inputLine cdct_line175">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">梅毒检测结果</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk1" type="radio" name="mejcqk" value="">
+							<label for="mejcqk1">未检测</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk2" type="radio" name="mejcqk" value="">
+							<label for="mejcqk2">阴性</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk3" type="radio" name="mejcqk" value="">
+							<label for="mejcqk3">阳性</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk4" type="radio" name="mejcqk" value="">
+							<label for="mejcqk4">不确定</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk5" type="radio" name="mejcqk" value="">
+							<label for="mejcqk5">不详</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mejcqk6" type="radio" name="mejcqk" value="">
+							<label for="mejcqk6">其他</label>
+							<input type="text" class="cdct_inputLine cdct_line175">
+						</div>						
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">是否需要进行预防性治疗</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfyf1" type="radio" name="sfyf" value="">
+							<label for="sfyf1">是</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfyf2" type="radio" name="sfyf" value="">
+							<label for="sfyf2">否</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">是否接受预防性治疗</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfjs1" type="radio" name="sfjs" value="">
+							<label for="sfjs1">是</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfjs2" type="radio" name="sfjs" value="">
+							<label for="sfjs2">否</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">儿童梅毒感染状态</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="etmdzt1" type="radio" name="etmdzt" value="">
+							<label for="etmdzt1">诊断先天梅毒</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="etmdzt2" type="radio" name="etmdzt" value="">
+							<label for="etmdzt2">排除梅毒感染</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">诊断为先天梅毒的依据</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mdyj1" type="radio" name="mdyj" value="">
+							<label for="mdyj1">出生时非梅毒螺旋体抗原血清学试验滴度高于母亲分娩前滴度的4倍</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mdyj2" type="radio" name="mdyj" value="">
+							<label for="mdyj2">暗视野显微镜检查到梅毒螺旋体或梅毒螺旋体IgM抗体检测阳性</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mdyj3" type="radio" name="mdyj" value="">
+							<label for="mdyj3">随访过程中非梅毒螺旋体抗原血清学试验由阴转阳，或滴度上升且有临床症状</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="mdyj4" type="radio" name="mdyj" value="">
+							<label for="mdyj4">随访至18月龄时梅毒螺旋体抗原血清学实验仍阳性</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">诊断时间</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone datepicker">
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">是否进行先天梅毒治疗</span>
+					</div>
+					<div class="cdct_info">
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfmdzla1" type="radio" name="sfmdzla" value="">
+							<label for="sfmdzla1">是</label>
+						</div>
+						<div class="cdct_radio cdct_radio_suc">
+							<input id="sfmdzla2" type="radio" name="sfmdzla" value="">
+							<label for="sfmdzla2">否</label>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+					<div class="cdct_txt">
+						<span class="cdct_tit">备注(非必填项)</span>
+					</div>
+					<div class="cdct_info">
+						<input type="text" class="cdct_inputNone">
+					</div>
+				</div>
+
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">报告单位</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">报告医生</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">医生1</li>
+										<li class="hideUlLi" data-selectoption="2">医生2</li>
+										<li class="hideUlLi" data-selectoption="3">医生3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">请选择</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">联系电话</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit cdct_asterisk">填报时间</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+
+	<script type="text/javascript">
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				info1:{
+					required:true,
+				},
+				info2:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+	</script>
+</body>
+</html>

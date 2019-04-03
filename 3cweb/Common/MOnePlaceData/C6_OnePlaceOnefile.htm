@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设备管理</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("flexigrid");
+        loadControl("mySelectTree");
+        loadControl("layer");
+        loadControl("ztree");
+    </script>
+    <script src="/Common/MOnePlaceData/script/C6_OnePlaceOnefile.js" type="text/javascript"></script>
+    <link href="/Common/MOnePlaceData/css/C6_OnePlaceOnefile.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="box span12">
+            <div class="row-fluid">
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-search"></i>一所一档查询条件
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+                <div class="box-content Transformer_search">
+                    <div class="row-fluid">
+                        <span>
+                            <label>变电所名称：</label>
+                            <!--<select id="Transformer_Name" name="Transformer_Name" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>-->
+                            <input type="text" id="Transformer_Name" name="Transformer_Name" style="width: 120px;" />
+                        </span>
+                        <span>
+                            <label>线路名称：</label>
+                            <select id="Transformer_line" name="Transformer_line" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label>行&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                            <input type="text" name="Transformer_Derection" id="Transformer_Derection" style="width: 120px;"/>
+                        </span>
+                        <span>
+                            <label>公里标：</label>
+                            <input type="text" id="Transformer_StarKM" class="input-small" style="width: 120px;" /> 至 
+                            <input type="text" id="Transformer_EndKM" class="input-small" style="width: 120px;" />
+                        </span>
+                    </div>
+                    <div class="row-fluid">
+                        <span>
+                            <label>铁&nbsp;&nbsp;&nbsp;&nbsp;路&nbsp;&nbsp;&nbsp;&nbsp;局：</label>
+                            <select id="Transformer_JU" name="Transformer_JU" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label>供&nbsp;&nbsp;电&nbsp;&nbsp;段：</label>
+                            <select id="Transformer_DUAN" name="Transformer_DUAN" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label>车&nbsp;&nbsp;&nbsp;&nbsp;间：</label>
+                            <select id="Transformer_CJ" name="Transformer_CJ" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label>班&nbsp;&nbsp;&nbsp;&nbsp;组：</label>
+                            <select id="Transformer_Class" name="Transformer_Class" style="width: 130px;">
+                                <option value="0">全部</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label>供电方式：</label>
+                            <input type="text" id="PWMDL_NAME" class="input-small" code="" style="width: 120px;" />
+                        </span>
+                        <span>
+                            <button class="btn btn-primary" type="button" onclick="doQuery()">查 询</button>
+                        </span>
+                        <span>
+                            <button class="btn btn-primary" id="OnePlaceData_Add" type="button" onclick="addC6DeviceModal()">添 加</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="box-header well" data-original-title=data-original-title>
+                    <h2>
+                        <i class="icon-hdd"></i>一所一档查询结果
+                    </h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table id="flexTable" style="display: none"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+</body>
+</html>

@@ -1,0 +1,889 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>重复报警分析</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script src="/Common/MGIS/JS/BMapJS.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("ztree");
+        loadControl("hint");
+        loadControl("multiSelect");
+        loadControl("mySelectTree");
+        loadControl("trainselect");
+        loadJs("/Common/MDataAnalysis/js/RepeatAlarm.js?v=" + version);
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.sessionStorage.setItem('repeatAlarm_html_start', false);
+           
+            
+            $("#startTime").val(getDateStr(new Date(), parseInt(getConfig("RepeatDays"))));
+            $("#endTime").val(getDateStr(new Date()));
+            $("#ddlzt").html("");
+            $("#Distance").val(getConfig("RepeatRange"));
+            $("#repeatCount").val(getConfig("RepeatCount"));
+            var stausAll = "AFSTATUS01,AFSTATUS02,AFSTATUS03,AFSTATUS04,AFSTATUS05".split(',');
+            var status = getConfig("RepeatStatus");
+            for (var j = 0; j < stausAll.length; j++) {
+                var name = "";
+                switch (stausAll[j]) {
+                    case "AFSTATUS01":
+                        name = "新上报";
+                        break;
+                    case "AFSTATUS02":
+                        name = "已取消";
+                        break;
+                    case "AFSTATUS03":
+                        name = "已确认";
+                        break;
+                    case "AFSTATUS04":
+                        name = "已计划";
+                        break;
+                    case "AFSTATUS05":
+                        name = "已关闭";
+                        break;
+                    default:
+                }
+                if (status.indexOf(stausAll[j]) > -1)
+                    $("#ddlzt").html($("#ddlzt").html() + "<option value='" + stausAll[j] + "' selected>" + name + "</option>");
+                else
+                    $("#ddlzt").html($("#ddlzt").html() + "<option value='" + stausAll[j] + "'>" + name + "</option>");
+            }
+
+            $('#org_name').mySelectTree({
+                tag: 'ORGANIZATION',
+                type: '',
+                onClick: function (event, treeId, treeNode) {
+                    $("#hf_org_id").val(treeNode.id);
+                    $("#org_name").val(treeNode.name);
+                    $("#hf_org_type").val(treeNode.treeType);
+                }
+            });
+
+            //报警类型
+            $('#citySel').mySelectTree({
+                cateGory: 'AFCODE',
+                codeType: '3C',
+                chkboxType: { "Y": "s", "N": "s" },
+                enableCheck: true,
+                onClick: false,
+                tag: "SYSDICTIONARYTREE",
+                onCheck: function (event, treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj(treeId),
+                    nodes = zTree.getCheckedNodes(true),
+                     v = "", code = "";
+                    for (var i = 0, l = nodes.length; i < l; i++) {
+                        v += nodes[i].name + ",";
+                        code += nodes[i].id + ",";
+                    }
+                    if (v.length > 0) v = v.substring(0, v.length - 1);
+                    if (code.length > 0) code = code.substring(0, code.length - 1);
+                    var cityObj = $("#citySel");
+                    cityObj.attr("value", v).attr("code", code);
+                },
+                callback: function (event, treeId, treeNode, msg) {
+                    var treeCode = getConfig("RepeatCode").split(',');
+                    if (treeCode[0] == "") {
+                        var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                        treeObj.checkAllNodes(true);
+                        var node = treeObj.getNodeByParam("name", "干扰", null);
+                        treeObj.checkNode(node, false, true);
+                    } else {
+                        for (var i = 0; i < treeCode.length; i++) {
+                            var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                            var node = treeObj.getNodeByParam("id", treeCode[i], null);
+                            treeObj.checkNode(node, true, true);
+                        }
+                        var zTree = $.fn.zTree.getZTreeObj(treeId),
+                        nodes = zTree.getCheckedNodes(true),
+                        v = "", code = "";
+                        for (var i = 0, l = nodes.length; i < l; i++) {
+                            v += nodes[i].name + ",";
+                            code += nodes[i].id + ",";
+                        }
+                        if (v.length > 0) v = v.substring(0, v.length - 1);
+                        if (code.length > 0) code = code.substring(0, code.length - 1);
+                        var cityObj = $("#citySel");
+                        cityObj.attr("value", v).attr("code", code);
+
+                    }
+                    //                    var newNode = { id: "FGR", name: "非干扰", checked: true };
+                    //                    newNode = treeObj.addNodes(null, newNode);
+                }
+            });
+            $("#ddlzt").multiselect({
+                noneSelectedText: "==请选择==",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                selectedList: 5
+            });
+            var jbJson = GetSeverityJson();//获取级别
+            var jsHtml = "";
+            for (var i = 0; i < jbJson.length; i++) {
+                if (jbJson[i].code == "三类" && getConfig('debug') != "1") {
+                    jsHtml += "<option value='" + jbJson[i].code + "'>" + jbJson[i].name + "</option>";
+                } else {
+                    jsHtml += "<option selected value='" + jbJson[i].code + "'>" + jbJson[i].name + "</option>";
+                }
+            }
+            if (jsHtml.split('三级').length == 1 && getConfig('debug') != "1") {
+                jsHtml += "<option value='" + '三类' + "'>" + getConfig('Severity_Third') + "</option>";
+            }
+            if (jsHtml) {
+                $("#jb").html(jsHtml);
+            }
+            $("#jb").multiselect({
+                noneSelectedText: "全部",
+                checkAllText: "全选",
+                uncheckAllText: '全不选',
+                height:100,
+                selectedList: 3
+            });
+            $('#btn_openSearch').click(function () {
+                $('#box_search').modal().css({
+                    width: 'auto',
+                    'margin-left': function () {
+                        return -($(this).width() / 2);
+                    },
+                    'margin-top': function () {
+                        return -($(this).height() / 2);
+                    }
+                });
+            });
+            $('#rdo1').click(function () {
+                $(this).addClass('fxactive').siblings().removeClass('fxactive');
+                $(".line").css("display", "table-row");
+                $(".gps").css("display", "none");
+                $("#lblMark").parent().parent().css("display", "table-row");
+                $("#txt_whereMemo").css("display", "block");
+                //                $("#div_gps").css("display", "none"); $("#div_line,#div_km").css("display", "");
+            });
+            $('#rdo2').click(function () {
+                $(this).addClass('fxactive').siblings().removeClass('fxactive');
+                $(".line").css("display", "none");
+                $(".gps").css("display", "table-row")
+                $("#lblMark").parent().parent().css("display", "none");
+                $("#txt_whereMemo").css("display", "none");
+                //                $("#div_gps").css("display", ""); $("#div_line,#div_km").css("display", "none");
+            });
+            $('#btn_reset').click(function () {
+
+                ymPrompt.confirmInfo({
+                    message: '确认要清空查询条件?',
+                    handler: function (tp) {
+                        if (tp == 'ok') {
+
+                            setSelectdItem($("#ddlzt"));
+                            $('.line input[type="text"]').val('');
+                            $('.gps input[type="text"]').val('');
+                            $("#lineCode").removeAttr("code");
+                            $("#lineCode").removeAttr("treetype");
+                            $('.line td select').each(function () {
+
+                                $(this).find('option:first').prop("selected", 'selected');
+
+                            })
+                            var treeObj = $.fn.zTree.getZTreeObj("ULcitySel");
+                            treeObj.checkAllNodes(true);
+                            var node = treeObj.getNodeByParam("name", "干扰", null);
+                            treeObj.checkNode(node, false, true);
+                            $("#citySel").val("非干扰");
+                            $("#lblMark").text("");
+                        }
+                        if (tp == 'cancel') {
+                            //  cancelFn();
+                        }
+                        if (tp == 'close') {
+                            //   closeFn()
+                        }
+                    }
+                });
+
+            })
+            //$("#jb").mySelect({
+            //    tag: "SYSDICTIONARY",
+            //    code: "SEVERITY"
+            //});
+
+            //$("#lineCode").mySelect({
+            //    tag: "LINE",
+            //    callback: function () {
+            //        var lineCode_val = $("#lineCode").val();
+            //        var xb_val = $("#xb").val();
+            //        var startTime_val = $("#startTime").val();
+            //        var endTime_val = $("#endTime").val();
+            //        Distance_val = $("#Distance").val();
+            //        var repeatCount_val = $("#repeatCount").val();
+
+            //        $('#txtqz').jHint({
+            //            type: 'StationSection',
+            //            line: '',
+            //            km: true,
+            //            kmMarkID: "lblMark"
+            //        });
+            //        $("#frameMap").height($(window).height());
+            //        btnClick(0);
+            //    }
+            //});
+            $('#lineCode').mySelectTree({
+                tag: 'StationSection',
+                height: 250,
+                enableFilter: true,
+                callback: function () {
+                    $("#frameMap").height($(window).height());
+                    btnClick(0);
+                }
+            });
+
+            $(".gps").css("display", "none");
+
+
+            //绑定行别
+            $("#xb").mySelectTree({
+                tag: 'SYSDICTIONARYTREE',
+                codeType: '3C',
+                cateGory: 'DRTFLG',
+                enableFilter: false,
+                onClick: function (event, treeId, treeNode) {
+                    $("#xb").attr('code', treeNode.id).val(treeNode.name);
+                }
+            });
+
+            //下拉选择控件
+            $('#locomotive_code').LocoSelect({
+                position: 'RepeatAlarm'
+            });
+
+            //设备编号控件
+            $('#locomotive_code').inputSelect({
+                type: 'loca',
+                contant: 2
+            });
+
+            $('.detail_list_foot img').toggle(
+                function () {
+                    $(this).css({ ' margin-left': '46%', 'margin-top': '18px', 'transform': 'rotate(180deg)', 'transition': 'linear all .3s' })
+                    $('#detail_list').animate({ height: "122px" })
+                },
+                function () {
+                    $(this).css({ ' margin-left': '47%', 'margin-top': '15px', 'transform': 'rotate(0)', 'transition': 'linear all .3s' })
+                    $('#detail_list').animate({ height: "700px" })
+                }
+            );
+
+            
+
+
+        })
+        ////线路改变
+        //function lineChange(pcode) {
+        //    if (pcode == "0")
+        //        pcode = "";
+        //    $('#txtqz').jHint({
+        //        type: 'StationSection',
+        //        line: pcode,
+        //        km: true,
+        //        kmMarkID: "lblMark"
+        //    });
+        //};
+        function GetLabel(objID, ForType, title) {
+
+            if (title != undefined && title != '' && title != "全部") {
+                var re = "<span class='label label-info whereBlock' For='" + objID + "' ForType='" + ForType + "' >&nbsp;" + title + "&nbsp;<span class='icon-remove icon-white lableClose'></span>  </span>";
+                // re += "<span>"+ line+"</span>";
+
+                $('#txt_whereMemo').html($('#txt_whereMemo').html() + "&nbsp;" + re);
+            }
+        }
+        function SetWhereMemo() {
+            $('#txt_whereMemo').html('');
+
+            GetLabel("lineCode", "input", $("#lineCode").val());
+            //GetLabel("txtqz", "text", $('#txtqz').val());
+            GetLabel("xb", "select", $("#xb").val());
+
+
+            GetLabel("#skm1,#skm2,#ekm1,#ekm2", "text2", GetRangStr('skm1', 'skm2', 'ekm1', 'ekm2', '公里标'));  //≤ ≥
+
+            $('.whereBlock').each(function () {
+                var ForObjID = $(this).attr('For');
+                var ForType = $(this).attr('ForType');
+                var span_close = $(this).find('.lableClose');
+
+                span_close.click(function () {
+                    switch (ForType) {
+                        case "select":
+                            $('#' + ForObjID).val('');
+                            break;
+                        case "text":
+                            $('#' + ForObjID).val('');
+                            break;
+                        case "text2":
+                            $(ForObjID).val('');
+                            break;
+                        case "input":
+                            $('#' + ForObjID).removeAttr("code");
+                            $('#' + ForObjID).removeAttr("treetype");
+                            break;
+                    }
+                    //                    doQuery();
+                    btnClick(1);
+                })
+            })
+        }
+        function GetRangStr(skm1, skm2, ekm1, ekm2, title) {
+            var re = '';
+            var start_km = "", end_km = "";
+            var att1 = '';
+            if ($('#' + skm1).val() != '' && $('#' + skm2).val() != '') {
+                att1 = "K" + $('#' + skm1).val() + "+" + $('#' + skm2).val() + " ≤ ";
+            }
+
+            var att2 = '';
+            if ($('#' + ekm1).val() != '' && $('#' + ekm2).val() != '') {
+                att2 = " ≤ " + "K" + $('#' + ekm1).val() + "+" + $('#' + ekm2).val()
+            }
+
+
+
+            if (att1 != '' || att2 != '') {
+                re = att1 + title + att2
+            }
+
+            return re;
+
+        }
+        var imgbtn = true;
+        function imgbtnChange() {
+            var H = $(window).height();
+            if (imgbtn) {
+                $(".repeat-icon").children('img').attr('src', '../img/icon.png')
+                $("#div_tj").removeClass("dh_out").addClass("dh_in");
+                if (H < 800) {
+                    $(".repeat-icon").animate({ 'left': '10px' });
+                }
+            }
+            else {
+                $(".repeat-icon").children('img').attr('src', '../img/icon-light.png')
+                $("#div_tj").removeClass("dh_in").addClass("dh_out");
+                if (H < 800) {
+                    $(".repeat-icon").animate({ 'left': '230px' });
+                }
+            }
+            imgbtn = !imgbtn;
+        }
+
+    </script>
+    <style type="text/css">
+        /*.listContainer
+        {
+            border: 1px solid #ff9e0b;
+            padding: 0px;
+            margin-top: 0px;
+            margin-left: 8px;
+            background-color: #AEE7FC;
+            position: absolute;
+            height: 200px;
+            width: 200px;
+            overflow: auto;
+            display: none;
+            color: #000;
+            font-size: 12px;
+            z-index: 999;
+        }*/
+        .gps
+        {
+            height: 37px;
+        }
+        @-webkit-keyframes wbin {
+             0% {
+                margin-left: 0;
+             }
+             10% {
+                margin-left: -43px;
+             }
+             20% {
+                margin-left: -86px;
+             }
+             30% {
+                margin-left: -129px;
+             }
+             40% {
+                margin-left: -172px;
+             }
+             50% {
+                margin-left: -215px;
+             }
+             60% {
+                margin-left: -258px;
+             }
+             70% {
+                margin-left: -300px;
+             }
+             100% {
+                margin-left: -300px;
+             }
+          }
+        @-webkit-keyframes wbout {
+             0% {
+                margin-left: -300px;
+             }
+             10% {
+                margin-left: -258px;
+             }
+             20% {
+                margin-left: -215px;
+             }
+             30% {
+                margin-left: -172px;
+             }
+             40% {
+                margin-left: -129px;
+             }
+             50% {
+                margin-left: -86px;
+             }
+             60% {
+                margin-left: -43px;
+             }
+             100% {
+                margin-left: 0;
+             }
+          }
+        .dh_in
+        {
+            -webkit-animation:wbin 0.5s;
+            margin-left: -300px;
+        }
+        .dh_out
+        {
+            -webkit-animation:wbout 0.5s;
+            margin-left: 0;
+        }
+        .img_out
+        {
+            width: 35px;
+            height: 40px; 
+            position: absolute;
+            right: 0;
+            top: 50%;
+            }
+        .img_in
+        {
+            width: 35px;
+            height: 40px; 
+            position: absolute;
+            right: -35px;
+            top: 50%;
+            }
+            
+        .lableClose {
+            cursor:pointer;
+        }
+        .repeat-icon{
+            position:absolute;
+            top:5px;
+            left:10px;
+            cursor:pointer;
+        }
+        #div_tj {
+            width: 220px;
+            height: 750px;
+            position: absolute;
+            top: 90px;
+            left: 10px;
+            background: url(/Common/img/repeatAlarm/repeat-bg.png) no-repeat;
+            opacity: 1;
+            color: White;
+            border-radius: 5px;
+        }
+        .ui-multiselect {
+            overflow: hidden;
+        }
+        .ui-multiselect > span:last-child {
+            width: 100px;
+            overflow: inherit;
+            height: 18px;
+            display: inline-block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .line,.gps {
+            background: black;
+        }
+        .xlfx, .gpsfx {
+            width: 50%;
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            margin-top: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .fxactive {
+            background: black;
+            color: #46C1FF;
+        }
+        @media screen and (max-height:800px){
+            #div_tj {
+                top: 10px;
+                background: url(/Common/img/repeatAlarm/repeat-bg-little.png) no-repeat;
+            }
+            .repeat-icon {
+                left: 230px;
+                top: 25px;
+            }
+        }
+
+        #detail_list {
+            font-family:'Microsoft YaHei';
+            width:324px;
+            height: 700px;
+            position: absolute;
+            top: 65px;
+            border-radius:8px 8px 8px 8px;
+            right: 10px;background:#1D1D1D;
+            overflow:hidden;
+        }
+        .detail_list_title{
+            font-size:15px;
+            letter-spacing:1px;
+            border-radius:8px 8px 0 0;
+            width: 294px;
+            height: 65px;
+            position: absolute;
+            top:0;
+            left:0;
+            background:url(/Common/img/repeatAlarm/repeatDetailTitle.png);
+            line-height:65px;
+            padding:0 15px;
+            z-index:5;
+            color:white;
+        }
+        .detail_list_title img{
+            margin:-5px 5px 0 0;
+        }
+        .detail_list_title span{
+            font-size:12px;
+        }
+        .detail_list_foot{
+            border-radius:0 0 8px 8px ;
+            width: 324px;
+            height: 57px;
+            position: absolute;
+            bottom:0;
+            left:0;
+            z-index:5;
+            background:url(/Common/img/repeatAlarm/repeatDetailFoot.png);
+        }
+        .detail_list_foot img {
+            margin-left: 47%;
+            margin-top:15px;
+            cursor: pointer;
+        }
+        /*.detail_list_foot img:hover{
+            transition:linear all .3s;
+            transform:rotate(180deg);
+             margin-left: 46%;
+            margin-top:18px;
+        }*/
+        .detail_list_body{
+            width:97%;
+            margin:105px auto 57px;
+            /*padding:103px 0 57px 0;*/
+            color:#FEFDFD;
+            max-height:538px;
+            overflow:auto;
+        }
+        .detail_list_body>div {
+            border-bottom:solid black 1px;
+            box-shadow: 0 0 0 green,0 0 0 blue,0 1px 0 #3C3C3C,0 0 0 yellow; 
+            overflow:auto;
+        }
+        .detail_list_body>div>span{
+            float:left;
+        }
+        .detail_list_reallytitle {
+            margin:0 auto;
+            color:#46C9FF;
+            position:absolute;
+            z-index:4;
+            top:65px;
+            width:97%;
+            border-bottom:solid black 1px;
+            box-shadow: 0 0 0 green,0 0 0 blue,0 1px 0 #3C3C3C,0 0 0 yellow; 
+        }
+        .detail_list_reallytitle>span:nth-of-type(1) {
+            display:inline-block;
+            width:53%;
+            padding:10px 25px;
+            /*background:red;*/
+            text-align:center;
+
+        }
+         .detail_list_reallytitle>span:nth-of-type(2){
+            display:inline-block;
+            width:30%;
+            padding:10px 0;
+            /*background:blue;*/
+            text-align:center;
+         }
+        .detail_list_body div span:nth-of-type(1) {
+            display:inline-block;
+            width:57%;
+            padding:10px 10px 10px 23px;
+            /*background:red;*/
+            text-align:left;
+        }
+        .detail_list_body div span:nth-of-type(2) {
+            display:inline-block;
+            width:30%;
+            padding:10px 0;
+            color:red;
+            font-weight:800;            /*background:blue;*/
+            text-align:center;
+        }
+        .detail_list_body > div:hover {
+            border: 1px #61ADE8 solid;
+            background: #040404;
+            margin: -1px auto  0;
+            border-radius: 5px;
+            cursor:pointer;
+        }
+         @media screen and (max-width:1600px){
+            #detail_list {
+                top: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="repeat-icon" onclick="imgbtnChange();">
+        <img src="../img/icon-light.png" alt="" />
+    </div>
+    <div id="div_tj">
+        <table style="margin:80px auto 0;width:201px;">
+            <tr>
+                <td style="width:60px;">
+                    起始日期
+                </td>
+                <td colspan="2" width="*">
+                    <input id="startTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                        style="width: 120px" readonly="readonly">&nbsp;<span style="font-size:14px;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    终止日期
+                </td>
+                <td colspan="2">
+                    <input id="endTime" class="Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                        style="width: 120px" readonly="readonly">&nbsp;<span style="font-size:14px;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    间距( m )
+                </td>
+                <td>
+                    <input type="text" id="Distance" style="width: 120px;" value="50" onblur="getValjj(this.id)"
+                        onkeypress="checkNum(this);" />&nbsp;<span style="font-size:14px;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    重复次数
+                </td>
+                <td>
+                    <input type="text" onblur="getVal(this.id)" id="repeatCount" style="width: 120px;"
+                        value="2" onkeypress="checkNum(this);" />&nbsp;<span style="font-size:14px;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    组织机构
+                </td>
+                <td colspan="2" width="*">
+                    <input id="org_name" type="text" style="width: 120px" />
+                    <input id="hf_org_id" style="display: none;" />
+                    <input id="hf_org_type" style="display: none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    设备编号
+                </td>
+                <td colspan="2" width="*">
+                    <input id="locomotive_code" type="text" style="width: 120px" />
+                </td>
+            </tr>
+            <tr>
+                <td height="37px">
+                    报警级别
+                </td>
+                <td>
+                    <select id="jb" multiple="multiple" style="width: 135px; border-radius: 3px;">
+                       
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="28px">
+                    报警状态
+                </td>
+                <td style="height:24px;overflow:hidden;display:inline-block;">
+                    <select name="ddlzt" id="ddlzt" title="状态" multiple="multiple" name="example-basic"
+                        style="width: 135px;height:24px;" size="1">
+                        <option value="AFSTATUS01" selected>新上报</option>
+                        <option value="AFSTATUS04" selected>已计划</option>
+                        <option value="AFSTATUS03" selected>已确认</option>
+                        <option value="AFSTATUS02">已取消</option>
+                        <option value="AFSTATUS05">已关闭</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td height="37px">
+                    报警类型
+                </td>
+                <td>
+                    <input id="citySel" type="text" value="非干扰" code="FGR" style="width: 120px; margin: 0;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height: 40px; text-align: center;">
+                    <div class="xlfx fxactive" id="rdo1">
+                        <!--<input id="rdo1" type="radio" name="rdoBox" checked="checked" value="线路分析" />
+        <label for="rdo1">线路分析</label>-->
+                        <span>线路分析</span>
+                    </div>
+                    <div class="gpsfx" id="rdo2">
+                        <!--<input id="rdo2" type="radio" name="rdoBox" value="GPS分析" />
+        <label for="rdo2">GPS分析</label>-->
+                        <span>GPS分析</span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="line">
+                <td>
+                    &nbsp;线路区站
+                </td>
+                <td>
+                    <!--<select id="lineCode" style="width: 130px; border-radius: 5px;margin-top:8px;" onchange="lineChange(this.value)">
+                        <option value="0">全部</option>
+                    </select>-->
+                    <div style="display: inline; position: relative;">
+                        <input type="text" id="lineCode" style="width: 120px;" />
+                    </div>
+                </td>
+            </tr>
+            <!--<tr class="line">
+                <td>
+                    &nbsp;区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;站
+                </td>
+                <td>
+                    <input type="text" id="txtqz" style="width: 120px;" />
+                </td>
+            </tr>-->
+            <tr class="line">
+                <td>
+                    &nbsp;行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
+                </td>
+                <td>
+                    <input type="text" id="xb" style="width: 120px; border-radius: 5px;"/>
+                </td>
+            </tr>
+            <tr class="line">
+                <td style="letter-spacing:-1px;">
+                    起始公里标
+                </td>
+                <td>
+                    <input type="text" id="skm1" class="smallInput validate[maxSize[6]]" style="width: 51px" />+<input
+                        type="text" id="skm2" class="smallInput validate[maxSize[6]]" style="width: 51px" />
+                </td>
+            </tr>
+            <tr class="line">
+                <td style="letter-spacing:-1px;">
+                    终止公里标
+                </td>
+                <td>
+                    <input type="text" id="ekm1" class="smallInput validate[maxSize[6]]" style="width: 51px" />+<input
+                        type="text" id="ekm2" class="smallInput validate[maxSize[6]]" style="width: 51px" />
+                </td>
+            </tr>
+            <tr class="gps">
+                <td>
+                    &nbsp;经&nbsp;&nbsp;&nbsp;&nbsp;度&nbsp;1&nbsp;
+                </td>
+                <td>
+                    <input id="gis_x1" type="text" value="" style="width: 120px; margin: 0; margin-top: 8px;" />
+                </td>
+            </tr>
+            <tr class="gps">
+                <td>
+                    &nbsp;纬&nbsp;&nbsp;&nbsp;&nbsp;度&nbsp;1&nbsp;
+                </td>
+                <td>
+                    <input id="gis_y1" type="text" value="" style="width: 120px; margin: 0;" />
+                </td>
+            </tr>
+            <tr class="gps">
+                <td>
+                    &nbsp;经&nbsp;&nbsp;&nbsp;&nbsp;度&nbsp;2&nbsp;
+                </td>
+                <td>
+                    <input id="gis_x2" type="text" value="" style="width: 120px; margin: 0;" />
+                </td>
+            </tr>
+            <tr class="gps">
+                <td>
+                    &nbsp;纬&nbsp;&nbsp;&nbsp;&nbsp;度&nbsp;2&nbsp;
+                </td>
+                <td>
+                    <input id="gis_y2" type="text" value="" style="width: 120px; margin: 0;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label id="lblMark" style="font-weight: bold; font-size: 12px;" start="0" end="0">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <!--<button id="btnQ" class="btn btn-primary" onclick="btnClick(1);">
+                        分析</button>
+                    <button type="button" class="btn btn-warning" id="btn_reset">
+                        清空条件</button>
+                    <button type="button" class="btn btn-success" id="btn_import" onclick="importExcel();">
+                        导出EXCEL</button>-->
+                    <a href="javascript:btnClick(1);" id="btnQ"><img src="/Common/img/repeatAlarm/repeat-fx.png" alt="" style="margin-top:8px;" /></a>
+                    <a href="javascript:void(0)" id="btn_reset"><img src="/Common/img/repeatAlarm/repeat-qk.png" alt="" style="margin-top:8px;" /></a>
+                    <a href="javascript:importExcel();;" id="btn_import"><img src="/Common/img/repeatAlarm/repeat-dc.png" alt="" style="margin-top:8px;" /></a>
+                </td>
+            </tr>
+        </table>
+        <div id="txt_whereMemo" style="font-size: 12px; padding-top: 3px;width:200px;margin:0 auto;">
+        </div>
+    </div>
+
+
+    <div id="detail_list">
+        <div class="detail_list_title">
+            <img src="/Common/img/repeatAlarm/repeat_title_inside.png" alt="title" />查询结果<span class="sumCount"></span>
+        </div>
+        <div class="detail_list_foot">
+            <img src="/Common/MOnePoleData/img/prepage.png" alt="展开/收缩" title="展开/收缩" />
+        </div>
+        <div class="detail_list_reallytitle"><span>位&ensp;&ensp;&ensp;&ensp;&ensp;置</span><span>重复报警数</span></div>
+        <div class="detail_list_body"></div>
+
+    </div>
+    <iframe id="frameJtopo" scrolling="no" frameborder="0" style="width: 100%; height: 460px;
+        display: none;"></iframe>
+    <iframe id="frameMap" scrolling="no" frameborder="0" style="width: 100%;"></iframe>
+    <input id="json" name="json" type="hidden" />
+</body>
+</html>

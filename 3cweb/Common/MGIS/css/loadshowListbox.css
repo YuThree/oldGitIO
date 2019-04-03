@@ -1,0 +1,77 @@
+﻿
+#myshowListbox1 .myshowListbox {
+    color:black;
+    line-height:29px;
+    overflow-y:auto;
+}
+#myshowListbox1 .myshowListbox .list_row:nth-of-type(2n){
+    background:#EDF7FF;
+}
+    #myshowListbox1 .myshowListbox .list_row {
+        overflow:auto;
+        padding:5px 0;
+        padding-left:75px;
+
+    }
+.list_row > div {
+    float:left;
+    display:inline-block;
+}
+.list_row .w_300 {
+    width:340px;
+}
+.list_row .w_600 {
+    width:600px;
+}
+.list_row .title_span {
+    margin-left: 0;
+    text-align:justify; 
+    text-align-last:justify;
+    width:83px;
+
+}
+.list_row .longtext {
+    display:inline-block;
+    width: 500px;
+    word-wrap: break-word;
+    vertical-align: top;
+    line-height:25px;
+}
+.list_row .imgOutbox {
+    vertical-align: top;
+    display:inline-block;
+    margin: 7px;cursor:pointer;
+    float:left;
+}
+    .list_row .imgOutbox img {
+        width:200px;
+        height:200px;
+    }
+.list_row .log_box {
+    position:absolute;
+    top:5px;
+    right:50px;
+    width:50px;
+    height:50px;
+    border-radius:26px;
+    border:2px solid ;
+}
+    .list_row .log_box div {
+        text-align:center;
+        width: 36px;
+        height: 36px;
+        padding:4px;
+        border-radius: 23px;
+        border: 1px solid ;
+        margin: 2px;
+        line-height: 18px;
+    }
+.list_row .redOne {
+    color:red;
+    border-color:red;
+}
+.list_row .yellowOne {
+    color:#FF880A;
+    border-color:#FF880A;
+}
+

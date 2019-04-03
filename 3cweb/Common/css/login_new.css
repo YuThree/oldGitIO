@@ -1,0 +1,172 @@
+﻿@charset "utf-8";
+body{
+    margin:0px
+
+}
+body, html { 
+    font:12px "微软雅黑", Arial, Helvetica, sans-serif; 
+    width:100%;
+    height:100%;
+    overflow:hidden
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+     margin:0; 
+     padding:0;
+}
+table { 
+    border-collapse:collapse; 
+}
+button { 
+    cursor:pointer 
+}
+fieldset, img { 
+    border:none; 
+}
+em, th { 
+    font-style:normal; 
+    font-weight:normal; 
+}
+li { 
+    list-style:none; 
+}
+h1, h2, h3, h4, h5, h6 { 
+    font-size:100%; 
+}
+body {
+    background:url(/Common/img/login/bg_pic.png) no-repeat;/*背景图片*/
+    background-size: 100% 100%;
+}
+.header_title{
+    background:url(/Common/img/login/title.png) no-repeat;/*标题图片*/
+    margin:0 auto;
+    width:940px;
+    height:157px
+}
+.login_box{/*登录框*/
+    width:400px; 
+    height:430px; 
+    border-radius:7px;
+    margin-top:8%;
+    margin-left:59%
+}
+.box_header{
+    border-radius:7px 7px 0 0;
+    background:rgb(1,141,239);
+    height:70px;
+    width:100%
+}
+.box_header label{
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    letter-spacing:3px;
+    float:left;
+    margin-top:20px;
+    margin-left:20px
+}
+.box_header img{
+    float:right;
+    margin-top:15px;
+    margin-right:20px;
+}
+.box_body{
+    background:rgba(122,139,146,0.7);
+    width:100%;
+    height:295px;
+    border-radius:0 0 8px 8px
+}
+.box_body ul{
+    padding:25px 45px;
+}
+.box_body ul li{
+    height:54px;
+    padding:7px 0px;
+    position:relative;
+}
+.box_body ul li:nth-of-type(4){
+    height:20px;
+    padding-top:11px;
+}
+.box_body ul li input{
+     float:left; 
+     width:300px;
+     border:1px solid #468ec4; 
+     height:50px; 
+     padding:0px 7px;
+     border-radius:4px;
+     background:rgb(188,195,201);
+     font-size:16px
+}
+.box_body ul li input:hover{
+    /*opacity:0.8;*/
+    -webkit-box-shadow: 0 0 3px rgb(1,141,239);
+}
+.icon_user {
+    position: absolute;
+    right: 7px;
+    top:20px;
+     /*z-index:-1;*/ 
+    background-image: url(/Common/img/login/user.png); /*引入图片图片*/
+    background-repeat: no-repeat; /*设置图片不重复*/
+    background-position: 0px 0px; /*图片显示的位置*/
+    width: 28px; /*设置图片显示的宽*/
+    height: 28px; /*图片显示的高*/
+}
+.icon_code {
+    position: absolute;
+    right: 7px;
+    top:20px;
+     /*z-index:-1;*/ 
+    background-image: url(/Common/img/login/code.png); /*引入图片图片*/
+    background-repeat: no-repeat; /*设置图片不重复*/
+    background-position: 0px 0px; /*图片显示的位置*/
+    width: 28px; /*设置图片显示的宽*/
+    height: 28px; /*图片显示的高*/
+}
+::-webkit-input-placeholder{
+    padding-left:7px
+}
+#rem_Password{
+    width:20px;
+    height:20px;
+}
+#remember{
+    line-height:18px;
+    width: 100px; 
+    color:#fff;
+    padding-left:10px
+}
+.box_body ul li input.login_code{ 
+    width: 100px
+}
+.box_body ul li.btn{
+     padding-top:34px;
+     padding-left:110px
+}
+.box_body ul li input.login_go{ 
+    height:45px;
+    width:100px; 
+    border:none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer; 
+    font-size: 20px; 
+    line-height:45px; 
+    float:left; 
+    background:rgb(1,141,239);
+}
+.box_body ul li input.login_go:hover{
+    opacity:0.7;
+}
+#foot{ 
+    position:absolute; 
+    bottom:40px; 
+    text-align:center; 
+    width:100%; 
+    color:#9BD5EA
+}
+#foot p{ 
+    line-height:22px; 
+    font-size:12px; 
+    color:#fff
+}

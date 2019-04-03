@@ -1,0 +1,329 @@
+﻿body {
+}
+
+.test {
+    width: 170px;
+    padding: 50px 10px;
+ 
+    position: relative;
+    height: 5px;
+}
+
+    .test span {
+        width: 0;
+        height: 0;
+        font-size: 0;
+        overflow: hidden;
+        position: absolute;
+    }
+
+       
+      
+
+.container {
+    width: 97%;
+    float: right;
+}
+
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 29px;
+   
+    width: 100%;
+}
+
+    ul.tabs li {
+        float: left;
+        margin: 0;
+        padding: 0;
+        height: 31px;
+        line-height: 31px;
+       
+       
+        margin-bottom: -1px;
+        background: #ccc;
+        overflow: hidden;
+        position: relative;
+    }
+
+        ul.tabs li a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            font-size: 1.2em;
+            padding: 0 20px;
+            
+            outline: none;
+        }
+
+            ul.tabs li a:hover {
+                background: #ccc;
+            }
+
+html ul.tabs li.active, html ul.tabs li.active a:hover {
+    background: #fff;
+   
+}
+
+.tab_container {
+  
+   
+    clear: both;
+    float: left;
+    width: 360px;
+}
+#tab4 table {
+   margin-left:15px;
+} 
+.tab_content {
+    padding: 10px;
+    font-size: 1.2em;
+    font-family: 微软雅黑 !imporment;
+}
+
+    .tab_content h2 {
+        font-weight: normal;
+        padding-bottom: 10px;
+      
+        font-size: 1.8em;
+    }
+
+    .tab_content h3 a {
+    }
+
+    .tab_content img {
+       
+        margin: 35px 30px 20px ;
+		cursor: pointer;
+      
+        
+    }
+
+.flexigrid div.bDiv {
+    overflow-y: auto;
+}
+
+.nav-tabs > li > a, .nav-pills > li > a {
+    padding: 5px;
+}
+
+#search_bg {
+    padding: 10px;
+}
+
+.so_LT {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+}
+
+th {
+    text-align: right;
+}
+
+.row_Search {
+    padding: 5px 0px;
+}
+
+#box_whereMemo {
+    padding: 5px 5px 5px 15px;
+    background: #c6e8f5;
+}
+
+#txt_whereTitle {
+    float: left;
+    width: 70px;
+    padding-top: 6px;
+}
+
+#txt_whereMemo {
+    display: inline-block;
+    float: left;
+    width: 100%;
+}
+
+.whereBlock {
+    margin: 1px 5px;
+    padding: 5px;
+    float: left;
+}
+
+.lableClose {
+    cursor: pointer;
+}
+
+.cls {
+    clear: both;
+}
+
+.itemWZ {
+    padding: 0px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#dpTodayInput {
+    display: none;
+}
+
+.span12 {
+    position: relative;
+}
+
+.span2 {
+    position: relative;
+}
+
+.button_img_show {
+    position: absolute;
+    width: 35px;
+    height: 50px;
+    background: url("/Common/img/100.png") center no-repeat;
+    background-size: contain;
+    right: -35px;
+    top: 50%;
+    cursor: pointer;
+}
+
+.button_img_hide {
+    position: absolute;
+    width: 35px;
+    height: 50px;
+    background: url("/Common/img/101.png") center no-repeat;
+    background-size: contain;
+    left: 0;
+    top: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+#img_hw, #img_kjg {
+    width: 480px;
+    height: 360px;
+}
+
+#div_E_save {
+    padding: 5px;
+}
+
+.tr_over {
+    border: solid 2px #ff6a00;
+}
+
+.btn_save {
+    cursor: pointer;
+}
+
+#tab1 td {
+    line-height: 50px;
+}
+
+#tab4 td {
+    line-height:40px;
+}
+
+.img_out {
+    width: 35px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.img_in {
+    width: 35px;
+    height: 40px;
+    position: absolute;
+    right: -35px;
+    top: 50%;
+}
+
+ .listContainer
+        {
+            
+            padding: 0px;
+            margin-top: 0px;
+            margin-left: 8px;
+            background-color: #AEE7FC;
+            position: absolute;
+            height: 200px;
+            width: 200px;
+            overflow: auto;
+            display: none;
+            color: #000;
+            font-size: 12px;
+            z-index: 999;
+        }
+        .gps
+        {
+            height: 37px;
+        }
+        @-webkit-keyframes 'wbin' {
+             0% {
+                margin-left: 0;
+             }
+             10% {
+                margin-left: -43px;
+             }
+             20% {
+                margin-left: -86px;
+             }
+             30% {
+                margin-left: -129px;
+             }
+             40% {
+                margin-left: -172px;
+             }
+             50% {
+                margin-left: -215px;
+             }
+             60% {
+                margin-left: -258px;
+             }
+             70% {
+                margin-left: -300px;
+             }
+             100% {
+                margin-left: -410px;
+             }
+          }
+        @-webkit-keyframes 'wbout' {
+             0% {
+                margin-left: -410px;
+             }
+             10% {
+                margin-left: -258px;
+             }
+             20% {
+                margin-left: -215px;
+             }
+             30% {
+                margin-left: -172px;
+             }
+             40% {
+                margin-left: -129px;
+             }
+             50% {
+                margin-left: -86px;
+             }
+             60% {
+                margin-left: -43px;
+             }
+             100% {
+                margin-left: 0;
+             }
+          }
+        .dh_in
+        {
+            -webkit-animation:wbin 0.5s;
+            margin-left: -410px;
+        }
+        .dh_out
+        {
+            -webkit-animation:wbout 0.5s;
+            margin-left: 0;
+        }

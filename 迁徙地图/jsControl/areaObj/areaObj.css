@@ -1,0 +1,50 @@
+.areaObjClass{
+    width: 430px;
+    height: 212px;
+    position: absolute;
+}
+.areaObjClass .areaObjHeader{
+    height: 40px;
+    width: 100%;
+    font-size: 0;
+    line-height: 40px;
+    background-color: rgba(51,149,212,1);
+}
+.areaObjClass .areaObjHeader .item,.areaObjClass .areaObjContent .item{
+    font-size: 15px;
+    color:#ffffff;
+    font-family: "微软雅黑","Microsoft YaHei",Microsoft YaHei;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 17px;
+    border-right: 1px dashed #e6eaee;
+    cursor: pointer;
+}
+.areaObjClass .areaObjHeader .item:last-child{
+    border-right: none;
+}
+.areaObjClass .areaObjContent{
+    height: 172px;
+    position: relative;
+    width: 100%;
+    background-color: rgba(11,45,69,0.9);
+}
+.areaObjClass .areaObjContent .item{
+    width: 25%;
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
+    border-right-style: solid;
+    margin-top: 20px;
+    border-right-color:rgba(47,111,151,1) ;
+    cursor: pointer;
+}
+.areaObjClass .areaObjContent .item:nth-of-type(4n){
+    border-right: none;
+}
+.areaObjClass .areaObjContent .areaObjContentScroll{
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>任务管理</title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        loadControl("jqueryUI");
+        loadControl("mytree");
+        loadControl("multiSelect");
+        loadControl("paging");
+        loadControl("layer");
+        loadControl("mySelectTree");
+        loadCss('/Lib/bootstrap/css/opa-icons.css?v=' + version);
+        loadCss("/Lib/scrollBar/scrollStyle.css?v=" + version);
+    </script>
+    <link href="/Common/MTask/css/TaskList_new.css" rel="stylesheet" />
+    <script src="/Common/MTask/JS/TaskList_new.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="title-bg">
+            <span class="title-ico"></span>
+            <span class="title letter-spacing-small">任务管理</span>
+            <span class="close-ico" onclick="window.close();"></span>
+        </div>
+        <div class="mian">
+            <div class="aside">
+                <ul>
+                    <li class="waitFor active">
+                        <img src="img/waitFor_hover.png" width="17" height="17" />
+                        <span>待办任务</span>
+                    </li>
+                    <li class="my">
+                        <img src="img/my.png" width="18" height="20" />
+                        <span>我办过的</span>
+                    </li>
+                    <li class="allTask">
+                        <img src="img/allTask.png" width="16" height="18" />
+                        <span>全部任务</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <div id="seleHeadDiv_2C" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+                    <div>
+                        <img id="img_C2500Img" src="" alt="" />
+                        <img id="img_C2100Img" src="" alt="" />
+                    </div>
+                </div>
+                <div id="seleHeadDiv_3C" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+                    <div>
+                        <img id="img_C3IRV" src="" alt="" />
+                        <img id="img_C3VI" src="" alt="" />
+                        <img id="img_C3OA" src="" alt="" />
+                    </div>
+                </div>
+                <div id="seleHeadDiv_4C" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+                    <div>
+                        <img id="img_C4FaultImg" src="" alt="" />
+                        <img id="img_C4AllImg" src="" alt="" />
+                    </div>
+                </div>
+                <div id="seleHeadDiv_DailyWalk" style="display: none; position: absolute; z-index: 9999; background: rgba(255,255,255,0.9)">
+                    <div>
+                        <img id="img_DailyWalkFaultImg" src="" alt="" />
+                    </div>
+                </div>
+                <div class="content_title">
+                    <div class="waitFor_title">
+                        <ul>
+                            <li>
+                                <span>
+                                    <label>整改通知书号</label>：
+                                    <input type="text" id="waitFor_TASK_CODE" />
+                                </span>
+                                <span>
+                                    <label>缺陷等级</label>：
+                                    <select id="waitFor_SEVERITY_CODE" name="example-basic" multiple="multiple" style="width:156px"></select>
+                                </span>
+                                <span>
+                                    <label>检测类型</label>：
+                                    <input type="text" id="waitFor_CATEGORY_CODE" code="" />
+                                </span>
+                                <span>
+                                    <label>检测时间</label>：
+                                    <input type="text" id="waitFor_START_RAISED_TIME" class="Wdate"  onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;至&nbsp;<input type="text" id="waitFor_END_RAISED_TIME" class="Wdate"  onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                                <span>
+                                    <label style="width:55px;">任务状态</label>：
+                                    <select name="waitFor_STATUS" id="waitFor_STATUS" style="width: 155px">
+                                        <option value="0">全部</option>
+                                        <option value="新建">新建</option>
+                                        <option value="派发">派发</option>
+                                        <option value="完成">完成</option>
+                                        <option value="取消">取消</option>
+                                        <option value="复测">复测</option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>线路</label>：
+                                    <select id="waitFor_LINE_CODE" name="waitFor_LINE_CODE" onchange="lineChange1(this.value)">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>区站</label>：
+                                    <select id="waitFor_POSITION_CODE" name="waitFor_POSITION_CODE">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>行别</label>：
+                                    <input type="text" id="waitFor_DIRECTION" />
+                                </span>
+                                <span>
+                                    <label>公里标(m)</label>：
+                                    <input type="text" id="waitFor_START_KM_MARK" class="small" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="waitFor_END_KM_MARK" class="small" />
+                                </span>
+                                <span>
+                                    <button type="button" id="waitFor_search" class="btn btn-primary" onclick="load_waitFor();">查&nbsp;&nbsp;询</button>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="my_title">
+                        <ul>
+                            <li>
+                                <span>
+                                    <label>整改通知书号</label>：
+                                    <input type="text" id="my_TASK_CODE" />
+                                </span>
+                                <span>
+                                    <label>复测工作票</label>：
+                                    <input type="text" id="my_CHECK_TICKET_1" class="small" />—<input type="text" id="my_CHECK_TICKET_2" class="small" />
+                                </span>
+                                <span>
+                                    <label>复测时间</label>：
+                                    <input type="text" id="my_START_CHECK_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="my_END_CHECK_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                                <span>
+                                    <label>复测人</label>：
+                                    <input type="text" id="my_CHECKER" />
+                                </span>
+                                <span>
+                                    <label>检测时间</label>：
+                                    <input type="text" id="my_START_RAISED_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;至&nbsp;<input type="text" id="my_END_RAISED_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>检测类型</label>：
+                                    <input type="text" id="my_CATEGORY_CODE" code="" />
+                                </span>
+                                <span>
+                                    <label>处理工作票</label>：
+                                    <input type="text" id="my_DEAL_TICKET_1" class="small" />—<input type="text" id="my_DEAL_TICKET_2" class="small" />
+                                </span>
+                                <span>
+                                    <label>处理时间</label>：
+                                    <input type="text" id="my_START_DEAL_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="my_END_DEAL_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                                <span>
+                                    <label>处理人</label>：
+                                    <input type="text" id="my_DEALER" />
+                                </span>
+                                <span>
+                                    <label>缺陷等级</label>：
+                                    <select id="my_SEVERITY_CODE" name="example-basic" multiple="multiple" style="width:148px"></select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>线路</label>：
+                                    <select id="my_LINE_CODE" name="my_LINE_CODE" onchange="lineChange2(this.value)">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>区站</label>：
+                                    <select id="my_POSITION_CODE" name="my_POSITION_CODE">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>行别</label>：
+                                    <input type="text" id="my_DIRECTION" />
+                                </span>
+                                <span>
+                                    <label>公里标(m)</label>：
+                                    <input type="text" id="my_START_KM_MARK" class="small" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="my_END_KM_MARK" class="small" />
+                                </span>
+                                <span>
+                                    <label style="width:55px;">任务状态</label>：
+                                    <select name="my_STATUS" id="my_STATUS" style="width: 155px">
+                                        <option value="0">全部</option>
+                                        <option value="新建">新建</option>
+                                        <option value="派发">派发</option>
+                                        <option value="完成">完成</option>
+                                        <option value="取消">取消</option>
+                                        <option value="复测">复测</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <button type="button" id="my_search" class="btn btn-primary" onclick="load_my();">查&nbsp;&nbsp;询</button>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="allTask_title">
+                        <ul>
+                            <li>
+                                <span>
+                                    <label>整改通知书号</label>：
+                                    <input type="text" id="allTask_TASK_CODE" />
+                                </span>
+                                <span>
+                                    <label>复测工作票</label>：
+                                    <input type="text" id="allTask_CHECK_TICKET_1" class="small" />—<input type="text" id="allTask_CHECK_TICKET_2" class="small" />
+                                </span>
+                                <span>
+                                    <label>复测时间</label>：
+                                    <input type="text" id="allTask_START_CHECK_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="allTask_END_CHECK_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                                <span>
+                                    <label>复测人</label>：
+                                    <input type="text" id="allTask_CHECKER" />
+                                </span>
+                                <span>
+                                    <label>检测时间</label>：
+                                    <input type="text" id="allTask_START_RAISED_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;至&nbsp;<input type="text" id="allTask_END_RAISED_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>检测类型</label>：
+                                    <input type="text" id="allTask_CATEGORY_CODE" code="" />
+                                </span>
+                                <span>
+                                    <label>处理工作票</label>：
+                                    <input type="text" id="allTask_DEAL_TICKET_1" class="small" />—<input type="text" id="allTask_DEAL_TICKET_2" class="small" />
+                                </span>
+                                <span>
+                                    <label>处理时间</label>：
+                                    <input type="text" id="allTask_START_DEAL_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="allTask_END_DEAL_TIME" class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" readonly="readonly" />
+                                </span>
+                                <span>
+                                    <label>处理人</label>：
+                                    <input type="text" id="allTask_DEALER" />
+                                </span>
+                                <span>
+                                    <label>缺陷等级</label>：
+                                    <select id="allTask_SEVERITY_CODE" name="example-basic" multiple="multiple" style="width:148px"></select>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <label>线路</label>：
+                                    <select id="allTask_LINE_CODE" name="allTask_LINE_CODE" onchange="lineChange3(this.value)">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>区站</label>：
+                                    <select id="allTask_POSITION_CODE" name="allTask_POSITION_CODE">
+                                        <option value="0">全部</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label>行别</label>：
+                                    <input type="text" id="allTask_DIRECTION" />
+                                </span>
+                                <span>
+                                    <label>公里标(m)</label>：
+                                    <input type="text" id="allTask_START_KM_MARK" class="small" />&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="allTask_END_KM_MARK" class="small" />
+                                </span>
+                                <span>
+                                    <label>接收机构</label>：
+                                    <input type="text" id="allTask_RECV_DEPT" />
+                                    <input id="hf_RECV_DEPT" style="display: none;" />
+                                    <input id="hf_type_RECV_DEPT" style="display: none;" />
+                                </span>
+                                <span>
+                                    <label style="width:55px;">任务状态</label>：
+                                    <select name="allTask_STATUS" id="allTask_STATUS" style="width: 155px">
+                                        <option value="0">全部</option>
+                                        <option value="新建">新建</option>
+                                        <option value="派发">派发</option>
+                                        <option value="完成">完成</option>
+                                        <option value="取消">取消</option>
+                                        <option value="复测">复测</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <button type="button" id="allTask_search" class="btn btn-primary" onclick="load_allTask();">查&nbsp;&nbsp;询</button>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="content_body" class="content_body">
+                       <div class="table_title">
+                           <span class="width1"></span><span class="width2_1" style="text-align:center !important;">操作</span><span class="width3">整改通知书号</span><span class="width2">缺陷等级</span><span class="width3">检测时间</span><span class="width4">任务描述</span><span class="width4_1">处理意见</span><span class="width2">任务状态</span><span class="width2">检测类型</span><span class="width3">截止日期</span><span class="width3">复测工作票</span><span class="width3">复测人</span><span class="width3">复测时间</span><span id="ReceiveOrg" class="width3">接收机构</span><span id="DEAL_TICKET" class="width3">处理工作票</span><span id="DEALER" class="width3">处理人</span><span id="DEAL_TIME" class="width3">处理时间</span>
+                       </div>
+                       <div id="table_main"></div>
+                </div>
+                <div id="content_page"></div>
+                <div id="foot_txt" style="text-align: center; color:#2385ce; font-size:14px; height:30px; line-height:30px;background-color: #ffffff;">Copyright 2011-2018,成都国铁电气设备有限公司 版权所有 </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

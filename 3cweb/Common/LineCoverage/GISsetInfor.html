@@ -1,0 +1,674 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?ak=F75484f6486f962ed1c28985b9ca68c0&v=1.5&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+        loadControl("jqueryUI_2");
+
+        loadControl("mytree");
+        loadControl("mySelectTree");
+        loadControl("elevatezoom");
+        loadControl("jqueryUI");
+        loadControl("multiSelect");
+
+
+
+
+        loadControl("layer");
+
+     
+        loadCss("css/GISsetInfor.css?v=" + version);
+        loadJs("js/GISsetInfor.js?v=" + version);
+
+    </script>
+    <script type="text/javascript">
+        var speed = 400; //初始播放速度
+        var checkDom; //选中对象
+        //页面加载是调用
+        $(document).ready(function () {
+            //报警状态多选框
+          
+
+          
+          
+         
+          
+            try {
+                var _h = parseInt($(window).height());
+                var _w = parseInt($(window).width());
+                var hh = parseInt($('#orbitcheck').height());
+                $("#orBmapDiv").height(_h-hh).width(_w);
+
+               
+                document.getElementById('loading').style.display = 'none'; //隐藏加载信息
+                var deviceid = GetQueryString("deviceid"); //车号
+               
+                var startdate = GetQueryString("startdate").replace(/\//g, '-'); //开始时间
+                var enddate = GetQueryString("enddate").replace(/\//g, '-'); //结束时间
+
+                $('#lineselect').val(LINE_CODE);
+                OrbMapbind(deviceid, startdate, enddate); //加载机车轨迹 js/C3Sms.js
+
+                document.getElementById('UserLogon').style.display = 'none';
+            } catch (e) {
+                // alert("地图加载不成功，请检查网络！");
+
+            }
+            var _w = (parseInt($(window).width()) - 20) / 4;
+            var _h = '';
+            if ($(window).height() < 800) {
+                _h = (parseInt($(window).height()) - 95) / 4;
+                $("#C3Alarm_1").width(_w).height(_h - 85);
+                $("#C3Alarm_4").width(_w).height(_h);
+                $("#linechart").width(_w).height(_h);
+            } else {
+                _h = (parseInt($(window).height()) - 10) / 4;
+                $("#C3Alarm_1").width(_w).height(_h - 85);
+                $("#C3Alarm_4").width(_w).height(_h - 85);
+                $("#linechart").width(_w).height(_h - 85);
+            }
+            $("#kjg").elevateZoom({ zoomWindowPosition: 05, zoomWindowWidth: _w - 8, zoomWindowHeight: _h - 8 });
+
+            $("#C3Alarm_2").width(_w).height(_h);
+            $("#C3Alarm_3").width(_w).height(_h);
+            $("#C3Alarm_5").width(_w).height(_h); //全景
+
+            $("#hw").width(_w).height(_h);
+            $("#kjg").width(_w).height(_h);
+            $('#allimg').width(_w).height(_h);
+
+            $("#ImgTypeBox").css("bottom", "10px");
+            $('#iframe_task').attr('src', '/Common/MTask/TaskForm.htm?id=' + GetQueryString("alarmid") + '&type=openFaultTask&openType=&ShowSimple=1&v=' + version)
+
+
+          
+          
+
+
+
+
+            $('#btn_play').click(function () {
+                //播放
+                Is_doing = false;
+                chageSpeed(checkDom, speed)
+                $(this).hide();
+                $('#btn_pause').show();
+            });
+
+            $('#btn_pause').click(function () {
+                //暂停
+                Is_doing = true;
+                clearInterval(setSmsshow); //关闭定时器
+                $(this).hide();
+                $('#btn_play').show();
+            });
+
+            //回播
+            $('#_Content_Sta').click(function () {
+                //$('#btn_play').show();
+                //$('#btn_pause').hide();
+
+                ColseC3Alarm();
+
+                map.clearOverlays();
+                smsNumber = silderNumber; //当前帧数
+                clearB_SmsNumberArray();
+               
+                $("#_Content_Sta_Lab").html("" + _josn[0][2].Dtime[smsNumber].Dtime);
+                $("#Sms_slider").slider("option", "values", [smsNumber, EndNumber]);
+                clearInterval(setSmsshow); //关闭定时器
+
+                //speed = 400;
+                //   $("#speendMemo").html("正常");
+
+
+                $('#btn_play').hide();
+                $('#btn_pause').show();
+
+                chageSpeed(checkDom, speed);
+                //                var _showtime = 200; //刷新时间
+                //                clearInterval(setSmsshow); //关闭定时器
+                //                setSmsshow = setInterval('SetC3Sms()', _showtime);
+            });
+
+            //改变按钮颜色
+            $("#list1").children("img").hover(function () {
+                if ($("#play1").css("display") == "none") {
+                    $(this).attr("src", "img/orbit-img/orbit-filter-light.png")
+                }
+            }, function () {
+                if ($("#play1").css("display") == "none") {
+                    $(this).attr("src", "img/orbit-img/orbit-filter.png")
+                }
+            });
+            $("#_YSButton").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-old-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-old.png")
+            });
+            $("#quanbu1").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-all-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-all.png")
+            });
+            $("#btnSet").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-line-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-line.png")
+            });
+            $("#btn_slow").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-left-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-left.png")
+            });
+            $("#btn_play").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-play-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-play.png")
+            });
+            $("#btn_pause").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-pause-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-pause.png")
+            });
+            $("#btn_fast").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-right-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-right.png")
+            });
+            $("#_Content_Sta").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-repeat-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-repeat.png")
+            });
+            $(".orbit-close").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-close-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-close.png")
+            });
+            $("#Submit1").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-check-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-check.png")
+            });
+            $("#btn_hideSoBox").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/orbit-hide-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/orbit-hide.png")
+            });
+            $(".footSure").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/sure-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/sure.png")
+            });
+            $(".footCancel").children("img").hover(function () {
+                $(this).attr("src", "img/orbit-img/calcel-light.png")
+            }, function () {
+                $(this).attr("src", "img/orbit-img/cancel.png")
+            });
+            $('.AnimateMarker>a').children("img").hover(function () {
+                $(this).attr("src", "img/gis-img/guanbi-light.png")
+            }, function () {
+                $(this).attr("src", "img/gis-img/guanbi.png")
+            });
+            $("#qjbtn").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/pic.png");
+            });
+            $("#note-left").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/left.png");
+            });
+            $("#note-right").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/right.png");
+            });
+            $("#note-jump").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/jump.png");
+            });
+            $("#note-close").hover(function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close-light.png");
+            }, function () {
+                $(this).attr("src", "/C3/PC/MAlarmMonitoring/ImgTmp/close1.png");
+            });
+            //播放时间内容
+            $(".playTime").html('<strong id="_Content1" style="font-size: 12px;"></strong>');
+        });
+        function chageSpeed(e, delay) {
+            checkDom = e;
+            speed = delay;
+            $("#1X,#2X,#4X,#8X").css("color", "White");
+            $(e).css("color", "rgb(255, 235, 77)");
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+            JSSms(delay);
+        }
+
+        function reload() {
+            window.location.reload();
+        }
+
+        function chageSpeed_fast() {
+            //speed 400  加速
+            var _speed = speed / 2;
+            var _sp = 400 / _speed;
+
+            if (_sp > 32) {
+                _sp = 32;
+                _speed = 400 / 32;
+            }
+
+            speed = _speed;
+
+            if (_sp == "1")
+            { _sp = "正常"; }
+            else {
+                _sp = _sp + "倍";
+            }
+
+            $('#speendMemo').html(_sp);
+
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+
+            JSSms(speed);
+
+
+
+        }
+
+        function chageSpeed_slow() {
+            //speed 400  减速
+            var _speed = speed * 2;
+
+            var _sp = 400 / _speed;
+
+            if (_sp < 1) {
+                _sp = 1;
+                _speed = 400;
+            }
+
+            speed = _speed;
+
+            if (_sp == "1")
+            { _sp = "正常"; }
+            else {
+                _sp = _sp + "倍";
+            }
+
+            $('#speendMemo').html(_sp);
+
+            $('#btn_play').hide();
+            $('#btn_pause').show();
+
+            JSSms(speed);
+        }
+
+        function ss() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 290;
+            $('#allp').width(_w).height(_h);
+            $('#play1').show();
+            $('#play1').animate({ bottom: 10, right: 20, opacity: 1, width: 258, height: 342 }, 500);
+            $("#list1").children("img").attr("src", "img/orbit-img/orbit-filter-surce.png");
+        }
+        function ColseDIV() {
+            $('#allp').show();
+            var _w = 240;
+            var _h = 120;
+            $('#allp').width(_w).height(_h);
+
+            $('#play1').animate({ bottom: 10, right: 0, opacity: 0, width: _w, height: _h }, 500);
+            $('#play1').hide();
+            $("#list1").children("img").attr("src", "img/orbit-img/orbit-filter.png");
+        }
+
+       
+        var silderNumber = 0; //记录最后一次拖动的帧号
+        var EndNumber = 0;
+        function Setslider(count) {
+
+
+            $("#Sms_slider").slider({
+                range: true,
+                min: 0,
+                max: count,
+                values: [0, count],
+                slide: function (event, ui) {
+                    //  $("#FrameN").html("$" + ui.value);
+                    if (event.keyCode == undefined)  //按钮不执行。
+                    {
+                        $("#Sms_slider").slider("option", "values", [ui.values[0], ui.values[1]]);
+                        map.clearOverlays();
+                        EndNumber = ui.values[1];
+                        smsNumber = ui.values[0]; //当前帧数
+                        if (ui.value == ui.values[0]) {
+                            silderNumber = ui.values[0]; //回放时用
+                        }
+                        clearB_SmsNumberArray();
+                        clearInterval(setSmsshow); //关闭定时器
+                        $('#btn_play').show();
+                        $('#btn_pause').hide();
+                        $("#_Content_Sta_Lab").html("" + _josn[0][2].Dtime[silderNumber].Dtime);
+                        $("#_Content_End").html("结束时间:" + _josn[0][2].Dtime[EndNumber].Dtime);
+                        var startdate = _josn[0][2].Dtime[silderNumber].Dtime.replace(/\//g, '-'); //开始时间
+                        var enddate = _josn[0][2].Dtime[EndNumber].Dtime.replace(/\//g, '-'); //结束时间
+                    
+                        SetC3Sms();
+
+                        //设置当前时间div位置
+
+                        var p = parseInt($("#Sms_slider .ui-slider-handle").css("left"));
+                        $(".playTime").css("left", -96 + p + 'px');
+                    }
+
+                },
+                change: function (event, ui) {
+                    var p = parseInt($("#Sms_slider .ui-slider-handle").css("left"));
+                    $(".playTime").css("left", -96 + p + 'px');
+                }
+            });
+        }
+    </script>
+    <style type="text/css">
+        
+.loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-weight: bold;
+    font-family: "微软雅黑";
+    font-size: 30px;
+    background: url(loading.gif) rgb(26, 26, 26) no-repeat left center;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    padding: 0px 10px 0 120px;
+    margin-left: -140px;
+    margin-top: -60px;
+}
+
+        .main {
+            width: 100%;
+        }
+
+        .speed {
+            color: White;
+        }
+
+            .speed :hover {
+                color: rgb(255, 235, 77) !important;
+            }
+
+        .ym-btn input {
+            padding: 0;
+        }
+
+        #ul_txtqz {
+            width: 200px;
+        }
+
+        #orbitcheck {
+            display: block;
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 100px;
+            background: #232323;
+            bottom: 0;
+            left: 0;
+        }
+
+            #orbitcheck .orbit-lei {
+                width: 5%;
+                height: 100%;
+                float: left;
+                position: relative;
+            }
+
+        #ImgTypeBox {
+            background-color: transparent;
+            left: 10px;
+        }
+
+        #list1, #_YSButton, #quanbu1, #btnSet {
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 4.7%;
+        }
+
+        #orbitcheck .orbit-button a {
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        #orbitcheck .orbit-button-play {
+            background: url(img/orbit-img/orbit-play-bg.png) no-repeat;
+            margin-top: 10px;
+            float: left;
+            margin-left: 10px;
+            width: 13%;
+        }
+
+            #orbitcheck .orbit-button-play a {
+                margin-left: 3px;
+                /*width:21.5%;*/
+            }
+
+        #orbitcheck .orbit-button-numb {
+            background: red;
+            background-size: contain;
+            width: 1.8%;
+            /*height: 38px;*/
+            margin-left: 2px;
+            margin-top: 10px;
+            text-align: center;
+            float: left;
+        }
+
+            #orbitcheck .orbit-button-numb label {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+        #orbitcheck .orbit-contrl {
+            float: left;
+            margin-top: 10px;
+            width: 50%;
+            margin-left: 10px;
+        }
+
+        #orbitcheck .orbit-close {
+            float: right;
+            margin-top: 10px;
+            margin-right: 20px;
+            width: 5%;
+        }
+
+        #play1 {
+            display: none;
+            position: absolute;
+            background: url(img/orbit-img/orbit-filter-bg.png) no-repeat;
+            background-size: 100% 100%;
+            width: 50px;
+            color: White;
+            text-align: center;
+            padding: 5px;
+        }
+
+            #play1 table {
+                margin: 10px auto;
+            }
+
+        #Submit1 {
+            display: inline-block;
+        }
+
+            #Submit1 img, #btn_hideSoBox img {
+                border-radius: 4px;
+            }
+
+        #btn_hideSoBox {
+            display: inline-block;
+        }
+
+        #slider {
+            font-size: 12px;
+            margin-top: 5px;
+            height: 0.4em;
+            width: 91%;
+        }
+
+            #slider.ui-widget-content {
+                border: 1px solid #666;
+                background: none;
+            }
+
+            #slider .ui-slider-handle {
+                border-color: transparent;
+                border: none;
+                background: url(/C3/PC/MAlarmMonitoring/ImgTmp/bar-button.png) no-repeat;
+                background-size: contain;
+                width: 25px;
+                height: 25px;
+                margin-top: -3px;
+                margin-left: -6px;
+                cursor: pointer;
+                border-bottom: none;
+            }
+
+        #Sms_slider {
+            background: url(/Common/MGIS/img/orbit-img/orbit-bar.png) no-repeat;
+            border: none;
+            height: .6em;
+        }
+
+            #Sms_slider .ui-slider-range {
+                background: #52D9F9;
+            }
+
+            #Sms_slider .ui-slider-handle {
+                border-color: transparent;
+                border: none;
+                background: url(/Common/MGIS/img/orbit-img/orbit-rice.png) no-repeat;
+                background-size: contain;
+                width: 20px;
+                height: 20px;
+            }
+
+      
+
+        .playTime {
+            position: absolute;
+            background: url(img/orbit-img/orbit-time.png) no-repeat;
+            width: 192px;
+            height: 44px;
+            top: -48px;
+            left: -96px;
+            line-height: 35px;
+        }
+
+        #_Content1 {
+            color: #52D9F9;
+            padding: 5px 5px 5px 15px;
+        }
+
+        #note {
+            position: absolute;
+            width: 180px;
+            padding: 10px;
+            background: #000000;
+            border: 1px solid #ccc;
+            right: 1%;
+            z-index: 9999;
+            display: none;
+            filter: alpha(Opacity=60);
+            -moz-opacity: 0.6;
+            opacity: 1.0;
+        }
+
+        #slider {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+
+  
+
+
+    
+
+    <div id="loading">
+        <div class="loading-indicator" id="UserLogon">
+            <span id="loading-msg">正在加载，请稍候...</span>
+        </div>
+    </div>
+    <div class="main">
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 930px; text-align: center; z-index: 1" id="orBmapDiv">
+                </div>
+                
+            
+                <!-- 新的控制界面 -->
+                <div id="orbitcheck">
+                    <div class="orbit-lei">
+                        
+                    </div>
+                    <!--<div class="orbit-button">-->
+                    <a href="#" id='list1' onclick="ss()"><img src="img/orbit-img/orbit-filter.png" alt="筛选" /></a>
+                    <a href="#" id="_YSButton" onclick='QB()' style="display:none;"><img src="img/orbit-img/orbit-old.png" alt="原始轨迹" /></a>
+                    <a href="#" id="quanbu1" onclick='QBSms()'><img src="img/orbit-img/orbit-all.png" alt="全部轨迹" /></a>
+                    <a href="#" id="btnSet"><img src="img/orbit-img/orbit-line.png" alt="设置行别" /></a>
+                    <div class="orbit-button-play">
+                        <a id="btn_slow" href="javascript:chageSpeed_slow()"><img src="img/orbit-img/orbit-left.png" alt="减速" /></a>
+                        <a id="btn_play" href="#" title="播放" style="display: none;"><img src="img/orbit-img/orbit-play.png" alt="播放" /></a>
+                        <a id="btn_pause" href="#" title="暂停"><img src="img/orbit-img/orbit-pause.png" alt="暂停" /></a>
+                        <a id="btn_fast" href="javascript:chageSpeed_fast()"><img src="img/orbit-img/orbit-right.png" alt="加速" /></a>
+                        <a href="javascript:void(0);" id="_Content_Sta"><img src="img/orbit-img/orbit-repeat.png" alt="重播" /></a>
+                    </div>
+                    <a href="#" class="orbit-button-numb"><label id="speendMemo">正常</label></a>
+                    <!--</div>-->
+                    <div class="orbit-contrl" style="position:relative;">
+                        <div class="playTime"></div>
+                        <div id="Sms_slider" style="margin-bottom:6px;"></div>
+                        <strong id="_Content" style="font-size: 12px; color: #ffffff">开始时间：<label id="_Content_Sta_Lab"></label></strong>
+                        <strong id="_Content_End" style="font-size: 12px;float:right;color:#ffffff"></strong>
+                    </div>
+                    <a class="orbit-close" href="#" onclick='window.close()'>
+                        <img src="img/orbit-img/orbit-close.png" alt="关闭本页" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/Common/MAlarmMonitoring/js/AlarmSureBox.js"></script>
+<script>
+    $(function () {
+        LoadSureBox('3C', GetQueryString("alarmid"))
+    })
+
+</script>

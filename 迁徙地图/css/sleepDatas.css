@@ -1,0 +1,94 @@
+html,body{height: 100%; width: 100%;}
+.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.scrollBox{
+    width: 100%;
+    padding: 0 40px;
+}
+.box{
+	height: 765px;
+	width: 100%;
+}
+/* 容器公用 */
+.top{
+	padding-top: 15px;
+	padding-left: 20px;
+}
+.operation{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.main{
+	height: 100%;
+}
+.main .left,.main .right{
+	float: left;
+	width: 50%;
+	height: -moz-calc(100% - 120px);
+	height: calc(100% - 120px);
+}
+.main .right .timeList{
+	width: 255px;
+	height: 230px;
+	border: solid 1px #1AA9E8;
+	background: url('../img/timeIcon.png') no-repeat;
+	background-position: center 27px;
+	background-size: 63px 67px;
+	padding-top: 115px;
+	text-align: center;
+	margin-top: 60px;
+	float: left;
+	margin-right: 40px;
+}
+.timeList .info{
+	font-size: 20px;
+	color: #1CC7FF;
+	margin-bottom: 20px;
+}
+.timeList .time{
+	font-size: 30px;
+	color: #fff;
+}
+.sleepStyle{
+	margin-top: 100px;
+}
+
+.sleepStyle .info{
+	display: inline-block;
+	color: #fff;
+	font-size: 20px;
+	padding-right: 24px;
+	height: 29px;
+}
+.sleepStyle .time{
+	color: #fff;
+	font-size: 20px;
+	padding-left: 15px;
+}
+.sleepStyle .info::before{
+	content: '';
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url('../img/sleepIcon.png') no-repeat;
+	background-size: 100%;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.sleepStyle .progress{
+	display: inline-block;
+	width: 590px;
+	vertical-align: middle;
+}
+.inner-therm span{
+	color: #fff!important;
+	padding: 0;
+	line-height: 29px;
+}
+.outer-therm{
+	margin: 0!important;;
+}

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>艾滋病感染孕妇登记</title>
+	<link rel="stylesheet" type="text/css" href="../../common/css/COMMONT.css">
+	<!-- 日期选择 -->
+	<link rel="stylesheet" href="../../jsControl/datatime/lq.datetimepick.css">
+	<!-- 滚动条 -->
+	<link rel="stylesheet" href="../../jsControl/zUI/zUI.css">
+	<!-- 表单验证 -->
+	<link rel="stylesheet" href="../../jsControl/validate/validata.css">
+	<!-- 侧边菜单栏 -->
+	<link rel="stylesheet" href="../../jsControl/sideBar/sideBar.css">
+	<!-- 表格 -->
+	<link rel="stylesheet" type="text/css" href="../../jsControl/dataTable/table.css">
+
+	<!-- 孕产妇模块公用样式 -->
+	<link rel="stylesheet" href="../../css/maternal/maternalCom.css">
+</head>
+<body>
+	<form action="" id="form">
+		<div class="cdct_tableTitle">艾滋病感染孕妇登记</div>
+		<div class="rowScroll">
+			<div class="cdct_scroll">
+				<!-- 基本情况开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">一、基本情况</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">姓名</span>
+								</div>
+								<div class="cdct_info cdct_relative">
+									<input type="text" class="cdct_inputNone" name="firstname" required>
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">身份证号</span>
+								</div>
+								<div class="cdct_info cdct_relative">
+									<input type="text" class="cdct_inputNone" name="idcard" required>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">出生日期</span>
+							</div>
+							<div class="cdct_info">
+								<label class="cdct_inputLable">
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+								<label class="cdct_inputLable">
+									（如出生日期不详，实足年龄：
+									<input type="text" class="cdct_inputLine cdct_line80">
+									岁）
+								</label>
+							</div>
+						</div>
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">民族</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">文化程度</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">职业</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">婚姻状况</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">孕产情况</span>
+							</div>
+							<div class="cdct_info">
+								<label class="cdct_inputLable">
+									孕次:
+									<input type="text" class="cdct_inputLine cdct_line80">
+								</label>
+								<label class="cdct_inputLable">
+									产次：
+									<input type="text" class="cdct_inputLine cdct_line80">
+								</label>
+								<label class="cdct_inputLable">
+									现有子女数：
+									<input type="text" class="cdct_inputLine cdct_line80">
+								</label>
+							</div>
+						</div>
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">户籍所在地</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">现住址</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">工作单位</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">联系电话</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">户籍所属:</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="hjss1" type="radio" name="hjss" value="" checked="">
+									<label for="hjss1">本县区</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="hjss2" type="radio" name="hjss" value="">
+									<label for="hjss2">本市其他县区</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="hjss3" type="radio" name="hjss" value="">
+									<label for="hjss3">本省其他城市</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="hjss4" type="radio" name="hjss" value="">
+									<label for="hjss4">外省</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="hjss5" type="radio" name="hjss" value="">
+									<label for="hjss5">港澳台</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+									<input id="hjss6" type="radio" name="hjss" value="">
+									<label for="hjss6">外籍</label>
+								</div>
+								<label><input type="text" class="cdct_inputLine cdct_line150">(国家)</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 基本情况结束 -->
+
+				<!-- 艾滋病病毒感染相关情况开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">二、艾滋病病毒感染相关情况</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">确认艾滋病病毒感染时期</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq1" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq1">婚前检查</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq2" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq2">人工流产</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq3" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq3">引产</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq4" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq4">孕期保健</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq5" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq5">产时</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="azbgrsq6" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq6">产后</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+									<input id="azbgrsq7" type="radio" name="azbgrsq" value="">
+									<label for="azbgrsq7">其他</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line80">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">确认艾滋病病毒感染时间</span>
+							</div>
+							<div class="cdct_info">
+								<input type="text" class="cdct_inputNone datepicker">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">本次妊娠前是否已知HIV感染</span>
+							</div>
+							<div class="cdct_info spe_LH">
+								（仅感染孕产妇填写）：
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sfgr1" type="radio" name="sfgr" value="">
+									<label for="sfgr1">否</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="sfgr2" type="radio" name="sfgr" value="">
+									<label for="sfgr2">是:</label>
+								</div>
+								<label class="cdct_inputLable">
+									本次是确认HIV感染后第
+									<input type="text" class="cdct_inputLine cdct_line80">
+									次妊娠
+								</label>
+								
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">最可能的艾滋病病毒感染途径</span>
+							</div>
+							<div class="cdct_info spe_LH">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj1" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj1">注射毒品</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj2" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj2">性传播</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj3" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj3">采血（浆）</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj4" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj4">输血/血制品</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj5" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj5">母婴传播</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj6" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj6">职业暴露</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVgrtj7" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj7">不详</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+									<input id="HIVgrtj8" type="radio" name="HIVgrtj" value="">
+									<label for="HIVgrtj8">其他</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line150">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">相关危险行为（多选）</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw1" type="checkbox">
+									<label for="wxxw1">与HIV感染配偶或男友的性生活</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw2" type="checkbox">
+									<label for="wxxw2">多性伴</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw3" type="checkbox">
+									<label for="wxxw3">商业性行为</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw4" type="checkbox">
+									<label for="wxxw4">注射吸毒</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw5" type="checkbox">
+									<label for="wxxw5">有偿采供血</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw6" type="checkbox">
+									<label for="wxxw6">输血或者使用血制品</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw7" type="checkbox">
+									<label for="wxxw7">纹身或穿耳等身体刺伤</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw8" type="checkbox">
+									<label for="wxxw8">意外伤害</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw9" type="checkbox">
+									<label for="wxxw9">职业暴露</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw10" type="checkbox">
+									<label for="wxxw10">医源性感染</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="wxxw11" type="checkbox">
+									<label for="wxxw11">不详</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc" style="margin-right: 0;">
+									<input id="wxxw12" type="checkbox">
+									<label for="wxxw12">其他</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line150">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 艾滋病病毒感染相关情况结束 -->
+
+				<!-- 丈夫性伴侣情况开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit">三、丈夫性伴侣情况</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">姓名</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">民族</span>
+								</div>
+								<div class="cdct_info">
+									<input type="text" class="cdct_inputNone">
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">出生日期</span>
+							</div>
+							<div class="cdct_info">
+								<label class="cdct_inputLable">
+									<input type="text" class="cdct_inputLine cdct_line150">
+								</label>
+								<label class="cdct_inputLable">
+									（如出生日期不详，实足年龄：
+									<input type="text" class="cdct_inputLine cdct_line80">
+									岁）
+								</label>
+							</div>
+						</div>
+						<div class="cdct_row cdct_row1_col4">
+							<div class="cdct_col cdct_colLeft">
+								<div class="cdct_txt">
+									<span class="cdct_tit">文化程度</span>
+								</div>
+								<div class="cdct_info">
+									<div data-selectsimu="1" class="cdct_select" >
+										<div class="selectBox">
+											<span data-selectnew="1" class="checkspan">
+												<span class="optD">
+													<span class="fontMain"></span>
+												</span>
+												<span class="selectDown"></span>
+											</span>
+
+											<ul class="hideUl" data-selectbox="1" style="display: none;">
+												<li class="hideUlLi" data-selectoption="1">高中</li>
+												<li class="hideUlLi" data-selectoption="2">大专</li>
+												<li class="hideUlLi" data-selectoption="2">大学</li>
+												<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+													<span class="optD">
+														<span class="fontMain">请选择</span>
+													</span>
+													<span class="selectDown"></span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cdct_col cdct_colRight">
+								<div class="cdct_txt">
+									<span class="cdct_tit">职业</span>
+								</div>
+								<div class="cdct_info">
+									<div data-selectsimu="1" class="cdct_select" >
+										<div class="selectBox">
+											<span data-selectnew="1" class="checkspan">
+												<span class="optD">
+													<span class="fontMain"></span>
+												</span>
+												<span class="selectDown"></span>
+											</span>
+
+											<ul class="hideUl" data-selectbox="1" style="display: none;">
+												<li class="hideUlLi" data-selectoption="1">大专</li>
+												<li class="hideUlLi" data-selectoption="2">高中</li>
+												<li class="hideUlLi" data-selectoption="3">本科</li>
+												<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+													<span class="optD">
+														<span class="fontMain">请选择</span>
+													</span>
+													<span class="selectDown"></span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">HIV检测情况</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjcqk1" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk1">不详</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjcqk2" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk2">未检测</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjcqk3" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk3">检测</label>
+								</div>						
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">HIV检测结果</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjcqk1" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk1">不详</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="HIVjcqk2" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk2">阴性</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+									<input id="HIVjcqk3" type="radio" name="HIVjcqk" value="">
+									<label for="HIVjcqk3">阳性,确认感染时间:</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line150 datepicker">				
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">最可能的艾滋病病毒感染途径</span>
+							</div>
+							<div class="cdct_info spe_LH">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj1" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj1">注射毒品</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj2" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj2">性传播</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj3" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj3">采血（浆）</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj4" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj4">输血/血制品</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj5" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj5">母婴传播</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj6" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj6">职业暴露</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="zfHIVgrtj7" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj7">不详</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc" style="margin-right: 0;">
+									<input id="zfHIVgrtj8" type="radio" name="zfHIVgrtj" value="">
+									<label for="zfHIVgrtj8">其他</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line150">
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">相关危险行为（多选）</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw1" type="checkbox">
+									<label for="zfwxxw1">与HIV感染配偶或男友的性生活</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw2" type="checkbox">
+									<label for="zfwxxw2">多性伴</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw3" type="checkbox">
+									<label for="zfwxxw3">商业性行为</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw4" type="checkbox">
+									<label for="zfwxxw4">注射吸毒</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw5" type="checkbox">
+									<label for="zfwxxw5">有偿采供血</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw6" type="checkbox">
+									<label for="zfwxxw6">输血或者使用血制品</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw7" type="checkbox">
+									<label for="zfwxxw7">纹身或穿耳等身体刺伤</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw8" type="checkbox">
+									<label for="zfwxxw8">意外伤害</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw9" type="checkbox">
+									<label for="zfwxxw9">职业暴露</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw10" type="checkbox">
+									<label for="zfwxxw10">医源性感染</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc">
+									<input id="zfwxxw11" type="checkbox">
+									<label for="zfwxxw11">不详</label>
+								</div>
+								<div class="cdct_chk cdct_chk_suc" style="margin-right: 0;">
+									<input id="zfwxxw12" type="checkbox">
+									<label for="zfwxxw12">其他</label>
+								</div>
+								<input type="text" class="cdct_inputLine cdct_line150">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 丈夫性伴侣情况结束 -->
+
+				<!-- 本次接受预防艾滋病母婴传播服务情况开始 -->
+				<div class="cdct_row cdct_rows_col3">
+					<div class="cdct_col cdct_colLeft">
+						<span class="cdct_tit" style="width: 30px;">四、本次接受预防艾滋病母婴传播服务情况</span>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">本次接受预防艾滋病母婴传播服务的时期</span>
+							</div>
+							<div class="cdct_info spe_LH">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw1" type="radio" name="cbfw" value="">
+									<label for="cbfw1">婚前检查</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw2" type="radio" name="cbfw" value="">
+									<label for="cbfw2">人工流产</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw3" type="radio" name="cbfw" value="">
+									<label for="cbfw3">引产</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw4" type="radio" name="cbfw" value="">
+									<label for="cbfw4">孕前</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw5" type="radio" name="cbfw" value="">
+									<label for="cbfw5">孕期</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw6" type="radio" name="cbfw" value="">
+									<label for="cbfw6">产时</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="cbfw7" type="radio" name="cbfw" value="">
+									<label for="cbfw7">产后</label>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">艾滋病检测前咨询情况</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jczxq1" type="radio" name="jczxq" value="">
+									<label for="jczxq1">未咨询</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jczxq2" type="radio" name="jczxq" value="">
+									<label for="jczxq2">咨询</label>
+								</div>
+							</div>
+						</div>
+						<div class="cdct_row">
+							<div class="cdct_txt">
+								<span class="cdct_tit">艾滋病检测后咨询情况</span>
+							</div>
+							<div class="cdct_info">
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jczxh1" type="radio" name="jczxh" value="">
+									<label for="jczxh1">未咨询</label>
+								</div>
+								<div class="cdct_radio cdct_radio_suc">
+									<input id="jczxh2" type="radio" name="jczxh" value="">
+									<label for="jczxh2">咨询</label>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<!-- 本次接受预防艾滋病母婴传播服务情况结束 -->
+
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">报告单位（盖章）</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">机构1</li>
+										<li class="hideUlLi" data-selectoption="2">机构2</li>
+										<li class="hideUlLi" data-selectoption="3">机构3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">默认当前机构</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">报告医生</span>
+						</div>
+						<div class="cdct_info">
+							<div data-selectsimu="1" class="cdct_select" >
+								<div class="selectBox">
+									<span data-selectnew="1" class="checkspan">
+										<span class="optD">
+											<span class="fontMain"></span>
+										</span>
+										<span class="selectDown"></span>
+									</span>
+
+									<ul class="hideUl" data-selectbox="1" style="display: none;">
+										<li class="hideUlLi" data-selectoption="1">医生1</li>
+										<li class="hideUlLi" data-selectoption="2">医生2</li>
+										<li class="hideUlLi" data-selectoption="3">医生3</li>
+										<li class="hideUlLi" data-selectoption="-1" style="display: none;">
+											<span class="optD">
+												<span class="fontMain">默认当前操作人</span>
+											</span>
+											<span class="selectDown"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col4">
+					<div class="cdct_col cdct_colLeft">
+						<div class="cdct_txt">
+							<span class="cdct_tit">联系电话</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone">
+						</div>
+					</div>
+					<div class="cdct_col cdct_colRight">
+						<div class="cdct_txt">
+							<span class="cdct_tit">填报时间</span>
+						</div>
+						<div class="cdct_info">
+							<input type="text" class="cdct_inputNone datepicker">
+						</div>
+					</div>
+				</div>
+				<div class="cdct_row cdct_row1_col2">
+				    <div class="cdct_txt">
+				        <span class="cdct_tit">备注（非必填)</span>
+				    </div>
+				    <div class="cdct_info">
+				    	<input type="text" class="cdct_inputNone">
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 侧边菜单栏开始 -->
+		<div class="cdct_sideBar">
+			<div class="cdct_toolTip">
+				<span class="toolSpan">艾梅乙管理</span>
+			</div>
+			<div class="cdct_sideBarTop">
+				艾梅乙管理
+				<span class="close"></span>
+			</div>
+			<div class="cdct_sideBarCon">
+				<div class="cdct_sideBarConTitle" style="line-height: normal;">
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx1" type="radio" name="xx" value="">
+						<label for="xx1">全部显示</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx2" type="radio" name="xx" value="">
+						<label for="xx2">艾滋病登记</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx3" type="radio" name="xx" value="">
+						<label for="xx3">梅毒登记</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx4" type="radio" name="xx" value="">
+						<label for="xx4">艾滋病妊娠登记</label>
+					</div>
+					<div class="cdct_radio cdct_radio_suc spe_radio">
+						<input id="xx5" type="radio" name="xx" value="">
+						<label for="xx5">梅毒随访</label>
+					</div>
+				</div>
+				<div class="cdct_tableBox">
+					<div class="tablMainOne" style="height: 100%;">
+						<div class="tableContent tableShowInfo" style="height: 100%;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cdct_sideBarFooter">
+				<button type="button" class="cdct_btn">上一页</button>
+				<input class="cdct_input datepicker1" placeholder="2018">
+				<button type="button" class="cdct_btn">下一页</button>
+			</div>
+		</div>
+		<!-- 侧边菜单栏结束 -->
+	</form>
+	<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+	<!-- 时间选择 -->
+	<script type="text/javascript" src="../../jsControl/datatime/lq.datetimepick.min.js"></script>
+	<!-- 下拉插件 -->
+	<script type="text/javascript" src="../../jsControl/simulationSelect/simulationSelect.min.js"></script>
+	<!-- 滚动条 -->
+	<script type="text/javascript" src="../../jsControl/zUI/zUI.min.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../jsControl/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="../../jsControl/validate/regAddMethod.js"></script>
+	<!-- 侧边菜单栏 -->
+	<script type="text/javascript" src="../../jsControl/sideBar/sideBar.js"></script>
+	<!-- 表格 -->
+	<script type="text/javascript" src="../../jsControl/dataTable/table.min.js"></script>
+
+	<script type="text/javascript">
+		// 这部分 放置自己js文件里面
+		// 时间选择
+		$(".datepicker").on('click', function(e){
+			e.stopPropagation();
+			$(this).lqdatetimepicker({
+				css : 'datetime-day',
+				dateType:"YYYY-MM-DD",
+			});
+		});
+		// 下拉
+		var allEle=$(".cdct_select");
+		for(var i = 0;i<allEle.length;i++){
+			$(allEle[i]).simulationSelect({
+				selectText:'{a}<span class="selectDown"></span>'
+			});
+		}
+
+		// 滚动条
+		$(".rowScroll").panel({
+			iWheelStep:32,
+		});
+
+		// 表单验证
+		var obj=$("#form").validate({
+			rules:{
+				firstname:{
+					required:true,
+				},
+				idcard:{
+					required:true,
+				},
+			},
+			errorClass:"errorClass_"
+		});
+		obj.form();
+
+
+		// 侧边栏表格
+		var dataSet = [
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+			[ "01", "嘻嘻", "2018-03-07", "哈"],
+		    
+		];
+
+		var tableObj=$(".tableShowInfo").showTable({
+		    data:dataSet,
+		    title:[
+		        "序号",
+		        "类型",
+		        "记录日期",
+		        "备注"
+		    ],
+		    scrollHeight:".tableShowInfo",
+		    scrollHeightPC:45,
+		    edit:false
+		});
+	</script>
+</body>
+</html>

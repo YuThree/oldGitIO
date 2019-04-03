@@ -1,0 +1,189 @@
+﻿
+.btn-alarm {
+    display: inline-block;
+    padding: 4px 6px;
+    background-color: #43a1da;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+
+#OriginalFileBox .row-fluid span{
+	padding:0;
+}
+#OriginalFileBox{
+	padding:15px 10px 15px 20px;
+	font-size:13px;
+	border-radius: 8px;
+	display:none;
+}
+#OriginalFileBox h4>span{
+		color:#488cb4;
+		letter-spacing: 5px;
+		margin-left: 10px;
+	}
+.new-img{
+	background:url(/C3/PC/MLiveStreaming/img/new_img.png);
+	background-position: 0px 0px; 
+	width: 18px;
+	height: 19px;
+	display:inline-block;
+}
+#newcreat_loca .newcreat_loca_img{
+	width: 18px;
+	height: 18px;
+	display:inline-block;
+	vertical-align: top;
+    margin-left: 0;
+	cursor:pointer;
+}
+#OriginalFileBox .hr-div{
+	width:100%;
+	height:1px;
+	background:#5d5d5d;
+	margin:15px 0 20px;
+}
+#taskname_time{
+	width: 340px;
+}
+#new-strTime,#new-endTime,#new-loco{
+	width:155px;
+}
+.div-menus{
+	float: left;
+	width: 160px;
+	height: 25px;
+	border: 1px solid #5d5d5d;
+	border-radius: 4px;
+	position: relative;
+	margin-bottom: 9px;
+	background:#f3f1f1;
+}
+#locomotive_NB {
+	display: block;
+	line-height: 25px;
+	padding-left: 4px;
+	cursor: pointer;
+}
+.div-menus img {
+	position: absolute;
+	right: 5px;
+	top: 8px;
+	width: 12px;
+	height: 10px;
+}
+#OriginalFile_TreeAll {
+	position: absolute;
+	top: 25px;
+	left: 0;
+	height: 103px;
+	width: 200px;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+	overflow: auto;
+	background-color: rgba(255,254,241,1);
+	color: White;
+	display: none;
+	padding-top:35px;
+	z-index:1;
+}
+.div-menu:hover {
+    background-color: #004994;
+    border: 1px solid #97d7ff;
+}
+#new-loco .ztreeInput{
+    width:180px !important;
+    display:none;
+}
+.newcreat_title{
+	width: 100%;
+    margin: 10px auto;
+    line-height: 18px;
+}
+.newcreat_title:after{
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+.newcreat_title p{
+	display: inline-block;
+	float:left;
+    width: 25%;
+    text-align: center;
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 5px;
+    padding-bottom: 4px;
+    padding-top: 3px;
+	font-size:13px;
+}
+.newcreat_title_p2{
+	border-bottom: 2px solid #488cb4;
+}
+.newcreat_title p.newcreat_title_active{
+	color: #488cb4;
+    border-top: 2px solid #488cb4;
+    border-left: 2px solid #488cb4;
+    border-right: 2px solid #488cb4;
+}
+.newcreat_title p.newcreat_title_empty{
+	width:49%;
+	border-bottom: 2px solid #488cb4;
+	height: 18px;
+	cursor: default;
+}
+#newcreat_time .span2,#newcreat_loca .span2{
+	/*text-align:right;*/
+}
+#newcreat_loca{
+	display:none;
+	max-height: 350px;
+    overflow: auto;
+}
+#newcreat_loca>div,#newcreat_loca>h4{
+	width:95%;
+}
+#newcreat_loca input{
+	width:144px;
+}
+#newcreat_loca_set{
+	display:none;
+}
+#checked_loca{
+	width:96%;
+	height:90px;
+	resize:none;
+	border: 1px solid #ccc;
+	overflow: auto;
+	padding:12px;
+}
+#checked_loca span{
+	margin-left: 38px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+#OriginalFileBox .closeimg{
+	position:absolute;
+	right:5px;
+	top:5px;
+	height:24px;
+	width:24px;
+	background:url(/Common/img/closePage/23x23/close.png);
+	background-position: 0px 0px;
+	cursor:pointer;
+}
+#btn_vedio_play {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background:url(/C3/PC/MAlarmMonitoring/img/vedio_paly.png) no-repeat;
+    vertical-align: text-top;
+}    

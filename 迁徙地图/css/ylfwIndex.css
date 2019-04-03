@@ -1,0 +1,158 @@
+
+.searchBox{
+	height: 90px;
+	padding-top: 27px;
+}
+/* 容器公用 */
+.top{
+	height: 60px;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+
+.main{
+	width: 100%;
+	height: -moz-calc(100% - 60px);
+	height: calc(100% - 60px);
+}
+.box{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.top .more{
+	display: inline-block;
+	color: #6FC9FF;
+	font-size: 18px;
+	float: right;
+	cursor: pointer;
+	padding-right:20px;
+}
+
+
+/* 顶部容器 */
+.chartBoxTop{
+	width: 100%;
+}
+.chartBoxTop .left,.chartBoxTop .right{
+	float: left;
+}
+
+.chartBoxTop .left{
+	width: -moz-calc(28% - 20px);
+	width: calc(28% - 20px);
+	margin-right: 20px;
+}
+.chartBoxTop .left .box:nth-of-type(1){
+	height: 560px;
+}
+.chartBoxTop .left .box:nth-of-type(2){
+	height: 220px;
+}
+.chartBoxTop .right{
+	width: 72%;
+}
+.chartBoxTop .right .box:nth-of-type(1){
+	height: 560px;
+}
+.chartBoxTop .right .box:nth-of-type(2){
+	height: 220px;
+}
+
+
+/* 中间容器 */
+.chartBoxCenter{
+	width: 100%;
+}
+.chartBoxCenter .left,.chartBoxCenter .right{
+	float: left;
+}
+
+.chartBoxCenter .left{
+	width: -moz-calc(64% - 20px);
+	width: calc(64% - 20px);
+	margin-right: 20px;
+}
+.chartBoxCenter .left .box:nth-of-type(1){
+	height: 390px;
+}
+.chartBoxCenter .left .box:nth-of-type(2){
+	height: 420px;
+}
+.chartBoxCenter .right{
+	width: 36%;
+}
+.chartBoxCenter .right .box:nth-of-type(1){
+	height: 390px;
+}
+.chartBoxCenter .right .box:nth-of-type(2){
+	height: 420px;
+}
+
+/* 底部容器 */
+.chartBoxFoot{
+	width: 100%;
+}
+.chartBoxFoot .box{
+	height: 350px;
+	float: left;
+}
+.chartBoxFoot .box:nth-of-type(1){
+	width: 29%;
+}
+.chartBoxFoot .box:nth-of-type(2){
+	width: calc(35% - 40px);
+	margin: 0 20px;
+}
+.chartBoxFoot .box:nth-of-type(3){
+	width: 36%;
+}
+
+/* 第一块div容器样式 */
+.list{
+	height: 140px;
+	width: 83.2%;
+	margin-left: 36px;
+	margin-bottom: 20px;
+}
+.list:first-of-type{
+	margin-top: 10px;
+}
+
+.list .title{
+	width: 52px;
+	height: 100%;
+	background: #008BCC;
+	float: left;
+	position: relative;
+}
+.list .title span{
+	width: 20px;
+	color: #fff;
+	font-size: 16px;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.list .info{
+	overflow: hidden;
+	height: 100%;
+	background: rgba(0, 139, 204, .2);
+}
+.list .info .pScroll{
+	padding-left: 23px;
+	padding-top: 15px;
+	width: 100%;
+}
+.list .info p{
+	color: #B3F1FC;
+	font-size: 14px;
+	padding-bottom: 3px;
+}
+.list .info p span{
+	color: #B3F1FC;
+}

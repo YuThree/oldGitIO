@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/Common/js/6cweb/LoadPubFile_base.js" type="text/javascript"></script>
+    <link href="/Common/css/gis/GIS.css" rel="stylesheet" />
+    <!--模态-->
+    <style>
+        .test
+        {
+            width: 170px;
+            padding: 50px 10px;
+            border: 0px solid #beceeb;
+            position: relative;
+            height: 5px;
+        }
+        .test span
+        {
+            width: 0;
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+            position: absolute;
+        }
+        .test span.bot
+        {
+            border-width: 20px;
+            border-style: solid dashed dashed;
+            border-color: #beceeb transparent transparent;
+            left: 20px;
+            bottom: -40px;
+        }
+        .test span.top
+        {
+            border-width: 20px;
+            border-style: solid dashed dashed;
+            border-color: #ffffff transparent transparent;
+            left: 20px;
+            bottom: -33px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var _h = (parseInt($(window).height())) * 0.95;
+            var _w = parseInt($(window).width());
+            $("#topoDiv").width(_w).height(_h);
+            $("#alarmDiv").width(_w).height(_h);
+            $("#LogicTopo").width(_w).height(_h);
+            $("#AlarmTopo").width(_w).height(_h);
+            ///  document.getElementById("topoDiv").style.height = window.screen.height * 0.82 + "px";
+            //            document.getElementById("alarmDiv").style.height = window.screen.height * 0.82 + "px";
+            //            document.getElementById("LogicTopo").style.height = window.screen.height * 0.82 + "px";
+            //            document.getElementById("AlarmTopo").style.height = window.screen.height * 0.82 + "px";
+            addCookie("TPSmall", "", 1, "");
+            document.getElementById("LogicTopo").src = "LogicTopo.html?Category_Code=" + GetQueryString("Category_Code") + '&v=' + version;
+            var C = getConfig("For6C");
+            if (C == "1C" || C == "2C" || C == "4C") {
+                document.getElementById('one1').style.display = 'none';
+                document.getElementById('con_one_1').style.display = 'none';
+                setTab('one', 2, 2); Toiframe();
+            }
+        });
+        function setTab(name, cursel, n) {
+            for (i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                var con = document.getElementById("con_" + name + "_" + i);
+                menu.className = i == cursel ? "hover" : "";
+                con.style.display = i == cursel ? "block" : "none";
+            }
+        }
+        function Toiframe() {
+            document.getElementById("AlarmTopo").src = "AlarmTopo.htm?Category_Code=" + GetQueryString("Category_Code") + '&v=' + version;
+        }
+        function toADisplay(type) {
+            if (type == "1") {
+                document.getElementById("FullScreen").style.display = "none";
+                document.getElementById("ExitFullScreen").style.display = "block";
+                document.getElementById("topoDiv").style.height = "1000px";
+                document.getElementById("alarmDiv").style.height = "1000px";
+            } else {
+                document.getElementById("FullScreen").style.display = "block";
+                document.getElementById("ExitFullScreen").style.display = "none";
+                document.getElementById("topoDiv").style.height = "920px";
+                document.getElementById("alarmDiv").style.height = "920px";
+            }
+        }
+        ///用于判断当前选中table
+        function Color(type) {
+            if (type == "Jtop") {
+                document.getElementById('JtopA').style.color = "red";
+                document.getElementById('QxJtop').style.color = "";
+            } else {
+
+                document.getElementById('JtopA').style.color = "";
+                document.getElementById('QxJtop').style.color = "red";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <ul style="width: 800px">
+            <li id="one1" onclick="setTab('one',1,2)"><a id="JtopA" onclick="Color('Jtop')" style="color: Red;"
+                href="#">逻辑拓扑</a></li>
+            <li id="one2" onclick="setTab('one',2,2);Toiframe();"><a id="QxJtop" onclick="Color('')"
+                href="#">缺陷拓扑</a></li>
+            <li style="float: right; display: none;"><a id="FullScreen" href="#" onclick="javascript:window.parent.toFullScreen('1');toADisplay('1');">
+                全屏</a><a id="ExitFullScreen" href="#" style="display: none;" onclick="javascript:window.parent.toFullScreen('2');toADisplay('2');">退出全屏</a></li>
+        </ul>
+        <div class="mainbox">
+            <div id="con_one_1">
+                <div style="width: 100%; height: 600px; border: 0px solid gray; text-align: center;
+                    z-index: 1" id="topoDiv">
+                    <iframe id="LogicTopo" src="LogicTopo.html" height="600px" class="span12" style="width: 100%;
+                        margin-left: 0px; border: 0px;"></iframe>
+                </div>
+            </div>
+            <div id="con_one_2" style="display: none;">
+                <div style="width: 100%; height: 590px; border: 0px solid gray; text-align: center;
+                    z-index: 1" id="alarmDiv">
+                    <iframe src="" id="AlarmTopo" height="590px" class="span12" style="width: 100%; border: 0px;
+                        margin-left: 0px"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popDiv" class="mydiv" style="display: none;">
+        <table>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="javascript:closeDiv()">
+                        关闭</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
